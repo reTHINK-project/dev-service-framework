@@ -1,0 +1,265 @@
+import SyncherManager from '../src/syncher-manager/SyncherManager';
+import chai from 'chai';
+import chaiAsPromised from 'chai-as-promised';
+
+let expect = chai.expect;
+chai.use(chaiAsPromised);
+
+describe('SyncherManager', function() {
+  it('create and invite', function(done) {
+    this.timeout(5000);
+    let seq1 = 0;
+    let seq2 = 0;
+
+    let h2Listener;
+    let inviteReplyCallback;
+
+    let h1Bus = {
+      postMessage: (msg, replyCallback) => {
+        if (!msg.header.id) {
+          msg.header.id = seq1;
+        }
+
+        console.log('h1-postMessage', seq1, JSON.stringify(msg), replyCallback);
+
+        //create request for reporter and reply
+        if (seq1 === 1) {
+          expect(replyCallback).to.be.an.instanceof(Function);
+          expect(msg).to.eql({
+            header: {id: 1, type: 'create', from: 'hyper-1', to: '<???-CreatorURL>'},
+            body: {schema: 'schema://point-schema-url'}
+          });
+
+          //reply simulation of the url allocator
+          replyCallback({
+            header: {id: 1, type: 'reply', from: '<???-CreatorURL>', to: 'hyper-1'},
+            body: {code: 'ok', url: 'resource://obj1'}
+          });
+        }
+
+        if (seq1 === 2) {
+          expect(msg).to.eql({
+            header: {id: 2, type: 'invite', from: 'resource://obj1', to: 'hyper-2'},
+            body: {schema: 'schema://point-schema-url', version: 0, value: {x: 10, y: 10}}
+          });
+
+          inviteReplyCallback = replyCallback;
+
+          //send invite message to hyper-2
+          h2Listener(msg);
+        }
+
+        seq1++;
+      },
+
+      addListener: (url, listener) => {
+        console.log('h1-addListener', seq1, url, listener);
+
+        //register hyper-1 listener
+        if (seq1 === 0) {
+          expect(url).to.eql('hyper-1');
+          expect(listener).to.be.an.instanceof(Function);
+        }
+
+        //register obj1 listener
+        if (seq1 === 1) {
+          expect(url).to.eql('resource://obj1');
+          expect(listener).to.be.an.instanceof(Function);
+        }
+
+        seq1++;
+      }
+    };
+
+    let h2Bus = {
+      postMessage: (msg, replyCallback) => {
+        if (!msg.header.id) {
+          msg.header.id = seq2;
+        }
+
+        console.log('h2-postMessage', seq2, JSON.stringify(msg), replyCallback);
+
+        //reply to the invite
+        if (seq2 === 2) {
+          expect(msg).to.eql({
+            header: {id: 2, type: 'reply', from: 'hyper-2', to: 'resource://obj1'},
+            body: {code: 'ok'}
+          });
+
+          //send invite reply to obj1 in hyper-1
+          inviteReplyCallback(msg);
+        }
+
+        seq2++;
+      },
+
+      addListener: (url, listener) => {
+        console.log('h2-addListener', seq2, url, listener);
+
+        //register hyperty listener
+        if (seq2 === 0) {
+          expect(url).to.eql('hyper-2');
+          expect(listener).to.be.an.instanceof(Function);
+          h2Listener = listener;
+        }
+
+        //register change listener for obj1
+        if (seq2 === 1) {
+          expect(url).to.eql('hyper-2');
+          expect(listener).to.be.an.instanceof(Function);
+        }
+
+        seq2++;
+      }
+    };
+
+    let sm1 = new SyncherManager('hyper-1', h1Bus, {});
+    let sm2 = new SyncherManager('hyper-2', h2Bus, {});
+    sm2.onInvite((event) => {
+      event.accept();
+    });
+
+    expect(sm1.create('schema://point-schema-url', { x: 10, y: 10 }).then((dor) => {
+      expect(dor.status).to.eql('on');
+      expect(sm1.reporters).to.have.any.keys('resource://obj1');
+      return dor.invite('hyper-2').then((ss) => {
+        console.log('OK');
+        expect(ss.status).to.eql('on');
+        expect(dor.subscriptions).to.have.any.keys('hyper-2');
+
+        expect(sm2.observers).to.have.any.keys('resource://obj1');
+        let doo = sm2.observers['resource://obj1'];
+        expect(doo.status).to.eql('on');
+        expect(doo.data).to.eql({x: 10, y: 10});
+      });
+    })).notify(done);
+  });
+
+  it('create and subscribe', function(done) {
+    this.timeout(5000);
+    let seq1 = 0;
+    let seq2 = 0;
+
+    let obj1Listener;
+    let subscribeReplyCallback;
+
+    let h1Bus = {
+      postMessage: (msg, replyCallback) => {
+        if (!msg.header.id) {
+          msg.header.id = seq1;
+        }
+
+        console.log('h1-postMessage', seq1, JSON.stringify(msg), replyCallback);
+
+        //create request for reporter and reply
+        if (seq1 === 1) {
+          expect(replyCallback).to.be.an.instanceof(Function);
+          expect(msg).to.eql({
+            header: {id: 1, type: 'create', from: 'hyper-1', to: '<???-CreatorURL>'},
+            body: {schema: 'schema://point-schema-url'}
+          });
+
+          //reply simulation of the url allocator
+          replyCallback({
+            header: {id: 1, type: 'reply', from: '<???-CreatorURL>', to: 'hyper-1'},
+            body: {code: 'ok', url: 'resource://obj1'}
+          });
+        }
+
+        //subscription reply, generated by the event.accept()
+        if (seq1 === 3) {
+          expect(msg).to.eql({
+            header: {id: 1, type: 'reply', from: 'resource://obj1', to: 'hyper-2'},
+            body: {code: 'ok', schema: 'schema://point-schema-url', version: 0, value: {x: 10, y: 10}}
+          });
+
+          subscribeReplyCallback(msg);
+        }
+
+        seq1++;
+      },
+
+      addListener: (url, listener) => {
+        console.log('h1-addListener', seq1, url, listener);
+
+        //register hyper-1 listener
+        if (seq1 === 0) {
+          expect(url).to.eql('hyper-1');
+          expect(listener).to.be.an.instanceof(Function);
+        }
+
+        //register obj1 listener
+        if (seq1 === 1) {
+          expect(url).to.eql('resource://obj1');
+          expect(listener).to.be.an.instanceof(Function);
+          obj1Listener = listener;
+        }
+
+        seq1++;
+      }
+    };
+
+    let h2Bus = {
+      postMessage: (msg, replyCallback) => {
+        if (!msg.header.id) {
+          msg.header.id = seq2;
+        }
+
+        console.log('h2-postMessage', seq2, JSON.stringify(msg), replyCallback);
+
+        //send subscribe message to obj1
+        if (seq2 === 1) {
+          expect(msg).to.eql({
+            header: {id: 1, type: 'subscribe', from: 'hyper-2', to: 'resource://obj1'},
+            body: {}
+          });
+
+          subscribeReplyCallback = replyCallback;
+
+          //send subscribe to obj1 in hyper-1
+          obj1Listener(msg);
+        }
+
+        seq2++;
+      },
+
+      addListener: (url, listener) => {
+        console.log('h2-addListener', seq2, url, listener);
+
+        //register hyperty listener
+        if (seq2 === 0) {
+          expect(url).to.eql('hyper-2');
+          expect(listener).to.be.an.instanceof(Function);
+        }
+
+        //register change listener for obj1
+        if (seq2 === 1) {
+          expect(url).to.eql('hyper-2');
+          expect(listener).to.be.an.instanceof(Function);
+        }
+
+        seq2++;
+      }
+    };
+
+    let sm1 = new SyncherManager('hyper-1', h1Bus, {});
+    let sm2 = new SyncherManager('hyper-2', h2Bus, {});
+
+    expect(sm1.create('schema://point-schema-url', { x: 10, y: 10 }).then((dor) => {
+      expect(dor.status).to.eql('on');
+      expect(sm1.reporters).to.have.any.keys('resource://obj1');
+
+      //add subscribe event listener
+      dor.onSubscription((event) => {
+        event.accept();
+      });
+
+      return sm2.subscribe('resource://obj1').then((doo) => {
+        console.log('OK');
+        expect(doo.status).to.eql('on');
+        expect(sm2.observers).to.have.any.keys('resource://obj1');
+        expect(doo.data).to.eql({x: 10, y: 10});
+      });
+    })).notify(done);
+  });
+});
