@@ -1,4 +1,8 @@
 import SyncherManager from '../src/syncher-manager/SyncherManager';
+import SyncSubscription from '../src/syncher-manager/SyncSubscription';
+import DataObjectReporter from '../src/syncher-manager/DataObjectReporter';
+import DataObjectObserver from '../src/syncher-manager/DataObjectObserver';
+
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 
@@ -20,7 +24,7 @@ describe('SyncherManager', function() {
           msg.header.id = seq1;
         }
 
-        console.log('h1-postMessage', seq1, JSON.stringify(msg), replyCallback);
+        console.log('1-h1-postMessage', seq1, JSON.stringify(msg), replyCallback);
 
         //create request for reporter and reply
         if (seq1 === 1) {
@@ -53,7 +57,7 @@ describe('SyncherManager', function() {
       },
 
       addListener: (url, listener) => {
-        console.log('h1-addListener', seq1, url, listener);
+        console.log('1-h1-addListener', seq1, url, listener);
 
         //register hyper-1 listener
         if (seq1 === 0) {
@@ -77,10 +81,10 @@ describe('SyncherManager', function() {
           msg.header.id = seq2;
         }
 
-        console.log('h2-postMessage', seq2, JSON.stringify(msg), replyCallback);
+        console.log('1-h2-postMessage', seq2, JSON.stringify(msg), replyCallback);
 
         //reply to the invite
-        if (seq2 === 2) {
+        if (seq2 === 1) {
           expect(msg).to.eql({
             header: {id: 2, type: 'reply', from: 'hyper-2', to: 'resource://obj1'},
             body: {code: 'ok'}
@@ -94,19 +98,13 @@ describe('SyncherManager', function() {
       },
 
       addListener: (url, listener) => {
-        console.log('h2-addListener', seq2, url, listener);
+        console.log('1-h2-addListener', seq2, url, listener);
 
         //register hyperty listener
         if (seq2 === 0) {
           expect(url).to.eql('hyper-2');
           expect(listener).to.be.an.instanceof(Function);
           h2Listener = listener;
-        }
-
-        //register change listener for obj1
-        if (seq2 === 1) {
-          expect(url).to.eql('hyper-2');
-          expect(listener).to.be.an.instanceof(Function);
         }
 
         seq2++;
@@ -123,7 +121,7 @@ describe('SyncherManager', function() {
       expect(dor.status).to.eql('on');
       expect(sm1.reporters).to.have.any.keys('resource://obj1');
       return dor.invite('hyper-2').then((ss) => {
-        console.log('OK');
+        console.log('1-OK');
         expect(ss.status).to.eql('on');
         expect(dor.subscriptions).to.have.any.keys('hyper-2');
 
@@ -149,7 +147,7 @@ describe('SyncherManager', function() {
           msg.header.id = seq1;
         }
 
-        console.log('h1-postMessage', seq1, JSON.stringify(msg), replyCallback);
+        console.log('2-h1-postMessage', seq1, JSON.stringify(msg), replyCallback);
 
         //create request for reporter and reply
         if (seq1 === 1) {
@@ -180,7 +178,7 @@ describe('SyncherManager', function() {
       },
 
       addListener: (url, listener) => {
-        console.log('h1-addListener', seq1, url, listener);
+        console.log('2-h1-addListener', seq1, url, listener);
 
         //register hyper-1 listener
         if (seq1 === 0) {
@@ -205,7 +203,7 @@ describe('SyncherManager', function() {
           msg.header.id = seq2;
         }
 
-        console.log('h2-postMessage', seq2, JSON.stringify(msg), replyCallback);
+        console.log('2-h2-postMessage', seq2, JSON.stringify(msg), replyCallback);
 
         //send subscribe message to obj1
         if (seq2 === 1) {
@@ -224,7 +222,7 @@ describe('SyncherManager', function() {
       },
 
       addListener: (url, listener) => {
-        console.log('h2-addListener', seq2, url, listener);
+        console.log('2-h2-addListener', seq2, url, listener);
 
         //register hyperty listener
         if (seq2 === 0) {
@@ -255,11 +253,360 @@ describe('SyncherManager', function() {
       });
 
       return sm2.subscribe('resource://obj1').then((doo) => {
-        console.log('OK');
+        console.log('2-OK');
         expect(doo.status).to.eql('on');
         expect(sm2.observers).to.have.any.keys('resource://obj1');
         expect(doo.data).to.eql({x: 10, y: 10});
       });
     })).notify(done);
+  });
+
+  it('verify produced sync messages', function(done) {
+    this.timeout(10000);
+    let msgList = [];
+    let bus = {
+      postMessage: (msg, replyCallback) => {
+        msgList.push(msg);
+      },
+
+      addListener: (url, listener) => {
+        console.log('3-addListener', url, listener);
+      }
+    };
+
+    //BEGIN: skip message system (already tested in previous units) and manually create a reporter and subscription, this should not be done in real code.
+    let reporter = new DataObjectReporter('resource://obj1', 'schema://fake-schema-url', bus, 'on');
+    let sub = new SyncSubscription(reporter, 'hyper-2', 'on');
+    reporter.subscriptions['hyper-2'] = sub;
+
+    let sm = new SyncherManager('hyper-1', bus, {});
+    sm.reporters['resource://obj1'] = reporter;
+
+    //END
+    let data = reporter.data;
+
+    //apply changes...
+    data['1'] = {name: 'Micael', birthdate: '28-02-1981', email: 'micael-xxx@gmail.com', phone: 911000000};
+    data['1'].obj1 = { name: 'xpto' };
+    data['2'] = {name: 'Luis Duarte', birthdate: '02-12-1991', email: 'luis-xxx@gmail.com', phone: 910000000, obj1: { name: 'xpto' }};
+
+    setTimeout(() => {
+      expect(msgList).to.eql([
+        {
+          header: {type: 'add', from: 'resource://obj1', to: 'hyper-2'},
+          body: {version: 1, oType: 'object', attrib: '1',
+            value: {
+              name: 'Micael',
+              birthdate: '28-02-1981',
+              email: 'micael-xxx@gmail.com',
+              phone: 911000000,
+              obj1: { name: 'xpto'}
+            }
+          }
+        },
+
+        {
+          header: {type: 'add', from: 'resource://obj1', to: 'hyper-2'},
+          body: {version: 2, oType: 'object', attrib: '2',
+            value: {
+              name: 'Luis Duarte',
+              birthdate: '02-12-1991',
+              email: 'luis-xxx@gmail.com',
+              phone: 910000000,
+              obj1: { name: 'xpto' }
+            }
+          }
+        }
+      ]);
+
+      msgList = []; //empty message list
+
+      //apply changes...
+      data['1'].name = 'Micael Pedrosa';
+      data['1'].birthdate = new Date(1982, 1, 28);
+      data['1'].obj1.name = 'XPTO';
+      delete data['2'];
+
+      setTimeout(() => {
+        expect(msgList).to.eql([
+          {
+            header: {type: 'remove', from: 'resource://obj1', to: 'hyper-2'},
+            body: {version: 3, oType: 'object', attrib: '2', value: undefined}
+          },
+
+          {
+            header: {type: 'update', from: 'resource://obj1', to: 'hyper-2'},
+            body: {version: 4, oType: 'object', attrib: '1.name', value: 'Micael Pedrosa'}
+          },
+
+          {
+            header: {type: 'update', from: 'resource://obj1', to: 'hyper-2'},
+            body: {version: 5, oType: 'object', attrib: '1.birthdate', value: '1982-02-28T00:00:00.000Z'}
+          },
+
+          {
+            header: {type: 'update', from: 'resource://obj1', to: 'hyper-2'},
+            body: {version: 6, oType: 'object', attrib: '1.obj1.name', value: 'XPTO'}
+          }
+        ]);
+
+        msgList = []; //empty message list
+
+        //apply changes...
+        data['1'].arr = [1, 0, {x: 10, y: 20}];
+
+        setTimeout(() => {
+          expect(msgList).to.eql([
+            {
+              header: {type: 'add', from: 'resource://obj1', to: 'hyper-2'},
+              body: {version: 7, oType: 'object', attrib: '1.arr', value: [1, 0, {x: 10, y: 20}]}
+            }
+          ]);
+
+          msgList = []; //empty message list
+
+          //apply changes...
+          data['1'].arr[1] = 2;
+
+          setTimeout(() => {
+            expect(msgList).to.eql([
+              {
+                header: {type: 'update', from: 'resource://obj1', to: 'hyper-2'},
+                body:{version: 8, oType: 'array', attrib: '1.arr.1', value: 2}
+              }
+            ]);
+
+            msgList = []; //empty message list
+
+            //apply changes...
+            data['1'].arr.push(3);
+            data['1'].arr.push({x: 1, y: 2});
+
+            setTimeout(() => {
+              expect(msgList).to.eql([
+                {
+                  header: {type: 'add', from: 'resource://obj1', to: 'hyper-2'},
+                  body: {version: 9, oType: 'array', attrib: '1.arr.3', value: [3]}
+                },
+
+                {
+                  header: {type: 'add', from: 'resource://obj1', to: 'hyper-2'},
+                  body: {version: 10, oType: 'array', attrib: '1.arr.4', value: [{x: 1, y: 2}]}
+                }
+              ]);
+
+              msgList = []; //empty message list
+
+              //apply changes...
+              data['1'].arr.splice(1, 2, 10, 11, 12);
+              data['1'].arr[5].x = 10;
+
+              setTimeout(() => {
+                expect(msgList).to.eql([
+                  {
+                    header: {type: 'remove', from: 'resource://obj1', to: 'hyper-2'},
+                    body: {version: 11, oType: 'array', attrib: '1.arr.1', value: 2}
+                  },
+
+                  {
+                    header: {type: 'add', from: 'resource://obj1', to: 'hyper-2'},
+                    body: {version: 12, oType: 'array', attrib: '1.arr.1', value: [10, 11, 12]}
+                  },
+
+                  {
+                    header: {type: 'update', from: 'resource://obj1', to: 'hyper-2'},
+                    body: {version: 13, oType: 'object', attrib: '1.arr.5.x', value: 10}
+                  }
+                ]);
+
+                msgList = []; //empty message list
+
+                //apply changes...
+                data['1'].arr.pop();
+
+                setTimeout(() => {
+                  expect(msgList).to.eql([
+                    {
+                      header: {type: 'remove', from: 'resource://obj1', to: 'hyper-2'},
+                      body: {version: 14, oType: 'array', attrib: '1.arr.5', value: 1}
+                    }
+                  ]);
+
+                  done();
+                });
+              });
+            });
+          });
+        });
+      });
+    });
+  });
+
+  it('verify consumed sync messages', function(done) {
+    this.timeout(10000);
+
+    let post;
+
+    let bus = {
+      addListener: (url, listener) => {
+        console.log('4-addListener', url, listener);
+        post = listener;
+      }
+    };
+
+    //BEGIN: skip message system (already tested in previous units) and manually create an observer, this should not be done in real code.
+    let evtList = [];
+    let observer = new DataObjectObserver('hyper-2', 'resource://obj1', 'schema://fake-schema-url', 'on');
+    observer.onChange('*', (event) => {
+      evtList.push(event);
+    });
+
+    let sm = new SyncherManager('hyper-2', bus, {});
+    sm.observers['resource://obj1'] = observer;
+
+    //END
+    let data = observer.data;
+
+    post({
+      header: {type: 'add', from: 'resource://obj1', to: 'hyper-2'},
+      body: {version: 1, oType: 'object', attrib: '1',
+        value: {
+          name: 'Micael',
+          birthdate: '28-01-1981',
+          email: 'micael-xxx@gmail.com',
+          phone: 911000000,
+          obj1: { name: 'xpto'}
+        }
+      }
+    });
+
+    post({
+      header: {type: 'add', from: 'resource://obj1', to: 'hyper-2'},
+      body: {version: 2, oType: 'object', attrib: '2',
+        value: {
+          name: 'Luis Duarte',
+          birthdate: '02-12-1991',
+          email: 'luis-xxx@gmail.com',
+          phone: 910000000,
+          obj1: { name: 'xpto' }
+        }
+      }
+    });
+
+    setTimeout(() => {
+      expect(evtList[0]).to.eql({cType: 'add', oType: 'object', field: '1', data: {name: 'Micael', birthdate:'28-01-1981', email: 'micael-xxx@gmail.com', phone: 911000000, obj1: {name: 'xpto'}}});
+      expect(evtList[1]).to.eql({cType: 'add', oType: 'object', field: '2', data: {name: 'Luis Duarte', birthdate: '02-12-1991', email: 'luis-xxx@gmail.com', phone: 910000000, obj1:{name: 'xpto'}}});
+
+      expect(data).to.eql({
+        1: {name: 'Micael', birthdate: '28-01-1981', email: 'micael-xxx@gmail.com', phone: 911000000, obj1: {name: 'xpto'}},
+        2: {name: 'Luis Duarte', birthdate: '02-12-1991', email: 'luis-xxx@gmail.com', phone: 910000000, obj1: {name: 'xpto'}}
+      });
+
+      post({
+        header: {type: 'remove', from: 'resource://obj1', to: 'hyper-2'},
+        body: {version: 3, oType: 'object', attrib: '2'}
+      });
+
+      post({
+        header: {type: 'update', from: 'resource://obj1', to: 'hyper-2'},
+        body: {version: 4, oType: 'object', attrib: '1.name', value: 'Micael Pedrosa'}
+      });
+
+      post({
+        header: {type: 'update', from: 'resource://obj1', to: 'hyper-2'},
+        body: {version: 5, oType: 'object', attrib: '1.birthdate', value: '28-02-1981'}
+      });
+
+      post({
+        header: {type: 'update', from: 'resource://obj1', to: 'hyper-2'},
+        body: {version: 6, oType: 'object', attrib: '1.obj1.name', value: 'XPTO'}
+      });
+
+      setTimeout(() => {
+        expect(data).to.eql({
+          1: {name: 'Micael Pedrosa', birthdate: '28-02-1981', email: 'micael-xxx@gmail.com', phone: 911000000, obj1: {name: 'XPTO'}}
+        });
+
+        post({
+          header: {type: 'add', from: 'resource://obj1', to: 'hyper-2'},
+          body: {version: 7, oType: 'object', attrib: '1.arr', value: [1, 0, {x: 10, y: 20}]}
+        });
+
+        setTimeout(() => {
+          expect(data).to.eql({
+            1: {name: 'Micael Pedrosa', birthdate: '28-02-1981', email: 'micael-xxx@gmail.com', phone: 911000000, obj1: {name: 'XPTO'}, arr: [1, 0, {x: 10, y: 20}]}
+          });
+
+          evtList = [];
+
+          post({
+            header: {type: 'update', from: 'resource://obj1', to: 'hyper-2'},
+            body:{version: 8, oType: 'array', attrib: '1.arr.1', value: 2}
+          });
+
+          setTimeout(() => {
+            expect(evtList[0]).to.eql({cType: 'update', oType: 'array', field: '1.arr.1', data: 2});
+
+            expect(data).to.eql({
+              1: {name: 'Micael Pedrosa', birthdate: '28-02-1981', email: 'micael-xxx@gmail.com', phone: 911000000, obj1: {name: 'XPTO'}, arr: [1, 2, {x: 10, y: 20}]}
+            });
+
+            post({
+              header: {type: 'add', from: 'resource://obj1', to: 'hyper-2'},
+              body: {version: 9, oType: 'array', attrib: '1.arr.3', value: [3]}
+            });
+
+            post({
+              header: {type: 'add', from: 'resource://obj1', to: 'hyper-2'},
+              body: {version: 10, oType: 'array', attrib: '1.arr.4', value: [{x: 1, y: 2}]}
+            });
+
+            setTimeout(() => {
+              expect(data).to.eql({
+                1: {name: 'Micael Pedrosa', birthdate: '28-02-1981', email: 'micael-xxx@gmail.com', phone: 911000000, obj1: {name: 'XPTO'}, arr: [1, 2, {x: 10, y: 20}, 3, {x: 1, y: 2}]}
+              });
+
+              post({
+                header: {type: 'remove', from: 'resource://obj1', to: 'hyper-2'},
+                body: {version: 11, oType: 'array', attrib: '1.arr.1', value: 2}
+              });
+
+              post({
+                header: {type: 'add', from: 'resource://obj1', to: 'hyper-2'},
+                body: {version: 12, oType: 'array', attrib: '1.arr.1', value: [10, 11, 12]}
+              });
+
+              post({
+                header: {type: 'update', from: 'resource://obj1', to: 'hyper-2'},
+                body: {version: 13, oType: 'object', attrib: '1.arr.5.x', value: 10}
+              });
+
+              setTimeout(() => {
+                expect(data).to.eql({
+                  1: {name: 'Micael Pedrosa', birthdate: '28-02-1981', email: 'micael-xxx@gmail.com', phone: 911000000, obj1: {name: 'XPTO'}, arr: [1, 10, 11, 12, 3, {x: 10, y: 2}]}
+                });
+
+                evtList = [];
+
+                post({
+                  header: {type: 'remove', from: 'resource://obj1', to: 'hyper-2'},
+                  body: {version: 14, oType: 'array', attrib: '1.arr.5', value: 1}
+                });
+
+                setTimeout(() => {
+                  expect(evtList[0]).to.eql({cType: 'remove', oType: 'array', field: '1.arr.5', data: 1});
+
+                  expect(data).to.eql({
+                    1: {name: 'Micael Pedrosa', birthdate: '28-02-1981', email: 'micael-xxx@gmail.com', phone: 911000000, obj1: {name: 'XPTO'}, arr: [1, 10, 11, 12, 3]}
+                  });
+
+                  done();
+                });
+              });
+            });
+          });
+        });
+      });
+    });
   });
 });

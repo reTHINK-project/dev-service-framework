@@ -1,5 +1,7 @@
 class SyncSubscription /* implements SyncStatus */ {
   /* private
+  _version: number
+  _parent: DataObjectReporter
   _url: HypertyURL
   _status: on | paused
   */
@@ -9,12 +11,16 @@ class SyncSubscription /* implements SyncStatus */ {
      b) Should I send the actual data in case there is no knowledge of the last state/version of the observer?
   */
 
-  constructor(url, initialStatus) {
+  constructor(parent, url, initialStatus) {
     let _this = this;
 
+    _this._version = 0;
+    _this._parent = parent;
     _this._url = url;
     _this._status = initialStatus;
   }
+
+  get version() { return this._version; }
 
   get url() { return this._url; }
 
@@ -33,6 +39,16 @@ class SyncSubscription /* implements SyncStatus */ {
   stop() {
     //TODO: should remove the subscription
     throw 'Not implemented';
+
+    /*
+    let sub = _parent._subscriptions[_this._url];
+    delete _parent._subscriptions[_this._url];
+
+    let unSubscribeMsg = {
+      header: {type: 'uninvite', from: <ObjectURL>, to: _this._url},
+      body: {}
+    };
+    */
   }
 }
 

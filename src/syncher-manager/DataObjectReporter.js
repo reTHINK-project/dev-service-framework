@@ -44,6 +44,8 @@ class DataObjectReporter /* implements SyncStatus */ {
     });
   }
 
+  get version() { return this._version; }
+
   get url() { return this._url; }
 
   get schema() { return this._schema; }
@@ -83,6 +85,7 @@ class DataObjectReporter /* implements SyncStatus */ {
   invite(url) {
     let _this = this;
 
+    //TODO: validate if subscription already exists ?
     let inviteMsg = {
       header: {type: 'invite', from: _this._url, to: url},
       body: {schema: _this._schema, version: _this._version, value: deepClone(_this.data)}
@@ -94,7 +97,7 @@ class DataObjectReporter /* implements SyncStatus */ {
         console.log('invite-reply: ', reply);
         if (reply.body.code === 'ok') {
           //invitation accepted
-          let newObj = new SyncSubscription(url, 'on');
+          let newObj = new SyncSubscription(_this, url, 'on');
           _this._subscriptions[url] = newObj;
           resolve(newObj);
         } else {
@@ -112,6 +115,7 @@ class DataObjectReporter /* implements SyncStatus */ {
   _onSubscribe(msg) {
     let _this = this;
 
+    //TODO: validate if subscription already exists ?
     let hypertyUrl = msg.header.from;
 
     let event = {
@@ -120,7 +124,7 @@ class DataObjectReporter /* implements SyncStatus */ {
 
       accept: () => {
         //create new subscription
-        let newObj = new SyncSubscription(hypertyUrl, 'on');
+        let newObj = new SyncSubscription(_this, hypertyUrl, 'on');
         _this._subscriptions[hypertyUrl] = newObj;
 
         //send ok reply message
@@ -175,13 +179,20 @@ class DataObjectReporter /* implements SyncStatus */ {
     Object.keys(_this._subscriptions).forEach((key) => {
       let sub = _this._subscriptions[key];
       if (sub.status === 'on') {
+
         //TODO: send version, update version on the SyncSubscription?
-        //how to handle unsynchronized versions?
         //will we need confirmation from the receiver?
-        let changeMsg = {
-          header: {type: 'change', from: _this._url, to: key},
-          body: {cType: event.cType, oType: event.oType, attrib: event.field, value: event.data}
-        };
+        let changeMsg;
+        if (sub._version + 1 === _this._version) {
+          sub._version++;
+          changeMsg = {
+            header: {type: event.cType, from: _this._url, to: key},
+            body: {version: _this._version, oType: event.oType, attrib: event.field, value: event.data}
+          };
+        } else {
+          //TODO: how to handle unsynchronized versions?
+          console.log('unsynchronized versions');
+        }
 
         _this._bus.postMessage(changeMsg);
       }

@@ -35,6 +35,9 @@ class SyncherManager {
      switch (msg.header.type) {
        case 'invite': _this._onInvite(msg); break;
        case 'uninvite': _this._onUnInvite(msg); break;
+       case 'update': _this._onChange(msg); break;
+       case 'add': _this._onChange(msg); break;
+       case 'remove': _this._onChange(msg); break;
      }
    });
  }
@@ -90,6 +93,7 @@ class SyncherManager {
  subscribe(url) {
    let _this = this;
 
+   //TODO: validate if subscription already exists ?
    let subscribeMsg = {
      header: {type: 'subscribe', from: _this._owner, to: url},
      body: {}
@@ -101,7 +105,7 @@ class SyncherManager {
        console.log('subscribe-reply: ', reply);
        if (reply.body.code === 'ok') {
          //subscription accepted
-         let newObj = new DataObjectObserver(_this._owner, url, reply.body.schema, _this._bus, 'on', reply.body.value);
+         let newObj = new DataObjectObserver(_this._owner, url, reply.body.schema, 'on', reply.body.value);
          _this._observers[url] = newObj;
          resolve(newObj);
        } else {
@@ -124,6 +128,7 @@ class SyncherManager {
  _onInvite(msg) {
    let _this = this;
 
+   //TODO: validate if subscription already exists ?
    let objUrl = msg.header.from;
    let objSchema = msg.header.schema;
 
@@ -133,7 +138,7 @@ class SyncherManager {
 
      accept: () => {
        //create new observer
-       let newObj = new DataObjectObserver(_this._owner, objUrl, objSchema, _this._bus, 'on', msg.body.value);
+       let newObj = new DataObjectObserver(_this._owner, objUrl, objSchema, 'on', msg.body.value);
        _this._observers[objUrl] = newObj;
 
        //send ok reply message
@@ -179,6 +184,13 @@ class SyncherManager {
    _this._onInviteHandlers.forEach((handler) => {
      handler(event);
    });
+ }
+
+ _onChange(msg) {
+   let _this = this;
+
+   let observer = _this._observers[msg.header.from];
+   observer._changeObject(msg);
  }
 
 }
