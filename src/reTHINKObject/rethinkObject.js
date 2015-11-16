@@ -25,6 +25,10 @@ class rethinkObject{
 
     }
 
+    /**
+     *
+     * @param data
+     */
     validate(data){
 
         return var valid = tv4.validate(data, this._schema);

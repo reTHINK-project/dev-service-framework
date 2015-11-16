@@ -10,6 +10,6 @@ class RuntimeConstraint {
     }
 
     get constraint() { return this._constraint; }
-    get runtimHypertyCapabilityType() { return this._runtimeHypertyCapabilityType; }
+    get runtimeHypertyCapabilityType() { return this._runtimeHypertyCapabilityType; }
 }
 export default RuntimeConstraint;
