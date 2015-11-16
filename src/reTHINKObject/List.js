@@ -4,12 +4,10 @@
 /**
  * ReTHINK List
  */
+// Probably not going to be needed. We could use the Array or Set Objects from JavaScript
 class List extends Array{
-    constructor(){
-       super();
-
+    constructor() {
+        super();
     }
-
-    //override push and top?
 
 }

@@ -44,32 +44,7 @@ class Message{
         this._signature = signature;
     }
 
-    get jsonBody()
-    {
-       if(this.jsonBody == isUndefinedOrNull())
-       {
-            return toJson();
-       }
-        return this.jsonBody;
-    }
 
-    set jsonBody(json){
-        "use strict";
-        this.jsonBody = json;
-    }
-
-    toJson(){
-        this.jsonBody = {
-            "id" : this._id,
-            "from": this._from,
-            "type": this._type,
-            "contextId": this.contextId,
-            "body": this._body,
-            "signature": this._signature
-        }
-
-        return this._jsonBody;
-    }
 }
 //var MessageType = new enums.Enum("CREATE", "UPDATE", "DELETE", "READ", "SUBSCRIBE", "UNSUBSCRIBE", "RESPONSE");
 export var MessageType = {CREATE: 'create', READ: 'read', UPDATE: 'update', DELETE: 'delete', SUBSCRIBE: 'subscribe', UNSUBSCRIBE: 'unsubscribe', RESPONSE: 'response'};
