@@ -4,13 +4,6 @@
 
 class Message{
 
-
-	constructor(jsonBody){
-        this.jsonBody = JSON.parse(jsonBody);
-
-        this._id = inputBody.id;
-    }
-
     constructor(id, from, type, contextId, body) {
 
 		this._id = id;

@@ -2,7 +2,8 @@
  * Created by amo on 14/11/2015.
  */
 
-import RuntimeProtocolCapabilityType from './HypertyRuntimeDescriptor/RuntimeProtocolCapabilityType';
+import CatalogueDataObject from './CatalogueDataObject';
+import RuntimeProtocolCapabilityType from './HypertyRuntimeDescriptor';
 
 class ProtocolStubDescriptor extends CatalogueDataObject{
     constructor(guid, type, objectName, description, language, sourcePackageURL, messageSchemas, configurationList, constraintList){

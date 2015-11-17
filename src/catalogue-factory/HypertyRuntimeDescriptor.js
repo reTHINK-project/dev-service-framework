@@ -1,6 +1,9 @@
 /**
  * Created by amo on 14/11/2015.
  */
+
+import CatalogueDataObject from './CatalogueDataObject';
+
 class HypertyRuntimeDescriptor extends CatalogueDataObject{
 
     constructor(guid, catalogueType, objectName, description, language, sourcePackageURL, runtimeType, hypertyCapabilities, protocolCapabilities){
