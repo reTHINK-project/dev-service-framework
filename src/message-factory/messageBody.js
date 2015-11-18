@@ -2,153 +2,235 @@ class MessageBody{
 
 	constructor(idToken, accessToken, resource){
         //let _this = this;
-        if(idToken != isUndefinedOrNull)
-            this._idToken = idToken;
-        if(accessToken != isUndefinedOrNull)
-            this._accessToken = accessToken;
-        if(resource != isUndefinedOrNull)
-            this._resource = resource;
+        if(typeof idoken !== 'undefined')
+            this.idToken = idToken;
+        if(typeof accessToken  !== 'undefined')
+            this.accessToken = accessToken;
+        if(typeof resource !== 'undefined' )
+            this.resource = resource;
 	}
 
-    get idToken(){ return this._idToken; }
+    /*get idToken(){ return this.idToken; }
 
-    get accessToken(){ return this._accessToken; }
+    get accessToken(){ return this.accessToken; }
 
-    get resource() { return this._resource; }
+    get resource() { return this.resource; }
 
-    toJson(){
-        //TODO generate json object
-        var json = {
-            "idToken" : {
-                "authenticationDataInv": {
-                    "iDTokenArray": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "../Identity/IDToken.json"
-                        }
-                    }
-                    ,
-                    "identityInv": {
-                        "$ref": "../Identity/Identity.json"
-                    }
-                }
-            }
-        }
-        return json;
+    set idToken(iToken){
+        if(iToken)
+            this.idToken = iToken;
     }
+
+    set accessToken(aToken){
+        if(aToken)
+            this.accessToken = aToken;
+    }
+    */
+
+
 }
 
-class CreateMessageBody extends MessageBody {
+export class CreateMessageBody extends MessageBody {
     constructor(value, policy, idToken, accessToken, resource){
-        if(isUndefinedOrNull(value))
+        if(typeof value === 'undefined')
             throw new NullParameterError("The value parameter is null");
         super(idToken,accessToken, resource);
 
-        this._value = value;
-        if(policy != isUndefinedOrNull)
-            this._policy = policy;
+        this.value = value;
+        if(policy)
+            this.policy = policy;
     }
+    /*
+    get value() { return this.value; }
 
-    get value() { return this._value; }
-
-    get policy(){return this._policy}
+    get policy(){return this.policy}
 
     set value(value){
         if(value)
-            this._value = value
+            this.value = value;
     }
 
     set policy(policy){
         if(policy)
-            this._policy = policy
-    }
+            this.policy = policy;
+    }*/
 }
 
-class ReadMessageBody extends MessageBody {
-    constructor(attribute, criteriaSyntax, criteria, policy, idToken, accessToken, resource){
+export class ReadMessageBody extends MessageBody {
+    constructor( data, attribute, criteriaSyntax, criteria){
+
+        let previousBody = data.body;
+        let idToken = previousBody.idToken;
+        let accessToken = previousBody.accessToken;
+        let resource = previousBody.resource;
+
         super(idToken,accessToken ,resource );
 
-        if(!isUndefinedOrNull(attribute)){
-            this._attribute = attribute;
-        }
+        if(attribute)
+            this.attribute = attribute;
 
-        if(!isUndefinedOrNull(criteriaSyntax)){
-            this._criteriaSyntax = criteriaSyntax;
-        }
+        if(criteriaSyntax)
+            this.criteriaSyntax = criteriaSyntax;
 
-        if(criteria != isUndefinedOrNull){
-            this._criteria = criteria;
-        }
+        if(criteria)
+            this.criteria = criteria;
     }
 
-    get attribute() { return this._attribute; }
-    get criteriaSyntax() { return this._criteriaSyntax; }
+    /*get attribute() { return this.attribute; }
+    get criteriaSyntax() { return this.criteriaSyntax; }
     get criteria() {return }
 
     set attribute(atr){
         if(atr)
-            this._attribute = atr;
+            this.attribute = atr;
     }
 
     set criteria(criteria){
         if(criteria)
-            this._criteria;
+            this.criteria;
     }
 
     set criteriaSyntax(crSyntax){
         if(crSyntax)
-            this._criteriaSyntax = crSyntax;
-    }
+            this.criteriaSyntax = crSyntax;
+    }*/
 }
 
 
-class DeleteMessageBody extends MessageBody {
-    constructor(attribute, idToken, accessToken, resource){
+export class DeleteMessageBody extends MessageBody {
+    constructor(data, attribute){
+
+        let previousBody = data.body;
+        let idToken = previousBody.idToken;
+        let accessToken = previousBody.accessToken;
+        let resource = previousBody.resource;
+
         super(idToken,accessToken ,resource );
 
         if(attribute){
-            this._attribute = attribute;
+            this.attribute = attribute;
         }
     }
-
-    get attribute() { return this._attribute; }
+    /*
+    get attribute() { return this.attribute; }
+    set attribute(atr){
+        if(atr)
+            this.attribute = atr;
+    }*/
 }
 
-class UpdateMessageBody extends MessageBody {
-    constructor(attribute, value, idToken, accessToken, resource){
+export class UpdateMessageBody extends MessageBody {
+    constructor(data, attribute, value){
+        let previousBody = data.body;
+        let idToken = previousBody.idToken;
+        let accessToken = previousBody.accessToken;
+        let resource = previousBody.resource;
+
         super(idToken,accessToken ,resource );
 
-        if(attribute)
-            this._attribute = attribute;
-
-        if(value)
-            this._value = value;
+        this.attribute = attribute;
+        this.value = value;
     }
 
-    get attribute() { return this._attribute; }
-    get value(){ return this._value; }
+   /* get attribute() { return this.attribute; }
+    get value(){ return this.value; }
+
+    set attribute(atr){
+        if(atr)
+            this.attribute = atr;
+    }
+
+    set value(value){
+        if(value)
+            this.value = value;
+    }*/
 }
 
-class ResponseMessageBody extends MessageBody {
-    constructor(code, decription, value, idToken, accessToken, resource){
+export class ResponseMessageBody extends MessageBody {
+
+    constructor(data, code, value){
+
+        let previousBody = data.body;
+        let idToken = previousBody.idToken;
+        let accessToken = previousBody.accessToken;
+        let resource = previousBody.resource;
+
+        super(idToken,accessToken ,resource );
         super(idToken,accessToken ,resource );
 
         if(code)
-            this._code = attribute;
-
-        if(decription)
-            this._description = decription;
+        {
+            this.code = code;
+            this.description = REASON_PHRASE[code];
+        }
 
         if(value)
-            this._value = value;
+            this.value = value;
     }
 
-    get code(){ return this._code; }
-    get description() { return this._description; }
-    get value(){ return this._value; }
-}
+    /*get code(){ return this.code; }
+    get description() { return this.description; }
+    get value(){ return this.value; }
 
-var REASON_PHRASE = {
+    set description(desc){
+        if(desc)
+            this.description = desc;
+    }
+
+    set value(value){
+        if(value)
+            this.value = value;
+    }
+
+    set code(code){
+        if(code)
+            this.code = code;
+    }*/
+}
+export var RESPONS_CODE = {
+    100: '100',
+    101: '101',
+    200: '200',
+    201: '201',
+    202: '202',
+    203: '203',
+    204: '204',
+    205: '205',
+    206: '206',
+    300: '300',
+    301: '301',
+    302: '302',
+    303: '303',
+    304: '304',
+    305: '305',
+    307: '307',
+    400: '400',
+    401: '401',
+    402: '402',
+    403: '403',
+    404: '404',
+    405: '405',
+    406: '406',
+    407: '407',
+    408: '408',
+    409: '409',
+    410: '410',
+    411: '411',
+    412: '412',
+    413: '413',
+    414: '414',
+    415: '415',
+    416: '416',
+    417: '417',
+    426: '426',
+    500: '500',
+    501: '501',
+    502: '502',
+    503: '503',
+    504: '504',
+    505: '505'
+};
+export var REASON_PHRASE = {
     100: 'Continue',
     101: 'Switching Protocols',
     200: 'OK',
@@ -191,5 +273,5 @@ var REASON_PHRASE = {
     504: 'Gateway Time-out',
     505: 'HTTP Version Not Supported'
 };
-export var REASON_PHRASE;
+
 export default MessageBody;

@@ -2,61 +2,94 @@
  * Created by amo on 14/11/2015.
  */
 class CatalogueDataObject{
-    /*
-     guid	string	yes	Global Unique identifier of the Catalogue Object (e.g. Hyperty descriptor, ProtocolStub descriptor, etc) enabling the same object to be stored and discovered in different Catalogues. That means, guid corresponds to <resource-type-id> per BNF of Resource Path. Couldn't we have problems with too long URL paths?
-     type	CatalogueObjectType	yes	Indicates the type of Catalogue Data Object e.g. Hyperty, ProtocolStub, etc
-     objectName	string	yes	human-understable name of the catalogue object e.g. "My Awesome Hyperty".
-     sourcePackageURL	string	yes	A string containing the URL from where the source code package of the corresponding catalogue object, e.g. deployable packages containing executable code for Hyperties or ProtoStubs, can be downloaded. Question: should this only be the pure URL or should it also include the protocol used to download it, i.e. http://xxxxx or ftp://xxxxx etc)
-     sourcePackage	string	no	The deployable packages of the catalogue object (i.e. the executable of the Hyperty or ProtoStubs). Note: The sourcePackage attribute must be present if the sourcePackageURL points to this attribute.
-     language	DataObjectSourceLanguage	yes	The programming language used in the SourcePackage.SourceCode e.g. Javascript ECMA5 for Hyperties or JSON-Schema for Data Object Schemas. The main purpose of this attribute is to make reTHINK agnostic of the programming language used.
-     signature	string	no	Enables integrity and authenticity verification of Data Object catalogue.
+
+    /**
+     * Creates the Cataloogue Data Object
+     * @param guid - Global Unique identifier of the Catalogue Object (e.g. Hyperty descriptor, ProtocolStub descriptor, etc) enabling the same object to be stored and discovered in different Catalogues. That means, guid corresponds to <resource-type-id> per BNF of Resource Path. Couldn't we have problems with too long URL paths?
+     * @param type - indicates the type of Catalogue Data Object e.g. Hyperty, ProtocolStub, etc
+     * @param objectName - human-understable name of the catalogue object e.g. "My Awesome Hyperty"
+     * @param description - desciption of the source package
+     * @param language - the programming language used in the SourcePackage.SourceCode
+     * @param sourcePackageURL - A string containing the URL from where the source code package of the corresponding catalogue object, e.g. deployable packages containing executable code for Hyperties or ProtoStubs, can be downloaded
      */
     constructor(guid, type, objectName, description, language, sourcePackageURL){
-        this._guid = guid;
-        this._type = type;
-        this._objectName = objectName;
-        this._descriptiom = description;
-        this._language = language;
-        this._sourcePackageURL = sourcePackageURL;
+        this.guid = guid;
+        this.type = type;
+        this.objectName = objectName;
+        this.description = description;
+        this.language = language;
+        this.sourcePackageURL = sourcePackageURL;
 
-        this._signature = null;
-        this._sourcePackage = null;
+        this.signature = null;
+        this.sourcePackage = null;
     }
 
     // Getters
-    get guid(){ return this._guid; }
+    get guid(){ return this.guid; }
 
-    get type(){ return this._type; }
+    get type(){ return this.type; }
 
-    get objectName(){return this._objectName; }
+    get objectName(){return this.objectName; }
 
-    get description(){ return this._descriptiom; }
+    get description(){ return this.descriptiom; }
 
-    get language() {return this._language; }
+    get language() {return this.language; }
 
-    get signature() { return this._signature; }
+    get signature() { return this.signature; }
 
-    get sourcePackage(){ return this._sourcePackage; }
+    get sourcePackage(){ return this.sourcePackage; }
+
+    get sourcePackageURL(){ return this.sourcePackageURL; }
 
 
     // Setters
-    /**
-     * Set the signature to enables integrity and authenticity verification
-     * @param signature
-     */
+    set guid(guid){
+        if(guid)
+            this.guid = guid;
+    }
+
+    set type(catalogueType){
+        if(catalogueType)
+            this.type = catalogueType;
+    }
+
+    set objectName(oName){
+        if(oName)
+            this.objectName = oName;
+    }
+    set description(desc){
+        if(desc)
+            this.description = desc;
+    }
+    set language(lang){
+        if(lang)
+            this.language = lang;
+    }
+
     set signature(signature){
         if(signature)
-            this._signature = signature;
-
+            this.signature = signature;
     }
 
     set sourcePackage(srcPackage){
         if(srcPackage)
-            this._sourcePackage = srcPackage;
-
+            this.sourcePackage = srcPackage;
     }
+
+    set sourcePackageURL(srcPackageUrl){
+        if(srcPackageUrl)
+            this.sourcePackageURL = srcPackageUrl;
+    }
+
 }
-class SourcePackage{
+export class SourcePackage{
+    constructor(encoding, sourceCodeClassname, sourceCode, signature){
+        "use strict";
+        this.encoding = encoding;
+        this.sourceCodeClassname = sourceCodeClassname;
+        this.sourceCode = sourceCode;
+        this.signature = signature;
+    }
 
 }
 

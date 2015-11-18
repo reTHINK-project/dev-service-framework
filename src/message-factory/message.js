@@ -4,41 +4,62 @@
 
 class Message{
 
-    constructor(id, from, type, contextId, body) {
+    constructor(id, from, toList, type, contextId, body, signature) {
 
-		this._id = id;
-        this._from = from;
-        this._type = type;
-        this._contextId = contextId;
-        this._body = body;
+		this.id = id;
+        this.from = from;
+        this.type = type;
+        this.contextId = contextId;
+        this.body = body;
 
-        this._to = {};
-        this._signature = null;
-        this.jsonBody = null;
+        this.to = toList;
+        this.signature = signature;
      }
 
-    get id(){ return this._id; }
+    /*
+    get id(){ return this.id; }
 
-    get from(){ return this._from; }
+    get from(){ return this.from; }
 
-    get type() { return this._type; }
+    get type() { return this.type; }
 
-    get contextId() { return this._contextId; }
+    get contextId() { return this.contextId; }
 
-    get body(){ return this._body; }
+    get body(){ return this.body; }
 
+    set id(identifier){
+        if(identifier)
+            this.id = identifier;
+    }
+
+    set from(sender){
+        if(sender)
+            this.from = sender;
+    }
+
+    set type(msgType){
+        if(msgType)
+            this.type = msgType;
+    }
+
+    set contextId(cID){
+        if(cID)
+            this.contextId = cID;
+    }
+    set body(msgBody){
+        if(msgBody)
+            this.body = msgBody;
+    }
     set to(recipientList){
-        "use strict";
-        this._to = recipientList;
+        if(recipientList)
+            this.to = recipientList;
     }
 
-    set signature(signature){
-        "use strict";
-        this._signature = signature;
-    }
-
+    set signature(signature) {
+        if (signature)
+            this.signature = signature;
+    }*/
 
 }
-//var MessageType = new enums.Enum("CREATE", "UPDATE", "DELETE", "READ", "SUBSCRIBE", "UNSUBSCRIBE", "RESPONSE");
 export var MessageType = {CREATE: 'create', READ: 'read', UPDATE: 'update', DELETE: 'delete', SUBSCRIBE: 'subscribe', UNSUBSCRIBE: 'unsubscribe', RESPONSE: 'response'};
 export default Message

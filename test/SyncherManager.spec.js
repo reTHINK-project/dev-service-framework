@@ -1,4 +1,4 @@
-import SyncherManager from '../src/syncher-manager/SyncherManager';
+/*import SyncherManager from '../src/syncher-manager/SyncherManager';
 import SyncSubscription from '../src/syncher-manager/SyncSubscription';
 import DataObjectReporter from '../src/syncher-manager/DataObjectReporter';
 import DataObjectObserver from '../src/syncher-manager/DataObjectObserver';
@@ -610,3 +610,4 @@ describe('SyncherManager', function() {
     });
   });
 });
+*/

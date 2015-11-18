@@ -8,29 +8,57 @@ class HypertyDescriptor extends CatalogueDataObject{
     constructor(guid, catalogueType, objectName, description, language, sourcePackageURL, hypertyType, dataObjects) {
         super(guid, catalogueType, objectName, description, language, sourcePackageURL);
 
-        this._configurationDataList = [];
-        this._runtimeConstraintList = [];
-        this._policies = [];
-        this._messageSchema = null;
+        this.configurationDataList = {};
+        this.runtimeConstraintList = {};
+        this.policies = {};
+        this.messageSchema = null;
 
-        this._hypertyType = hypertyType;
-        this._dataObjects = dataObjects;
+        this.hypertyType = hypertyType;
+        this.dataObjects = dataObjects;
     }
 
-    get hypertyType() { return this._hypertyType; }
+    get hypertyType() { return this.hypertyType; }
 
-    get dataObjects() { return this._dataObjects; }
+    get dataObjects() { return this.dataObjects; }
 
-    get configurationDataList() {return this._configurationDataList; }
+    get configurationDataList() {return this.configurationDataList; }
 
-    get runtimeConstraintList() { return this._runtimeConstraintList; }
+    get runtimeConstraintList() { return this.runtimeConstraintList; }
 
-    get messageSchema(){ return this._messageSchema; }
+    get messageSchema(){ return this.messageSchema; }
 
-    toJSON(){
-        "use strict";
+    get policies() { return this.policies; }
 
+    set hypertyType(hType) {
+        if(hType)
+            this.hypertyType = hType;
     }
+
+    set dataObjects(dataObjectUrl) {
+        if(dataObjectUrl)
+            this.dataObjects = dataObjectUrl;
+    }
+
+    set configurationDataList(configDataList) {
+        if(configDataList)
+            this.configurationDataList = configDataList;
+    }
+
+    set runtimeConstraintList(runtimeConstList) {
+        if(runtimeConstList)
+            this.runtimeConstraintList = runtimeConstList;
+    }
+
+    set messageSchema(msgSchema){
+        if(msgSchema)
+            this._messageSchema = msgSchema;
+    }
+
+    set policies (policyList){
+        if(policyList)
+            this.policies = policyList;
+    }
+
 }
 
 
