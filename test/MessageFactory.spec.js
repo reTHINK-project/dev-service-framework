@@ -25,9 +25,11 @@ describe('MessageFactory', function() {
 
         it('should be a Message of Type CREATE', function(done) {
 
+
+            //createMessageRequest(from, to, contextId, value, policy, idToken, accessToken, resource, signature)
             let message = messageFactory.createMessageRequest(
-                "hyperty-runtime-esn://domain.com/12345", "a7317660-bfa1-4830-b03f-278a814d2feb", "{attribute: 'value'}",
-                "policyURL", null, null, "hyperty-runtime-uuid://domain.com/12345", null);
+                "hyperty-runtime-esn://domain.com/12345", "[hyperty-runtime-imei://domain.com/12345, hyperty-runtime-imei://domain.com/678910]","a7317660-bfa1-4830-b03f-278a814d2feb", "{audio: 'PCMU-Codec'}",
+                "policyURL", null, null, "hyperty-runtime-uuid://domain.com/myResource", null);
 
             console.log('created msg', JSON.stringify(message));
             expect(message).to.not.be.empty;
@@ -38,14 +40,13 @@ describe('MessageFactory', function() {
     describe('updateMessageRequest()', function() {
         let messageFactory = new MessageFactory("false", "{}");
         let message = messageFactory.createMessageRequest(
-            "hyperty-runtime-esn://domain.com/12345", "a7317660-bfa1-4830-b03f-278a814d2feb", "{attribute: 'value'}",
-            "policyURL", null, null, "hyperty-runtime-uuid://domain.com/12345", null);
+            "hyperty-runtime-esn://domain.com/12345", "[hyperty-runtime-imei://domain.com/12345, hyperty-runtime-imei://domain.com/678910]","a7317660-bfa1-4830-b03f-278a814d2feb", "{audio: 'PCMU-Codec'}",
+            "policyURL", null, null, "hyperty-runtime-uuid://domain.com/myResource", null);
 
         it('should be a Message of Type UPDATE', function(done) {
-
-           let updateMessage = messageFactory.createUpdateMessageRequest(message, "param1", "video");
-
-            console.log('created msg', JSON.stringify(updateMessage));
+            console.log('created msg', JSON.stringify(message));
+            let updateMessage = messageFactory.createUpdateMessageRequest(message, "audio", "MPEG");
+            console.log('updated msg', JSON.stringify(updateMessage));
             expect(message).to.not.be.empty;
             done();
         });

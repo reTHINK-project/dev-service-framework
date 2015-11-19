@@ -5,7 +5,7 @@
 import rethinkObject from '../reTHINKObject/rethinkObject.js';
 import Message from './Message.js';
 import {CreateMessageBody, DeleteMessageBody, UpdateMessageBody, ReadMessageBody, ResponseMessageBody, REASON_PHRASE} from './MessageBody.js';
-import MessageType from './Message';
+import {MessageType} from './Message.js';
 
 class MessageFactory extends rethinkObject {
 
@@ -39,7 +39,8 @@ class MessageFactory extends rethinkObject {
 	{
         if(typeof from === 'undefined' || typeof contextId === 'undefined'
         || typeof value === 'undefined')
-            throw  new Error("from, contextId, and value of object to be created MUST be specified")
+            throw  new Error("from, contextId, and value of object to be created MUST be specified");
+
         let messageBody = new CreateMessageBody(value, policy, idToken, accessToken, resource);
         let message = new Message(MessageFactory.generateGUID(), from, to, MessageType.CREATE, contextId, messageBody, signature);
         return message;
@@ -53,9 +54,9 @@ class MessageFactory extends rethinkObject {
      */
     createDeleteMessageRequest(data, attribute){
 		if(typeof data === 'undefined' || typeof attribute === 'undefined')
-            throw  new Error("message and attribute MUST be specified")
+            throw  new Error("message and attribute MUST be specified");
         let newBody = new DeleteMessageBody(data, attribute);
-        return new Message(data.id, data.from, MessageType.DELETE, data.contextId, newBody);
+        return new Message(data.id, data.from, data.to, MessageType.DELETE, data.contextId, newBody, data.signature);
 	}
 
     /**
@@ -67,36 +68,30 @@ class MessageFactory extends rethinkObject {
      */
 	createUpdateMessageRequest(data,  attribute,  value){
         if(!data || !attribute || !value)
-            throw  new Error("message attribute and value MUST be specified")
+            throw  new Error("message attribute and value MUST be specified");
         let newBody = new UpdateMessageBody(data, attribute, value);
-        return new Message(data.id, data.from, MessageType.UPDATE, data.contextId, newBody);
+        return new Message(data.id, data.from, data.to, MessageType.UPDATE, data.contextId, newBody, data.signature);
 	}
 
     /**
      * Creates a Read Message request
-     * @param data
-     * @param attribute
-     * @param criteria
-     * @param criteriaSyntax
+     * @param {Message} data
+     * @param {Object} attribute
+     * @param {Object} criteria
+     * @param {Object} criteriaSyntax
      */
     createReadMessageRequest( data,  attribute,  criteria,  criteriaSyntax){
 
-        let newBody = new ReadMessageBody(data, attribute, value);
-        return new Message(data.id, data.from, MessageType.UPDATE, data.contextId, newBody);
+        let newBody = new ReadMessageBody(data, attribute, criteriaSyntax, criteria);
+        return new Message(data.id, data.from, data.to, MessageType.READ, data.contextId, newBody, data.signature);
     }
 	
-	createResponse( data,  code)
-	{
-		
-	}
-	
-	getHeader( data,  key){
-		
-	}
-	
-	getBody( data){
-		
-	}
+	createResponse( data,  code, value) {
+        if (!data || !code)
+            throw new Error("message and response code MUST be specified");
+        let response = new ResponseMessageBody(data, code, value);
+        return new Message(data.id, data.from, data.to, MessageType.RESPONSE, data.contextId, response, data.signature);
+    }
 
 
 

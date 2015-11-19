@@ -8,12 +8,11 @@ class Message{
 
 		this.id = id;
         this.from = from;
+        this.to = toList;
         this.type = type;
         this.contextId = contextId;
-        this.body = body;
-
-        this.to = toList;
         this.signature = signature;
+        this.body = body;
      }
 
     /*
@@ -61,5 +60,7 @@ class Message{
     }*/
 
 }
+
+
 export var MessageType = {CREATE: 'create', READ: 'read', UPDATE: 'update', DELETE: 'delete', SUBSCRIBE: 'subscribe', UNSUBSCRIBE: 'unsubscribe', RESPONSE: 'response'};
 export default Message
