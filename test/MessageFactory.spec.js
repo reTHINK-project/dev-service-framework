@@ -1,5 +1,5 @@
-import MessageFactory from '../src/message-factory/MessageFactory.js';
-import Message from '../src/message-factory/Message.js';
+import MessageFactory from '../src/message-factory/messageFactory.js';
+import Message from '../src/message-factory/message.js';
 
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';

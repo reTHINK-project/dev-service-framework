@@ -3,9 +3,9 @@
 * 
 */
 import rethinkObject from '../reTHINKObject/rethinkObject.js';
-import Message from './Message.js';
-import {CreateMessageBody, DeleteMessageBody, UpdateMessageBody, ReadMessageBody, ResponseMessageBody, REASON_PHRASE} from './MessageBody.js';
-import {MessageType} from './Message.js';
+import Message from './message.js';
+import {CreateMessageBody, DeleteMessageBody, UpdateMessageBody, ReadMessageBody, ResponseMessageBody, REASON_PHRASE} from './messageBody.js';
+import {MessageType} from './message.js';
 
 class MessageFactory extends rethinkObject {
 
