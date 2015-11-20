@@ -9,6 +9,11 @@ if you already have the project configured on your machine, you only need run th
 
 if you have some trouble with the environment, you can open an issue;
 
+Address data factory is based on https://github.com/jsdom/whatwg-url, which transforms the source file with some minor changes. In this project, I have added a rule to perform that changes. Just do:
+
+   npm run-script build
+
+
 ### Javascript Environment
 JavaScript code should be written in ES6.
 There are direct dependencies from nodejs and npm, these can be installed separately or in conjunction with [nvm](https://github.com/creationix/nvm)
@@ -40,3 +45,8 @@ Unit testing can be launched manually with **karma start**.
 
 After investigate and testing the [expect.js](https://github.com/Automattic/expect.js) it don't support some features for ES6, because this tool hasn't activity at some time, that is why, it is recomended use the [chaijs](http://chaijs.com/) it is more versatile and have expect.js (but updated) and others tools that can be useful;
 
+The address data factory can be tested independently by calling
+
+    cd <base folder>/test
+    mocha addressFactoryTest.js
+        
