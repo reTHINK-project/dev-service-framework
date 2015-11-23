@@ -52,4 +52,3 @@ export class ContextDataObjectSchema extends HypertyDataObjectSchema {
 }
 
 export default DataObjectSchema;
-
