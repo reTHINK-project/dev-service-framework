@@ -3,7 +3,7 @@
 * 
 */
 
-import rethinkObject from '../reTHINKObject/RethinkObject.js';
+import RethinkObject from '../reTHINKObject/RethinkObject.js';
 import Message from './Message.js';
 import {CreateMessageBody, DeleteMessageBody, UpdateMessageBody, ReadMessageBody, ResponseMessageBody, REASON_PHRASE} from './MessageBody.js';
 import {MessageType} from './Message.js';
@@ -29,7 +29,7 @@ class MessageFactory extends RethinkObject {
     }
 
     /**
-     * Create a Message with CREATE MessageType and Create Mesage Body
+     * Create a Message with CREATE MessageType and Create Message Body
      *
      * @param {URL.URL} from - the sender of this message
      * @param {URL.URLList} One or more URLs of Message recipients. According to the URL scheme it may be handled in different ways
