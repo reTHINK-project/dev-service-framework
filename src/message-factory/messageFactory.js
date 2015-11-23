@@ -2,12 +2,13 @@
 * Message Factory
 * 
 */
-import rethinkObject from '../reTHINKObject/rethinkObject.js';
+import rethinkObject from '../reTHINKObject/RethinkObject.js';
 import Message from './Message.js';
 import {CreateMessageBody, DeleteMessageBody, UpdateMessageBody, ReadMessageBody, ResponseMessageBody, REASON_PHRASE} from './MessageBody.js';
 import {MessageType} from './Message.js';
 
-class MessageFactory extends rethinkObject {
+
+class MessageFactory extends RethinkObject {
 
     /**
      * Constructor
@@ -20,6 +21,11 @@ class MessageFactory extends rethinkObject {
         let _this = this;
 		
 	}
+
+    validate(data){
+        return super.validate(data);
+
+    }
 
     /**
      * Create a Message with CREATE MessageType and Create Mesage Body

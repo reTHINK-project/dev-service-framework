@@ -1,6 +1,6 @@
 import tv4 from "tv4";
 
-class rethinkObject{
+export class RethinkObject{
 
     constructor(validation, schema){
 
@@ -14,7 +14,6 @@ class rethinkObject{
     }
 
 
-
     validate(data){
         if(this.schema)
             return tv4.validate(data, this.schema);
@@ -22,4 +21,5 @@ class rethinkObject{
             return false;
     }
 }
-export default rethinkObject;
+
+export default;

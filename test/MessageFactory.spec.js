@@ -31,9 +31,28 @@ describe('MessageFactory', function() {
             console.log('created msg', JSON.stringify(message));
             expect(message).to.not.be.empty;
             expect(message.type).to.eql(MessageType.CREATE);
+
+            let isValid = messageFactory.validate(message);
+            console.log('Is message valid? ', isValid);
+
             done();
         });
+
+        it('should validate', function(done){
+            let isValid = messageFactory.validate(message);
+            console.log('Is message valid? ', isValid);
+            done();
+
+        });
     });
+
+
+    /*describe('schema validation', function(done){
+        let msg = message;
+        let isValid = messageFactory.validate(msg);
+        console.log('Is message valid? ', isValid);
+        done();
+    });*/
 
     describe('updateMessageRequest()', function() {
 
