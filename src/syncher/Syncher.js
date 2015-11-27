@@ -5,7 +5,7 @@ import DataObjectObserver from './DataObjectObserver';
  * @author micaelpedrosa@gmail.com
  * Client API Syncronization system.
  */
-class SyncherManager {
+class Syncher {
   /* private
   _owner: URL
   _bus: MiniBus
@@ -164,4 +164,4 @@ class SyncherManager {
 
 }
 
-export default SyncherManager;
+export default Syncher;
