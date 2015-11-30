@@ -39,7 +39,7 @@ class CatalogueDataObjectFactory extends RethinkObject {
             || typeof sourcePackageURL === "undefined"
         )
             throw new Error("Invalid parameters!");
-        return new CatalogueDataObject(this.guid(), type, objectName, description, language, sourcePackageURL);
+        return new CatalogueDataObject(this._generateGuid(), type, objectName, description, language, sourcePackageURL);
     }
 
     createHypertyDescriptorObject(catalogueType, objectName, description, language, sourcePackageURL, hypertyType,
@@ -54,7 +54,7 @@ class CatalogueDataObjectFactory extends RethinkObject {
             || typeof dataObjects === "undefined"
         )
             throw new Error("Invalid parameters!");
-        return new HypertyDescriptor(this.guid(), catalogueType, objectName, description, language, sourcePackageURL,
+        return new HypertyDescriptor(this._generateGuid(), catalogueType, objectName, description, language, sourcePackageURL,
             hypertyType, dataObjects);
     }
 
@@ -71,7 +71,7 @@ class CatalogueDataObjectFactory extends RethinkObject {
             || typeof constraintList === "undefined"
         )
             throw new Error("Invalid parameters!");
-        return new ProtocolStubDescriptor(this.guid(), type, objectName, description, language, sourcePackageURL,
+        return new ProtocolStubDescriptor(this._generateGuid(), type, objectName, description, language, sourcePackageURL,
             messageSchemas, configurationList, constraintList);
     }
 
@@ -89,7 +89,7 @@ class CatalogueDataObjectFactory extends RethinkObject {
         )
             throw new Error("Invalid parameters!");
 
-        return new HypertyRuntimeDescriptor(this.guid(), catalogueType, objectName, description, language, sourcePackageURL,
+        return new HypertyRuntimeDescriptor(this._generateGuid(), catalogueType, objectName, description, language, sourcePackageURL,
             runtimeType, hypertyCapabilities, protocolCapabilities);
     };
 
@@ -106,7 +106,7 @@ class CatalogueDataObjectFactory extends RethinkObject {
         )
             throw new Error("Invalid parameters!");
 
-        return new PolicyEnforcerDescriptor(this.guid(), type, objectName, description, language, sourcePackageURL,
+        return new PolicyEnforcerDescriptor(this._generateGuid(), type, objectName, description, language, sourcePackageURL,
             configuration, policies);
     }
 
@@ -120,20 +120,18 @@ class CatalogueDataObjectFactory extends RethinkObject {
         )
             throw new Error("Invalid parameters!");
 
-        return new DataObjectSchema(this.guid(), type, objectName, description, language, sourcePackageURL);
+        return new DataObjectSchema(this._generateGuid(), type, objectName, description, language, sourcePackageURL);
     }
 
-    guid() {
-        function s4() {
-            return Math.floor((1 + Math.random()) * 0x10000)
-                .toString(16)
-                .substring(1);
-        }
+    _generateGuid() {
+        let d = new Date().getTime();
 
-        return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-            s4() + '-' + s4() + s4() + s4();
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            let r = (d + Math.random() * 16) % 16 | 0;
+            d = Math.floor(d / 16);
+            return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+        });
     }
-
 }
 
 export default CatalogueDataObjectFactory;

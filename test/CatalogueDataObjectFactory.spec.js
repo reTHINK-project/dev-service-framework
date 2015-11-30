@@ -38,10 +38,13 @@ describe('CatalogueDataObjectFactory', function () {
         });
 
         it('CatalogueDataObject should have valid, generated GUID', function(done) {
-            console.log("GUID", catalogueDataObject._guid);
-            expect(catalogueDataObject._guid.to.match(
+            console.log("GUID", catalogueDataObject.guid);
+
+            //GUID according to RFC4122
+            expect(catalogueDataObject.guid).to.match(
                 /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
-            ));
+            );
+            expect(catalogueDataObject.guid).to.not.equal(catalogueDataObjectFactory._generateGuid());
             done();
         })
     });
