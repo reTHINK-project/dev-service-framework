@@ -30,24 +30,22 @@ class CatalogueDataObjectFactory extends RethinkObject {
         super(validation, schema);
     }
 
-    createCatalogueDataObject(guid, type, objectName, description, language, sourcePackageURL) {
+    createCatalogueDataObject(type, objectName, description, language, sourcePackageURL) {
         if (
-            typeof guid === "undefined"
-            || typeof type === "undefined"
+            typeof type === "undefined"
             || typeof objectName === "undefined"
             || typeof description === "undefined"
             || typeof language === "undefined"
             || typeof sourcePackageURL === "undefined"
         )
             throw new Error("Invalid parameters!");
-        return new CatalogueDataObject(guid, type, objectName, description, language, sourcePackageURL);
+        return new CatalogueDataObject(this.guid(), type, objectName, description, language, sourcePackageURL);
     }
 
-    createHypertyDescriptorObject(guid, catalogueType, objectName, description, language, sourcePackageURL, hypertyType,
+    createHypertyDescriptorObject(catalogueType, objectName, description, language, sourcePackageURL, hypertyType,
                                   dataObjects) {
         if (
-            typeof guid === "undefined"
-            || typeof catalogueType === "undefined"
+            typeof catalogueType === "undefined"
             || typeof objectName === "undefined"
             || typeof description === "undefined"
             || typeof language === "undefined"
@@ -56,15 +54,14 @@ class CatalogueDataObjectFactory extends RethinkObject {
             || typeof dataObjects === "undefined"
         )
             throw new Error("Invalid parameters!");
-        return new HypertyDescriptor(guid, catalogueType, objectName, description, language, sourcePackageURL,
+        return new HypertyDescriptor(this.guid(), catalogueType, objectName, description, language, sourcePackageURL,
             hypertyType, dataObjects);
     }
 
-    createProtoStubDescriptorObject(guid, type, objectName, description, language, sourcePackageURL, messageSchemas,
+    createProtoStubDescriptorObject(type, objectName, description, language, sourcePackageURL, messageSchemas,
                                     configurationList, constraintList) {
         if (
-            typeof guid === "undefined"
-            || typeof type === "undefined"
+            typeof type === "undefined"
             || typeof objectName === "undefined"
             || typeof description === "undefined"
             || typeof language === "undefined"
@@ -74,15 +71,14 @@ class CatalogueDataObjectFactory extends RethinkObject {
             || typeof constraintList === "undefined"
         )
             throw new Error("Invalid parameters!");
-        return new ProtocolStubDescriptor(guid, type, objectName, description, language, sourcePackageURL,
+        return new ProtocolStubDescriptor(this.guid(), type, objectName, description, language, sourcePackageURL,
             messageSchemas, configurationList, constraintList);
     }
 
-    createHypertRuntimeDescriptorObject(guid, catalogueType, objectName, description, language, sourcePackageURL,
-                                        runtimeType, hypertyCapabilities, protocolCapabilities) {
+    createHypertyRuntimeDescriptorObject(catalogueType, objectName, description, language, sourcePackageURL,
+                                         runtimeType, hypertyCapabilities, protocolCapabilities) {
         if (
-            typeof guid === "undefined"
-            || typeof type === "undefined"
+            typeof type === "undefined"
             || typeof objectName === "undefined"
             || typeof description === "undefined"
             || typeof language === "undefined"
@@ -93,15 +89,14 @@ class CatalogueDataObjectFactory extends RethinkObject {
         )
             throw new Error("Invalid parameters!");
 
-        return new HypertyRuntimeDescriptor(guid, catalogueType, objectName, description, language, sourcePackageURL,
+        return new HypertyRuntimeDescriptor(this.guid(), catalogueType, objectName, description, language, sourcePackageURL,
             runtimeType, hypertyCapabilities, protocolCapabilities);
     };
 
-    createPolicyEnforcerDescriptorObject(guid, type, objectName, description, language, sourcePackageURL, configuration,
+    createPolicyEnforcerDescriptorObject(type, objectName, description, language, sourcePackageURL, configuration,
                                          policies) {
         if (
-            typeof guid === "undefined"
-            || typeof type === "undefined"
+            typeof type === "undefined"
             || typeof objectName === "undefined"
             || typeof description === "undefined"
             || typeof language === "undefined"
@@ -111,14 +106,13 @@ class CatalogueDataObjectFactory extends RethinkObject {
         )
             throw new Error("Invalid parameters!");
 
-        return new PolicyEnforcerDescriptor(guid, type, objectName, description, language, sourcePackageURL,
+        return new PolicyEnforcerDescriptor(this.guid(), type, objectName, description, language, sourcePackageURL,
             configuration, policies);
     }
 
-    createDataObjectSchema(guid, type, objectName, description, language, sourcePackageURL) {
+    createDataObjectSchema(type, objectName, description, language, sourcePackageURL) {
         if (
-            typeof guid === "undefined"
-            || typeof type === "undefined"
+            typeof type === "undefined"
             || typeof objectName === "undefined"
             || typeof description === "undefined"
             || typeof language === "undefined"
@@ -126,7 +120,18 @@ class CatalogueDataObjectFactory extends RethinkObject {
         )
             throw new Error("Invalid parameters!");
 
-        return new DataObjectSchema(guid, type, objectName, description, language, sourcePackageURL);
+        return new DataObjectSchema(this.guid(), type, objectName, description, language, sourcePackageURL);
+    }
+
+    guid() {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+                .toString(16)
+                .substring(1);
+        }
+
+        return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+            s4() + '-' + s4() + s4() + s4();
     }
 
 }
