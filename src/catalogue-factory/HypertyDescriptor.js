@@ -8,13 +8,13 @@ class HypertyDescriptor extends CatalogueDataObject{
     constructor(guid, catalogueType, objectName, description, language, sourcePackageURL, hypertyType, dataObjects) {
         super(guid, catalogueType, objectName, description, language, sourcePackageURL);
 
-        this.configurationDataList = {};
-        this.runtimeConstraintList = {};
-        this.policies = {};
-        this.messageSchema = null;
+        this._configurationDataList = {};
+        this._runtimeConstraintList = {};
+        this._policies = {};
+        this._messageSchema = null;
 
-        this.hypertyType = hypertyType;
-        this.dataObjects = dataObjects;
+        this._hypertyType = hypertyType;
+        this._dataObjects = dataObjects;
     }
 
     get hypertyType() { return this.hypertyType; }
@@ -31,22 +31,22 @@ class HypertyDescriptor extends CatalogueDataObject{
 
     set hypertyType(hType) {
         if(hType)
-            this.hypertyType = hType;
+            this._hypertyType = hType;
     }
 
     set dataObjects(dataObjectUrl) {
         if(dataObjectUrl)
-            this.dataObjects = dataObjectUrl;
+            this._dataObjects = dataObjectUrl;
     }
 
     set configurationDataList(configDataList) {
         if(configDataList)
-            this.configurationDataList = configDataList;
+            this._configurationDataList = configDataList;
     }
 
     set runtimeConstraintList(runtimeConstList) {
         if(runtimeConstList)
-            this.runtimeConstraintList = runtimeConstList;
+            this._runtimeConstraintList = runtimeConstList;
     }
 
     set messageSchema(msgSchema){
@@ -56,13 +56,13 @@ class HypertyDescriptor extends CatalogueDataObject{
 
     set policies (policyList){
         if(policyList)
-            this.policies = policyList;
+            this._policies = policyList;
     }
 
 }
 
 
 
-export var RuntimeHypertyCapabilityType = {}
+export var RuntimeHypertyCapabilityType = {};
 export var HypertyType = {COMMUNICATOR : 'communicator', IDENTITY: 'identity', CONTEXT: 'context'};
 export default HypertyDescriptor;
