@@ -2,7 +2,7 @@
 * Class implementation of Message Data Model
 */
 
-class Message{
+export class Message{
 
     constructor(id, from, toList, type, contextId, body, signature) {
 
@@ -63,4 +63,5 @@ class Message{
 
 
 export var MessageType = {CREATE: 'create', READ: 'read', UPDATE: 'update', DELETE: 'delete', SUBSCRIBE: 'subscribe', UNSUBSCRIBE: 'unsubscribe', RESPONSE: 'response'};
-export default Message
+
+export default Message;
