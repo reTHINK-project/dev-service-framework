@@ -22,4 +22,4 @@ export class RethinkObject{
     }
 }
 
-export default;
+export default RethinkObject;

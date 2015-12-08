@@ -3,7 +3,7 @@
 * 
 */
 
-import rethinkObject from '../reTHINKObject/RethinkObject.js';
+import RethinkObject from '../reTHINKObject/RethinkObject.js';
 import Message from './Message.js';
 import {CreateMessageBody, DeleteMessageBody, UpdateMessageBody, ReadMessageBody, ResponseMessageBody, REASON_PHRASE} from './MessageBody.js';
 import {MessageType} from './Message.js';
