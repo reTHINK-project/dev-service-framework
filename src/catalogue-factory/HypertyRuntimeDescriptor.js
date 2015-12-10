@@ -6,7 +6,8 @@ import CatalogueDataObject from './CatalogueDataObject';
 
 class HypertyRuntimeDescriptor extends CatalogueDataObject{
 
-    constructor(guid, catalogueType, objectName, description, language, sourcePackageURL, runtimeType, hypertyCapabilities, protocolCapabilities){
+    constructor(guid, catalogueType, objectName, description, language, sourcePackageURL, runtimeType,
+                hypertyCapabilities, protocolCapabilities){
         super(guid, catalogueType, objectName, description, language, sourcePackageURL);
 
         this._runtimeType = runtimeType;
@@ -28,6 +29,8 @@ class HypertyRuntimeDescriptor extends CatalogueDataObject{
 }
 
 export var RuntimeType = { BROWSER: 'browser', STANDALONE: 'standalone', SERVER: 'server', GATEWAY: 'gateway'};
-export var RuntimeHypertyCapabilityType = { MIC: 'mic', CAMERA: 'camera', SENSOR: 'sensor', WEBRTC: 'webrtc', ORTC: 'ortc'};
-export var RuntimeProtocolCapabilityType = { HTTP: 'http', HTTPS: 'https', WS: 'ws', WSS: 'wss', COAP: 'coap', DATACHANEL: 'datachannel'};
+export var RuntimeHypertyCapabilityType = { MIC: 'mic', CAMERA: 'camera', SENSOR: 'sensor', WEBRTC: 'webrtc',
+    ORTC: 'ortc'};
+export var RuntimeProtocolCapabilityType = { HTTP: 'http', HTTPS: 'https', WS: 'ws', WSS: 'wss', COAP: 'coap',
+    DATACHANEL: 'datachannel'};
 export default HypertyRuntimeDescriptor;
