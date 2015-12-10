@@ -29,7 +29,7 @@ var pkg = require('./package.json');
 gulp.task('dist', function() {
 
   var bundler = browserify('./src/service-framework.js', {
-    standalone: 'ServiceFramework', debug: false}).transform(babel);
+    standalone: 'service-framework', debug: false}).transform(babel);
 
   function rebundle() {
     bundler.bundle()
@@ -37,7 +37,7 @@ gulp.task('dist', function() {
         console.error(err);
         this.emit('end');
       })
-      .pipe(source('ServiceFramework.js'))
+      .pipe(source('service-framework.js'))
       .pipe(buffer())
       .pipe(uglify())
       .pipe(insert.prepend('// Service Framework \n\n// version: {{version}}\n\n'))
@@ -52,7 +52,7 @@ gulp.task('dist', function() {
 gulp.task('build', function() {
 
   var bundler = browserify('./src/service-framework.js', {
-    standalone: 'ServiceFramework',
+    standalone: 'service-framework',
     debug: true
   }).transform(babel);
 
@@ -62,7 +62,7 @@ gulp.task('build', function() {
         console.error(err);
         this.emit('end');
       })
-      .pipe(source('ServiceFramework.js'))
+      .pipe(source('service-framework.js'))
       .pipe(gulp.dest('./dist'));
   }
 
