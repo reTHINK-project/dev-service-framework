@@ -17,17 +17,17 @@ class HypertyDescriptor extends CatalogueDataObject{
         this._dataObjects = dataObjects;
     }
 
-    get hypertyType() { return this.hypertyType; }
+    get hypertyType() { return this._hypertyType; }
 
-    get dataObjects() { return this.dataObjects; }
+    get dataObjects() { return this._dataObjects; }
 
-    get configurationDataList() {return this.configurationDataList; }
+    get configurationDataList() {return this._configurationDataList; }
 
-    get runtimeConstraintList() { return this.runtimeConstraintList; }
+    get runtimeConstraintList() { return this._runtimeConstraintList; }
 
-    get messageSchema(){ return this.messageSchema; }
+    get messageSchema(){ return this._messageSchema; }
 
-    get policies() { return this.policies; }
+    get policies() { return this._policies; }
 
     set hypertyType(hType) {
         if(hType)
