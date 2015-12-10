@@ -119,10 +119,10 @@ class DataObjectObserver /* implements SyncStatus */ {
       let value = msg.body.value;
       let findResult = _this._syncObj.findBefore(path);
 
-      if (msg.header.type === ChangeType.UPDATE) {
+      if (msg.type === ChangeType.UPDATE) {
         findResult.obj[findResult.last] = value;
       } else {
-        if (msg.header.type === ChangeType.ADD) {
+        if (msg.type === ChangeType.ADD) {
           if (msg.body.oType === ObjectType.OBJECT) {
             findResult.obj[findResult.last] = value;
           } else {
