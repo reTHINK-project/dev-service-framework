@@ -155,6 +155,42 @@ describe('MessageFactory', function() {
         });
     });
 
+    describe('createMessageResponse()', function() {
+        it('should be a Response Message of Type RESPONSE', function(done) {
+            //from, to, contextId, idToken, accessToken, resource, signature, schema,assertedIdentity, value, policy
+            let message = messageFactory.createMessageResponse("hyperty-runtime-esn://domain.com/12345",
+                "[hyperty-runtime-imei://domain.com/12345, hyperty-runtime-imei://domain.com/678910]",
+                "a7317660-bfa1-4830-b03f-278a814d2feb", null, null, "hyperty-runtime-uuid://domain.com/myResource",
+                null, "{}", "alice@fokus.de","200", "OK");
 
+            console.log('Response Message', JSON.stringify(message));
+            expect(message).to.not.be.empty;
+            expect(message.type).to.eql(MessageType.RESPONSE);
+
+            let isValid = messageFactory.validate(message);
+            console.log('Is message valid? ', isValid);
+            done();
+        });
+        //TODO Validate against schema
+        /*
+         it('should validate', function(done){
+         let isValid = messageFactory.validate(message);
+         console.log('Is message valid? ', isValid);
+         done();
+
+         });*/
+    });
+
+    describe('generateResponse()', function() {
+
+        it('should generate a Response to the given message', function(done) {
+
+            let response = messageFactory.generateMessageResponse(message, "404", "Not Found");
+            console.log('response msg', JSON.stringify(response));
+            expect(response).to.not.be.empty;
+            expect(response.type).to.eql(MessageType.RESPONSE);
+            done();
+        });
+    });
 });
 

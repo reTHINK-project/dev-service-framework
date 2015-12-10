@@ -168,7 +168,7 @@ class MessageFactory extends RethinkObject {
             throw  new Error("from, contextId, and response Code MUST be specified");
         let response = new ResponseMessageBody(idToken, accessToken, resource, code, value);
         return new Message(MessageFactory._generateMessageId(), from, to, MessageType.RESPONSE, contextId, response,
-            data.signature);
+            signature);
     }
 
     /**
