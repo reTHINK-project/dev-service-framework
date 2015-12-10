@@ -55,6 +55,10 @@ class CatalogueDataObject {
         return this._sourcePackage;
     }
 
+    get sourcePackageURL() {
+        return this._sourcePackageURL;
+    }
+
 
     // Setters
     /**
