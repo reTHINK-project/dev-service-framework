@@ -30,7 +30,7 @@ class MessageFactory extends RethinkObject {
     }
 
     /**
-     * Create a Message with CREATE MessageType and Create Mesage Body
+     * Create a Message with CREATE MessageType and Create Message Body
      *
      * @param {URL.URL} from - the sender of this message
      * @param {URL.URLList} One or more URLs of Message recipients. According to the URL scheme it may be handled in
