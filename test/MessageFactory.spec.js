@@ -23,29 +23,94 @@ describe('MessageFactory', function() {
 
     describe('createMessageRequest()', function() {
         it('should be a Message of Type CREATE', function(done) {
-            //createMessageRequest(from, to, contextId, value, policy, idToken, accessToken, resource, signature)
-            message = messageFactory.createMessageRequest(
-                "hyperty-runtime-esn://domain.com/12345", "[hyperty-runtime-imei://domain.com/12345, hyperty-runtime-imei://domain.com/678910]","a7317660-bfa1-4830-b03f-278a814d2feb", "{audio: 'PCMU-Codec'}",
-                "policyURL", null, null, "hyperty-runtime-uuid://domain.com/myResource", null);
+            //from, to, contextId, idToken, accessToken, resource, signature, schema,assertedIdentity, value, policy
+            message = messageFactory.createMessageRequest("hyperty-runtime-esn://domain.com/12345",
+                "[hyperty-runtime-imei://domain.com/12345, hyperty-runtime-imei://domain.com/678910]",
+                "a7317660-bfa1-4830-b03f-278a814d2feb", null, null, "hyperty-runtime-uuid://domain.com/myResource",
+                null, "{}", "alice@fokus.de","{audio: 'PCMU-Codec'}", "policyURL");
 
-            console.log('created msg', JSON.stringify(message));
+            console.log('Create Message', JSON.stringify(message));
             expect(message).to.not.be.empty;
             expect(message.type).to.eql(MessageType.CREATE);
 
             let isValid = messageFactory.validate(message);
             console.log('Is message valid? ', isValid);
-
             done();
         });
-
+        //TODO Validate against schema
+        /*
         it('should validate', function(done){
             let isValid = messageFactory.validate(message);
             console.log('Is message valid? ', isValid);
             done();
 
+        });*/
+    });
+
+    describe('createForwardMessageRequest()', function() {
+
+        it('should create a new Forward Message Request with a message payload', function(done) {
+
+            //message, from, to, contextId, idToken, accessToken, resource, signature, schema, assertedIdentity
+            let forwardMessage = messageFactory.createForwardMessageRequest(message,
+                "hyperty-runtime-esn://fromdomain.com/12345", "[hyperty-runtime-imei://todomain.com/12345]",
+                "a7317660-bfa1-4830-b03f-278a814d2feb", null, null, "hyperty-runtime-uuid://domain.com/myResource",
+                "mySignature", null, "alice@fokus.de");
+
+            console.log('Forward Message Request', JSON.stringify(forwardMessage));
+            expect(forwardMessage).to.not.be.empty;
+            expect(forwardMessage.type).to.eql(MessageType.FORWARD);
+            done();
         });
     });
 
+    describe('createDeleteMessageRequest()', function() {
+        it('should be a Message of Type DELETE', function(done) {
+            //(from, to, contextId, idToken, accessToken, resource, signature, attribute,schema, assertedIdentity
+            let message = messageFactory.createDeleteMessageRequest("hyperty-runtime-esn://domain.com/12345",
+                "[hyperty-runtime-imei://domain.com/123456]",
+                "o7317660-bfa1-4830-b03f-278a814d2fee", null, null, "hyperty-runtime-uuid://domain.com/myResource",
+                "audio", "{}", "alice-dev@fokus.de");
+
+            console.log('Delete Message', JSON.stringify(message));
+            expect(message).to.not.be.empty;
+            expect(message.type).to.eql(MessageType.DELETE);
+
+            done();
+        });
+    });
+
+
+    describe('createUpdateMessageRequest()', function() {
+        it('should be a Message of Type UPDATE', function(done) {
+            //from, to, contextId, idToken, accessToken, resource, signature, schema,assertedIdentity, attribute,  value
+           let message = messageFactory.createUpdateMessageRequest("hyperty-esn://domain.com/12345",
+                "[hyperty-imei://domain.com/123456]","q7317660-bfa1-4830-b03f-278a814d2fee", null, null,
+                "hyperty-runtime-uuid://domain.com/myResource", null, "{}", "alice-dev@fokus.de", "audio", "audio-only");
+
+            console.log('Update Message', JSON.stringify(message));
+            expect(message).to.not.be.empty;
+            expect(message.type).to.eql(MessageType.UPDATE);
+
+            done();
+        });
+    });
+
+    describe('createReadMessageRequest()', function() {
+        it('should be a Message of Type READ', function(done) {
+            //from, to, contextId, idToken, accessToken, resource, signature,schema, assertedIdentity,  attribute,
+            // criteriaSyntax, criteria
+            let message = messageFactory.createReadMessageRequest("hyperty-esn://domain.com/12345",
+                "[hyperty-imei://domain.com/123456]","q7317660-bfa1-4830-b03f-278a814d2fee", null, null,
+                "hyperty-runtime-uuid://domain.com/myResource", null, "{}", "alice-dev@fokus.de", "audio", "audio-only");
+
+            console.log('Update Message', JSON.stringify(message));
+            expect(message).to.not.be.empty;
+            expect(message.type).to.eql(MessageType.UPDATE);
+
+            done();
+        });
+    });
 
     /*describe('schema validation', function(done){
         let msg = message;
@@ -54,13 +119,11 @@ describe('MessageFactory', function() {
         done();
     });*/
 
-    describe('updateMessageRequest()', function() {
+    describe('generateUpdateMessageBody()', function() {
 
+        it('should generate a new Update Message Body to the given message', function(done) {
 
-
-        it('should be a Message of Type UPDATE', function(done) {
-
-            let updateMessage = messageFactory.createUpdateMessageRequest(message, "audio", "MPEG");
+            let updateMessage = messageFactory.generateUpdateMessageBody(message, "audio", "MPEG");
             console.log('updated msg', JSON.stringify(updateMessage));
             expect(updateMessage).to.not.be.empty;
             expect(updateMessage.type).to.eql(MessageType.UPDATE);
@@ -68,16 +131,30 @@ describe('MessageFactory', function() {
         });
     });
 
-    describe('deleteMessageRequest()', function() {
+    describe('generateReadMessageBody()', function() {
 
-        it('should be a Message of Type DELETE', function(done) {
+        it('should generate a new Read Message Body to the given message', function(done) {
 
-            let deleteMessage = messageFactory.createDeleteMessageRequest(message, "audio");
+            let readMessage = messageFactory.generateReadMessageBody(message, "video", "myCriteriaObj", "myCriteriaSyntax")
+            console.log('delete msg', JSON.stringify(readMessage));
+            expect(readMessage).to.not.be.empty;
+            expect(readMessage.type).to.eql(MessageType.READ);
+            done();
+        });
+    });
+
+    describe('generateDeleteMessageBody()', function() {
+
+        it('should generate a new Delete Message Body to the given message', function(done) {
+
+            let deleteMessage = messageFactory.generateDeleteMessageBody(message, "audio");
             console.log('delete msg', JSON.stringify(deleteMessage));
             expect(deleteMessage).to.not.be.empty;
             expect(deleteMessage.type).to.eql(MessageType.DELETE);
             done();
         });
     });
+
+
 });
 

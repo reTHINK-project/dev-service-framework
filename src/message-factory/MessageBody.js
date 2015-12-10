@@ -1,6 +1,15 @@
 class MessageBody{
 
-	constructor(idToken, accessToken, resource){
+    /**
+     *
+     * @param {Identity.JWT} idToken - token for Identity assertion purpose
+     * @param {Identity.JWT} accessToken
+     * @param {URL.URL} resource
+     * @param {URL.HypertyCatalogueURL} schema
+     * @param {Identity.JWT} assertedIdentity
+     *
+     */
+	constructor(idToken, accessToken, resource, schema, assertedIdentity){
         //let _this = this;
         if(typeof idoken !== 'undefined')
             this.idToken = idToken;
@@ -8,63 +17,29 @@ class MessageBody{
             this.accessToken = accessToken;
         if(typeof resource !== 'undefined' )
             this.resource = resource;
+        if(typeof schema !== 'undefined' )
+            this.schema = schema;
+        if(typeof assertedIdentity !== 'undefined')
+            this.assertedIdentity = assertedIdentity;
 	}
-
-    /*get idToken(){ return this.idToken; }
-
-    get accessToken(){ return this.accessToken; }
-
-    get resource() { return this.resource; }
-
-    set idToken(iToken){
-        if(iToken)
-            this.idToken = iToken;
-    }
-
-    set accessToken(aToken){
-        if(aToken)
-            this.accessToken = aToken;
-    }
-    */
-
-
 }
 
 export class CreateMessageBody extends MessageBody {
-    constructor(value, policy, idToken, accessToken, resource){
+    constructor(value, policy, idToken, accessToken, resource, schema, assertedIdentity){
         if(typeof value === 'undefined')
-            throw new NullParameterError("The value parameter is null");
-        super(idToken,accessToken, resource);
+            throw new Error("The value parameter is null");
+        super(idToken,accessToken, resource, schema, assertedIdentity, schema, assertedIdentity);
 
         this.value = value;
         if(policy)
             this.policy = policy;
     }
-    /*
-    get value() { return this.value; }
-
-    get policy(){return this.policy}
-
-    set value(value){
-        if(value)
-            this.value = value;
-    }
-
-    set policy(policy){
-        if(policy)
-            this.policy = policy;
-    }*/
 }
 
 export class ReadMessageBody extends MessageBody {
-    constructor( data, attribute, criteriaSyntax, criteria){
+    constructor( idToken, accessToken, resource, schema, assertedIdentity, attribute, criteriaSyntax, criteria){
 
-        let previousBody = data.body;
-        let idToken = previousBody.idToken;
-        let accessToken = previousBody.accessToken;
-        let resource = previousBody.resource;
-
-        super(idToken,accessToken ,resource );
+        super(idToken,accessToken ,resource, schema, assertedIdentity );
 
         if(attribute)
             this.attribute = attribute;
@@ -75,87 +50,46 @@ export class ReadMessageBody extends MessageBody {
         if(criteria)
             this.criteria = criteria;
     }
-
-    /*get attribute() { return this.attribute; }
-    get criteriaSyntax() { return this.criteriaSyntax; }
-    get criteria() {return }
-
-    set attribute(atr){
-        if(atr)
-            this.attribute = atr;
-    }
-
-    set criteria(criteria){
-        if(criteria)
-            this.criteria;
-    }
-
-    set criteriaSyntax(crSyntax){
-        if(crSyntax)
-            this.criteriaSyntax = crSyntax;
-    }*/
 }
 
 
 export class DeleteMessageBody extends MessageBody {
-    constructor(data, attribute){
+    constructor(idToken, accessToken, resource, schema, assertedIdentity,attribute ){
 
-        let previousBody = data.body;
-        let idToken = previousBody.idToken;
-        let accessToken = previousBody.accessToken;
-        let resource = previousBody.resource;
-
-        super(idToken,accessToken ,resource );
+        super(idToken,accessToken ,resource, schema, assertedIdentity );
 
         if(attribute){
             this.attribute = attribute;
         }
     }
-    /*
-    get attribute() { return this.attribute; }
-    set attribute(atr){
-        if(atr)
-            this.attribute = atr;
-    }*/
+
 }
 
 export class UpdateMessageBody extends MessageBody {
-    constructor(data, attribute, value){
-        let previousBody = data.body;
-        let idToken = previousBody.idToken;
-        let accessToken = previousBody.accessToken;
-        let resource = previousBody.resource;
+    constructor(idToken, accessToken, resource, schema, assertedIdentity, attribute, value){
 
-        super(idToken,accessToken ,resource );
+
+        super(idToken,accessToken ,resource, schema, assertedIdentity );
 
         this.attribute = attribute;
         this.value = value;
     }
+}
 
-   /* get attribute() { return this.attribute; }
-    get value(){ return this.value; }
+export class ForwardMessageBody extends MessageBody {
+    constructor(idToken, accessToken, resource, schema, assertedIdentity, message){
 
-    set attribute(atr){
-        if(atr)
-            this.attribute = atr;
+
+        super(idToken,accessToken ,resource, schema, assertedIdentity );
+
+        this.message = message;
     }
-
-    set value(value){
-        if(value)
-            this.value = value;
-    }*/
 }
 
 export class ResponseMessageBody extends MessageBody {
 
-    constructor(data, code, value){
+    constructor(idToken, accessToken, resource, code, value){
 
-        let previousBody = data.body;
-        let idToken = previousBody.idToken;
-        let accessToken = previousBody.accessToken;
-        let resource = previousBody.resource;
-
-        super(idToken,accessToken ,resource );
         super(idToken,accessToken ,resource );
 
         if(code)
@@ -168,24 +102,6 @@ export class ResponseMessageBody extends MessageBody {
             this.value = value;
     }
 
-    /*get code(){ return this.code; }
-    get description() { return this.description; }
-    get value(){ return this.value; }
-
-    set description(desc){
-        if(desc)
-            this.description = desc;
-    }
-
-    set value(value){
-        if(value)
-            this.value = value;
-    }
-
-    set code(code){
-        if(code)
-            this.code = code;
-    }*/
 }
 export var RESPONS_CODE = {
     100: '100',
