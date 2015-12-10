@@ -37,6 +37,9 @@ class Syncher {
        case 'response': _this._onResponse(msg); break;
        case 'forward': _this._onForward(msg); break;
        case 'create': _this._onCreate(msg); break;
+       case 'update': _this._onChange(msg); break;
+       case 'add': _this._onChange(msg); break;
+       case 'remove': _this._onChange(msg); break;
      }
    });
  }
@@ -127,12 +130,6 @@ class Syncher {
    //TODO: process notification reponses!
  }
 
- _onNotification(msg) {
-   let _this = this;
-
-   //TODO: process (create, delete) notifications!
- }
-
  _onForward(msg) {
    let _this = this;
 
@@ -143,8 +140,31 @@ class Syncher {
  _onCreate(msg) {
    let _this = this;
 
-   //TODO: fire notification event (only create observer if accepted ? )
-   _this._addObserver(msg.body.resource, msg.body.schema, msg.body.value);
+   let event = {
+     type: msg.type,
+     url: msg.body.resource,
+     schema: msg.body.schema,
+     value: msg.body.value,
+
+     ack: () => {
+       //send ack response message
+       _this._bus.postMessage({
+         id: msg.id, type: 'response', from: msg.to, to: msg.from,
+         body: { code: 200 }
+       });
+     }
+   };
+
+   if (_this._onNotificationHandler) {
+     _this._onNotificationHandler(event);
+   }
+ }
+
+ _onChange(msg) {
+   let _this = this;
+
+   let observer = _this._observers[msg.from];
+   observer._changeObject(msg);
  }
 
  _addObserver(objURL, schemaURL, initialData) {
@@ -152,12 +172,6 @@ class Syncher {
 
    let newObj = new DataObjectObserver(_this._owner, objURL, schemaURL, 'on', initialData);
    _this._observers[objURL] = newObj;
-
-   //add changes listener
-   _this._bus.addListener(objURL + '/changes', (msg) => {
-     console.log(objURL + '/changes-RCV: ', msg);
-     newObj._changeObject(msg);
-   });
 
    return newObj;
  }

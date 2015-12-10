@@ -132,7 +132,7 @@ class DataObjectReporter /* implements SyncStatus */ {
 
     if (_this._status === 'on') {
       _this._bus.postMessage({
-        type: event.cType, from: _this._owner, to: _this._url + '/changes',
+        type: event.cType, from: _this._owner, to: _this._url,
         body: {version: _this._version, oType: event.oType, attrib: event.field, value: event.data}
       });
     }
