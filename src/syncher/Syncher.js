@@ -128,6 +128,7 @@ class Syncher {
    let _this = this;
 
    //TODO: process notification reponses!
+   console.log('onResponse:', msg);
  }
 
  _onForward(msg) {
@@ -142,6 +143,7 @@ class Syncher {
 
    let event = {
      type: msg.type,
+     from: msg.from,
      url: msg.body.resource,
      schema: msg.body.schema,
      value: msg.body.value,
