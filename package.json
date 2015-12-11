@@ -64,6 +64,12 @@
     "directories": {
       "packages": "vendor"
     },
+    "dependencies": {
+      "ortc-over-rtc": "npm:ortc-over-rtc@^0.1.0",
+      "runtime-core": "github:reTHINK-project/dev-runtime-core@dev-0.2",
+      "webrtc-adapter-test": "npm:webrtc-adapter-test@^0.2.5",
+      "webrtc-shim": "npm:webrtc-shim@^0.1.2"
+    },
     "devDependencies": {
       "babel": "npm:babel-core@^5.8.34",
       "babel-runtime": "npm:babel-runtime@^5.8.34",
@@ -73,5 +79,11 @@
   "directories": {
     "example": "example",
     "test": "test"
+  },
+  "dependencies": {
+    "ortc-over-rtc": "^0.1.0",
+    "runtime-core": "rethink-project/dev-runtime-core#dev-0.2",
+    "webrtc-adapter-test": "^0.2.5",
+    "webrtc-shim": "^0.1.2"
   }
 }

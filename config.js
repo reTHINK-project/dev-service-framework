@@ -22,14 +22,18 @@ System.config({
     "browserify": "npm:browserify@11.1.0",
     "core-js": "npm:core-js@1.2.6",
     "karma-browserify": "npm:karma-browserify@4.3.0",
+    "ortc-over-rtc": "npm:ortc-over-rtc@0.1.0",
     "punycode": "npm:punycode@1.3.2",
+    "runtime-core": "github:reTHINK-project/dev-runtime-core@dev-0.2",
     "tr46": "npm:tr46@0.0.2",
     "tv4": "npm:tv4@1.2.7",
+    "webrtc-adapter-test": "npm:webrtc-adapter-test@0.2.5",
+    "webrtc-shim": "npm:webrtc-shim@0.1.2",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },
     "github:jspm/nodelibs-buffer@0.1.0": {
-      "buffer": "npm:buffer@3.5.0"
+      "buffer": "npm:buffer@3.5.3"
     },
     "github:jspm/nodelibs-constants@0.1.0": {
       "constants-browserify": "npm:constants-browserify@0.0.1"
@@ -99,6 +103,9 @@ System.config({
     },
     "github:jspm/nodelibs-zlib@0.1.0": {
       "browserify-zlib": "npm:browserify-zlib@0.1.4"
+    },
+    "github:reTHINK-project/dev-runtime-core@dev-0.2": {
+      "service-framework": "github:reTHINK-project/dev-service-framework@develop"
     },
     "npm:JSONStream@1.0.4": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
@@ -381,6 +388,14 @@ System.config({
       "ieee754": "npm:ieee754@1.1.6",
       "is-array": "npm:is-array@1.0.1"
     },
+    "npm:buffer@3.5.3": {
+      "base64-js": "npm:base64-js@0.0.8",
+      "child_process": "github:jspm/nodelibs-child_process@0.1.0",
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "ieee754": "npm:ieee754@1.1.6",
+      "is-array": "npm:is-array@1.0.1",
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
     "npm:bufferutil@1.0.1": {
       "bindings": "npm:bindings@1.2.1",
       "nan": "npm:nan@1.6.2"
@@ -465,6 +480,9 @@ System.config({
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
     "npm:core-util-is@1.0.1": {
+      "buffer": "github:jspm/nodelibs-buffer@0.1.0"
+    },
+    "npm:core-util-is@1.0.2": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"
     },
     "npm:create-ecdh@2.0.1": {
@@ -1079,6 +1097,11 @@ System.config({
     "npm:options@0.0.6": {
       "fs": "github:jspm/nodelibs-fs@0.1.2"
     },
+    "npm:ortc-over-rtc@0.1.0": {
+      "https": "github:jspm/nodelibs-https@0.1.0",
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
     "npm:os-browserify@0.1.2": {
       "os": "github:jspm/nodelibs-os@0.1.0"
     },
@@ -1200,7 +1223,7 @@ System.config({
     },
     "npm:readable-stream@1.1.13": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
-      "core-util-is": "npm:core-util-is@1.0.1",
+      "core-util-is": "npm:core-util-is@1.0.2",
       "events": "github:jspm/nodelibs-events@0.1.1",
       "inherits": "npm:inherits@2.0.1",
       "isarray": "npm:isarray@0.0.1",
@@ -1482,6 +1505,9 @@ System.config({
       "systemjs-json": "github:systemjs/plugin-json@0.1.0",
       "through2": "npm:through2@0.6.5",
       "xtend": "npm:xtend@4.0.0"
+    },
+    "npm:webrtc-shim@0.1.2": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:ws@0.7.1": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
