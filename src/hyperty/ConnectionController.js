@@ -24,9 +24,20 @@ class ConnectionController extends EventEmitter {
     let peerConnection = new RTCPeerConnection();
 
     peerConnection.addEventListener('signalingstatechange', function(event) {
+
       if (event.currentTarget.signalingState === 'have-remote-offer') {
         _this.mode = 'answer';
+        _this.trigger('controller:state:change', _this.mode);
       }
+
+      if (event.currentTarget.signalingState === 'have-local-offer') {
+        _this.trigger('controller:state:change', _this.mode);
+      }
+
+    });
+
+    peerConnection.addEventListener('iceconnectionstatechange', function(event) {
+      console.info(event.currentTarget.iceConnectionState);
     });
 
     peerConnection.addEventListener('icecandidate', function(event) {
@@ -45,6 +56,7 @@ class ConnectionController extends EventEmitter {
 
     // Add stream to PeerConnection
     peerConnection.addEventListener('addstream', function(event) {
+      console.log('add stream from mode: ', _this.mode);
       _this.trigger('stream:added', URL.createObjectURL(event.stream));
     });
 
@@ -96,7 +108,7 @@ class ConnectionController extends EventEmitter {
 
     console.log('Set connectionDataObject: ', _this._connectionDataObjectObserver);
 
-    _this.sinalingBus();
+    _this.changePeerInformation();
   }
 
   /**
@@ -113,36 +125,31 @@ class ConnectionController extends EventEmitter {
    * @param  {Object}     options Object containing the information that resources will be used (camera, mic, resolution, etc);
    * @return {Promise}
    */
-  getUserMedia(options) {
+  getUserMedia(constraints) {
 
     let _this = this;
 
     return new Promise(function(resolve, reject) {
 
-      navigator.getUserMedia(options, function(stream) {
-        _this.peerConnection.addStream(stream);
-        resolve(stream);
-      }, function(reason) {
-
+      navigator.mediaDevices.getUserMedia(constraints)
+      .then(function(mediaStream) {
+        _this.peerConnection.addStream(mediaStream);
+        resolve(mediaStream);
+      })
+      .catch(function(reason) {
         reject(reason);
-
       });
-
     });
   }
 
-  sinalingBus() {
+  changePeerInformation() {
 
-    var _this = this;
-
-    _this._connectionDataObjectObserver.onChange('type.offer.*', function(event) {
-      console.log('CHANGES: ', event);
-    });
+    let _this = this;
 
     _this._connectionDataObjectObserver.onChange('*', function(event) {
       console.debug('message:', event);
 
-      var message = event.data;
+      let message = event.data;
 
       if (message.type === 'offer' || message.type === 'answer') {
 
@@ -164,32 +171,56 @@ class ConnectionController extends EventEmitter {
   }
 
   createOffer() {
-    var _this = this;
-    var peerConnection = _this.peerConnection;
+    let _this = this;
 
-    peerConnection.createOffer(function(description) {
+    _this.peerConnection.createOffer(function(description) {
       _this.onLocalSessionCreated(description);
-    }, _this.logError);
+    }, _this.logError, _this.mediaConstraints);
 
   }
 
   createAnswer() {
-    var _this = this;
-    var peerConnection = _this.peerConnection;
+    let _this = this;
 
-    peerConnection.createAnswer(function(description) {
+    _this.peerConnection.createAnswer(function(description) {
       _this.onLocalSessionCreated(description);
     }, _this.logError);
   }
 
+  /**
+   * Disconnect the peer connection
+   * @method disconnect
+   * @return {Promise}
+   */
+  disconnect() {
+
+    // TODO: optimize the disconnect function
+
+    let _this = this;
+
+    return new Promise(function(resolve, reject) {
+
+      try {
+
+        _this.peerConnection.close();
+
+        resolve(true);
+      } catch (e) {
+        reject('error disconnecting connection');
+      }
+
+    });
+
+  }
+
   onLocalSessionCreated(description) {
 
-    var _this = this;
-    var peerConnection = _this.peerConnection;
+    let _this = this;
+    let peerConnection = _this.peerConnection;
 
     peerConnection.setLocalDescription(description, function() {
 
-      var data = _this._connectionDataObjectReporter.data;
+      let data = _this._connectionDataObjectReporter.data;
       data.sdp = {
         sdp: description.sdp,
         type: description.type

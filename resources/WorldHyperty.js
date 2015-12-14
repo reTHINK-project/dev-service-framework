@@ -26,30 +26,55 @@ class WorldHyperty {
     _this.hypertyConnector.name = 'World Hyperty';
   }
 
-  connectTo(hypertyURL, options) {
+  connect(hypertyURL, options) {
     let _this = this;
     _this.to = hypertyURL;
 
-    console.info('Connecting to: ', hypertyURL);
-    _this.hypertyConnector.connect(hypertyURL, options).then(function(controller) {
-      console.info('connected to: ', hypertyURL, controller);
-    }).catch(function(reason) {
-      console.error(reason);
+    return new Promise(function(resolve, reject) {
+
+      console.info('Connecting to: ', hypertyURL);
+      _this.hypertyConnector.connect(hypertyURL, options).then(function(controller) {
+        console.info('Connected to: ', hypertyURL, controller);
+        resolve(controller);
+      }).catch(function(reason) {
+        reject(reason);
+      });
+
     });
+
   }
 
   accept() {
     let _this = this;
-    _this.mode = 'guest';
 
-    let reporters = _this.syncher.reporters;
-    let observers = _this.syncher.observers;
-    let options = {};
+    return new Promise(function(resolve, reject) {
 
-    _this.hypertyConnector.accept(options).then(function(controller) {
-      console.info('subscribed to: ', controller);
-    }).catch(function(reason) {
-      console.error(reason);
+      console.info('Subscribing object');
+      _this.hypertyConnector.accept().then(function(controller) {
+        console.info('subscribed to: ', controller);
+        resolve(controller);
+      }).catch(function(reason) {
+        console.error(reason);
+        reject(reason);
+      });
+    });
+
+  }
+
+  disconnect() {
+
+    let _this = this;
+
+    return new Promise(function(resolve, reject) {
+
+      console.info('disconnecting object');
+      _this.hypertyConnector.disconnect().then(function(result) {
+        console.info('disconnected');
+        resolve(result);
+      }).catch(function(reason) {
+        console.error(reason);
+        reject(reason);
+      });
     });
 
   }

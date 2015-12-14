@@ -1,20 +1,16 @@
+// polyfills
 import 'babel-polyfill';
 import 'indexeddbshim';
 import 'mutationobserver-shim';
 import 'object.observe';
 import 'array.observe';
 
+// reTHINK modules
 import {RuntimeUA} from 'runtime-core';
-
 import SandboxFactory from '../resources/sandboxes/SandboxFactory';
 
 var sandboxFactory = new SandboxFactory();
-
 var runtime = new RuntimeUA(sandboxFactory);
-window.runtime = runtime;
-
-indexedDB.deleteDatabase('registry-DB');
-
 var hypertiesList = ['hyperty-catalogue://ua.pt/HelloHyperty', 'hyperty-catalogue://ua.pt/WorldHyperty'];
 
 function errorMessage(reason) {
@@ -47,30 +43,96 @@ function deployedHyperties(hyperty, result) {
     e.preventDefault();
   });
 
+  runtime.messageBus.addListener(result.runtimeHypertyURL, newMessageRecived);
+
   hypertyEl.querySelector('.call').addEventListener('click', startHypertyConnector);
   hypertyEl.querySelector('.accept').addEventListener('click', acceptCall);
 
-  var h = components[result.runtimeHypertyURL].hypertyCode.hypertyConnector;
-  h.onNotification(function(notification, to) {
+  var connector = components[result.runtimeHypertyURL].hypertyCode.hypertyConnector;
 
-    var toForm = document.querySelector('form[data-url="' + to + '"]');
-    console.log('TO: ', to);
+  connector.addEventListener('connector:notification', function(event) {
+    console.log('connector notification:', event);
+    var toForm = document.querySelector('form[data-url="' + event.to + '"]');
 
     if (toForm) {
       var button = toForm.querySelector('.accept');
-      button.className = button.className.replace('hide','');
-
-      h.connectionController.addEventListener('stream:added', function(stream) {
-        console.log('Stream: ', stream);
-        toForm.querySelector('.video').src = stream;
-      });
-
+      button.className = button.className.replace('hide', '');
     }
 
   });
 
+}
 
-  // runtime.messageBus.addListener(result.runtimeHypertyURL, newMessageRecived);
+function startHypertyConnector(e) {
+
+  var target = e.target;
+  var form = target.parentElement;
+  var fromHyperty = form.getAttribute('data-url');
+  var toHyperty = form.querySelector('.toHyperty').value;
+  var messageHypert = form.querySelector('.messageHyperty').value;
+  var connected = target.getAttribute('data-connected');
+
+  console.log(target);
+
+  e.preventDefault();
+
+  if (!toHyperty) {
+    alert('nobody to connect');
+    return;
+  }
+
+  var a = components[fromHyperty].hypertyCode;
+
+  if (connected) {
+
+    a.disconnect().then(function(status) {
+
+      target.setAttribute('data-connected', false);
+      target.innerHTML = 'Call';
+
+    }).catch(function(reason) {
+      console.error(reason);
+    });
+
+  } else {
+
+    a.connect(toHyperty).then(function(controller) {
+
+      target.setAttribute('data-connected', true);
+      target.innerHTML = 'End';
+
+      controller.addEventListener('stream:added', function(stream) {
+        form.querySelector('.video').src = stream;
+      });
+
+    }).catch(function(reason) {
+      console.error(reason);
+    });
+
+  }
+}
+
+function acceptCall(e) {
+
+  var target = e.target;
+  var form = target.parentElement;
+  var hyperty = form.getAttribute('data-url');
+  var resourceObj = target.getAttribute('data-obj');
+  var messageHypert = form.querySelector('.messageHyperty').value;
+
+  var a = components[hyperty].hypertyCode;
+  a.accept().then(function(controller) {
+
+    controller.addEventListener('stream:added', function(stream) {
+      form.querySelector('.video').src = stream;
+    });
+
+  }).catch(function(reason) {
+    console.error(reason);
+  });
+
+  e.preventDefault();
+
 }
 
 function newMessageRecived(msg) {
@@ -80,7 +142,7 @@ function newMessageRecived(msg) {
 
   var elTo = document.querySelector('form[data-url="' + toHyperty + '"]');
 
-  /*if (msg.body.hasOwnProperty('value')) {
+  if (msg.body.hasOwnProperty('value') && msg.body.value.length) {
     var listTo = elTo.parentElement.querySelector('.list');
     var itemTo = document.createElement('li');
 
@@ -88,9 +150,7 @@ function newMessageRecived(msg) {
     itemTo.innerHTML = '<i class="material-icons circle green">call_received</i><label class="name title">' + fromHyperty + '</label><p class="message">' + msg.body.value.replace(/\n/g, '<br>') + '</p>';
 
     listTo.appendChild(itemTo);
-  } else {
-
-  }*/
+  }
 
 }
 
@@ -132,7 +192,7 @@ function loadHyperties() {
       }).catch(function(reason) {
         errorMessage(reason);
       });
-    }, (1000 * time));
+    }, (100 * time));
 
     time++;
 
@@ -141,33 +201,3 @@ function loadHyperties() {
 }
 
 loadHyperties();
-
-function startHypertyConnector(e){
-
-  var target = e.target;
-  var form = target.parentElement;
-  var fromHyperty = form.getAttribute('data-url');
-  var toHyperty = form.querySelector('.toHyperty').value;
-  var messageHypert = form.querySelector('.messageHyperty').value;
-
-  var a = components[fromHyperty].hypertyCode;
-  a.connectTo(toHyperty);
-
-  e.preventDefault();
-}
-
-function acceptCall(e) {
-
-  var target = e.target;
-  var form = target.parentElement;
-  var hyperty = form.getAttribute('data-url');
-  var resourceObj = target.getAttribute('data-obj');
-  var messageHypert = form.querySelector('.messageHyperty').value;
-
-
-  var a = components[hyperty].hypertyCode;
-  a.accept();
-
-  e.preventDefault();
-
-}
