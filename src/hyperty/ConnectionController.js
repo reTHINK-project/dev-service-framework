@@ -10,11 +10,13 @@ class ConnectionController extends EventEmitter {
 
     let _this = this;
 
+    _this.mode = 'offer';
+
     _this.mediaConstraints = {
       optional: [],
       mandatory: {
-        OfferToReceiveAudio: true,
-        OfferToReceiveVideo: true
+        offerToReceiveAudio:true,
+        offerToReceiveVideo:true
       }
     };
 
@@ -22,7 +24,9 @@ class ConnectionController extends EventEmitter {
     let peerConnection = new RTCPeerConnection();
 
     peerConnection.addEventListener('signalingstatechange', function(event) {
-      console.info('PEER CONNECTION STATE: ', event, event.currentTarget.signalingState);
+      if (event.currentTarget.signalingState === 'have-remote-offer') {
+        _this.mode = 'answer';
+      }
     });
 
     peerConnection.addEventListener('icecandidate', function(event) {
@@ -58,10 +62,13 @@ class ConnectionController extends EventEmitter {
     _this._connectionDataObjectReporter = connectionDataObject;
 
     connectionDataObject.onSubscription(function(event) {
-      console.info('reporter create offer:', event);
       event.accept();
 
-      _this.createOffer();
+      if (_this.mode === 'offer') {
+        _this.createOffer();
+      } else {
+        _this.createAnswer();
+      }
 
     });
 
@@ -141,10 +148,6 @@ class ConnectionController extends EventEmitter {
 
         _this.peerConnection.setRemoteDescription(new RTCSessionDescription(message), _this.remoteDescriptionSuccess, _this.remoteDescriptionError);
 
-        if (message.type !== 'offer') {
-          _this.createAnswer();
-        }
-
       } else if (message.type === 'candidate') {
         _this.peerConnection.addIceCandidate(new RTCIceCandidate({candidate: message.candidate}));
       }
@@ -166,7 +169,7 @@ class ConnectionController extends EventEmitter {
 
     peerConnection.createOffer(function(description) {
       _this.onLocalSessionCreated(description);
-    }, _this.logError, _this.mediaConstraints);
+    }, _this.logError);
 
   }
 
@@ -176,7 +179,7 @@ class ConnectionController extends EventEmitter {
 
     peerConnection.createAnswer(function(description) {
       _this.onLocalSessionCreated(description);
-    }, _this.logError, _this.mediaConstraints);
+    }, _this.logError);
   }
 
   onLocalSessionCreated(description) {

@@ -15,15 +15,18 @@ System.config({
   },
 
   map: {
-    "RuntimeCore": "github:reTHINK-project/dev-runtime-core@dev-0.2",
+    "array.observe": "npm:array.observe@0.0.1",
     "babel": "npm:babel-core@5.8.34",
+    "babel-polyfill": "npm:babel-polyfill@6.3.14",
     "babel-runtime": "npm:babel-runtime@5.8.34",
     "babelify": "npm:babelify@6.3.0",
     "browserify": "npm:browserify@11.1.0",
     "core-js": "npm:core-js@1.2.6",
+    "indexeddbshim": "npm:indexeddbshim@2.2.1",
     "karma-browserify": "npm:karma-browserify@4.3.0",
+    "mutationobserver-shim": "npm:mutationobserver-shim@0.3.1",
+    "object.observe": "npm:object.observe@0.2.6",
     "ortc-over-rtc": "npm:ortc-over-rtc@0.1.0",
-    "punycode": "npm:punycode@1.3.2",
     "runtime-core": "github:reTHINK-project/dev-runtime-core@dev-0.2",
     "tr46": "npm:tr46@0.0.2",
     "tv4": "npm:tv4@1.2.7",
@@ -33,7 +36,7 @@ System.config({
       "assert": "npm:assert@1.3.0"
     },
     "github:jspm/nodelibs-buffer@0.1.0": {
-      "buffer": "npm:buffer@3.5.3"
+      "buffer": "npm:buffer@3.5.5"
     },
     "github:jspm/nodelibs-constants@0.1.0": {
       "constants-browserify": "npm:constants-browserify@0.0.1"
@@ -74,9 +77,6 @@ System.config({
     "github:jspm/nodelibs-process@0.1.2": {
       "process": "npm:process@0.11.2"
     },
-    "github:jspm/nodelibs-punycode@0.1.0": {
-      "punycode": "npm:punycode@1.3.2"
-    },
     "github:jspm/nodelibs-querystring@0.1.0": {
       "querystring": "npm:querystring@0.2.0"
     },
@@ -106,6 +106,12 @@ System.config({
     },
     "github:reTHINK-project/dev-runtime-core@dev-0.2": {
       "service-framework": "github:reTHINK-project/dev-service-framework@develop"
+    },
+    "github:reTHINK-project/dev-service-framework@develop": {
+      "ortc-over-rtc": "npm:ortc-over-rtc@0.1.0",
+      "runtime-core": "github:reTHINK-project/dev-runtime-core@dev-0.2",
+      "webrtc-adapter-test": "npm:webrtc-adapter-test@0.2.5",
+      "webrtc-shim": "npm:webrtc-shim@0.1.2"
     },
     "npm:JSONStream@1.0.4": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
@@ -137,6 +143,9 @@ System.config({
       "arr-flatten": "npm:arr-flatten@1.0.1",
       "array-slice": "npm:array-slice@0.2.3"
     },
+    "npm:array.observe@0.0.1": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
     "npm:asn1.js@2.2.1": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",
       "bn.js": "npm:bn.js@2.2.0",
@@ -152,6 +161,15 @@ System.config({
       "acorn": "npm:acorn@1.2.2"
     },
     "npm:async@0.2.10": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:babel-polyfill@6.3.14": {
+      "babel-regenerator-runtime": "npm:babel-regenerator-runtime@6.3.13",
+      "babel-runtime": "npm:babel-runtime@5.8.34",
+      "core-js": "npm:core-js@1.2.6",
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:babel-regenerator-runtime@6.3.13": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:babel-runtime@5.8.34": {
@@ -304,7 +322,6 @@ System.config({
       "path": "github:jspm/nodelibs-path@0.1.0",
       "path-browserify": "npm:path-browserify@0.0.0",
       "process": "npm:process@0.11.2",
-      "punycode": "npm:punycode@1.3.2",
       "querystring-es3": "npm:querystring-es3@0.2.1",
       "read-only-stream": "npm:read-only-stream@1.1.1",
       "readable-stream": "npm:readable-stream@1.1.13",
@@ -358,7 +375,6 @@ System.config({
       "path": "github:jspm/nodelibs-path@0.1.0",
       "path-browserify": "npm:path-browserify@0.0.0",
       "process": "npm:process@0.11.2",
-      "punycode": "npm:punycode@1.3.2",
       "querystring-es3": "npm:querystring-es3@0.2.1",
       "read-only-stream": "npm:read-only-stream@1.1.1",
       "readable-stream": "npm:readable-stream@2.0.2",
@@ -388,12 +404,12 @@ System.config({
       "ieee754": "npm:ieee754@1.1.6",
       "is-array": "npm:is-array@1.0.1"
     },
-    "npm:buffer@3.5.3": {
+    "npm:buffer@3.5.5": {
       "base64-js": "npm:base64-js@0.0.8",
       "child_process": "github:jspm/nodelibs-child_process@0.1.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "ieee754": "npm:ieee754@1.1.6",
-      "is-array": "npm:is-array@1.0.1",
+      "isarray": "npm:isarray@1.0.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:bufferutil@1.0.1": {
@@ -644,10 +660,6 @@ System.config({
       "url": "github:jspm/nodelibs-url@0.1.0",
       "ws": "npm:ws@0.7.2"
     },
-    "npm:ent@2.2.0": {
-      "punycode": "github:jspm/nodelibs-punycode@0.1.0",
-      "systemjs-json": "github:systemjs/plugin-json@0.1.0"
-    },
     "npm:es5-ext@0.10.7": {
       "es6-iterator": "npm:es6-iterator@0.1.3",
       "es6-symbol": "npm:es6-symbol@2.0.1",
@@ -830,6 +842,9 @@ System.config({
       "string_decoder": "github:jspm/nodelibs-string_decoder@0.1.0",
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
+    "npm:indexeddbshim@2.2.1": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
     "npm:inflight@1.0.4": {
       "once": "npm:once@1.3.2",
       "process": "github:jspm/nodelibs-process@0.1.2",
@@ -916,7 +931,6 @@ System.config({
       "os": "github:jspm/nodelibs-os@0.1.0",
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
-      "punycode": "github:jspm/nodelibs-punycode@0.1.0",
       "querystring": "github:jspm/nodelibs-querystring@0.1.0",
       "readline": "github:jspm/nodelibs-readline@0.1.0",
       "rimraf": "npm:rimraf@2.4.3",
@@ -1066,6 +1080,9 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:next-tick@0.2.2": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:object.observe@0.2.6": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:object.omit@1.1.0": {
@@ -1443,7 +1460,6 @@ System.config({
     },
     "npm:tr46@0.0.2": {
       "process": "github:jspm/nodelibs-process@0.1.2",
-      "punycode": "github:jspm/nodelibs-punycode@0.1.0",
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
     "npm:type-check@0.3.1": {
