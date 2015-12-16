@@ -1,6 +1,7 @@
 # dev-service-framework
 (Adopted from dev-core-runtime)
 
+[Example](#example)
 
 ### How to install this repository like a NPM Module;
 
@@ -76,3 +77,19 @@ The address data factory can be tested independently by calling
 
     cd <base folder>/test
     mocha addressFactoryTest.js
+
+
+### <a id="example">Example</a>
+
+This repository have a folder with an working example of Hyperty Connector and we can do:
+ - send message and make a WebRTC call between remote hyperties through the vertx;
+
+-----
+
+To run the demo on example folder:
+ - you need **live-server** running in the root folder.
+ ```
+ live-server --port=4000
+ ```
+ - in your browser access to http://localhost:4000/example.
+ - this example have a dependecy from [dev-msg-node-vertx](https://github.com/reTHINK-project/dev-msg-node-vertx#java) for communication between hyperties in two distinct browsers or tabs, you need, run locally [dev-msg-node-vertx](https://github.com/reTHINK-project/dev-msg-node-vertx#java)

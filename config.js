@@ -27,7 +27,7 @@ System.config({
     "mutationobserver-shim": "npm:mutationobserver-shim@0.3.1",
     "object.observe": "npm:object.observe@0.2.6",
     "ortc-over-rtc": "npm:ortc-over-rtc@0.1.0",
-    "runtime-core": "github:reTHINK-project/dev-runtime-core@dev-0.2",
+    "runtime-core": "github:rethink-project/dev-runtime-core@dev-0.2",
     "tr46": "npm:tr46@0.0.2",
     "tv4": "npm:tv4@1.2.7",
     "webrtc-adapter-test": "npm:webrtc-adapter-test@0.2.5",
@@ -104,12 +104,15 @@ System.config({
     "github:jspm/nodelibs-zlib@0.1.0": {
       "browserify-zlib": "npm:browserify-zlib@0.1.4"
     },
-    "github:reTHINK-project/dev-runtime-core@dev-0.2": {
-      "service-framework": "github:reTHINK-project/dev-service-framework@develop"
+    "github:rethink-project/dev-runtime-core@dev-0.2": {
+      "service-framework": "github:rethink-project/dev-service-framework@develop"
     },
-    "github:reTHINK-project/dev-service-framework@develop": {
+    "github:rethink-project/dev-service-framework@develop": {
+      "array.observe": "npm:array.observe@0.0.1",
+      "babel-polyfill": "npm:babel-polyfill@6.3.14",
+      "indexeddbshim": "npm:indexeddbshim@2.2.1",
+      "object.observe": "npm:object.observe@0.2.6",
       "ortc-over-rtc": "npm:ortc-over-rtc@0.1.0",
-      "runtime-core": "github:reTHINK-project/dev-runtime-core@dev-0.2",
       "webrtc-adapter-test": "npm:webrtc-adapter-test@0.2.5",
       "webrtc-shim": "npm:webrtc-shim@0.1.2"
     },

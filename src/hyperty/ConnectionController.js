@@ -56,8 +56,8 @@ class ConnectionController extends EventEmitter {
 
     // Add stream to PeerConnection
     peerConnection.addEventListener('addstream', function(event) {
-      console.log('add stream from mode: ', _this.mode);
-      _this.trigger('stream:added', URL.createObjectURL(event.stream));
+      console.info('add stream from mode: ', _this.mode);
+      _this.trigger('stream:added', URL.createObjectURL(event.stream), _this.connectionDataObjectReporter, _this.connectionDataObjectObserver);
     });
 
     _this.peerConnection = peerConnection;

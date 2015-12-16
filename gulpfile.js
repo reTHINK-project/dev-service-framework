@@ -32,7 +32,7 @@ gulp.task('dist', function() {
     standalone: 'service-framework', debug: false}).transform(babel);
 
   function rebundle() {
-    bundler.bundle()
+    return bundler.bundle()
       .on('error', function(err) {
         console.error(err);
         this.emit('end');
@@ -45,7 +45,7 @@ gulp.task('dist', function() {
       .pipe(gulp.dest('./dist'));
   }
 
-  rebundle();
+  return rebundle();
 
 });
 
@@ -57,7 +57,7 @@ gulp.task('build', function() {
   }).transform(babel);
 
   function rebundle() {
-    bundler.bundle()
+    return bundler.bundle()
       .on('error', function(err) {
         console.error(err);
         this.emit('end');
@@ -66,7 +66,7 @@ gulp.task('build', function() {
       .pipe(gulp.dest('./dist'));
   }
 
-  rebundle();
+  return rebundle();
 
 });
 
@@ -79,11 +79,6 @@ gulp.task('build', function() {
 gulp.task('compile', function() {
 
   var filename = argv.file;
-  compile(filename);
-
-});
-
-function compile(filename) {
   var path;
 
   if (!filename) {
@@ -102,7 +97,7 @@ function compile(filename) {
   }).transform(babel);
 
   function rebundle() {
-    bundler.bundle()
+    return bundler.bundle()
       .on('error', function(err) {
         console.error(err);
         this.emit('end');
@@ -113,26 +108,8 @@ function compile(filename) {
       .pipe(gulp.dest(path));
   }
 
-  rebundle();
-}
-
-gulp.task('watch', function() {
-  var watcher = gulp.watch(['src/hyperty/*.js', 'resources/*.js', '!resources/*.ES5.js']);
-  watcher.on('change', function(event) {
-    console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-
-    var list = [];
-    list.push('resources/WorldHyperty.js');
-    list.push('resources/HelloHyperty.js');
-
-    list.forEach(function(file) {
-      compile(file);
-    });
-
-  });
+  return rebundle();
 });
-
-gulp.task('default', ['watch']);
 
 /**
  * Bumping version number and tagging the repository with it.

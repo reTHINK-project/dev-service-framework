@@ -126,13 +126,13 @@ class HypertyConnector extends EventEmitter {
 
         // step 7 and 10 - https://github.com/reTHINK-project/scenario-service-implementation/tree/master/docs/hyperties/connector#notification-about-incoming-connection-request
         _this.connectionController.connectionDataObjectObserver = connectionDataObject;
+        resolve(_this.connectionController);
 
         let resources = connectionDataObject.data.resources;
         return _this.connectionController.getUserMedia(resources);
       })
       .then(function(commResources) {
         console.log('Get webRTC common resources', commResources);
-        resolve(_this.connectionController);
       })
       .catch(function(reason) {
         console.error(reason);

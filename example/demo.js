@@ -11,7 +11,9 @@ import SandboxFactory from '../resources/sandboxes/SandboxFactory';
 
 var sandboxFactory = new SandboxFactory();
 var runtime = new RuntimeUA(sandboxFactory);
-var hypertiesList = ['hyperty-catalogue://ua.pt/HelloHyperty', 'hyperty-catalogue://ua.pt/WorldHyperty'];
+var hypertiesList = ['hyperty-catalogue://ua.pt/HelloHyperty'];
+
+window.runtime = runtime;
 
 function errorMessage(reason) {
   console.log(reason);
@@ -29,7 +31,7 @@ function deployedHyperties(hyperty, result) {
   hypertyEl.querySelector('.send').addEventListener('click', function(e) {
 
     var target = e.target;
-    var form = target.parentElement;
+    var form = target.parentElement.parentElement;
     var fromHyperty = form.getAttribute('data-url');
     var toHyperty = form.querySelector('.toHyperty').value;
     var messageHypert = form.querySelector('.messageHyperty').value;
@@ -51,8 +53,9 @@ function deployedHyperties(hyperty, result) {
   var connector = components[result.runtimeHypertyURL].hypertyCode.hypertyConnector;
 
   connector.addEventListener('connector:notification', function(event) {
-    console.log('connector notification:', event);
     var toForm = document.querySelector('form[data-url="' + event.to + '"]');
+
+    console.log('connector notification:', event);
 
     if (toForm) {
       var button = toForm.querySelector('.accept');
@@ -61,12 +64,17 @@ function deployedHyperties(hyperty, result) {
 
   });
 
+  connector.connectionController.addEventListener('stream:added', function(stream, reporter, observer) {
+    console.log('Stream: ', stream, reporter, observer);
+    document.querySelector('.video').src = stream;
+  });
+
 }
 
 function startHypertyConnector(e) {
 
   var target = e.target;
-  var form = target.parentElement;
+  var form = target.parentElement.parentElement;
   var fromHyperty = form.getAttribute('data-url');
   var toHyperty = form.querySelector('.toHyperty').value;
   var messageHypert = form.querySelector('.messageHyperty').value;
@@ -101,9 +109,9 @@ function startHypertyConnector(e) {
       target.setAttribute('data-connected', true);
       target.innerHTML = 'End';
 
-      controller.addEventListener('stream:added', function(stream) {
-        form.querySelector('.video').src = stream;
-      });
+      // controller.addEventListener('stream:added', function(stream) {
+      //   form.querySelector('.video').src = stream;
+      // });
 
     }).catch(function(reason) {
       console.error(reason);
@@ -115,7 +123,7 @@ function startHypertyConnector(e) {
 function acceptCall(e) {
 
   var target = e.target;
-  var form = target.parentElement;
+  var form = target.parentElement.parentElement;
   var hyperty = form.getAttribute('data-url');
   var resourceObj = target.getAttribute('data-obj');
   var messageHypert = form.querySelector('.messageHyperty').value;
@@ -123,9 +131,7 @@ function acceptCall(e) {
   var a = components[hyperty].hypertyCode;
   a.accept().then(function(controller) {
 
-    controller.addEventListener('stream:added', function(stream) {
-      form.querySelector('.video').src = stream;
-    });
+    console.log('Controller: ', controller);
 
   }).catch(function(reason) {
     console.error(reason);
@@ -170,7 +176,7 @@ function sendMessage(from, to, message) {
     var listFrom = form.parentElement.querySelector('.list');
     var itemFrom = document.createElement('li');
     itemFrom.setAttribute('class', 'collection-item avatar');
-    itemFrom.innerHTML = '<i class="material-icons circle yellow">call_made</i><label class="name title">' + from + '</label><p class="message">' + messageObject.body.value.replace(/\n/g, '<br>') + '</p>';
+    itemFrom.innerHTML = '<i class="material-icons circle yellow">call_made</i><label class="name title">' + to + '</label><p class="message">' + messageObject.body.value.replace(/\n/g, '<br>') + '</p>';
 
     listFrom.appendChild(itemFrom);
   }

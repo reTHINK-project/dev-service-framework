@@ -12,8 +12,6 @@ class WorldHyperty {
     _this.configuration = configuration;
     _this.hypertyURL = hypertyURL;
 
-    _this.mode = 'owner';
-
     let syncher = new Syncher(hypertyURL, bus, configuration);
     _this.syncher = syncher;
 

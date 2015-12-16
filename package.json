@@ -79,7 +79,7 @@
       "babel-runtime": "npm:babel-runtime@^5.8.34",
       "core-js": "npm:core-js@^1.2.6",
       "mutationobserver-shim": "npm:mutationobserver-shim@^0.3.1",
-      "runtime-core": "github:reTHINK-project/dev-runtime-core@dev-0.2"
+      "runtime-core": "github:rethink-project/dev-runtime-core@dev-0.2"
     }
   },
   "directories": {
