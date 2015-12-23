@@ -11,3 +11,5 @@ CVS
 npm-debug.log
 vendor
 node_modules
+
+resources/bundle.js

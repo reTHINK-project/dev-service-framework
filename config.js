@@ -105,6 +105,7 @@ System.config({
       "browserify-zlib": "npm:browserify-zlib@0.1.4"
     },
     "github:rethink-project/dev-runtime-core@dev-0.2": {
+      "hellojs": "npm:hellojs@1.9.9",
       "service-framework": "github:rethink-project/dev-service-framework@develop"
     },
     "github:rethink-project/dev-service-framework@develop": {
@@ -813,6 +814,13 @@ System.config({
     },
     "npm:hash.js@1.0.3": {
       "inherits": "npm:inherits@2.0.1"
+    },
+    "npm:hellojs@1.9.9": {
+      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
+      "http": "github:jspm/nodelibs-http@1.7.1",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "url": "github:jspm/nodelibs-url@0.1.0",
+      "util": "github:jspm/nodelibs-util@0.1.0"
     },
     "npm:http-browserify@1.7.0": {
       "Base64": "npm:Base64@0.2.1",

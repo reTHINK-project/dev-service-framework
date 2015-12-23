@@ -86,10 +86,25 @@ This repository have a folder with an working example of Hyperty Connector and w
 
 -----
 
+Generate a Certificate and private key
+```
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout private.key -out certificate.crt
+```
+
+Generate an certificate #PKCS12
+```
+openssl pkcs12 -export -in certificate.crt -inkey private.key -out local.p12
+```
+when ask you for a password
+
+Converter o #PKCS12 EM JKS(Java Key Store) para ser utilizado no vertx
+		keytool -importkeystore -srckeystore local.p12 -srcstoretype pkcs12 -destkeystore local.jks -deststoretype JKS
+
+
 To run the demo on example folder:
- - you need **live-server** running in the root folder.
+ - you need **[http-server](https://github.com/indexzero/http-server)** running in the root folder.
  ```
- live-server --port=4000
+ npm start
  ```
- - in your browser access to http://localhost:4000/example.
- - this example have a dependecy from [dev-msg-node-vertx](https://github.com/reTHINK-project/dev-msg-node-vertx#java) for communication between hyperties in two distinct browsers or tabs, you need, run locally [dev-msg-node-vertx](https://github.com/reTHINK-project/dev-msg-node-vertx#java)
+ - in your browser access to https://127.0.0.1:8080/example.
+ - this example have a dependecy from [dev-msg-node-vertx](https://github.com/reTHINK-project/dev-msg-node-vertx/tree/dev-0.2#unit-testing) for communication between hyperties in two distinct browsers or tabs, you need, run locally [dev-msg-node-vertx](https://github.com/reTHINK-project/dev-msg-node-vertx/tree/dev-0.2#unit-testing)

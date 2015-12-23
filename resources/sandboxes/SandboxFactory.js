@@ -130,8 +130,7 @@ var SandboxBrowser = (function (_Sandbox) {
     _this._sbr._create = function (url, sourceCode, config) {
       console.log('SandboxRegistry._create ', url, config);
       window.eval(sourceCode);
-      window.vertx = new VertxProtoStub(url, _this._bus, config);
-      return window.vertx;
+      return activate(url, _this._bus, config);
     };
   }
 
