@@ -6,7 +6,7 @@
   "scripts": {
     "init-setup": "npm init && npm install -g jspm karma-cli gulp-cli && npm install && jspm init && node setup.js",
     "test": "karma start",
-    "start": "http-server -a 127.0.0.1 -p 8080 -S -C rethink-certificate.cert -K rethink-certificate.key",
+    "start": "live-server --no-browser --port=8080",
     "build": "node scripts/transform.js"
   },
   "repository": {

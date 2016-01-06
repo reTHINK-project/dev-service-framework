@@ -78,33 +78,25 @@ The address data factory can be tested independently by calling
     cd <base folder>/test
     mocha addressFactoryTest.js
 
+### <a id="Tasks">Tasks</a>
+
+In this repository, we have some tasks which can help you.
+If you need change some resource file, like an Hyperty, you need run task watch first, to encode the Hyperty file changes in a base64 file and add it to the descriptor folder in the respective place;
+
+in your command line run:
+```
+gulp watch
+```
+
+this is temporary until the dev-catalogue is ready;
 
 ### <a id="example">Example</a>
 
-This repository have a folder with an working example of Hyperty Connector and we can do:
- - send message and make a WebRTC call between remote hyperties through the vertx;
-
------
-
-Generate a Certificate and private key
-```
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout private.key -out certificate.crt
-```
-
-Generate an certificate #PKCS12
-```
-openssl pkcs12 -export -in certificate.crt -inkey private.key -out local.p12
-```
-when ask you for a password
-
-Converter o #PKCS12 EM JKS(Java Key Store) para ser utilizado no vertx
-		keytool -importkeystore -srckeystore local.p12 -srcstoretype pkcs12 -destkeystore local.jks -deststoretype JKS
-
+This repository have a folder with an working example of Hyperty Connector and we can send message and make a WebRTC call between remote hyperties through the vertx;
 
 To run the demo on example folder:
- - you need **[http-server](https://github.com/indexzero/http-server)** running in the root folder.
- ```
- npm start
- ```
- - in your browser access to https://127.0.0.1:8080/example.
- - this example have a dependecy from [dev-msg-node-vertx](https://github.com/reTHINK-project/dev-msg-node-vertx/tree/dev-0.2#unit-testing) for communication between hyperties in two distinct browsers or tabs, you need, run locally [dev-msg-node-vertx](https://github.com/reTHINK-project/dev-msg-node-vertx/tree/dev-0.2#unit-testing)
+ - this example have a dependecy from [dev-msg-node-vertx](https://github.com/reTHINK-project/dev-msg-node-vertx/tree/dev-0.2#unit-testing) and [dev-registry-domain](https://github.com/reTHINK-project/dev-registry-domain#dev-registry-domain) for communication between hyperties in two distinct browsers or tabs. **At this moment you need run locally [dev-msg-node-vertx](https://github.com/reTHINK-project/dev-msg-node-vertx/tree/dev-0.2#unit-testing) and [dev-registry-domain](https://github.com/reTHINK-project/dev-registry-domain#dev-registry-domain)**
+ - you need, in the root folder, run command: ``` npm start ```
+ - in your browser, access to https://127.0.0.1:8080/example
+
+This example works over https protocol, but how we are running in the 127.0.0.1, this address is considered secure and the webRTC will works well;

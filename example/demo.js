@@ -234,9 +234,9 @@ function processVideo(stream) {
 
 function processMessage(msg, type) {
 
+  // console.log(msg.body.value);
   console.log(type);
-
-  if (typeof msg.body.value !== 'object') {
+  if (typeof msg.body.value !== 'object' && msg.body.value !== undefined) {
 
     let messageCollection = $('.hyperty-chat .collection');
     let messageItem = '<li class="collection-item avatar"><img src="' + avatar + '" alt="" class="circle"><span class="title">' + msg.from + '</span><p>' + msg.body.value.replace(/\n/g, '<br>') + '</p></li>';
