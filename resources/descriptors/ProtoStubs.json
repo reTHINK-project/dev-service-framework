@@ -12,7 +12,7 @@
     "messageSchema":"",
     "configuration": {
       "_comment": "ws://citysdk.tagus.ist.utl.pt:9000/ws-wss://msg-node.ua.pt:9090/ws",
-      "url": "ws://citysdk.tagus.ist.utl.pt:9000/ws"
+      "url": "wss://msg-node.ua.pt:9090/ws"
     },
     "policies": "",
     "constraints":"",

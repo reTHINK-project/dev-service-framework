@@ -1,4 +1,4 @@
-import 'webrtc-adapter-test';
+import {RTCPeerConnection, RTCSessionDescription, RTCIceCandidate} from 'webrtc-adapter-test';
 
 import EventEmitter from '../utils/EventEmitter';
 

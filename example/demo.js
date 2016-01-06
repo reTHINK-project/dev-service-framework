@@ -1,3 +1,6 @@
+// jshint browser:true, jquery: true
+import {addLoader, removeLoader, documentReady, errorMessage} from './support';
+
 // polyfills
 import 'babel-polyfill';
 import 'indexeddbshim';
@@ -6,163 +9,246 @@ import 'object.observe';
 import 'array.observe';
 
 // reTHINK modules
-import {RuntimeUA} from 'runtime-core';
-import SandboxFactory from '../resources/sandboxes/SandboxFactory';
+import RuntimeUA from 'runtime-core/dist/runtimeUA';
 
-var sandboxFactory = new SandboxFactory();
-var runtime = new RuntimeUA(sandboxFactory);
-var hypertiesList = ['hyperty-catalogue://ua.pt/HelloHyperty'];
+import SandboxFactory from '../resources/sandboxes/SandboxFactory';
+let sandboxFactory = new SandboxFactory();
+let avatar = 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg';
+let runtime = new RuntimeUA(sandboxFactory);
 
 window.runtime = runtime;
 
-function errorMessage(reason) {
-  console.log(reason);
+// Check if the document is ready
+if (document.readyState === 'complete') {
+  documentReady();
+} else {
+  window.addEventListener('onload', documentReady, false);
+  document.addEventListener('DOMContentLoaded', documentReady, false);
 }
 
-function deployedHyperties(hyperty, result) {
+let loginBtn = document.querySelector('.login');
+loginBtn.addEventListener('click', function(e) {
 
-  var hypertyName = hyperty.substr(hyperty.lastIndexOf('/') + 1);
-  var hypertyEl = document.querySelector('.' + hypertyName);
+  let loginPanel = document.querySelector('.login-panel');
+  let content = loginPanel.querySelector('.card-action');
+  addLoader(content);
 
-  hypertyEl.querySelector('.status').innerHTML = result.status;
-  hypertyEl.querySelector('.name').innerHTML = hypertyName;
-  hypertyEl.querySelector('.runtime-hyperty-url').innerHTML = result.runtimeHypertyURL;
-  hypertyEl.querySelector('.form').setAttribute('data-url', result.runtimeHypertyURL);
-  hypertyEl.querySelector('.send').addEventListener('click', function(e) {
+  runtime.identityModule.loginWithRP().then(function(result) {
+    removeLoader(content);
+    userLoged(result);
+  }).catch(function(reason) {
+    removeLoader(content);
+    let cardHolder = $('.card-content');
+    let html = '<div class="row"><div class="col s12"><span class="card-title">Login</span></div><div class="col s12">' + reason.error.message + '</div>';
 
-    var target = e.target;
-    var form = target.parentElement.parentElement;
-    var fromHyperty = form.getAttribute('data-url');
-    var toHyperty = form.querySelector('.toHyperty').value;
-    var messageHypert = form.querySelector('.messageHyperty').value;
+    cardHolder.html(html);
+  });
 
-    if (fromHyperty && toHyperty && messageHypert) {
-      sendMessage(fromHyperty, toHyperty, messageHypert);
+  let btn = $(e.currentTarget);
+  btn.addClass('hide');
+
+});
+
+function userLoged(result) {
+
+  let hypertyHolder = $('.hyperties');
+  hypertyHolder.removeClass('hide');
+
+  let cardHolder = $('.card-content');
+  let html = '<div class="row"><div class="col s12"><span class="card-title">Logged</span></div><div class="col s2"><img alt="" class="circle responsive-img" src=' + result.picture + ' ></div><div class="col s8"><p><b>id:</b> ' + result.id + '</p><p><b>email:</b> ' + result.email + '</p><p><b>name:</b> ' + result.name + '</p><p><b>locale:</b> ' + result.locale + '</p></div>';
+
+  cardHolder.html(html);
+
+  console.log(result);
+
+  let hyperty = 'http://ua.pt/HelloHyperty';
+
+  // Load First Hyperty
+  runtime.loadHyperty(hyperty).then(hypertyDeployed).catch(function(reason) {
+    errorMessage(reason);
+  });
+
+}
+
+function hypertyDeployed(result) {
+
+  let loginPanel = $('.login-panel');
+  let cardAction = loginPanel.find('.card-action');
+  let hypertyInfo = '<span class="white-text"><p><b>hypertyURL:</b> ' + result.runtimeHypertyURL + '</br><b>status:</b> ' + result.status + '</p></span>';
+
+  loginPanel.attr('data-url', result.runtimeHypertyURL);
+  cardAction.append(hypertyInfo);
+
+  // Prepare to discover email:
+  discoverEmail();
+
+  // Prepare the chat
+  let messageChat = $('.hyperty-chat');
+  messageChat.removeClass('hide');
+
+  let connector = window.components[result.runtimeHypertyURL].hypertyCode.hypertyConnector;
+
+  connector.addEventListener('connector:notification', notificationHandler);
+
+  connector.connectionController.addEventListener('stream:added', processVideo);
+
+  runtime.messageBus.addListener(result.runtimeHypertyURL, newMessageRecived);
+}
+
+function discoverEmail() {
+
+  let section = $('.discover');
+  let searchForm = section.find('.form');
+  let inputField = searchForm.find('.friend-email');
+
+  section.removeClass('hide');
+
+  searchForm.on('submit', function(event) {
+    event.preventDefault();
+
+    let collection = section.find('.collection');
+    let collectionItem = '<li class="collection-item"><div class="preloader-wrapper small active"><div class="spinner-layer spinner-blue-only"><div class="circle-clipper left"><div class="circle"></div></div><div class="gap-patch"><div class="circle"></div></div><div class="circle-clipper right"><div class="circle"></div></div></div></div></li>';
+
+    collection.removeClass('hide');
+    collection.addClass('center-align');
+    collection.html(collectionItem);
+
+    let email = inputField.val();
+    console.log(email);
+    runtime.registry.getUserHyperty(email).then(emailDiscovered).catch(emailDiscoveredError);
+
+  });
+}
+
+function emailDiscovered(result) {
+  // Email Discovered:  Object {id: "openidtest10@gmail.com", descriptor: "http://ua.pt/HelloHyperty", hypertyURL: "hyperty://ua.pt/27d080c8-22ef-445f-9f9a-f2c750fc6d5a"}
+
+  console.log('Email Discovered: ', result);
+
+  let section = $('.discover');
+  let collection = section.find('.collection');
+  let collectionItem = '<li class="collection-item avatar"><img src="' + avatar + '" alt="" class="circle"><span class="title">' + result.id + '</span><p>' + result.descriptor + '<br>' + result.hypertyURL + '</p><a href="#!" class="message-btn"><i class="material-icons left">message</i>Send Message</a><a href="#!" class="call-btn"><i class="material-icons">call</i>Call</a></li>';
+
+  collection.empty();
+  collection.removeClass('center-align');
+  collection.append(collectionItem);
+
+  let messageChatBtn = collection.find('.message-btn');
+  messageChatBtn.on('click', function(event) {
+    event.preventDefault();
+    openChat(result, false);
+  });
+
+  let callBtn = collection.find('.call-btn');
+  callBtn.on('click', function(event) {
+    event.preventDefault();
+    openChat(result, true);
+  });
+
+}
+
+function emailDiscoveredError(result) {
+
+  // result = {
+  //   id: 'openidtest10@gmail.com',
+  //   descriptor: 'http://ua.pt/HelloHyperty',
+  //   hypertyURL: 'hyperty://ua.pt/27d080c8-22ef-445f-9f9a-f2c750fc6d5a'
+  // };
+  //
+  // emailDiscovered(result);
+
+  console.error('Email Discovered Error: ', result);
+
+  let section = $('.discover');
+  let collection = section.find('.collection');
+
+  let collectionItem = '<li class="collection-item orange lighten-3"><i class="material-icons left circle">error_outline</i>' + result + '</li>';
+
+  collection.empty();
+  collection.removeClass('center-align');
+  collection.removeClass('hide');
+  collection.append(collectionItem);
+}
+
+function openChat(result, video) {
+
+  let messagesChat = $('.messages');
+  let messageForm = messagesChat.find('.form');
+  let loginPanel = $('.login-panel');
+  let fromUser = loginPanel.attr('data-url');
+  let toUserEl = messagesChat.find('.runtime-hyperty-url');
+  let toUser = result.hypertyURL;
+
+  toUserEl.html(toUser);
+
+  if (video) {
+
+    let a = window.components[fromUser].hypertyCode;
+
+    console.log(toUser);
+
+    a.connect(toUser).then(function(controller) {
+
+      controller.addEventListener('stream:added', processVideo);
+
+    }).catch(function(reason) {
+      console.error(reason);
+    });
+
+  }
+
+  messageForm.on('submit', function(e) {
+
+    let messageText = messagesChat.find('.message-text').val();
+
+    if (messageText) {
+      sendMessage(fromUser, toUser, messageText);
     }
 
-    form.reset();
+    messageForm[0].reset();
 
     e.preventDefault();
   });
 
-  runtime.messageBus.addListener(result.runtimeHypertyURL, newMessageRecived);
-
-  hypertyEl.querySelector('.call').addEventListener('click', startHypertyConnector);
-  hypertyEl.querySelector('.accept').addEventListener('click', acceptCall);
-
-  var connector = components[result.runtimeHypertyURL].hypertyCode.hypertyConnector;
-
-  connector.addEventListener('connector:notification', function(event) {
-    var toForm = document.querySelector('form[data-url="' + event.to + '"]');
-
-    console.log('connector notification:', event);
-
-    if (toForm) {
-      var button = toForm.querySelector('.accept');
-      button.className = button.className.replace('hide', '');
-    }
-
-  });
-
-  connector.connectionController.addEventListener('stream:added', function(stream, reporter, observer) {
-    console.log('Stream: ', stream, reporter, observer);
-    document.querySelector('.video').src = stream;
-  });
-
-}
-
-function startHypertyConnector(e) {
-
-  var target = e.target;
-  var form = target.parentElement.parentElement;
-  var fromHyperty = form.getAttribute('data-url');
-  var toHyperty = form.querySelector('.toHyperty').value;
-  var messageHypert = form.querySelector('.messageHyperty').value;
-  var connected = target.getAttribute('data-connected');
-
-  console.log(target);
-
-  e.preventDefault();
-
-  if (!toHyperty) {
-    alert('nobody to connect');
-    return;
-  }
-
-  var a = components[fromHyperty].hypertyCode;
-
-  if (connected) {
-
-    a.disconnect().then(function(status) {
-
-      target.setAttribute('data-connected', false);
-      target.innerHTML = 'Call';
-
-    }).catch(function(reason) {
-      console.error(reason);
-    });
-
-  } else {
-
-    a.connect(toHyperty).then(function(controller) {
-
-      target.setAttribute('data-connected', true);
-      target.innerHTML = 'End';
-
-      // controller.addEventListener('stream:added', function(stream) {
-      //   form.querySelector('.video').src = stream;
-      // });
-
-    }).catch(function(reason) {
-      console.error(reason);
-    });
-
-  }
-}
-
-function acceptCall(e) {
-
-  var target = e.target;
-  var form = target.parentElement.parentElement;
-  var hyperty = form.getAttribute('data-url');
-  var resourceObj = target.getAttribute('data-obj');
-  var messageHypert = form.querySelector('.messageHyperty').value;
-
-  var a = components[hyperty].hypertyCode;
-  a.accept().then(function(controller) {
-
-    console.log('Controller: ', controller);
-
-  }).catch(function(reason) {
-    console.error(reason);
-  });
-
-  e.preventDefault();
+  messagesChat.removeClass('hide');
 
 }
 
 function newMessageRecived(msg) {
 
-  var fromHyperty = msg.from;
-  var toHyperty = msg.to;
+  console.log(msg);
 
-  var elTo = document.querySelector('form[data-url="' + toHyperty + '"]');
+  // Object {to: "hyperty://ua.pt/71552726-ae61-411a-bab0-41843b26b56f", from: "hyperty://ua.pt/586f5f0a-aa98-4d23-b864-a6efd3ccdd74", type: "message", body: Object, id: 2}
+  processMessage(msg, 'in');
 
-  if (msg.body.hasOwnProperty('value') && msg.body.value.length) {
-    var listTo = elTo.parentElement.querySelector('.list');
-    var itemTo = document.createElement('li');
+}
 
-    itemTo.setAttribute('class', 'collection-item avatar right-align');
-    itemTo.innerHTML = '<i class="material-icons circle green">call_received</i><label class="name title">' + fromHyperty + '</label><p class="message">' + msg.body.value.replace(/\n/g, '<br>') + '</p>';
+function processVideo(stream) {
 
-    listTo.appendChild(itemTo);
+  let messageChat = $('.hyperty-chat');
+  let video = messageChat.find('.video');
+
+  video.removeClass('hide');
+  video[0].src = stream;
+}
+
+function processMessage(msg, type) {
+
+  console.log(type);
+
+  if (typeof msg.body.value !== 'object') {
+
+    let messageCollection = $('.hyperty-chat .collection');
+    let messageItem = '<li class="collection-item avatar"><img src="' + avatar + '" alt="" class="circle"><span class="title">' + msg.from + '</span><p>' + msg.body.value.replace(/\n/g, '<br>') + '</p></li>';
+
+    messageCollection.append(messageItem);
   }
 
 }
 
 function sendMessage(from, to, message) {
 
-  var messageObject = {
+  let msg = {
     to: to,
     from: from,
     type: 'message',
@@ -171,39 +257,43 @@ function sendMessage(from, to, message) {
     }
   };
 
-  var form = document.querySelector('form[data-url="' + from + '"]');
-  if (form) {
-    var listFrom = form.parentElement.querySelector('.list');
-    var itemFrom = document.createElement('li');
-    itemFrom.setAttribute('class', 'collection-item avatar');
-    itemFrom.innerHTML = '<i class="material-icons circle yellow">call_made</i><label class="name title">' + to + '</label><p class="message">' + messageObject.body.value.replace(/\n/g, '<br>') + '</p>';
-
-    listFrom.appendChild(itemFrom);
-  }
-
-  runtime.messageBus.postMessage(messageObject);
+  processMessage(msg, 'out');
+  runtime.messageBus.postMessage(msg);
 }
 
-function loadHyperties() {
+function notificationHandler(event) {
 
-  var time = 1;
+  let loginPanel = $('.login-panel');
+  let hypertyId = loginPanel.attr('data-url');
+  let incoming = $('.modal-call');
+  let informationHolder = incoming.find('.information');
+  let agreeBtn = incoming.find('.modal-action');
 
-  hypertiesList.forEach(function(hyperty) {
+  let parseInformation = '<label>From: </label>' + event.from;
 
-    setTimeout(function() {
-
-      // Load First Hyperty
-      runtime.loadHyperty(hyperty).then(function(result) {
-        deployedHyperties(hyperty, result);
-      }).catch(function(reason) {
-        errorMessage(reason);
-      });
-    }, (100 * time));
-
-    time++;
-
+  parseInformation += '<h5>Resources</h5><ul>';
+  Object.keys(event.resources).map(function(key) {
+    parseInformation += '<li>' + key + '</li>';
   });
 
-}
+  parseInformation += '</ul>';
 
-loadHyperties();
+  informationHolder.html(parseInformation);
+
+  console.log(event);
+
+  agreeBtn.on('click', function(e) {
+
+    let a = window.components[hypertyId].hypertyCode;
+    a.accept().then(function(controller) {
+      console.log('Controller: ', controller);
+    }).catch(function(reason) {
+      console.error(reason);
+    });
+
+    e.preventDefault();
+  });
+
+  $('.modal-call').openModal();
+
+}

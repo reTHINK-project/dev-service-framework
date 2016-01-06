@@ -96,8 +96,9 @@ class Syncher {
    let objSubscriptorURL = objURL + '/subscription';
 
    //TODO: validate if subscription already exists ?
+   //TODO: remove from body hypertyURL (was added because the PolicyEngine)
    let subscribeMsg = {
-     type: 'subscribe', from: _this._owner, to: objSubscriptorURL
+     type: 'subscribe', from: _this._owner, to: objSubscriptorURL, body: {hypertyURL:_this._owner}
    };
 
    return new Promise((resolve, reject) => {

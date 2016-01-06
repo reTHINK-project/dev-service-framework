@@ -1,4 +1,3 @@
-import {deepClone} from '../utils/utils';
 import ConnectionController from './ConnectionController';
 import EventEmitter from '../utils/EventEmitter';
 
@@ -108,9 +107,9 @@ class HypertyConnector extends EventEmitter {
   }
 
   /**
-   * [accept description]
+   * Accept the incoming call
    * @method accept
-   * @return {[type]}
+   * @return {Promise}
    */
   accept() {
     let _this = this;
@@ -136,6 +135,7 @@ class HypertyConnector extends EventEmitter {
       })
       .catch(function(reason) {
         console.error(reason);
+        reject(reason);
       });
     });
   }
