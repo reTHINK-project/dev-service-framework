@@ -1,7 +1,7 @@
 "use strict";
 /*global describe */
 /*global it */
-
+/*
 const assert = require("assert");
 const fs = require("fs");
 const URL = require("../lib/url").createURLConstructor();
@@ -251,3 +251,4 @@ describe("Tests to check 'origin':", function () {
 //     it("Testing: ", testURL(url))
     
 // });
+*/
