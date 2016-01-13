@@ -1,12 +1,8 @@
-Hyperty Development
+Development Manuals
 -------------------
 
-**Introduce the Hyperty Concept, the Criteria to use or not to use Hyperties, the APIs to be used and code snippets**
+### Hyperty Development
 
-### Hyperty Concept
+### Application Development
 
-### Criteria do use the Hyperty Concept
-
-### APIs
-
-### Examples
+### Messaging Development
