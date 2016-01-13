@@ -13,6 +13,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'node_modules/webrtc-adapter-test/adapter.js',
       'node_modules/babel-polyfill/dist/polyfill.js',
       'node_modules/indexeddbshim/dist/indexeddbshim.js',
       'node_modules/object.observe/dist/object-observe.js',

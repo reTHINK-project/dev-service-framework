@@ -12,5 +12,4 @@ npm-debug.log
 vendor
 node_modules
 
-example
-resources
+resources/bundle.js

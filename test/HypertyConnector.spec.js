@@ -6,6 +6,7 @@ import sinonChai from 'sinon-chai';
 
 // internal modules to be tested
 import {divideURL} from '../src/utils/utils';
+import HypertyConnector from '../src/hyperty/HypertyConnector';
 
 let expect = chai.expect;
 
@@ -17,8 +18,17 @@ chai.use(sinonChai);
 
 describe('Hyperty Connector', function() {
 
-  it.skip('Hyperty connector constructor', function() {
-    expect(true).to.be.equal(true);
+  let syncher;
+  before(function() {
+    syncher = {};
+  });
+
+  it('Hyperty connector constructor', function() {
+
+    console.log(RTCPeerConnection);
+
+    //var connector = new HypertyConnector(syncher);
+
   });
 
 });

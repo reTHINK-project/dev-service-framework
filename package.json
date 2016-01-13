@@ -6,6 +6,7 @@
   "scripts": {
     "init-setup": "npm init && npm install -g jspm karma-cli gulp-cli && npm install && jspm init && node setup.js",
     "test": "karma start",
+    "start": "live-server --no-browser --port=8080",
     "build": "node scripts/transform.js"
   },
   "repository": {
@@ -25,11 +26,8 @@
   "devDependencies": {
 
     "array.observe": "0.0.1",
+	"assert": "^1.3.0",
     "babel-polyfill": "^6.2.0",
-    "indexeddbshim": "^2.2.1",
-    "object.observe": "^0.2.6",
-
-    "assert": "^1.3.0",
     "babelify": "^6.3.0",
     "browserify": "^12.0.1",
     "chai": "^3.3.0",
@@ -40,7 +38,9 @@
     "gulp-replace": "^0.5.4",
     "gulp-uglify": "^1.4.2",
     "gulp-watch": "^4.3.5",
+    "indexeddbshim": "^2.2.1",
     "istanbul": "~0.3.14",
+    "js-base64": "^2.1.9",
     "jscs": "^1.13.0",
     "jsdoc": "^3.4.0",
     "jshint": "^2.7.0",
@@ -56,11 +56,15 @@
     "mocha-traceur": "^2.1.0",
     "recast": "~0.10.29",
     "request": "^2.55.0",
+    "mutationobserver-shim": "^0.3.1",
+    "object.observe": "^0.2.6",
     "sinon": "^1.17.2",
     "sinon-chai": "^2.8.0",
+    "through2": "^2.0.0",
     "tr46": "0.0.2",
     "tv4": "^1.2.7",
     "vinyl-buffer": "^1.0.0",
+    "vinyl-paths": "^2.1.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.4.0",
     "yargs": "~3.27.0"
@@ -70,15 +74,20 @@
       "packages": "vendor"
     },
     "dependencies": {
+      "array.observe": "npm:array.observe@^0.0.1",
+      "babel-polyfill": "npm:babel-polyfill@^6.3.14",
+      "indexeddbshim": "npm:indexeddbshim@^2.2.1",
+      "object.observe": "npm:object.observe@^0.2.6",
       "ortc-over-rtc": "npm:ortc-over-rtc@^0.1.0",
-      "runtime-core": "github:reTHINK-project/dev-runtime-core@dev-0.2",
       "webrtc-adapter-test": "npm:webrtc-adapter-test@^0.2.5",
       "webrtc-shim": "npm:webrtc-shim@^0.1.2"
     },
     "devDependencies": {
       "babel": "npm:babel-core@^5.8.34",
       "babel-runtime": "npm:babel-runtime@^5.8.34",
-      "core-js": "npm:core-js@^1.2.6"
+      "core-js": "npm:core-js@^1.2.6",
+      "mutationobserver-shim": "npm:mutationobserver-shim@^0.3.1",
+      "runtime-core": "github:rethink-project/dev-runtime-core"
     }
   },
   "directories": {
@@ -87,7 +96,6 @@
   },
   "dependencies": {
     "ortc-over-rtc": "^0.1.0",
-    "runtime-core": "rethink-project/dev-runtime-core#dev-0.2",
     "webrtc-adapter-test": "^0.2.5",
     "webrtc-shim": "^0.1.2"
   }
