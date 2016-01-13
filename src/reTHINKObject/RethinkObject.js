@@ -18,4 +18,6 @@ export class RethinkObject {
     }
 }
 
+
 export default RethinkObject;
+

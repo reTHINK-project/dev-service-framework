@@ -1,0 +1,52 @@
+﻿Merge remote-tracking branch 'refs/remotes/origin/develop'
+
+# Conflicts:
+#	package.json
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	modified:   .gitignore
+#	modified:   .jscsrc
+#	modified:   .jshintrc
+#	modified:   README.md
+#	modified:   config.js
+#	modified:   dist/service-framework.js
+#	new file:   example/demo.js
+#	new file:   example/index.html
+#	new file:   example/support.js
+#	modified:   gulpfile.js
+#	modified:   karma.conf.js
+#	modified:   package.json
+#	new file:   privatekey.csr
+#	new file:   privkey.pem
+#	new file:   resources/HelloHyperty.js
+#	new file:   resources/VertxProtoStub.js
+#	new file:   resources/WorldHyperty.js
+#	new file:   resources/descriptors/HelloHyperty-sourcePackageURL.json
+#	new file:   resources/descriptors/Hyperties.json
+#	new file:   resources/descriptors/ProtoStubs.json
+#	new file:   resources/descriptors/VertxProtoStub-sourcePackageURL.json
+#	new file:   resources/descriptors/WorldHyperty-sourcePackageURL.json
+#	new file:   resources/sandboxes/SandboxFactory.js
+#	new file:   rethink-certificate.cert
+#	new file:   rethink-certificate.key
+#	modified:   src/catalogue-factory/CatalogueDataObjectFactory.js
+#	modified:   src/hyperty/ConnectionController.js
+#	modified:   src/hyperty/HypertyConnector.js
+#	modified:   src/service-framework.js
+#	modified:   src/syncher/Syncher.js
+#	modified:   test/HypertyConnector.spec.js
+#
+
