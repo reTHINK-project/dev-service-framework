@@ -1,3 +1,5 @@
+// jshint varstmt: false
+
 var gulp = require('gulp');
 var exec = require('child_process').exec;
 
@@ -5,7 +7,7 @@ var exec = require('child_process').exec;
 gulp.task('doc', function(done) {
 
   console.log('Generating documentation...');
-  exec('node_modules/.bin/jsdoc -R readme.md -d docs src/*', function(err, stdout, stderr) {
+  exec('node_modules/.bin/jsdoc -R readme.md -d docs src/*', function(err) {
     if (err) return done(err);
     console.log('Documentation generated in "docs" directory');
     done();
@@ -114,9 +116,8 @@ gulp.task('compile', function() {
 var through = require('through2');
 var Base64 = require('js-base64').Base64;
 var fs = require('fs');
-var vinylPaths = require('vinyl-paths');
 
-function encode(filename, descriptor) {
+function encode(filename) {
 
   var sourcePackage = fs.readFileSync('resources/descriptors/' + filename + '-sourcePackageURL.json', 'utf8');
   var json = JSON.parse(sourcePackage);
@@ -130,8 +131,6 @@ function encode(filename, descriptor) {
     if (file.isStream()) {
       return cb(new Error('Streaming not supported'));
     }
-
-    var descriptorObject = fs.readFileSync('resources/descriptors/' + descriptor + '.json', 'utf8');
 
     var encoded = Base64.encode(file.contents);
     json.sourceCode = encoded;
@@ -148,7 +147,7 @@ function encode(filename, descriptor) {
 
 gulp.task('watch', function() {
 
-  var watcher = gulp.watch(['resources/*Hyperty.js', 'resources/*ProtoStub.js']);
+  var watcher = gulp.watch(['resources/*Hyperty.js', 'resources/*ProtoStub.js', 'src/hyperty/HypertyConnector.js']);
   watcher.on('change', function(event) {
 
     if (event.type === 'deleted') return;
@@ -157,8 +156,11 @@ gulp.task('watch', function() {
 
     var filename = event.path;
     var splitIndex = filename.lastIndexOf('/') + 1;
-    path = filename.substr(0, splitIndex);
     filename = filename.substr(splitIndex).replace('.js', '');
+
+    if (filename !== 'HelloHyperty' || filename !== 'WorldHyperty') {
+      filename = 'HelloHyperty';
+    }
 
     var descriptorName = 'Hyperties';
     if (filename.indexOf('Hyperty') === -1) {
@@ -177,7 +179,7 @@ gulp.task('watch', function() {
       .pipe(source('bundle.js'))
       .pipe(gulp.dest('resources/'))
       .pipe(buffer())
-      .pipe(encode(filename, descriptorName))
+      .pipe(encode(filename))
       .pipe(source(filename + '-sourcePackageURL.json'))
       .pipe(gulp.dest('resources/descriptors/'));
   });

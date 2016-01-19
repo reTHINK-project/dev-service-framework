@@ -36,10 +36,7 @@ class Syncher {
      switch (msg.type) {
        case 'response': _this._onResponse(msg); break;
        case 'forward': _this._onForward(msg); break;
-       case 'create': _this._onCreate(msg); break;
-       case 'update': _this._onChange(msg); break;
-       case 'add': _this._onChange(msg); break;
-       case 'remove': _this._onChange(msg); break;
+       case 'create': _this._onRemoteCreate(msg); break;
      }
    });
  }
@@ -64,7 +61,7 @@ class Syncher {
 
    let requestMsg = {
      type: 'create', from: _this._owner, to: _this._subURL,
-     body: {schema: schema, value: initialData, authorise: observers}
+     body: { schema: schema, value: initialData, authorise: observers }
    };
 
    return new Promise((resolve, reject) => {
@@ -93,12 +90,11 @@ class Syncher {
   */
  subscribe(objURL) {
    let _this = this;
-   let objSubscriptorURL = objURL + '/subscription';
 
    //TODO: validate if subscription already exists ?
-   //TODO: remove from body hypertyURL (was added because the PolicyEngine)
    let subscribeMsg = {
-     type: 'subscribe', from: _this._owner, to: objSubscriptorURL
+     type: 'subscribe', from: _this._owner, to: _this._subURL,
+     body: { resource: objURL }
    };
 
    return new Promise((resolve, reject) => {
@@ -139,7 +135,7 @@ class Syncher {
    reporter._onForward(msg);
  }
 
- _onCreate(msg) {
+ _onRemoteCreate(msg) {
    let _this = this;
 
    let event = {
@@ -149,11 +145,16 @@ class Syncher {
      schema: msg.body.schema,
      value: msg.body.value,
 
-     ack: () => {
+     ack: (type) => {
+       let lType = 200;
+       if (type) {
+         lType = type;
+       }
+
        //send ack response message
        _this._bus.postMessage({
          id: msg.id, type: 'response', from: msg.to, to: msg.from,
-         body: { code: 200 }
+         body: { code: lType }
        });
      }
    };
@@ -163,18 +164,24 @@ class Syncher {
    }
  }
 
- _onChange(msg) {
+ /*_onRemoteChange(msg) {
    let _this = this;
 
    let observer = _this._observers[msg.from];
    observer._changeObject(msg);
- }
+ }*/
 
  _addObserver(objURL, schemaURL, initialData) {
    let _this = this;
 
    let newObj = new DataObjectObserver(_this._owner, objURL, schemaURL, 'on', initialData);
    _this._observers[objURL] = newObj;
+
+   //add listener for objURL
+   _this._bus.addListener(objURL, (msg) => {
+     console.log('Syncher-' + objURL + '-RCV: ', msg);
+     newObj._changeObject(msg);
+   });
 
    return newObj;
  }
