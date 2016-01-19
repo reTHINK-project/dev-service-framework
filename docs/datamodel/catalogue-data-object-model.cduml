@@ -38,12 +38,12 @@ package CatalogueDataObject <<Rect>> {
 
 	CatalogueDataObject -right-> SourcePackage
 	CatalogueDataObject -left-> CatalogueObjectType
-	CatalogueDataObject -down-> DataObjectSourceLanguage
+	CatalogueDataObject -up-> DataObjectSourceLanguage
 
 	HypertyDescriptor.HypertyDescriptor .up.|> CatalogueDataObject
 	ProtoStubDescriptor.ProtoStubDescriptor .up.|> CatalogueDataObject
 	HypertyRuntimeDescriptor.HypertyRuntimeDescriptor .up.|> CatalogueDataObject
-	PolicyEnforcerDescriptor.PolicyEnforcerDescriptor .up.|> CatalogueDataObject
+	HypertyInterceptorDescriptor.HypertyInterceptorDescriptor .up.|> CatalogueDataObject
 	DataObjectSchema.DataObjectSchema .up.|> CatalogueDataObject
 }
 

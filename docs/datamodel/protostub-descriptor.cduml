@@ -9,7 +9,6 @@ package ProtoStubDescriptor <<Rect>> {
 	}
 
 	class ProtostubConfiguration {
-	domain : String
 	}
 
 	ProtoStubDescriptor .up.|> CatalogueDataObject.CatalogueDataObject
