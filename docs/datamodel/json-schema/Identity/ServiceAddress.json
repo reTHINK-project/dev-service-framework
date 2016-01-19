@@ -1,0 +1,20 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "ServiceAddress",
+	"type": "object",
+	"required": ["address", "serviceType"],
+	"additionalProperties": false,
+	"properties": {
+		"address": {
+			"$ref": "../URL/URL.json"
+		}
+		,
+		"serviceType": {
+			"$ref": "../Identity/ServiceType.json"
+		}
+		,
+		"identityInv": {
+			"$ref": "../Identity/Identity.json"
+		}
+	}
+}

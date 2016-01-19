@@ -1,0 +1,16 @@
+@startuml "Protostub-Instance-Data-Object-Model.png"
+
+package ProtoStubInstance <<Rect>> {
+
+	class ProtoStubInstance {
+		runtime : HypertyRuntimeInstance.HypertyRuntimeInstance
+	}
+
+	ProtoStubInstance .up.|> RegistryDataObject.RegistryDataObject
+
+	ProtoStubInstance ..> ProtoStubDescriptor.ProtoStubDescriptor : instance of
+	ProtoStubInstance ..> HypertyRuntimeInstance.HypertyRuntimeInstance : executing at
+
+}
+
+@enduml

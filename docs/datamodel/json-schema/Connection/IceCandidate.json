@@ -1,0 +1,25 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "IceCandidate",
+	"type": "object",
+	"required": ["candidate", "sdpMLineIndex", "sdpMid"],
+	"additionalProperties": false,
+	"properties": {
+		"candidate": {
+			"type": "string"
+		},
+		"sdpMLineIndex": {
+			"type": "integer"
+		},
+		"sdpMid": {
+			"type": "string"
+		}
+		,
+		"localIceCandidatesInv": {
+			"$ref": "../Connection/LocalIceCandidates.json"
+		},
+		"remoteIceCandidatesInv": {
+			"$ref": "../Connection/RemoteIceCandidates.json"
+		}
+	}
+}

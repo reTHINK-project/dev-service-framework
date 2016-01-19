@@ -1,0 +1,22 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "HypertyDataObjectInstance",
+	"type": "object",
+	"required": ["owner", "hypertyInstance", "dataObjectSchema"],
+	"additionalProperties": false,
+	"allOf": [
+		{"$ref": "../RegistryDataObject/RegistryDataObject.json"}
+	],
+	"properties": {
+		"owner": {
+			"$ref": "../HypertyInstance/HypertyInstance.json"
+		}
+		,
+		"hypertyInstance": {
+			"$ref": "../HypertyInstance/HypertyInstance.json"
+		},
+		"dataObjectSchema": {
+			"$ref": "../DataObjectSchema/DataObjectSchema.json"
+		}
+	}
+}

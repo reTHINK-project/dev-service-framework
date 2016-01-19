@@ -1,0 +1,32 @@
+@startuml "Registry-Data-Object.png"
+
+package RegistryDataObject <<Rect>> {
+
+	class RegistryDataObject {
+		id : string
+		url : URL.URL
+		descriptor : URL.HypertyCatalogueURL
+		startingTime : RethinkType.Date
+		lastModified : RethinkType.Date
+		status : RegistryDataObjectStatus
+		stubs : URL.HypertyCatalogueURL
+		stubsConfiguration : ConfigurationDataList
+	}
+
+	enum RegistryDataObjectStatus {
+		CREATED
+		LIVE
+		DISCONNECTED
+		DEAD
+	}
+
+	RegistryDataObject .up.> RegistryDataObjectStatus
+
+	HypertyInstance.HypertyInstance .up.|> RegistryDataObject
+	HypertyRuntimeInstance.HypertyRuntimeInstance .up.|> RegistryDataObject
+	ProtoStubInstance.ProtoStubInstance .up.|> RegistryDataObject
+	HypertyDataObjectInstance.HypertyDataObjectInstance .up.|> RegistryDataObject
+
+}
+
+@enduml

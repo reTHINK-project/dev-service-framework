@@ -1,0 +1,21 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "RuntimeConstraintList",
+	"type": "object",
+	"additionalProperties": false,
+	"allOf": [
+		{"$ref": "../RethinkType/List.json"}
+	],
+	"properties": {
+		"runtimeConstraintArray": {
+			"type": "array",
+			"items": {
+				"$ref": "../ProtoStubDescriptor/RuntimeConstraint.json"
+			}
+		}
+		,
+		"protoStubDescriptorInv": {
+			"$ref": "../ProtoStubDescriptor/ProtoStubDescriptor.json"
+		}
+	}
+}

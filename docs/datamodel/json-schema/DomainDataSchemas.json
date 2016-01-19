@@ -1,0 +1,30 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "DomainDataSchemas",
+	"type": "object",
+	"required": ["hypertyDescriptorSchema", "hypertyInstanceSchema", "hypertyRuntimeSchema", "addressSchema", "messageSchema", "userHypertyAccountSchema", "userIdentitySchema"],
+	"additionalProperties": false,
+	"properties": {
+		"hypertyDescriptorSchema": {
+			"$ref": "../URL/URL.json"
+		},
+		"hypertyInstanceSchema": {
+			"$ref": "../URL/URL.json"
+		},
+		"hypertyRuntimeSchema": {
+			"$ref": "../URL/URL.json"
+		},
+		"addressSchema": {
+			"$ref": "../URL/URL.json"
+		},
+		"messageSchema": {
+			"$ref": "../URL/URL.json"
+		},
+		"userHypertyAccountSchema": {
+			"$ref": "../URL/URL.json"
+		},
+		"userIdentitySchema": {
+			"$ref": "../URL/URL.json"
+		}
+	}
+}

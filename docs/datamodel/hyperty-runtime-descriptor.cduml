@@ -1,0 +1,73 @@
+@startuml "Hyperty-Runtime-Descriptor-Data-Object-Model.png"
+
+package HypertyRuntimeDescriptor <<Rect>> {
+
+	class HypertyRuntimeDescriptor {
+		type : RuntimeType
+		hypertyCapabilities : RuntimeHypertyCapabilityList
+		protocolCapabilities : RuntimeProtocolCapabilityList
+	}
+
+	class RuntimeType {
+		browser
+		standalone
+		server
+		gateway
+	}
+
+	class RuntimeHypertyCapabilityType {
+		MIC
+		CAMERA
+		SENSOR
+		WEBRTC
+		ORTC
+	}
+
+	class RuntimeProtocolCapabilityType {
+		HTTP
+		HTTPS
+		WS
+		WSS
+		COAP
+		DataChannel
+	}
+
+	class RuntimeHypertyCapabilityList {
+	}
+
+	class RuntimeProtocolCapabilityList {
+	}
+
+	class RuntimeHypertyCapability {
+		type : RuntimeHypertyCapabilityType
+	}
+
+	class RuntimeProtocolCapability {
+		type : RuntimeProtocolCapabilityType
+	}
+
+	RuntimeHypertyCapability ..> RuntimeHypertyCapabilityType
+	RuntimeProtocolCapability ..> RuntimeProtocolCapabilityType
+
+	HypertyRuntimeDescriptor ..> RuntimeType
+
+	HypertyRuntimeDescriptor *.. "1" RuntimeHypertyCapabilityList
+
+	HypertyRuntimeDescriptor *.. "1" RuntimeProtocolCapabilityList
+
+	HypertyRuntimeDescriptor .up.|> CatalogueDataObject.CatalogueDataObject
+
+	RuntimeHypertyCapabilityList *.. RuntimeHypertyCapability
+
+	RuntimeProtocolCapabilityList *.. RuntimeProtocolCapability
+
+	RuntimeHypertyCapabilityList .down.|> RethinkType.List
+
+	RuntimeProtocolCapabilityList .down.|> RethinkType.List
+	
+	RuntimeHypertyCapability .down.|> RethinkType.ListElement
+
+	RuntimeProtocolCapability .down.|> RethinkType.ListElement
+}
+
+@enduml

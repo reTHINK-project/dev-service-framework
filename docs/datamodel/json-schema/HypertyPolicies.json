@@ -1,0 +1,18 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "HypertyPolicies",
+	"type": "object",
+	"required": ["management", "aaa", "qos"],
+	"additionalProperties": false,
+	"properties": {
+		"management": {
+			"type": "null"
+		},
+		"aaa": {
+			"type": "null"
+		},
+		"qos": {
+			"type": "null"
+		}
+	}
+}

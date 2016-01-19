@@ -1,0 +1,14 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "ConfigurationData",
+	"type": "object",
+	"additionalProperties": false,
+	"allOf": [
+		{"$ref": "../RethinkType/ListElement.json"}
+	],
+	"properties": {
+		"configurationDataListInv": {
+			"$ref": "../PolicyEnforcerDescriptor/ConfigurationDataList.json"
+		}
+	}
+}

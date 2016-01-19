@@ -1,0 +1,21 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "RuntimeHypertyCapabilityList",
+	"type": "object",
+	"additionalProperties": false,
+	"allOf": [
+		{"$ref": "../RethinkType/List.json"}
+	],
+	"properties": {
+		"runtimeHypertyCapabilityArray": {
+			"type": "array",
+			"items": {
+				"$ref": "../HypertyRuntimeDescriptor/RuntimeHypertyCapability.json"
+			}
+		}
+		,
+		"hypertyRuntimeDescriptorInv": {
+			"$ref": "../HypertyRuntimeDescriptor/HypertyRuntimeDescriptor.json"
+		}
+	}
+}

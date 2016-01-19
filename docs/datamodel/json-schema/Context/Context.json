@@ -1,0 +1,43 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "Context",
+	"type": "object",
+	"required": ["id", "type", "value", "contextValueListArray", "contextType", "contextUnit"],
+	"additionalProperties": false,
+	"properties": {
+		"id": {
+			"type": "string"
+		},
+		"type": {
+			"$ref": "../Context/ContextType.json"
+		},
+		"description": {
+			"type": "string"
+		},
+		"time": {
+			"$ref": "../RethinkType/Date.json"
+		},
+		"units": {
+			"$ref": "../Context/ContextUnit.json"
+		},
+		"version": {
+			"type": "integer"
+		},
+		"value": {
+			"$ref": "../Context/ContextValueList.json"
+		},
+		"tag": {
+			"type": "string"
+		}
+		,
+		"contextValueListArray": {
+			"$ref": "../Context/ContextValueList.json"
+		},
+		"contextType": {
+			"$ref": "../Context/ContextType.json"
+		},
+		"contextUnit": {
+			"$ref": "../Context/ContextUnit.json"
+		}
+	}
+}

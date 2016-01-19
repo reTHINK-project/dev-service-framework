@@ -1,0 +1,15 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "IdentityDataObjectSchema",
+	"type": "object",
+	"required": ["identity"],
+	"additionalProperties": false,
+	"allOf": [
+		{"$ref": "../DataObjectSchema/HypertyDataObjectSchema.json"}
+	],
+	"properties": {
+		"identity": {
+			"$ref": "../Identity/Identity.json"
+		}
+	}
+}

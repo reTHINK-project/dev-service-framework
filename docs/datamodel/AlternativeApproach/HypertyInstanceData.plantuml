@@ -1,0 +1,78 @@
+@startuml
+GenericHypertyInstanceData <|-- CommunicationHypertyInstanceData
+GenericHypertyInstanceData <|-- IdentityHypertyInstanceData
+GenericHypertyInstanceData <|-- ContextHypertyInstanceData
+class GenericHypertyInstanceData {
+HypertyId 
+Administrative domain 
+Type : Communication | Identity | Context
+Identity Identifier 
+User agent 
+DeviceType/DeviceModel 
+domainURLs 
+HypertyInstanceAddress 
+Instantiation Time 
+LastModified
+}
+
+class CommunicationHypertyInstanceData {
+Communication Type
+Presence status
+Connexion Status 
+}
+
+class CommunicationHypertyInstanceData <|-- StreamCommunication
+class CommunicationHypertyInstanceData <|-- MessageCommunication
+class CommunicationHypertyInstanceData "1" *-- "0..1" class CommunicationParameters
+class StreamCommunication "1" *-- "1" class ConnexionParameters 
+class StreamCommunication "1" *-- "1" class RuntimeResourcesDescription
+class StreamCommunication "1" *-- "1" class ResourcesUsed
+
+class MessageCommunication {
+Type : P2P , viaProxy
+Message Format
+Proxy
+} 
+
+class CommunicationParameters {
+Communication Identifier
+Host
+Owner
+Subject
+Participants
+Status
+Starting time
+Duration
+LastModified
+Quality 
+}
+
+class ConnexionParameters {
+ICE candidates 
+SDP 
+QoS  
+}
+
+class RuntimeResourcesDescription {
+Micro
+Camera
+Sensors
+}
+
+class ResourcesUsed {
+Resource type : Chat, Voice, Video, Screen, File, MIDI, etc 
+Direction : in, out, inout
+}
+
+
+class IdentityHypertyInstanceData {
+IdP
+Credentials 
+Authentication schema
+}
+
+class ContextHypertyInstanceData {
+Data
+}
+ 
+@enduml

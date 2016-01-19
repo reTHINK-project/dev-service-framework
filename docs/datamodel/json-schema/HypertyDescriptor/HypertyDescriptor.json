@@ -1,0 +1,46 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "HypertyDescriptor",
+	"type": "object",
+	"required": ["dataObjects", "type", "messageSchema", "constraints", "hypertyType"],
+	"additionalProperties": false,
+	"allOf": [
+		{"$ref": "../CatalogueDataObject/CatalogueDataObject.json"}
+	],
+	"properties": {
+		"dataObjects": {
+			"$ref": "../URL/HypertyCatalogueURLList.json"
+		},
+		"type": {
+			"$ref": "../HypertyDescriptor/HypertyType.json"
+		},
+		"messageSchema": {
+			"$ref": "../URL/HypertyCatalogueURL.json"
+		},
+		"configuration": {
+			"$ref": "../HypertyDescriptor/ConfigurationDataList.json"
+		},
+		"constraints": {
+			"$ref": "../HypertyDescriptor/RuntimeConstraintList.json"
+		},
+		"policies": {
+			"$ref": "../URL/HypertyCatalogueURL.json"
+		}
+		,
+		"hypertyType": {
+			"$ref": "../HypertyDescriptor/HypertyType.json"
+		},
+		"runtimeConstraintListArray": {
+			"$ref": "../HypertyDescriptor/RuntimeConstraintList.json"
+		},
+		"configurationDataListArray": {
+			"$ref": "../HypertyDescriptor/ConfigurationDataList.json"
+		},
+		"hypertyCatalogueURLListArray": {
+			"type": "array",
+			"items": {
+				"$ref": "../URL/HypertyCatalogueURLList.json"
+			}
+		}
+	}
+}

@@ -1,0 +1,24 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "ServiceType",
+	"type": "object",
+	"required": ["E164_TELEPHONY", "VOIP_SIP", "EMAIL", "W3C_PUSH", "TWITTER"],
+	"additionalProperties": false,
+	"properties": {
+		"E164_TELEPHONY": {
+			"type": "null"
+		},
+		"VOIP_SIP": {
+			"type": "null"
+		},
+		"EMAIL": {
+			"type": "null"
+		},
+		"W3C_PUSH": {
+			"type": "null"
+		},
+		"TWITTER": {
+			"type": "null"
+		}
+	}
+}

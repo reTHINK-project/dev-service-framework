@@ -1,0 +1,54 @@
+@startuml "Hyperty-Descriptor-Data-Object-Model.png"
+
+package HypertyDescriptor <<Rect>> {
+
+	class HypertyType {
+		COMMUNICATOR
+		IDENTITY
+		CONTEXT
+	}
+
+	class HypertyDescriptor {
+		dataObjects : URL.HypertyCatalogueURLList
+		type : HypertyType
+		messageSchema : URL.HypertyCatalogueURL
+		configuration ?: ConfigurationDataList
+		constraints : RuntimeConstraintList
+		policies ?: URL.HypertyCatalogueURL
+	}
+
+	class ConfigurationDataList {
+	}
+
+	class ConfigurationData {
+	}
+
+
+	class RuntimeConstraintList {
+	}
+
+	class RuntimeConstraint {
+	constraint : HypertyRuntimeDescriptor.RuntimeHypertyCapabilityType
+	}
+
+	HypertyDescriptor .up.|> CatalogueDataObject.CatalogueDataObject
+
+	HypertyDescriptor .. HypertyType
+	HypertyDescriptor *.. "0..1" RuntimeConstraintList
+	HypertyDescriptor *.. "0..1" ConfigurationDataList
+	HypertyDescriptor *..> URL.HypertyCatalogueURLList : list of URLs of data schemas handled by the Hyperty
+
+	RuntimeConstraint ..> HypertyRuntimeDescriptor.RuntimeHypertyCapabilityType
+
+	RuntimeConstraintList *.. RuntimeConstraint
+	ConfigurationDataList *.. ConfigurationData
+
+	RuntimeConstraintList .down.|> RethinkType.List
+	ConfigurationDataList .down.|> RethinkType.List
+
+	RuntimeConstraint .down.|> RethinkType.ListElement
+	ConfigurationData .down.|> RethinkType.ListElement
+
+}
+
+@enduml

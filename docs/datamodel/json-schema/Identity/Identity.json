@@ -1,0 +1,57 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "Identity",
+	"type": "object",
+	"required": ["guid", "identifiers", "userHypertyAccount", "identityType", "authenticationDataArray", "userProfileArray"],
+	"additionalProperties": false,
+	"properties": {
+		"guid": {
+			"$ref": "../URL/UserUUIDURL.json"
+		},
+		"identifiers": {
+			"$ref": "../URL/UserURL.json"
+		}
+		,
+		"userHypertyAccount": {
+			"$ref": "../UserHypertyAccount/UserHypertyAccount.json"
+		},
+		"identityType": {
+			"enum": [
+				"HUMAN",
+				"ORGANISATION",
+				"PHYSICAL_SPACE",
+				"PHYSICAL_OBJECT"
+			]
+		},
+		"authenticationDataArray": {
+			"type": "array",
+			"items": {
+				"$ref": "../Identity/AuthenticationData.json"
+			}
+		},
+		"authorisationDataArray": {
+			"type": "array",
+			"items": {
+				"$ref": "../Identity/AuthorisationData.json"
+			}
+		},
+		"userProfileArray": {
+			"type": "array",
+			"items": {
+				"$ref": "../Identity/UserProfile.json"
+			}
+		},
+		"serviceAddressArray": {
+			"type": "array",
+			"items": {
+				"$ref": "../Identity/ServiceAddress.json"
+			}
+		},
+		"idAssertionArray": {
+			"type": "array",
+			"items": {
+				"$ref": "../Identity/IdAssertion.json"
+			}
+		}
+	}
+}

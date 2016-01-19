@@ -1,0 +1,23 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "RuntimeProtocolCapability",
+	"type": "object",
+	"required": ["type", "runtimeProtocolCapabilityType"],
+	"additionalProperties": false,
+	"allOf": [
+		{"$ref": "../RethinkType/ListElement.json"}
+	],
+	"properties": {
+		"type": {
+			"$ref": "../HypertyRuntimeDescriptor/RuntimeProtocolCapabilityType.json"
+		}
+		,
+		"runtimeProtocolCapabilityType": {
+			"$ref": "../HypertyRuntimeDescriptor/RuntimeProtocolCapabilityType.json"
+		}
+		,
+		"runtimeProtocolCapabilityListInv": {
+			"$ref": "../HypertyRuntimeDescriptor/RuntimeProtocolCapabilityList.json"
+		}
+	}
+}

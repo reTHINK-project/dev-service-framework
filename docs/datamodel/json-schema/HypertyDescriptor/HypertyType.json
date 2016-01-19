@@ -1,0 +1,22 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "HypertyType",
+	"type": "object",
+	"required": ["COMMUNICATOR", "IDENTITY", "CONTEXT"],
+	"additionalProperties": false,
+	"properties": {
+		"COMMUNICATOR": {
+			"type": "null"
+		},
+		"IDENTITY": {
+			"type": "null"
+		},
+		"CONTEXT": {
+			"type": "null"
+		}
+		,
+		"hypertyDescriptorInv": {
+			"$ref": "../HypertyDescriptor/HypertyDescriptor.json"
+		}
+	}
+}

@@ -1,0 +1,31 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "HypertyRuntimeDescriptor",
+	"type": "object",
+	"required": ["type", "hypertyCapabilities", "protocolCapabilities", "runtimeType", "runtimeHypertyCapabilityListArray", "runtimeProtocolCapabilityListArray"],
+	"additionalProperties": false,
+	"allOf": [
+		{"$ref": "../CatalogueDataObject/CatalogueDataObject.json"}
+	],
+	"properties": {
+		"type": {
+			"$ref": "../HypertyRuntimeDescriptor/RuntimeType.json"
+		},
+		"hypertyCapabilities": {
+			"$ref": "../HypertyRuntimeDescriptor/RuntimeHypertyCapabilityList.json"
+		},
+		"protocolCapabilities": {
+			"$ref": "../HypertyRuntimeDescriptor/RuntimeProtocolCapabilityList.json"
+		}
+		,
+		"runtimeType": {
+			"$ref": "../HypertyRuntimeDescriptor/RuntimeType.json"
+		},
+		"runtimeHypertyCapabilityListArray": {
+			"$ref": "../HypertyRuntimeDescriptor/RuntimeHypertyCapabilityList.json"
+		},
+		"runtimeProtocolCapabilityListArray": {
+			"$ref": "../HypertyRuntimeDescriptor/RuntimeProtocolCapabilityList.json"
+		}
+	}
+}

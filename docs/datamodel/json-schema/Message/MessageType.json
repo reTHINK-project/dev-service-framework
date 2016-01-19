@@ -1,0 +1,30 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "MessageType",
+	"type": "object",
+	"required": ["CREATE", "UPDATE", "DELETE", "READ", "SUBSCRIBE", "UNSUBSCRIBE", "RESPONSE"],
+	"additionalProperties": false,
+	"properties": {
+		"CREATE": {
+			"type": "null"
+		},
+		"UPDATE": {
+			"type": "null"
+		},
+		"DELETE": {
+			"type": "null"
+		},
+		"READ": {
+			"type": "null"
+		},
+		"SUBSCRIBE": {
+			"type": "null"
+		},
+		"UNSUBSCRIBE": {
+			"type": "null"
+		},
+		"RESPONSE": {
+			"type": "null"
+		}
+	}
+}

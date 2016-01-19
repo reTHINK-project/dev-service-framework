@@ -1,0 +1,29 @@
+@startuml "Hyperty-Data-Object-Instance-Model.png"
+
+package HypertyDataObjectInstance <<Rect>> {
+
+	class HypertyDataObjectInstance {
+		owner : HypertyInstance.HypertyInstance
+		}
+
+	class HypertyCommunicationDataObjectInstance {
+		url : URL.CommunicationURL
+		}
+
+	class HypertyContextDataObjectInstance {
+		url : URL.ContextURL
+		}
+
+	HypertyDataObjectInstance .up.|> RegistryDataObject.RegistryDataObject
+
+	HypertyContextDataObjectInstance .up.|> HypertyDataObjectInstance
+
+	HypertyCommunicationDataObjectInstance .up.|> HypertyDataObjectInstance
+
+	HypertyDataObjectInstance ..> HypertyInstance.HypertyInstance : owned by
+
+	HypertyDataObjectInstance ..> DataObjectSchema.DataObjectSchema : described by
+
+}
+
+@enduml

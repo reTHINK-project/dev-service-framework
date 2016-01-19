@@ -1,0 +1,21 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "SourcePackage",
+	"type": "object",
+	"required": ["sourceCodeClassname", "sourceCode"],
+	"additionalProperties": false,
+	"properties": {
+		"encoding": {
+			"type": "string"
+		},
+		"sourceCodeClassname": {
+			"type": "string"
+		},
+		"sourceCode": {
+			"type": "string"
+		},
+		"signature": {
+			"type": "string"
+		}
+	}
+}

@@ -1,0 +1,40 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "HypertyInstance",
+	"type": "object",
+	"required": ["url", "user", "user_uuid", "runtime", "presence", "hypertyDescriptor", "identity", "hypertyRuntimeInstance", "presenceStatus"],
+	"additionalProperties": false,
+	"allOf": [
+		{"$ref": "../RegistryDataObject/RegistryDataObject.json"}
+	],
+	"properties": {
+		"url": {
+			"$ref": "../URL/HypertyURL.json"
+		},
+		"user": {
+			"$ref": "../URL/UserURL.json"
+		},
+		"user_uuid": {
+			"$ref": "../URL/UserUUIDURL.json"
+		},
+		"runtime": {
+			"$ref": "../HypertyRuntimeInstance/HypertyRuntimeInstance.json"
+		},
+		"presence": {
+			"$ref": "../HypertyInstance/PresenceStatus.json"
+		}
+		,
+		"hypertyDescriptor": {
+			"$ref": "../HypertyDescriptor/HypertyDescriptor.json"
+		},
+		"identity": {
+			"$ref": "../Identity/Identity.json"
+		},
+		"hypertyRuntimeInstance": {
+			"$ref": "../HypertyRuntimeInstance/HypertyRuntimeInstance.json"
+		},
+		"presenceStatus": {
+			"$ref": "../HypertyInstance/PresenceStatus.json"
+		}
+	}
+}

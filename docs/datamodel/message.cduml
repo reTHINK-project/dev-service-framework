@@ -1,0 +1,94 @@
+@startuml "Message-Data-Model.png"
+
+package Message <<Rect>> {
+
+	class Message {
+		id : string
+		from : URL.URL
+		to ?: URL.URLList
+		type : MessageType
+		contextId
+		body : MessageBody
+		signature ?
+	}
+
+	class MessageBody {
+		resource ?: URL.URL
+		schema ?: URL.HypertyCatalogueURL
+		idToken ?: Identity.JWT
+		accessToken ?: Identity.JWT
+		assertedIdentity ?: Identity.Identity
+	}
+
+	class CreateMessageBody {
+		policy ?: URL.URL
+		value : string
+	}
+
+	class UpdateMessageBody {
+		attribute ?: string
+		value : string
+	}
+
+	class ResponseCode {
+	}
+
+	class ResponseMessageBody {
+		code : ResponseCode
+		description?: string
+		value ?: string
+	}
+	note bottom : to be compliant with RFC7231
+
+	class DeleteMessageBody {
+		attribute? : string
+	}
+
+	class ReadMessageBody {
+		attribute ?: string
+		criteriaSyntax ?: string
+		criteria ?: string
+	}
+
+	class SubscribeMessageBody {
+		resource ?: URL.URL
+		schema ?: URL.HypertyCatalogueURL
+	}
+
+	class UnsubscribeMessageBody {
+		resource ?: URL.URL
+	}
+
+	class FowardMessageBody {
+		message ?: Message.Message
+	}
+
+
+	class MessageType {
+	  CREATE
+	  UPDATE
+	  DELETE
+	  READ
+	  SUBSCRIBE
+	  UNSUBSCRIBE
+	  RESPONSE
+		FORWARD
+	}
+
+	Message --> MessageType
+	Message --> URL.URL
+	Message *-- "1" MessageBody
+
+	CreateMessageBody -up-|> MessageBody
+	UpdateMessageBody -up-|> MessageBody
+	ResponseMessageBody -up-|> MessageBody
+	DeleteMessageBody -up-|> MessageBody
+	ReadMessageBody -down-|> MessageBody
+	SubscribeMessageBody -down-|> MessageBody
+	UnsubscribeMessageBody -down-|> MessageBody
+	FowardMessageBody -down-|> MessageBody
+
+	ResponseMessageBody --> ResponseCode
+}
+
+@enduml

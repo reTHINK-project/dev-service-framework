@@ -1,0 +1,17 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "UserUUIDURLList",
+	"type": "object",
+	"additionalProperties": false,
+	"allOf": [
+		{"$ref": "../URL/URLList.json"}
+	],
+	"properties": {
+		"userUUIDURLArray": {
+			"type": "array",
+			"items": {
+				"$ref": "../URL/UserUUIDURL.json"
+			}
+		}
+	}
+}

@@ -1,0 +1,14 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "IDToken",
+	"type": "object",
+	"additionalProperties": false,
+	"allOf": [
+		{"$ref": "../Identity/JWT.json"}
+	],
+	"properties": {
+		"authenticationDataInv": {
+			"$ref": "../Identity/AuthenticationData.json"
+		}
+	}
+}

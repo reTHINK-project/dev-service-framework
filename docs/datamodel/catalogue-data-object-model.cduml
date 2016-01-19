@@ -1,0 +1,50 @@
+@startuml "Catalogue-Data-Object.png"
+
+package CatalogueDataObject <<Rect>> {
+
+	class CatalogueDataObject {
+		guid : string
+		type : CatalogueObjectType
+		objectName : string
+		description : string
+		language : DataObjectSourceLanguage
+		sourcePackageURL : URL.URL
+		sourcePackage ?: SourcePackage
+		signature ?: string
+	}
+
+	class CatalogueObjectType {
+	HYPERTY
+	PROTOSTUB
+	HYPERTY_RUNTIME
+	HYPERTY_INTERCEPTOR
+	HYPERTY_DATA_OBJECT
+	}
+
+	class DataObjectSourceLanguage {
+	JAVASCRIPT_ECMA6
+	JAVASCRIPT_ECMA5
+	JSON_SCHEMA_V4
+	PYTHON
+	TYPE_SCRIPT
+	}
+
+	class SourcePackage {
+	encoding ?: string
+	sourceCodeClassname : string
+	sourceCode : string
+	signature ?: string
+	}
+
+	CatalogueDataObject -right-> SourcePackage
+	CatalogueDataObject -left-> CatalogueObjectType
+	CatalogueDataObject -down-> DataObjectSourceLanguage
+
+	HypertyDescriptor.HypertyDescriptor .up.|> CatalogueDataObject
+	ProtoStubDescriptor.ProtoStubDescriptor .up.|> CatalogueDataObject
+	HypertyRuntimeDescriptor.HypertyRuntimeDescriptor .up.|> CatalogueDataObject
+	PolicyEnforcerDescriptor.PolicyEnforcerDescriptor .up.|> CatalogueDataObject
+	DataObjectSchema.DataObjectSchema .up.|> CatalogueDataObject
+}
+
+@enduml

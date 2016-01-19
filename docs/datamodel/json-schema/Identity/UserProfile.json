@@ -1,0 +1,22 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "UserProfile",
+	"type": "object",
+	"required": ["username", "cn", "avatar"],
+	"additionalProperties": false,
+	"properties": {
+		"username": {
+			"type": "string"
+		},
+		"cn": {
+			"type": "string"
+		},
+		"avatar": {
+			"$ref": "../URL/URL.json"
+		}
+		,
+		"identityInv": {
+			"$ref": "../Identity/Identity.json"
+		}
+	}
+}

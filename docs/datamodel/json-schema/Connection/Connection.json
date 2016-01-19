@@ -1,0 +1,43 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "Connection",
+	"type": "object",
+	"required": ["status", "owner", "localIceCandidatesArray", "localConnectionDescriptionArray", "localRtpTransportParametersArray", "remoteIceCandidatesArray", "remoteConnectionDescriptionArray", "remoteRtpTransportParametersArray"],
+	"additionalProperties": false,
+	"properties": {
+		"status": {
+			"type": "null"
+		},
+		"owner": {
+			"$ref": "../Communication/Participant.json"
+		}
+		,
+		"localIceCandidatesArray": {
+			"$ref": "../Connection/LocalIceCandidates.json"
+		},
+		"localConnectionDescriptionArray": {
+			"$ref": "../Connection/LocalConnectionDescription.json"
+		},
+		"localRtpTransportParametersArray": {
+			"$ref": "../Connection/LocalRtpTransportParameters.json"
+		},
+		"remoteIceCandidatesArray": {
+			"type": "array",
+			"items": {
+				"$ref": "../Connection/RemoteIceCandidates.json"
+			}
+		},
+		"remoteConnectionDescriptionArray": {
+			"type": "array",
+			"items": {
+				"$ref": "../Connection/RemoteConnectionDescription.json"
+			}
+		},
+		"remoteRtpTransportParametersArray": {
+			"type": "array",
+			"items": {
+				"$ref": "../Connection/RemoteRtpTransportParameters.json"
+			}
+		}
+	}
+}

@@ -1,0 +1,40 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "Message",
+	"type": "object",
+	"required": ["id", "from", "type", "contextId", "body", "messageType", "uRL", "messageBodyArray"],
+	"additionalProperties": false,
+	"properties": {
+		"id": {
+			"type": "string"
+		},
+		"from": {
+			"$ref": "../URL/URL.json"
+		},
+		"to": {
+			"$ref": "../URL/URLList.json"
+		},
+		"type": {
+			"$ref": "../Message/MessageType.json"
+		},
+		"contextId": {
+			"type": "null"
+		},
+		"body": {
+			"$ref": "../Message/MessageBody.json"
+		},
+		"signature": {
+			"type": "null"
+		}
+		,
+		"messageType": {
+			"$ref": "../Message/MessageType.json"
+		},
+		"uRL": {
+			"$ref": "../URL/URL.json"
+		},
+		"messageBodyArray": {
+			"$ref": "../Message/MessageBody.json"
+		}
+	}
+}

@@ -1,0 +1,17 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "HypertyURLList",
+	"type": "object",
+	"additionalProperties": false,
+	"allOf": [
+		{"$ref": "../URL/URLList.json"}
+	],
+	"properties": {
+		"hypertyURLArray": {
+			"type": "array",
+			"items": {
+				"$ref": "../URL/HypertyURL.json"
+			}
+		}
+	}
+}
