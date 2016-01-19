@@ -119,6 +119,17 @@ class CatalogueDataObjectFactory extends RethinkObject {
         return new DataObjectSchema(this._generateGuid(), type, objectName, description, language, sourcePackageURL);
     }
 
+    createSourcePackage(sourceCode, sourceCodeClassname) {
+        if (
+            typeof sourceCode === "undefined"
+            || typeof sourceCodeClassname === "undefined"
+        )
+            throw new Error("Invalid parameters!");
+
+        return new SourcePackage(sourceCode, sourceCodeClassname);
+
+    }
+
     _generateGuid() {
         let d = new Date().getTime();
 

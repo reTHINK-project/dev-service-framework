@@ -96,6 +96,7 @@ class Syncher {
    let objSubscriptorURL = objURL + '/subscription';
 
    //TODO: validate if subscription already exists ?
+   //TODO: remove from body hypertyURL (was added because the PolicyEngine)
    let subscribeMsg = {
      type: 'subscribe', from: _this._owner, to: objSubscriptorURL
    };
@@ -128,6 +129,7 @@ class Syncher {
    let _this = this;
 
    //TODO: process notification reponses!
+   console.log('onResponse:', msg);
  }
 
  _onForward(msg) {
@@ -142,6 +144,7 @@ class Syncher {
 
    let event = {
      type: msg.type,
+     from: msg.from,
      url: msg.body.resource,
      schema: msg.body.schema,
      value: msg.body.value,

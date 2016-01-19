@@ -32,7 +32,7 @@ gulp.task('dist', function() {
     standalone: 'service-framework', debug: false}).transform(babel);
 
   function rebundle() {
-    bundler.bundle()
+    return bundler.bundle()
       .on('error', function(err) {
         console.error(err);
         this.emit('end');
@@ -45,7 +45,7 @@ gulp.task('dist', function() {
       .pipe(gulp.dest('./dist'));
   }
 
-  rebundle();
+  return rebundle();
 
 });
 
@@ -57,7 +57,7 @@ gulp.task('build', function() {
   }).transform(babel);
 
   function rebundle() {
-    bundler.bundle()
+    return bundler.bundle()
       .on('error', function(err) {
         console.error(err);
         this.emit('end');
@@ -66,18 +66,125 @@ gulp.task('build', function() {
       .pipe(gulp.dest('./dist'));
   }
 
-  rebundle();
+  return rebundle();
 
 });
+
+/**
+ * Compile on specific file from ES6 to ES5
+ * @param  {string} 'compile' task name
+ *
+ * How to use: gulp compile --file 'path/to/file';
+ */
+gulp.task('compile', function() {
+
+  var filename = argv.file;
+  var path;
+
+  if (!filename) {
+    this.emit('end');
+  } else {
+    var splitIndex = filename.lastIndexOf('/') + 1;
+    path = filename.substr(0, splitIndex);
+    filename = filename.substr(splitIndex).replace('.js', '');
+  }
+
+  console.log('Converting ' + filename + ' on ' + path + ' to ES5');
+
+  var bundler = browserify(path + filename, {
+    standalone: 'activate',
+    debug: false
+  }).transform(babel);
+
+  function rebundle() {
+    return bundler.bundle()
+      .on('error', function(err) {
+        console.error(err);
+        this.emit('end');
+      })
+      .pipe(source(filename + '.ES5.js'))
+      .pipe(buffer())
+      .pipe(uglify())
+      .pipe(gulp.dest(path));
+  }
+
+  return rebundle();
+});
+
+var through = require('through2');
+var Base64 = require('js-base64').Base64;
+var fs = require('fs');
+var vinylPaths = require('vinyl-paths');
+
+function encode(filename, descriptor) {
+
+  var sourcePackage = fs.readFileSync('resources/descriptors/' + filename + '-sourcePackageURL.json', 'utf8');
+  var json = JSON.parse(sourcePackage);
+
+  return through.obj(function(file, enc, cb) {
+
+    if (file.isNull()) {
+      return cb(null, file);
+    }
+
+    if (file.isStream()) {
+      return cb(new Error('Streaming not supported'));
+    }
+
+    var descriptorObject = fs.readFileSync('resources/descriptors/' + descriptor + '.json', 'utf8');
+
+    var encoded = Base64.encode(file.contents);
+    json.sourceCode = encoded;
+    json.sourceCodeClassName = filename;
+    json.encoding = 'Base64';
+    json.signature = '';
+
+    sourcePackage = new Buffer(JSON.stringify(json, null));
+    cb(null, sourcePackage);
+
+  });
+
+}
 
 gulp.task('watch', function() {
-  var watcher = gulp.watch('src/**/*.js', ['build']);
+
+  var watcher = gulp.watch(['resources/*Hyperty.js', 'resources/*ProtoStub.js']);
   watcher.on('change', function(event) {
+
+    if (event.type === 'deleted') return;
+
     console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+
+    var filename = event.path;
+    var splitIndex = filename.lastIndexOf('/') + 1;
+    path = filename.substr(0, splitIndex);
+    filename = filename.substr(splitIndex).replace('.js', '');
+
+    var descriptorName = 'Hyperties';
+    if (filename.indexOf('Hyperty') === -1) {
+      descriptorName = 'ProtoStubs';
+    }
+
+    var bundler = browserify({
+      entries: ['resources/' + filename + '.js'],
+      standalone: 'activate',
+      debug: false
+    }).transform(babel);
+
+    console.log(descriptorName);
+
+    bundler.bundle()
+      .pipe(source('bundle.js'))
+      .pipe(gulp.dest('resources/'))
+      .pipe(buffer())
+      .pipe(encode(filename, descriptorName))
+      .pipe(source(filename + '-sourcePackageURL.json'))
+      .pipe(gulp.dest('resources/descriptors/'));
   });
+
 });
 
-gulp.task('default', ['watch']);
+gulp.task('encode', ['watch']);
 
 /**
  * Bumping version number and tagging the repository with it.
