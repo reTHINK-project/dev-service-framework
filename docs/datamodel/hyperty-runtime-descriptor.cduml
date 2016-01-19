@@ -4,8 +4,8 @@ package HypertyRuntimeDescriptor <<Rect>> {
 
 	class HypertyRuntimeDescriptor {
 		type : RuntimeType
-		hypertyCapabilities : RuntimeHypertyCapabilityList
-		protocolCapabilities : RuntimeProtocolCapabilityList
+		hypertyCapabilities : RuntimeHypertyCapabilities
+		protocolCapabilities : RuntimeProtocolCapabilities
 	}
 
 	class RuntimeType {
@@ -15,59 +15,33 @@ package HypertyRuntimeDescriptor <<Rect>> {
 		gateway
 	}
 
-	class RuntimeHypertyCapabilityType {
-		MIC
-		CAMERA
-		SENSOR
-		WEBRTC
-		ORTC
+	class RuntimeHypertyCapabilities {
+		mic ?: Boolean
+		camera ?: Boolean
+		sensor ?: Boolean
+		webrtc ?: Boolean
+		ortc ?: Boolean
 	}
 
-	class RuntimeProtocolCapabilityType {
-		HTTP
-		HTTPS
-		WS
-		WSS
-		COAP
-		DataChannel
+	class RuntimeProtocolCapabilities {
+		http ?: Boolean
+		https ?: Boolean
+		ws ?: Boolean
+		wss ?: Boolean
+		coap ?: Boolean
+		datachannel ?: Boolean
 	}
 
-	class RuntimeHypertyCapabilityList {
-	}
 
-	class RuntimeProtocolCapabilityList {
-	}
-
-	class RuntimeHypertyCapability {
-		type : RuntimeHypertyCapabilityType
-	}
-
-	class RuntimeProtocolCapability {
-		type : RuntimeProtocolCapabilityType
-	}
-
-	RuntimeHypertyCapability ..> RuntimeHypertyCapabilityType
-	RuntimeProtocolCapability ..> RuntimeProtocolCapabilityType
 
 	HypertyRuntimeDescriptor ..> RuntimeType
 
-	HypertyRuntimeDescriptor *.. "1" RuntimeHypertyCapabilityList
+	HypertyRuntimeDescriptor *.. "1" RuntimeHypertyCapabilities
 
-	HypertyRuntimeDescriptor *.. "1" RuntimeProtocolCapabilityList
+	HypertyRuntimeDescriptor *.. "1" RuntimeProtocolCapabilities
 
 	HypertyRuntimeDescriptor .up.|> CatalogueDataObject.CatalogueDataObject
 
-	RuntimeHypertyCapabilityList *.. RuntimeHypertyCapability
-
-	RuntimeProtocolCapabilityList *.. RuntimeProtocolCapability
-
-	RuntimeHypertyCapabilityList .down.|> RethinkType.List
-
-	RuntimeProtocolCapabilityList .down.|> RethinkType.List
-	
-	RuntimeHypertyCapability .down.|> RethinkType.ListElement
-
-	RuntimeProtocolCapability .down.|> RethinkType.ListElement
 }
 
 @enduml
