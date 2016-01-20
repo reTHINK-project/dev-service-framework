@@ -8,7 +8,7 @@ package Connection <<Rect>> {
 	class Connection {
 		status
 		owner : URL.UserURL
-		peers : URL.ConnectionURLList
+		peer : URL.ConnectionURL
 	}
 
   class OwnerPeer {
@@ -49,12 +49,10 @@ package Connection <<Rect>> {
 	Connection -up-|> SyncData
 	Peer -up-|> SyncData
 
-	Connection ..> URL.UserURL
-	Connection ..> URL.ConnectionURLList
 
 	Connection *--> "1" OwnerPeer
 
-	Connection ..> "1..*" Peer
+	Connection ..> "1" Peer
 
 	Peer *--> "1" IceCandidates
 	Peer *--> "1" ConnectionDescription

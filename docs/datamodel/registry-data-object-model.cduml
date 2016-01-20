@@ -21,7 +21,6 @@ package RegistryDataObject <<Rect>> {
 	}
 
 	RegistryDataObject .up.> RegistryDataObjectStatus
-	RegistryDataObject .up.> 	ProtostubDescriptor.PrototubConfiguration
 
 
 	HypertyInstance.HypertyInstance .up.|> RegistryDataObject

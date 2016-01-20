@@ -8,10 +8,7 @@ package HypertyRuntimeInstance <<Rect>> {
 	}
 
 	HypertyRuntimeInstance .up.|> RegistryDataObject.RegistryDataObject
-	
-	HypertyRuntimeInstance ..> URL.HypertyRuntimeURL
 
-	HypertyRuntimeInstance ..> URL.URLList
-}
+	}
 
 @enduml

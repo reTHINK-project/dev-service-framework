@@ -18,8 +18,8 @@ package URL <<Rect>> {
 		scheme = "user"
 	}
 
-	class UserUUIDURL {
-		scheme = "user-uuid"
+	class UserGUIDURL {
+		scheme = "user-guid"
 	}
 
 	class DomainURL {
@@ -52,11 +52,10 @@ package URL <<Rect>> {
 	}
 
 	class HypertyCatalogueURLList {
-		//???
 	}
 
-	UserURL --|> URL 
-	UserUUIDURL --|> URL
+	UserURL --|> URL
+	UserGUIDURL --|> URL
 	UserAccountURL --|> URL
 	HypertyURL -up-|> URL
 	HypertyCatalogueURL -up-|> URL
@@ -69,8 +68,9 @@ package URL <<Rect>> {
 
 	URL --|> RethinkType.ListElement
 	URL.URLList --|> RethinkType.List
-	
+
 	HypertyCatalogueURLList ..|> RethinkType.List
+	HypertyCatalogueURLList *.up.> HypertyCatalogueURL
 }
 
 @enduml
