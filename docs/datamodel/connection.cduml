@@ -49,6 +49,9 @@ package Connection <<Rect>> {
 	Connection -up-|> SyncData
 	Peer -up-|> SyncData
 
+	Connection ..> URL.UserURL
+	Connection ..> URL.ConnectionURLList
+
 	Connection *--> "1" OwnerPeer
 
 	Connection ..> "1..*" Peer

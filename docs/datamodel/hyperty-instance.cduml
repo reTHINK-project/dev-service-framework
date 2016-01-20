@@ -24,6 +24,11 @@ package HypertyInstance <<Rect>> {
 
 	HypertyInstance ..> Context
 
+	HypertyInstance .up.> URL.HypertyURL
+	HypertyInstance .up.> URL.UserURL
+	HypertyInstance .up.> URL.UserGUIDURL
+	HypertyInstance .up.> URL.ContextURL
+
 }
 
 @enduml
