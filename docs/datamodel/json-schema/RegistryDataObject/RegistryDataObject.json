@@ -2,7 +2,7 @@
 	"$schema": "http://json-schema.org/draft-04/schema#",
 	"id": "RegistryDataObject",
 	"type": "object",
-	"required": ["id", "url", "descriptor", "startingTime", "lastModified", "status", "registryDataObjectStatus"],
+	"required": ["id", "url", "descriptor", "startingTime", "lastModified", "status", "stubs", "stubsConfiguration", "registryDataObjectStatus"],
 	"additionalProperties": false,
 	"properties": {
 		"id": {
@@ -27,6 +27,12 @@
 				"DISCONNECTED",
 				"DEAD"
 			]
+		},
+		"stubs": {
+			"$ref": "../URL/HypertyCatalogueURL.json"
+		},
+		"stubsConfiguration": {
+			"$ref": "../ProtoStubDescriptor/ProtostubConfiguration.json"
 		}
 		,
 		"registryDataObjectStatus": {

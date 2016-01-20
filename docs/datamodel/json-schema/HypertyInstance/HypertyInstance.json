@@ -2,7 +2,7 @@
 	"$schema": "http://json-schema.org/draft-04/schema#",
 	"id": "HypertyInstance",
 	"type": "object",
-	"required": ["url", "user", "user_uuid", "runtime", "presence", "hypertyDescriptor", "identity", "hypertyRuntimeInstance", "presenceStatus"],
+	"required": ["url", "user", "guid", "runtime", "context", "hypertyDescriptor", "identity", "hypertyRuntimeInstance", "context"],
 	"additionalProperties": false,
 	"allOf": [
 		{"$ref": "../RegistryDataObject/RegistryDataObject.json"}
@@ -14,14 +14,14 @@
 		"user": {
 			"$ref": "../URL/UserURL.json"
 		},
-		"user_uuid": {
-			"$ref": "../URL/UserUUIDURL.json"
+		"guid": {
+			"$ref": "../URL/UserGUIDURL.json"
 		},
 		"runtime": {
 			"$ref": "../HypertyRuntimeInstance/HypertyRuntimeInstance.json"
 		},
-		"presence": {
-			"$ref": "../HypertyInstance/PresenceStatus.json"
+		"context": {
+			"$ref": "../URL/ContextURL.json"
 		}
 		,
 		"hypertyDescriptor": {
@@ -33,8 +33,8 @@
 		"hypertyRuntimeInstance": {
 			"$ref": "../HypertyRuntimeInstance/HypertyRuntimeInstance.json"
 		},
-		"presenceStatus": {
-			"$ref": "../HypertyInstance/PresenceStatus.json"
+		"context": {
+			"$ref": "../Context/Context.json"
 		}
 	}
 }

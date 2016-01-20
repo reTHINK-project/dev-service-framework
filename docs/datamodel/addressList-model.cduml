@@ -43,7 +43,7 @@ package URL <<Rect>> {
 	ContextURLList --|> URLList
 
 	UserURLList *-up- URL.UserURL 
-	UserUUIDURLList *-up- URL.UserUUIDURL
+	UserUUIDURLList *-up- URL.UserGUIDURL
 	UserAccountURLList *-up- URL.UserAccountURL
 	HypertyURLList *-down- URL.HypertyURL
 	HypertyCatalogueURLList *-down- URL.HypertyCatalogueURL

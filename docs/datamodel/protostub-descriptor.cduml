@@ -17,8 +17,6 @@ package ProtoStubDescriptor <<Rect>> {
 	ProtoStubDescriptor *.. ProtostubConfiguration
 
 	ProtoStubDescriptor *..> URL.HypertyCatalogueURL : url of the schemas describing \nmessages supported by the Protocol Stub
-
-
-		}
+}
 
 @enduml

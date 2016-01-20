@@ -1,0 +1,14 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "UnsubscribeMessageBody",
+	"type": "object",
+	"additionalProperties": false,
+	"allOf": [
+		{"$ref": "../Message/MessageBody.json"}
+	],
+	"properties": {
+		"resource": {
+			"$ref": "../URL/URL.json"
+		}
+	}
+}

@@ -65,13 +65,13 @@ package Message <<Rect>> {
 
 
 	class MessageType {
-	  CREATE
-	  UPDATE
-	  DELETE
-	  READ
-	  SUBSCRIBE
-	  UNSUBSCRIBE
-	  RESPONSE
+	  	CREATE
+	  	UPDATE
+	  	DELETE
+	  	READ
+	  	SUBSCRIBE
+	  	UNSUBSCRIBE
+	  	RESPONSE
 		FORWARD
 	}
 

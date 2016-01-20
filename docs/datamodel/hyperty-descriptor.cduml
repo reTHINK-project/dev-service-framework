@@ -29,7 +29,6 @@ package HypertyDescriptor <<Rect>> {
 	HypertyDescriptor *.. "0..1" HypertyConfiguration
 	HypertyDescriptor *..> URL.HypertyCatalogueURLList : list of URLs of data schemas handled by the Hyperty
 
-
 }
 
 @enduml

@@ -2,7 +2,7 @@
 	"$schema": "http://json-schema.org/draft-04/schema#",
 	"id": "HypertyRuntimeInstance",
 	"type": "object",
-	"required": ["url", "domains", "hypertyRuntimeURL", "uRLList"],
+	"required": ["url", "domains"],
 	"additionalProperties": false,
 	"allOf": [
 		{"$ref": "../RegistryDataObject/RegistryDataObject.json"}
@@ -12,13 +12,6 @@
 			"$ref": "../URL/HypertyRuntimeURL.json"
 		},
 		"domains": {
-			"$ref": "../URL/URLList.json"
-		}
-		,
-		"hypertyRuntimeURL": {
-			"$ref": "../URL/HypertyRuntimeURL.json"
-		},
-		"uRLList": {
 			"$ref": "../URL/URLList.json"
 		}
 	}

@@ -16,30 +16,25 @@ package HypertyRuntimeDescriptor <<Rect>> {
 	}
 
 	class RuntimeHypertyCapabilities {
-		mic ?: Boolean
-		camera ?: Boolean
-		sensor ?: Boolean
-		webrtc ?: Boolean
-		ortc ?: Boolean
+		mic ?: boolean
+		camera ?: boolean
+		sensor ?: boolean
+		webrtc ?: boolean
+		ortc ?: boolean
 	}
 
 	class RuntimeProtocolCapabilities {
-		http ?: Boolean
-		https ?: Boolean
-		ws ?: Boolean
-		wss ?: Boolean
-		coap ?: Boolean
-		datachannel ?: Boolean
+		http ?: boolean
+		https ?: boolean
+		ws ?: boolean
+		wss ?: boolean
+		coap ?: boolean
+		datachannel ?: boolean
 	}
 
-
-
 	HypertyRuntimeDescriptor ..> RuntimeType
-
 	HypertyRuntimeDescriptor *.. "1" RuntimeHypertyCapabilities
-
 	HypertyRuntimeDescriptor *.. "1" RuntimeProtocolCapabilities
-
 	HypertyRuntimeDescriptor .up.|> CatalogueDataObject.CatalogueDataObject
 
 }

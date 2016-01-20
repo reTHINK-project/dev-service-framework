@@ -22,9 +22,7 @@ package HypertyInstance <<Rect>> {
 	HypertyInstance ..> Identity.Identity : associated with
 	HypertyInstance ..> HypertyRuntimeInstance.HypertyRuntimeInstance : executing at
 
-	HypertyInstance ..> Context
-
-
+	HypertyInstance ..> Context.Context
 }
 
 @enduml

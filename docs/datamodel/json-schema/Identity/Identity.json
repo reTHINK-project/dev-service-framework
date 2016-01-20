@@ -6,7 +6,7 @@
 	"additionalProperties": false,
 	"properties": {
 		"guid": {
-			"$ref": "../URL/UserUUIDURL.json"
+			"$ref": "../URL/UserGUIDURL.json"
 		},
 		"identifiers": {
 			"$ref": "../URL/UserURL.json"

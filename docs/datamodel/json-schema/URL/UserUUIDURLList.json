@@ -7,10 +7,10 @@
 		{"$ref": "../URL/URLList.json"}
 	],
 	"properties": {
-		"userUUIDURLArray": {
+		"userGUIDURLArray": {
 			"type": "array",
 			"items": {
-				"$ref": "../URL/UserUUIDURL.json"
+				"$ref": "../URL/UserGUIDURL.json"
 			}
 		}
 	}

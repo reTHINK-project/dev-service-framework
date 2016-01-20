@@ -18,10 +18,10 @@
 			"$ref": "../URL/HypertyCatalogueURL.json"
 		},
 		"configuration": {
-			"$ref": "../HypertyDescriptor/ConfigurationDataList.json"
+			"$ref": "../HypertyDescriptor/HypertyConfiguration.json"
 		},
 		"constraints": {
-			"$ref": "../HypertyDescriptor/RuntimeConstraintList.json"
+			"$ref": "../HypertyRuntimeDescriptor/RuntimeHypertyCapabilities.json"
 		},
 		"policies": {
 			"$ref": "../URL/HypertyCatalogueURL.json"
@@ -30,11 +30,11 @@
 		"hypertyType": {
 			"$ref": "../HypertyDescriptor/HypertyType.json"
 		},
-		"runtimeConstraintListArray": {
-			"$ref": "../HypertyDescriptor/RuntimeConstraintList.json"
+		"runtimeHypertyCapabilitiesArray": {
+			"$ref": "../HypertyRuntimeDescriptor/RuntimeHypertyCapabilities.json"
 		},
-		"configurationDataListArray": {
-			"$ref": "../HypertyDescriptor/ConfigurationDataList.json"
+		"hypertyConfigurationArray": {
+			"$ref": "../HypertyDescriptor/HypertyConfiguration.json"
 		},
 		"hypertyCatalogueURLListArray": {
 			"type": "array",

@@ -10,7 +10,7 @@ package Identity <<Rect>> {
 	}
 
 	class Identity {
-		guid : URL.UserUUIDURL
+		guid : URL.UserGUIDURL
 		identifiers : URL.UserURL
 	}
 

@@ -1,0 +1,18 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "OwnerPeer",
+	"type": "object",
+	"required": ["iceCandidatesArray", "connectionDescriptionArray", "rtpTransportParametersArray"],
+	"additionalProperties": false,
+	"properties": {
+		"iceCandidatesArray": {
+			"$ref": "../Connection/IceCandidates.json"
+		},
+		"connectionDescriptionArray": {
+			"$ref": "../Connection/ConnectionDescription.json"
+		},
+		"rtpTransportParametersArray": {
+			"$ref": "../Connection/RtpTransportParameters.json"
+		}
+	}
+}
