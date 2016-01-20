@@ -2,7 +2,7 @@
 	"$schema": "http://json-schema.org/draft-04/schema#",
 	"id": "MessageType",
 	"type": "object",
-	"required": ["CREATE", "UPDATE", "DELETE", "READ", "SUBSCRIBE", "UNSUBSCRIBE", "RESPONSE"],
+	"required": ["CREATE", "UPDATE", "DELETE", "READ", "SUBSCRIBE", "UNSUBSCRIBE", "RESPONSE", "FORWARD"],
 	"additionalProperties": false,
 	"properties": {
 		"CREATE": {
@@ -24,6 +24,9 @@
 			"type": "null"
 		},
 		"RESPONSE": {
+			"type": "null"
+		},
+		"FORWARD": {
 			"type": "null"
 		}
 	}

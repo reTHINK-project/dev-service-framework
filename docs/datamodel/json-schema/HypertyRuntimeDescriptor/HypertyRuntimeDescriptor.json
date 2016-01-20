@@ -2,7 +2,7 @@
 	"$schema": "http://json-schema.org/draft-04/schema#",
 	"id": "HypertyRuntimeDescriptor",
 	"type": "object",
-	"required": ["type", "hypertyCapabilities", "protocolCapabilities", "runtimeType", "runtimeHypertyCapabilityListArray", "runtimeProtocolCapabilityListArray"],
+	"required": ["type", "hypertyCapabilities", "protocolCapabilities", "runtimeType", "runtimeHypertyCapabilitiesArray", "runtimeProtocolCapabilitiesArray"],
 	"additionalProperties": false,
 	"allOf": [
 		{"$ref": "../CatalogueDataObject/CatalogueDataObject.json"}
@@ -12,20 +12,20 @@
 			"$ref": "../HypertyRuntimeDescriptor/RuntimeType.json"
 		},
 		"hypertyCapabilities": {
-			"$ref": "../HypertyRuntimeDescriptor/RuntimeHypertyCapabilityList.json"
+			"$ref": "../HypertyRuntimeDescriptor/RuntimeHypertyCapabilities.json"
 		},
 		"protocolCapabilities": {
-			"$ref": "../HypertyRuntimeDescriptor/RuntimeProtocolCapabilityList.json"
+			"$ref": "../HypertyRuntimeDescriptor/RuntimeProtocolCapabilities.json"
 		}
 		,
 		"runtimeType": {
 			"$ref": "../HypertyRuntimeDescriptor/RuntimeType.json"
 		},
-		"runtimeHypertyCapabilityListArray": {
-			"$ref": "../HypertyRuntimeDescriptor/RuntimeHypertyCapabilityList.json"
+		"runtimeHypertyCapabilitiesArray": {
+			"$ref": "../HypertyRuntimeDescriptor/RuntimeHypertyCapabilities.json"
 		},
-		"runtimeProtocolCapabilityListArray": {
-			"$ref": "../HypertyRuntimeDescriptor/RuntimeProtocolCapabilityList.json"
+		"runtimeProtocolCapabilitiesArray": {
+			"$ref": "../HypertyRuntimeDescriptor/RuntimeProtocolCapabilities.json"
 		}
 	}
 }

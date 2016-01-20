@@ -2,7 +2,7 @@
 	"$schema": "http://json-schema.org/draft-04/schema#",
 	"id": "UserProfile",
 	"type": "object",
-	"required": ["username", "cn", "avatar"],
+	"required": ["username", "cn", "avatar", "context"],
 	"additionalProperties": false,
 	"properties": {
 		"username": {
@@ -13,6 +13,9 @@
 		},
 		"avatar": {
 			"$ref": "../URL/URL.json"
+		},
+		"context": {
+			"$ref": "../URL/ContextURL.json"
 		}
 		,
 		"identityInv": {

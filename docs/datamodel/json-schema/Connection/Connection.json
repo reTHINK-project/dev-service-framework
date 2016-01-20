@@ -2,42 +2,27 @@
 	"$schema": "http://json-schema.org/draft-04/schema#",
 	"id": "Connection",
 	"type": "object",
-	"required": ["status", "owner", "localIceCandidatesArray", "localConnectionDescriptionArray", "localRtpTransportParametersArray", "remoteIceCandidatesArray", "remoteConnectionDescriptionArray", "remoteRtpTransportParametersArray"],
+	"required": ["status", "owner", "peer", "ownerPeerArray", "peer"],
 	"additionalProperties": false,
+	"allOf": [
+		{"$ref": "../SyncData.json"}
+	],
 	"properties": {
 		"status": {
 			"type": "null"
 		},
 		"owner": {
-			"$ref": "../Communication/Participant.json"
+			"$ref": "../URL/UserURL.json"
+		},
+		"peer": {
+			"$ref": "../URL/ConnectionURL.json"
 		}
 		,
-		"localIceCandidatesArray": {
-			"$ref": "../Connection/LocalIceCandidates.json"
+		"ownerPeerArray": {
+			"$ref": "../Connection/OwnerPeer.json"
 		},
-		"localConnectionDescriptionArray": {
-			"$ref": "../Connection/LocalConnectionDescription.json"
-		},
-		"localRtpTransportParametersArray": {
-			"$ref": "../Connection/LocalRtpTransportParameters.json"
-		},
-		"remoteIceCandidatesArray": {
-			"type": "array",
-			"items": {
-				"$ref": "../Connection/RemoteIceCandidates.json"
-			}
-		},
-		"remoteConnectionDescriptionArray": {
-			"type": "array",
-			"items": {
-				"$ref": "../Connection/RemoteConnectionDescription.json"
-			}
-		},
-		"remoteRtpTransportParametersArray": {
-			"type": "array",
-			"items": {
-				"$ref": "../Connection/RemoteRtpTransportParameters.json"
-			}
+		"peer": {
+			"$ref": "../Connection/Peer.json"
 		}
 	}
 }

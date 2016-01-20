@@ -15,6 +15,9 @@
 		},
 		"accessToken": {
 			"$ref": "../Identity/JWT.json"
+		},
+		"assertedIdentity": {
+			"$ref": "../Identity/Identity.json"
 		}
 		,
 		"messageInv": {

@@ -14,12 +14,5 @@
 		"sdpMid": {
 			"type": "string"
 		}
-		,
-		"localIceCandidatesInv": {
-			"$ref": "../Connection/LocalIceCandidates.json"
-		},
-		"remoteIceCandidatesInv": {
-			"$ref": "../Connection/RemoteIceCandidates.json"
-		}
 	}
 }

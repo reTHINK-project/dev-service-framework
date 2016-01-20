@@ -12,22 +12,22 @@
 			"$ref": "../URL/HypertyCatalogueURL.json"
 		},
 		"configuration": {
-			"$ref": "../ProtoStubDescriptor/ConfigurationDataList.json"
+			"$ref": "../ProtoStubDescriptor/ProtostubConfiguration.json"
 		},
 		"constraints": {
-			"$ref": "../ProtoStubDescriptor/RuntimeConstraintList.json"
+			"$ref": "../HypertyRuntimeDescriptor/RuntimeProtocolCapabilities.json"
 		}
 		,
-		"runtimeConstraintListArray": {
+		"runtimeProtocolCapabilitiesArray": {
 			"type": "array",
 			"items": {
-				"$ref": "../ProtoStubDescriptor/RuntimeConstraintList.json"
+				"$ref": "../HypertyRuntimeDescriptor/RuntimeProtocolCapabilities.json"
 			}
 		},
-		"configurationDataListArray": {
+		"protostubConfigurationArray": {
 			"type": "array",
 			"items": {
-				"$ref": "../ProtoStubDescriptor/ConfigurationDataList.json"
+				"$ref": "../ProtoStubDescriptor/ProtostubConfiguration.json"
 			}
 		},
 		"hypertyCatalogueURLArray": {

@@ -1,0 +1,30 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "RuntimeProtocolCapabilities",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"http": {
+			"type": "boolean"
+		},
+		"https": {
+			"type": "boolean"
+		},
+		"ws": {
+			"type": "boolean"
+		},
+		"wss": {
+			"type": "boolean"
+		},
+		"coap": {
+			"type": "boolean"
+		},
+		"datachannel": {
+			"type": "boolean"
+		}
+		,
+		"hypertyRuntimeDescriptorInv": {
+			"$ref": "../HypertyRuntimeDescriptor/HypertyRuntimeDescriptor.json"
+		}
+	}
+}

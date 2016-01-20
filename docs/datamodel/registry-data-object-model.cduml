@@ -10,7 +10,7 @@ package RegistryDataObject <<Rect>> {
 		lastModified : RethinkType.Date
 		status : RegistryDataObjectStatus
 		stubs : URL.HypertyCatalogueURL
-		stubsConfiguration : ProtostubDescriptor.PrototubConfiguration
+		stubsConfiguration : ProtoStubDescriptor.ProtostubConfiguration
 	}
 
 	enum RegistryDataObjectStatus {
