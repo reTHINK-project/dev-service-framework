@@ -47,6 +47,10 @@ package URL <<Rect>> {
 		scheme = "comm"
 	}
 
+	class ConnectionURL {
+		scheme = "connection"
+	}
+
 	class ContextURL {
 		scheme = "ctxt"
 	}
@@ -61,6 +65,7 @@ package URL <<Rect>> {
 	HypertyCatalogueURL -up-|> URL
 	HypertyRuntimeURL -up-|> URL
 	CommunicationURL -up-|> URL
+	ConnectionURL --|> URL
 	DomainURL -up-|> URL
 	ContextURL --|> URL
 
