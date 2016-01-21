@@ -8,8 +8,8 @@ class HypertyDescriptor extends CatalogueDataObject{
     constructor(guid, catalogueType, objectName, description, language, sourcePackageURL, hypertyType, dataObjects) {
         super(guid, catalogueType, objectName, description, language, sourcePackageURL);
 
-        this._configurationDataList = {};
-        this._runtimeConstraintList = {};
+        this._configuration = {};
+        this._constraints = {};
         this._policies = {};
         this._messageSchema = null;
 
@@ -21,9 +21,9 @@ class HypertyDescriptor extends CatalogueDataObject{
 
     get dataObjects() { return this._dataObjects; }
 
-    get configurationDataList() {return this._configurationDataList; }
+    get configuration() {return this._configuration; }
 
-    get runtimeConstraintList() { return this._runtimeConstraintList; }
+    get constraints() { return this._constraints; }
 
     get messageSchema(){ return this._messageSchema; }
 
@@ -39,14 +39,14 @@ class HypertyDescriptor extends CatalogueDataObject{
             this._dataObjects = dataObjectUrl;
     }
 
-    set configurationDataList(configDataList) {
-        if(configDataList)
-            this._configurationDataList = configDataList;
+    set configuration(configuration) {
+        if(configuration)
+            this._configuration = configuration;
     }
 
-    set runtimeConstraintList(runtimeConstList) {
-        if(runtimeConstList)
-            this._runtimeConstraintList = runtimeConstList;
+    set constraints(constraints) {
+        if(constraints)
+            this._constraints = constraints;
     }
 
     set messageSchema(msgSchema){

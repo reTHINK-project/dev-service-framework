@@ -58,19 +58,19 @@ class CatalogueDataObjectFactory extends RethinkObject {
     }
 
     createProtoStubDescriptorObject(objectName, description, language, sourcePackageURL, messageSchemas,
-                                    configurationList, constraintList) {
+                                    configuration, constraints) {
         if (
             typeof objectName === "undefined"
             || typeof description === "undefined"
             || typeof language === "undefined"
             || typeof sourcePackageURL === "undefined"
             || typeof messageSchemas === "undefined"
-            || typeof configurationList === "undefined"
-            || typeof constraintList === "undefined"
+            || typeof configuration === "undefined"
+            || typeof constraints === "undefined"
         )
             throw new Error("Invalid parameters!");
         return new ProtocolStubDescriptor(this._generateGuid(), CatalogueObjectType.PROTOSTUB, objectName, description,
-            language, sourcePackageURL, messageSchemas, configurationList, constraintList);
+            language, sourcePackageURL, messageSchemas, configuration, constraints);
     }
 
     createHypertyRuntimeDescriptorObject(objectName, description, language, sourcePackageURL,

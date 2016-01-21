@@ -1,5 +1,6 @@
 import CatalogueDataObjectFactory from '../src/catalogue-factory/CatalogueDataObjectFactory'
 import CatalogueDataObject from '../src/catalogue-factory/CatalogueDataObject'
+import RuntimeConstraint from '../src/catalogue-factory/RuntimeConstraint'
 import {CatalogueObjectType} from '../src/catalogue-factory/CatalogueDataObject'
 import {DataObjectSourceLanguage} from '../src/catalogue-factory/CatalogueDataObject'
 import {HypertyType} from '../src/catalogue-factory/HypertyDescriptor'
@@ -57,8 +58,8 @@ describe('CatalogueDataObjectFactory', function () {
 
         it('should generate ProtocolStubDescriptor', function (done) {
             protocolStubDescriptor = catalogueDataObjectFactory.createProtoStubDescriptorObject("name", "description",
-                DataObjectSourceLanguage.JAVASCRIPT_ECMA6, "URL", "MESSAGE SCHEMAS", ['conf1', 'conf2'],
-                ['const1', 'const2', 'const3']);
+                DataObjectSourceLanguage.JAVASCRIPT_ECMA6, "URL", "MESSAGE SCHEMAS", "CONFIGURATION",
+                new RuntimeConstraint());
             expect(protocolStubDescriptor).not.to.be.empty;
             done();
         });
