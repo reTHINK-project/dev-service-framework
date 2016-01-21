@@ -91,6 +91,7 @@
     }
   },
   "directories": {
+    "doc": "docs",
     "example": "example",
     "test": "test"
   },
