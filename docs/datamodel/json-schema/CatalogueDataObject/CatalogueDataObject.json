@@ -1,0 +1,43 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "CatalogueDataObject",
+	"type": "object",
+	"required": ["guid", "type", "objectName", "description", "language", "sourcePackageURL", "sourcePackage", "catalogueObjectType", "dataObjectSourceLanguage"],
+	"additionalProperties": false,
+	"properties": {
+		"guid": {
+			"type": "string"
+		},
+		"type": {
+			"$ref": "../CatalogueDataObject/CatalogueObjectType.json"
+		},
+		"objectName": {
+			"type": "string"
+		},
+		"description": {
+			"type": "string"
+		},
+		"language": {
+			"$ref": "../CatalogueDataObject/DataObjectSourceLanguage.json"
+		},
+		"sourcePackageURL": {
+			"$ref": "../URL/URL.json"
+		},
+		"sourcePackage": {
+			"$ref": "../CatalogueDataObject/SourcePackage.json"
+		},
+		"signature": {
+			"type": "string"
+		}
+		,
+		"sourcePackage": {
+			"$ref": "../CatalogueDataObject/SourcePackage.json"
+		},
+		"catalogueObjectType": {
+			"$ref": "../CatalogueDataObject/CatalogueObjectType.json"
+		},
+		"dataObjectSourceLanguage": {
+			"$ref": "../CatalogueDataObject/DataObjectSourceLanguage.json"
+		}
+	}
+}

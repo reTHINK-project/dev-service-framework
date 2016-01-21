@@ -1,0 +1,14 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "FowardMessageBody",
+	"type": "object",
+	"additionalProperties": false,
+	"allOf": [
+		{"$ref": "../Message/MessageBody.json"}
+	],
+	"properties": {
+		"message": {
+			"$ref": "../Message/Message.json"
+		}
+	}
+}

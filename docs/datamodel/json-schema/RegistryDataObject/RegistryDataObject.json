@@ -1,0 +1,47 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "RegistryDataObject",
+	"type": "object",
+	"required": ["id", "url", "descriptor", "startingTime", "lastModified", "status", "stubs", "stubsConfiguration", "registryDataObjectStatus"],
+	"additionalProperties": false,
+	"properties": {
+		"id": {
+			"type": "string"
+		},
+		"url": {
+			"$ref": "../URL/URL.json"
+		},
+		"descriptor": {
+			"$ref": "../URL/HypertyCatalogueURL.json"
+		},
+		"startingTime": {
+			"$ref": "../RethinkType/Date.json"
+		},
+		"lastModified": {
+			"$ref": "../RethinkType/Date.json"
+		},
+		"status": {
+			"enum": [
+				"CREATED",
+				"LIVE",
+				"DISCONNECTED",
+				"DEAD"
+			]
+		},
+		"stubs": {
+			"$ref": "../URL/HypertyCatalogueURL.json"
+		},
+		"stubsConfiguration": {
+			"$ref": "../ProtoStubDescriptor/ProtostubConfiguration.json"
+		}
+		,
+		"registryDataObjectStatus": {
+			"enum": [
+				"CREATED",
+				"LIVE",
+				"DISCONNECTED",
+				"DEAD"
+			]
+		}
+	}
+}

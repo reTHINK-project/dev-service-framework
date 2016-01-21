@@ -1,0 +1,62 @@
+@startuml
+
+package Context <<Rect>> {
+
+	class Context {
+		id: string
+		type : ContextType
+		description ?: string
+		time?: RethinkType.Date
+		units?: ContextUnit
+		version?: integer
+		value: ContextValueList
+		tag?: string
+	}
+	note top : compliant with https://tools.ietf.org/html/draft-jennings-core-senml-01
+
+	class ContextType {
+
+	}
+
+	class ContextUnit {
+
+	}
+
+	class ContextValueList {
+	
+	}
+
+	class ContextValue {
+		name : string
+		units : ContextUnit
+		value : RethinkType.Basic
+		sum ?
+		time ?: RethinkType.Date
+		updateTime ?: RethinkType.Date
+		expires ?: RethinkType.Date
+		address ?: URL.HypertyRuntimeURL
+	}
+
+	class RawContextValue {
+	}
+
+	class ProcessedContextValue {
+	}
+
+	Context *-- "1" ContextValueList
+
+	Context --> ContextType
+	Context --> ContextUnit
+	ContextValue --> ContextUnit
+	ContextValue --> RethinkType.Basic
+	
+	ContextValueList *-- ContextValue
+
+	ContextValue --|> RethinkType.ListElement
+	ContextValueList --|> RethinkType.List
+
+	RawContextValue -up-|> ContextValue
+	ProcessedContextValue -up-|> ContextValue
+}
+
+@enduml

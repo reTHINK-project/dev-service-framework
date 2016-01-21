@@ -1,0 +1,21 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "HypertyPolicyList",
+	"type": "object",
+	"additionalProperties": false,
+	"allOf": [
+		{"$ref": "../RethinkType/List.json"}
+	],
+	"properties": {
+		"hypertyPolicyArray": {
+			"type": "array",
+			"items": {
+				"$ref": "../PolicyEnforcerDescriptor/HypertyPolicy.json"
+			}
+		}
+		,
+		"policyEnforcerDescriptorInv": {
+			"$ref": "../PolicyEnforcerDescriptor/PolicyEnforcerDescriptor.json"
+		}
+	}
+}

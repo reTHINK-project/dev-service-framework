@@ -1,0 +1,40 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "ProtoStubDescriptor",
+	"type": "object",
+	"required": ["messageSchemas", "configuration", "constraints"],
+	"additionalProperties": false,
+	"allOf": [
+		{"$ref": "../CatalogueDataObject/CatalogueDataObject.json"}
+	],
+	"properties": {
+		"messageSchemas": {
+			"$ref": "../URL/HypertyCatalogueURL.json"
+		},
+		"configuration": {
+			"$ref": "../ProtoStubDescriptor/ProtostubConfiguration.json"
+		},
+		"constraints": {
+			"$ref": "../HypertyRuntimeDescriptor/RuntimeProtocolCapabilities.json"
+		}
+		,
+		"runtimeProtocolCapabilitiesArray": {
+			"type": "array",
+			"items": {
+				"$ref": "../HypertyRuntimeDescriptor/RuntimeProtocolCapabilities.json"
+			}
+		},
+		"protostubConfigurationArray": {
+			"type": "array",
+			"items": {
+				"$ref": "../ProtoStubDescriptor/ProtostubConfiguration.json"
+			}
+		},
+		"hypertyCatalogueURLArray": {
+			"type": "array",
+			"items": {
+				"$ref": "../URL/HypertyCatalogueURL.json"
+			}
+		}
+	}
+}

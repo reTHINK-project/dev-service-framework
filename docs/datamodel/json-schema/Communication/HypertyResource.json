@@ -1,0 +1,12 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "HypertyResource",
+	"type": "object",
+	"required": ["connection"],
+	"additionalProperties": false,
+	"properties": {
+		"connection": {
+			"$ref": "../Connection/Connection.json"
+		}
+	}
+}

@@ -1,0 +1,211 @@
+## reTHINK Address Model
+
+It is proposed to use as much as possible Web URLs model for reTHINK addressing model as defined in the [WHATWG standard](https://url.spec.whatwg.org/). According to this standard, there is no distinguish betweeb URL and URI. The intention is not to depend on existing DNS based naming resolution but to keep it open as such decision will take place in WP4. 
+
+reTHINK URL is used by the [Message model](../message/readme.md) to identify the message recipient, message sender and resources where operations carried by the message will be performed. It is to be noted, that in some situations, there is no need to resolve URL into IP addresses in order to reach the URL endpoint. For example, it is possible that Hyperty instances served by a messaging service like vertx.io would use a dedicated name space to manage message routing between Hyperty instances.
+
+We should consider the introduction of new URL schemes for the different types of addresses needed but re-use as much as possible existing schemes that are handled by [IANA](https://www.iana.org/assignments/uri-schemes/uri-schemes.xhtml)
+
+The different types of URLs required by reTHINK are defined in the picture below: 
+
+![reTHINK Address Model](../Address-Model.png)
+
+*to be done:* check whether we need all URL components including:
+* username
+* passsword
+
+
+### User URL Type
+
+This URL is needed to identify reTHINK users as defined in D2.1 (including individuals, organisations, physical spaces, physical things) and modelled as [User Identity Objects](../user-identity/readme.md).
+
+Usage examples:
+* to query information about the user profile
+* to request to communicate with the user
+
+Analysis of existing schemes for users (improve consistency):
+* [acct](http://tools.ietf.org/html/rfc7565): is not appropriate since it is associated to a service provider and this address must be portable between service provider domains
+
+Proposal: to use a new scheme eg "user": 
+
+    user://<idpdomain>/<user-identifier>
+
+In case, the user identifier is not managed by an IdP but by some other naming management mechanism like a pure [DHT](https://github.com/reTHINK-project/governance-security-implementation/blob/master/docs/directories/directories.md) the URL would not contain the idp domain and just the user identifier that would have to be global unique identifier corresponding to the GraphID concept introduced in D2.1.
+
+    user-guid://<unique-user-identifier>
+
+
+**examples**
+
+Individuals:
+
+    user://orange.fr/simon
+
+    user://twitter.com/pchainho
+
+Physical Places:
+
+    user://cm-lisboa.pt/campo-grande-28-building
+
+Assuming the city hall is also playing the IdP role.
+
+Organisations:
+
+    user://telecom.pt/meo
+
+    Assuming PT is also playing the IdP role.
+
+Global Uniquer Identifiers (GraphID) without IdP domain:
+
+    user-guid://XXXXMYGUIDXXX
+
+### User Account in a Service Provider
+
+Usage examples:
+
+* account management purposes
+* to identify the account where personal policies for a specific service (eg CSP) are applied
+
+For users that have account in Service Providers including CSPs it is proposed to use the existing  [acct](http://tools.ietf.org/html/rfc7565):
+
+    acct://<sp_domain>/<account_identifier>
+
+**Example**
+
+    acct://telecom.pt/paulo-g-chainho
+
+In case the account identifier uses an IdP identifier, according to [RFC3986](https://tools.ietf.org/html/rfc3986), reserved percent encodes for ":" and "/" are used:
+
+    acct://<sp_domain>/user%3A%2F%2F<idpdomain>%2F<user-identifier>
+
+*to be checked. A percent encode before the scheme "user" is needed or can we just skip it?*
+
+**Example**
+
+The former example, now using Identifier from Twitter:
+
+    acct://telecom.pt/user%3A%2F%2Ftwitter.com%2Fpchainho
+
+### Catalogue Address
+
+The Catalogue URL is used to identify [descriptors](../hyperty-catalogue/readme.md) in the Catalogue notably Hyperty and Protocol Stub descriptors.
+
+Usage examples:
+
+* consult Hyperty Metadata from the Catalog
+* to download and deploy an Hyperty in a Runtime Device
+* consult Protocol Stub descriptor from the Catalog
+* to download and deploy an protocol stub in a Runtime Device
+* consult a data object schema from the Catalog
+* to download a data object schema into a Runtime Device
+
+It is proposed a new ""hyperty-catalogue" scheme:
+
+    hyperty-catalogue://<service-provider-domain>/version/<catalogue-object-identifier>
+
+**example**
+
+In case version 1.0 Hyperty "wonder-hype" is provided by "hyperty-provider.com", it URL would be:
+
+    hyperty-catalogue://hyperty-provider.com/1/wonder-hype
+
+
+### Device Runtime Address
+
+The Runtime URL is used to identify Runtime Data Objects where Hyperty instances are running.
+
+Usage examples:
+
+* to query information about runtime capabilities
+* to update runtime components
+* to send messages to a runtime component eg a runtime protocol stub
+* to query about hyperty instances running in the runtime
+
+No existing scheme was found appropriate. It is proposed a new "hyperty-runtime" scheme:
+
+    hyperty-runtime://<runtime-provider-domain>/<runtime-identifier>
+
+Where <runtime-provider-domain> identifies the stakeholder that provides and manages the Hyperty Runtime execution environment. This URL type should be compliant with OMA LWM2M identifier for endpoint client name defined at §6.2.1 from OMA-TS-LightweightM2M-V1_0-20141126-C. According to recommendations about URNs to be used in LWM2M endpoint client name the following Runtime URLs may be valid:
+
+    hyperty-runtime-uuid://<device-unique-identifier>/<runtime-identifier>
+    hyperty-runtime-dev-os://<device-unique-identifier>/<runtime-identifier>
+    hyperty-runtime-imei://<device-unique-identifier>/<runtime-identifier>
+    hyperty-runtime-esn://<device-unique-identifier>/<runtime-identifier>
+    hyperty-runtime-meid://<device-unique-identifier>/<runtime-identifier>
+
+**example**
+
+In case the runtime components are provided by google.
+
+    hyperty-runtime://google.com/001/123456
+
+
+### Hyperty Instance Address
+
+The Hyperty URL is used to identify [Hyperty Instance Data Objects](../hyperty-instance/readme.md) in the Registry.
+
+Usage examples:
+
+* to support messaging communication among Hyperty instances eg to control a Video Conference setup
+* to query the Registry about an Hyperty Instance
+
+It is proposed to use a new scheme eg "hyperty"
+
+    hyperty://<registry-domain>/<hyperty-instance-identifier>
+
+**open issue:** Should we include in the URL its timeout / expires or in the Registration message?
+
+**example**
+
+In case the Hyperty instance is registered at "meo.pt" domain:
+
+    hyperty://meo.pt/123456
+
+
+#### Communication / Conversation Address
+
+The URL Communication address is used to identify a [communication data object](../communication/readme.md).
+
+Usage examples:
+
+* to identify the resource communication during communication control
+* to query about recorded communications
+* to identify communications for billing purposes
+
+It is proposed to use a new scheme eg "comm"
+
+    comm://<csp-domain>/<communication-identifier>
+
+For cross domain communications, it is used the "csp domain" from the communication owner, tipically the communication requesting party. Other involved CSPs are free to generate its own communication URL for its operations purposes or user purposes e.g. to keep records of communication history.
+
+**open issue 1:** do we need a rule to correlate the same communication instance using URLs from different CSPs eg for settlement purposes?
+
+**open issue 2:** do we need separate schemes for [Connection Data Object](../communication/readme.md#connection) and [Hyperty Resources](../communication/readme.md#hyperty-resource)
+
+**example**
+
+In case the Communication is provided by "telekom.de":
+
+    comm://telekom.de/sdruesdow-20150802006
+
+#### Context Address
+
+The URL Communication address is used to identify a [Context data object](../context/readme.md).
+
+Usage examples:
+
+* to identify the resource context during production and consumption of context data
+* to query about recorded context data
+* to identify context data for billing purposes
+
+It is proposed to use a new scheme eg "comm"
+
+    ctxt://<context-producer-domain>/<context-identifier>
+
+
+**example**
+
+In case the Context data is about energy context of "myhouse" domain:
+
+    ctxt://myhouse/energy
+    

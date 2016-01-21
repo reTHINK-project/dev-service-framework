@@ -1,0 +1,16 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "LocalConnectionDescription",
+	"type": "object",
+	"required": ["sdp"],
+	"additionalProperties": false,
+	"properties": {
+		"sdp": {
+			"type": "string"
+		}
+		,
+		"connectionInv": {
+			"$ref": "../Connection/Connection.json"
+		}
+	}
+}

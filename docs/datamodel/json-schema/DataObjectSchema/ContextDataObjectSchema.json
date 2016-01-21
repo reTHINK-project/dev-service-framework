@@ -1,0 +1,15 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "ContextDataObjectSchema",
+	"type": "object",
+	"required": ["context"],
+	"additionalProperties": false,
+	"allOf": [
+		{"$ref": "../DataObjectSchema/HypertyDataObjectSchema.json"}
+	],
+	"properties": {
+		"context": {
+			"$ref": "../Context/Context.json"
+		}
+	}
+}

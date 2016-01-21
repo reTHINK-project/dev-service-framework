@@ -1,0 +1,28 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "Connection",
+	"type": "object",
+	"required": ["status", "owner", "peer", "ownerPeerArray", "peer"],
+	"additionalProperties": false,
+	"allOf": [
+		{"$ref": "../SyncData.json"}
+	],
+	"properties": {
+		"status": {
+			"type": "null"
+		},
+		"owner": {
+			"$ref": "../URL/UserURL.json"
+		},
+		"peer": {
+			"$ref": "../URL/ConnectionURL.json"
+		}
+		,
+		"ownerPeerArray": {
+			"$ref": "../Connection/OwnerPeer.json"
+		},
+		"peer": {
+			"$ref": "../Connection/Peer.json"
+		}
+	}
+}

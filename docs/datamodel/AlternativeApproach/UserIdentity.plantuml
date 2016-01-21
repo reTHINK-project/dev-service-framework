@@ -1,0 +1,12 @@
+@startuml
+
+class AtomicUserIdentity {
+Type : Human, organization, object, …
+Profile 
+Credential
+Subscribed hyperties : Set of HSD identifiers
+Policies
+Service adresses : set of Adresses
+}
+
+@enduml

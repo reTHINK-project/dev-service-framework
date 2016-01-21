@@ -1,0 +1,15 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "IdValidation",
+	"type": "object",
+	"required": ["identity", "contents"],
+	"additionalProperties": false,
+	"properties": {
+		"identity": {
+			"type": "string"
+		},
+		"contents": {
+			"type": "string"
+		}
+	}
+}

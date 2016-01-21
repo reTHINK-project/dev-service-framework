@@ -1,0 +1,16 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "LocalRtpTransportParameters",
+	"type": "object",
+	"required": ["status"],
+	"additionalProperties": false,
+	"properties": {
+		"status": {
+			"type": "null"
+		}
+		,
+		"connectionInv": {
+			"$ref": "../Connection/Connection.json"
+		}
+	}
+}

@@ -1,0 +1,17 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "SubscribeMessageBody",
+	"type": "object",
+	"additionalProperties": false,
+	"allOf": [
+		{"$ref": "../Message/MessageBody.json"}
+	],
+	"properties": {
+		"resource": {
+			"$ref": "../URL/URL.json"
+		},
+		"schema": {
+			"$ref": "../URL/HypertyCatalogueURL.json"
+		}
+	}
+}

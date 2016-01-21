@@ -1,0 +1,11 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "ProtostubConfiguration",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"protoStubDescriptorInv": {
+			"$ref": "../ProtoStubDescriptor/ProtoStubDescriptor.json"
+		}
+	}
+}

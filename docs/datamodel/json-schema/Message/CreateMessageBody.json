@@ -1,0 +1,18 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "CreateMessageBody",
+	"type": "object",
+	"required": ["value"],
+	"additionalProperties": false,
+	"allOf": [
+		{"$ref": "../Message/MessageBody.json"}
+	],
+	"properties": {
+		"policy": {
+			"$ref": "../URL/URL.json"
+		},
+		"value": {
+			"type": "string"
+		}
+	}
+}

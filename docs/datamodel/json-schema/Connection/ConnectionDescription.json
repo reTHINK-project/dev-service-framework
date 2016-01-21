@@ -1,0 +1,12 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "ConnectionDescription",
+	"type": "object",
+	"required": ["sdp"],
+	"additionalProperties": false,
+	"properties": {
+		"sdp": {
+			"type": "string"
+		}
+	}
+}

@@ -1,0 +1,15 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "HypertyCatalogueURL",
+	"type": "object",
+	"required": ["scheme"],
+	"additionalProperties": false,
+	"allOf": [
+		{"$ref": "../URL/URL.json"}
+	],
+	"properties": {
+		"scheme": {
+			"constant": "hyperty-catalogue"
+		}
+	}
+}

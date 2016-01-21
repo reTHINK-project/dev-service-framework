@@ -1,0 +1,27 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "RuntimeProtocolCapabilityType",
+	"type": "object",
+	"required": ["HTTP", "HTTPS", "WS", "WSS", "COAP", "DataChannel"],
+	"additionalProperties": false,
+	"properties": {
+		"HTTP": {
+			"type": "null"
+		},
+		"HTTPS": {
+			"type": "null"
+		},
+		"WS": {
+			"type": "null"
+		},
+		"WSS": {
+			"type": "null"
+		},
+		"COAP": {
+			"type": "null"
+		},
+		"DataChannel": {
+			"type": "null"
+		}
+	}
+}

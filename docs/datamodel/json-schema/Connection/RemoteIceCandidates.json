@@ -1,0 +1,42 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "RemoteIceCandidates",
+	"type": "object",
+	"required": ["status", "rTCIceConnectionState"],
+	"additionalProperties": false,
+	"properties": {
+		"status": {
+			"enum": [
+				"new",
+				"checking",
+				"connected",
+				"completed",
+				"failed",
+				"disconnected",
+				"closed"
+			]
+		}
+		,
+		"rTCIceConnectionState": {
+			"enum": [
+				"new",
+				"checking",
+				"connected",
+				"completed",
+				"failed",
+				"disconnected",
+				"closed"
+			]
+		},
+		"iceCandidateArray": {
+			"type": "array",
+			"items": {
+				"$ref": "../Connection/IceCandidate.json"
+			}
+		}
+		,
+		"connectionInv": {
+			"$ref": "../Connection/Connection.json"
+		}
+	}
+}

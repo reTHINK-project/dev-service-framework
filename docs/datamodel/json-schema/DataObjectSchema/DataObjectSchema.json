@@ -1,0 +1,11 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "DataObjectSchema",
+	"type": "object",
+	"additionalProperties": false,
+	"allOf": [
+		{"$ref": "../CatalogueDataObject/CatalogueDataObject.json"}
+	],
+	"properties": {
+	}
+}

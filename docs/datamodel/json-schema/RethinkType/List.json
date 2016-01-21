@@ -1,0 +1,14 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "List",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"listElementArray": {
+			"type": "array",
+			"items": {
+				"$ref": "../RethinkType/ListElement.json"
+			}
+		}
+	}
+}

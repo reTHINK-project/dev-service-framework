@@ -1,0 +1,27 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "MessageBody",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"resource": {
+			"$ref": "../URL/URL.json"
+		},
+		"schema": {
+			"$ref": "../URL/HypertyCatalogueURL.json"
+		},
+		"idToken": {
+			"$ref": "../Identity/JWT.json"
+		},
+		"accessToken": {
+			"$ref": "../Identity/JWT.json"
+		},
+		"assertedIdentity": {
+			"$ref": "../Identity/Identity.json"
+		}
+		,
+		"messageInv": {
+			"$ref": "../Message/Message.json"
+		}
+	}
+}

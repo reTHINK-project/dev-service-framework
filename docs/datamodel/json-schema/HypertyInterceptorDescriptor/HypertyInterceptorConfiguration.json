@@ -1,0 +1,11 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "HypertyInterceptorConfiguration",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"hypertyInterceptorDescriptorInv": {
+			"$ref": "../HypertyInterceptorDescriptor/HypertyInterceptorDescriptor.json"
+		}
+	}
+}

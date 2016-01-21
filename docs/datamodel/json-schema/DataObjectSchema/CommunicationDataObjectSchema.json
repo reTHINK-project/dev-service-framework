@@ -1,0 +1,15 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "CommunicationDataObjectSchema",
+	"type": "object",
+	"required": ["communication"],
+	"additionalProperties": false,
+	"allOf": [
+		{"$ref": "../DataObjectSchema/HypertyDataObjectSchema.json"}
+	],
+	"properties": {
+		"communication": {
+			"$ref": "../Communication/Communication.json"
+		}
+	}
+}

@@ -1,0 +1,12 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "RtpTransportParameters",
+	"type": "object",
+	"required": ["status"],
+	"additionalProperties": false,
+	"properties": {
+		"status": {
+			"type": "null"
+		}
+	}
+}
