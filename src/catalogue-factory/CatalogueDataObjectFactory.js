@@ -30,22 +30,24 @@ class CatalogueDataObjectFactory extends RethinkObject {
         super(validation, schema);
     }
 
-    createCatalogueDataObject(type, objectName, description, language, sourcePackageURL) {
+    createCatalogueDataObject(guid, type, objectName, description, language, sourcePackageURL) {
         if (
-            typeof type === "undefined"
+            typeof guid === "undefined"
+            || typeof type === "undefined"
             || typeof objectName === "undefined"
             || typeof description === "undefined"
             || typeof language === "undefined"
             || typeof sourcePackageURL === "undefined"
         )
             throw new Error("Invalid parameters!");
-        return new CatalogueDataObject(this._generateGuid(), type, objectName, description, language, sourcePackageURL);
+        return new CatalogueDataObject(guid, type, objectName, description, language, sourcePackageURL);
     }
 
-    createHypertyDescriptorObject(objectName, description, language, sourcePackageURL, hypertyType,
+    createHypertyDescriptorObject(guid, objectName, description, language, sourcePackageURL, hypertyType,
                                   dataObjects) {
         if (
-            typeof objectName === "undefined"
+            typeof guid === "undefined"
+            || typeof objectName === "undefined"
             || typeof description === "undefined"
             || typeof language === "undefined"
             || typeof sourcePackageURL === "undefined"
@@ -53,14 +55,15 @@ class CatalogueDataObjectFactory extends RethinkObject {
             || typeof dataObjects === "undefined"
         )
             throw new Error("Invalid parameters!");
-        return new HypertyDescriptor(this._generateGuid(), CatalogueObjectType.HYPERTY, objectName, description,
+        return new HypertyDescriptor(guid, CatalogueObjectType.HYPERTY, objectName, description,
             language, sourcePackageURL, hypertyType, dataObjects);
     }
 
-    createProtoStubDescriptorObject(objectName, description, language, sourcePackageURL, messageSchemas,
+    createProtoStubDescriptorObject(guid, objectName, description, language, sourcePackageURL, messageSchemas,
                                     configuration, constraints) {
         if (
-            typeof objectName === "undefined"
+            typeof guid === "undefined"
+            || typeof objectName === "undefined"
             || typeof description === "undefined"
             || typeof language === "undefined"
             || typeof sourcePackageURL === "undefined"
@@ -69,14 +72,15 @@ class CatalogueDataObjectFactory extends RethinkObject {
             || typeof constraints === "undefined"
         )
             throw new Error("Invalid parameters!");
-        return new ProtocolStubDescriptor(this._generateGuid(), CatalogueObjectType.PROTOSTUB, objectName, description,
+        return new ProtocolStubDescriptor(guid, CatalogueObjectType.PROTOSTUB, objectName, description,
             language, sourcePackageURL, messageSchemas, configuration, constraints);
     }
 
-    createHypertyRuntimeDescriptorObject(objectName, description, language, sourcePackageURL,
+    createHypertyRuntimeDescriptorObject(guid, objectName, description, language, sourcePackageURL,
                                          runtimeType, hypertyCapabilities, protocolCapabilities) {
         if (
-            typeof objectName === "undefined"
+            typeof guid === "undefined"
+            || typeof objectName === "undefined"
             || typeof description === "undefined"
             || typeof language === "undefined"
             || typeof sourcePackageURL === "undefined"
@@ -86,14 +90,15 @@ class CatalogueDataObjectFactory extends RethinkObject {
         )
             throw new Error("Invalid parameters!");
 
-        return new HypertyRuntimeDescriptor(this._generateGuid(), CatalogueObjectType.HYPERTY_RUNTIME, objectName,
+        return new HypertyRuntimeDescriptor(guid, CatalogueObjectType.HYPERTY_RUNTIME, objectName,
             description, language, sourcePackageURL, runtimeType, hypertyCapabilities, protocolCapabilities);
     }
 
-    createPolicyEnforcerDescriptorObject(objectName, description, language, sourcePackageURL, configuration,
+    createPolicyEnforcerDescriptorObject(guid, objectName, description, language, sourcePackageURL, configuration,
                                          policies) {
         if (
-            typeof objectName === "undefined"
+            typeof guid === "undefined"
+            || typeof objectName === "undefined"
             || typeof description === "undefined"
             || typeof language === "undefined"
             || typeof sourcePackageURL === "undefined"
@@ -102,13 +107,14 @@ class CatalogueDataObjectFactory extends RethinkObject {
         )
             throw new Error("Invalid parameters!");
 
-        return new PolicyEnforcerDescriptor(this._generateGuid(), CatalogueObjectType.POLICY_ENFORCER, objectName,
+        return new PolicyEnforcerDescriptor(guid, CatalogueObjectType.POLICY_ENFORCER, objectName,
             description, language, sourcePackageURL, configuration, policies);
     }
 
-    createDataObjectSchema(type, objectName, description, language, sourcePackageURL) {
+    createDataObjectSchema(guid, type, objectName, description, language, sourcePackageURL) {
         if (
-            typeof type === "undefined"
+            typeof guid === "undefined"
+            || typeof type === "undefined"
             || typeof objectName === "undefined"
             || typeof description === "undefined"
             || typeof language === "undefined"
@@ -116,7 +122,7 @@ class CatalogueDataObjectFactory extends RethinkObject {
         )
             throw new Error("Invalid parameters!");
 
-        return new DataObjectSchema(this._generateGuid(), type, objectName, description, language, sourcePackageURL);
+        return new DataObjectSchema(guid, type, objectName, description, language, sourcePackageURL);
     }
 
     createSourcePackage(sourceCode, sourceCodeClassname) {
@@ -128,16 +134,6 @@ class CatalogueDataObjectFactory extends RethinkObject {
 
         return new SourcePackage(sourceCode, sourceCodeClassname);
 
-    }
-
-    _generateGuid() {
-        let d = new Date().getTime();
-
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-            let r = (d + Math.random() * 16) % 16 | 0;
-            d = Math.floor(d / 16);
-            return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-        });
     }
 }
 
