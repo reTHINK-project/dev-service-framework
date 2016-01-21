@@ -16,19 +16,6 @@ globalRegistryRecord : graphconnector.GlobalRegistryRecord
 groups : List<String>
 residenceLocation : String
 
-generateGUID() : String
-useGUID(mnemonicAndSalt) : void
-addUserID(String): void
-removeUserID(String): void
-signGlobalRegistryRecord() : String
-addContact(guid, firstName, lastName) : void
-removeContact(guid) : void
-calculateBloomFilter1Hop() : void
-getContact(name) : array
-checkGUID(guid) : array
-exportGraphData() : ?
-importGraphData(?) : void
-
 }
 
 
@@ -58,8 +45,6 @@ timeout : ISO.Date
 publicKey : String
 active : Integer
 revoked : Integer
-
-getRecord() : Object
 
 }
 
