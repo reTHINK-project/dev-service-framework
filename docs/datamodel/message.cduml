@@ -5,11 +5,9 @@ package Message <<Rect>> {
 	class Message {
 		id : string
 		from : URL.URL
-		to ?: URL.URLList
+		to : URL.URLList
 		type : MessageType
-		contextId
-		body : MessageBody
-		signature ?
+		body ?: MessageBody
 	}
 
 	class MessageBody {
@@ -76,7 +74,6 @@ package Message <<Rect>> {
 	}
 
 	Message --> MessageType
-	Message --> URL.URL
 	Message *-- "1" MessageBody
 
 	CreateMessageBody -up-|> MessageBody
