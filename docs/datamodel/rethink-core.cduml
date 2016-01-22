@@ -1,0 +1,39 @@
+@startuml "Rethink-Core.png"
+
+package RethinkCore <<Rect>> {
+
+	class RethinkObject {
+	}
+
+	class SyncData {
+	}
+
+	class SyncDataChild {
+	}
+
+	package URL <<Rect>> {
+	}
+
+	package GraphConnector <<Rect>> {
+	}
+
+	package CatalogueDataObject <<Rect>> {
+	}
+
+	package RegistryDataObject <<Rect>> {
+	}
+
+	package Message <<Rect>> {
+	}
+
+	package UserHypertyAccount <<Rect>> {
+	}
+
+	package Identity <<Rect>> {
+	}
+
+	package RethinkType <<Rect>> {
+	}
+}
+
+@enduml
