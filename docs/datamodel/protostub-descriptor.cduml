@@ -13,10 +13,11 @@ package ProtoStubDescriptor <<Rect>> {
 
 	ProtoStubDescriptor .up.|> CatalogueDataObject.CatalogueDataObject
 
-	ProtoStubDescriptor *.. HypertyRuntimeDescriptor.RuntimeProtocolCapabilities
 	ProtoStubDescriptor *.. ProtostubConfiguration
 
-	ProtoStubDescriptor *..> URL.HypertyCatalogueURL : url of the schemas describing \nmessages supported by the Protocol Stub
+	ProtoStubDescriptor *.down. HypertyRuntimeDescriptor.RuntimeProtocolCapabilities
+
+	ProtoStubDescriptor *.down. URL.HypertyCatalogueURL : url of the schemas describing \nmessages supported by the Protocol Stub
 }
 
 @enduml
