@@ -1,9 +1,11 @@
 @startuml "Protostub-Instance-Data-Object-Model.png"
 
+package RegistryDataObject <<Rect>> {
+
 package ProtoStubInstance <<Rect>> {
 
 	class ProtoStubInstance {
-		runtime : HypertyRuntimeInstance.HypertyRuntimeInstance
+		runtime : RethinkCore.URL.HypertyRuntimeURL
 	}
 
 	ProtoStubInstance .up.|> RegistryDataObject.RegistryDataObject
@@ -13,4 +15,5 @@ package ProtoStubInstance <<Rect>> {
 
 }
 
+}
 @enduml

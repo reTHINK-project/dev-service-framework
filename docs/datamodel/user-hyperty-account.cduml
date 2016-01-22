@@ -4,8 +4,8 @@ package UserHypertyAccount <<Rect>> {
 
 	class UserHypertyAccount {
 		id
-		account : URL.UserURL
-		hyperty : URL.HypertyURL
+		account : RethinkCore.URL.UserURL
+		hyperty : RethinkCore.URL.HypertyURL
 	}
 
 	class UserHypertyConfigurationData {

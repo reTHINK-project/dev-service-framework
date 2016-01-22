@@ -8,7 +8,7 @@ package CatalogueDataObject <<Rect>> {
 		objectName : string
 		description : string
 		language : DataObjectSourceLanguage
-		sourcePackageURL : URL.URL
+		sourcePackageURL : RethinkCore.URL.URL
 		sourcePackage ?: SourcePackage
 		signature ?: string
 	}
@@ -35,6 +35,24 @@ package CatalogueDataObject <<Rect>> {
 	sourceCodeClassname : string
 	sourceCode : string
 	signature ?: string
+	}
+
+	package HypertyDescriptor <<Rect>> {
+	}
+
+	package ProtoStubDescriptor <<Rect>> {
+	}
+
+	package HypertyRuntimeDescriptor <<Rect>> {
+	}
+
+	package HypertyInterceptorDescriptor <<Rect>> {
+	}
+
+	package DataObjectSchema <<Rect>> {
+	}
+
+	package IdpProxyDescriptor <<Rect>> {
 	}
 
 	CatalogueDataObject -right-> SourcePackage

@@ -7,8 +7,8 @@ package Connection <<Rect>> {
 
 	class Connection {
 		status
-		owner : URL.UserURL
-		peer : URL.ConnectionURL
+		owner : RethinkCore.URL.UserURL
+		peer : RethinkCore.URL.ConnectionURL
 	}
 
   class OwnerPeer {
@@ -46,8 +46,8 @@ package Connection <<Rect>> {
 	    closed
 	}
 
-	Connection -up-|> SyncData
-	Peer -up-|> SyncData
+	Connection -up-|> RethinkCore.SyncData
+	Peer -up-|> RethinkCore.SyncData
 
 
 	Connection *--> "1" OwnerPeer

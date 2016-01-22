@@ -16,12 +16,6 @@ To be used to associate Response messages to the initial request message.
 
 Message type that will be used to define the Message Body format.
 
-#### contextId
-
-GUID used to identity eg a communication session like a telephony call
-
-*question:* do we need this, in case we use a data synch model where the *to* address would identify eg the communication session itself?
-
 #### from
 
 [URL](../address/readme.md) of Hyperty instance or User associated with it
@@ -29,10 +23,6 @@ GUID used to identity eg a communication session like a telephony call
 #### to
 
 One or more [URLs](../address/readme.md) of Message recipients. According to the URL scheme it may be handled in different ways
-
-#### resource
-
-The URL of the reTHINK Data Object Resource associated with the message that can be used for routing purposes eg in pub-sub communication to the messaging routing functionality will route resource update messages to services listening on this resource.
 
 ### Message Body
 
@@ -69,6 +59,10 @@ Description of response code compliant with HTTP response codes (RFC7231).
 ##### Value
 
 Contains a data value in JSON format. Applicable to Responses to READ MessageType.
+
+##### Source
+
+Contains the original creator of the response. Useful to identify the real source of the response to a one-to-many message delivery ie multiple responses coming coming from different sources.
 
 #### ReadMessageBody
 
@@ -107,6 +101,16 @@ Identifies the attribute in the Object that is deleted (optional)
 Contains forwarded message.
 
 ### Procedures
+
+#### Request - Response transactions
+
+A Response to a Request message should follow this rule:
+
+-	Response.from = Request.to
+-	Response.to = Request.from
+-	Response.id = Request.id
+
+It should be note, the Request.id MUST be incremented every time a new Request message is created.
 
 **Ask a remote Hyperty Instance to create and observe an object**
 

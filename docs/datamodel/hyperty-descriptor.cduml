@@ -1,5 +1,10 @@
 @startuml "Hyperty-Descriptor-Data-Object-Model.png"
 
+package CatalogueDataObject <<Rect>> {
+
+package HypertyRuntimeDescriptor <<Rect>> {
+}
+
 package HypertyDescriptor <<Rect>> {
 
 	class HypertyType {
@@ -9,12 +14,12 @@ package HypertyDescriptor <<Rect>> {
 	}
 
 	class HypertyDescriptor {
-		dataObjects : URL.HypertyCatalogueURLList
-		type : HypertyType
-		messageSchema : URL.HypertyCatalogueURL
+		dataObjects : RethinkCore.URL.HypertyCatalogueURLList
+		hypertyType : HypertyType
+		messageSchema : RethinkCore.URL.HypertyCatalogueURL
 		configuration ?: HypertyConfiguration
-		constraints : HypertyRuntimeDescriptor.RuntimeHypertyCapabilities
-		policies ?: URL.HypertyCatalogueURL
+		constraints : CatalogueDataObject.HypertyRuntimeDescriptor.RuntimeHypertyCapabilities
+		policies ?: RethinkCore.URL.HypertyCatalogueURL
 	}
 
 	class HypertyConfiguration {
@@ -27,8 +32,7 @@ package HypertyDescriptor <<Rect>> {
 	HypertyDescriptor .. HypertyType
 	HypertyDescriptor *.. "0..1" HypertyRuntimeDescriptor.RuntimeHypertyCapabilities
 	HypertyDescriptor *.. "0..1" HypertyConfiguration
-	HypertyDescriptor *..> URL.HypertyCatalogueURLList : list of URLs of data schemas handled by the Hyperty
 
 }
-
+}
 @enduml

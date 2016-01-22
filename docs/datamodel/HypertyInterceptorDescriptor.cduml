@@ -1,5 +1,8 @@
 @startuml "Hyperty-Interceptor-Descriptor-Data-Object-Model.png"
 
+
+package CatalogueDataObject <<Rect>> {
+
 package HypertyInterceptorDescriptor <<Rect>> {
 
 
@@ -26,10 +29,8 @@ package HypertyInterceptorDescriptor <<Rect>> {
 
 	HypertyPolicyList *.. HypertyPolicy
 
-	HypertyPolicyList .down.|> RethinkType.List
-
-	HypertyPolicy .down.|> RethinkType.ListElement
 
 }
 
+}
 @enduml

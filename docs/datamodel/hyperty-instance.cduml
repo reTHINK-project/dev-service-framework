@@ -1,28 +1,26 @@
 @startuml "Hyperty-Instance-Data-Object-Model.png"
 
-package Context {
-	class Context {
-	}
-}
+
+package RegistryDataObject <<Rect>> {
 
 package HypertyInstance <<Rect>> {
 
 
 	class HypertyInstance {
-		url : URL.HypertyURL
-		user : URL.UserURL
-		guid : URL.UserGUIDURL
-		runtime : HypertyRuntimeInstance.HypertyRuntimeInstance
-		context : URL.ContextURL
+		url : RethinkCore.URL.HypertyURL
+		user : RethinkCore.URL.UserURL
+		guid : RethinkCore.URL.UserGUIDURL
+		runtime : RethinkCore.URL.HypertyRuntimeURL
+		context : RethinkCore.URL.ContextURL
 	}
+
+}
+
 
 	HypertyInstance .up.|> RegistryDataObject.RegistryDataObject
 
-	HypertyInstance ..> HypertyDescriptor.HypertyDescriptor : described by
-	HypertyInstance ..> Identity.Identity : associated with
-	HypertyInstance ..> HypertyRuntimeInstance.HypertyRuntimeInstance : executing at
 
-	HypertyInstance ..> Context.Context
 }
+
 
 @enduml
