@@ -7,11 +7,11 @@ package HypertyInstance <<Rect>> {
 
 
 	class HypertyInstance {
-		url : RethinkCore.URL.HypertyURL
-		user : RethinkCore.URL.UserURL
-		guid : RethinkCore.URL.UserGUIDURL
-		runtime : RethinkCore.URL.HypertyRuntimeURL
-		context : RethinkCore.URL.ContextURL
+		url : URL.HypertyURL
+		user : URL.UserURL
+		guid : URL.UserGUIDURL
+		runtime : URL.HypertyRuntimeURL
+		context : URL.ContextURL
 	}
 
 }

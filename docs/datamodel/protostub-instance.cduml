@@ -5,7 +5,7 @@ package RegistryDataObject <<Rect>> {
 package ProtoStubInstance <<Rect>> {
 
 	class ProtoStubInstance {
-		runtime : RethinkCore.URL.HypertyRuntimeURL
+		runtime : URL.HypertyRuntimeURL
 	}
 
 	ProtoStubInstance .up.|> RegistryDataObject.RegistryDataObject

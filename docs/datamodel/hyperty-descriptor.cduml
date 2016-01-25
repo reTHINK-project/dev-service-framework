@@ -14,12 +14,12 @@ package HypertyDescriptor <<Rect>> {
 	}
 
 	class HypertyDescriptor {
-		dataObjects : RethinkCore.URL.HypertyCatalogueURLList
+		dataObjects : URL.HypertyCatalogueURLList
 		hypertyType : HypertyType
-		messageSchema : RethinkCore.URL.HypertyCatalogueURL
+		messageSchema : URL.HypertyCatalogueURL
 		configuration ?: HypertyConfiguration
 		constraints : CatalogueDataObject.HypertyRuntimeDescriptor.RuntimeHypertyCapabilities
-		policies ?: RethinkCore.URL.HypertyCatalogueURL
+		policies ?: URL.HypertyCatalogueURL
 	}
 
 	class HypertyConfiguration {

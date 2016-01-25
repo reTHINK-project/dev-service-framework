@@ -5,7 +5,7 @@ package CatalogueDataObject <<Rect>> {
 package ProtoStubDescriptor <<Rect>> {
 
 	class ProtoStubDescriptor {
-		messageSchemas : RethinkCore.URL.HypertyCatalogueURL
+		messageSchemas : URL.HypertyCatalogueURL
 		configuration : ProtostubConfiguration
 		constraints : CatalogueDataObject.HypertyRuntimeDescriptor.RuntimeProtocolCapabilities
 	}

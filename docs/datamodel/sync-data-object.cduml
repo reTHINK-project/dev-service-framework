@@ -1,0 +1,23 @@
+@startuml "SyncDataObject.png"
+	package SyncDataObject {
+
+
+		class SyncObject {
+			reporter : URL.HypertyURL
+			schema : URL.HypertyCatalogueURL
+		}
+
+		class SyncObjectParent {
+		}
+
+		class SyncObjectChild {
+
+		}
+
+	SyncObjectParent .up.|> SyncObject
+
+	SyncObjectChild .up.|> SyncObject
+
+	SyncObjectChild "1-*".up.*"1" SyncObjectParent
+	}
+@enduml

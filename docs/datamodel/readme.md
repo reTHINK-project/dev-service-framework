@@ -1,6 +1,7 @@
+reTHINK Data Model
+------------------
 
-## reTHINK Data Model
-
+![reTHINK Data Model](Rethink-Core.png)
 
 ### [Hyperty Domain](Hyperty-Domain/readme.md)
 
@@ -12,7 +13,7 @@
 
 ### [Hyperty Registry Model](hyperty-registry/readme.md)
 
-### [Graph Connector Data Model] (graph-connector/readme.md)
+### [Graph Connector Data Model](graph-connector/readme.md)
 
 ### [Communication](communication/readme.md)
 

@@ -4,12 +4,12 @@ package RegistryDataObject <<Rect>> {
 
 	class RegistryDataObject {
 		id : string
-		url : RethinkCore.URL.URL
-		descriptor : RethinkCore.URL.HypertyCatalogueURL
+		url : URL.URL
+		descriptor : URL.HypertyCatalogueURL
 		startingTime : RethinkCore.RethinkType.Date
 		lastModified : RethinkCore.RethinkType.Date
 		status : RegistryDataObjectStatus
-		stubs : RethinkCore.URL.HypertyCatalogueURL
+		stubs : URL.HypertyCatalogueURL
 		stubsConfiguration : RethinkCore.CatalogueDataObject.ProtoStubDescriptor.ProtostubConfiguration
 	}
 

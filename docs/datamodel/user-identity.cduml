@@ -10,8 +10,8 @@ package Identity <<Rect>> {
 	}
 
 	class Identity {
-		guid : RethinkCore.URL.UserUUIDURL
-		identifiers : RethinkCore.URL.UserURL
+		guid : URL.UserUUIDURL
+		identifiers : URL.UserURL
 	}
 
 	Identity -up- UserHypertyAccount.UserHypertyAccount
@@ -24,7 +24,7 @@ package Identity <<Rect>> {
 
 	class IdAssertion {
 		assertion : string
-		idp : RethinkCore.URL.URL
+		idp : URL.URL
 		scope : string
 	}
 
@@ -47,14 +47,14 @@ package Identity <<Rect>> {
 	}
 
 	class ServiceAddress {
-		address : RethinkCore.URL.URL
+		address : URL.URL
 	}
 
 	class UserProfile {
 		username : string
 		cn : string
-		avatar : RethinkCore.URL.URL
-		context : RethinkCore.URL.ContextURL
+		avatar : URL.URL
+		context : URL.ContextURL
 	}
 
 	note top : compliant with OIDC standard claims?

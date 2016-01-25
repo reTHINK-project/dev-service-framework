@@ -5,13 +5,7 @@ package RethinkCore <<Rect>> {
 	class RethinkObject {
 	}
 
-	class SyncData {
-	}
-
-	class SyncDataChild {
-	}
-
-	package URL <<Rect>> {
+	package SyncDataObject {
 	}
 
 	package GraphConnector <<Rect>> {
@@ -23,9 +17,6 @@ package RethinkCore <<Rect>> {
 	package RegistryDataObject <<Rect>> {
 	}
 
-	package Message <<Rect>> {
-	}
-
 	package UserHypertyAccount <<Rect>> {
 	}
 
@@ -35,5 +26,50 @@ package RethinkCore <<Rect>> {
 	package RethinkType <<Rect>> {
 	}
 }
+
+package Message <<Rect>> {
+}
+
+package URL <<Rect>> {
+}
+
+package Connection <<Rect>> {
+}
+
+package Communication <<Rect>> {
+}
+
+package Context <<Rect>> {
+}
+
+RethinkObject <|-- Identity
+
+RethinkObject <|-- GraphConnector
+
+RethinkObject <|-- CatalogueDataObject
+
+RethinkObject <|-- RegistryDataObject
+
+RethinkObject <|-- URL
+
+RethinkObject <|-- Message
+
+RethinkObject <|-- SyncDataObject
+
+SyncDataObject <|-- Connection
+
+SyncDataObject <|-- Communication
+
+SyncDataObject <|-- Context
+
+GraphConnector .down.> URL
+
+CatalogueDataObject .down.> URL
+
+RegistryDataObject .down.> URL
+
+Identity .down.> URL
+
+URL <.down. Message
 
 @enduml

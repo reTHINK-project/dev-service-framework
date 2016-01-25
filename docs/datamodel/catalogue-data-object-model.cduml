@@ -8,7 +8,7 @@ package CatalogueDataObject <<Rect>> {
 		objectName : string
 		description : string
 		language : DataObjectSourceLanguage
-		sourcePackageURL : RethinkCore.URL.URL
+		sourcePackageURL : URL.URL
 		sourcePackage ?: SourcePackage
 		signature ?: string
 	}

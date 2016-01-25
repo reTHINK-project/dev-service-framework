@@ -4,22 +4,22 @@ package Message <<Rect>> {
 
 	class Message {
 		id : string
-		from : RethinkCore.URL.URL
-		to : RethinkCore.URL.URLList
+		from : URL.URL
+		to : URL.URLList
 		type : MessageType
 		body ?: MessageBody
 	}
 
 	class MessageBody {
-		resource ?: RethinkCore.URL.URL
-		schema ?: RethinkCore.URL.HypertyCatalogueURL
+		resource ?: URL.URL
+		schema ?: URL.HypertyCatalogueURL
 		idToken ?: RethinkCore.Identity.JWT
 		accessToken ?: RethinkCore.Identity.JWT
 		assertedIdentity ?: RethinkCore.Identity.Identity
 	}
 
 	class CreateMessageBody {
-		policy ?: RethinkCore.URL.URL
+		policy ?: URL.URL
 		value : string
 	}
 
@@ -35,7 +35,7 @@ package Message <<Rect>> {
 		code : ResponseCode
 		description?: string
 		value ?: string
-		source ?: RethinkCore.URL.URL
+		source ?: URL.URL
 	}
 	note bottom : to be compliant with RFC7231
 
@@ -50,12 +50,12 @@ package Message <<Rect>> {
 	}
 
 	class SubscribeMessageBody {
-		resource ?: RethinkCore.URL.URL
-		schema ?: RethinkCore.URL.HypertyCatalogueURL
+		resource ?: URL.URL
+		schema ?: URL.HypertyCatalogueURL
 	}
 
 	class UnsubscribeMessageBody {
-		resource ?: RethinkCore.URL.URL
+		resource ?: URL.URL
 	}
 
 	class FowardMessageBody {

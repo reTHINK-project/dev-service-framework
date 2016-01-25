@@ -11,15 +11,15 @@ package RegistryDataObject <<Rect>> {
 package HypertyDataObjectInstance <<Rect>> {
 
 	class HypertyDataObjectInstance {
-		owner : RethinkCore.URL.HypertyURL
+		owner : URL.HypertyURL
 		}
 
 	class HypertyCommunicationDataObjectInstance {
-		url : RethinkCore.URL.CommunicationURL
+		url : URL.CommunicationURL
 		}
 
 	class HypertyContextDataObjectInstance {
-		url : RethinkCore.URL.ContextURL
+		url : URL.ContextURL
 		}
 		}
 
