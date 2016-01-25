@@ -2,7 +2,7 @@
  * Created by amo on 14/11/2015.
  */
 class SourcePackage {
-    constructor(sourceCode, sourceCodeClassname) {
+    constructor(sourceCodeClassname, sourceCode) {
         this._sourceCode = sourceCode;
         this._sourceCodeClassname = sourceCodeClassname;
 
