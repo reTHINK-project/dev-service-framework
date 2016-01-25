@@ -1,66 +1,40 @@
-import SyncObject from './SyncObject';
+import DataObject from './DataObject';
 import {deepClone} from '../utils/utils.js';
 
-class DataObjectReporter /* implements SyncStatus */ {
+class DataObjectReporter extends DataObject /* implements SyncStatus */ {
   /* private
-  _version: number
-
-  _url: ObjectURL
-  _schema: Schema
-  _bus: MiniBus
-  _status: on | paused
-
-  _syncObj: SyncData
   _subscriptions: <hypertyUrl: { status: string } }>
 
   ----event handlers----
   _onSubscriptionHandler: (event) => void
+  _onResponseHandler: (event) => void
   */
 
   constructor(owner, url, schema, bus, initialStatus, initialData) {
+    super(owner, url, schema, bus, initialStatus, initialData);
     let _this = this;
 
-    _this._version = 0;
-    _this._owner = owner;
-    _this._url = url;
-    _this._schema = schema;
-    _this._bus = bus;
+    bus.addListener(owner, (msg) => {
+      if (msg.type === 'response' && msg.body.source === url) {
+        _this._onResponse(msg);
+      }
+    });
 
-    _this._subscriptions = {};
-
-    _this._status = initialStatus;
-    _this._syncObj = new SyncObject(initialData);
     _this._syncObj.observe((event) => {
       _this._onChange(event);
     });
+
+    _this._subscriptions = {};
   }
-
-  get version() { return this._version; }
-
-  get url() { return this._url; }
-
-  get schema() { return this._schema; }
-
-  get status() { return this._status; }
-
-  get data() { return this._syncObj.data; }
 
   get subscriptions() { return this._subscriptions; }
 
-  pause() {
-    //TODO: pause change reports?
-  }
-
-  resume() {
-    //TODO: resume change reports?
-  }
-
-  stop() {
-    //TODO: destroy reporter?
-  }
-
   onSubscription(callback) {
     this._onSubscriptionHandler = callback;
+  }
+
+  onResponse(callback) {
+    this._onResponseHandler = callback;
   }
 
   _onForward(msg) {
@@ -137,6 +111,19 @@ class DataObjectReporter /* implements SyncStatus */ {
       });
     }
   }
+
+  _onResponse(msg) {
+    let _this = this;
+
+    //TODO: process notification reponses!
+    //TODO: process notification reponses!
+    console.log('DataObjectReporter.onResponse:', msg);
+
+    /*if (_this._onResponseHandler) {
+      _this._onResponseHandler(event);
+    }*/
+  }
+
 }
 
 export default DataObjectReporter;

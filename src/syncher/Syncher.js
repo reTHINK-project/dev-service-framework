@@ -16,7 +16,6 @@ class Syncher {
   _observers: <url: DataObjectObserver>
 
   ----event handlers----
-  _onResponseHandler: (event) => void
   _onNotificationHandler: (event) => void
   */
 
@@ -34,7 +33,6 @@ class Syncher {
    bus.addListener(owner, (msg) => {
      console.log('Syncher-RCV: ', msg);
      switch (msg.type) {
-       case 'response': _this._onResponse(msg); break;
        case 'forward': _this._onForward(msg); break;
        case 'create': _this._onRemoteCreate(msg); break;
      }
@@ -57,8 +55,6 @@ class Syncher {
  create(schema, observers, initialData) {
    let _this = this;
 
-   //TODO: what to do with schema?
-
    let requestMsg = {
      type: 'create', from: _this._owner, to: _this._subURL,
      body: { schema: schema, value: initialData, authorise: observers }
@@ -69,11 +65,12 @@ class Syncher {
      _this._bus.postMessage(requestMsg, (reply) => {
        console.log('create-response: ', reply);
        if (reply.body.code === 200) {
-         let objUrl = reply.body.resource;
+         let objURL = reply.body.resource;
 
          //reporter creation accepted
-         let newObj = new DataObjectReporter(_this._owner, objUrl, schema, _this._bus, 'on', initialData);
-         _this._reporters[objUrl] = newObj;
+         let newObj = new DataObjectReporter(_this._owner, objURL, schema, _this._bus, 'on', initialData);
+         _this._reporters[objURL] = newObj;
+
          resolve(newObj);
        } else {
          //reporter creation rejected
@@ -103,7 +100,9 @@ class Syncher {
        console.log('subscribe-response: ', reply);
        if (reply.body.code === 200) {
          //subscription accepted
-         let newObj = _this._addObserver(objURL, reply.body.schema, reply.body.value);
+         let newObj = new DataObjectObserver(_this._owner, objURL, reply.body.schema, _this._bus, 'on', reply.body.value);
+         _this._observers[objURL] = newObj;
+
          resolve(newObj);
        } else {
          //subscription rejected
@@ -113,19 +112,8 @@ class Syncher {
    });
  }
 
- onResponse(callback) {
-   this._onResponseHandler = callback;
- }
-
  onNotification(callback) {
    this._onNotificationHandler = callback;
- }
-
- _onResponse(msg) {
-   let _this = this;
-
-   //TODO: process notification reponses!
-   console.log('onResponse:', msg);
  }
 
  _onForward(msg) {
@@ -154,7 +142,7 @@ class Syncher {
        //send ack response message
        _this._bus.postMessage({
          id: msg.id, type: 'response', from: msg.to, to: msg.from,
-         body: { code: lType }
+         body: { code: lType, source: msg.body.resource }
        });
      }
    };
@@ -162,28 +150,6 @@ class Syncher {
    if (_this._onNotificationHandler) {
      _this._onNotificationHandler(event);
    }
- }
-
- /*_onRemoteChange(msg) {
-   let _this = this;
-
-   let observer = _this._observers[msg.from];
-   observer._changeObject(msg);
- }*/
-
- _addObserver(objURL, schemaURL, initialData) {
-   let _this = this;
-
-   let newObj = new DataObjectObserver(_this._owner, objURL, schemaURL, 'on', initialData);
-   _this._observers[objURL] = newObj;
-
-   //add listener for objURL
-   _this._bus.addListener(objURL, (msg) => {
-     console.log('Syncher-' + objURL + '-RCV: ', msg);
-     newObj._changeObject(msg);
-   });
-
-   return newObj;
  }
 
 }

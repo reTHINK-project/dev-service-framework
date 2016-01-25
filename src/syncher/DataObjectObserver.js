@@ -1,65 +1,30 @@
-import SyncObject from './SyncObject';
+import DataObject from './DataObject';
 import {ChangeType, ObjectType} from './SyncObject';
 
-var FilterType = {ANY: 'any', START: 'start', EXACT: 'exact'};
+let FilterType = {ANY: 'any', START: 'start', EXACT: 'exact'};
 
-class DataObjectObserver /* implements SyncStatus */ {
+class DataObjectObserver extends DataObject /* implements SyncStatus */ {
   /* private
-  _version: number
-  _owner: HypertyURL
-
-  _url: ObjectURL
-  _schema: Schema
-  _status: on | paused
-
-  _syncObj: SyncData
 
   ----event handlers----
   _filters: {<filter>: {type: <start, exact>, callback: <function>} }
   */
 
-  constructor(ownerURL, objectURL, schema, initialStatus, initialData) {
+  constructor(owner, url, schema, bus, initialStatus, initialData) {
+    super(owner, url, schema, bus, initialStatus, initialData);
     let _this = this;
 
-    _this._version = 0;
-    _this._owner = ownerURL;
-    _this._url = objectURL;
-    _this._schema = schema;
-
-    _this._status = initialStatus;
-    _this._syncObj = new SyncObject(initialData);
     _this._syncObj.observe((event) => {
       _this._onFilter(event);
     });
 
     _this._filters = {};
-  }
 
-  get version() { return this._version; }
-
-  get owner() { return this._owner; }
-
-  get url() { return this._url; }
-
-  get schema() { return this._schema; }
-
-  get status() { return this._status; }
-
-  get data() { return this._syncObj.data; }
-
-  pause() {
-    //TODO: this feature needs more analise
-    throw 'Not implemented';
-  }
-
-  resume() {
-    //TODO: this feature needs more analise
-    throw 'Not implemented';
-  }
-
-  stop() {
-    //TODO: should remove the subscription and send message unsubscribe?
-    throw 'Not implemented';
+    //add listener for objURL
+    bus.addListener(url, (msg) => {
+      console.log('DataObjectObserver-' + url + '-RCV: ', msg);
+      _this._changeObject(msg);
+    });
   }
 
   //register change filter
