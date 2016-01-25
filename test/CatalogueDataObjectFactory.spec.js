@@ -45,6 +45,22 @@ describe('CatalogueDataObjectFactory', function () {
             done();
         });
 
+        it('testing getters/setters (name, type, messageSchema)', function (done) {
+            let name = "My amazing Hyperty";
+            let messageSchema = "test";
+            let type = CatalogueObjectType.POLICY_ENFORCER;
+
+            hypertyDescriptor.name = name;
+            hypertyDescriptor.type = type;
+            hypertyDescriptor.messageSchema = messageSchema;
+
+            expect(hypertyDescriptor.name).to.eql(name);
+            expect(hypertyDescriptor.type).to.eql(type);
+            expect(hypertyDescriptor.messageSchema).to.eql(messageSchema);
+
+            done();
+        });
+
         it('should have valid GUID', function (done) {
             let guid = hypertyDescriptor.guid;
             expect(guidCheck(guid)).to.be.true;
