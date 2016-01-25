@@ -68,13 +68,41 @@ class CatalogueDataObject {
     set signature(signature) {
         if (signature)
             this._signature = signature;
-
     }
 
-    set sourcePackage(srcPackage) {
-        if (srcPackage)
-            this._sourcePackage = srcPackage;
+    set sourcePackage(sourcePackage) {
+        if (sourcePackage)
+            this._sourcePackage = sourcePackage;
+    }
 
+    set guid(guid) {
+        if (guid)
+            this._guid = guid;
+    }
+
+    set type(type) {
+        if (type)
+            this._type = type;
+    }
+
+    set objectName(objectName) {
+        if (objectName)
+            this._objectName = objectName;
+    }
+
+    set description(description) {
+        if (description)
+            this._description = description;
+    }
+
+    set language(language) {
+        if (language)
+            this._language = language;
+    }
+
+    set sourcePackageURL(sourcePackageURL) {
+        if (sourcePackageURL)
+            this._sourcePackageURL = sourcePackageURL;
     }
 }
 
