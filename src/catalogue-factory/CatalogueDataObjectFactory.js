@@ -125,14 +125,14 @@ class CatalogueDataObjectFactory extends RethinkObject {
         return new DataObjectSchema(guid, type, objectName, description, language, sourcePackageURL);
     }
 
-    createSourcePackage(sourceCode, sourceCodeClassname) {
+    createSourcePackage(sourceCodeClassname, sourceCode) {
         if (
             typeof sourceCode === "undefined"
             || typeof sourceCodeClassname === "undefined"
         )
             throw new Error("Invalid parameters!");
 
-        return new SourcePackage(sourceCode, sourceCodeClassname);
+        return new SourcePackage(sourceCodeClassname, sourceCode);
 
     }
 }
