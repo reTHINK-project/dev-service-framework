@@ -12,8 +12,8 @@ class DataObjectChild /* implements SyncStatus */ {
     _this._bus = bus;
 
     bus.addListener(owner, (msg) => {
-      console.log('DataObjectChild: ', msg);
       if (msg.type === 'response' && msg.id === msgId) {
+        console.log('DataObjectChild.onResponse:', msg);
         _this._onResponse(msg);
       }
     });
@@ -27,12 +27,15 @@ class DataObjectChild /* implements SyncStatus */ {
   _onResponse(msg) {
     let _this = this;
 
-    //TODO: process notification reponses!
-    console.log('DataObjectChild.onResponse:', msg);
+    let event = {
+      type: msg.type,
+      url: msg.body.source,
+      code: msg.body.code
+    };
 
-    /*if (_this._onResponseHandler) {
+    if (_this._onResponseHandler) {
       _this._onResponseHandler(event);
-    }*/
+    }
   }
 
 }

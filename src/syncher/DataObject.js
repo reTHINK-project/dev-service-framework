@@ -13,6 +13,9 @@ class DataObject {
   _syncObj: SyncData
 
   _children: { id: DataObjectChild }
+
+  ----event handlers----
+  _onAddChildHandler: (event) => void
   */
 
   constructor(owner, url, schema, bus, initialStatus, initialData) {
@@ -87,7 +90,6 @@ class DataObject {
     return new Promise((resolve) => {
       let msgId = _this._bus.postMessage(requestMsg);
 
-      //TODO: create DataObjectChild
       console.log('create-reporter-child( ' + _this._owner + ' ): ', requestMsg);
       let newChild = new DataObjectChild(_this._owner, msgChildId, msgId, _this._bus, initialData);
       _this._children[msgChildId] = newChild;
@@ -96,8 +98,8 @@ class DataObject {
     });
   }
 
-  onChild(callback) {
-
+  onAddChild(callback) {
+    this._onAddChildHandler = callback;
   }
 
   _onChildCreate(msg) {
@@ -112,7 +114,24 @@ class DataObject {
       let newChild = new DataObjectChild(msg.from, msgChildId, 0, _this._bus, msg.body.value);
       _this._children[msgChildId] = newChild;
 
-      //TODO: fire onChild event !
+      setTimeout(() => {
+        _this._bus.postMessage({
+          id: msg.id, type: 'response', from: msg.to, to: msg.from,
+          body: { code: 200, source: _this._owner }
+        });
+      });
+
+      let event = {
+        type: msg.type,
+        from: msg.from,
+        url: msg.to,
+        value: msg.body.value,
+        childId: msgChildId
+      };
+
+      if (_this._onAddChildHandler) {
+        _this._onAddChildHandler(event);
+      }
     }
   }
 

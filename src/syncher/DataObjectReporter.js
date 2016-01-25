@@ -115,13 +115,15 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
   _onResponse(msg) {
     let _this = this;
 
-    //TODO: process notification reponses!
-    //TODO: process notification reponses!
-    console.log('DataObjectReporter.onResponse:', msg);
+    let event = {
+      type: msg.type,
+      url: msg.from,
+      code: msg.body.code
+    };
 
-    /*if (_this._onResponseHandler) {
+    if (_this._onResponseHandler) {
       _this._onResponseHandler(event);
-    }*/
+    }
   }
 
 }
