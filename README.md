@@ -84,11 +84,9 @@ gulp doc
 
 To distribute the runtime-core, you can make a distribution file.
 
-
 Run the command:
 ```
-// compact true | false;
-gulp dist --compact=false
+gulp dist
 ```
 
 ##### <a id="build">Build</a>
