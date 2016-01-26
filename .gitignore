@@ -15,3 +15,5 @@ node_modules
 *.iml
 
 resources/bundle.js
+privatekey.csr
+*.pem

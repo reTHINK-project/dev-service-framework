@@ -11,28 +11,75 @@ class MessageBody{
      */
 	constructor(idToken, accessToken, resource, schema, assertedIdentity){
         //let _this = this;
-        if(typeof idoken !== 'undefined')
-            this.idToken = idToken;
+        if(typeof idToken !== 'undefined')
+            this._idToken = idToken;
         if(typeof accessToken  !== 'undefined')
-            this.accessToken = accessToken;
+            this._accessToken = accessToken;
         if(typeof resource !== 'undefined' )
-            this.resource = resource;
+            this._resource = resource;
         if(typeof schema !== 'undefined' )
-            this.schema = schema;
+            this._schema = schema;
         if(typeof assertedIdentity !== 'undefined')
-            this.assertedIdentity = assertedIdentity;
+            this._assertedIdentity = assertedIdentity;
 	}
+
+    get idToken(){ return this._idoken; }
+
+    get accessToken(){ return this._accessToken; }
+
+    get resource() { return this._resource; }
+
+    get schema(){ return this._schema; }
+
+    get assertedIdentity() { return this._assertedIdentity; }
+
+    set idToken(token){
+        if(token)
+            this._idToken = token;
+    }
+
+    set accessToken(token){
+        if(token)
+            this._accessToken = token;
+    }
+
+    set resource(resource){
+        if(resource)
+            this._resource = _resource;
+    }
+
+    set schema(schema){
+        if(schema)
+            this._schema = schema;
+    }
+    set assertedIdentity(assertedIdentity){
+        if(assertedIdentity)
+            this._assertedIdentity = assertedIdentity;
+    }
 }
 
 export class CreateMessageBody extends MessageBody {
     constructor(value, policy, idToken, accessToken, resource, schema, assertedIdentity){
-        if(typeof value === 'undefined')
+        if(!value)
             throw new Error("The value parameter is null");
         super(idToken,accessToken, resource, schema, assertedIdentity, schema, assertedIdentity);
 
-        this.value = value;
+        this._value = value;
         if(policy)
-            this.policy = policy;
+            this._policy = policy;
+    }
+    get value() { return this._value; }
+
+    set value(val){
+        if(val)
+            this._value = val;
+    }
+
+    get policy() { return this._policy; }
+
+    set policy(policy){
+        if(policy)
+            this._policy = policy;
     }
 }
 
@@ -42,13 +89,13 @@ export class ReadMessageBody extends MessageBody {
         super(idToken,accessToken ,resource, schema, assertedIdentity );
 
         if(attribute)
-            this.attribute = attribute;
+            this._attribute = attribute;
 
         if(criteriaSyntax)
-            this.criteriaSyntax = criteriaSyntax;
+            this._criteriaSyntax = criteriaSyntax;
 
         if(criteria)
-            this.criteria = criteria;
+            this._criteria = criteria;
     }
 }
 
@@ -59,7 +106,7 @@ export class DeleteMessageBody extends MessageBody {
         super(idToken,accessToken ,resource, schema, assertedIdentity );
 
         if(attribute){
-            this.attribute = attribute;
+            this._attribute = attribute;
         }
     }
 
@@ -71,8 +118,8 @@ export class UpdateMessageBody extends MessageBody {
 
         super(idToken,accessToken ,resource, schema, assertedIdentity );
 
-        this.attribute = attribute;
-        this.value = value;
+        this._attribute = attribute;
+        this._value = value;
     }
 }
 
@@ -82,7 +129,7 @@ export class ForwardMessageBody extends MessageBody {
 
         super(idToken,accessToken ,resource, schema, assertedIdentity );
 
-        this.message = message;
+        this._message = message;
     }
 }
 
@@ -94,12 +141,12 @@ export class ResponseMessageBody extends MessageBody {
 
         if(code)
         {
-            this.code = code;
-            this.description = REASON_PHRASE[code];
+            this._code = code;
+            this._description = REASON_PHRASE[code];
         }
 
         if(value)
-            this.value = value;
+            this._value = value;
     }
 
 }
