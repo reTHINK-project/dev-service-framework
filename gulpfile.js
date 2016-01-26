@@ -209,7 +209,7 @@ gulp.task('encode', function(done) {
     {
       type: 'input',
       name: 'configuration',
-      message: 'Configuration file like an object or url to ProtoStub have on configuration'
+      message: 'Configuration file like an object or url to ProtoStub have on configuration:'
     },
     {
       type: 'radio',
