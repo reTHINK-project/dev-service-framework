@@ -12,4 +12,6 @@ npm-debug.log
 vendor
 node_modules
 
+*.iml
+
 resources/bundle.js

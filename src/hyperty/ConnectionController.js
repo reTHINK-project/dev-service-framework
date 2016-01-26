@@ -1,15 +1,21 @@
+/* jshint undef: true */
+/* globals RTCPeerConnection */
+/* globals RTCSessionDescription */
+/* globals RTCIceCandidate */
+
 import 'webrtc-adapter-test';
 
 import EventEmitter from '../utils/EventEmitter';
 
 class ConnectionController extends EventEmitter {
 
-  constructor() {
+  constructor(syncher) {
 
-    super();
+    super(syncher);
 
     let _this = this;
 
+    _this.syncher = syncher;
     _this.mode = 'offer';
 
     _this.mediaConstraints = {
@@ -25,99 +31,126 @@ class ConnectionController extends EventEmitter {
 
     peerConnection.addEventListener('signalingstatechange', function(event) {
 
-      if (event.currentTarget.signalingState === 'have-remote-offer') {
-        _this.mode = 'answer';
+      console.info('signalingstatechange', event.currentTarget.signalingState);
+
+      if (event.currentTarget.signalingState === 'have-local-offer') {
         _this.trigger('controller:state:change', _this.mode);
       }
 
-      if (event.currentTarget.signalingState === 'have-local-offer') {
+      if (event.currentTarget.signalingState === 'have-remote-offer') {
+        _this.mode = 'answer';
         _this.trigger('controller:state:change', _this.mode);
       }
 
     });
 
     peerConnection.addEventListener('iceconnectionstatechange', function(event) {
-      console.info(event.currentTarget.iceConnectionState);
+      console.info('iceconnectionstatechange', event.currentTarget.iceConnectionState);
     });
 
     peerConnection.addEventListener('icecandidate', function(event) {
 
       if (!event.candidate) return;
 
-      let data = _this._connectionDataObjectReporter.data;
-      data.ice = {
+      let data = _this._dataObjectReporter.data;
+      if (!data.IceCandidates) data.IceCandidates = [];
+
+      data.IceCandidates.push({
         type: 'candidate',
         candidate: event.candidate.candidate,
         sdpMid: event.candidate.sdpMid,
         sdpMLineIndex: event.candidate.sdpMLineIndex
-      };
+      });
 
     });
 
     // Add stream to PeerConnection
     peerConnection.addEventListener('addstream', function(event) {
       console.info('add stream from mode: ', _this.mode);
-      _this.trigger('stream:added', URL.createObjectURL(event.stream), _this.connectionDataObjectReporter, _this.connectionDataObjectObserver);
+      _this.trigger('stream:added', URL.createObjectURL(event.stream), _this.dataObjectReporter, _this.dataObjectObserver);
     });
 
     _this.peerConnection = peerConnection;
+
+  }
+
+  // TODO: check if it is realy necessary this remotePeerInformation;
+  /**
+   * Set Remote peer information, like Hyperty.
+   * @param  {Object} remotePeerInformation information about the peer;
+   */
+  set remotePeerInformation(remotePeerInformation) {
+    let _this = this;
+    _this._remotePeerInformation = remotePeerInformation;
   }
 
   /**
-  * Set the connectionDataObject in the controller
-  * @param {ConnectionDataObject} connectionDataObject - have all information about the syncher object;
+   * Get information relative to the Remote Peer;
+   * @return {Object} remotePeerInformation;
+   */
+  get remotePeerInformation() {
+    let _this = this;
+    return _this._remotePeerInformation;
+  }
+
+  /**
+  * Set the dataObject in the controller
+  * @param {ConnectionDataObject} dataObject - have all information about the syncher object;
   */
-  set connectionDataObjectReporter(connectionDataObject) {
-    if (!connectionDataObject) throw new Error('The Connection Data Object is a needed parameter');
+  set dataObjectReporter(dataObjectReporter) {
+    if (!dataObjectReporter) throw new Error('The Data Object Reporter is a needed parameter');
 
     let _this = this;
-    _this._connectionDataObjectReporter = connectionDataObject;
+    _this._dataObjectReporter = dataObjectReporter;
 
-    connectionDataObject.onSubscription(function(event) {
-      event.accept();
+    console.log('Controller Mode: ', _this.mode);
+    if (_this.mode === 'offer') {
+      _this.createOffer();
+    } else {
+      _this.createAnswer();
+    }
 
-      if (_this.mode === 'offer') {
-        _this.createOffer();
-      } else {
-        _this.createAnswer();
-      }
-
+    // TODO: Check if is realy necessary the setTimeout
+    dataObjectReporter.onSubscription(function(event) {
+      setTimeout(function() {
+        event.accept();
+      }, 100);
     });
 
-    console.log('Set connectionDataObject: ', _this._connectionDataObjectReporter);
+    console.info('Set dataObject Reporter: ', _this.dataObjectReporter);
   }
 
   /**
-  * return the connectionDataObject in the controller
-  * @return {ConnectionDataObject} connectionDataObject
+  * return the dataObject in the controller
+  * @return {ConnectionDataObject} dataObject
   */
-  get connectionDataObjectReporter() {
+  get dataObjectReporter() {
     let _this = this;
-    return _this._connectionDataObjectReporter;
+    return _this._dataObjectReporter;
   }
 
   /**
-  * Set the connectionDataObject in the controller
-  * @param {ConnectionDataObject} connectionDataObject - have all information about the syncher object;
+  * Set the dataObject in the controller
+  * @param {ConnectionDataObject} dataObject - have all information about the syncher object;
   */
-  set connectionDataObjectObserver(connectionDataObject) {
-    if (!connectionDataObject) throw new Error('The Connection Data Object is a needed parameter');
+  set dataObjectObserver(dataObjectObserver) {
+    if (!dataObjectObserver) throw new Error('The Data Object Observer is a needed parameter');
 
     let _this = this;
-    _this._connectionDataObjectObserver = connectionDataObject;
+    _this._dataObjectObserver = dataObjectObserver;
 
-    console.log('Set connectionDataObject: ', _this._connectionDataObjectObserver);
+    console.info('Set dataObject Observer: ', _this._dataObjectObserver);
 
-    _this.changePeerInformation();
+    _this.changePeerInformation(dataObjectObserver);
   }
 
   /**
-  * return the connectionDataObject in the controller
-  * @return {ConnectionDataObject} connectionDataObject
+  * return the dataObject in the controller
+  * @return {ConnectionDataObject} dataObject
   */
-  get connectionDataObjectObserver() {
+  get dataObjectObserver() {
     let _this = this;
-    return _this._connectionDataObjectObserver;
+    return _this._dataObjectObserver;
   }
 
   /**
@@ -142,28 +175,40 @@ class ConnectionController extends EventEmitter {
     });
   }
 
-  changePeerInformation() {
+  changePeerInformation(dataObjectObserver) {
 
     let _this = this;
 
-    _this._connectionDataObjectObserver.onChange('*', function(event) {
-      console.debug('message:', event);
+    _this.processPeerInformation(dataObjectObserver.data);
 
-      let message = event.data;
-
-      if (message.type === 'offer' || message.type === 'answer') {
-
-        _this.peerConnection.setRemoteDescription(new RTCSessionDescription(message), _this.remoteDescriptionSuccess, _this.remoteDescriptionError);
-
-      } else if (message.type === 'candidate') {
-        _this.peerConnection.addIceCandidate(new RTCIceCandidate({candidate: message.candidate}));
-      }
-
+    dataObjectObserver.onChange('*', function(event) {
+      console.debug('message:', event.data);
+      _this.processPeerInformation(event.data);
     });
+
+  }
+
+  processPeerInformation(data) {
+    let _this = this;
+    let ConnectionDescription = data.ConnectionDescription;
+    let IceCandidates = data.IceCandidates;
+
+    if (ConnectionDescription.type === 'offer' || ConnectionDescription.type === 'answer') {
+      _this.peerConnection.setRemoteDescription(new RTCSessionDescription(ConnectionDescription), _this.remoteDescriptionSuccess, _this.remoteDescriptionError);
+    }
+
+    if (IceCandidates) {
+      IceCandidates.forEach(function(ice) {
+        if (ice.type === 'candidate') {
+          _this.peerConnection.addIceCandidate(new RTCIceCandidate({candidate: ice.candidate}), _this.remoteDescriptionSuccess, _this.remoteDescriptionError);
+        }
+      });
+    }
+
   }
 
   remoteDescriptionSuccess() {
-    console.log('remote success');
+    console.info('remote success');
   }
 
   remoteDescriptionError(error) {
@@ -175,7 +220,7 @@ class ConnectionController extends EventEmitter {
 
     _this.peerConnection.createOffer(function(description) {
       _this.onLocalSessionCreated(description);
-    }, _this.logError, _this.mediaConstraints);
+    }, _this.infoError, _this.mediaConstraints);
 
   }
 
@@ -184,11 +229,93 @@ class ConnectionController extends EventEmitter {
 
     _this.peerConnection.createAnswer(function(description) {
       _this.onLocalSessionCreated(description);
-    }, _this.logError);
+    }, _this.infoError);
+  }
+
+  onLocalSessionCreated(description) {
+
+    let _this = this;
+
+    _this.peerConnection.setLocalDescription(description, function() {
+
+      let data = _this._dataObjectReporter.data;
+      data.ConnectionDescription = {
+        sdp: description.sdp,
+        type: description.type
+      };
+
+    }, _this.infoError);
+
+  }
+
+  infoError(err) {
+    console.error(err.toString(), err);
   }
 
   /**
-   * Disconnect the peer connection
+   * Used to accept an incoming connection request.
+   * @method accept
+   * @return {Promise}
+   */
+  accept(options) {
+
+    let _this = this;
+    let syncher = _this.syncher;
+
+    options = options || {video: true, audio: true};
+
+    console.log('Remote Peer Information: ', _this._remotePeerInformation);
+    let remotePeer = _this._remotePeerInformation.from;
+
+    return new Promise(function(resolve, reject) {
+
+      try {
+
+        console.info('------------------------ Syncher Create ---------------------- \n');
+        _this.getUserMedia(options).then(function(mediaConstraints) {
+          console.info('1. Return media constraints ', mediaConstraints);
+          return syncher.create({}, [remotePeer], {});
+        }).then(function(dataObjectReporter) {
+          console.info('2. Return the Data Object Reporter ', dataObjectReporter);
+          _this.dataObjectReporter = dataObjectReporter;
+
+          resolve('accepted');
+        })
+        .catch(function(reason) {
+          reject(reason);
+        });
+
+      } catch (e) {
+        reject('error accepting connection');
+      }
+    });
+
+  }
+
+  /**
+  * Used to decline an incoming connection request.
+  * @method decline
+  * @return {Promise}
+  */
+  decline() {
+
+    let _this = this;
+    let syncher = _this.syncher;
+
+    return new Promise(function(resolve, reject) {
+
+      try {
+        console.log('syncher: ', syncher);
+        resolve('Declined');
+      } catch (e) {
+        reject(e);
+      }
+    });
+
+  }
+
+  /**
+   * Used to close an existing connection instance.
    * @method disconnect
    * @return {Promise}
    */
@@ -213,25 +340,81 @@ class ConnectionController extends EventEmitter {
 
   }
 
-  onLocalSessionCreated(description) {
+  /**
+   * Used to add/invite new peers on an existing connection instance (for multiparty connections).
+   * @method addPeer
+   * @return {Promise}
+   */
+   addPeer() {
 
-    let _this = this;
-    let peerConnection = _this.peerConnection;
+   }
 
-    peerConnection.setLocalDescription(description, function() {
-
-      let data = _this._connectionDataObjectReporter.data;
-      data.sdp = {
-        sdp: description.sdp,
-        type: description.type
-      };
-
-    }, _this.logError);
+  /**
+   * Used to remove a peer from an existing connection instance.
+   * @method removePeer
+   * @return {Promise}
+   */
+  removePeer() {
 
   }
 
-  logError(err) {
-    console.error(err.toString(), err);
+  // Peer Actions
+  disableMic() {
+    let _this = this;
+
+    return new Promise(function(resolve, reject) {
+
+      try {
+        let localStream = _this.peerConnection.getLocalStreams()[0];
+        let audioTrack = localStream.getAudioTracks()[0];
+
+        audioTrack.enabled = audioTrack.enabled ? false : true;
+        resolve(audioTrack.enabled);
+      } catch (e) {
+        reject(e);
+      }
+
+    });
+
+  }
+
+  disableCam() {
+    let _this = this;
+
+    return new Promise(function(resolve, reject) {
+
+      try {
+        let localStream = _this.peerConnection.getLocalStreams()[0];
+        let videoTrack = localStream.getVideoTracks()[0];
+
+        videoTrack.enabled = videoTrack.enabled ? false : true;
+
+        resolve(videoTrack.enabled);
+      } catch (e) {
+        reject(e);
+      }
+    });
+
+  }
+
+  mute() {
+
+    let _this = this;
+
+    return new Promise(function(resolve, reject) {
+
+      try {
+        let remoteStream = _this.peerConnection.getRemoteStreams()[0];
+        let audioTrack = remoteStream.getAudioTracks()[0];
+
+        audioTrack.enabled = audioTrack.enabled ? false : true;
+
+        resolve(audioTrack.enabled);
+      } catch (e) {
+        reject(e);
+      }
+    });
+
   }
 
 }
