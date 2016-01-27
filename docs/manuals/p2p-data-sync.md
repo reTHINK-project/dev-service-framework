@@ -17,6 +17,18 @@ On the Hyperty Observer side, Data Objects are also created with the Syncher API
 
 `*Observer code snippet*`
 
+### Hyperty Data Object URL address
+
+The Hyperty Middleware allocates to each new created Hyperty Data Object a Global Unique Identifier URL that is independent from the Hyperty instance creator and from the Hyperty Runtime, in order to support mobility of the Data Object between different Hyperty Runtimes and also to support delegation of the Reporter role to other Hyperty instances. However, at this point Reporter delegation is only supported between Hyperty instances from the same domain.
+
+### Hyperty Data Object Schema
+
+Each Hyperty Data Object is formaly described by a json-schema that is identified by a Catalogue URL. This allows to check whether two different Hyperties are compliant by cross checking each supported Hyperty Data Object schema. At this point the following Hyperty Data Object schemas are defined:
+
+-	**[Connection Data Schema](../datamodel/connection)** : Hyperties supporting this schema are able to handle WebRTC Peer Connections between the Hyperty Runtime instances where they are running independently of the signalling protocol used. The URL Scheme for Connection Data Objects is "connection".
+-	**[Communication Data Schema](../datamodel/communication)** : Hyperties supporting this schema are able to handle different communication types including Textual Chat, Audio, Video, Screen Sharing and File sharing. Such communication can be supported on top of WebRTC protocol streams by using the Connection Data Schema. The URL Scheme for Communication Data Objects is "comm".
+-	**[Context Data Schema](../datamodel/context)** : Hyperties supporting this schema are able to produce or consume Context Data, usually collected from sensors. The URL Scheme for Communication Data Objects is "ctxt".
+
 ### Parent - Children Resources
 
 In order to allow use cases like Group Chat where all involved Hyperties are able to write in the Sync Data Object, the Parent - Child Data Sync Objects is introduced.
