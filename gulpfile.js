@@ -33,7 +33,7 @@ gulp.task('dist', function() {
 
   return browserify('./src/service-framework.js', {
     standalone: 'service-framework', debug: false}
-  ).transform(babel, {optional: 'runtime'})
+  ).transform(babel, {compact: true, optional: 'runtime'})
   .bundle()
   .on('error', function(err) {
     console.error(err);

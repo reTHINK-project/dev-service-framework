@@ -112,9 +112,7 @@ class ConnectionController extends EventEmitter {
 
     // TODO: Check if is realy necessary the setTimeout
     dataObjectReporter.onSubscription(function(event) {
-      setTimeout(function() {
-        event.accept();
-      }, 100);
+      event.accept();
     });
 
     console.info('Set dataObject Reporter: ', _this.dataObjectReporter);
