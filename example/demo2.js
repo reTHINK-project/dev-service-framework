@@ -82,6 +82,7 @@ form.on('submit', function(event) {
       default:
 
     }
+    console.log(result);
 
     code = '\n' + JSON.stringify(result, null, 2);
 

@@ -93,7 +93,6 @@ function hypertyDeployed(result) {
   let connector = window.components[result.runtimeHypertyURL].instance;
 
   connector.addEventListener('have:notification', notificationHandler);
-  connector.connectionController.addEventListener('stream:added', processVideo);
 
   runtime.messageBus.addListener(result.runtimeHypertyURL, newMessageRecived);
 }
@@ -274,9 +273,9 @@ function notificationHandler(controller, event) {
   let acceptBtn = incoming.find('.btn-accept');
   let rejectBtn = incoming.find('.btn-reject');
 
-  let hypertyId = loginPanel.attr('data-url');
-  let informationHolder = incoming.find('.information');
-  let resources = {};
+  // let hypertyId = loginPanel.attr('data-url');
+  // let informationHolder = incoming.find('.information');
+  // let resources = {};
 
   showVideo(controller);
 
