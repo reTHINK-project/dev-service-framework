@@ -1,5 +1,5 @@
 import DataObject from './DataObject';
-import {deepClone} from '../utils/utils.js';
+import { deepClone } from '../utils/utils.js';
 
 class DataObjectReporter extends DataObject /* implements SyncStatus */ {
   /* private
@@ -95,20 +95,6 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
 
     if (_this._onSubscriptionHandler) {
       _this._onSubscriptionHandler(event);
-    }
-  }
-
-  //send delta messages to subscriptions
-  _onChange(event) {
-    let _this = this;
-
-    _this._version++;
-
-    if (_this._status === 'on') {
-      _this._bus.postMessage({
-        type: event.cType, from: _this._owner, to: _this._url,
-        body: {version: _this._version, oType: event.oType, attrib: event.field, value: event.data}
-      });
     }
   }
 

@@ -1,3 +1,4 @@
+import SyncObject from './SyncObject';
 
 class DataObjectChild /* implements SyncStatus */ {
   /* private
@@ -9,7 +10,10 @@ class DataObjectChild /* implements SyncStatus */ {
   constructor(owner, childId, msgId, bus, initialData) {
     let _this = this;
 
+    _this._owner = owner;
+    _this._childId = childId;
     _this._bus = bus;
+    _this._syncObj = new SyncObject(initialData);
 
     bus.addListener(owner, (msg) => {
       if (msg.type === 'response' && msg.id === msgId) {
@@ -18,6 +22,14 @@ class DataObjectChild /* implements SyncStatus */ {
       }
     });
 
+  }
+
+  get data() { return this._syncObj.data; }
+
+  onChange(callback) {
+    this._syncObj.observe((event) => {
+      callback(event);
+    });
   }
 
   onResponse(callback) {
