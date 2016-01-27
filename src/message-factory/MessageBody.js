@@ -23,7 +23,7 @@ class MessageBody{
             this._assertedIdentity = assertedIdentity;
 	}
 
-    get idToken(){ return this._idoken; }
+    get idToken(){ return this._idToken; }
 
     get accessToken(){ return this._accessToken; }
 
@@ -45,7 +45,7 @@ class MessageBody{
 
     set resource(resource){
         if(resource)
-            this._resource = _resource;
+            this._resource = resource;
     }
 
     set schema(schema){

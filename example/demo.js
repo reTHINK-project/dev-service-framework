@@ -16,7 +16,7 @@ let sandboxFactory = new SandboxFactory();
 let avatar = 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg';
 
 // You can change this at your own domain
-let domain = 'localhost:8080';
+let domain = 'localhost';
 
 let runtime = new RuntimeUA(sandboxFactory, domain);
 

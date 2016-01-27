@@ -111,10 +111,9 @@ class CatalogueDataObjectFactory extends RethinkObject {
             description, language, sourcePackageURL, configuration, policies);
     }
 
-    createDataObjectSchema(guid, type, objectName, description, language, sourcePackageURL) {
+    createDataObjectSchema(guid, objectName, description, language, sourcePackageURL) {
         if (
             typeof guid === "undefined"
-            || typeof type === "undefined"
             || typeof objectName === "undefined"
             || typeof description === "undefined"
             || typeof language === "undefined"
@@ -122,7 +121,7 @@ class CatalogueDataObjectFactory extends RethinkObject {
         )
             throw new Error("Invalid parameters!");
 
-        return new DataObjectSchema(guid, type, objectName, description, language, sourcePackageURL);
+        return new DataObjectSchema(guid, CatalogueObjectType.DATA_SCHEMA, objectName, description, language, sourcePackageURL);
     }
 
     createSourcePackage(sourceCodeClassname, sourceCode) {

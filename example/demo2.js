@@ -1,6 +1,6 @@
 // jshint browser:true, jquery: true
 
-import {MessageFactory} from 'service-framework';
+import {MessageFactory} from '../src/service-framework';
 
 let messageFactory = new MessageFactory();
 
@@ -33,11 +33,55 @@ form.on('submit', function(event) {
 
   try {
 
-    let result = messageFactory[object.messageType](
-      object.from, object.to, object.contextId, object.idToken, object.accessToken,
-      object.resource, object.signature, object.schema, object.assertedIdentity,
-      object.value, object.policy
-    );
+    let result;
+
+    switch (object.messageType) {
+      case 'createMessageRequest':
+        result = messageFactory.createMessageRequest(
+          object.from, object.to, object.idToken, object.accessToken,
+          object.resource, object.schema, object.assertedIdentity,
+          object.value, object.policy
+        );
+        break;
+
+      case 'createForwardMessageRequest':
+        result = messageFactory.createForwardMessageRequest(
+          object.value, object.from, object.to, object.idToken, object.accessToken,
+          object.resource, object.schema, object.assertedIdentity, object.policy
+        );
+        break;
+
+      case 'createDeleteMessageRequest':
+        result = messageFactory.createDeleteMessageRequest(
+          object.from, object.to, object.idToken, object.accessToken,
+          object.resource, object.schema, object.assertedIdentity, object.policy
+        );
+        break;
+
+      case 'createUpdateMessageRequest':
+        result = messageFactory.createUpdateMessageRequest(
+          object.from, object.to, object.idToken, object.accessToken,
+          object.resource, object.schema, object.assertedIdentity, object.attribute, object.value
+        );
+        break;
+
+      case 'createReadMessageRequest':
+        result = messageFactory.createReadMessageRequest(
+          object.from, object.to, object.idToken, object.accessToken,
+          object.resource, object.schema, object.assertedIdentity, object.attribute, object.value
+        );
+        break;
+
+      case 'createMessageResponse':
+        result = messageFactory.createMessageResponse(
+          object.from, object.to, object.idToken, object.accessToken,
+          object.resource, object.schema, object.assertedIdentity, object.code, object.value
+        );
+        break;
+
+      default:
+
+    }
 
     code = '\n' + JSON.stringify(result, null, 2);
 
@@ -49,13 +93,12 @@ form.on('submit', function(event) {
 
 });
 
-// createMessageRequest(from, to, contextId, idToken, accessToken, resource, signature, schema, assertedIdentity, value, policy);
-// createMessageRequest(from, to, contextId, idToken, accessToken, resource, signature, schema, assertedIdentity, value, policy);
-// createDeleteMessageRequest(from, to, contextId, idToken, accessToken, resource, signature, attribute, schema, assertedIdentity);
-// createUpdateMessageRequest(from, to, contextId, idToken, accessToken, resource, signature, schema, assertedIdentity, attribute,  value);
-// createReadMessageRequest(from, to, contextId, idToken, accessToken, resource, signature, schema, assertedIdentity,  attribute, criteriaSyntax, criteria);
-// createMessageResponse(from, to, contextId, idToken, accessToken, resource, signature, schema, assertedIdentity, code, value);
-// createForwardMessageRequest(data, from, to, contextId, idToken, accessToken, resource, signature, schema, assertedIdentity);
+// createMessageRequest(from, to, idToken, accessToken, resource, schema, assertedIdentity, value, policy);
+// createForwardMessageRequest(data, from, to, idToken, accessToken, resource, schema, assertedIdentity)
+// createDeleteMessageRequest(from, to, idToken, accessToken, resource, schema, assertedIdentity);
+// createUpdateMessageRequest(from, to, idToken, accessToken, resource, schema, assertedIdentity, attribute,  value);
+// createReadMessageRequest(from, to, idToken, accessToken, resource, schema, assertedIdentity,  attribute, criteriaSyntax, criteria);
+// createMessageResponse(from, to, idToken, accessToken, resource, schema, assertedIdentity, code, value);
 //
 // generateDeleteMessageBody(data, attribute);
 // generateUpdateMessageBody(data, attribute, value);
