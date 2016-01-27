@@ -109,7 +109,7 @@ class CatalogueDataObject {
 export var CatalogueObjectType = {
     HYPERTY: 'hyperty', PROTOSTUB: 'protostub', HYPERTY_RUNTIME: 'hyperty_runtime',
     HYPERTY_INTERCEPTOR: 'hyperty_inspector', HYPERTY_DATA_OBJECT: 'hyperty_data_object',
-    POLICY_ENFORCER: 'policy_enforcer', DATA_SCHEMA: 'data_schema'
+    POLICY_ENFORCER: 'policy_enforcer'
 };
 export var DataObjectSourceLanguage = {
     JAVASCRIPT_ECMA6: 'javascript_ecma6', JAVASCRIPT_ECMA5: 'javascript_ecma5',
