@@ -1,65 +1,29 @@
-import SyncObject from './SyncObject';
-import {ChangeType, ObjectType} from './SyncObject';
+import DataObject from './DataObject';
 
-var FilterType = {ANY: 'any', START: 'start', EXACT: 'exact'};
+let FilterType = {ANY: 'any', START: 'start', EXACT: 'exact'};
 
-class DataObjectObserver /* implements SyncStatus */ {
+class DataObjectObserver extends DataObject /* implements SyncStatus */ {
   /* private
-  _version: number
-  _owner: HypertyURL
-
-  _url: ObjectURL
-  _schema: Schema
-  _status: on | paused
-
-  _syncObj: SyncData
 
   ----event handlers----
   _filters: {<filter>: {type: <start, exact>, callback: <function>} }
   */
 
-  constructor(ownerURL, objectURL, schema, initialStatus, initialData) {
+  constructor(owner, url, schema, bus, initialStatus, initialData) {
+    super(owner, url, schema, bus, initialStatus, initialData);
     let _this = this;
 
-    _this._version = 0;
-    _this._owner = ownerURL;
-    _this._url = objectURL;
-    _this._schema = schema;
+    //add listener for objURL
+    bus.addListener(url, (msg) => {
+      console.log('DataObjectObserver-' + url + '-RCV: ', msg);
+      _this._changeObject(_this._syncObj, msg);
+    });
 
-    _this._status = initialStatus;
-    _this._syncObj = new SyncObject(initialData);
     _this._syncObj.observe((event) => {
       _this._onFilter(event);
     });
 
     _this._filters = {};
-  }
-
-  get version() { return this._version; }
-
-  get owner() { return this._owner; }
-
-  get url() { return this._url; }
-
-  get schema() { return this._schema; }
-
-  get status() { return this._status; }
-
-  get data() { return this._syncObj.data; }
-
-  pause() {
-    //TODO: this feature needs more analise
-    throw 'Not implemented';
-  }
-
-  resume() {
-    //TODO: this feature needs more analise
-    throw 'Not implemented';
-  }
-
-  stop() {
-    //TODO: should remove the subscription and send message unsubscribe?
-    throw 'Not implemented';
   }
 
   //register change filter
@@ -104,49 +68,6 @@ class DataObjectObserver /* implements SyncStatus */ {
         }
       }
     });
-  }
-
-  //receive and process change messages
-  _changeObject(msg) {
-    let _this = this;
-
-    //TODO: update version ?
-    //how to handle an incorrect version ? Example: receive a version 3 when the observer is in version 1, where is the version 2 ?
-    //will we need to confirm the reception ?
-    if (_this._version + 1 === msg.body.version) {
-      _this._version++;
-      let path = msg.body.attrib;
-      let value = msg.body.value;
-      let findResult = _this._syncObj.findBefore(path);
-
-      if (msg.type === ChangeType.UPDATE) {
-        findResult.obj[findResult.last] = value;
-      } else {
-        if (msg.type === ChangeType.ADD) {
-          if (msg.body.oType === ObjectType.OBJECT) {
-            findResult.obj[findResult.last] = value;
-          } else {
-            //ARRAY
-            let arr = findResult.obj;
-            let index = findResult.last;
-            Array.prototype.splice.apply(arr, [index, 0].concat(value));
-          }
-        } else {
-          //REMOVE
-          if (msg.body.oType === ObjectType.OBJECT) {
-            delete findResult.obj[findResult.last];
-          } else {
-            //ARRAY
-            let arr = findResult.obj;
-            let index = findResult.last;
-            arr.splice(index, value);
-          }
-        }
-      }
-    } else {
-      //TODO: how to handle unsynchronized versions?
-      console.log('unsynchronized versions');
-    }
   }
 }
 
