@@ -4,8 +4,9 @@ Development Manuals
 *give a short summary for each document and the reading order for each type of developer (Hyperty, App, Msg Node or Runtime developer)*
 
 -	[Hyperty Concept Overview](hyperty.md)
--	[Hyperty Messaging Middleware Overview](hyperty-messaging-middleware.md)
--	[Hyperty Data Synchronisation: Reporter - Observer communication model](hyperty-messaging-middleware.md)
+-	[Hyperty Messaging Framework Overview](hyperty-messaging-framework.md)
+-	[Hyperty Data Synchronisation: Reporter - Observer communication model](p2p-data-sync.md)
+-	[Hyperty Trust and Security Model](hyperty-trust.md)
 -	[Hyperty Development](development-of-hyperties.md)
 -	[Application Development](development-of-apps.md)
 -	[Message Nodes and Protostubs Development](development-of-protostubs-and-msg-nodes.md)

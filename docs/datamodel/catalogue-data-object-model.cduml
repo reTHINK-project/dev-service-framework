@@ -5,6 +5,7 @@ package CatalogueDataObject <<Rect>> {
 	class CatalogueDataObject {
 		guid : string
 		type : CatalogueObjectType
+		version : string
 		objectName : string
 		description : string
 		language : DataObjectSourceLanguage
