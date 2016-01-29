@@ -3,7 +3,7 @@
 package CatalogueDataObject <<Rect>> {
 
 	class CatalogueDataObject {
-		guid : string
+		cguid : string
 		type : CatalogueObjectType
 		version : string
 		objectName : string
