@@ -180,15 +180,15 @@ describe('CatalogueDataObjectFactory', function () {
 
         it('should generate DataObjectSchema for ProtocolStubDescriptor', function (done) {
             dataObjectSchema = catalogueDataObjectFactory.createDataObjectSchema(
-                "b36392c3-73d4-4a63-942b-4a9c2c663eea", CatalogueObjectType.PROTOSTUB, "My awesome Schema",
+                "b36392c3-73d4-4a63-942b-4a9c2c663eea", "My awesome Schema",
                 "Description of Schema",
                 DataObjectSourceLanguage.JAVASCRIPT_ECMA6, "https://example.org/my-awesome-schema/source");
             expect(dataObjectSchema).not.to.be.empty;
             done();
         });
 
-        it('should be of type PROTOSTUB', function (done) {
-            expect(dataObjectSchema.type).to.eql(CatalogueObjectType.PROTOSTUB);
+        it('should be of type data_schema', function (done) {
+            expect(dataObjectSchema.type).to.eql(CatalogueObjectType.DATA_SCHEMA);
             done();
         });
 
