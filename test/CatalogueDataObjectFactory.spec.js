@@ -178,7 +178,7 @@ describe('CatalogueDataObjectFactory', function () {
     describe('createDataObjectSchema()', function () {
         let dataObjectSchema;
 
-        it('should generate DataObjectSchema for ProtocolStubDescriptor', function (done) {
+        it('should generate DataObjectSchema', function (done) {
             dataObjectSchema = catalogueDataObjectFactory.createDataObjectSchema(
                 "b36392c3-73d4-4a63-942b-4a9c2c663eea", "My awesome Schema",
                 "Description of Schema",
@@ -187,7 +187,8 @@ describe('CatalogueDataObjectFactory', function () {
             done();
         });
 
-        it('should be of type data_schema', function (done) {
+
+        it('should be of type DATA_SCHEMA', function (done) {
             expect(dataObjectSchema.type).to.eql(CatalogueObjectType.DATA_SCHEMA);
             done();
         });
