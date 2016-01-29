@@ -2,6 +2,10 @@
 * Class implementation of Message Data Model
 */
 
+import {CreateMessageBody, DeleteMessageBody, UpdateMessageBody, ReadMessageBody, ResponseMessageBody,
+    ForwardMessageBody} from './MessageBody.js';
+
+
 export class Message{
 
     constructor(id, from, toList, type,  body) {
@@ -48,10 +52,41 @@ export class Message{
             this._to = recipientList;
     }
 
+    assertIdentity(message, token, identity){
+        if(!message || !token || !identity)
+            throw  new Error("message, token to be removed, and assertedIdentity must be provided");
+        //console.log('given message', message);
+        let newBody = message.body;
+
+        newBody.idToken = null;
+
+        newBody.assertedIdentity = identity;
+        message.body= newBody;
+        return message;
+    }
+
+    addIdToken(message, token){
+        if(!message || !token )
+            throw  new Error("message, token to be added, must be provided");
+        let newBody = message.body;
+        newBody.idToken = token;
+        message.body = newBody;
+        return message;
+    }
+
+
+    addAccessToken(message, token){
+        if(!message || !token )
+            throw  new Error("message, token to be added, must be provided");
+        let newBody = message.body;
+        newBody.accessToken = token;
+        message.body = newBody;
+        return message;
+    }
 }
 
 
-export var MessageType = {CREATE: 'create', READ: 'read', UPDATE: 'update', DELETE: 'delete', SUBSCRIBE: 'subscribe',
+export const MessageType = {CREATE: 'create', READ: 'read', UPDATE: 'update', DELETE: 'delete', SUBSCRIBE: 'subscribe',
     UNSUBSCRIBE: 'unsubscribe', RESPONSE: 'response', FORWARD: 'forward'};
 
 export default Message;

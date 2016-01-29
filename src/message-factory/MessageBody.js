@@ -1,4 +1,4 @@
-class MessageBody{
+export class MessageBody{
 
     /**
      *
@@ -135,9 +135,9 @@ export class ForwardMessageBody extends MessageBody {
 
 export class ResponseMessageBody extends MessageBody {
 
-    constructor(idToken, accessToken, resource, code, value){
+    constructor(idToken, accessToken, resource, code, value, source){
 
-        super(idToken,accessToken ,resource );
+        super(idToken, accessToken ,resource );
 
         if(code)
         {
@@ -145,8 +145,11 @@ export class ResponseMessageBody extends MessageBody {
             this._description = REASON_PHRASE[code];
         }
 
+        if(source)
+            this._source = source;
         if(value)
             this._value = value;
+
     }
 
 }
