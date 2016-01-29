@@ -11,11 +11,54 @@ Hyperty Reporter - Observer communication pattern goes beyond current solutions 
 
 The API to handle Hyperty Data Objects is extremely simple and fun to use. The Developer of the Hyperty Reporter just has to create the Data Sync object with the Syncher API, and write on the object every time there is data to be updated and shared with Hyperty Observers.
 
-`*Reporter code snippet*`
+```javascript
+  connect(hypertyURL, options) {
+
+    ....
+
+    console.info('------------------------ Syncher Create ---------------------- \n');
+    syncher.create({}, [hypertyURL], {}).then(function(dataObjectReporter) {
+      console.info('1. Return Create Data Object Reporter', dataObjectReporter);
+
+      _dataObjectReporter = dataObjectReporter;
+
+      connectionController = new ConnectionController(syncher);
+      return connectionController.getUserMedia(options);
+    })
+    .then(function(mediaConstraints) {
+      console.info('2. Return the media constraints from controller: ', mediaConstraints);
+
+      connectionController.dataObjectReporter = _dataObjectReporter;
+      _this._controllers[hypertyURL] = connectionController;
+
+      resolve(connectionController);
+      console.info('--------------------------- END --------------------------- \n');
+    })
+    .catch(function(reason) {
+      console.error(reason);
+      reject(reason);
+    });
+  }
+```
 
 On the Hyperty Observer side, Data Objects are also created with the Syncher API and the emerging [Object.observer() Javascript method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/observe) is used to receive the stream of data changes coming from the Reporter Hyperty.
 
-`*Observer code snippet*`
+```javascript
+  onNotification() {
+    console.info('---------------- Syncher Subscribe ---------------- \n');
+    syncher.subscribe(event.url).then(function(dataObjectObserver) {
+      console.info('1. Return Subscribe Data Object Observer', dataObjectObserver);
+
+      let connectionController = new ConnectionController(syncher);
+      _this.trigger('have:notification', connectionController, event);
+
+      console.info('------------------------ END ---------------------- \n');
+    }).catch(function(reason) {
+      console.error(reason);
+    });
+  }
+```
+
 
 ### Hyperty Data Object URL address
 
