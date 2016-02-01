@@ -35,32 +35,6 @@ Message sent by the Message Node Address Allocation function to Hyperty Runtime 
 "body" : { "code": 200, "value" : {"allocated": ["<scheme>://<sp-domain>/<identifier>", ...]} }
 ```
 
-#### Address deallocation request for one or more addresses
-
-**Message to request address deallocation for one or more addresses**
-
-Message sent by the Hyperty Runtime Registry function to Message Node Address Allocation function.
-
-```
-"id" : "<2>"
-"type" : "DELETE",
-"from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/registry/allocation",
-"to" : "domain://msg-node.<sp-domain>/<type>-address-allocation",
-"body" : { "value" : {"deallocate": ["<scheme>://<sp-domain>/<identifier>", ...]} }
-```
-
-**Response to Message requesting address deallocation for one specific set of addresses**
-
-Message sent by the Message Node Address Allocation function to Hyperty Runtime Registry function.
-
-```
-"id" : "2"
-"type" : "RESPONSE",
-"from" : "domain://msg-node.<sp-domain>/<type>-address-allocation",
-"to" : "hyperty-runtime://sp1/runalice/registry/allocation",
-"body" : { "code": 200, "value" : {"deallocate": ["<scheme>://<sp-domain>/<identifier>", ...]} }
-```
-
 #### Address deallocation request for one block of addresses
 
 **Message to request address deallocation for one block of addresses**
@@ -72,8 +46,7 @@ Message sent by the Hyperty Runtime Registry function to Message Node Address Al
 "type" : "DELETE",
 "from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/registry/allocation",
 "to" : "domain://msg-node.<sp-domain>/<type>-address-allocation",
-"body" : { "value" : {"allocationKey" : "<key>"} }
-
+"body" : { "resource" : "<key>" }
 ```
 
 **Response to Message requesting address deallocation for one specific set of addresses**
@@ -85,5 +58,31 @@ Message sent by the Message Node Address Allocation function to Hyperty Runtime 
 "type" : "RESPONSE",
 "from" : "domain://msg-node.<sp-domain>/<type>-address-allocation",
 "to" : "hyperty-runtime://sp1/runalice/registry/allocation",
-"body" : { "code": 200 } }
+"body" : { "code": 200 }
+```
+
+#### Address deallocation request for one or more addresses
+
+**Message to request address deallocation for one or more addresses**
+
+Message sent by the Hyperty Runtime Registry function to Message Node Address Allocation function.
+
+```
+"id" : "<2>"
+"type" : "DELETE",
+"from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/registry/allocation",
+"to" : "domain://msg-node.<sp-domain>/<type>-address-allocation",
+"body" : { "childrenResources" : {"["<scheme>://<sp-domain>/<identifier>", ...]} }
+```
+
+**Response to Message requesting address deallocation for one specific set of addresses**
+
+Message sent by the Message Node Address Allocation function to Hyperty Runtime Registry function.
+
+```
+"id" : "2"
+"type" : "RESPONSE",
+"from" : "domain://msg-node.<sp-domain>/<type>-address-allocation",
+"to" : "hyperty-runtime://sp1/runalice/registry/allocation",
+"body" : { "code": 200  }
 ```
