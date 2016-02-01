@@ -26,8 +26,10 @@ package Message <<Rect>> {
 	}
 
 	class UpdateMessageBody {
-		attribute ?: string
 		value : string
+		attribute ?: string
+		attributeType ?: string
+		operation ?: string
 	}
 
 	class ResponseCode {
