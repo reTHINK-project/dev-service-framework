@@ -94,11 +94,11 @@ class MessageFactory extends RethinkObject {
      * @param {URL.URL} from - the sender of this message
      * @param {URL.URLList}to - One or more URLs of Message recipients. According to the URL scheme it may be handled in
      * different ways
+     * @param value - The new value of the attribute to be updated
      * @param {URL.URL} resource - URL of Data Object Resource associated with the message
      * @param attribute - Identifies the attribute in the Object to be updated
-     * @param value - The new value of the attribute to be updated
      */
-    createUpdateMessageRequest(from, to, resource, attribute,  value){
+    createUpdateMessageRequest(from, to, value, resource, attribute){
         if(!from || !to || !value)
             throw  new Error("from, and to and value MUST be specified");
 
