@@ -68,7 +68,7 @@ class Syncher {
          let objURL = reply.body.resource;
 
          //reporter creation accepted
-         let newObj = new DataObjectReporter(_this._owner, objURL, schema, _this._bus, 'on', initialData);
+         let newObj = new DataObjectReporter(_this._owner, objURL, schema, _this._bus, 'on', initialData, reply.body.children);
          _this._reporters[objURL] = newObj;
 
          resolve(newObj);
@@ -100,7 +100,7 @@ class Syncher {
        console.log('subscribe-response: ', reply);
        if (reply.body.code === 200) {
          //subscription accepted
-         let newObj = new DataObjectObserver(_this._owner, objURL, reply.body.schema, _this._bus, 'on', reply.body.value);
+         let newObj = new DataObjectObserver(_this._owner, objURL, reply.body.schema, _this._bus, 'on', reply.body.value, reply.body.children);
          _this._observers[objURL] = newObj;
 
          resolve(newObj);

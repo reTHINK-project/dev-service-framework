@@ -10,8 +10,8 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
   _onResponseHandler: (event) => void
   */
 
-  constructor(owner, url, schema, bus, initialStatus, initialData) {
-    super(owner, url, schema, bus, initialStatus, initialData);
+  constructor(owner, url, schema, bus, initialStatus, initialData, children) {
+    super(owner, url, schema, bus, initialStatus, initialData, children);
     let _this = this;
 
     bus.addListener(owner, (msg) => {

@@ -9,8 +9,8 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
   _filters: {<filter>: {type: <start, exact>, callback: <function>} }
   */
 
-  constructor(owner, url, schema, bus, initialStatus, initialData) {
-    super(owner, url, schema, bus, initialStatus, initialData);
+  constructor(owner, url, schema, bus, initialStatus, initialData, children) {
+    super(owner, url, schema, bus, initialStatus, initialData, children);
     let _this = this;
 
     //add listener for objURL

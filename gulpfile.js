@@ -53,7 +53,7 @@ gulp.task('build', function() {
   return browserify('./src/service-framework.js', {
     standalone: 'service-framework',
     debug: true
-  }).transform(babel)
+  }).transform(babel, {compact: true, optional: 'runtime'})
   .bundle()
   .on('error', function(err) {
     console.error(err);
