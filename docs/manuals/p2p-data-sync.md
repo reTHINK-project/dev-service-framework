@@ -11,23 +11,63 @@ Hyperty Reporter - Observer communication pattern goes beyond current solutions 
 
 The API to handle Hyperty Data Objects is extremely simple and fun to use. The Developer of the Hyperty Reporter just has to create the Data Sync object with the Syncher API, and write on the object every time there is data to be updated and shared with Hyperty Observers.
 
-`*Reporter code snippet*`
+```javascript
+
+    ....
+
+    console.info('---------------- Syncher Create Reporter Hyperty Data ---------------------- \n');
+    syncher.create({}, [hypertyURL], {}).then(function(dataObjectReporter) {
+      console.info('1. Return Create Data Object Reporter', dataObjectReporter);
+
+    })
+      console.info('--------------- END Create Reporter Hyperty Data------------------ \n');
+    })
+    .catch(function(reason) {
+      console.error(reason);
+      reject(reason);
+    });
+
+    // missing snippet for updates and delete
+
+    ...
+
+
+```
 
 On the Hyperty Observer side, Data Objects are also created with the Syncher API and the emerging [Object.observer() Javascript method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/observe) is used to receive the stream of data changes coming from the Reporter Hyperty.
 
-`*Observer code snippet*`
+```javascript
+  onNotification() {
+    console.info('---------------- Syncher Subscribe ---------------- \n');
+    syncher.subscribe(objectUrl).then(function(dataObjectObserver) {
+      console.info('1. Return Subscribe Data Object Observer', dataObjectObserver);
+
+      // TODO: put source code to add listeners to updates by using Object.observer()
+
+
+      console.info('------------------------ END ---------------------- \n');
+    }).catch(function(reason) {
+      console.error(reason);
+    });
+  }
+
+  ...
+
+  // missing snippet for updates and delete
+
+```
 
 ### Hyperty Data Object URL address
 
-The Hyperty Middleware allocates to each new created Hyperty Data Object a Global Unique Identifier URL that is independent from the Hyperty instance creator and from the Hyperty Runtime, in order to support mobility of the Data Object between different Hyperty Runtimes and also to support delegation of the Reporter role to other Hyperty instances. However, at this point Reporter delegation is only supported between Hyperty instances from the same domain.
+The Hyperty Messaging Framework allocates to each new created Hyperty Data Object a Global Unique Identifier URL that is independent from the Hyperty instance creator and from the Hyperty Runtime, in order to support mobility of the Data Object between different Hyperty Runtimes and also to support delegation of the Reporter role to other Hyperty instances. However, at this point Reporter delegation is only supported between Hyperty instances from the same domain.
 
 ### Hyperty Data Object Schema
 
-Each Hyperty Data Object is formaly described by a json-schema that is identified by a Catalogue URL. This allows to check whether two different Hyperties are compliant by cross checking each supported Hyperty Data Object schema. At this point the following Hyperty Data Object schemas are defined:
+Each Hyperty Data Object is formally described by a json-schema that is identified by a Catalogue URL. This allows to check whether two different Hyperties are compliant by cross checking each supported Hyperty Data Object schema. At this point the following Hyperty Data Object schemas are defined:
 
--	**[Connection Data Schema](../datamodel/connection)** : Hyperties supporting this schema are able to handle WebRTC Peer Connections between the Hyperty Runtime instances where they are running independently of the signalling protocol used. The URL Scheme for Connection Data Objects is "connection".
--	**[Communication Data Schema](../datamodel/communication)** : Hyperties supporting this schema are able to handle different communication types including Textual Chat, Audio, Video, Screen Sharing and File sharing. Such communication can be supported on top of WebRTC protocol streams by using the Connection Data Schema. The URL Scheme for Communication Data Objects is "comm".
--	**[Context Data Schema](../datamodel/context)** : Hyperties supporting this schema are able to produce or consume Context Data, usually collected from sensors. The URL Scheme for Communication Data Objects is "ctxt".
+-	**[Connection Data Schema](../datamodel/connection)** : Hyperties supporting this schema are able to handle [WebRTC Peer Connections](https://developer.mozilla.org/en-US/docs/Web/Guide/API/WebRTC/Peer-to-peer_communications_with_WebRTC) between the Hyperty Runtime instances where they are running independently of the signalling protocol used. The URL Scheme for Connection Data Objects is "connection" (example: "connection://example.com/alice/bob201601290617").
+-	**[Communication Data Schema](../datamodel/communication)** : Hyperties supporting this schema are able to handle different communication types including Textual Chat, Audio, Video, Screen Sharing and File sharing. Such communication can be supported on top of WebRTC protocol streams by using the Connection Data Schema. The URL Scheme for Communication Data Objects is "comm" (example: "comm://example.com/group-chat/rethink201601290617").
+-	**[Context Data Schema](../datamodel/context)** : Hyperties supporting this schema are able to produce or consume Context Data, usually collected from sensors. The URL Scheme for Communication Data Objects is "ctxt" (example: "ctxt://example.com/room/temperature201601290617").
 
 ### Parent - Children Resources
 

@@ -12,6 +12,7 @@ package Message <<Rect>> {
 
 	class MessageBody {
 		resource ?: URL.URL
+		childrenResources ?: URL.URLList
 		schema ?: URL.HypertyCatalogueURL
 		idToken ?: RethinkCore.Identity.JWT
 		accessToken ?: RethinkCore.Identity.JWT
@@ -20,6 +21,7 @@ package Message <<Rect>> {
 
 	class CreateMessageBody {
 		policy ?: URL.URL
+		authorise ?: URL.URLList
 		value : string
 	}
 
@@ -49,19 +51,14 @@ package Message <<Rect>> {
 		criteria ?: string
 	}
 
-	class SubscribeMessageBody {
-		resource ?: URL.URL
-		schema ?: URL.HypertyCatalogueURL
-	}
-
-	class UnsubscribeMessageBody {
-		resource ?: URL.URL
-	}
-
 	class FowardMessageBody {
 		message ?: Message.Message
 	}
 
+	class ExecuteMessageBody {
+		executable : string
+		configuration ?: string
+	}
 
 	class MessageType {
 	  	CREATE
@@ -71,7 +68,8 @@ package Message <<Rect>> {
 	  	SUBSCRIBE
 	  	UNSUBSCRIBE
 	  	RESPONSE
-		FORWARD
+			FORWARD
+			EXECUTE
 	}
 
 	Message --> MessageType
@@ -82,9 +80,8 @@ package Message <<Rect>> {
 	ResponseMessageBody -up-|> MessageBody
 	DeleteMessageBody -up-|> MessageBody
 	ReadMessageBody -down-|> MessageBody
-	SubscribeMessageBody -down-|> MessageBody
-	UnsubscribeMessageBody -down-|> MessageBody
 	FowardMessageBody -down-|> MessageBody
+	ExecuteMessageBody -down-|> MessageBody
 
 	ResponseMessageBody --> ResponseCode
 }

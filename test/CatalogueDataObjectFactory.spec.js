@@ -187,6 +187,7 @@ describe('CatalogueDataObjectFactory', function () {
             done();
         });
 
+
         it('should be of type DATA_SCHEMA', function (done) {
             expect(dataObjectSchema.type).to.eql(CatalogueObjectType.DATA_SCHEMA);
             done();
