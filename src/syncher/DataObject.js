@@ -19,7 +19,7 @@ class DataObject {
   _onAddChildrenHandler: (event) => void
   */
 
-  constructor(owner, url, schema, bus, initialStatus, initialData) {
+  constructor(owner, url, schema, bus, initialStatus, initialData, children) {
     let _this = this;
 
     _this._version = 0;
@@ -32,10 +32,7 @@ class DataObject {
     _this._syncObj = new SyncObject(initialData);
 
     _this._childId = 0;
-    _this._children = {};
-
-    //get children from schema?
-    let children = ['children1', 'children2'];
+    _this._children = { };
 
     let childBaseURL = url + '/children/';
     children.forEach((child) => {
@@ -90,7 +87,7 @@ class DataObject {
 
     let requestMsg = {
       type: 'create', from: _this._owner, to: msgChildPath,
-      body: { childId: msgChildId, value: initialData }
+      body: { resource: msgChildId, value: initialData }
     };
 
     //returns promise, in the future, the API may change to asynchronous call
@@ -115,7 +112,7 @@ class DataObject {
 
   _onChildrenCreate(msg) {
     let _this = this;
-    let msgChildId = msg.body.childId;
+    let msgChildId = msg.body.resource;
 
     console.log('create-observer-child( ' + _this._owner + ' ): ', msg);
     let newChild = new DataObjectChild(msg.from, msgChildId, 0, _this._bus, msg.body.value);
