@@ -7,6 +7,7 @@ Development Manuals
 
 *give a short summary for each document and the reading order for each type of developer (Hyperty, App, Msg Node or Runtime developer)*
 
+-	[Getting Started](start.md)
 -	[Hyperty Concept Overview](hyperty.md)
 -	[Hyperty Messaging Framework Overview](hyperty-messaging-framework.md)
 -	[Hyperty Data Synchronisation: Reporter - Observer communication model](p2p-data-sync.md)
