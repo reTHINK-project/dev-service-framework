@@ -1,0 +1,22 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "HypertyDataObjectSchema",
+	"type": "object",
+	"required": ["accessControlPolicy"],
+	"additionalProperties": false,
+	"allOf": [
+		{"$ref": "../DataObjectSchema/DataObjectSchema.json"}
+	],
+	"properties": {
+		"accessControlPolicy": {
+			"type": "string"
+		}
+		,
+		"accessControlPolicyArray": {
+			"type": "array",
+			"items": {
+				"$ref": "../DataObjectSchema/AccessControlPolicy.json"
+			}
+		}
+	}
+}
