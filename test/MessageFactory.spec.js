@@ -69,10 +69,10 @@ describe('MessageFactory', function() {
 
     describe('createUpdateMessageRequest()', function() {
         it('should be a Message of Type UPDATE', function(done) {
-            //createUpdateMessageRequest(from, to, resource, attribute, value)
+            //createUpdateMessageRequest(from, to, value, resource, attribute)
            let message = messageFactory.createUpdateMessageRequest("hyperty-esn://domain.com/12345",
-                "[hyperty-imei://domain.com/123456]", "hyperty-runtime-uuid://domain.com/myResource",
-                "audio", "audio-only");
+                "[hyperty-imei://domain.com/123456]", "audio-only", "hyperty-runtime-uuid://domain.com/myResource",
+                "audio");
 
             //console.log('Update Message', JSON.stringify(message));
             expect(message).to.not.be.empty;
