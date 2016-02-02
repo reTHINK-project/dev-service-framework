@@ -53,7 +53,7 @@ gulp.task('build', function() {
   return browserify('./src/service-framework.js', {
     standalone: 'service-framework',
     debug: true
-  }).transform(babel, {compact: true, optional: 'runtime'})
+  }).transform(babel, {compact: false, optional: 'runtime'})
   .bundle()
   .on('error', function(err) {
     console.error(err);
@@ -109,7 +109,7 @@ gulp.task('watch-hyperty', function(cb) {
 
   var destination = argv.dest;
 
-  gulp.watch(['src/hyperty/*.js'], function(event) {
+  gulp.watch(['src/hyperty/*.js'], function() {
     return compile('src/hyperty/HypertyConnector.js', destination, cb);
   });
 
@@ -147,9 +147,9 @@ function encode(filename, descriptorName, configuration, isDefault) {
       }
     } else {
       var newObject;
-      if (json.hasOwnProperty('default')) {
+      try {
         newObject = JSON.parse(JSON.stringify(json['default']));
-      } else if (json.hasOwnProperty('HelloHyperty')) {
+      } catch (e) {
         newObject = JSON.parse(JSON.stringify(json.HelloHyperty));
       }
 
@@ -157,14 +157,16 @@ function encode(filename, descriptorName, configuration, isDefault) {
       value = filename;
     }
 
+    json[value].description = 'Description of ' + filename;
     json[value].objectName = filename;
-    json[value].configuration = configuration;
+    if (configuration) json[value].configuration = configuration;
     json[value].sourcePackage.sourceCode = encoded;
     json[value].sourcePackage.sourceCodeClassname = filename;
     json[value].sourcePackage.encoding = 'Base64';
     json[value].sourcePackage.signature = '';
 
-    var newDescriptor = new Buffer(JSON.stringify(json, null));
+    var newDescriptor = new Buffer(JSON.stringify(json, null, 2));
+    console.log(value);
     cb(null, newDescriptor);
 
   });
@@ -201,46 +203,49 @@ function resource(file, configuration, isDefault) {
 gulp.task('encode', function(done) {
 
   gulp.src('./', {buffer:false})
-    .pipe(prompt.prompt([{
-      type: 'input',
-      name: 'file',
-      message: 'File to be converted?'
-    },
-    {
-      type: 'input',
-      name: 'configuration',
-      message: 'Configuration file like an object or url to ProtoStub have on configuration:'
-    },
-    {
-      type: 'radio',
-      name: 'defaultFile',
-      message: 'This will be a default file to be loaded? (yes/no)',
-      choices: ['yes', 'no']
-    }], function(res) {
-
-      fs.access(res.file, fs.R_OK | fs.W_OK, function(err) {
-        if (err) done(new Error('No such file or directory'));
-        return;
-      });
-
-      var configuration;
-      if (typeof res.configuration === 'object') {
-        configuration = res.configuration;
-      } else if (typeof res.configuration === 'string') {
-        configuration = {};
-        configuration.url = res.configuration;
+  .pipe(prompt.prompt([{
+    type: 'input',
+    name: 'file',
+    message: 'File to be converted? (resources/<ProtoStub.js or Hyperty.js>)'
+  },
+  {
+    type: 'input',
+    name: 'configuration',
+    message: 'ProtoStub Configuration, use something like:\n{"url": "wss://msg-node.localhost:9090/ws"}\nConfiguration:',
+    validate: function(value) {
+      try {
+        JSON.parse(value);
+        return true;
+      } catch (e) {
+        console.error('Check your configuration JSON\nShould be something like:\n{"url": "wss://msg-node.localhost:9090/ws"}');
+        return false;
       }
+    }
+  },
+  {
+    type: 'radio',
+    name: 'defaultFile',
+    message: 'This will be a default file to be loaded? (yes/no)',
+    choices: ['yes', 'no']
+  }], function(res) {
 
-      var isDefault = true;
-      if (res.defaultFile === 'no') {
-        isDefault = false;
-      }
+    fs.access(res.file, fs.R_OK | fs.W_OK, function(err) {
+      if (err) done(new Error('No such file or directory'));
+      return;
+    });
 
-      if (res.file) {
-        resource(res.file, configuration, isDefault);
-      }
-    })
-  );
+    var configuration = JSON.parse(res.configuration);
+
+    var isDefault = true;
+    if (res.defaultFile === 'no') {
+      isDefault = false;
+    }
+
+    if (res.file) {
+      resource(res.file, configuration, isDefault);
+    }
+  })
+);
 
 });
 
