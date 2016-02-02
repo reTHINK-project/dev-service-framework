@@ -11,7 +11,7 @@ The following Messages used to manage URL address allocation are specified in th
 
 #### Address allocation request
 
-**Response Message returning the requested addresses allocation**
+**Message requesting address allocation**
 
 Message sent by the Hyperty Runtime Registry function to Message Node Address Allocation function.
 

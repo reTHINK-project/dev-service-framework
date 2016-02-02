@@ -36,22 +36,20 @@ The Hyperty Instance object contains:
 
 -	the Context URL for the user associated to the Hyperty Instance, which may include Presence information.
 
-### Protocol Stub Instance or (Domain Sessions)
+Example:
 
-*do we need this?*
-
-![ProtoStub Instance Data Object Model](../Protostub-Instance-Data-Object-Model.png)
-
-The Protocol Stub instance, contains data about instances of protocol stubs used to connect to the Hyperty Messaging Service domain. This data can be used to manage and keep logs about sessions where the user is logged in into the domain. It contains the Protocol Stub Descriptor URL that can be used to consult protocol stub metadata and the runtime instance where the protocol stub is executed.
-
-### Hyperty Runtime Instance
-
-![Hyperty Runtime Instance Data Object Model](../Hyperty-Runtime-Instance-Data-Object-Model.png)
-
-The Hyperty Runtime Instance contains data about connected devices featuring Hyperty runtime. It contains the URL of the Device Runtime ([HypertyRuntimeURL](../address/readme.md#device-runtime-address)) which identifies the runtime where the hyperty instance is running, its descriptor and the list of domains from Hyperties running in this device.
+```
+ "hypertyDescriptorURL" : "hyperty-catalogue://catalogue.<sp-domain>/<catalogue-object-identifier>", "hypertyURL" : "hyperty://<sp-domain>/<hyperty-instance-identifier>", "hypertyRuntimeURL" : "hyperty-runtime://sp1/runalice",
+```
 
 ### Hyperty Data Object Instance (or Hyperty Data Object sessions)
 
 ![Hyperty Data Object Instance Model](../Hyperty-Data-Object-Instance-Model.png)
 
 Hyperty Data Object Instance contains data about (data) objects instances handled by Hyperty Instances e.g. communication data objects. This data can be used to manage and keep logs about data object instances handled by Hyperty Instances eg communication / call sessions. It identifies the Hyperty Instance that owns (has created) the data object. HypertyContextDataObjectInstance and HypertyCommunicationDataObjectInstance are two examples of hyperty data objects instances that are reached through different URL types, namely ContextURL and CommunicationURL addresses.
+
+### Hyperty Runtime Instance
+
+![Hyperty Runtime Instance Data Object Model](../Hyperty-Runtime-Instance-Data-Object-Model.png)
+
+The Hyperty Runtime Instance contains data about connected devices featuring Hyperty runtime. It contains the URL of the Device Runtime ([HypertyRuntimeURL](../address/readme.md#device-runtime-address)) which identifies the runtime where the hyperty instance is running, its descriptor and the list of domains from Hyperties running in this device.
