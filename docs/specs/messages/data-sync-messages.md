@@ -144,18 +144,6 @@ Message sent by Reporter Runtime Sync Manager to Object Changes Handler.
 "to" : "<ObjectURL>/changes"
 ```
 
-##### Data Object Update
-
-Message sent by Object Reporter Hyperty to Data Object Changes Handler.
-
-```
-"id" : "3"
-"type" : "UPDATE",
-"from" : "<ObjectURL>",
-"to" : "<ObjectURL>/changes",
-"body" : { "value" : "changed value"  }
-```
-
 #### Synchronisation management by Sync Manager Observer
 
 ##### Observer Subscription request sent to Data Object Subscription Handler
@@ -249,6 +237,18 @@ Message sent by Observer Runtime Sync Manager to Message Node to request the rem
 ```
 
 #### Synchronisation Messages among Synchers
+
+##### Data Object Update
+
+Message sent by Object Reporter Hyperty to Data Object Changes Handler.
+
+```
+"id" : "3"
+"type" : "UPDATE",
+"from" : "<ObjectURL>",
+"to" : "<ObjectURL>/changes",
+"body" : { "value" : "changed value"  }
+```
 
 ##### Creation of Data Object child
 
