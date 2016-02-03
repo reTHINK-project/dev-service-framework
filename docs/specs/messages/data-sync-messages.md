@@ -7,6 +7,7 @@ This doc specifies Messages that are used to manage Hyperty Data Object Synchron
 -	[Synchronisation management by Sync Manager Reporter](#synchronisation-management-by-sync-manager-reporter)
 -	[Synchronisation management by Sync Manager Observer](#synchronisation-management-by-sync-manager-observer)
 -	[Synchronisation Management by Message Node](#synchronisation-management-by-message-node)
+-	[Synchronisation Messages among Synchers](#synchronisation-messages-among-synchers)
 
 where,
 
@@ -247,7 +248,7 @@ Message sent by Observer Runtime Sync Manager to Message Node to request the rem
 "body" : { "code" : "2XX"  }
 ```
 
-#### Syncher Data Synchronisation Messages
+#### Synchronisation Messages among Synchers
 
 ##### Creation of Data Object child
 
