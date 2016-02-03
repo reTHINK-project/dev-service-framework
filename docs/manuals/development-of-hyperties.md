@@ -22,8 +22,32 @@ These are guidelines to help developers decide if they should provide specific s
 * Is the feature modular and reusbale on different applications?
 * Can the feature be delivered and developed by different stakeholders (i.e domain specific implementation)?
 
-If the answers to the above questions are "YES" then most likely, you should go for the Hyperty Concept.
+If the answers to the above questions are "YES" then most likely, you should go for the Hyperty Concept. The reTHINK Service Framework is what you want to look at next. The Service Framework provides APIs for developers to facilitate the development of Hyperties. 
+
+### Getting Started with Service
+So you have decided for the Hyperty Concept and now ask yourself where to start. This section describes the basic steps any developer needs to undertake to include the Service Framwork into their projects. There are two simple steps to get you started. 
+
+1) Install the Service Framework
+
+```
+npm install git+git@github.com:reTHINK-project/dev-service-framework.git#develop --save
+jspm install service-framework=github:reTHINK-project/dev-service-framework.git@develop
+```
+
+2) Import Module(s)
+```
+import {Syncher} from 'service-framework';
+```
+or if you need more than one dependency:
+```
+import {Syncher, MessageFactory, AddressFactory} from 'service-framework';
+```
+The next section explains the availble modules and APIs they expose.
 
 ### APIs
+Here we describe useful functionalities that are exposed by the Service Framework Module, which developers can use in development process.
+
+//TODO: describe the APIs from syncher, minibus.postMessage(), hypertyDiscovery, messageFactory and URLFactory
 
 ### Examples
+//TODO: Give useful examples 
