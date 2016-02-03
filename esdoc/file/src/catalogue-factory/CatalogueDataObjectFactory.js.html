@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/catalogue-factory/CatalogueDataObjectFactory.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <a data-ice="repoURL" href="git+ssh://git@github.com/reTHINK-project/core-framework.git">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">catalogue-factory</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html">CatalogueDataObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/CatalogueDataObjectFactory.js~CatalogueDataObjectFactory.html">CatalogueDataObjectFactory</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~CommunicationDataObjectSchema.html">CommunicationDataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~ConnectionDataObjectSchema.html">ConnectionDataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~ContextDataObjectSchema.html">ContextDataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~DataObjectSchema.html">DataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~HypertyDataObjectSchema.html">HypertyDataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~IdentifyDataObjectSchema.html">IdentifyDataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~MessageDataObjectSchema.html">MessageDataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/HypertyDescriptor.js~HypertyDescriptor.html">HypertyDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/HypertyRuntimeDescriptor.js~HypertyRuntimeDescriptor.html">HypertyRuntimeDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/PolicyEnforcerDescriptor.js~PolicyEnforcerDescriptor.html">PolicyEnforcerDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor.html">ProtocolStubDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/RuntimeConstraint.js~RuntimeConstraint.html">RuntimeConstraint</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/SourcePackage.js~SourcePackage.html">SourcePackage</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-CatalogueObjectType">CatalogueObjectType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-DataObjectSourceLanguage">DataObjectSourceLanguage</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-catalogueDataObject">catalogueDataObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-catalogueDataObjectFactory">catalogueDataObjectFactory</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-dataObjectSchema">dataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HypertyType">HypertyType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RuntimeHypertyCapabilityType">RuntimeHypertyCapabilityType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-hypertyDescriptor">hypertyDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RuntimeHypertyCapabilityType">RuntimeHypertyCapabilityType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RuntimeProtocolCapabilityType">RuntimeProtocolCapabilityType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RuntimeType">RuntimeType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-hypertyRuntimeDescriptor">hypertyRuntimeDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-policyEnforcerDescriptor">policyEnforcerDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-protocolStubDescriptor">protocolStubDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-runtimeConstraint">runtimeConstraint</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-sourcePackage">sourcePackage</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">hyperty</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/hyperty/Connection.js~Connection.html">Connection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/hyperty/ConnectionController.js~ConnectionController.html">ConnectionController</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/hyperty/OwnerPeer.js~OwnerPeer.html">OwnerPeer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/hyperty/Peer.js~Peer.html">Peer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-activate">activate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-connection">connection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-connectionController">connectionController</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ownerPeer">ownerPeer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-peer">peer</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">hyperty-discovery</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/hyperty-discovery/HypertyDiscovery.js~HypertyDiscovery.html">HypertyDiscovery</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-hypertyDiscovery">hypertyDiscovery</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">message-factory</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/Message.js~Message.html">Message</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~CreateMessageBody.html">CreateMessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~DeleteMessageBody.html">DeleteMessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~ForwardMessageBody.html">ForwardMessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~MessageBody.html">MessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~ReadMessageBody.html">ReadMessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~ResponseMessageBody.html">ResponseMessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~UpdateMessageBody.html">UpdateMessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageFactory.js~IdGenerator.html">IdGenerator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageFactory.js~MessageFactory.html">MessageFactory</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Enum">Enum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-MessageType">MessageType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-REASON_PHRASE">REASON_PHRASE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RESPONSE_CODE">RESPONSE_CODE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-messageFactory">messageFactory</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">reTHINKObject</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/reTHINKObject/RethinkObject.js~RethinkObject.html">RethinkObject</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">syncher</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/DataObject.js~DataObject.html">DataObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/DataObjectChild.js~DataObjectChild.html">DataObjectChild</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/DataObjectObserver.js~DataObjectObserver.html">DataObjectObserver</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/DataObjectReporter.js~DataObjectReporter.html">DataObjectReporter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/SyncObject.js~SyncObject.html">SyncObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/Syncher.js~Syncher.html">Syncher</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-dataObject">dataObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-dataObjectChild">dataObjectChild</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-dataObjectObserver">dataObjectObserver</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-dataObjectReporter">dataObjectReporter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ChangeType">ChangeType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ObjectType">ObjectType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-syncObject">syncObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-syncher">syncher</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">utils</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/utils/EventEmitter.js~EventEmitter.html">EventEmitter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-deepClone">deepClone</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-divideURL">divideURL</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-eventEmitter">eventEmitter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-divideURL">divideURL</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/catalogue-factory/CatalogueDataObjectFactory.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import RethinkObject from &apos;../reTHINKObject/RethinkObject&apos;;
+
+import CatalogueDataObject from &apos;./CatalogueDataObject&apos;;
+import {CatalogueObjectType} from &apos;./CatalogueDataObject&apos;;
+import {DataObjectSourceLanguage} from &apos;./CatalogueDataObject&apos;;
+
+import SourcePackage from &apos;./SourcePackage&apos;;
+
+import HypertyDescriptor from &apos;./HypertyDescriptor&apos;;
+import {HypertyType} from &apos;./HypertyDescriptor&apos;;
+
+import ProtocolStubDescriptor from &apos;./ProtocolStubDescriptor&apos;;
+
+import HypertyRuntimeDescriptor from &apos;./HypertyRuntimeDescriptor&apos;;
+import {RuntimeType} from &apos;./HypertyRuntimeDescriptor&apos;;
+import {RuntimeProtocolCapabilityType} from &apos;./HypertyRuntimeDescriptor&apos;;
+import {RuntimeHypertyCapabilityType} from &apos;./HypertyRuntimeDescriptor&apos;;
+
+import PolicyEnforcerDescriptor from &apos;./PolicyEnforcerDescriptor&apos;;
+import DataObjectSchema from &apos;./DataObjectSchema&apos;;
+
+class CatalogueDataObjectFactory extends RethinkObject {
+
+    /**
+     * Constructor
+     * @param {boolean} validation
+     * @param {URL.URL } schema - link to the schema
+     */
+    constructor(validation, schema) {
+        super(validation, schema);
+    }
+
+    /**
+     * Create CatalogueDataObject
+     * @param {string} guid - Catalogue Global Unique identifier of the Catalogue Object
+     * @param {CatalogueObjectType} type - Indicates the type of Catalogue Data Object
+     * @param {string} objectName - Human-understandable name of the catalogue object
+     * @param {string} description
+     * @param {DataObjectSourceLanguage} language - Programming language used in the SourcePackage
+     * @param {string} sourcePackageURL - URL from where the source code package of the corresponding catalogue object can be downloaded.
+     * @returns {CatalogueDataObject}
+     */
+    createCatalogueDataObject(guid, type, objectName, description, language, sourcePackageURL) {
+        if (
+            typeof guid === &quot;undefined&quot;
+            || typeof type === &quot;undefined&quot;
+            || typeof objectName === &quot;undefined&quot;
+            || typeof description === &quot;undefined&quot;
+            || typeof language === &quot;undefined&quot;
+            || typeof sourcePackageURL === &quot;undefined&quot;
+        )
+            throw new Error(&quot;Invalid parameters!&quot;);
+        return new CatalogueDataObject(guid, type, objectName, description, language, sourcePackageURL);
+    }
+
+    /**
+     * Create HypertyDescriptor
+     * @param {string} guid - Catalogue Global Unique identifier of the Catalogue Object
+     * @param {string} objectName - Human-understandable name of the catalogue object
+     * @param {string} description
+     * @param {DataObjectSourceLanguage} language - Programming language used in the SourcePackage
+     * @param {string} sourcePackageURL - URL from where the source code package of the corresponding catalogue object can be downloaded.
+     * @param {int} hypertyType - A tag that identifies what type of hyperty is described in the object.
+     * @param {URL.URLList} dataObjects - Defines the Data Object Schemas supported by the Hyperty through a list of Catalogue URLs from where these schemas can be reached.
+     * @returns {HypertyDescriptor}
+     */
+    createHypertyDescriptorObject(guid, objectName, description, language, sourcePackageURL, hypertyType,
+                                  dataObjects) {
+        if (
+            typeof guid === &quot;undefined&quot;
+            || typeof objectName === &quot;undefined&quot;
+            || typeof description === &quot;undefined&quot;
+            || typeof language === &quot;undefined&quot;
+            || typeof sourcePackageURL === &quot;undefined&quot;
+            || typeof hypertyType === &quot;undefined&quot;
+            || typeof dataObjects === &quot;undefined&quot;
+        )
+            throw new Error(&quot;Invalid parameters!&quot;);
+        return new HypertyDescriptor(guid, CatalogueObjectType.HYPERTY, objectName, description,
+            language, sourcePackageURL, hypertyType, dataObjects);
+    }
+
+    /**
+     * Create ProtocolStubDescriptor
+     * @param {string} guid - Catalogue Global Unique identifier of the Catalogue Object
+     * @param {string} objectName - Human-understandable name of the catalogue object
+     * @param {string} description
+     * @param {DataObjectSourceLanguage} language - Programming language used in the SourcePackage
+     * @param {string} sourcePackageURL - URL from where the source code package of the corresponding catalogue object can be downloaded.
+     * @param {URL.URL} messageSchemas - Defines the Schema describing the Message Data Model used by the Hyperty through the Catalogue URL from where the Message schema can be reached. If not defined, by default it is assumed the standard Message Model is used.
+     * @param configuration - Data required to configure the ProtocolStub
+     * @param constraints - Describes capabilities required from the Hyperty Runtime in order to be able to execute the ProtocolStub
+     * @returns {ProtocolStubDescriptor}
+     */
+    createProtoStubDescriptorObject(guid, objectName, description, language, sourcePackageURL, messageSchemas,
+                                    configuration, constraints) {
+        if (
+            typeof guid === &quot;undefined&quot;
+            || typeof objectName === &quot;undefined&quot;
+            || typeof description === &quot;undefined&quot;
+            || typeof language === &quot;undefined&quot;
+            || typeof sourcePackageURL === &quot;undefined&quot;
+            || typeof messageSchemas === &quot;undefined&quot;
+            || typeof configuration === &quot;undefined&quot;
+            || typeof constraints === &quot;undefined&quot;
+        )
+            throw new Error(&quot;Invalid parameters!&quot;);
+        return new ProtocolStubDescriptor(guid, CatalogueObjectType.PROTOSTUB, objectName, description,
+            language, sourcePackageURL, messageSchemas, configuration, constraints);
+    }
+
+    /**
+     * Create HypertyRuntimeDescriptor
+     * @param {string} guid - Catalogue Global Unique identifier of the Catalogue Object
+     * @param {string} objectName - Human-understandable name of the catalogue object
+     * @param {string} description
+     * @param {DataObjectSourceLanguage} language - Programming language used in the SourcePackage
+     * @param {string} sourcePackageURL - URL from where the source code package of the corresponding catalogue object can be downloaded.
+     * @param runtimeType
+     * @param hypertyCapabilities - Supported capabilities to execute Hyperties
+     * @param protocolCapabilities - Supported capabilities to execute Protocol Stubs
+     * @returns {HypertyRuntimeDescriptor}
+     */
+    createHypertyRuntimeDescriptorObject(guid, objectName, description, language, sourcePackageURL,
+                                         runtimeType, hypertyCapabilities, protocolCapabilities) {
+        if (
+            typeof guid === &quot;undefined&quot;
+            || typeof objectName === &quot;undefined&quot;
+            || typeof description === &quot;undefined&quot;
+            || typeof language === &quot;undefined&quot;
+            || typeof sourcePackageURL === &quot;undefined&quot;
+            || typeof runtimeType === &quot;undefined&quot;
+            || typeof hypertyCapabilities === &quot;undefined&quot;
+            || typeof protocolCapabilities === &quot;undefined&quot;
+        )
+            throw new Error(&quot;Invalid parameters!&quot;);
+
+        return new HypertyRuntimeDescriptor(guid, CatalogueObjectType.HYPERTY_RUNTIME, objectName,
+            description, language, sourcePackageURL, runtimeType, hypertyCapabilities, protocolCapabilities);
+    }
+
+    /**
+     * Create PolicyEnforcerDescriptor
+     * @param {string} guid - Catalogue Global Unique identifier of the Catalogue Object
+     * @param {string} objectName - Human-understandable name of the catalogue object
+     * @param {string} description
+     * @param {DataObjectSourceLanguage} language - Programming language used in the SourcePackage
+     * @param {string} sourcePackageURL - URL from where the source code package of the corresponding catalogue object can be downloaded.
+     * @param configuration
+     * @param policies
+     * @returns {PolicyEnforcerDescriptor}
+     */
+    createPolicyEnforcerDescriptorObject(guid, objectName, description, language, sourcePackageURL, configuration,
+                                         policies) {
+        if (
+            typeof guid === &quot;undefined&quot;
+            || typeof objectName === &quot;undefined&quot;
+            || typeof description === &quot;undefined&quot;
+            || typeof language === &quot;undefined&quot;
+            || typeof sourcePackageURL === &quot;undefined&quot;
+            || typeof configuration === &quot;undefined&quot;
+            || typeof policies === &quot;undefined&quot;
+        )
+            throw new Error(&quot;Invalid parameters!&quot;);
+
+        return new PolicyEnforcerDescriptor(guid, CatalogueObjectType.POLICY_ENFORCER, objectName,
+            description, language, sourcePackageURL, configuration, policies);
+    }
+
+    /**
+     * Create DataObjectSchema
+     * @param {string} guid - Catalogue Global Unique identifier of the Catalogue Object
+     * @param {string} objectName - Human-understandable name of the catalogue object
+     * @param {string} description
+     * @param {DataObjectSourceLanguage} language - Programming language used in the SourcePackage
+     * @param {string} sourcePackageURL - URL from where the source code package of the corresponding catalogue object can be downloaded.
+     * @returns {DataObjectSchema}
+     */
+    createDataObjectSchema(guid, objectName, description, language, sourcePackageURL) {
+        if (
+            typeof guid === &quot;undefined&quot;
+            || typeof objectName === &quot;undefined&quot;
+            || typeof description === &quot;undefined&quot;
+            || typeof language === &quot;undefined&quot;
+            || typeof sourcePackageURL === &quot;undefined&quot;
+        )
+            throw new Error(&quot;Invalid parameters!&quot;);
+
+        return new DataObjectSchema(guid, CatalogueObjectType.DATA_SCHEMA, objectName, description, language, sourcePackageURL);
+    }
+
+    /**
+     * Create SourcePackage
+     * @param sourceCodeClassname - The Class-name of the SourceCode
+     * @param sourceCode - The source code of the catalogue object
+     * @returns {SourcePackage}
+     */
+    createSourcePackage(sourceCodeClassname, sourceCode) {
+        if (
+            typeof sourceCode === &quot;undefined&quot;
+            || typeof sourceCodeClassname === &quot;undefined&quot;
+        )
+            throw new Error(&quot;Invalid parameters!&quot;);
+
+        return new SourcePackage(sourceCodeClassname, sourceCode);
+
+    }
+}
+
+export default CatalogueDataObjectFactory;</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.3)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>
