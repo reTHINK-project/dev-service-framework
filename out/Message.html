@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Class: Message</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Class: Message</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>Message</h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+
+    <h4 class="name" id="Message"><span class="type-signature"></span>new Message<span class="signature">(id, from, toList, type, body)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Generates a message data object
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">To be used to associate Response messages to the initial request message.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>from</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">URL.URL</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">URL of Hyperty instance or User associated with it</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>toList</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">URL.URLList</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">One or more URLs of Message recipients. According to the URL scheme it may behandled in different ways</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">MessageType</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The URL of the reTHINK Data Object Resource associated with the message that can beused for routing purposes</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>body</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">MessageBody</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Optionaly, all message bodies exchanged between different Runtime Messge BUS cancontain JWT tokens for Access Control for Identity Assertion purposes that are inserted by the Identity Modulebefore the message is routed to protostubs</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Message.js.html">Message.js</a>, <a href="Message.js.html#line22">line 22</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="addAccessToken"><span class="type-signature"></span>addAccessToken<span class="signature">(token)</span><span class="type-signature"> &rarr; {*}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Add an access token to the given message
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>token</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">token to be added to the given message</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Message.js.html">Message.js</a>, <a href="Message.js.html#line104">line 104</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">*</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="addIdToken"><span class="type-signature"></span>addIdToken<span class="signature">(token)</span><span class="type-signature"> &rarr; {<a href="Message.html">Message</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Adds an Id token to the given message
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>token</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Identity.JWT</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">identity token to include in the message</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Message.js.html">Message.js</a>, <a href="Message.js.html#line90">line 90</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    the updated message
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Message.html">Message</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="assertIdentity"><span class="type-signature"></span>assertIdentity<span class="signature">(token, identity)</span><span class="type-signature"> &rarr; {<a href="Message.html">Message</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Adds the asserted identity to the message body and removes the given token from the message
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>token</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Identity.JWT</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">idToken to remove from message</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>identity</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Identity.Identity</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">asserted identity to include</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Message.js.html">Message.js</a>, <a href="Message.js.html#line72">line 72</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    message - updated message
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Message.html">Message</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="-_.html"></a></li><li><a href="Message.html">Message</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Wed Feb 03 2016 08:14:15 GMT+0100 (W. Europe Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

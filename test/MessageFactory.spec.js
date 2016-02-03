@@ -1,5 +1,6 @@
 import MessageFactory from '../src/message-factory/MessageFactory.js';
-import { Message, MessageType} from '../src/message-factory/Message.js';
+import {MessageType} from '../src/message-factory/Message.js';
+import {RESPONSE_CODE, REASON_PHRASE} from '../src/message-factory/MessageBody.js';
 
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
@@ -127,33 +128,30 @@ describe('MessageFactory', function() {
 
     describe('assertIdentity()', function() {
         it('should add asserted identity to the given message', function(done) {
-            //assertIdentity(message, token, identity)
-            let assertedMessage = message.assertIdentity(message, "token","alice@frauhofer.fokus.de");
-            //console.log('asserted Identity Message', JSON.stringify(assertedMessage));
-            expect(assertedMessage).to.not.be.empty;
-            expect(assertedMessage.body.assertedIdentity).to.eql("alice@frauhofer.fokus.de");
+            //assertIdentity(token, identity)
+            message.assertIdentity("token","alicem@frauhofer.fokus.de");
+            //console.log('asserted Identity Message', JSON.stringify(message));
+            expect(message.body.assertedIdentity).to.eql("alicem@frauhofer.fokus.de");
             done();
         });
     });
 
     describe('addAccessToken()', function() {
         it('should add asserted identity to the given message', function(done) {
-            //addAccessToken(message, token)
-            let updatedMessage = message.addAccessToken(message, "7z94rif97z39gfi9v33893z3");
+            //addAccessToken(token)
+            message.addAccessToken("7z94rif97z39gfi9v33893z3");
             //console.log('Updated Message', JSON.stringify(updatedMessage));
-            expect(updatedMessage).to.not.be.empty;
-            expect(updatedMessage.body.accessToken).to.eql("7z94rif97z39gfi9v33893z3");
+            expect(message.body.accessToken).to.eql("7z94rif97z39gfi9v33893z3");
             done();
         });
     });
 
     describe('addIdToken()', function() {
         it('should add asserted identity to the given message', function(done) {
-            //addIdToken(message, token)
-            let updatedMessage = message.addIdToken(message, "3jwwjhw89whbhuf9z439zhfih94z");
-            //console.log('Updated Message', JSON.stringify(updatedMessage));
-            expect(updatedMessage).to.not.be.empty;
-            expect(updatedMessage.body.idToken).to.eql("3jwwjhw89whbhuf9z439zhfih94z");
+            //addIdToken(token)
+            message.addIdToken("3jwwjhw89whbhuf9z439zhfih94z");
+            //console.log('Updated Message', JSON.stringify(message));
+            expect(message.body.idToken).to.eql("3jwwjhw89whbhuf9z439zhfih94z");
             done();
         });
     });
@@ -161,8 +159,8 @@ describe('MessageFactory', function() {
     describe('createMessageResponse()', function() {
         it('should be a Response Message of Type RESPONSE', function(done) {
             //message, code, value, source
-            let response = messageFactory.createMessageResponse(message,"200", "OK");
-
+            let response = messageFactory.createMessageResponse(message,RESPONSE_CODE[200], REASON_PHRASE[200]);
+            //console.log("response code:"+RESPONSE_CODE[200]+ "reason phrase: "+REASON_PHRASE[200]);
             //console.log('Response Message', JSON.stringify(response));
             expect(response).to.not.be.empty;
             expect(response.type).to.eql(MessageType.RESPONSE);
