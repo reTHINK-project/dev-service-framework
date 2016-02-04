@@ -24,7 +24,7 @@ These are guidelines to help developers decide if they should provide specific s
 
 If the answers to the above questions are "YES" then most likely, you should go for the Hyperty Concept. The reTHINK Service Framework is what you want to look at next. The Service Framework provides APIs for developers to facilitate the development of Hyperties. 
 
-### Getting Started with Service
+### Getting Started with the Service Framework
 So you have decided for the Hyperty Concept and now ask yourself where to start. This section describes the basic steps any developer needs to undertake to include the Service Framwork into their projects. There are two simple steps to get you started. 
 
 1) Install the Service Framework
