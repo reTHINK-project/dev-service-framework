@@ -20,6 +20,8 @@ class ConnectionController extends EventEmitter {
     _this.syncher = syncher;
     _this.mode = 'offer';
 
+    _this._objectDescURL = 'hyperty-catalogue://localhost/.well-known/dataschemas/FakeDataSchema';
+
     _this.mediaConstraints = {
       optional: [],
       mandatory: {
@@ -306,7 +308,7 @@ class ConnectionController extends EventEmitter {
         console.info('------------------------ Syncher Create ---------------------- \n');
         _this.getUserMedia(options).then(function(mediaConstraints) {
           console.info('1. Return media constraints ', mediaConstraints);
-          return syncher.create({}, [remotePeer], {});
+          return syncher.create(_this._objectDescURL, [remotePeer], {});
         }).then(function(dataObjectReporter) {
           console.info('2. Return the Data Object Reporter ', dataObjectReporter);
           _this.dataObjectReporter = dataObjectReporter;

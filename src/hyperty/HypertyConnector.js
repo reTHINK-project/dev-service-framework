@@ -28,6 +28,8 @@ class HypertyConnector extends EventEmitter {
     _this._bus = bus;
     _this._configuration = configuration;
 
+    _this._objectDescURL = 'hyperty-catalogue://localhost/.well-known/dataschemas/FakeDataSchema';
+
     _this._controllers = {};
 
     let syncher = new Syncher(hypertyURL, bus, configuration);
@@ -62,7 +64,7 @@ class HypertyConnector extends EventEmitter {
     console.info('---------------- Syncher Subscribe ---------------- \n');
     console.info('Subscribe URL Object ', event, syncher);
 
-    syncher.subscribe(event.url).then(function(dataObjectObserver) {
+    syncher.subscribe(_this._objectDescURL, event.url).then(function(dataObjectObserver) {
       console.info('1. Return Subscribe Data Object Observer', dataObjectObserver);
 
       let connectionController = new ConnectionController(syncher);
@@ -84,7 +86,7 @@ class HypertyConnector extends EventEmitter {
 
     console.info('---------------- Syncher Subscribe ---------------- \n');
     console.info('Subscribe URL Object ', event, syncher);
-    syncher.subscribe(event.url).then(function(dataObjectObserver) {
+    syncher.subscribe(_this._objectDescURL, event.url).then(function(dataObjectObserver) {
       console.info('1. Return Subscribe Data Object Observer', dataObjectObserver);
 
       _this._controllers[event.from].dataObjectObserver = dataObjectObserver;
@@ -113,7 +115,7 @@ class HypertyConnector extends EventEmitter {
       let _dataObjectReporter;
 
       console.info('------------------------ Syncher Create ---------------------- \n');
-      syncher.create({}, [hypertyURL], {}).then(function(dataObjectReporter) {
+      syncher.create(_this._objectDescURL, [hypertyURL], {}).then(function(dataObjectReporter) {
         console.info('1. Return Create Data Object Reporter', dataObjectReporter);
 
         _dataObjectReporter = dataObjectReporter;

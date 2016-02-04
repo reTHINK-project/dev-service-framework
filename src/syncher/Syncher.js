@@ -1,5 +1,6 @@
 import DataObjectReporter from './DataObjectReporter';
 import DataObjectObserver from './DataObjectObserver';
+import DataProvisional from './DataProvisional';
 
 /**
  * @author micaelpedrosa@gmail.com
@@ -14,6 +15,7 @@ class Syncher {
 
   _reporters: <url: DataObjectReporter>
   _observers: <url: DataObjectObserver>
+  _provisionals: <url: DataProvisional>
 
   ----event handlers----
   _onNotificationHandler: (event) => void
@@ -29,6 +31,7 @@ class Syncher {
 
    _this._reporters = {};
    _this._observers = {};
+   _this._provisionals = {};
 
    bus.addListener(owner, (msg) => {
      console.log('Syncher-RCV: ', msg);
@@ -85,27 +88,32 @@ class Syncher {
   * @param  {ObjectURL} objURL Address of the existent object.
   * @return {Promise<DataObjectObserver>} Return Promise to a new Observer.
   */
- subscribe(objURL) {
+ subscribe(schema, objURL) {
    let _this = this;
 
    //TODO: validate if subscription already exists ?
    let subscribeMsg = {
      type: 'subscribe', from: _this._owner, to: _this._subURL,
-     body: { resource: objURL }
+     body: { schema: schema, resource: objURL }
    };
 
    return new Promise((resolve, reject) => {
      //request subscription
      _this._bus.postMessage(subscribeMsg, (reply) => {
        console.log('subscribe-response: ', reply);
-       if (reply.body.code === 200) {
-         //subscription accepted
-         let newObj = new DataObjectObserver(_this._owner, objURL, reply.body.schema, _this._bus, 'on', reply.body.value, reply.body.children);
-         _this._observers[objURL] = newObj;
+       let newProvisional = _this._provisionals[objURL];
+       delete _this._provisionals[objURL];
+       if (newProvisional) newProvisional.release();
+
+       if (reply.body.code < 200) {
+         newProvisional = new DataProvisional(_this._owner, objURL, _this._bus, reply.body.childrenResources);
+         _this._provisionals[objURL] = newProvisional;
+       } else if (reply.body.code === 200) {
+         let newObj = new DataObjectObserver(_this._owner, objURL, schema, _this._bus, 'on', reply.body.value, newProvisional.children);
 
          resolve(newObj);
+         newProvisional.apply(newObj);
        } else {
-         //subscription rejected
          reject(reply.body.desc);
        }
      });

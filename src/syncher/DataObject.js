@@ -35,19 +35,22 @@ class DataObject {
     _this._children = { };
 
     let childBaseURL = url + '/children/';
-    children.forEach((child) => {
-      let childURL = childBaseURL + child;
-      bus.addListener(childURL, (msg) => {
-        //ignore msg sent by himself
-        if (msg.from !== this._owner) {
-          switch (msg.type) {
-            case 'create': _this._onChildrenCreate(msg); break;
-            case 'delete': console.log(msg); break;
-            default: _this._changeChildren(msg); break;
+
+    if (children) {
+      children.forEach((child) => {
+        let childURL = childBaseURL + child;
+        bus.addListener(childURL, (msg) => {
+          //ignore msg sent by himself
+          if (msg.from !== this._owner) {
+            switch (msg.type) {
+              case 'create': _this._onChildrenCreate(msg); break;
+              case 'delete': console.log(msg); break;
+              default: _this._changeChildren(msg); break;
+            }
           }
-        }
+        });
       });
-    });
+    }
   }
 
   get version() { return this._version; }
@@ -75,6 +78,10 @@ class DataObject {
   stop() {
     //TODO: should remove the subscription and send message unsubscribe?
     throw 'Not implemented';
+  }
+
+  release() {
+    //TODO: remove all listeners for this object
   }
 
   addChildren(resource, initialData) {
