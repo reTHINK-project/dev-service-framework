@@ -24,6 +24,8 @@ class DataObjectChild /* implements SyncStatus */ {
 
   }
 
+  get childId() { return this._childId; }
+
   get data() { return this._syncObj.data; }
 
   onChange(callback) {

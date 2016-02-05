@@ -57,13 +57,16 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
 
       accept: () => {
         //create new subscription
-        _this._subscriptions[hypertyUrl] = { status: 'on' };
+        let sub = { url: hypertyUrl, status: 'on' };
+        _this._subscriptions[hypertyUrl] = sub;
 
         //send ok response message
         _this._bus.postMessage({
           id: msg.id, type: 'response', from: msg.to, to: msg.from,
           body: { code: 200, schema: _this._schema, version: _this._version, value: deepClone(_this.data) }
         });
+
+        return sub;
       },
 
       reject: (reason) => {
