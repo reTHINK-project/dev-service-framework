@@ -30,6 +30,28 @@ Message sent by the Registry Domain server (Connector or Protostub) to Hyperty R
 "body" : { "code": 200 }
 ```
 
+#### Unregistration request
+
+Message sent by the Hyperty Runtime Registry function to Registry Domain server (Connector or Protostub).
+
+```
+"id" : "4"
+"type" : "DELETE",
+"from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/registry",
+"to" : "domain://registry.<sp-domain>",
+"body" : { "value" : <RegistryDataObject> }
+```
+
+Message sent by the Registry Domain server (Connector or Protostub) to Hyperty Runtime Registry function.
+
+```
+"id" : "<4>"
+"type" : "RESPONSE",
+"from" : "domain://registry.<sp-domain>",
+"to" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/registry",
+"body" : { "code": 200 }
+```
+
 #### Hyperty Instance Query per User
 
 Message sent by an Hyperty Instance to Registry Domain server (Connector or Protostub).
@@ -71,7 +93,7 @@ Message sent by an Hyperty Instance to Registry Domain server (Connector or Prot
 Message sent by Registry Domain server (Connector or Protostub) to an Hyperty Instance.
 
 ```
-"id" : "2"
+"id" : "3"
 "type" : "RESPONSE",
 "from" : "domain://registry.<sp-domain>",
 "to" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
