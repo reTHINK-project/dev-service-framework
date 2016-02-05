@@ -127,6 +127,9 @@ Response Message sent back by Runtime Observer Sync Manager to Object Observer H
 "body" : { "code" : "2XX" }
 ```
 
+
+Response to Object Delete sent by Runtime Reporter
+
 #### Synchronisation management by Sync Manager Reporter
 
 ##### Observer Invitation
@@ -162,6 +165,18 @@ Message sent by Reporter Runtime Sync Manager to Object Changes Handler.
 "type" : "DELETE",
 "from" : "<ObjectURL>/subscription",
 "to" : "<ObjectURL>/changes"
+```
+
+###### Response to Object Delete
+
+Message sent by Observer Runtime Sync Manager to Object Subscription Handler, on behalf of Observer Hyperty.
+
+```
+"id" : "6"
+"type" : "RESPONSE",
+"from" : "<ObjectURL>/changes",
+"to" : "<ObjectURL>/subscription",
+"body" : { "code" : "2XX", "source" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>" }
 ```
 
 #### Synchronisation management by Sync Manager Observer
