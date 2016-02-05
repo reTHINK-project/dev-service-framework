@@ -31,6 +31,8 @@ Message sent by the Reporter Syncher Hyperty to Reporter Runtime Sync Manager.
 
 **note:** `"resource"` is present in the body in case the ObjectURL is already known by the reporter eg in a Reporter delegation procedure.
 
+###### Response
+
 Reporter Runtime Sync Manager Response Message sent to the Reporter Syncher Hyperty to confirm Object Data creation.
 
 ```
