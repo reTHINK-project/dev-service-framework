@@ -55,6 +55,8 @@ Message sent by Object Reporter Hyperty to Reporter Runtime Sync Manager.
 "body" : { "resource" : "<ObjectURL>" }
 ```
 
+###### Response
+
 Response Message sent back by Reporter Runtime Sync Manager to Object Reporter Hyperty.
 
 ```
@@ -79,6 +81,8 @@ Message sent by the Reporter Runtime Sync Manager to invited Observer Hyperty In
 "body" : { "resource" : "<ObjectURL>", "childrenResources" : [{"<resource-children-name>"}] , "value" : "<json object > , "schema" : "hyperty-catalogue://<sp-domain>/dataObjectSchema/<schema-identifier>" }
 ```
 
+###### Response
+
 Response Message sent back by invited Hyperty Instance to the Reporter Runtime Sync Manager.
 
 ```
@@ -100,6 +104,8 @@ Message sent by Observer (candidate) Hyperty Instance to the Observer Runtime Sy
 "to" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
 "body" : { "resource" : "<ObjectURL>" , "childrenResources" : [{"<resource-children-name>"}], "schema" : "hyperty-catalogue://<sp-domain>/dataObjectSchema/<schema-identifier>" }
 ```
+
+###### Response
 
 200OK Response Message sent back by Observer Runtime Sync Manager to Observer Hyperty Instance containing in the body the most updated version of Data Object.
 
