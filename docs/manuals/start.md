@@ -1,10 +1,14 @@
+Introduction
+------------
+
 ### Introduction to the ReThink Framework
 
-_Describe concepts_  
-_Big picture with Devices/CSP (including support services + IdPs)_  
+*Describe concepts*  
+*Big picture with Devices/CSP (including support services + IdPs)*
 
 ### My First Service
-_Hello World like application A  calls B with a communication Hyperty already provided_  
-_Second application with a sensor emulation (Get the room temperature)_
+
+*Hello World like application A calls B with a communication Hyperty already provided*  
+*Second application with a sensor emulation (Get the room temperature)*
 
 ###
