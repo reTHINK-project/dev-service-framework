@@ -43,6 +43,16 @@ Reporter Runtime Sync Manager Response Message sent to the Reporter Syncher Hype
 "body" : { "code" : "200", "value" : "{ "resource" : "<ObjectURL>", "childrenResources" : [{"<resource-children-name>"}] } }
 ```
 
+Reporter Runtime Sync Manager forwards to the Reporter Syncher Hyperty, Response Messages sent by invited Observer Hyperties.
+
+```
+"id" : "1"
+"type" : "RESPONSE",
+"from" : "hyperty-runtime://<sp-domain>/<hyperty-runtime-instance-identifier>/sm",
+"to" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
+"body" : { "code" : "1XX\2XX" , "source" : "hyperty://<sp-domain>/<hyperty-observer-instance-identifier>" }
+```
+
 ##### Delete Data Object requested by Reporter
 
 Message sent by Object Reporter Hyperty to Reporter Runtime Sync Manager.
