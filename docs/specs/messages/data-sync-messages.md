@@ -115,6 +115,8 @@ Message sent by Object Observer Hyperty to Runtime Observer Sync Manager .
 "body" : { "resource" : "<ObjectURL>" , "childrenResources" : [{"<resource-children-name>"}]}
 ```
 
+###### Unsubscription Response
+
 Response Message sent back by Runtime Observer Sync Manager to Object Observer Hyperty.
 
 ```
