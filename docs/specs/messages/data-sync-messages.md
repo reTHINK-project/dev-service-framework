@@ -69,30 +69,6 @@ Response Message sent back by Reporter Runtime Sync Manager to Object Reporter H
 
 #### Synchronisation Management by Syncher Observer
 
-##### Observer Invitation
-
-Message sent by the Reporter Runtime Sync Manager to invited Observer Hyperty Instance.
-
-```
-"id" : "1"
-"type" : "CREATE",
-"from" : "hyperty-runtime://<sp-domain>/<hyperty-runtime-instance-identifier>/sm",
-"to" : "hyperty://<sp-domain>/<hyperty-observer-instance-identifier>",
-"body" : { "resource" : "<ObjectURL>", "childrenResources" : [{"<resource-children-name>"}] , "value" : "<json object > , "schema" : "hyperty-catalogue://<sp-domain>/dataObjectSchema/<schema-identifier>" }
-```
-
-###### Response
-
-Response Message sent back by invited Hyperty Instance to the Reporter Runtime Sync Manager.
-
-```
-"id" : "1"
-"type" : "RESPONSE",
-"from" : "hyperty://<observer-sp-domain>/<hyperty-observer-instance-identifier>",
-"to" : "hyperty-runtime://<sp-domain>/<hyperty-runtime-instance-identifier>/sm",
-"body" : { "code" : "1XX\2XX"  }
-```
-
 ##### Hyperty request to be an Observer
 
 Message sent by Observer (candidate) Hyperty Instance to the Observer Runtime Sync Manager.
@@ -141,6 +117,30 @@ Response Message sent back by Runtime Observer Sync Manager to Object Observer H
 
 #### Synchronisation management by Sync Manager Reporter
 
+##### Observer Invitation
+
+Message sent by the Reporter Runtime Sync Manager to invited Observer Hyperty Instance.
+
+```
+"id" : "1"
+"type" : "CREATE",
+"from" : "hyperty-runtime://<sp-domain>/<hyperty-runtime-instance-identifier>/sm",
+"to" : "hyperty://<sp-domain>/<hyperty-observer-instance-identifier>",
+"body" : { "resource" : "<ObjectURL>", "childrenResources" : [{"<resource-children-name>"}] , "value" : "<json object > , "schema" : "hyperty-catalogue://<sp-domain>/dataObjectSchema/<schema-identifier>" }
+```
+
+###### Response
+
+Response Message sent back by invited Hyperty Instance to the Reporter Runtime Sync Manager.
+
+```
+"id" : "1"
+"type" : "RESPONSE",
+"from" : "hyperty://<observer-sp-domain>/<hyperty-observer-instance-identifier>",
+"to" : "hyperty-runtime://<sp-domain>/<hyperty-runtime-instance-identifier>/sm",
+"body" : { "code" : "1XX\2XX"  }
+```
+
 ##### All Observers are requested to delete Data Object
 
 Message sent by Reporter Runtime Sync Manager to Object Changes Handler.
@@ -166,6 +166,8 @@ Message sent by Observer Runtime Sync Manager to Data Object Subscription Handle
 "body" : {  "subscriber" : "hyperty://<observer-sp-domain>/<hyperty-observer-instance-identifier>" }
 ```
 
+###### Response
+
 200OK Response Message sent back by Data Object Subscription Handler to Observer Runtime Sync Manager containing in the body the most updated version of Data Object.
 
 ```
@@ -187,6 +189,8 @@ Message sent by Observer Runtime Sync Manager to Data Object Subscription Handle
 "to" : "<ObjectURL>/subscription",
 "body" : {  "subscriber" : "hyperty://<observer-sp-domain>/<hyperty-observer-instance-identifier>", "childrenResources" : [{"<resource-children-name>"}] }
 ```
+
+###### Response
 
 200OK Response Message sent back by Data Object Subscription Handler to Observer Runtime Sync Manager.
 
@@ -212,6 +216,8 @@ Message sent by Observer Runtime Sync Manager to Message Node to request the set
 "body" : { "resource" : "<ObjectURL>" , "childrenResources" : [{"<resource-children-name>"}], "schema" : "hyperty-catalogue://<sp-domain>/dataObjectSchema/<schema-identifier>"}
 ```
 
+###### Response
+
 200OK Response Message sent back by Message Node to Observer Runtime Sync Manager.
 
 ```
@@ -233,6 +239,8 @@ Message sent by Observer Runtime Sync Manager to Message Node to request the rem
 "to" : "domain://msg-node.<observer-sp-domain>/sm",
 "body" : { "resource" : "<ObjectURL>" , "childrenResources" : [{"<resource-children-name>"}] }
 ```
+
+###### Response
 
 200OK Response Message sent back by Message Node to Observer Runtime Sync Manager.
 
@@ -269,6 +277,8 @@ Message sent by Child Object Reporter Hyperty to Data Object Parent Children Han
 "to" : "<ObjectURL>/children/<resource-children-name>",
 "body" : { "resource" : "hyperty://<sp-domain>/<hyperty-child-reporter-identifier>#<1>", "value" : "{  "<ChildDataObject>" }  }
 ```
+
+###### Response
 
 (Optional) Response Message from Child Object Observer Hyperty to Child Object Reporter Hyperty.
 
