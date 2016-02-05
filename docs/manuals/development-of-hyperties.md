@@ -5,7 +5,7 @@ This document provides guidelines for developers of Hyperties. It is recommended
 
 -	[An Overview of the Hyperty Concept](hyperty.md)
 -	[An Overview of the Hyperty Messaging Framework](hyperty-messaging-framework.md)
--	[An overview on how Hyperties cooperate each other through a Data Synchronisation model called Reporter - Observer](p2p-data-sync.md)
+-	[An overview on how Hyperties cooperate with each other through a Data Synchronisation model called Reporter - Observer](p2p-data-sync.md)
 -	[An overview on the Hyperty Security and Trust Model](hyperty-trust.md)
 
 ### Hyperty Concept
@@ -59,6 +59,19 @@ The next section explains the availble modules and APIs they expose.
 *First I would just provide the basic Syncher and hypertyDiscovery APIs to be used and the others in an "advanced" section*
 
 Here we describe useful functionalities that are exposed by the Service Framework Module, which developers can use in development process.
+
+#### Syncher API
+
+```
+new Syncher(hypertyURL, bus.MiniBus, configuration)
+```
+*Parameters:*
+
+| name                | type                                      | description                                                                                                                                                                           |
+|---------------------|-------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| hypertyURL          | URL.HypertyURL                            | A URL allocated by the runtime that uniquely identifies the Hyperty                                                                                                            |
+| bus.MiniBus         | MiniBus                                   | An instance of the MiniBus provided in the sandbox. When an object (Reporter or Observed) is created, the SyncherManager will add a listener in the MiniBus to receive/send Messages of that object.                                                                                         |
+| configuration       | Config                                    | Configuration data containing the runtimeURL. |
 
 //TODO: describe the APIs from syncher, minibus.postMessage(), hypertyDiscovery, messageFactory and URLFactory
 
