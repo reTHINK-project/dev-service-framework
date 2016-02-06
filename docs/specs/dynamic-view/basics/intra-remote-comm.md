@@ -47,4 +47,3 @@ SP1H@1B <- BUS@1B : postMessage( message )
 -->
 
 ![Figure @runtime-intra-remote-comm: Intra-domain Remote Communication](intradomain-remote-communication.png)
-
