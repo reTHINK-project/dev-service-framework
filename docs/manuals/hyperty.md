@@ -5,6 +5,7 @@ This document, provides an overview about the Hyperty concept and it should be t
 
 -	the [Hyperty Messaging Framework overview](hyperty-messaging-framework.md)
 -	the [Reporter - Observer Data Synchronisation model](p2p-data-sync.md)
+-	the [Hyperty Trust and Security Model](hyperty-trust.md)
 
 Hyperties are cooperative [Microservices](http://martinfowler.com/articles/microservices.html) that are executed in devices on behalf of users through simple but sophisticated Identity Management techniques. This means, Hyperties are independently deployable components each one providing a small set of business capabilities, using the *smart endpoints and dumb pipes* philosophy i.e. Hyperties don't depend on complex and sophisticated communication middleware like Enterprise Service BUS (ESB). Instead, Hyperties rely on a very light but powerful [Messaging Framework](hyperty-messaging-framework.md) concept).
 
@@ -16,9 +17,9 @@ However, Hyperties can also be executed in Network Servers for specific Business
 
 In addition, Hyperties have some unique characteristics including:
 
--	Hyperties are programmed in Javascript ECMA5/6, i.e. any existing device featuring a Browser or a NodeJS can be used today to execute Hyperties without requiring the installation of any new software. This means, **billions of devices** are already Hyperty enabled and ready to make part of reTHINK ecossystem.
--	The User Identity associated to an Hyperty is decoupled from the Hyperty Service Provider. Ie Identity Management is handled under the scene and the Developer does not have to care about it and just have to focus on the development of Business Capabilities. This also means, the end-user has the power to decide which is the Identity to be securely associated to a certain Hyperty instance. *put link*
--	Hyperties cooperate and communicate each other via P2P Synchronisation of Hyperty JSON Data Objects supported by the novel [Reporter - Observer communication pattern](p2p-data-sync.md).  
+-	Hyperties are programmed in Javascript ECMA5/6, i.e. any existing device featuring a Browser or a NodeJS can be used today to execute Hyperties without requiring the installation of any new software. This means, **billions of devices** are already Hyperty enabled and ready to make part of reTHINK ecosystem. The [Hyperty Core Runtime](https://github.com/reTHINK-project/dev-runtime-core), provides additional features not natively supported by current Web Runtimes that are required to safely manage the deployment and execution of Hyperties. The Hyperty Core Runtime is also programmed in Javascript ECMA5/6 and is deployed on-the-fly along with the Hyperty if not done before.
+-	The User Identity associated to an Hyperty is decoupled from the Hyperty Service Provider. I.e. Identity Management is handled under the scene and the Developer does not have to care about it and just have to focus on the development of Business Capabilities. This also means, the end-user has the power to decide which is the Identity to be securely associated to a certain Hyperty instance. More information about the Hyperty Security and Trust Model is provided [here](hyperty-trust.md).
+-	Hyperties cooperate and communicate each other via P2P Synchronisation of Hyperty JSON Data Objects supported by the [Reporter - Observer communication pattern](p2p-data-sync.md). For example, as soon as there is new measurement collected from a sensor the data is set in a associated JSON Object. As soon as there is a change in this JSON Object, the change is reported by the Reporter Hyperty to any authorised Observer Hyperty. In this way, the JSON Object handled by Observer Hyperty is always synchronised with the JSON Object owned by the Reporter Hyperty.
 
 ![Reporter-Observer Communication Pattern](reporter-observer.png)
 
@@ -72,4 +73,4 @@ On the Hyperty Observer side, Data Objects are also created with the Syncher API
 
 -	Hyperties can easily cooperate with Hyperties from other domains with no federation required or the standardisation of Protocols thanks to the [Protocol On-the Fly powered Messaging Framework](hyperty-messaging-framework.md). Hyperties only have to agree on a common json-schema for one or more Hyperty Data Objects, in order to be able to cooperate each other.
 
--	Hyperties can be used on any Application Domain, but they are specially suitable for Real Time Communication Apps (eg Video Conference and Chat) as well as IoT Apps.
+-	Hyperties can be used on any Application Domain, but they are specially suitable for Real Time Communication Apps (eg Video Conference and Chat) as well as IoT Apps. Check [Current Hyperty Catalogue](../../examples)\(*to be moved to a dedicated repo ou portal?*).
