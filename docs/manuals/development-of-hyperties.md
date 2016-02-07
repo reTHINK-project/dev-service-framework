@@ -100,7 +100,14 @@ subscribe(objURL) → {Promise.<DataObjectObserver>}
 ```
 *Parameters:*
 
-objURL	ObjectURL	Address of the existent object.
+| name     | type    | description                                                                                                         |
+|----------|---------|---------------------------------------------------------------------------------------------------------------------|
+| objURL | ObjectURL | 	Address of the existent object |
+	
+*Returns:*
+Return Promise to a new Observer.
+Type
+Promise.<DataObjectObserver>
 
 //TODO: describe the APIs  minibus.postMessage(), hypertyDiscovery, messageFactory and URLFactory
 
