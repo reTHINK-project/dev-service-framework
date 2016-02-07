@@ -94,7 +94,8 @@ create(schema, List, initialData)
 Return Promise to a new Reporter. The reporter can be accepted or rejected by the PEP
 Type
 Promise.<DataObjectReporter>
-------------------------------------
+
+
 The subscribe method can be used to request subscription to an existent object. 
 
 ```
@@ -125,8 +126,9 @@ _onPostMessage(msg)
 | msg | Message.Message | posted Message|
 		
 
-The _registerExternalListener() method is not publicly available. It can be used by the class extension implementation to process all messages that enter the MiniBus from an external interface, like a WebWorker or IFrame. This method is called one time in the constructor to register external listeners. The implementation will probably call the "_onMessage" method to publish in the local listeners. DO NOT call "postMessage", there is a danger that the message enters in a cycle!
+The _registerExternalListener() method is not publicly available. It can be used by the class extension implementation to process all messages that enter the MiniBus from an external interface, like a WebWorker or IFrame. This method is called one time in the constructor to register external listeners. The implementation will probably call the "_onMessage" method to publish in the local listeners. 
 
+*NOTE:* DO NOT call "postMessage", there is a danger that the message enters in a cycle!
 ```
 _registerExternalListener()
 ```
