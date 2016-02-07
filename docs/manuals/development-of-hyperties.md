@@ -73,7 +73,22 @@ new Syncher(hypertyURL, bus.MiniBus, configuration)
 | bus.MiniBus         | MiniBus                                   | An instance of the MiniBus provided in the sandbox. When an object (Reporter or Observed) is created, the SyncherManager will add a listener in the MiniBus to receive/send Messages of that object.                                                                                         |
 | configuration       | Config                                    | Configuration data containing the runtimeURL. |
 
-//TODO: describe the APIs from syncher, minibus.postMessage(), hypertyDiscovery, messageFactory and URLFactory
+##### Methods
+
+The create method request a DataObjectReporter creation. The URL will be be requested by the allocation mechanism..
+
+```
+create(schema, List, initialData) → {Promise.<DataObjectReporter>}
+```
+*Parameters:*
+
+| name     | type    | description                                                                                                         |
+|----------|---------|---------------------------------------------------------------------------------------------------------------------|
+| schema | Schema | The Schema of the object |
+|List	|Array.<HypertyURL>	|of hyperties to send the create|
+
+
+//TODO: describe the APIs  minibus.postMessage(), hypertyDiscovery, messageFactory and URLFactory
 
 ### Examples
 
