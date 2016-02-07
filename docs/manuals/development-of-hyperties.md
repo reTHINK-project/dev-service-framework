@@ -134,7 +134,7 @@ _registerExternalListener()
 ```
 
 
-//TODO: hypertyDiscovery, messageFactory and URLFactory
+//TODO: hypertyDiscovery
 
 ### Examples
 
