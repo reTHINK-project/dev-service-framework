@@ -85,8 +85,22 @@ create(schema, List, initialData) → {Promise.<DataObjectReporter>}
 | name     | type    | description                                                                                                         |
 |----------|---------|---------------------------------------------------------------------------------------------------------------------|
 | schema | Schema | The Schema of the object |
-|List	|Array.<HypertyURL>	|of hyperties to send the create|
+|List	|Array<HypertyURL>	|of hyperties to send the create|
+|initialData|	JSON	|Object initial data|
 
+* Returns:*
+Return Promise to a new Reporter. The reporter can be accepted or rejected by the PEP
+Type
+Promise.<DataObjectReporter>
+------------------------------------
+Request a subscription to an existent object. 
+
+```
+subscribe(objURL) → {Promise.<DataObjectObserver>}
+```
+*Parameters:*
+
+objURL	ObjectURL	Address of the existent object.
 
 //TODO: describe the APIs  minibus.postMessage(), hypertyDiscovery, messageFactory and URLFactory
 
