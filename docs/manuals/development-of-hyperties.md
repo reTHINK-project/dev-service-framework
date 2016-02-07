@@ -62,6 +62,8 @@ Here we describe useful functionalities that are exposed by the Service Framewor
 
 #### Syncher API
 
+The Syncher is a singleton class per Hyperty/URL and it is the owner of all created DataObjects.
+The main class for the package. Should only be available one per Hyperty/URL. It's the owner of all kind of DataObjects.
 ```
 new Syncher(hypertyURL, bus.MiniBus, configuration)
 ```
@@ -93,7 +95,7 @@ Return Promise to a new Reporter. The reporter can be accepted or rejected by th
 Type
 Promise.<DataObjectReporter>
 ------------------------------------
-Request a subscription to an existent object. 
+The subscribe method can be used to request subscription to an existent object. 
 
 ```
 subscribe(objURL) → {Promise.<DataObjectObserver>}
@@ -105,11 +107,11 @@ subscribe(objURL) → {Promise.<DataObjectObserver>}
 | objURL | ObjectURL | 	Address of the existent object |
 	
 *Returns:*
-Return Promise to a new Observer.
-Type
-Promise.<DataObjectObserver>
+Return Promise to a new Observer of Type Promise.<DataObjectObserver>
 
-//TODO: describe the APIs  minibus.postMessage(), hypertyDiscovery, messageFactory and URLFactory
+#### Minibus API
+
+//TODO: describe the APIs  , hypertyDiscovery, messageFactory and URLFactory
 
 ### Examples
 
