@@ -80,7 +80,7 @@ new Syncher(hypertyURL, bus.MiniBus, configuration)
 The create method request a DataObjectReporter creation. The URL will be be requested by the allocation mechanism..
 
 ```
-create(schema, List, initialData) → {Promise.<DataObjectReporter>}
+create(schema, List, initialData)
 ```
 *Parameters:*
 
@@ -98,7 +98,7 @@ Promise.<DataObjectReporter>
 The subscribe method can be used to request subscription to an existent object. 
 
 ```
-subscribe(objURL) → {Promise.<DataObjectObserver>}
+subscribe(objURL) 
 ```
 *Parameters:*
 
@@ -110,8 +110,29 @@ subscribe(objURL) → {Promise.<DataObjectObserver>}
 Return Promise to a new Observer of Type Promise.<DataObjectObserver>
 
 #### Minibus API
+The MiniBus API is a minimal interface to send and receive messages. It can be reused in many type of components. Components that need a message system should receive this class as a dependency or extend it. Classes extending this interface have to implement the following private methods: _onPostMessage and _registerExternalListener which are described below.
 
-//TODO: describe the APIs  , hypertyDiscovery, messageFactory and URLFactory
+The _onPostMessage method is a private class and used by the classes extending the Minibus class to process messages from the public "postMessage" without a registered listener. It can be used to send the message to an external interface, like a WebWorker or an IFrame.
+
+```
+_onPostMessage(msg)
+```
+
+*Parameters:*
+
+| name     | type    | description                                                                                                         |
+|----------|---------|---------------------------------------------------------------------------------------------------------------------|
+| msg | Message.Message | posted Message|
+		
+
+The _registerExternalListener() method is not publicly available. It can be used by the class extension implementation to process all messages that enter the MiniBus from an external interface, like a WebWorker or IFrame. This method is called one time in the constructor to register external listeners. The implementation will probably call the "_onMessage" method to publish in the local listeners. DO NOT call "postMessage", there is a danger that the message enters in a cycle!
+
+```
+_registerExternalListener()
+```
+
+
+//TODO: hypertyDiscovery, messageFactory and URLFactory
 
 ### Examples
 
