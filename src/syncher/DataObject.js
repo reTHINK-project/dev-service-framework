@@ -19,6 +19,9 @@ class DataObject {
   _onAddChildrenHandler: (event) => void
   */
 
+  /**
+   * Should not be used directly by Hyperties. It's called by the Syncher create or subscribe method's
+   */
   constructor(owner, url, schema, bus, initialStatus, initialData, children) {
     let _this = this;
 
@@ -53,16 +56,34 @@ class DataObject {
     }
   }
 
-  get version() { return this._version; }
-
+  /**
+   * Object URL of reporter or observer
+   * @return {ObjectURL} Object URL
+   */
   get url() { return this._url; }
 
+  /**
+   * Object schemaURL (this field is not yet stable, and is subsject to change)
+   * @return {SchemaURL} schema URL
+   */
   get schema() { return this._schema; }
 
+  /**
+   * Status of the reporter or observer connection (this field is not yet stable, and is subsject to change)
+   * @return {Status} Enum of: on | paused
+   */
   get status() { return this._status; }
 
+  /**
+   * Data Structure to be synchronized.
+   * @return {JSON} JSON structure that should follow the defined schema, if any.
+   */
   get data() { return this._syncObj.data; }
 
+  /**
+   * All created children's since the subscription, doesn't contain all children's since reporter creation.
+   * @return {<ChildId>: DataObjectChild} Map of childrens
+   */
   get children() { return this._children; }
 
   pause() {
@@ -84,6 +105,12 @@ class DataObject {
     //TODO: remove all listeners for this object
   }
 
+  /**
+   * Create and add a children to the subscription group.
+   * @param {String} resource Resource name, one of the items in the schema.properties.scheme of the parent object.
+   * @param {JSON} initialData Initial data of the child
+   * @return {Promise<DataObjectChild>} Return Promise to a new Children.
+   */
   addChildren(resource, initialData) {
     let _this = this;
 
@@ -113,6 +140,10 @@ class DataObject {
     });
   }
 
+  /**
+   * Setup the callback to process create and delete childrens
+   * @param  {Function} callback Function of type (event) => void
+   */
   onAddChildren(callback) {
     this._onAddChildrenHandler = callback;
   }

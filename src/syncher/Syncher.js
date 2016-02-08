@@ -21,6 +21,12 @@ class Syncher {
   _onNotificationHandler: (event) => void
   */
 
+ /**
+  * Constructor that should be used by the Hyperty owner
+  * @param  {HypertyURL} owner Hyperty URL owner
+  * @param  {MiniBus} bus The internal sandbox MiniBus used by the Hyperty
+  * @param  {JSON} config The only required field for now is runtimeURL
+  */
  constructor(owner, bus, config) {
    let _this = this;
 
@@ -42,17 +48,29 @@ class Syncher {
    });
  }
 
+ /**
+  * The owner of the Syncher and all created reporters.
+  * @return {HypertyURL} The owner HypertyURL
+  */
  get owner() { return this._owner; }
 
+ /**
+  * All owned reporters, the ones that were created by a create
+  * @return {<url>: DataObjectReporter} Map of the reporters
+  */
  get reporters() { return this._reporters; }
 
+ /**
+  * All owned observers, the ones that were created by a local subscription
+  * @return {<url>: DataObjectObserver} Map of the observers
+  */
  get observers() { return this._observers; }
 
  /**
   * Request a DataObjectReporter creation. The URL will be be requested by the allocation mechanism.
-  * @param  {Schema} schema Schema of the object
-  * @param  {HypertyURL[]} List of hyperties to send the create
-  * @param  {JSON} initialData Object initial data
+  * @param  {SchemaURL} schema URL of the object descriptor
+  * @param  {HypertyURL[]} List of hyperties that are pre-authorized for subscription
+  * @param  {JSON} initialData Initial data of the reporter
   * @return {Promise<DataObjectReporter>} Return Promise to a new Reporter. The reporter can be accepted or rejected by the PEP
   */
  create(schema, observers, initialData) {
@@ -85,8 +103,9 @@ class Syncher {
 
  /**
   * Request a subscription to an existent object.
-  * @param  {ObjectURL} objURL Address of the existent object.
-  * @return {Promise<DataObjectObserver>} Return Promise to a new Observer.
+  * @param  {SchemaURL} schema URL of the object descriptor
+  * @param  {ObjectURL} objURL Address of the existent reporter object
+  * @return {Promise<DataObjectObserver>} Return Promise to a new observer.
   */
  subscribe(schema, objURL) {
    let _this = this;
@@ -120,6 +139,10 @@ class Syncher {
    });
  }
 
+ /**
+  * Setup the callback to process create and delete notifications
+  * @param  {Function} callback Function of type (event) => void
+  */
  onNotification(callback) {
    this._onNotificationHandler = callback;
  }

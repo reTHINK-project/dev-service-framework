@@ -1872,6 +1872,11 @@ var DataObjectChild /* implements SyncStatus */ = (function () {
       }
     }
   }, {
+    key: 'childId',
+    get: function get() {
+      return this._childId;
+    }
+  }, {
     key: 'data',
     get: function get() {
       return this._syncObj.data;
@@ -2077,13 +2082,16 @@ var DataObjectReporter = (function (_DataObject) {
 
         accept: function accept() {
           //create new subscription
-          _this._subscriptions[hypertyUrl] = { status: 'on' };
+          var sub = { url: hypertyUrl, status: 'on' };
+          _this._subscriptions[hypertyUrl] = sub;
 
           //send ok response message
           _this._bus.postMessage({
             id: msg.id, type: 'response', from: msg.to, to: msg.from,
             body: { code: 200, schema: _this._schema, version: _this._version, value: (0, _utilsUtilsJs.deepClone)(_this.data) }
           });
+
+          return sub;
         },
 
         reject: function reject(reason) {
