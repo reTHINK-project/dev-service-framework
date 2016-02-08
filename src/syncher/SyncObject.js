@@ -1,5 +1,8 @@
 import {deepClone} from '../utils/utils.js';
 
+/**
+ * @access private
+ */
 class SyncObject {
   /* private
     _data: any;

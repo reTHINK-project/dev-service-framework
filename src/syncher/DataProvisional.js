@@ -1,3 +1,6 @@
+/**
+ * @access private
+ */
 class DataProvisional {
   /* private
   _childrenListeners: [MsgListener]

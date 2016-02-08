@@ -11,6 +11,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
   */
 
   /**
+   * @ignore
    * Should not be used directly by Hyperties. It's called by the Syncher.create method
    */
   constructor(owner, url, schema, bus, initialStatus, initialData, children) {
@@ -32,21 +33,21 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
 
   /**
    * Subscriptions requested and accepted to this reporter
-   * @return {<HypertyURL>: SyncSubscription} Map of subscriptions
+   * @type {Object<HypertyURL, SyncSubscription>}
    */
   get subscriptions() { return this._subscriptions; }
 
   /**
    * Setup the callback to process subscribe and unsubscribe notifications
-   * @param  {Function} callback Function of type (event) => void
+   * @param {function(event: MsgEvent)} callback
    */
   onSubscription(callback) {
     this._onSubscriptionHandler = callback;
   }
 
   /**
-   * Setup the callback to process response notifications of the creates
-   * @param  {Function} callback Function of type (event) => void
+   * Setup the callback to process response notifications of the create's
+   * @param {function(event: MsgEvent)} callback
    */
   onResponse(callback) {
     this._onResponseHandler = callback;

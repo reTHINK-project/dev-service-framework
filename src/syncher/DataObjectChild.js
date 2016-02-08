@@ -8,6 +8,7 @@ class DataObjectChild /* implements SyncStatus */ {
   */
 
   /**
+   * @ignore
    * Should not be used directly by Hyperties. It's called by the DataObject.addChildren
    */
   constructor(owner, childId, msgId, bus, initialData) {
@@ -29,19 +30,19 @@ class DataObjectChild /* implements SyncStatus */ {
 
   /**
    * Children ID generated on addChildren. Unique identifier
-   * @return {URL} URL of the format <HypertyURL>#<numeric-sequence>
+   * @type {URL} - URL of the format <HypertyURL>#<numeric-sequence>
    */
   get childId() { return this._childId; }
 
   /**
    * Data Structure to be synchronized.
-   * @return {JSON} JSON structure that should follow the defined schema, if any.
+   * @type {JSON} - JSON structure that should follow the defined schema, if any.
    */
   get data() { return this._syncObj.data; }
 
   /**
    * Register the change listeners sent by the reporter child
-   * @param  {Function} callback Function of type (event) => void
+   * @param {function(event: MsgEvent)} callback
    */
   onChange(callback) {
     this._syncObj.observe((event) => {
@@ -51,7 +52,7 @@ class DataObjectChild /* implements SyncStatus */ {
 
   /**
    * Setup the callback to process response notifications of the creates
-   * @param  {Function} callback Function of type (event) => void
+   * @param {function(event: MsgEvent)} callback
    */
   onResponse(callback) {
     this._onResponseHandler = callback;

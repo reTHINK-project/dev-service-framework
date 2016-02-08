@@ -10,6 +10,7 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
   */
 
   /**
+   * @ignore
    * Should not be used directly by Hyperties. It's called by the Syncher.subscribe method
    */
   constructor(owner, url, schema, bus, initialStatus, initialData, children) {
@@ -31,8 +32,8 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
 
   /**
    * Register the change listeners sent by the reporter
-   * @param  {String}   filter Filter that identifies the field (separeted dot path). it accepts * at the end for a more unrestricted filtering.
-   * @param  {Function} callback Function of type (event) => void
+   * @param {string} filter - Filter that identifies the field (separeted dot path). Accepts * at the end for a more unrestricted filtering.
+   * @param {function(event: MsgEvent)} callback
    */
   onChange(filter, callback) {
     let key = filter;

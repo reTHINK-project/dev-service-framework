@@ -23,9 +23,9 @@ class Syncher {
 
  /**
   * Constructor that should be used by the Hyperty owner
-  * @param  {HypertyURL} owner Hyperty URL owner
-  * @param  {MiniBus} bus The internal sandbox MiniBus used by the Hyperty
-  * @param  {JSON} config The only required field for now is runtimeURL
+  * @param {HypertyURL} owner - Hyperty URL owner
+  * @param {MiniBus} bus - The internal sandbox MiniBus used by the Hyperty
+  * @param {JSON} config - The only required field for now is runtimeURL
   */
  constructor(owner, bus, config) {
    let _this = this;
@@ -50,27 +50,27 @@ class Syncher {
 
  /**
   * The owner of the Syncher and all created reporters.
-  * @return {HypertyURL} The owner HypertyURL
+  * @type {HypertyURL}
   */
  get owner() { return this._owner; }
 
  /**
   * All owned reporters, the ones that were created by a create
-  * @return {<url>: DataObjectReporter} Map of the reporters
+  * @type {Object<URL, DataObjectReporter>}
   */
  get reporters() { return this._reporters; }
 
  /**
   * All owned observers, the ones that were created by a local subscription
-  * @return {<url>: DataObjectObserver} Map of the observers
+  * @type {Object<URL, DataObjectObserver>}
   */
  get observers() { return this._observers; }
 
  /**
   * Request a DataObjectReporter creation. The URL will be be requested by the allocation mechanism.
-  * @param  {SchemaURL} schema URL of the object descriptor
-  * @param  {HypertyURL[]} List of hyperties that are pre-authorized for subscription
-  * @param  {JSON} initialData Initial data of the reporter
+  * @param  {SchemaURL} schema - URL of the object descriptor
+  * @param  {HypertyURL[]} observers - List of hyperties that are pre-authorized for subscription
+  * @param  {JSON} initialData - Initial data of the reporter
   * @return {Promise<DataObjectReporter>} Return Promise to a new Reporter. The reporter can be accepted or rejected by the PEP
   */
  create(schema, observers, initialData) {
@@ -103,8 +103,8 @@ class Syncher {
 
  /**
   * Request a subscription to an existent object.
-  * @param  {SchemaURL} schema URL of the object descriptor
-  * @param  {ObjectURL} objURL Address of the existent reporter object
+  * @param {SchemaURL} schema - URL of the object descriptor
+  * @param {ObjectURL} objURL - Address of the existent reporter object
   * @return {Promise<DataObjectObserver>} Return Promise to a new observer.
   */
  subscribe(schema, objURL) {
@@ -140,8 +140,9 @@ class Syncher {
  }
 
  /**
-  * Setup the callback to process create and delete notifications
-  * @param  {Function} callback Function of type (event) => void
+  * Setup the callback to process create and delete events of remove Reporter objects.
+  * This is releated to the messagens sent by create to the observers Hyperty array.
+  * @param {function(event: MsgEvent)} callback
   */
  onNotification(callback) {
    this._onNotificationHandler = callback;
