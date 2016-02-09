@@ -1,6 +1,10 @@
 reTHINK Service Framework
 -------------------------
 
+-	[Overview](#rethink-framework-overview)
+-	[Getting Started](#getting-started)
+-	[Contribute to reTHINK](#how-to-contribute)
+
 ### ReThink Framework Overview
 
 *Describe concepts*  
@@ -17,7 +21,15 @@ More information about reTHINK Framework is provided here:
 -	[Hyperty Data Synchronisation: Reporter - Observer communication model](docs/manuals/p2p-data-sync.md)
 -	[Hyperty Trust and Security Model](docs/manuals/hyperty-trust.md)
 
-### My First reTHINK Applications
+The current repository provides the Hyperty Service Framework, comprised by a set of libs to develop, and test new Hyperties. Check below a quick guideline on how to use the Hyperty Service Framework. In order to setup your own reTHINK Framework, you should install the following components (docker images available):
+
+-	the [Hyperty Catalogue](https://github.com/reTHINK-project/dev-catalogue)
+-	the [Hyperty Domain Registry](https://github.com/reTHINK-project/dev-registry-domain)
+-	the [Vertx Message Node](https://github.com/reTHINK-project/dev-msg-node-vertx). Other Message Nodes will be available including for [Matrix](https://matrix.org/) and for [NodeJS](https://nodejs.org/en/).
+
+Very soon we will provide a live public reTHINK environment, to let you publish and try your Hyperties or Apps without the need to install anything. Demos with Apps and Hyperty examples are provided below.
+
+### Getting Started
 
 *Hello World Chat application A send msg to B with a connection Hyperty already provided*  
 *Hello World WebRTC application A calls B with a Connector Hyperty already provided*  
@@ -29,9 +41,18 @@ Different development manuals are available, including:
 -	[Application Development manual](development-of-apps.md)
 -	[Message Nodes and Protostubs Development manual](development-of-protostubs-and-msg-nodes.md)
 
-### Service Framework developer view
+### How to contribute to reTHINK
 
-This section provides information for developers of reTHINK Service Framework.
+This section provides guidelines on how to contribute to reTHINK Service Framework. Contributions to other reTHINK components should follow its own guidelines:
+
+-	[Hyperty Core Runtime Development guidelines](https://github.com/reTHINK-project/dev-runtime-core/blob/master/readme.md#developer-view);
+-	[Hyperty Browser Runtime Development guidelines](https://github.com/reTHINK-project/dev-runtime-browser);
+-	[Hyperty Nodejs Runtime Development guidelines](https://github.com/reTHINK-project/dev-runtime-nodejs);
+-	[Development guidelines for new Hyperty Runtime Platforms](https://github.com/reTHINK-project/dev-runtime-core/blob/d3.2-working-docs/readme.md#browser-runtime);
+-	[Vertx Message Node Development guidelines](https://github.com/reTHINK-project/dev-msg-node-vertx);
+-	[Matrix Message Node Development guidelines](https://github.com/reTHINK-project/dev-msg-node-matrix);
+-	[NodeJS Message Node Development guidelines](https://github.com/reTHINK-project/dev-msg-node-nodejs);
+-	[Development guidelines for new Message Nodes](docs/manuals/development-of-protostubs-and-msg-nodes.md); -
 
 #### How to install this repository like a NPM Module;
 
