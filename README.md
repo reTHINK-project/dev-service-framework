@@ -41,7 +41,7 @@ Different development manuals are available, including:
 -	[Application Development manual](development-of-apps.md)
 -	[Message Nodes and Protostubs Development manual](development-of-protostubs-and-msg-nodes.md)
 
-### How to contribute to reTHINK
+### How to contribute
 
 This section provides guidelines on how to contribute to reTHINK Service Framework. Contributions to other reTHINK components should follow its own guidelines:
 
