@@ -1,0 +1,15 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "FakeObject",
+	"type": "object",
+	"required": ["scheme"],
+	"additionalProperties": false,
+  "properties": {
+		"scheme": {
+			"constant": "fake"
+		},
+		"children": {
+			"constant": ["message"]
+		}
+	}
+}

@@ -109,8 +109,16 @@ gulp.task('watch-hyperty', function(cb) {
 
   var destination = argv.dest;
 
-  gulp.watch(['src/hyperty/*.js'], function() {
-    return compile('src/hyperty/HypertyConnector.js', destination, cb);
+  gulp.watch(['src/hyperty-connector/*.js', 'src/hyperty-chat/*.js'], function(event) {
+    var pathSplit = event.path.split('/');
+    var dir = pathSplit[pathSplit.length - 2];
+
+    if (dir === 'hyperty-chat') {
+      return compile('src/' + dir + '/HypertyChat.js', destination, cb);
+    } else if (dir === 'hyperty-connector') {
+      return compile('src/' + dir + '/HypertyConnector.js', destination, cb);
+    }
+
   });
 
 });
@@ -133,7 +141,6 @@ function encode(filename, descriptorName, configuration, isDefault) {
     if (file.isNull()) {
       return cb(null, file);
     }
-
     if (file.isStream()) {
       return cb(new Error('Streaming not supported'));
     }
@@ -146,24 +153,33 @@ function encode(filename, descriptorName, configuration, isDefault) {
         value = filename;
       }
     } else {
-      var newObject;
-      try {
-        newObject = JSON.parse(JSON.stringify(json['default']));
-      } catch (e) {
-        newObject = JSON.parse(JSON.stringify(json.HelloHyperty));
-      }
-
+      var newObject = {};
       json[filename] = newObject;
+      json[filename].sourcePackage = {};
       value = filename;
     }
 
+    var language = 'javascript';
+    if (descriptorName === 'DataSchemas') {
+      language = 'JSON-Schema';
+    }
+
+    json[value].cguid = Math.floor(Math.random() + 1);
+    json[value].type = descriptorName;
+    json[value].version = '0.1';
     json[value].description = 'Description of ' + filename;
     json[value].objectName = filename;
-    if (configuration) json[value].configuration = configuration;
+    json[value].configuration = configuration;
+    json[value].sourcePackageURL = '/sourcePackage';
     json[value].sourcePackage.sourceCode = encoded;
     json[value].sourcePackage.sourceCodeClassname = filename;
-    json[value].sourcePackage.encoding = 'Base64';
+    json[value].sourcePackage.encoding = 'base64';
     json[value].sourcePackage.signature = '';
+    json[value].language = language;
+    json[value].signature = '';
+    json[value].messageSchemas = '';
+    json[value].dataObjects = [];
+    json[value].accessControlPolicy = 'somePolicy';
 
     var newDescriptor = new Buffer(JSON.stringify(json, null, 2));
     console.log(value);
@@ -177,26 +193,52 @@ function resource(file, configuration, isDefault) {
 
   var filename = file;
   var splitIndex = filename.lastIndexOf('/') + 1;
-  filename = filename.substr(splitIndex).replace('.js', '');
+  var extension = filename.substr(filename.lastIndexOf('.') + 1);
 
-  var descriptorName = 'Hyperties';
-  if (filename.indexOf('Hyperty') === -1) {
-    descriptorName = 'ProtoStubs';
+  switch (extension) {
+    case 'js':
+      filename = filename.substr(splitIndex).replace('.js', '');
+      break;
+    case 'json':
+      filename = filename.substr(splitIndex).replace('.json', '');
+      break;
   }
 
-  return browserify({
-    entries: ['resources/' + filename + '.js'],
-    standalone: 'activate',
-    debug: false
-  })
-  .transform(babel)
-  .bundle()
-  .pipe(source('bundle.js'))
-  .pipe(gulp.dest('resources/'))
-  .pipe(buffer())
-  .pipe(encode(filename, descriptorName, configuration, isDefault))
-  .pipe(source(descriptorName + '.json'))
-  .pipe(gulp.dest('resources/descriptors/'));
+  var descriptorName;
+  if (filename.indexOf('Hyperty') !== -1) {
+    descriptorName = 'Hyperties';
+  } else if (filename.indexOf('ProtoStub') !== -1) {
+    descriptorName = 'ProtoStubs';
+  } else if (filename.indexOf('DataSchema')) {
+    descriptorName = 'DataSchemas';
+  }
+
+  console.log('DATA:', descriptorName);
+
+  if (extension === 'js') {
+    return browserify({
+      entries: ['resources/' + filename + '.js'],
+      standalone: 'activate',
+      debug: false
+    })
+    .transform(babel)
+    .bundle()
+    .pipe(source('bundle.js'))
+    .pipe(gulp.dest('resources/'))
+    .pipe(buffer())
+    .pipe(encode(filename, descriptorName, configuration, isDefault))
+    .pipe(source(descriptorName + '.json'))
+    .pipe(gulp.dest('resources/descriptors/'));
+  } else if (extension === 'json') {
+
+    return gulp.src(['resources/' + filename + '.json'])
+    .pipe(gulp.dest('resources/'))
+    .pipe(buffer())
+    .pipe(encode(filename, descriptorName, configuration, isDefault))
+    .pipe(source(descriptorName + '.json'))
+    .pipe(gulp.dest('resources/descriptors/'));
+
+  }
 
 }
 

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Demo of Hyperty and Protostubs</title>
+
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+
+</head>
+<body>
+
+  <div class="container">
+
+    <h2>Message Factory Tester</h2>
+
+    <div class="row">
+
+      <form class="col s12" id="messageFactoryForm">
+
+        <div class="row">
+          <span class="col s6">
+            <input name="messageType" type="radio" id="createCreateMessageRequest" checked value="createCreateMessageRequest"/>
+            <label for="createCreateMessageRequest">Create Message Request</label>
+          </span>
+
+          <span class="col s6">
+            <input name="messageType" type="radio" id="createForwardMessageRequest" value="createForwardMessageRequest"/>
+            <label for="createForwardMessageRequest">Create Forward Message Request</label>
+          </span>
+
+          <span class="col s6">
+            <input name="messageType" type="radio" id="createDeleteMessageRequest" value="createDeleteMessageRequest"/>
+            <label for="createDeleteMessageRequest">Create Delete Message Request</label>
+          </span>
+
+          <span class="col s6">
+            <input name="messageType" type="radio" id="createUpdateMessageRequest" value="createUpdateMessageRequest"/>
+            <label for="createUpdateMessageRequest">Create Update Message Request</label>
+          </span>
+
+          <span class="col s6">
+            <input name="messageType" type="radio" id="createReadMessageRequest" value="createReadMessageRequest"/>
+            <label for="createReadMessageRequest">Create Read Message Request</label>
+          </span>
+
+          <span class="col s6">
+            <input name="messageType" type="radio" id="createSubscribeMessageRequest" value="createSubscribeMessageRequest"/>
+            <label for="createSubscribeMessageRequest">Create Subscribe Message Request</label>
+          </span>
+
+          <span class="col s6">
+            <input name="messageType" type="radio" id="createUnsubscribeMessageRequest" value="createUnsubscribeMessageRequest"/>
+            <label for="createUnsubscribeMessageRequest">Create Unsubscribe Message Request</label>
+          </span>
+
+          <span class="col s6">
+            <input name="messageType" type="radio" id="createMessageResponse" value="createMessageResponse"/>
+            <label for="createMessageResponse">Create Message Response</label>
+          </span>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <input placeholder="From hyperty" name="from" id="from" type="text" value="hyperty://ua.pt/27d080c8-22ef-445f-9f9a-f2c750fc6d5a" class="validate">
+            <label for="from">From</label>
+          </div>
+
+          <div class="input-field col s12">
+            <input placeholder="To hyperty" name="to" id="to" type="text" value="hyperty://ua.pt/27d080c8-22ef-445f-9f9a-f2c750fc6d5a" class="validate">
+            <label for="to">To</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12 m6">
+            <input placeholder="Resource" name="resource" id="resource" type="text" class="validate">
+            <label for="resource">Resource</label>
+          </div>
+
+          <div class="input-field col s12 m6">
+            <input placeholder="Attribute" name="attribute" id="attribute" type="text" class="validate" value="from">
+            <label for="attribute">Attribute</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12 m6">
+            <input placeholder="Code" name="code" id="code" type="text" class="validate" value="200">
+            <label for="code">Message code</label>
+          </div>
+
+          <div class="input-field col s12 m12">
+            <input placeholder="Value" name="value" id="value" type="text" class="validate" value="description message inside the body">
+            <label for="value">Value</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s6">
+            <button class="btn waves-effect waves-light" type="submit" name="action">Submit<i class="material-icons right">send</i></button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="row">
+      <h2>Result</h2>
+      <pre class="language-markup lighten-4">
+        <code class="language-markup code"></code>
+      </pre>
+    </div>
+
+  </div>
+
+  <script src="../vendor/system.js"></script>
+  <script src="../config.js"></script>
+  <script>System.import("../example/demo2");</script>
+</body>
+</html>

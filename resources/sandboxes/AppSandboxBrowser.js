@@ -12,7 +12,7 @@ class AppSandboxBrowser extends Sandbox {
     //simulate sandbox frontier
     _this._bus = new MiniBus();
     _this._bus._onPostMessage = function(msg) {
-      console.log('AppSandboxBrowser._onPostMessage -> external', 'from: ', msg.from, 'to: ', msg.to);
+      console.log('AppSandboxBrowser._onPostMessage -> external (out)', 'from: ', msg.from, 'to: ', msg.to, 'msg: ', msg);
 
       //redirect messages to the external part of the sandbox
       _this._onMessage(msg);
@@ -20,7 +20,7 @@ class AppSandboxBrowser extends Sandbox {
 
     _this._sbr = new SandboxRegistry(_this._bus);
     _this._sbr._create = (url, sourceCode, config) => {
-      console.log('SandboxRegistry._create ', url, config, sourceCode);
+      console.log('SandboxRegistry._create ', url, config);
       eval(sourceCode);
       return activate(url, _this._bus, config);
     };
@@ -31,7 +31,7 @@ class AppSandboxBrowser extends Sandbox {
 
   _onPostMessage(msg) {
     let _this = this;
-    console.log('AppSandboxBrowser._onPostMessage -> internal', 'from: ', msg.from, 'to: ', msg.to);
+    console.log('AppSandboxBrowser._onPostMessage -> internal (in)', 'from: ', msg.from, 'to: ', msg.to, 'msg: ', msg);
 
     //redirect messages to the internal part of the sandbox
     _this._bus._onMessage(msg);

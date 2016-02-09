@@ -10,139 +10,72 @@
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 
 </head>
 <body>
 
-  <div class="container">
+  <div class="progress"><div class="indeterminate"></div></div>
 
-    <h2>Message Factory Tester</h2>
+  <div class="row container hide">
+    <div class="login-panel">
+      <div class="card blue-grey darken-1">
+        <div class="card-content not-logged white-text">
+          <span class="card-title">Login</span>
+          <p>So that an application can use Google's OAuth 2.0 authentication system for user login.
+            A test account was created to set the project in the Google Developers with
+            this credentials:</p>
 
-    <div class="row">
-
-      <form class="col s12" id="messageFactoryForm">
-
-        <div class="row">
-          <span class="col s6">
-            <input name="messageType" type="radio" id="createMessageRequest" value="createMessageRequest"/>
-            <label for="createMessageRequest">Create Message Request</label>
-          </span>
-
-          <span class="col s6">
-            <input name="messageType" type="radio" id="createForwardMessageRequest" value="createForwardMessageRequest"/>
-            <label for="createForwardMessageRequest">Create Forward Message Request</label>
-          </span>
-
-          <span class="col s6">
-            <input name="messageType" type="radio" id="createDeleteMessageRequest" value="createDeleteMessageRequest"/>
-            <label for="createDeleteMessageRequest">Create Delete Message Request</label>
-          </span>
-
-          <span class="col s6">
-            <input name="messageType" type="radio" id="createUpdateMessageRequest" value="createUpdateMessageRequest"/>
-            <label for="createUpdateMessageRequest">Create Update Message Request</label>
-          </span>
-
-          <span class="col s6">
-            <input name="messageType" type="radio" id="createReadMessageRequest" value="createReadMessageRequest"/>
-            <label for="createReadMessageRequest">Create Read Message Request</label>
-          </span>
-
-          <span class="col s6">
-            <input name="messageType" type="radio" id="createMessageResponse" value="createMessageResponse"/>
-            <label for="createMessageResponse">Create Message Response</label>
-          </span>
-        </div>
-
-        <div class="row">
-          <div class="input-field col s12">
-            <input placeholder="From hyperty" name="from" id="from" type="text" value="hyperty://ua.pt/27d080c8-22ef-445f-9f9a-f2c750fc6d5a" class="validate">
-            <label for="from">From</label>
+            <span class="row">
+              <span class="col s6">
+                <h5>1º Account</h5>
+                <p><b>username:</b> openidtest10@gmail.com</p>
+                <p><b>password:</b> testOpenID10</p>
+              </span>
+              <span class="col s6">
+                <h5>2º Account</h5>
+                <p><b>username:</b> openidtest20@gmail.com</p>
+                <p><b>password:</b> testOpenID20</p>
+              </span>
+            </span>
           </div>
-
-          <div class="input-field col s12">
-            <input placeholder="To hyperty" name="to" id="to" type="text" value="hyperty://ua.pt/27d080c8-22ef-445f-9f9a-f2c750fc6d5a" class="validate">
-            <label for="to">To</label>
+          <div class="card-action">
+            <button class="login waves-effect waves-light btn">Login</button>
           </div>
         </div>
+      </div>
 
-        <div class="row">
-          <div class="input-field col s12 m6">
-            <input placeholder="Id Token" name="IdToken" id="IdToken" type="text" class="validate"  value="idToken value">
-            <label for="IdToken">Id Token</label>
-          </div>
+      <section class="chat-section hide">
 
-          <div class="input-field col s12 m6">
-            <input placeholder="Access Token" name="accessToken" id="accessToken" type="text" value="ya29.dQJc3kiaA25OHGpF8jQIqSyhb0MszCBd42lsrYtsyTGtFaexD8ZUAjJ08N_WPGAc7JZLgw" class="validate">
-            <label for="accessToken">Access Token</label>
-          </div>
-        </div>
+      </section>
 
-        <div class="row">
-          <div class="input-field col s12 m6">
-            <input placeholder="Resource" name="resource" id="resource" type="text" class="validate">
-            <label for="resource">Resource</label>
-          </div>
-          <div class="input-field col s12 m6">
-            <input placeholder="Signature" name="signature" id="signature" type="text" class="validate">
-            <label for="signature">Signature</label>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="input-field col s12 m6">
-            <input placeholder="Schema" name="schema" id="schema" type="text" class="validate">
-            <label for="schema">Schema</label>
-          </div>
-          <div class="input-field col s12 m6">
-            <input placeholder="Asserted Identity" name="assertedIdentity" id="assertedIdentity" value="{'id':'111934233632520077743','email':'openidtest10@gmail.com','verified_email':true,'name':'test OpenID','given_name':'test','family_name':'OpenID','picture':'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg','locale':'pt-PT'}" type="text" class="validate">
-            <label for="assertedIdentity">Asserted Identity</label>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="input-field col s12 m6">
-            <input placeholder="Code" name="code" id="code" type="text" class="validate" value="200">
-            <label for="code">Message code</label>
-          </div>
-
-          <div class="input-field col s12 m6">
-            <input placeholder="Attribute" name="attribute" id="attribute" type="text" class="validate" value="from">
-            <label for="attribute">Attribute</label>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="input-field col s12 m12">
-            <input placeholder="Value" name="value" id="value" type="text" class="validate" value="description message inside the body">
-            <label for="value">Value</label>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="input-field col s12">
-            <input placeholder="Policy" name="policy" id="policy" type="text" class="validate">
-            <label for="policy">Policy</label>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col s6">
-            <button class="btn waves-effect waves-light" type="submit" name="action">Submit<i class="material-icons right">send</i></button>
-          </div>
-        </div>
-
-      </form>
     </div>
 
-    <div class="row">
-      <h2>Result</h2>
-      <pre class="language-markup lighten-4">
-        <code class="language-markup code"></code>
-      </pre>
+  <!-- Modal Structure -->
+  <div class="modal join-chat">
+    <div class="modal-content">
+      <h4>Name of Chat Group</h4>
+      <input class="input-name" placeholder="chat name" id="name" required aria-required="true" type="text">
     </div>
-
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat btn-cancel">Cancel</a>
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat btn-join">Join</a>
+    </div>
   </div>
+
+  <!-- Modal Structure -->
+  <div class="modal add-participant">
+    <div class="modal-content">
+      <h4>Participant Email</h4>
+      <input class="input-name" placeholder="email" id="email" required aria-required="true" type="email">
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat btn-cancel">Cancel</a>
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat btn-add">Add</a>
+    </div>
+  </div>
+
+
 
   <script src="../vendor/system.js"></script>
   <script src="../config.js"></script>

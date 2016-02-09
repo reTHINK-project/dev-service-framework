@@ -33,8 +33,7 @@ if (document.readyState === 'complete') {
 let loginBtn = document.querySelector('.login');
 loginBtn.addEventListener('click', function(e) {
 
-  let loginPanel = document.querySelector('.login-panel');
-  let content = loginPanel.querySelector('.card-action');
+  let content = $('.card-action');
   addLoader(content);
 
   runtime.identityModule.loginWithRP().then(function(result) {
@@ -42,8 +41,9 @@ loginBtn.addEventListener('click', function(e) {
     userLoged(result);
   }).catch(function(reason) {
     removeLoader(content);
-    let cardHolder = $('.card-content');
-    let html = '<div class="row"><div class="col s12"><span class="card-title">Login</span></div><div class="col s12">' + reason.error.message + '</div>';
+    let cardHolder = $('.card');
+
+    let html = '<div class="card-content not-logged white-text"><span class="card-title">Login</span><p>So that an application can use Google\'s OAuth 2.0 authentication system for user login. A test account was created to set the project in the Google Developers with this credentials:</p><span class="row"><p>' + reason.error.message + '<p></span></div><div class="card-action"><button class="login waves-effect waves-light btn">Login</button></div>';
 
     cardHolder.html(html);
   });
