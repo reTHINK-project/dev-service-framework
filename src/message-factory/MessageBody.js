@@ -1,7 +1,7 @@
 /**
+ * @author alice.cheambe[at]fokus.fraunhofer.de
+ * The MessageBody class is the base implementation of the Message Body Data Model from which the other body types extend.
  *
- * @author alice.cheambe@fokus.fraunhofer.de
- * Class implementation of Message Body Data Model
  */
 
 export class MessageBody{
@@ -29,35 +29,76 @@ export class MessageBody{
             this._assertedIdentity = assertedIdentity;
 	}
 
+    /**
+     * Get the id token
+     * @return {Identity.JWT}
+     */
     get idToken(){ return this._idToken; }
 
+    /**
+     * Get the access token
+     * @return {Identity.JWT}
+     */
     get accessToken(){ return this._accessToken; }
 
+    /**
+     * The the resource URL
+     * @return {URL.URL}
+     */
     get resource() { return this._resource; }
 
+    /**
+     * Return the URL of the schema on the HypertyCatalogue
+     * @return {URL.HypertyCatalogueURL}
+     */
     get schema(){ return this._schema; }
 
+    /**
+     * Return the asserted Identity
+     * @return {Identity.Identity}
+     */
     get assertedIdentity() { return this._assertedIdentity; }
 
+    /**
+     * set the token identifier
+     * @param {Identity.JWT} token
+     */
     set idToken(token){
         if(token)
             this._idToken = token;
     }
 
+    /**
+     * set the access token
+     * @param {Identity.JWT} token
+     */
     set accessToken(token){
         if(token)
             this._accessToken = token;
     }
 
+    /**
+     * set the resource
+     * @param {URL.URL}resource
+     */
     set resource(resource){
         if(resource)
             this._resource = resource;
     }
 
+    /**
+     * set the schema URL
+     * @param {URL.HypertyCatalogueURL} schema
+     */
     set schema(schema){
         if(schema)
             this._schema = schema;
     }
+
+    /**
+     * set the asserted identity
+     * @param {Identity.Identity} assertedIdentity
+     */
     set assertedIdentity(assertedIdentity){
         if(assertedIdentity)
             this._assertedIdentity = assertedIdentity;
@@ -165,7 +206,7 @@ export class DeleteMessageBody extends MessageBody {
  */
 export class UpdateMessageBody extends MessageBody {
     /**
-     *
+     * Constructor to create the object
      * @param {Identity.JWT} idToken -
      * @param {Identity.JWT} accessToken
      * @param {URL.URL} resource - URL of the object
@@ -187,7 +228,7 @@ export class UpdateMessageBody extends MessageBody {
  */
 export class ForwardMessageBody extends MessageBody {
     /**
-     * constructor
+     * Constructor to create the object
      *
      * @param {Identity.JWT} idToken -
      * @param {Identity.JWT} accessToken
@@ -211,6 +252,7 @@ export class ForwardMessageBody extends MessageBody {
 export class ResponseMessageBody extends MessageBody {
 
     /**
+     * Constructor to create the object
      *
      * @param {Identity.JWT} idToken -
      * @param {Identity.JWT} accessToken

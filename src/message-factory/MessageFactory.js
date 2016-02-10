@@ -1,21 +1,21 @@
-/**
-* Message Factory
-* 
-*/
-
 import RethinkObject from '../reTHINKObject/RethinkObject.js';
 import Message from './Message.js';
 import {MessageBody, CreateMessageBody, DeleteMessageBody, UpdateMessageBody, ReadMessageBody, ResponseMessageBody,
     ForwardMessageBody} from './MessageBody.js';
 import {MessageType} from './Message.js';
 
+/**
+ * @author alice.cheambe[at]fokus.fraunhofer.de
+ * The MessageFactory creates messages according to the reTHINK Message Data Model to be sent through the Runtime
+ * Message Bus.
+ */
 
 class MessageFactory extends RethinkObject {
 
     /**
-     * Constructor
+     * Constructor to be used to instantiate an object of the Message Factory
      * @param {boolean} validation
-     * @param {URL.URL } schema - link to the schema
+     * @param {URL.URL } schema - link to the reTHINK Message Data Schema
      */
     constructor(validation, schema){
         super(validation,schema);
@@ -23,6 +23,11 @@ class MessageFactory extends RethinkObject {
         this.myGenerator = new IdGenerator().idMaker();
     }
 
+    /**
+     * Validates the message against the reTHINK Message Data Schema
+     * @param data
+     * @return {*}
+     */
     validate(data){
         return super.validate(data);
     }
@@ -190,6 +195,9 @@ class MessageFactory extends RethinkObject {
 
 }
 
+/**
+ * Message Identifier Generator that generates the id used to identifier message transactions
+ */
 export class IdGenerator {
     *idMaker(){
         let index = 1;

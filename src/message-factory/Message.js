@@ -1,7 +1,8 @@
 /**
  *
- * @author alice.cheambe@fokus.fraunhofer.de
- * Class implementation of Message Data Model
+ * @author alice.cheambe[at]fokus.fraunhofer.de
+ * The Message class is the representation of the reTHINK Message Data Model
+ *
 */
 
 export class Message{
@@ -15,9 +16,9 @@ export class Message{
      * handled in different ways
      * @param {MessageType} type - The URL of the reTHINK Data Object Resource associated with the message that can be
      * used for routing purposes
-     * @param {MessageBody} body - Optionaly, all message bodies exchanged between different Runtime Messge BUS can
+     * @param {MessageBody} body - Optionally, all message bodies exchanged between different Runtime Messge BUS can
      * contain JWT tokens for Access Control for Identity Assertion purposes that are inserted by the Identity Module
-     * before the message is routed to protostubs
+     * before the message is routed to proto stubs
      */
     constructor(id, from, toList, type,  body) {
 
@@ -99,7 +100,7 @@ export class Message{
     /**
      * Add an access token to the given message
      * @param token - token to be added to the given message
-     * @return {*}
+     * @return {Message}
      */
     addAccessToken(token){
         if(!token )
@@ -111,6 +112,10 @@ export class Message{
     }
 }
 
+/**
+ * MessageType representing the type of message
+ * @type {{CREATE: string, READ: string, UPDATE: string, DELETE: string, SUBSCRIBE: string, UNSUBSCRIBE: string, RESPONSE: string, FORWARD: string}}
+ */
 export const MessageType = {CREATE: 'create', READ: 'read', UPDATE: 'update', DELETE: 'delete', SUBSCRIBE: 'subscribe',
     UNSUBSCRIBE: 'unsubscribe', RESPONSE: 'response', FORWARD: 'forward'};
 
