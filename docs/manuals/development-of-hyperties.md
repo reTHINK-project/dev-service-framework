@@ -134,7 +134,12 @@ _registerExternalListener()
 ```
 
 
-//TODO: hypertyDiscovery
+#### Hyperty Discovery API
+ The HypertyDiscovery interface provides functionality to applications to search for Hyperties using the Message Bus
+ 
+ ```
+new HypertyDiscovery(domain, msgBus)
+```
 
 ### Examples
 
