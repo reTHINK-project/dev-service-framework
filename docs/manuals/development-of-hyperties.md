@@ -116,7 +116,7 @@ The MiniBus API is a minimal interface to send and receive messages. It can be r
 The _onPostMessage method is a private class and used by the classes extending the Minibus class to process messages from the public "postMessage" without a registered listener. It can be used to send the message to an external interface, like a WebWorker or an IFrame.
 
 ```
-_onPostMessage(msg)
+onPostMessage(msg)
 ```
 
 *Parameters:*
@@ -130,7 +130,7 @@ The _registerExternalListener() method is not publicly available. It can be used
 
 *NOTE:* DO NOT call "postMessage", there is a danger that the message enters in a cycle!
 ```
-_registerExternalListener()
+registerExternalListener()
 ```
 
 
