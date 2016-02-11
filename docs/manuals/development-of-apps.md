@@ -11,6 +11,10 @@ The Developer must include the reTHINK libraries in the web application. Through
 
 *Include diagram here*
 
+![Standar App Diagram](standard_app_diagrams.png)
+
+![reTHINK App Diagram](hyperty_app_diagrams.png)
+
 ### How to use Hyperties
 
 *Here we can explain how hyperties are being used based on this example from PTIN: https://github.com/reTHINK-project/dev-service-framework/blob/develop/example/demo.js*
