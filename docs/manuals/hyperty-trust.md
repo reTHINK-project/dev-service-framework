@@ -20,20 +20,28 @@ Traditionally, the authentication is performed with something a user knows (like
 The Identity Module (Id Module) is the component responsible for handling the user identity and the association of this identity with the Hyperty instances, in order to make Hyperty instances identifiable. The identity in the reTHINK project is not fixed to a unique Identity Service Provider, but obtained through several different Identity sources. With this approach, the Id Module provides to the user the option to choose the preferred method for authentication. This module will thus able to support multiple Identity acquisition methods, such as OpenID connect 1.0, Kerberos System, or authentication through smart cards. For example, a user with a Google account can use the Google as an Identity Provider to provide Identity Tokens, which can be used by the Identity Module to associate it with a Hyperty instance.
 
 To allow the invocation of methods from the Identity Module, an API is provided. The API as well as his logic is described bellow:
+
 **void constructor()**
+
 This is the constructor to initialise the Identity Module it does not require any input.
 
 **Identities getIdentities()**
+
 Function to return all the identities registered within a session by a user. These identities are returned in an array containing a JSON package for each user identity.
+
 
 **Promise loginWithRP(identifier, scope)**
 
 Function to request an ID Token from a user. If no token exists, the Identity Module will try to obtain one from an Identity Provider, and the user will be asked to authenticate towards the Identity Provider. The function returns a promise with a token containing the user information.
 
+
 **Promise generateAssertion(contents, origin, usernameHint)**
+
 Function to generate an identity Assertion for a call session. It takes as input a content bundle, an origin, and a username hint. It returns a promise with an identity assertion.
 
+
 **Promise validateAssertion(assertion)**
+
 Function to validate an identity assertion generated previously. Returns a promise with the result from the validation.
 
 Identity Module Proxy API:
