@@ -38,7 +38,7 @@ class MessageFactory extends RethinkObject {
      * @param {URL.URL} from - the sender of this message
      * @param {URL.URLList} to-  One or more URLs of Message recipients. According to the URL scheme it may be handled
      * in different ways
-     * @param {string} value - Contains the created object in JSON format
+     * @param {String} value - Contains the created object in JSON format
      * @param {URL.URL} policy - the sender of this message
      */
     createCreateMessageRequest(from, to, value, policy) {
@@ -57,7 +57,8 @@ class MessageFactory extends RethinkObject {
      * @param {URL.URL} from - the sender of this message
      * @param {URL.URLList} to-  One or more URLs of Message recipients. According to the URL scheme it may be handled
      * in different ways
-     * @param message {Message} message - the message to be forwarded
+     * @param message {Message.Message} message - the message to be forwarded
+     * @return {Message.Message} Message - the Forward Message Request
      */
     createForwardMessageRequest(from, to, message ) {
         if(!from || !to || !message)
@@ -77,7 +78,7 @@ class MessageFactory extends RethinkObject {
      * in different ways
      * @param {URL.URl} resource - URL of Data Object Resource associated with the message
      * @param attribute - Identifies the attribute in the Object to be deleted
-     * @return Delete Message
+     * @return {Message.Message} Message - the Delete Message Request
      */
     createDeleteMessageRequest(from, to, resource, attribute){
         if(!from || !to)
@@ -99,6 +100,7 @@ class MessageFactory extends RethinkObject {
      * @param value - The new value of the attribute to be updated
      * @param {URL.URL} resource - URL of Data Object Resource associated with the message
      * @param attribute - Identifies the attribute in the Object to be updated
+     * @return {Message.Message} Message - the Update message request
      */
     createUpdateMessageRequest(from, to, value, resource, attribute){
         if(!from || !to || !value)
@@ -111,12 +113,13 @@ class MessageFactory extends RethinkObject {
     }
 
     /**
-     *
+     * Creates a Message of type READ
      * @param {URL.URL} from - the sender of this message
      * @param {URL.URLList} to- One or more URLs of Message recipients. According to the URL scheme it may be handled in
      * different ways
      * @param {URL.URl} resource - URL of Data Object Resource associated with the message
      * @param attribute - Identifies the attribute in the Object to be read
+     * @return {Message.Message} Message - the Read message request
      */
     createReadMessageRequest(from, to, resource, attribute){
         if(!from || !to || !resource)
@@ -129,6 +132,13 @@ class MessageFactory extends RethinkObject {
         return message;
     }
 
+    /**
+     * Creates a Message of type SUBSCRIBE
+     * @param {URL.URL} from - the sender of this message
+     * @param {URL.URLList} to- One or more URLs of Message recipients. According to the URL scheme it may be handled in
+     * different ways
+     * @param {URL.URL} resource - URL of the object
+     */
     createSubscribeMessageRequest(from, to, resource){
         if(!from || !to || !resource)
             throw  new Error("from, to and the resource to subscribe to MUST be specified");
@@ -139,6 +149,13 @@ class MessageFactory extends RethinkObject {
         return message;
     }
 
+    /**
+     * Creates a Message of type UNSUBSCRIBE
+     * @param {URL.URL} from - the sender of this message
+     * @param {URL.URLList} to- One or more URLs of Message recipients. According to the URL scheme it may be handled in
+     * different ways
+     * @param {URL.URL} resource - URL of the object
+     */
     createUnsubscribeMessageRequest(from, to, resource){
         if(!from || !to || !resource)
             throw  new Error("from, to and the resource to subscribe to MUST be specified");
@@ -150,7 +167,7 @@ class MessageFactory extends RethinkObject {
     }
 
     /**
-     *
+     * Creates the response to the Message
      * @param message - the message request from which the response should be generated
      * @param code - the response code compliant with HTTP response codes (RFC7231).
      * @param value - contains a data value in JSON format. Applicable to Responses to READ MessageType.

@@ -29,36 +29,67 @@ export class Message{
         this._body = body;
      }
 
-
+    /**
+     * The Message identifier.
+     * @type {String}
+     */
     get id(){ return this._id; }
 
+    /**
+     * The sender of the Message.
+     * @type {URL.URL}
+     */
     get from(){ return this._from; }
 
+    /**
+     * The recipient of the Message.
+     * @type {URL.URLList}
+     */
     get to(){ return this._to; }
 
+    /**
+     * The Message type.
+     * @type {MessageType}
+     */
     get type() { return this._type; }
 
+    /**
+     * The Message body
+     * @type {MessageBody}
+     */
     get body(){ return this._body; }
 
-    set id(identifier){
-        if(identifier)
-            this._id = identifier;
-    }
-
+    /**
+     *  set the sender of the Message
+     * @param {URL.URL} sender
+     */
     set from(sender){
         if(sender)
             this._from = sender;
     }
 
+    /**
+     * set the message type
+     * @param {MessageType} msgType
+     */
     set type(msgType){
         if(msgType)
             this._type = msgType;
     }
 
+    /**
+     * set the message body
+     * @param {MessageBody} msgBody
+     */
     set body(msgBody){
         if(msgBody)
             this._body = msgBody;
     }
+
+    /**
+     * set the list of recipients
+     * @param {URL.URLList} recipientList
+     */
     set to(recipientList){
         if(recipientList)
             this._to = recipientList;
@@ -68,7 +99,7 @@ export class Message{
      * Adds the asserted identity to the message body and removes the given token from the message
      * @param {Identity.JWT} token - idToken to remove from message
      * @param {Identity.Identity} identity - asserted identity to include
-     * @return {Message} message - updated message
+     * @return {Message.Message} message - updated message
      */
     assertIdentity(token, identity){
         if(!token || !identity)
@@ -86,7 +117,7 @@ export class Message{
     /**
      * Adds an Id token to the given message
      * @param {Identity.JWT} token - identity token to include in the message
-     * @return {Message}  the updated message
+     * @return {Message.Message} - the updated message
      */
     addIdToken(token){
         if(!token )
@@ -99,8 +130,8 @@ export class Message{
 
     /**
      * Add an access token to the given message
-     * @param token - token to be added to the given message
-     * @return {Message}
+     * @param {Identity.JWT} token - token to be added to the given message
+     * @return {Message.Message} -  the updated Message
      */
     addAccessToken(token){
         if(!token )

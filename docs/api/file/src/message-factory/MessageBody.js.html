@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/message-factory/MessageBody.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <a data-ice="repoURL" href="git+ssh://git@github.com/reTHINK-project/core-framework.git">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">catalogue-factory</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html">CatalogueDataObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/CatalogueDataObjectFactory.js~CatalogueDataObjectFactory.html">CatalogueDataObjectFactory</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~CommunicationDataObjectSchema.html">CommunicationDataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~ConnectionDataObjectSchema.html">ConnectionDataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~ContextDataObjectSchema.html">ContextDataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~DataObjectSchema.html">DataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~HypertyDataObjectSchema.html">HypertyDataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~IdentifyDataObjectSchema.html">IdentifyDataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~MessageDataObjectSchema.html">MessageDataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/HypertyDescriptor.js~HypertyDescriptor.html">HypertyDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/HypertyRuntimeDescriptor.js~HypertyRuntimeDescriptor.html">HypertyRuntimeDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/PolicyEnforcerDescriptor.js~PolicyEnforcerDescriptor.html">PolicyEnforcerDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor.html">ProtocolStubDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/RuntimeConstraint.js~RuntimeConstraint.html">RuntimeConstraint</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/SourcePackage.js~SourcePackage.html">SourcePackage</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-CatalogueObjectType">CatalogueObjectType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-DataObjectSourceLanguage">DataObjectSourceLanguage</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-catalogueDataObject">catalogueDataObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-catalogueDataObjectFactory">catalogueDataObjectFactory</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-dataObjectSchema">dataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HypertyType">HypertyType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RuntimeHypertyCapabilityType">RuntimeHypertyCapabilityType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-hypertyDescriptor">hypertyDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RuntimeHypertyCapabilityType">RuntimeHypertyCapabilityType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RuntimeProtocolCapabilityType">RuntimeProtocolCapabilityType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RuntimeType">RuntimeType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-hypertyRuntimeDescriptor">hypertyRuntimeDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-policyEnforcerDescriptor">policyEnforcerDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-protocolStubDescriptor">protocolStubDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-runtimeConstraint">runtimeConstraint</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-sourcePackage">sourcePackage</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">hyperty</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/hyperty/Connection.js~Connection.html">Connection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/hyperty/ConnectionController.js~ConnectionController.html">ConnectionController</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/hyperty/OwnerPeer.js~OwnerPeer.html">OwnerPeer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/hyperty/Peer.js~Peer.html">Peer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-activate">activate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-connection">connection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-connectionController">connectionController</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ownerPeer">ownerPeer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-peer">peer</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">hyperty-discovery</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/hyperty-discovery/HypertyDiscovery.js~HypertyDiscovery.html">HypertyDiscovery</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-hypertyDiscovery">hypertyDiscovery</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">message-factory</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/Message.js~Message.html">Message</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~CreateMessageBody.html">CreateMessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~DeleteMessageBody.html">DeleteMessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~ForwardMessageBody.html">ForwardMessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~MessageBody.html">MessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~ReadMessageBody.html">ReadMessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~ResponseMessageBody.html">ResponseMessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~UpdateMessageBody.html">UpdateMessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageFactory.js~IdGenerator.html">IdGenerator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageFactory.js~MessageFactory.html">MessageFactory</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Enum">Enum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-MessageType">MessageType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-REASON_PHRASE">REASON_PHRASE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RESPONSE_CODE">RESPONSE_CODE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-messageFactory">messageFactory</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">reTHINKObject</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/reTHINKObject/RethinkObject.js~RethinkObject.html">RethinkObject</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">syncher</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/DataObject.js~DataObject.html">DataObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/DataObjectChild.js~DataObjectChild.html">DataObjectChild</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/DataObjectObserver.js~DataObjectObserver.html">DataObjectObserver</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/DataObjectReporter.js~DataObjectReporter.html">DataObjectReporter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/Syncher.js~Syncher.html">Syncher</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-dataObject">dataObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-dataObjectChild">dataObjectChild</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-dataObjectObserver">dataObjectObserver</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-dataObjectReporter">dataObjectReporter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-dataProvisional">dataProvisional</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ChangeType">ChangeType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ObjectType">ObjectType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-syncObject">syncObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-syncher">syncher</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">utils</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/utils/EventEmitter.js~EventEmitter.html">EventEmitter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-deepClone">deepClone</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-divideURL">divideURL</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-eventEmitter">eventEmitter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-divideURL">divideURL</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/message-factory/MessageBody.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * @author alice.cheambe[at]fokus.fraunhofer.de
+ * The MessageBody class is the base implementation of the Message Body Data Model from which the other body types extend.
+ *
+ */
+
+export class MessageBody{
+
+    /**
+     *
+     * @param {Identity.JWT} idToken - token for Identity assertion purpose
+     * @param {Identity.JWT} accessToken - token for access control
+     * @param {URL.URL} resource - URL of the object
+     * @param {URL.HypertyCatalogueURL} schema - URL of the Data object schema stored in the Catalogue
+     * @param {Identity.Identity} assertedIdentity - AssertedIdentity is compliant with User Identity Data Model
+     *
+     */
+	constructor(idToken, accessToken, resource, schema, assertedIdentity){
+        //let _this = this;
+        if(typeof idToken !== &apos;undefined&apos;)
+            this._idToken = idToken;
+        if(typeof accessToken  !== &apos;undefined&apos;)
+            this._accessToken = accessToken;
+        if(typeof resource !== &apos;undefined&apos; )
+            this._resource = resource;
+        if(typeof schema !== &apos;undefined&apos; )
+            this._schema = schema;
+        if(typeof assertedIdentity !== &apos;undefined&apos;)
+            this._assertedIdentity = assertedIdentity;
+	}
+
+    /**
+     * Get the id token
+     * @return {Identity.JWT}
+     */
+    get idToken(){ return this._idToken; }
+
+    /**
+     * Get the access token
+     * @return {Identity.JWT}
+     */
+    get accessToken(){ return this._accessToken; }
+
+    /**
+     * The the resource URL
+     * @return {URL.URL}
+     */
+    get resource() { return this._resource; }
+
+    /**
+     * Return the URL of the schema on the HypertyCatalogue
+     * @return {URL.HypertyCatalogueURL}
+     */
+    get schema(){ return this._schema; }
+
+    /**
+     * Return the asserted Identity
+     * @return {Identity.Identity}
+     */
+    get assertedIdentity() { return this._assertedIdentity; }
+
+    /**
+     * set the token identifier
+     * @param {Identity.JWT} token
+     */
+    set idToken(token){
+        if(token)
+            this._idToken = token;
+    }
+
+    /**
+     * set the access token
+     * @param {Identity.JWT} token
+     */
+    set accessToken(token){
+        if(token)
+            this._accessToken = token;
+    }
+
+    /**
+     * set the resource
+     * @param {URL.URL}resource
+     */
+    set resource(resource){
+        if(resource)
+            this._resource = resource;
+    }
+
+    /**
+     * set the schema URL
+     * @param {URL.HypertyCatalogueURL} schema
+     */
+    set schema(schema){
+        if(schema)
+            this._schema = schema;
+    }
+
+    /**
+     * set the asserted identity
+     * @param {Identity.Identity} assertedIdentity
+     */
+    set assertedIdentity(assertedIdentity){
+        if(assertedIdentity)
+            this._assertedIdentity = assertedIdentity;
+    }
+}
+
+/**
+ * Class representation of the CreateMessageBody object
+ */
+export class CreateMessageBody extends MessageBody {
+
+    /**
+     *
+     * @param {String} value - Contains the created object in JSON format.
+     * @param {URL.URL} policy - URL from where access policy control can be downloaded
+     * @param {Identity.JWT} idToken -
+     * @param {Identity.JWT} accessToken
+     * @param {URL.URL} resource - URL of the object
+     * @param {URL.HypertyCatalogueURL} schema - URL of the Data object schema stored in the Catalogue
+     * @param {Identity.Identity} assertedIdentity - AssertedIdentity is compliant with User Identity Data Model
+     */
+    constructor(value, policy, idToken, accessToken, resource, schema, assertedIdentity){
+        if(!value)
+            throw new Error(&quot;The value parameter is null&quot;);
+        super(idToken,accessToken, resource, schema, assertedIdentity, schema, assertedIdentity);
+
+        this._value = value;
+        if(policy)
+            this._policy = policy;
+    }
+    get value() { return this._value; }
+
+    set value(val){
+        if(val)
+            this._value = val;
+    }
+
+    get policy() { return this._policy; }
+
+    set policy(policy){
+        if(policy)
+            this._policy = policy;
+    }
+}
+
+/**
+ * Class representation of the ReadMessageBody data object
+ */
+export class ReadMessageBody extends MessageBody {
+    /**
+     *
+     * @param {Identity.JWT} idToken -
+     * @param {Identity.JWT} accessToken
+     * @param {URL.URL} resource - URL of the objec
+     * @param {URL.HypertyCatalogueURL} schema - URL of the Data object schema stored in the Catalogue
+     * @param {Identity.Identity} assertedIdentity - AssertedIdentity is compliant with User Identity Data Model
+     * @param {String} attribute - Identifies the attribute in the Object to be read (optional)
+     * @param {String} criteriaSyntax - Defines the criteria syntax used in criteria field. To be used for search purposes.
+     * Valid criteria Syntax are: &quot;key-value&quot;, &quot;mongodb&quot;, &quot;sql&quot;(?), ...
+     * @param {String} criteria -Defines the criteria to be used for search purposes. Syntax used to define the criteria
+     * is set in the criteriaSyntax.
+     */
+    constructor( idToken, accessToken, resource, schema, assertedIdentity, attribute, criteriaSyntax, criteria){
+
+        super(idToken,accessToken ,resource, schema, assertedIdentity );
+
+        if(attribute)
+            this._attribute = attribute;
+
+        if(criteriaSyntax)
+            this._criteriaSyntax = criteriaSyntax;
+
+        if(criteria)
+            this._criteria = criteria;
+    }
+}
+
+
+/**
+ * Class representation of the DeleteMessageBody data object
+ */
+export class DeleteMessageBody extends MessageBody {
+    /**
+     *
+     * @param {Identity.JWT} idToken -
+     * @param {Identity.JWT} accessToken
+     * @param {URL.URL} resource - URL of the object
+     * @param {URL.HypertyCatalogueURL} schema - URL of the Data object schema stored in the Catalogue
+     * @param {Identity.Identity} assertedIdentity - AssertedIdentity is compliant with User Identity Data Model
+     * @param {String} attribute - Identifies the attribute in the Object to be deleted (optional)
+     */
+    constructor(idToken, accessToken, resource, schema, assertedIdentity,attribute ){
+
+        super(idToken,accessToken ,resource, schema, assertedIdentity );
+
+        if(attribute){
+            this._attribute = attribute;
+        }
+    }
+
+}
+
+/**
+ * Class representation of the UpdateMessageBody data object
+ */
+export class UpdateMessageBody extends MessageBody {
+    /**
+     * Constructor to create the object
+     * @param {Identity.JWT} idToken -
+     * @param {Identity.JWT} accessToken
+     * @param {URL.URL} resource - URL of the object
+     * @param {URL.HypertyCatalogueURL} schema - URL of the Data object schema stored in the Catalogue
+     * @param {Identity.Identity} assertedIdentity - AssertedIdentity is compliant with User Identity Data Model
+     * @param {String} attribute - Identifies the attribute in the Object to be deleted (optional)
+     * @param {String} value - Contains the updated value object in JSON format.
+     */
+    constructor(idToken, accessToken, resource, schema, assertedIdentity, attribute, value){
+
+        super(idToken,accessToken ,resource, schema, assertedIdentity );
+        this._attribute = attribute;
+        this._value = value;
+    }
+}
+
+/**
+ * Class representation of the ForwardMessageBody data object
+ */
+export class ForwardMessageBody extends MessageBody {
+    /**
+     * Constructor to create the object
+     *
+     * @param {Identity.JWT} idToken -
+     * @param {Identity.JWT} accessToken
+     * @param {URL.URL} resource - URL of the object
+     * @param {URL.HypertyCatalogueURL} schema - URL of the Data object schema stored in the Catalogue
+     * @param {Identity.Identity} assertedIdentity - AssertedIdentity is compliant with User Identity Data Model
+     * @param {Message} message - Message to be forwarded
+     */
+    constructor(idToken, accessToken, resource, schema, assertedIdentity, message){
+
+
+        super(idToken,accessToken ,resource, schema, assertedIdentity );
+
+        this._message = message;
+    }
+}
+
+/**
+ * Class representation of the ResponseMessageBody data object
+ */
+export class ResponseMessageBody extends MessageBody {
+
+    /**
+     * Constructor to create the object
+     *
+     * @param {Identity.JWT} idToken -
+     * @param {Identity.JWT} accessToken
+     * @param {URL.URL} resource - URL of the object
+     * @param code - A response code compliant with HTTP response codes (RFC7231)
+     * @param value - Contains a data value in JSON format. Applicable to Responses to READ MessageType.
+     */
+    constructor(idToken, accessToken, resource, code, value){
+
+        super(idToken, accessToken ,resource );
+
+        if(code)
+        {
+            this._code = code;
+            this._description = REASON_PHRASE[code];
+        }
+        if(value)
+            this._value = value;
+
+    }
+}
+
+export function Enum(a){
+    let i = Object
+        .keys(a)
+        .reduce((o,k)=&gt;(o[a[k]]=k,o),{});
+
+    return Object.freeze(
+        Object.keys(a).reduce(
+            (o,k)=&gt;(o[k]=a[k],o), v=&gt;i[v]
+        )
+    );
+}
+
+/**
+ * Represents response code compliant with HTTP response codes (RFC7231).
+ */
+export const RESPONSE_CODE = Enum({
+    100: &apos;100&apos;,
+    101: &apos;101&apos;,
+    200: &apos;200&apos;,
+    201: &apos;201&apos;,
+    202: &apos;202&apos;,
+    203: &apos;203&apos;,
+    204: &apos;204&apos;,
+    205: &apos;205&apos;,
+    206: &apos;206&apos;,
+    300: &apos;300&apos;,
+    301: &apos;301&apos;,
+    302: &apos;302&apos;,
+    303: &apos;303&apos;,
+    304: &apos;304&apos;,
+    305: &apos;305&apos;,
+    307: &apos;307&apos;,
+    400: &apos;400&apos;,
+    401: &apos;401&apos;,
+    402: &apos;402&apos;,
+    403: &apos;403&apos;,
+    404: &apos;404&apos;,
+    405: &apos;405&apos;,
+    406: &apos;406&apos;,
+    407: &apos;407&apos;,
+    408: &apos;408&apos;,
+    409: &apos;409&apos;,
+    410: &apos;410&apos;,
+    411: &apos;411&apos;,
+    412: &apos;412&apos;,
+    413: &apos;413&apos;,
+    414: &apos;414&apos;,
+    415: &apos;415&apos;,
+    416: &apos;416&apos;,
+    417: &apos;417&apos;,
+    426: &apos;426&apos;,
+    500: &apos;500&apos;,
+    501: &apos;501&apos;,
+    502: &apos;502&apos;,
+    503: &apos;503&apos;,
+    504: &apos;504&apos;,
+    505: &apos;505&apos;
+});
+
+/**
+ * Represents response phrases to response code compliant with HTTP response codes (RFC7231).
+ */
+export const REASON_PHRASE = Enum({
+    100: &apos;Continue&apos;,
+    101: &apos;Switching Protocols&apos;,
+    200: &apos;OK&apos;,
+    201: &apos;Created&apos;,
+    202: &apos;Accepted&apos;,
+    203: &apos;Non-Authoritative Information&apos;,
+    204: &apos;No Content&apos;,
+    205: &apos;Reset Content&apos;,
+    206: &apos;Partial Content&apos;,
+    300: &apos;Multiple Choices&apos;,
+    301: &apos;Moved Permanently&apos;,
+    302: &apos;Found&apos;,
+    303: &apos;See Other&apos;,
+    304: &apos;Not Modified&apos;,
+    305: &apos;Use Proxy&apos;,
+    307: &apos;Temporary Redirect&apos;,
+    400: &apos;Bad Request&apos;,
+    401: &apos;Unauthorized&apos;,
+    402: &apos;Payment Required&apos;,
+    403: &apos;Forbidden&apos;,
+    404: &apos;Not Found&apos;,
+    405: &apos;Method Not Allowed&apos;,
+    406: &apos;Not Acceptable&apos;,
+    407: &apos;Proxy Authentication Required&apos;,
+    408: &apos;Request Timeout&apos;,
+    409: &apos;Conflict&apos;,
+    410: &apos;Gone&apos;,
+    411: &apos;Length Required&apos;,
+    412: &apos;Precondition Failed&apos;,
+    413: &apos;Payload Too Large&apos;,
+    414: &apos;Request-URI Too Long&apos;,
+    415: &apos;Unsupported Media Type&apos;,
+    416: &apos;Range Not Satisfiable&apos;,
+    417: &apos;Expectation Failed&apos;,
+    426: &apos;Upgrade Required&apos;,
+    500: &apos;Internal Server Error&apos;,
+    501: &apos;Not Implemented&apos;,
+    502: &apos;Bad Gateway&apos;,
+    503: &apos;Service Unavailable&apos;,
+    504: &apos;Gateway Time-out&apos;,
+    505: &apos;HTTP Version Not Supported&apos;
+});
+
+export default MessageBody;
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.3)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

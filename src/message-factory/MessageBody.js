@@ -116,7 +116,7 @@ export class CreateMessageBody extends MessageBody {
      * @param {URL.URL} policy - URL from where access policy control can be downloaded
      * @param {Identity.JWT} idToken -
      * @param {Identity.JWT} accessToken
-     * @param {URL.URL} resource - URL of the objec
+     * @param {URL.URL} resource - URL of the object
      * @param {URL.HypertyCatalogueURL} schema - URL of the Data object schema stored in the Catalogue
      * @param {Identity.Identity} assertedIdentity - AssertedIdentity is compliant with User Identity Data Model
      */
