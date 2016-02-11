@@ -167,4 +167,47 @@ Return Promise
 
 ### Examples
 
-//TODO: Give useful examples
+#### Syncher Example
+Here is an example on how a Hyperty can instantiate and use the syncher.
+
+```
+import {Syncher, MessageFactory} from '../src/service-framework';
+
+class MyAwesomeHyperty{
+
+	constructor(hypertyURL, bus, configuration)
+	{
+    		let _this = this;
+    		_this.bus = bus;
+    		_this.configuration = configuration;
+    		_this.hypertyURL = hypertyURL;
+		// Syncher Object
+    		let syncher = new Syncher(hypertyURL, bus, configuration);
+    		_this.syncher = syncher;
+    	
+    		//MessageFactory Object
+    		let messageFactory = new MessageFactory("false", '{}');
+    		_this.messageFactory = messageFactory;
+
+    		_this.syncher.onNotification(function(event) {
+      		console.log('My Awesome Hyperty just recieved a notification: ', event);
+      		_this.hypertyConnector._onNotification(event, hypertyURL);
+	 });
+    	_this.hypertyConnector = new HypertyConnector(syncher);
+    	_this.hypertyConnector.name = 'My Awesome Hyperty';
+  }
+}
+```
+
+#### MiniBus API Example
+We shall now provide more functionality to our MyAwesomeHyperty example above. The above class already has an instance of the MiniBus object which was provided in the constructor parameter. The example below shows how to use this instance to send a Message on the Message Bus.
+
+```
+sendMessage() {
+	let _this = this;
+	let message = messageFactory.createCreateMessageRequest( _this.hypertyURL, 
+	'hyperty-runtime://sp1/AnotherHyperty'
+	"Hello from My Awesome Hyperty");
+	_this.bus.postMessage(message);
+  }
+```
