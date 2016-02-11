@@ -135,11 +135,35 @@ _registerExternalListener()
 
 
 #### Hyperty Discovery API
- The HypertyDiscovery interface provides functionality to applications to search for Hyperties using the Message Bus
+Hyperty Discovery interface provides the functionality to query hyperties instances registered in the domain registry of a given user
  
  ```
-new HypertyDiscovery(domain, msgBus)
+new HypertyDiscovery(domainURL, msgBus)
 ```
+*Parameters:*
+
+| name                | type                                      | description                                                                                                                                                                           |
+|---------------------|-------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| domainURL          | URL.RuntimeURL                            | A URL allocated by the runtime that uniquely identifies the Hyperty                                                                                                            |
+| msgBus.MiniBus     | MiniBus                                   | An instance of the MiniBus used to post messages to the Message Bus                                                                                         |
+
+##### Methods
+
+The discoverHypertyPerUser function is used to query hyperties instances registered in Domain registry for a given user.
+
+```
+ discoverHypertyPerUser(userIdentifier)
+```
+*Parameters:*
+
+| name     | type    | description                                                                                                         |
+|----------|---------|---------------------------------------------------------------------------------------------------------------------|
+| userIdentifier | Identity.Identity | The user's unique identifier |
+
+* Returns:*
+Return Promise 
+
+
 
 ### Examples
 
