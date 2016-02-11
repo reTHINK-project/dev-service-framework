@@ -12,10 +12,46 @@ Hyperty Trust Model extends [WebRTC Identity model](https://w3c.github.io/webrtc
 ![Hyperty Trust Management](hyperty-trust-management.png)
 
 ### User Identity
+In our modern society, technology is ubiquitous, and transactions are evermore accomplished using digital technologies without the need to involve physical contact. An example of this situation can be observed in money transactions, where a few years ago if someone needed to make a bank transfer, it would require that person to move personally into a bank agency to order it, and in current days these money transfers can be performed using a smartphone. Since identification binds a person identity with the respective individual attributes, an authentication of identity is required. Given this, and since the majority of the current transactions are performed digitally, we need, a sometimes called, digital identity to prove who we are in remote communication.
+This concept of Identity comprises two important information security mechanisms, the authentication and authorization. In a short description, the authentication is an identification followed by verification. In this identification process an entity supplies its identity, while in the verification process, the identity provided is checked before the system. Therefore, the correctness of an authentication strongly depends on the verification procedure employed. The authorisation is the decision to allow a given identity to execute or access a certain resource. Access control to a service or system, can be achieved based on authorisation mechanisms, where is possible to define the access rights or policies for each Identity, thus making it possible to decide to allow or deny a particular action based on an identifier or attribute. This appears as an interesting solution if the system requires having access restrictions.
+Traditionally, the authentication is performed with something a user knows (like a PIN or a password) or holds (such as a key, or a magnetic card). But there is another method, biometrics, which can be used to authenticate users. Biometrics are automated authentication methods based on measurable human characteristics, such as voice samples, fingerprint, or facial features.  However, biometric methods do not typically allow for remote authentication. As such, it is herein not considered.
 
 ### Identity Module and IdP Proxy
+The Identity Module (Id Module) is the component responsible for handling the user identity and the association of this identity with the Hyperty instances, in order to make Hyperty instances identifiable. The identity in the reTHINK project is not fixed to a unique Identity Service Provider, but obtained through several different Identity sources. With this approach, the Id Module provides to the user the option to choose the preferred method for authentication. This module will thus able to support multiple Identity acquisition methods, such as OpenID connect 1.0, Kerberos System, or authentication through smart cards. For example, a user with a Google account can use the Google as an Identity Provider to provide Identity Tokens, which can be used by the Identity Module to associate it with a Hyperty instance.
 
-*picture illustrating usage of IDP proxy as a special protostub in the Messaging Framework*
+To allow the invocation of methods from the Identity Module, an API is provided. The API as well as his logic is described bellow:
+**void constructor()**
+This is the constructor to initialise the Identity Module it does not require any input.
+
+**Identities getIdentities()**
+Function to return all the identities registered within a session by a user. These identities are returned in an array containing a JSON package for each user identity.
+
+**Promise loginWithRP(identifier, scope)**
+
+Function to request an ID Token from a user. If no token exists, the Identity Module will try to obtain one from an Identity Provider, and the user will be asked to authenticate towards the Identity Provider. The function returns a promise with a token containing the user information.
+
+**Promise generateAssertion(contents, origin, usernameHint)**
+Function to generate an identity Assertion for a call session. It takes as input a content bundle, an origin, and a username hint. It returns a promise with an identity assertion.
+
+**Promise validateAssertion(assertion)**
+Function to validate an identity assertion generated previously. Returns a promise with the result from the validation.
+
+Identity Module Proxy API:
+	API to be defined, to be in compliance with the WebRTC standards.
+
+To provide some further insight about the Identity Module architecture, the structure for this module is described below.
+
+The Identity Module uses a node package, the HelloJS, which is a client-side JavaScript API for authentication that facilitates the requests for the OpenID connect protocol. This method allows for some abstraction when making requests for different Identity Providers, such as OpenID connect used by Google, Facebook, Microsoft, for example.
+
+When a request for a user identity is made using the method loginWithRP(identifier, scope), this method will analyse the Identity Provider chosen to obtain an identity and will use the HelloJS node package with the selected Identity Provider and identity scope. After the HelloJS request for an Access Token to the Identity Providers, the user will be prompted to authenticate towards the Identity Provider. Upon receiving the Access Token, this token is validated with a RESTful web service request to an endpoint on the Identity Provider Authorization Server, and after the validation is done, an ID token is obtained with the information according to the scope required. This ID token is then preserved in this module that can obtained through the getIdentities() and is passed as return value of the loginWithRP function.
+
+The methods generateAssertion and validateAssertion have not yet been developed.
+
+Also for the Identity Module, Identity proxies are considered to act as intermediaries between the Identity Module and the specific Identity Provider Proxies (IdP Proxy), promoting a more flexible and adaptable solution. This IdP Proxy is responsible to handle the communication between the Identity Providers and the Identity Module.
+
+The following figure illustrates this interaction:
+
+![Interaction between the Identity Module and the Identity Provider](IdM_Proxy_flow.png)
 
 ### Runtime Sandbox
 
