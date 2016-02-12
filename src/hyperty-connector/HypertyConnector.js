@@ -57,11 +57,7 @@ class HypertyConnector extends EventEmitter {
     if (_this._controllers[event.from]) {
       _this._autoSubscribe(event);
     } else {
-
-      setTimeout(function() {
-        _this._autoAccept(event);
-      }, 3000);
-
+      _this._autoAccept(event);
     }
 
   }
@@ -75,6 +71,8 @@ class HypertyConnector extends EventEmitter {
 
     syncher.subscribe(_this._objectDescURL, event.url).then(function(dataObjectObserver) {
       console.info('1. Return Subscribe Data Object Observer', dataObjectObserver);
+
+      console.info('2. Data Object Observer data: ', JSON.stringify(dataObjectObserver.data));
 
       let connectionController = new ConnectionController(syncher);
 

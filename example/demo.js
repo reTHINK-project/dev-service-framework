@@ -43,8 +43,8 @@ function userLoged() {
 
   let hyperty = 'hyperty-catalogue://' + domain + '/.well-known/hyperty/HypertyConnector';
 
-  var core = new CoreFactory();
-  var runtimeLoader = new RuntimeLoader(core);
+  let core = new CoreFactory();
+  let runtimeLoader = new RuntimeLoader(core);
 
   // Load First Hyperty
   runtimeLoader.requireHyperty(hyperty).then(hypertyDeployed).catch(function(reason) {
@@ -52,6 +52,8 @@ function userLoged() {
   });
 
 }
+
+let connector;
 
 function hypertyDeployed(result) {
 
@@ -70,7 +72,7 @@ function hypertyDeployed(result) {
   let messageChat = $('.hyperty-chat');
   messageChat.removeClass('hide');
 
-  let connector = result.instance;
+  connector = result.instance;
 
   connector.addEventListener('connector:connected', function(controller) {
 
@@ -159,8 +161,6 @@ function openChat(result, video) {
   let toUser = result.hypertyURL;
 
   toUserEl.html(toUser);
-
-  let connector = result.instance;
 
   if (video) {
 

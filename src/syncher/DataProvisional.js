@@ -43,8 +43,10 @@ class DataProvisional {
   apply(observer) {
     let _this = this;
     _this._changes.forEach((change) => {
+      console.log('Data provisional apply: ', change);
       observer._changeObject(observer._syncObj, change);
     });
+    console.log('Data provisional data: ', JSON.stringify(observer.data));
   }
 
   release() {

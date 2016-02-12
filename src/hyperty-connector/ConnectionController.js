@@ -118,11 +118,7 @@ class ConnectionController extends EventEmitter {
     let data = _this._dataObjectReporter.data;
 
     dataObjectReporter.onSubscription(function(event) {
-
-      setTimeout(function() {
-        event.accept();
-      }, 200);
-
+      event.accept();
     });
 
     // TODO: Check if is realy necessary the setTimeout
@@ -132,12 +128,19 @@ class ConnectionController extends EventEmitter {
 
       // TODO: Set on connection object the owner, peer, and status;
       connection.owner = _this._dataObjectReporter._owner;
-      data.connection = connection;
+      data.connection = {
+        ownerPeer: {
+          connectionDescription: {},
+          iceCandidates: []
+        }
+      };
 
       _this.createOffer();
     } else {
-      let peer = new Peer();
-      data.peer = peer;
+      // let peer = new Peer();
+      data.peer = {
+        iceCandidates: []
+      };
 
       _this.createAnswer();
     }
@@ -206,7 +209,7 @@ class ConnectionController extends EventEmitter {
     _this.processPeerInformation(dataObjectObserver.data);
 
     dataObjectObserver.onChange('*', function(event) {
-      console.info('Observer on change message: ', event.data);
+      console.info('Observer on change message: ', event);
       _this.processPeerInformation(event.data);
     });
 
@@ -218,6 +221,8 @@ class ConnectionController extends EventEmitter {
 
     let connectionDescription = isOwner ? data.connection.ownerPeer.connectionDescription : data.peer.connectionDescription;
     let iceCandidates = isOwner ? data.connection.ownerPeer.iceCandidates : data.peer.iceCandidates;
+
+    console.info('ProcessPeer: ', data);
 
     if (!connectionDescription) return;
 
@@ -314,7 +319,6 @@ class ConnectionController extends EventEmitter {
         }).then(function(dataObjectReporter) {
           console.info('2. Return the Data Object Reporter ', dataObjectReporter);
           _this.dataObjectReporter = dataObjectReporter;
-
           resolve('accepted');
         })
         .catch(function(reason) {

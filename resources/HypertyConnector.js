@@ -2033,7 +2033,7 @@ var ConnectionController = (function (_EventEmitter) {
       _this.processPeerInformation(dataObjectObserver.data);
 
       dataObjectObserver.onChange('*', function (event) {
-        console.info('Observer on change message: ', event.data);
+        console.info('Observer on change message: ', event);
         _this.processPeerInformation(event.data);
       });
     }
@@ -2045,6 +2045,8 @@ var ConnectionController = (function (_EventEmitter) {
 
       var connectionDescription = isOwner ? data.connection.ownerPeer.connectionDescription : data.peer.connectionDescription;
       var iceCandidates = isOwner ? data.connection.ownerPeer.iceCandidates : data.peer.iceCandidates;
+
+      console.info('ProcessPeer: ', data);
 
       if (!connectionDescription) return;
 
@@ -2145,7 +2147,6 @@ var ConnectionController = (function (_EventEmitter) {
           }).then(function (dataObjectReporter) {
             console.info('2. Return the Data Object Reporter ', dataObjectReporter);
             _this.dataObjectReporter = dataObjectReporter;
-
             resolve('accepted');
           })['catch'](function (reason) {
             reject(reason);
@@ -2312,10 +2313,7 @@ var ConnectionController = (function (_EventEmitter) {
       var data = _this._dataObjectReporter.data;
 
       dataObjectReporter.onSubscription(function (event) {
-
-        setTimeout(function () {
-          event.accept();
-        }, 200);
+        event.accept();
       });
 
       // TODO: Check if is realy necessary the setTimeout
@@ -2325,12 +2323,19 @@ var ConnectionController = (function (_EventEmitter) {
 
         // TODO: Set on connection object the owner, peer, and status;
         connection.owner = _this._dataObjectReporter._owner;
-        data.connection = connection;
+        data.connection = {
+          ownerPeer: {
+            connectionDescription: {},
+            iceCandidates: []
+          }
+        };
 
         _this.createOffer();
       } else {
-        var peer = new _Peer2['default']();
-        data.peer = peer;
+        // let peer = new Peer();
+        data.peer = {
+          iceCandidates: []
+        };
 
         _this.createAnswer();
       }
@@ -2473,10 +2478,7 @@ var HypertyConnector = (function (_EventEmitter) {
       if (_this._controllers[event.from]) {
         _this._autoSubscribe(event);
       } else {
-
-        setTimeout(function () {
-          _this._autoAccept(event);
-        }, 3000);
+        _this._autoAccept(event);
       }
     }
   }, {
@@ -2490,6 +2492,8 @@ var HypertyConnector = (function (_EventEmitter) {
 
       syncher.subscribe(_this._objectDescURL, event.url).then(function (dataObjectObserver) {
         console.info('1. Return Subscribe Data Object Observer', dataObjectObserver);
+
+        console.info('2. Data Object Observer data: ', JSON.stringify(dataObjectObserver.data));
 
         var connectionController = new _ConnectionController2['default'](syncher);
 
@@ -3638,8 +3642,10 @@ var DataProvisional = (function () {
     value: function apply(observer) {
       var _this = this;
       _this._changes.forEach(function (change) {
+        console.log('Data provisional apply: ', change);
         observer._changeObject(observer._syncObj, change);
       });
+      console.log('Data provisional data: ', JSON.stringify(observer.data));
     }
   }, {
     key: 'release',
