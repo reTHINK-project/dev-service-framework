@@ -6,8 +6,8 @@ import sinonChai from 'sinon-chai';
 
 // internal modules to be tested
 import {divideURL} from '../src/utils/utils';
-import Connection from '../src/hyperty/Connection';
-import Peer from '../src/hyperty/Peer';
+import Connection from '../src/hyperty-connector/Connection';
+import Peer from '../src/hyperty-connector/Peer';
 
 let expect = chai.expect;
 

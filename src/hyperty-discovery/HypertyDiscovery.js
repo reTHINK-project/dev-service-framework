@@ -12,11 +12,15 @@ class HypertyDiscovery {
   * @param  {RuntimeURL}          runtimeURL            runtimeURL
   * @param  {MessageBus}          msgbus                msgbus
   */
-  constructor(domain, msgBus) {
+  constructor(hypertyURL, bus, configuration) {
     let _this = this;
-    _this.messageBus = msgBus;
+    _this.messageBus = bus;
 
-    _this.domain = domain;
+    let domain = divideURL(hypertyURL).domain;
+    _this._domain = domain;
+
+    console.log(configuration);
+
     _this.discoveryURL = 'hyperty://' + domain + '/hypertyDisovery';
   }
 
@@ -58,4 +62,11 @@ class HypertyDiscovery {
 
 }
 
-export default HypertyDiscovery;
+export default function activate(hypertyURL, bus, configuration) {
+
+  return {
+    name: 'HypertyDiscovery',
+    instance: new HypertyDiscovery(hypertyURL, bus, configuration)
+  };
+
+}

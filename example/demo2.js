@@ -1,7 +1,8 @@
 // jshint browser:true, jquery: true
 /* global Handlebars */
+/* global Materialize */
 
-import {addLoader, removeLoader, documentReady, errorMessage} from './support';
+import {removeLoader, documentReady, errorMessage} from './support';
 
 // polyfills
 import 'babel-polyfill';
@@ -21,7 +22,6 @@ let avatar = 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAA
 let domain = 'localhost';
 
 let runtime = new RuntimeUA(sandboxFactory, domain);
-
 window.runtime = runtime;
 
 // Check if the document is ready
@@ -32,40 +32,17 @@ if (document.readyState === 'complete') {
   document.addEventListener('DOMContentLoaded', documentReady, false);
 }
 
-let loginBtn = document.querySelector('.login');
-loginBtn.addEventListener('click', function(e) {
+setTimeout(function() {
+  userLoged();
+}, 1000);
 
-  let content = $('.card-action');
-  addLoader(content);
-
-  runtime.identityModule.loginWithRP().then(function(result) {
-    removeLoader(content);
-    userLoged(result);
-  }).catch(function(reason) {
-    removeLoader(content);
-    let cardHolder = $('.card');
-
-    let html = '<div class="card-content not-logged white-text"><span class="card-title">Login</span><p>So that an application can use Google\'s OAuth 2.0 authentication system for user login. A test account was created to set the project in the Google Developers with this credentials:</p><span class="row"><p>' + reason.error.message + '<p></span></div><div class="card-action"><button class="login waves-effect waves-light btn">Login</button></div>';
-
-    cardHolder.html(html);
-  });
-
-  let btn = $(e.currentTarget);
-  btn.addClass('hide');
-
-});
-
-function userLoged(result) {
+function userLoged() {
 
   let hypertyHolder = $('.hyperties');
   hypertyHolder.removeClass('hide');
 
-  let cardHolder = $('.card-content');
-  let html = '<div class="row"><div class="col s12"><span class="card-title">Logged</span></div><div class="col s2"><img alt="" class="circle responsive-img" src=' + result.picture + ' ></div><div class="col s8"><p><b>id:</b> ' + result.id + '</p><p><b>email:</b> ' + result.email + '</p><p><b>name:</b> ' + result.name + '</p><p><b>locale:</b> ' + result.locale + '</p></div>';
-
-  cardHolder.html(html);
-
-  console.log(result);
+  let content = $('.card-action');
+  removeLoader(content);
 
   let hyperty = 'hyperty-catalogue://' + domain + '/.well-known/hyperty/HypertyChat';
 
@@ -107,9 +84,6 @@ function prepareChat() {
   let hypertyURL = loginPanel.attr('data-url');
   let roomsSections = $('.rooms');
 
-  // let createChatBtn = messageChat.find('.create');
-  // createChatBtn.on('click', createChat);
-
   // Prepare the chat
   let hypertyChat = window.components[hypertyURL].instance;
   let name = 'reThink';
@@ -143,7 +117,6 @@ function chatManagerReady(chatGroup) {
   let joinRoomBtn = chatSection.find('.join-room');
 
   let messageForm = chatSection.find('.message-form');
-  let sendMessageBtn = chatSection.find('.send-message-btn');
 
   let joinModal = $('.join-chat');
   let joinBtn = joinModal.find('.btn-join');
@@ -214,44 +187,10 @@ function chatManagerReady(chatGroup) {
 
   chatGroup.addEventListener('have:new:notification', function(event) {
     console.log('have:new:notification: ', event);
-    Materialize.toast(reason, 3000, 'rounded');
+    Materialize.toast('Have new notification', 3000, 'rounded');
   });
 
 }
-
-// function addParticipant() {
-//
-//   let addParticipantModal = $('.add-participant');
-//   let emailValue = addParticipantModal.find('.input-name').val();
-//
-//   runtime.registry.getUserHyperty(emailValue).then(emailDiscovered).catch(emailDiscoveredError);
-// }
-//
-// function emailDiscovered(result) {
-//   console.log('Email Discovered: ', result);
-//
-//   let section = $('.conversations');
-//   let collection = section.find('.participant-list');
-//   let haveItem = collection.find('li[data-name="' + result.id + '"]').length ? true : false;
-//   if (haveItem) return;
-//
-//   addParticipant(result);
-// }
-//
-// function emailDiscoveredError(result) {
-//
-//   console.error('Email Discovered Error: ', result);
-//
-//   let section = $('.discover');
-//   let collection = section.find('.collection');
-//
-//   let collectionItem = '<li class="collection-item orange lighten-3"><i class="material-icons left circle">error_outline</i>' + result + '</li>';
-//
-//   collection.empty();
-//   collection.removeClass('center-align');
-//   collection.removeClass('hide');
-//   collection.append(collectionItem);
-// }
 
 function addParticipant(participant) {
 

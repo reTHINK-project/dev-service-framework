@@ -8,7 +8,7 @@ var prompt = require('gulp-prompt');
 gulp.task('doc', function(done) {
 
   console.log('Generating documentation...');
-  exec('node_modules/.bin/jsdoc -R readme.md -d docs src/*', function(err) {
+  exec('node_modules/.bin/jsdoc -d api src/*', function(err) {
     if (err) return done(err);
     console.log('Documentation generated in "docs" directory');
     done();
@@ -109,14 +109,19 @@ gulp.task('watch-hyperty', function(cb) {
 
   var destination = argv.dest;
 
-  gulp.watch(['src/hyperty-connector/*.js', 'src/hyperty-chat/*.js'], function(event) {
+  gulp.watch(['src/hyperty-connector/*.js', 'src/hyperty-chat/*.js', 'src/hyperty-discovery/*.js'], function(event) {
     var pathSplit = event.path.split('/');
     var dir = pathSplit[pathSplit.length - 2];
 
-    if (dir === 'hyperty-chat') {
-      return compile('src/' + dir + '/HypertyChat.js', destination, cb);
-    } else if (dir === 'hyperty-connector') {
-      return compile('src/' + dir + '/HypertyConnector.js', destination, cb);
+    switch (dir) {
+      case 'hyperty-chat':
+        return compile('src/' + dir + '/HypertyChat.js', destination, cb);
+
+      case 'hyperty-connector':
+        return compile('src/' + dir + '/HypertyConnector.js', destination, cb);
+
+      case 'hyperty-discovery':
+        return compile('src/' + dir + '/HypertyDiscovery.js', destination, cb);
     }
 
   });
@@ -149,14 +154,15 @@ function encode(filename, descriptorName, configuration, isDefault) {
     var value = 'default';
 
     if (isDefault) {
-      if (json.hasOwnProperty(filename)) {
-        value = filename;
-      }
+      value = 'default';
     } else {
-      var newObject = {};
-      json[filename] = newObject;
-      json[filename].sourcePackage = {};
       value = filename;
+    }
+
+    if (!json.hasOwnProperty(value)) {
+      var newObject = {};
+      json[value] = newObject;
+      json[value].sourcePackage = {};
     }
 
     var language = 'javascript';
@@ -248,7 +254,7 @@ gulp.task('encode', function(done) {
   .pipe(prompt.prompt([{
     type: 'input',
     name: 'file',
-    message: 'File to be converted? (resources/<ProtoStub.js or Hyperty.js>)'
+    message: 'File to be converted? (resources/<ProtoStub.js, DataSchema.json or Hyperty.js>)'
   },
   {
     type: 'input',
@@ -267,7 +273,7 @@ gulp.task('encode', function(done) {
   {
     type: 'radio',
     name: 'defaultFile',
-    message: 'This will be a default file to be loaded? (yes/no)',
+    message: 'This will be a default file to be loaded? (y)es/(n)o',
     choices: ['yes', 'no']
   }], function(res) {
 
@@ -279,7 +285,7 @@ gulp.task('encode', function(done) {
     var configuration = JSON.parse(res.configuration);
 
     var isDefault = true;
-    if (res.defaultFile === 'no') {
+    if (res.defaultFile === 'no' || res.defaultFile === 'n') {
       isDefault = false;
     }
 

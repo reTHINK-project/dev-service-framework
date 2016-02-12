@@ -117,6 +117,16 @@ class ConnectionController extends EventEmitter {
 
     let data = _this._dataObjectReporter.data;
 
+    dataObjectReporter.onSubscription(function(event) {
+
+      setTimeout(function() {
+        event.accept();
+      }, 200);
+
+    });
+
+    // TODO: Check if is realy necessary the setTimeout
+
     if (_this.mode === 'offer') {
       let connection = new Connection();
 
@@ -134,14 +144,6 @@ class ConnectionController extends EventEmitter {
 
     console.debug(_this._dataObjectReporter);
 
-    // TODO: Check if is realy necessary the setTimeout
-    dataObjectReporter.onSubscription(function(event) {
-
-      setTimeout(function() {
-        event.accept();
-      }, 200);
-
-    });
   }
 
   /**

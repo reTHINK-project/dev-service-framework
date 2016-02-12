@@ -52,7 +52,11 @@ class HypertyConnector extends EventEmitter {
     if (_this._controllers[event.from]) {
       _this._autoSubscribe(event);
     } else {
-      _this._autoAccept(event);
+
+      setTimeout(function() {
+        _this._autoAccept(event);
+      }, 3000);
+
     }
 
   }
@@ -72,7 +76,8 @@ class HypertyConnector extends EventEmitter {
       // TODO: remove this remotePeerInformation;
       connectionController.remotePeerInformation = event;
       connectionController.dataObjectObserver = dataObjectObserver;
-      _this.trigger('have:notification', connectionController, event);
+      _this.trigger('connector:connected', connectionController);
+      _this.trigger('have:notification', event);
 
       console.info('------------------------ END ---------------------- \n');
     }).catch(function(reason) {

@@ -164,6 +164,7 @@ class Syncher {
      url: msg.body.resource,
      schema: msg.body.schema,
      value: msg.body.value,
+     identity: msg.body.idToken,
 
      ack: (type) => {
        let lType = 200;
