@@ -17,6 +17,7 @@ package Message <<Rect>> {
 		idToken ?: RethinkCore.Identity.JWT
 		accessToken ?: RethinkCore.Identity.JWT
 		assertedIdentity ?: RethinkCore.Identity.Identity
+		via ?: URL.URLList
 	}
 
 	class CreateMessageBody {

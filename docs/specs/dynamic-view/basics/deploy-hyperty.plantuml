@@ -5,7 +5,10 @@ autonumber
 
 !define SHOW_RuntimeA
 
+!define SHOW_AppSandboxA
 !define SHOW_AppAtRuntimeA
+!define SHOW_AppStubAtRuntimeA
+!define SHOW_AppBusAtRuntimeA
 
 !define SHOW_CoreRuntimeA
 !define SHOW_MsgBUSAtRuntimeA

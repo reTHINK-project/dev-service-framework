@@ -30,6 +30,8 @@ Optionaly, all message bodies exchanged between different Runtime Messge BUS can
 
 When these message bodies reach the destination MessageBUS, the JWT tokens are decoded and verified by the Identity Module. The result of this process (if successful) is inserted in the MessageBody as assertedIdentity objects and the JWT tokens removed, before the message is delivered to the Hyperty. AssertedIdentity is compliant with [User Identity Data Model](https://github.com/reTHINK-project/architecture/tree/master/docs/datamodel/user-identity).
 
+The "MessageBody.via" attribute contains a list of all Protostub addresses (Protostub) that the message has been passed through. It is used to prevent infinite cycles in the Hyperty Messaging Framework.
+
 #### CreateMessageBody
 
 ##### value
@@ -111,5 +113,3 @@ A Response to a Request message should follow this rule:
 -	Response.id = Request.id
 
 It should be note, the Request.id MUST be incremented every time a new Request message is created.
-
-

@@ -52,7 +52,7 @@ node "Core Functionalities" as core {
 
  node "Address Allocation\nManagement" as ID
 
- node "Sync\nManager" as Sync
+ node "Subscription\nManager" as Sync
 
  }
 
