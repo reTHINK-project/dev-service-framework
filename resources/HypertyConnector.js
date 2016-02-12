@@ -1553,6 +1553,11 @@ var DataObject = (function () {
   _onAddChildrenHandler: (event) => void
   */
 
+  /**
+   * @ignore
+   * Should not be used directly by Hyperties. It's called by the Syncher create or subscribe method's
+   */
+
   function DataObject(owner, url, schema, bus, initialStatus, initialData, children) {
     var _this2 = this;
 
@@ -1594,29 +1599,57 @@ var DataObject = (function () {
     }
   }
 
+  /**
+   * Object URL of reporter or observer
+   * @type {ObjectURL}
+   */
+
   _createClass(DataObject, [{
     key: 'pause',
+
+    /**
+     * @ignore
+     */
     value: function pause() {
       //TODO: this feature needs more analise
       throw 'Not implemented';
     }
+
+    /**
+     * @ignore
+     */
   }, {
     key: 'resume',
     value: function resume() {
       //TODO: this feature needs more analise
       throw 'Not implemented';
     }
+
+    /**
+     * @ignore
+     */
   }, {
     key: 'stop',
     value: function stop() {
       //TODO: should remove the subscription and send message unsubscribe?
       throw 'Not implemented';
     }
+
+    /**
+     * @ignore
+     */
   }, {
     key: 'release',
-    value: function release() {
-      //TODO: remove all listeners for this object
-    }
+    value: function release() {}
+    //TODO: remove all listeners for this object
+
+    /**
+     * Create and add a children to the subscription group.
+     * @param {String} resource - Resource name, one of the items in the schema.properties.scheme of the parent object.
+     * @param {JSON} initialData - Initial data of the child
+     * @return {Promise<DataObjectChild>} - Return Promise to a new Children.
+     */
+
   }, {
     key: 'addChildren',
     value: function addChildren(resource, initialData) {
@@ -1647,6 +1680,11 @@ var DataObject = (function () {
         resolve(newChild);
       });
     }
+
+    /**
+     * Setup the callback to process create and delete childrens
+     * @param {function(event: MsgEvent)} callback
+     */
   }, {
     key: 'onAddChildren',
     value: function onAddChildren(callback) {
@@ -1766,30 +1804,45 @@ var DataObject = (function () {
       }
     }
   }, {
-    key: 'version',
-    get: function get() {
-      return this._version;
-    }
-  }, {
     key: 'url',
     get: function get() {
       return this._url;
     }
+
+    /**
+     * Object schema URL (this field is not yet stable, and is subsject to change)
+     * @type {SchemaURL}
+     */
   }, {
     key: 'schema',
     get: function get() {
       return this._schema;
     }
+
+    /**
+     * Status of the reporter or observer connection (this field is not yet stable, and is subsject to change)
+     * @type {Status} - Enum of: on | paused
+     */
   }, {
     key: 'status',
     get: function get() {
       return this._status;
     }
+
+    /**
+     * Data structure to be synchronized.
+     * @type {JSON} - JSON structure that should follow the defined schema, if any.
+     */
   }, {
     key: 'data',
     get: function get() {
       return this._syncObj.data;
     }
+
+    /**
+     * All created children's since the subscription, doesn't contain all children's since reporter creation.
+     * @type {Object<ChildId, DataObjectChild>}
+     */
   }, {
     key: 'children',
     get: function get() {
@@ -1826,6 +1879,11 @@ var DataObjectChild /* implements SyncStatus */ = (function () {
   _onResponseHandler: (event) => void
   */
 
+  /**
+   * @ignore
+   * Should not be used directly by Hyperties. It's called by the DataObject.addChildren
+   */
+
   function DataObjectChild(owner, childId, msgId, bus, initialData) {
     _classCallCheck(this, DataObjectChild);
 
@@ -1844,13 +1902,28 @@ var DataObjectChild /* implements SyncStatus */ = (function () {
     });
   }
 
+  /**
+   * Children ID generated on addChildren. Unique identifier
+   * @type {URL} - URL of the format <HypertyURL>#<numeric-sequence>
+   */
+
   _createClass(DataObjectChild, [{
     key: 'onChange',
+
+    /**
+     * Register the change listeners sent by the reporter child
+     * @param {function(event: MsgEvent)} callback
+     */
     value: function onChange(callback) {
       this._syncObj.observe(function (event) {
         callback(event);
       });
     }
+
+    /**
+     * Setup the callback to process response notifications of the creates
+     * @param {function(event: MsgEvent)} callback
+     */
   }, {
     key: 'onResponse',
     value: function onResponse(callback) {
@@ -1876,6 +1949,11 @@ var DataObjectChild /* implements SyncStatus */ = (function () {
     get: function get() {
       return this._childId;
     }
+
+    /**
+     * Data Structure to be synchronized.
+     * @type {JSON} - JSON structure that should follow the defined schema, if any.
+     */
   }, {
     key: 'data',
     get: function get() {
@@ -1920,6 +1998,11 @@ var DataObjectObserver = (function (_DataObject) {
   _filters: {<filter>: {type: <start, exact>, callback: <function>} }
   */
 
+  /**
+   * @ignore
+   * Should not be used directly by Hyperties. It's called by the Syncher.subscribe method
+   */
+
   function DataObjectObserver(owner, url, schema, bus, initialStatus, initialData, children) {
     _classCallCheck(this, DataObjectObserver);
 
@@ -1939,7 +2022,11 @@ var DataObjectObserver = (function (_DataObject) {
     _this._filters = {};
   }
 
-  //register change filter
+  /**
+   * Register the change listeners sent by the reporter
+   * @param {string} filter - Filter that identifies the field (separeted dot path). Accepts * at the end for a more unrestricted filtering.
+   * @param {function(event: MsgEvent)} callback
+   */
 
   _createClass(DataObjectObserver, [{
     key: 'onChange',
@@ -1962,8 +2049,6 @@ var DataObjectObserver = (function (_DataObject) {
 
       this._filters[key] = filterObj;
     }
-
-    //filter changes
   }, {
     key: '_onFilter',
     value: function _onFilter(event) {
@@ -2028,6 +2113,11 @@ var DataObjectReporter = (function (_DataObject) {
   _onResponseHandler: (event) => void
   */
 
+  /**
+   * @ignore
+   * Should not be used directly by Hyperties. It's called by the Syncher.create method
+   */
+
   function DataObjectReporter(owner, url, schema, bus, initialStatus, initialData, children) {
     _classCallCheck(this, DataObjectReporter);
 
@@ -2047,11 +2137,26 @@ var DataObjectReporter = (function (_DataObject) {
     _this._subscriptions = {};
   }
 
+  /**
+   * Subscriptions requested and accepted to this reporter
+   * @type {Object<HypertyURL, SyncSubscription>}
+   */
+
   _createClass(DataObjectReporter, [{
     key: 'onSubscription',
+
+    /**
+     * Setup the callback to process subscribe and unsubscribe notifications
+     * @param {function(event: MsgEvent)} callback
+     */
     value: function onSubscription(callback) {
       this._onSubscriptionHandler = callback;
     }
+
+    /**
+     * Setup the callback to process response notifications of the create's
+     * @param {function(event: MsgEvent)} callback
+     */
   }, {
     key: 'onResponse',
     value: function onResponse(callback) {
@@ -2155,6 +2260,9 @@ exports['default'] = DataObjectReporter;
 module.exports = exports['default'];
 
 },{"../utils/utils.js":15,"./DataObject":7}],11:[function(require,module,exports){
+/**
+ * @access private
+ */
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2243,6 +2351,10 @@ var _createClass = (function () { function defineProperties(target, props) { for
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 var _utilsUtilsJs = require('../utils/utils.js');
+
+/**
+ * @access private
+ */
 
 var SyncObject = (function () {
   /* private
@@ -2598,6 +2710,13 @@ var Syncher = (function () {
   _onNotificationHandler: (event) => void
   */
 
+  /**
+   * Constructor that should be used by the Hyperty owner
+   * @param {HypertyURL} owner - Hyperty URL owner
+   * @param {MiniBus} bus - The internal sandbox MiniBus used by the Hyperty
+   * @param {JSON} config - The only required field for now is runtimeURL
+   */
+
   function Syncher(owner, bus, config) {
     _classCallCheck(this, Syncher);
 
@@ -2623,14 +2742,19 @@ var Syncher = (function () {
     });
   }
 
+  /**
+   * The owner of the Syncher and all created reporters.
+   * @type {HypertyURL}
+   */
+
   _createClass(Syncher, [{
     key: 'create',
 
     /**
      * Request a DataObjectReporter creation. The URL will be be requested by the allocation mechanism.
-     * @param  {Schema} schema Schema of the object
-     * @param  {HypertyURL[]} List of hyperties to send the create
-     * @param  {JSON} initialData Object initial data
+     * @param  {SchemaURL} schema - URL of the object descriptor
+     * @param  {HypertyURL[]} observers - List of hyperties that are pre-authorized for subscription
+     * @param  {JSON} initialData - Initial data of the reporter
      * @return {Promise<DataObjectReporter>} Return Promise to a new Reporter. The reporter can be accepted or rejected by the PEP
      */
     value: function create(schema, observers, initialData) {
@@ -2663,8 +2787,9 @@ var Syncher = (function () {
 
     /**
      * Request a subscription to an existent object.
-     * @param  {ObjectURL} objURL Address of the existent object.
-     * @return {Promise<DataObjectObserver>} Return Promise to a new Observer.
+     * @param {SchemaURL} schema - URL of the object descriptor
+     * @param {ObjectURL} objURL - Address of the existent reporter object
+     * @return {Promise<DataObjectObserver>} Return Promise to a new observer.
      */
   }, {
     key: 'subscribe',
@@ -2699,6 +2824,12 @@ var Syncher = (function () {
         });
       });
     }
+
+    /**
+     * Setup the callback to process create and delete events of remove Reporter objects.
+     * This is releated to the messagens sent by create to the observers Hyperty array.
+     * @param {function(event: MsgEvent)} callback
+     */
   }, {
     key: 'onNotification',
     value: function onNotification(callback) {
@@ -2747,11 +2878,21 @@ var Syncher = (function () {
     get: function get() {
       return this._owner;
     }
+
+    /**
+     * All owned reporters, the ones that were created by a create
+     * @type {Object<URL, DataObjectReporter>}
+     */
   }, {
     key: 'reporters',
     get: function get() {
       return this._reporters;
     }
+
+    /**
+     * All owned observers, the ones that were created by a local subscription
+     * @type {Object<URL, DataObjectObserver>}
+     */
   }, {
     key: 'observers',
     get: function get() {
