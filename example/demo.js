@@ -42,50 +42,18 @@ function userLoged() {
   hypertyHolder.removeClass('hide');
 
   let hyperty = 'hyperty-catalogue://' + domain + '/.well-known/hyperty/HypertyConnector';
-  let hypertyDiscovery = 'hyperty-catalogue://' + domain + '/.well-known/hyperty/HypertyDiscovery';
 
-  console.log();
+  var core = new CoreFactory();
+  var runtimeLoader = new RuntimeLoader(core);
 
-  let core = new CoreFactory();
-  let runtimeLoader = new RuntimeLoader(core);
   // Load First Hyperty
-
-  // runtimeLoader.requireHyperty(hypertyDiscovery).then(hypertyDeployed).catch(function(reason) {
-  //   errorMessage(reason);
-  // });
-
   runtimeLoader.requireHyperty(hyperty).then(hypertyDeployed).catch(function(reason) {
     errorMessage(reason);
   });
 
-  // let promise1 = runtimeLoader.requireHyperty(hypertyDiscovery);
-  // let promise2 = runtimeLoader.requireHyperty(hyperty);
-  //
-  // Promise.all([promise1, promise2]).then(function(result) {
-  //
-  //   console.log(result);
-  //
-  // }).catch(function(reason) {
-  //   console.log('reason:', reason);
-  // })
-
-  // Load First Hyperty
-  // runtime.loadHyperty(hyperty).then(hypertyDeployed).catch(function(reason) {
-  //   errorMessage(reason);
-  // });
-
 }
 
 function hypertyDeployed(result) {
-
-  // TODO: Apply the Hyperty Discover
-  // let hypertyHolder = $('.hyperties');
-  // hypertyHolder.removeClass('hide');
-  //
-  // let cardHolder = $('.card-content');
-  // let html = '<div class="row"><div class="col s12"><span class="card-title">Logged</span></div><div class="col s2"><img alt="" class="circle responsive-img" src=' + result.picture + ' ></div><div class="col s8"><p><b>id:</b> ' + result.id + '</p><p><b>email:</b> ' + result.email + '</p><p><b>name:</b> ' + result.name + '</p><p><b>locale:</b> ' + result.locale + '</p></div>';
-  //
-  // cardHolder.html(html);
 
   let loginPanel = $('.login-panel');
   let cardAction = loginPanel.find('.card-action');
@@ -95,14 +63,14 @@ function hypertyDeployed(result) {
   cardAction.append(hypertyInfo);
 
   // Prepare to discover email:
-  discoverEmail();
+  let hypertyDiscovery = result.instance.hypertyDiscovery;
+  discoverEmail(hypertyDiscovery);
 
   // Prepare the chat
   let messageChat = $('.hyperty-chat');
   messageChat.removeClass('hide');
 
-  console.log(result);
-  let connector = window.components[result.runtimeHypertyURL].instance;
+  let connector = result.instance;
 
   connector.addEventListener('connector:connected', function(controller) {
 
@@ -115,7 +83,7 @@ function hypertyDeployed(result) {
   // runtime.messageBus.addListener(result.runtimeHypertyURL, newMessageRecived);
 }
 
-function discoverEmail() {
+function discoverEmail(hypertyDiscovery) {
 
   let section = $('.discover');
   let searchForm = section.find('.form');
@@ -136,7 +104,7 @@ function discoverEmail() {
     let email = inputField.val();
     console.log(email);
 
-    // runtime.registry.getUserHyperty(email).then(emailDiscovered).catch(emailDiscoveredError);
+    hypertyDiscovery.discoverHypertyPerUser(email).then(emailDiscovered).catch(emailDiscoveredError);
 
   });
 }
@@ -192,7 +160,7 @@ function openChat(result, video) {
 
   toUserEl.html(toUser);
 
-  let connector = window.components[fromUser].instance;
+  let connector = result.instance;
 
   if (video) {
 

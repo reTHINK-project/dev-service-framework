@@ -2377,7 +2377,7 @@ var ConnectionController = (function (_EventEmitter) {
 exports['default'] = ConnectionController;
 module.exports = exports['default'];
 
-},{"../utils/EventEmitter":14,"./Connection":2,"./Peer":6,"webrtc-adapter-test":1}],4:[function(require,module,exports){
+},{"../utils/EventEmitter":15,"./Connection":2,"./Peer":6,"webrtc-adapter-test":1}],4:[function(require,module,exports){
 /* jshint undef: true */
 
 'use strict';
@@ -2398,6 +2398,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var _hypertyDiscoveryHypertyDiscovery = require('../hyperty-discovery/HypertyDiscovery');
+
+var _hypertyDiscoveryHypertyDiscovery2 = _interopRequireDefault(_hypertyDiscoveryHypertyDiscovery);
+
 var _ConnectionController = require('./ConnectionController');
 
 var _ConnectionController2 = _interopRequireDefault(_ConnectionController);
@@ -2409,6 +2413,8 @@ var _utilsEventEmitter2 = _interopRequireDefault(_utilsEventEmitter);
 var _syncherSyncher = require('../syncher/Syncher');
 
 var _syncherSyncher2 = _interopRequireDefault(_syncherSyncher);
+
+var _utilsUtils = require('../utils/utils');
 
 /**
 * Hyperty Connector;
@@ -2441,6 +2447,9 @@ var HypertyConnector = (function (_EventEmitter) {
     _this._objectDescURL = 'hyperty-catalogue://localhost/.well-known/dataschemas/FakeDataSchema';
 
     _this._controllers = {};
+
+    var domain = (0, _utilsUtils.divideURL)(hypertyURL).domain;
+    _this.hypertyDiscovery = new _hypertyDiscoveryHypertyDiscovery2['default'](domain, bus);
 
     var syncher = new _syncherSyncher2['default'](hypertyURL, bus, configuration);
     syncher.onNotification(function (event) {
@@ -2640,7 +2649,7 @@ function activate(hypertyURL, bus, configuration) {
 
 module.exports = exports['default'];
 
-},{"../syncher/Syncher":13,"../utils/EventEmitter":14,"./ConnectionController":3}],5:[function(require,module,exports){
+},{"../hyperty-discovery/HypertyDiscovery":7,"../syncher/Syncher":14,"../utils/EventEmitter":15,"../utils/utils":16,"./ConnectionController":3}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2751,6 +2760,89 @@ exports['default'] = Peer;
 module.exports = exports['default'];
 
 },{}],7:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _utilsUtilsJs = require('../utils/utils.js');
+
+/**
+* Core HypertyDiscovery interface
+* Class to allow applications to search for hyperties using the message bus
+*/
+
+var HypertyDiscovery = (function () {
+
+  /**
+  * To initialise the HypertyDiscover, which will provide the support for hyperties to
+  * query users registered in outside the internal core.
+  * @param  {RuntimeURL}          runtimeURL            runtimeURL
+  * @param  {MessageBus}          msgbus                msgbus
+  */
+
+  function HypertyDiscovery(domain, msgBus) {
+    _classCallCheck(this, HypertyDiscovery);
+
+    var _this = this;
+    _this.messageBus = msgBus;
+
+    _this.domain = domain;
+    _this.discoveryURL = 'hyperty://' + domain + '/hypertyDisovery';
+  }
+
+  /**
+  * function to request about users registered in domain registry, and
+  * return the hyperty instance if found.
+  * @param  {email}              email
+  * @return {Promise}          Promise
+  */
+
+  _createClass(HypertyDiscovery, [{
+    key: 'discoverHypertyPerUser',
+    value: function discoverHypertyPerUser(email) {
+      var _this = this;
+      var identityURL = 'user://' + email.substring(email.indexOf('@') + 1, email.length) + '/' + email.substring(0, email.indexOf('@'));
+
+      // message to query domain registry, asking for a user hyperty.
+      var message = {
+        type: 'READ', from: _this.discoveryURL, to: 'domain://registry.' + _this.domain + '/', body: { user: identityURL }
+      };
+
+      return new Promise(function (resolve, reject) {
+
+        _this.messageBus.postMessage(message, function (reply) {
+
+          var hypertyURL = reply.body.last;
+
+          if (hypertyURL === undefined) {
+            return reject('User Hyperty not found');
+          }
+
+          var idPackage = {
+            id: email,
+            descriptor: reply.body.hyperties[hypertyURL].descriptor,
+            hypertyURL: hypertyURL
+          };
+
+          resolve(idPackage);
+        });
+      });
+    }
+  }]);
+
+  return HypertyDiscovery;
+})();
+
+exports['default'] = HypertyDiscovery;
+module.exports = exports['default'];
+
+},{"../utils/utils.js":16}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -3088,7 +3180,7 @@ var DataObject = (function () {
 exports['default'] = DataObject;
 module.exports = exports['default'];
 
-},{"./DataObjectChild":8,"./SyncObject":12}],8:[function(require,module,exports){
+},{"./DataObjectChild":9,"./SyncObject":13}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -3199,7 +3291,7 @@ var DataObjectChild /* implements SyncStatus */ = (function () {
 exports['default'] = DataObjectChild;
 module.exports = exports['default'];
 
-},{"./SyncObject":12}],9:[function(require,module,exports){
+},{"./SyncObject":13}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -3312,7 +3404,7 @@ var DataObjectObserver = (function (_DataObject) {
 exports['default'] = DataObjectObserver;
 module.exports = exports['default'];
 
-},{"./DataObject":7}],10:[function(require,module,exports){
+},{"./DataObject":8}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -3491,7 +3583,7 @@ var DataObjectReporter = (function (_DataObject) {
 exports['default'] = DataObjectReporter;
 module.exports = exports['default'];
 
-},{"../utils/utils.js":15,"./DataObject":7}],11:[function(require,module,exports){
+},{"../utils/utils.js":16,"./DataObject":8}],12:[function(require,module,exports){
 /**
  * @access private
  */
@@ -3571,7 +3663,7 @@ var DataProvisional = (function () {
 exports['default'] = DataProvisional;
 module.exports = exports['default'];
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -3900,7 +3992,7 @@ var ObjectType = { OBJECT: 'object', ARRAY: 'array' };
 exports.ObjectType = ObjectType;
 exports['default'] = SyncObject;
 
-},{"../utils/utils.js":15}],13:[function(require,module,exports){
+},{"../utils/utils.js":16}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -4139,7 +4231,7 @@ var Syncher = (function () {
 exports['default'] = Syncher;
 module.exports = exports['default'];
 
-},{"./DataObjectObserver":9,"./DataObjectReporter":10,"./DataProvisional":11}],14:[function(require,module,exports){
+},{"./DataObjectObserver":10,"./DataObjectReporter":11,"./DataProvisional":12}],15:[function(require,module,exports){
 /**
  * EventEmitter
  * All classes which extends this, can have addEventListener and trigger events;
@@ -4194,7 +4286,7 @@ var EventEmitter = (function () {
 exports["default"] = EventEmitter;
 module.exports = exports["default"];
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 /**
  * Support module with some functions will be useful
  * @module utils

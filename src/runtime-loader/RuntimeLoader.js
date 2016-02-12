@@ -23,6 +23,12 @@ class RuntimeLoader {
     let _this = this;
     let from = 'app:requireHyperty';
 
+    // from: <AppSandboxURL>/app
+    // to: hyperty-runtime://<runtime-instance-identitifier>/runtime-ua
+    // <runtime-instance-identitifier> should be generated wen the runtimeUA is instantiated;
+    // body.resource = 'hyperty' || 'protostub'
+    // body.value = <hypertyDescriptorURL> || <domain>;
+
     return new Promise(function(resolve, reject){
 
       let msg = {

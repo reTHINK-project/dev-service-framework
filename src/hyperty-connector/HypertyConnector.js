@@ -1,8 +1,10 @@
 /* jshint undef: true */
 
+import HypertyDiscovery from '../hyperty-discovery/HypertyDiscovery';
 import ConnectionController from './ConnectionController';
 import EventEmitter from '../utils/EventEmitter';
 import Syncher from '../syncher/Syncher';
+import {divideURL} from '../utils/utils';
 
 /**
 * Hyperty Connector;
@@ -31,6 +33,9 @@ class HypertyConnector extends EventEmitter {
     _this._objectDescURL = 'hyperty-catalogue://localhost/.well-known/dataschemas/FakeDataSchema';
 
     _this._controllers = {};
+
+    let domain = divideURL(hypertyURL).domain;
+    _this.hypertyDiscovery = new HypertyDiscovery(domain, bus);
 
     let syncher = new Syncher(hypertyURL, bus, configuration);
     syncher.onNotification(function(event) {
