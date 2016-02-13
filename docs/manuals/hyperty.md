@@ -26,9 +26,6 @@ In addition, Hyperties have some unique characteristics including:
 The API to handle the Synchronisation of Hyperty Data Objects is extremely simple and fun to use. The Developer of the Hyperty Reporter just has to create the Data Sync object with the Syncher API, and write on the object every time there is data to be updated and shared with Hyperty Observers.
 
 ```javascript
-
-    ....
-
     console.info('---------------- Syncher Create Reporter Hyperty Data ---------------------- \n');
     syncher.create({}, [hypertyURL], {}).then(function(dataObjectReporter) {
       console.info('1. Return Create Data Object Reporter', dataObjectReporter);
@@ -42,10 +39,6 @@ The API to handle the Synchronisation of Hyperty Data Objects is extremely simpl
     });
 
     // missing snippet for updates and delete
-
-    ...
-
-
 ```
 
 On the Hyperty Observer side, Data Objects are also created with the Syncher API and the emerging [Object.observer() Javascript method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/observe) is used to receive the stream of data changes coming from the Reporter Hyperty.
@@ -64,13 +57,9 @@ On the Hyperty Observer side, Data Objects are also created with the Syncher API
       console.error(reason);
     });
   }
-
-  ...
-
   // missing snippet for updates and delete
-
 ```
 
 -	Hyperties can easily cooperate with Hyperties from other domains with no federation required or the standardisation of Protocols thanks to the [Protocol On-the Fly powered Messaging Framework](hyperty-messaging-framework.md). Hyperties only have to agree on a common json-schema for one or more Hyperty Data Objects, in order to be able to cooperate each other.
 
--	Hyperties can be used on any Application Domain, but they are specially suitable for Real Time Communication Apps (eg Video Conference and Chat) as well as IoT Apps. Check [Current Hyperty Catalogue](../../examples)\(*to be moved to a dedicated repo ou portal?*).
+-	Hyperties can be used on any Application Domain, but they are specially suitable for Real Time Communication Apps (eg Video Conference and Chat) as well as IoT Apps. Check [Current Hyperty Catalogue](../../examples).
