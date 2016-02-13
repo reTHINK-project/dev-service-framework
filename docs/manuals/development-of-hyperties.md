@@ -29,9 +29,7 @@ If the answers to the above questions are "YES" then most likely, you should go 
 
 ### Getting Started with the Service Framework
 
-So you have decided for the Hyperty Concept and now ask yourself where to start. This section describes the basic steps any developer needs to undertake to include the Service Framwork into their projects. There are two simple steps to get you started.
-
-*should we say something about the need to select or design the data schema to be used with syncher?*
+So you have decided for the Hyperty Concept and now ask yourself where to start. This section describes the basic steps any developer needs to undertake to include the Service Framework into their projects. There are two simple steps to get you started.
 
 1) Install the Service Framework
 
@@ -56,24 +54,21 @@ The next section explains the availble modules and APIs they expose.
 
 ### APIs
 
-*First I would just provide the basic Syncher and hypertyDiscovery APIs to be used and the others in an "advanced" section*
-
 Here we describe useful functionalities that are exposed by the Service Framework Module, which developers can use in development process.
 
 #### Syncher API
 
-The Syncher is a singleton class per Hyperty/URL and it is the owner of all created DataObjects.
-The main class for the package. Should only be available one per Hyperty/URL. It's the owner of all kind of DataObjects.
-```
-new Syncher(hypertyURL, bus.MiniBus, configuration)
-```
+The Syncher is a singleton class per Hyperty/URL and it is the owner of all created DataObjects. The main class for the package. Should only be available one per Hyperty/URL. It's the owner of all kind of DataObjects.
+
+`new Syncher(hypertyURL, bus.MiniBus, configuration)`
+
 *Parameters:*
 
-| name                | type                                      | description                                                                                                                                                                           |
-|---------------------|-------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| hypertyURL          | URL.HypertyURL                            | A URL allocated by the runtime that uniquely identifies the Hyperty                                                                                                            |
-| bus.MiniBus         | MiniBus                                   | An instance of the MiniBus provided in the sandbox. When an object (Reporter or Observed) is created, the SyncherManager will add a listener in the MiniBus to receive/send Messages of that object.                                                                                         |
-| configuration       | Config                                    | Configuration data containing the runtimeURL. |
+| name          | type           | description                                                                                                                                                                                          |
+|---------------|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| hypertyURL    | URL.HypertyURL | A URL allocated by the runtime that uniquely identifies the Hyperty                                                                                                                                  |
+| bus.MiniBus   | MiniBus        | An instance of the MiniBus provided in the sandbox. When an object (Reporter or Observed) is created, the SyncherManager will add a listener in the MiniBus to receive/send Messages of that object. |
+| configuration | Config         | Configuration data containing the runtimeURL.                                                                                                                                                        |
 
 ##### Methods
 
@@ -82,38 +77,36 @@ The create method request a DataObjectReporter creation. The URL will be be requ
 ```
 create(schema, List, initialData)
 ```
+
 *Parameters:*
 
-| name     | type    | description                                                                                                         |
-|----------|---------|---------------------------------------------------------------------------------------------------------------------|
-| schema | Schema | The Schema of the object |
-|List	|Array<HypertyURL>	|of hyperties to send the create|
-|initialData|	JSON	|Object initial data|
+| name        | type              | description                     |
+|-------------|-------------------|---------------------------------|
+| schema      | Schema            | The Schema of the object        |
+| List        | Array<HypertyURL> | of hyperties to send the create |
+| initialData | JSON              | Object initial data             |
 
-* Returns:*
-Return Promise to a new Reporter. The reporter can be accepted or rejected by the PEP
-Type
-Promise.<DataObjectReporter>
+-	Returns: Return Promise to a new Reporter. The reporter can be accepted or rejected by the PEP Type Promise.<DataObjectReporter>
 
-
-The subscribe method can be used to request subscription to an existent object. 
+The subscribe method can be used to request subscription to an existent object.
 
 ```
-subscribe(objURL) 
+subscribe(objURL)
 ```
+
 *Parameters:*
 
-| name     | type    | description                                                                                                         |
-|----------|---------|---------------------------------------------------------------------------------------------------------------------|
-| objURL | ObjectURL | 	Address of the existent object |
-	
-*Returns:*
-Return Promise to a new Observer of Type Promise.<DataObjectObserver>
+| name   | type      | description                    |
+|--------|-----------|--------------------------------|
+| objURL | ObjectURL | Address of the existent object |
+
+*Returns:* Return Promise to a new Observer of Type Promise.<DataObjectObserver>
 
 #### Minibus API
-The MiniBus API is a minimal interface to send and receive messages. It can be reused in many type of components. Components that need a message system should receive this class as a dependency or extend it. Classes extending this interface have to implement the following private methods: _onPostMessage and _registerExternalListener which are described below.
 
-The _onPostMessage method is a private class and used by the classes extending the Minibus class to process messages from the public "postMessage" without a registered listener. It can be used to send the message to an external interface, like a WebWorker or an IFrame.
+The MiniBus API is a minimal interface to send and receive messages. It can be reused in many type of components. Components that need a message system should receive this class as a dependency or extend it. Classes extending this interface have to implement the following private methods: `_onPostMessage` and `_registerExternalListener` which are described below.
+
+The `_onPostMessage` method is a private class and used by the classes extending the Minibus class to process messages from the public "postMessage" without a registered listener. It can be used to send the message to an external interface, like a WebWorker or an IFrame.
 
 ```
 onPostMessage(msg)
@@ -121,31 +114,30 @@ onPostMessage(msg)
 
 *Parameters:*
 
-| name     | type    | description                                                                                                         |
-|----------|---------|---------------------------------------------------------------------------------------------------------------------|
-| msg | Message.Message | posted Message|
-		
+| name | type            | description    |
+|------|-----------------|----------------|
+| msg  | Message.Message | posted Message |
 
-The _registerExternalListener() method is not publicly available. It can be used by the class extension implementation to process all messages that enter the MiniBus from an external interface, like a WebWorker or IFrame. This method is called one time in the constructor to register external listeners. The implementation will probably call the "_onMessage" method to publish in the local listeners. 
+The `_registerExternalListener()` method is not publicly available. It can be used by the class extension implementation to process all messages that enter the MiniBus from an external interface, like a WebWorker or IFrame. This method is called one time in the constructor to register external listeners. The implementation will probably call the `_onMessage` method to publish in the local listeners.
 
-*NOTE:* DO NOT call "postMessage", there is a danger that the message enters in a cycle!
-```
+*NOTE:* DO NOT call "postMessage", there is a danger that the message enters in a cycle!`
 registerExternalListener()
-```
-
+`
 
 #### Hyperty Discovery API
+
 Hyperty Discovery interface provides the functionality to query hyperties instances registered in the domain registry of a given user
- 
- ```
+
+```
 new HypertyDiscovery(domainURL, msgBus)
 ```
+
 *Parameters:*
 
-| name                | type                                      | description                                                                                                                                                                           |
-|---------------------|-------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| domainURL          | URL.RuntimeURL                            | A URL allocated by the runtime that uniquely identifies the Hyperty                                                                                                            |
-| msgBus.MiniBus     | MiniBus                                   | An instance of the MiniBus used to post messages to the Message Bus                                                                                         |
+| name           | type           | description                                                         |
+|----------------|----------------|---------------------------------------------------------------------|
+| domainURL      | URL.RuntimeURL | A URL allocated by the runtime that uniquely identifies the Hyperty |
+| msgBus.MiniBus | MiniBus        | An instance of the MiniBus used to post messages to the Message Bus |
 
 ##### Methods
 
@@ -154,20 +146,19 @@ The discoverHypertyPerUser function is used to query hyperties instances registe
 ```
  discoverHypertyPerUser(userIdentifier)
 ```
+
 *Parameters:*
 
-| name     | type    | description                                                                                                         |
-|----------|---------|---------------------------------------------------------------------------------------------------------------------|
+| name           | type              | description                  |
+|----------------|-------------------|------------------------------|
 | userIdentifier | Identity.Identity | The user's unique identifier |
 
-* Returns:*
-Return Promise 
-
-
+-	Returns:\* Return Promise
 
 ### Examples
 
 #### Syncher Example
+
 Here is an example on how a Hyperty can instantiate and use the syncher.
 
 ```
@@ -175,39 +166,40 @@ import {Syncher, MessageFactory} from '../src/service-framework';
 
 class MyAwesomeHyperty{
 
-	constructor(hypertyURL, bus, configuration)
-	{
-    		let _this = this;
-    		_this.bus = bus;
-    		_this.configuration = configuration;
-    		_this.hypertyURL = hypertyURL;
-		// Syncher Object
-    		let syncher = new Syncher(hypertyURL, bus, configuration);
-    		_this.syncher = syncher;
-    	
-    		//MessageFactory Object
-    		let messageFactory = new MessageFactory("false", '{}');
-    		_this.messageFactory = messageFactory;
+    constructor(hypertyURL, bus, configuration)
+    {
+            let _this = this;
+            _this.bus = bus;
+            _this.configuration = configuration;
+            _this.hypertyURL = hypertyURL;
+        // Syncher Object
+            let syncher = new Syncher(hypertyURL, bus, configuration);
+            _this.syncher = syncher;
 
-    		_this.syncher.onNotification(function(event) {
-      		console.log('My Awesome Hyperty just recieved a notification: ', event);
-      		_this.hypertyConnector._onNotification(event, hypertyURL);
-	 });
-    	_this.hypertyConnector = new HypertyConnector(syncher);
-    	_this.hypertyConnector.name = 'My Awesome Hyperty';
+            //MessageFactory Object
+            let messageFactory = new MessageFactory("false", '{}');
+            _this.messageFactory = messageFactory;
+
+            _this.syncher.onNotification(function(event) {
+            console.log('My Awesome Hyperty just recieved a notification: ', event);
+            _this.hypertyConnector._onNotification(event, hypertyURL);
+     });
+        _this.hypertyConnector = new HypertyConnector(syncher);
+        _this.hypertyConnector.name = 'My Awesome Hyperty';
   }
 }
 ```
 
 #### MiniBus API Example
+
 We shall now provide more functionality to our MyAwesomeHyperty example above. The above class already has an instance of the MiniBus object which was provided in the constructor parameter. The example below shows how to use this instance to send a Message on the Message Bus.
 
 ```
 sendMessage() {
-	let _this = this;
-	let message = messageFactory.createCreateMessageRequest( _this.hypertyURL, 
-	'hyperty-runtime://sp1/AnotherHyperty'
-	"Hello from My Awesome Hyperty");
-	_this.bus.postMessage(message);
+    let _this = this;
+    let message = messageFactory.createCreateMessageRequest( _this.hypertyURL,
+    'hyperty-runtime://sp1/AnotherHyperty'
+    "Hello from My Awesome Hyperty");
+    _this.bus.postMessage(message);
   }
 ```

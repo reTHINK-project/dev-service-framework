@@ -1,7 +1,7 @@
 Hyper-linked Entities - Hyperties
 ---------------------------------
 
-This document, provides an overview about the Hyperty concept and it should be the starting point for any new developer. After this document, all developers should also read:
+This document provides an overview about the Hyperty concept and it should be the starting point for any new developer. After this document, all developers should also read:
 
 -	the [Hyperty Messaging Framework overview](hyperty-messaging-framework.md)
 -	the [Reporter - Observer Data Synchronisation model](p2p-data-sync.md)

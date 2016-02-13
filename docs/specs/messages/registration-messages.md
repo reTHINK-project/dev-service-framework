@@ -1,5 +1,4 @@
-Registration Messages
----------------------
+### Registration Messages
 
 This doc specifies Messages to be used to manage registrations in the Domain Registry, where,
 
