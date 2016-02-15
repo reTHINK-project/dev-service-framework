@@ -31,9 +31,13 @@ The diagram below depicts the general architecture of a reTHINK Web App. This di
 The Web developer does not have to deal with low level details of the architecture. The sandboxes and the management of hyperties and protostubs is done by the core framework. The sandboxes allows to isolate code from different providers reducing the risk of suffering cross-site scripting attacks. 
 
 #####Functionality: hyperties
+In the standard application, the developers needs to know in advance the libraries and versions it has to download to build the aplication. In reTHINK the functionality is provided by hyperties which are dynamically loaded in the runtime on-demand. The interaction with the Hyperties which can be executed in different sandboxes is done through commands and events from the Web application. There are special cases where the Hyperty needs to be executed in the same sandbox as the main web application, for example, when the Hyperty needs to access the WebRTC API. 
 
 #####Compatibility: Protostubs
+In a standard Web Application, the developers needs to know in advance with which services providers it will be necessary to interact. The number of protocols an application can speak is limited in implementation time and it can not change without modifying the code. In reTHINK the protocol-on-the-fly concept is used. If you need to interact with a service which uses protocol A, the framework will provide you a piece of code called protostub which will be executed in the right sandbox. This protostub will speak protocol A and it wil expose a common API to the Hyperty. The Web Developer will not need to deal with this complexity.   
 
-#####Identity management
+#####Identity management.
+The identity management is normally be done on a per service basis. There are standard mechanism for authentication and Identity management however not all the services use the same. The reTHINK framework provides a common 
 
-*app: the idea was trying to give some hints on how to adapt existing Apps in order to be reTHINK enabled avoiding building from scratch a new app*
+#####Impact at interface level
+reTHINK web applications should not have any significant impact at interface level, being impossible for an average user to distinguish between a standard application and a reTHINK application. However there are settings which can be applied to reTHINK libraries which can be exposed to the end user to customize its behaviour. 
