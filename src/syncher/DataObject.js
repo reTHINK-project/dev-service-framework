@@ -251,7 +251,7 @@ class DataObject {
       }
     } else {
       //TODO: how to handle unsynchronized versions?
-      console.log('unsynchronized versions');
+      console.log('UNSYNCHRONIZED VERSION: (data => ' + _this._version + ', msg => ' + msg.body.version + ')');
     }
   }
 
