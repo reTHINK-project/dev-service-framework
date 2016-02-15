@@ -6,8 +6,8 @@
 import 'webrtc-adapter-test';
 
 import EventEmitter from '../utils/EventEmitter';
-import Connection from './Connection';
-import Peer from './Peer';
+import connection from './connection';
+import peer from './peer';
 
 class ConnectionController extends EventEmitter {
 
@@ -121,26 +121,12 @@ class ConnectionController extends EventEmitter {
       event.accept();
     });
 
-    // TODO: Check if is realy necessary the setTimeout
-
     if (_this.mode === 'offer') {
-      let connection = new Connection();
-
-      // TODO: Set on connection object the owner, peer, and status;
-      connection.owner = _this._dataObjectReporter._owner;
-      data.connection = {
-        ownerPeer: {
-          connectionDescription: {},
-          iceCandidates: []
-        }
-      };
+      data.connection = connection;
 
       _this.createOffer();
     } else {
-      // let peer = new Peer();
-      data.peer = {
-        iceCandidates: []
-      };
+      data.peer = peer;
 
       _this.createAnswer();
     }
@@ -204,43 +190,45 @@ class ConnectionController extends EventEmitter {
 
   changePeerInformation(dataObjectObserver) {
 
-    let _this = this;
+      let _this = this;
 
-    _this.processPeerInformation(dataObjectObserver.data);
+      console.info(JSON.stringify(dataObjectObserver.data));
 
-    dataObjectObserver.onChange('*', function(event) {
-      console.info('Observer on change message: ', event);
-      _this.processPeerInformation(event.data);
-    });
+      _this.processPeerInformation(dataObjectObserver.data);
 
-  }
-
-  processPeerInformation(data) {
-    let _this = this;
-    let isOwner = data.hasOwnProperty('connection');
-
-    let connectionDescription = isOwner ? data.connection.ownerPeer.connectionDescription : data.peer.connectionDescription;
-    let iceCandidates = isOwner ? data.connection.ownerPeer.iceCandidates : data.peer.iceCandidates;
-
-    console.info('ProcessPeer: ', data);
-
-    if (!connectionDescription) return;
-
-    if (connectionDescription.type === 'offer' || connectionDescription.type === 'answer') {
-      console.info('Process Connection Description: ', connectionDescription);
-      _this.peerConnection.setRemoteDescription(new RTCSessionDescription(connectionDescription), _this.remoteDescriptionSuccess, _this.remoteDescriptionError);
-    }
-
-    if (iceCandidates) {
-      iceCandidates.forEach(function(ice) {
-        if (ice.type === 'candidate') {
-          console.info('Process Ice Candidate: ', ice);
-          _this.peerConnection.addIceCandidate(new RTCIceCandidate({candidate: ice.candidate}), _this.remoteDescriptionSuccess, _this.remoteDescriptionError);
-        }
+      dataObjectObserver.onChange('*', function(event) {
+        console.info('Observer on change message: ', event);
+        _this.processPeerInformation(dataObjectObserver.data);
       });
     }
 
-  }
+    processPeerInformation(data) {
+      let _this = this;
+
+      console.debug(JSON.stringify(data));
+
+      let isOwner = data.hasOwnProperty('connection');
+
+      let connectionDescription = isOwner ? data.connection.ownerPeer.connectionDescription : data.peer.connectionDescription;
+      let iceCandidates = isOwner ? data.connection.ownerPeer.iceCandidates : data.peer.iceCandidates;
+
+      console.log(connectionDescription, iceCandidates);
+
+      if (connectionDescription.type === 'offer' || connectionDescription.type === 'answer') {
+        console.info('Process Connection Description: ', connectionDescription);
+        _this.peerConnection.setRemoteDescription(new RTCSessionDescription(connectionDescription), _this.remoteDescriptionSuccess, _this.remoteDescriptionError);
+      }
+
+      if (iceCandidates) {
+        iceCandidates.forEach(function(ice) {
+          if (ice.type === 'candidate') {
+            console.info('Process Ice Candidate: ', ice);
+            _this.peerConnection.addIceCandidate(new RTCIceCandidate({candidate: ice.candidate}), _this.remoteDescriptionSuccess, _this.remoteDescriptionError);
+          }
+        });
+      }
+
+    }
 
   remoteDescriptionSuccess() {
     console.info('remote success');
@@ -274,15 +262,15 @@ class ConnectionController extends EventEmitter {
     _this.peerConnection.setLocalDescription(description, function() {
 
       let data = _this._dataObjectReporter.data;
-      let sdp = {
+      let sdpConnection = {
         sdp: description.sdp,
         type: description.type
       };
 
       if (_this.mode === 'offer') {
-        data.connection.ownerPeer.connectionDescription = sdp;
+        data.connection.ownerPeer.connectionDescription = sdpConnection;
       } else {
-        data.peer.connectionDescription = sdp;
+        data.peer.connectionDescription = sdpConnection;
       }
 
     }, _this.infoError);

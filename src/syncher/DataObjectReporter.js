@@ -25,6 +25,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     });
 
     _this._syncObj.observe((event) => {
+      console.log('DataObjectReporter-' + url + '-SEND: ', event);
       _this._onChange(event);
     });
 

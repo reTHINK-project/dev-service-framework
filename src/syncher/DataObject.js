@@ -1,6 +1,7 @@
 import SyncObject from './SyncObject';
 import DataObjectChild from './DataObjectChild';
 import { ChangeType, ObjectType } from './SyncObject';
+import {deepClone} from '../utils/utils.js';
 
 class DataObject {
   /* private
@@ -221,7 +222,7 @@ class DataObject {
     if (_this._version + 1 === msg.body.version) {
       _this._version++;
       let path = msg.body.attrib;
-      let value = msg.body.value;
+      let value = deepClone(msg.body.value);
       let findResult = syncObj.findBefore(path);
 
       if (msg.type === ChangeType.UPDATE) {
@@ -250,7 +251,7 @@ class DataObject {
       }
     } else {
       //TODO: how to handle unsynchronized versions?
-      console.log('unsynchronized versions');
+      console.log('UNSYNCHRONIZED VERSION: (data => ' + _this._version + ', msg => ' + msg.body.version + ')');
     }
   }
 

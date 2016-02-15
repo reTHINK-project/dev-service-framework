@@ -13,9 +13,11 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
    * @ignore
    * Should not be used directly by Hyperties. It's called by the Syncher.subscribe method
    */
-  constructor(owner, url, schema, bus, initialStatus, initialData, children) {
+  constructor(owner, url, schema, bus, initialStatus, initialData, children, initialVersion) {
     super(owner, url, schema, bus, initialStatus, initialData, children);
     let _this = this;
+
+    _this._version = initialVersion;
 
     //add listener for objURL
     bus.addListener(url, (msg) => {

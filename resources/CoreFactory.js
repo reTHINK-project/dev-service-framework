@@ -14,6 +14,8 @@ class CoreFactory extends Core  {
     let sandboxFactory = new SandboxFactory();
     let runtimeUA = new RuntimeUA(sandboxFactory, 'localhost');
 
+    window.runtime = runtimeUA;
+
     bus.addListener('core:loadHyperty', function(msg){
       console.log('Load Hyperty: ', msg);
 

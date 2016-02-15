@@ -72,13 +72,14 @@ class HypertyConnector extends EventEmitter {
     syncher.subscribe(_this._objectDescURL, event.url).then(function(dataObjectObserver) {
       console.info('1. Return Subscribe Data Object Observer', dataObjectObserver);
 
-      console.info('2. Data Object Observer data: ', JSON.stringify(dataObjectObserver.data));
-
       let connectionController = new ConnectionController(syncher);
 
       // TODO: remove this remotePeerInformation;
       connectionController.remotePeerInformation = event;
       connectionController.dataObjectObserver = dataObjectObserver;
+
+      console.info('2. Data Object Observer data: ', JSON.stringify(dataObjectObserver.data));
+
       _this.trigger('connector:connected', connectionController);
       _this.trigger('have:notification', event);
 

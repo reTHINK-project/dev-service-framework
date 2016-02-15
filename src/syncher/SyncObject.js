@@ -16,7 +16,7 @@ class SyncObject {
     _this._filters = {};
 
     if (initialData) {
-      _this._data = initialData;
+      _this._data = deepClone(initialData);
     } else {
       _this._data = {};
     }

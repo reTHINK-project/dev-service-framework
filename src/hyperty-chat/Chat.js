@@ -41,7 +41,7 @@ class ChatGroup extends EventEmitter {
 
     });
 
-    dataObjectReporter.onAddChildren(_this._processChildren);
+    dataObjectReporter.onAddChildren('*', _this._processChildren);
 
   }
 
@@ -84,6 +84,8 @@ class ChatGroup extends EventEmitter {
     let dataObject = _this.dataObjectReporter ? _this.dataObjectReporter : _this.dataObjectObserver;
 
     return new Promise(function(resolve, reject) {
+
+      console.log(dataObject);
 
       dataObject.addChildren('message', {message: message}).then(function(result) {
         console.info(result);

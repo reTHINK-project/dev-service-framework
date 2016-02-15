@@ -88,7 +88,7 @@ function compile(file, destination, cb) {
     entries: [filename],
     standalone: 'activate',
     debug: false
-  }).transform(babel)
+  }).transform(babel, {compact: false, optional: 'runtime'})
   .bundle()
   .on('error', function(err) {
     console.error(err);

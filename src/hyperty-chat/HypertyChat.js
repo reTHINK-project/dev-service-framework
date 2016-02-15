@@ -1,5 +1,5 @@
 import HypertyDiscovery from '../hyperty-discovery/HypertyDiscovery';
-import Communication from './Communication';
+import communication from './communication';
 import {divideURL} from '../utils/utils';
 import Syncher from '../syncher/Syncher';
 import ChatGroup from './Chat';
@@ -44,9 +44,6 @@ class HypertyChat {
     let hypertyDiscovery = _this._hypertyDiscovery;
 
     return new Promise(function(resolve, reject) {
-
-      let communication = new Communication();
-      communication.id = name;
 
       console.info('------------------------ Syncher Create ---------------------- \n');
       syncher.create(_this._objectDescURL, [], {communication: communication})

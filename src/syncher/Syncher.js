@@ -128,7 +128,7 @@ class Syncher {
          newProvisional = new DataProvisional(_this._owner, objURL, _this._bus, reply.body.childrenResources);
          _this._provisionals[objURL] = newProvisional;
        } else if (reply.body.code === 200) {
-         let newObj = new DataObjectObserver(_this._owner, objURL, schema, _this._bus, 'on', reply.body.value, newProvisional.children);
+         let newObj = new DataObjectObserver(_this._owner, objURL, schema, _this._bus, 'on', reply.body.value, newProvisional.children, reply.body.version);
 
          resolve(newObj);
          newProvisional.apply(newObj);

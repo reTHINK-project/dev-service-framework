@@ -16,7 +16,7 @@
       g = self;
     } else {
       g = this;
-    }g.activate = f();
+    }g.VertxProtoStub = f();
   }
 })(function () {
   var define, module, exports;return (function e(t, n, r) {
@@ -90,6 +90,8 @@
 
           bus.addListener('*', function (msg) {
             _this._open(function () {
+              if (msg.body && msg.body.via === _this._runtimeProtoStubURL) return;
+
               _this._sock.send(JSON.stringify(msg));
             });
           });
@@ -221,6 +223,14 @@
             }
           }
         }, {
+          key: '_deliver',
+          value: function _deliver(msg) {
+            if (!msg.body) msg.body = {};
+
+            msg.body.via = this._runtimeProtoStubURL;
+            this._bus.postMessage(msg);
+          }
+        }, {
           key: '_open',
           value: function _open(callback) {
             var _this = this;
@@ -250,7 +260,7 @@
                     _this._sessionCallback(msg);
                   }
                 } else {
-                  _this._bus.postMessage(msg);
+                  _this._deliver(msg);
                 }
               };
 
