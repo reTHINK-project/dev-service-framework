@@ -24,7 +24,7 @@ On the other side, we have only considered here Web Apps, but services provided 
 ####reTHINK application
 reTHINK web applications are similar to a common Web Application and have no impact at interface level, being impossible for an average user to distinguish between a standard application and a reTHINK application. However there are some settings available that gives the end user the power to take some decisions independently of the App consumed namely in terms of Identity to be used, Contact Lists and personal policies in general.
 
-*put here a picture only showing Hyperties and having the Core Runtime as a black box*
+![reTHINK App Diagram Black-box diagram](hyperty-app-black-box.png)
 
 In the standard application, the developers needs to know in advance the libraries and versions it has to download to build the aplication. In reTHINK the functionality is provided by hyperties which are dynamically loaded in the runtime on-demand. The interaction with the Hyperties which can be executed in different sandboxes is done through commands and events from the Web application.
 
