@@ -26,11 +26,7 @@ One or more [URLs](../address/readme.md) of Message recipients. According to the
 
 ### Message Body
 
-Optionaly, message bodies can contain JWT tokens for Access Control or for Identity Assertion purposes that are inserted by the Identity Module before the message is routed to protostubs.
-
-When these messages reach the destination MessageBUS, the JWT tokens are decoded and translated into standard [User Identity Data format](../user-identity).
-
-According to applicable policies, IdTokens are verified by the Identity Module and, if successful, `"assertedIdentity" : "true"` is inserted in the MessageBody. These procedures are performed before the message is delivered to the Hyperty.
+Optionally, message bodies can contain JWT tokens for Access Control or for Identity Assertion purposes. See [here](../../specs/dynamic-view/identity-management/user-identity-assertion.md) for more details.
 
 The "MessageBody.via" attribute contains a list of all Protostub addresses (Protostub) that the message has been passed through. It is used to prevent infinite cycles in the Hyperty Messaging Framework.
 
