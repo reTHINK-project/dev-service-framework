@@ -22,42 +22,51 @@ export class Message{
      */
     constructor(id, from, toList, type,  body) {
 
-        this._id = id;
-        this._from = from;
-        this._to = toList;
-        this._type = type;
-        this._body = body;
+        this.id = id;
+        this.from = from;
+        this.to = toList;
+        this.type = type;
+        this.body = body;
      }
 
     /**
      * The Message identifier.
      * @type {String}
      */
-    get id(){ return this._id; }
+    get id(){ return this.id; }
 
     /**
      * The sender of the Message.
      * @type {URL.URL}
      */
-    get from(){ return this._from; }
+    get from(){ return this.from; }
 
     /**
      * The recipient of the Message.
      * @type {URL.URLList}
      */
-    get to(){ return this._to; }
+    get to(){ return this.to; }
 
     /**
      * The Message type.
      * @type {MessageType}
      */
-    get type() { return this._type; }
+    get type() { return this.type; }
 
     /**
      * The Message body
      * @type {MessageBody}
      */
-    get body(){ return this._body; }
+    get body(){ return this.body; }
+
+    /**
+     * sets the identifier
+     * @param {String} identifier
+     */
+    set id(identifier){
+        if(identifier)
+            this.id=identifier;
+    }
 
     /**
      *  set the sender of the Message
@@ -65,7 +74,7 @@ export class Message{
      */
     set from(sender){
         if(sender)
-            this._from = sender;
+            this.from = sender;
     }
 
     /**
@@ -74,7 +83,7 @@ export class Message{
      */
     set type(msgType){
         if(msgType)
-            this._type = msgType;
+            this.type = msgType;
     }
 
     /**
@@ -83,7 +92,7 @@ export class Message{
      */
     set body(msgBody){
         if(msgBody)
-            this._body = msgBody;
+            this.body = msgBody;
     }
 
     /**
@@ -92,7 +101,7 @@ export class Message{
      */
     set to(recipientList){
         if(recipientList)
-            this._to = recipientList;
+            this.to = recipientList;
     }
 
     /**

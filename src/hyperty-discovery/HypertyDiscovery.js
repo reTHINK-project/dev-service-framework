@@ -8,7 +8,7 @@ class HypertyDiscovery {
   /**
   * To initialise the HypertyDiscover, which will provide the support for hyperties to
   * query users registered in outside the internal core.
-  * @param  {RuntimeURL}          runtimeURL            runtimeURL
+  * @param  {RuntimeURL}          domainURL            runtimeURL
   * @param  {MessageBus}          msgBus                msgBus
   */
   constructor(domainURL, msgBus) {

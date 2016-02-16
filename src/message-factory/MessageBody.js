@@ -16,48 +16,48 @@ export class MessageBody{
      *
      */
 	constructor(idToken, accessToken, resource, schema, assertedIdentity){
-        //let _this = this;
+
         if(typeof idToken !== 'undefined')
-            this._idToken = idToken;
+            this.idToken = idToken;
         if(typeof accessToken  !== 'undefined')
-            this._accessToken = accessToken;
+            this.accessToken = accessToken;
         if(typeof resource !== 'undefined' )
-            this._resource = resource;
+            this.resource = resource;
         if(typeof schema !== 'undefined' )
-            this._schema = schema;
+            this.schema = schema;
         if(typeof assertedIdentity !== 'undefined')
-            this._assertedIdentity = assertedIdentity;
+            this.assertedIdentity = assertedIdentity;
 	}
 
     /**
      * Get the id token
      * @return {Identity.JWT}
      */
-    get idToken(){ return this._idToken; }
+    get idToken(){ return this.idToken; }
 
     /**
      * Get the access token
      * @return {Identity.JWT}
      */
-    get accessToken(){ return this._accessToken; }
+    get accessToken(){ return this.accessToken; }
 
     /**
      * The the resource URL
      * @return {URL.URL}
      */
-    get resource() { return this._resource; }
+    get resource() { return this.resource; }
 
     /**
      * Return the URL of the schema on the HypertyCatalogue
      * @return {URL.HypertyCatalogueURL}
      */
-    get schema(){ return this._schema; }
+    get schema(){ return this.schema; }
 
     /**
      * Return the asserted Identity
      * @return {Identity.Identity}
      */
-    get assertedIdentity() { return this._assertedIdentity; }
+    get assertedIdentity() { return this.assertedIdentity; }
 
     /**
      * set the token identifier
@@ -65,7 +65,7 @@ export class MessageBody{
      */
     set idToken(token){
         if(token)
-            this._idToken = token;
+            this.idToken = token;
     }
 
     /**
@@ -74,7 +74,7 @@ export class MessageBody{
      */
     set accessToken(token){
         if(token)
-            this._accessToken = token;
+            this.accessToken = token;
     }
 
     /**
@@ -83,7 +83,7 @@ export class MessageBody{
      */
     set resource(resource){
         if(resource)
-            this._resource = resource;
+            this.resource = resource;
     }
 
     /**
@@ -92,7 +92,7 @@ export class MessageBody{
      */
     set schema(schema){
         if(schema)
-            this._schema = schema;
+            this.schema = schema;
     }
 
     /**
@@ -101,7 +101,7 @@ export class MessageBody{
      */
     set assertedIdentity(assertedIdentity){
         if(assertedIdentity)
-            this._assertedIdentity = assertedIdentity;
+            this.assertedIdentity = assertedIdentity;
     }
 }
 
@@ -125,22 +125,22 @@ export class CreateMessageBody extends MessageBody {
             throw new Error("The value parameter is null");
         super(idToken,accessToken, resource, schema, assertedIdentity, schema, assertedIdentity);
 
-        this._value = value;
+        this.value = value;
         if(policy)
-            this._policy = policy;
+            this.policy = policy;
     }
-    get value() { return this._value; }
+    get value() { return this.value; }
 
     set value(val){
         if(val)
-            this._value = val;
+            this.value = val;
     }
 
-    get policy() { return this._policy; }
+    get policy() { return this.policy; }
 
     set policy(policy){
         if(policy)
-            this._policy = policy;
+            this.policy = policy;
     }
 }
 
@@ -166,13 +166,13 @@ export class ReadMessageBody extends MessageBody {
         super(idToken,accessToken ,resource, schema, assertedIdentity );
 
         if(attribute)
-            this._attribute = attribute;
+            this.attribute = attribute;
 
         if(criteriaSyntax)
-            this._criteriaSyntax = criteriaSyntax;
+            this.criteriaSyntax = criteriaSyntax;
 
         if(criteria)
-            this._criteria = criteria;
+            this.criteria = criteria;
     }
 }
 
@@ -195,7 +195,7 @@ export class DeleteMessageBody extends MessageBody {
         super(idToken,accessToken ,resource, schema, assertedIdentity );
 
         if(attribute){
-            this._attribute = attribute;
+            this.attribute = attribute;
         }
     }
 
@@ -218,8 +218,8 @@ export class UpdateMessageBody extends MessageBody {
     constructor(idToken, accessToken, resource, schema, assertedIdentity, attribute, value){
 
         super(idToken,accessToken ,resource, schema, assertedIdentity );
-        this._attribute = attribute;
-        this._value = value;
+        this.attribute = attribute;
+        this.value = value;
     }
 }
 
@@ -242,7 +242,7 @@ export class ForwardMessageBody extends MessageBody {
 
         super(idToken,accessToken ,resource, schema, assertedIdentity );
 
-        this._message = message;
+        this.message = message;
     }
 }
 
@@ -266,11 +266,11 @@ export class ResponseMessageBody extends MessageBody {
 
         if(code)
         {
-            this._code = code;
-            this._description = REASON_PHRASE[code];
+            this.code = code;
+            this.description = REASON_PHRASE[code];
         }
         if(value)
-            this._value = value;
+            this.value = value;
 
     }
 }
