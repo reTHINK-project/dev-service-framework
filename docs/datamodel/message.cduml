@@ -16,7 +16,8 @@ package Message <<Rect>> {
 		schema ?: URL.HypertyCatalogueURL
 		idToken ?: RethinkCore.Identity.JWT
 		accessToken ?: RethinkCore.Identity.JWT
-		assertedIdentity ?: RethinkCore.Identity.Identity
+		identity ?: RethinkCore.Identity.Identity
+		assertedIdentity ?: boolean
 		via ?: URL.URLList
 	}
 

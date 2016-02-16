@@ -1,31 +1,41 @@
 @startuml "user-identity-assertion.png"
 autonumber
 
-box "Alice Device Runtime"
-        participant "Id Module" as runtime
+box "Bob Device Runtime"
+        participant "Id Module" as idm
+        participant "Policy\nEngine" as pep
         participant "Msg BUS" as msgbus
+        participant "Registry" as registry
+        participant "RuntimeUA" as runUA
 end box
-box "IdP Proxy Sandbox at Alice"
+box "Alice's IdP Proxy Sandbox"
         participant "Identity Proxy" as idpproxy
 end box
-box "Service Provider Sandbox at Alice"
-        participant "Service Provider Hyperty" as hyperty
+box "Bob's Service Provider Sandbox"
+        participant "Alice's\n Hyperty" as hyperty
+        participant "Alice's \nService Provider\n Protostub" as stub
 end box
-participant "Service Provider" as backend
-participant "Identity service Provider" as idp
+participant "Bob's\nService Provider" as backend
+participant "Alice's\nIdentity service Provider" as idp
 
-backend  -> hyperty     : Send(IdAssertion)
+backend  -> stub     : Message + IdToken
 note right
-        Bob's IdAssertion received through
-        signaling of the Service Provider.
+        Alice's IdAssertion received through
+        Message Node of Bob's Service Provider.
 end note
 
-hyperty  -> msgbus      : Verify(IdAssertion)
-msgbus   -> runtime     : Verify(IdAssertion)
-runtime  -> idp         : GetProxy(IdAssertion.proxy)
-idp      -> runtime     : return(proxy)
+stub  -> msgbus      : Message + IdToken
+msgbus   -> pep     : authorise(Message + IdToken)
+pep   -> pep     : assert Idtoken?
+pep   -> idm     : validate(Idtoken)
+
+msgbus   <- idm     : postMessage(Create Validation Request Message )
+msgbus   -> registry     : resolve(IDP URL)
+runUA  <- registry     : loadIdpProxy(IDP URL)
+runUA  -> idp         : Get well-known IdpProxy URL
+runUA  <- idp         : IdP Proxy returned
 create idpproxy
-runtime  -> idpproxy    : <<create>>\n new IdPProxy(proxy)
+runUA  -> idpproxy    : <<create>>\n new IdPProxy(proxy)
 
 note over idp
         May be two different server
@@ -34,22 +44,27 @@ note over idp
         participant.
 end note
 
-runtime  -> msgbus      : Verify(IdAssertion)
-msgbus   -> idpproxy    : Verify(IdAssertion)
-idpproxy -> idp         : Verify(IdAssertion)
-activate idp
+runUA  -> registry     : return IdP Proxy SandboxURL
+
+msgbus   <- registry     : return IdP Proxy SandboxURL
+
+msgbus   -> idpproxy    : postMessage(Create Validation Request Message )
+idpproxy -> idp         : Verify(IdToken)
 idp      -> idpproxy    : Verified(IdAssertion, validity)
-deactivate idp
-idpproxy -> msgbus      : Verified(IdAssertion, validity)
-msgbus   -> runtime     : Verified(IdAssertion, validity)
-note over runtime
+idpproxy -> msgbus      : postMessage(Response to Validation Request Message )
+msgbus   -> idm     : postMessage(Response to Validation Request Message )
+note over runUA
         Received and validated IdAssertion
         could be stored for future reference.
         (e.g. last known assertion)
 end note
 
-runtime  -> msgbus      : Confirm(IdAssertion)
-msgbus   -> hyperty     : Confirm(IdAssertion)
+pep   <- idm     : return validated(Identity)
+
+pep   <- pep     : add IdAssertion to Message Body
+
+pep  -> msgbus      : postMessage(Message + IdAssertion)
+msgbus   -> hyperty     : postMessage(Message + IdAssertion)
 
 opt Refresh Trust
 end
