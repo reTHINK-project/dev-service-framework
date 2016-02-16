@@ -1,7 +1,6 @@
 class Core {
 
   constructor() {
-
   }
 
   install() {

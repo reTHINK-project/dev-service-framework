@@ -1,5 +1,8 @@
 // jshint browser:true, jquery: true
-import {addLoader, removeLoader, documentReady, errorMessage} from './support';
+/* global Handlebars */
+/* global Materialize */
+
+import {addLoader, removeLoader, ready, errorMessage} from './support';
 
 // polyfills
 import 'babel-polyfill';
@@ -32,11 +35,9 @@ if (document.readyState === 'complete') {
   document.addEventListener('DOMContentLoaded', documentReady, false);
 }
 
-setTimeout(function() {
-  userLoged();
-}, 1000);
+function documentReady() {
 
-function userLoged() {
+  ready();
 
   let hypertyHolder = $('.hyperties');
   hypertyHolder.removeClass('hide');
@@ -45,6 +46,8 @@ function userLoged() {
 
   let core = new CoreFactory();
   let runtimeLoader = new RuntimeLoader(core);
+
+  console.log(runtimeLoader, hyperty);
 
   // Load First Hyperty
   runtimeLoader.requireHyperty(hyperty).then(hypertyDeployed).catch(function(reason) {

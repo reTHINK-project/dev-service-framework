@@ -14,8 +14,8 @@ let communication = {
   lastModified: '',
   duration: '',
   communicationStatus: '',
-  participant: '',
-  CommunicationQuality: '',
+  communicationQuality: '',
+  participants: [],
   chatMessage: {}
 };
 

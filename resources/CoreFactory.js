@@ -8,15 +8,14 @@ class CoreFactory extends Core  {
     super();
   }
 
-  install(bus) {
-    console.log('install', bus);
+  install(minibus) {
 
     let sandboxFactory = new SandboxFactory();
     let runtimeUA = new RuntimeUA(sandboxFactory, 'localhost');
 
-    window.runtime = runtimeUA;
+    console.log(this);
 
-    bus.addListener('core:loadHyperty', function(msg){
+    minibus.addListener('core:loadHyperty', function(msg){
       console.log('Load Hyperty: ', msg);
 
       let resultMsg = {};
@@ -24,24 +23,23 @@ class CoreFactory extends Core  {
       resultMsg.to = msg.from;
       resultMsg.body = {};
 
-      setTimeout(function() {
-
-        //TODO: Work the message errors, probably use message factory
-        runtimeUA.loadHyperty(msg.body.value.descriptor).then(function(result) {
-          resultMsg.body.value = result;
-          bus.postMessage(resultMsg);
-        }).catch(function(reason) {
-          resultMsg.body.value = reason;
-          resultMsg.body.code = 400;
-          bus.postMessage(resultMsg);
-        })
-      }, 100);
+      //TODO: Work the message errors, probably use message factory
+      runtimeUA.loadHyperty(msg.body.value.descriptor).then(function(result) {
+        resultMsg.body.value = result;
+        minibus._onMessage(resultMsg);
+      }).catch(function(reason) {
+        resultMsg.body.value = reason;
+        resultMsg.body.code = 400;
+        minibus._onMessage(resultMsg);
+      })
 
     });
 
-    bus.addListener('core:loadStub', function(msg){
+    minibus.addListener('core:loadStub', function(msg){
       console.log('Load Stub:', msg);
     });
+
+    console.log('Runtime Instaled: ', minibus);
 
   }
 

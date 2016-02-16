@@ -1549,6 +1549,10 @@ var _utilsEventEmitter = require('../utils/EventEmitter');
 
 var _utilsEventEmitter2 = _interopRequireDefault(_utilsEventEmitter);
 
+var _participant = require('./participant');
+
+var _participant2 = _interopRequireDefault(_participant);
+
 var ChatGroup = (function (_EventEmitter) {
   _inherits(ChatGroup, _EventEmitter);
 
@@ -1565,17 +1569,37 @@ var ChatGroup = (function (_EventEmitter) {
     _this._hypertyDiscovery = hypertyDiscovery;
 
     _this._objectDescURL = 'hyperty-catalogue://localhost/.well-known/dataschemas/FakeDataSchema';
-
-    syncher.onNotification(function (event) {
-      console.log('Notification: ', event);
-      _this.trigger('have:new:notification', event);
-    });
   }
 
   _createClass(ChatGroup, [{
+    key: 'processPartipants',
+    value: function processPartipants(dataObject) {
+      var _this = this;
+      var participants = dataObject.data.communication.participants;
+
+      console.log('Process Participants: ', participants);
+
+      participants.forEach(function (participant) {
+        if (dataObject._owner !== participant.hypertyResource) {
+          console.log('Each Participant will be trigger: ', participant);
+          _this.trigger('participant:added', participant);
+        }
+      });
+    }
+
+    /**
+     * Process children messages
+     * @param  {[type]} children [description]
+     * @return {[type]}          [description]
+     */
+  }, {
     key: '_processChildren',
     value: function _processChildren(children) {
-      console.info('on add children: ', children);
+      var _this = this;
+
+      console.info('Process Message:', children);
+
+      _this.trigger('new:message:recived', children);
     }
 
     /**
@@ -1591,11 +1615,16 @@ var ChatGroup = (function (_EventEmitter) {
 
       return new _Promise(function (resolve, reject) {
 
-        console.log(dataObject);
+        dataObject.addChildren('message', { chatMessage: message }).then(function (dataObjectChild) {
+          console.info(dataObjectChild);
+          var msg = {
+            childId: dataObjectChild._childId,
+            from: dataObjectChild._owner,
+            value: dataObjectChild.data
+          };
 
-        dataObject.addChildren('message', { message: message }).then(function (result) {
-          console.info(result);
-          resolve(result);
+          _this._processChildren(msg);
+          resolve(dataObjectChild);
         })['catch'](function (reason) {
           console.error('Reason:', reason);
           reject(reason);
@@ -1633,22 +1662,12 @@ var ChatGroup = (function (_EventEmitter) {
      */
   }, {
     key: 'addParticipant',
-    value: function addParticipant(resource) {
+    value: function addParticipant(email) {
 
       var _this = this;
       var syncher = _this._syncher;
 
-      return new _Promise(function (resolve, reject) {
-
-        console.info('------------------------ Syncher subscribe ---------------------- \n');
-        console.info(resource);
-        syncher.subscribe(_this._objectDescURL, resource).then(function (dataObjectObserver) {
-          console.info('Data Object Observer: ', dataObjectObserver);
-          _this.dataObjectObserver = dataObjectObserver;
-        })['catch'](function (reason) {
-          reject(reason);
-        });
-      });
+      return new _Promise(function (resolve, reject) {});
     }
 
     /**
@@ -1684,18 +1703,22 @@ var ChatGroup = (function (_EventEmitter) {
       var _this = this;
       _this._dataObjectReporter = dataObjectReporter;
 
-      var data = dataObjectReporter.data;
-
-      console.info('Set data object reporter: ', data);
+      console.info('Set data object reporter: ', dataObjectReporter);
 
       dataObjectReporter.onSubscription(function (event) {
-        console.log('Subscription: ', event);
+
         event.accept();
 
-        _this.trigger('participant:added', event.url);
+        // Set the other subscription like a participant
+        _participant2['default'].hypertyResource = event.url;
+        dataObjectReporter.data.communication.participants.push(_participant2['default']);
+
+        _this.trigger('participant:added', _participant2['default']);
       });
 
-      dataObjectReporter.onAddChildren('*', _this._processChildren);
+      dataObjectReporter.onAddChildren(function (children) {
+        _this._processChildren(children);
+      });
     },
     get: function get() {
       var _this = this;
@@ -1708,17 +1731,24 @@ var ChatGroup = (function (_EventEmitter) {
 
       _this._dataObjectObserver = dataObjectObserver;
 
-      console.log('set data Object Observer: ', dataObjectObserver);
-
       dataObjectObserver.onChange('*', function (event) {
         console.info('Change Event: ', event);
+        _this.processPartipants(dataObjectObserver);
       });
 
-      dataObjectObserver.onAddChildren(_this._processChildren);
+      dataObjectObserver.onAddChildren(function (children) {
+        _this._processChildren(children);
+      });
     },
     get: function get() {
       var _this = this;
       return _this._dataObjectObserver;
+    }
+  }, {
+    key: 'dataObject',
+    get: function get() {
+      var _this = this;
+      return _this._dataObjectReporter ? _this.dataObjectReporter : _this.dataObjectObserver;
     }
   }]);
 
@@ -1728,8 +1758,12 @@ var ChatGroup = (function (_EventEmitter) {
 exports['default'] = ChatGroup;
 module.exports = exports['default'];
 
-},{"../utils/EventEmitter":103,"babel-runtime/core-js/promise":7,"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12,"babel-runtime/helpers/get":14,"babel-runtime/helpers/inherits":15,"babel-runtime/helpers/interop-require-default":16}],93:[function(require,module,exports){
+},{"../utils/EventEmitter":104,"./participant":95,"babel-runtime/core-js/promise":7,"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12,"babel-runtime/helpers/get":14,"babel-runtime/helpers/inherits":15,"babel-runtime/helpers/interop-require-default":16}],93:[function(require,module,exports){
 'use strict';
+
+var _get = require('babel-runtime/helpers/get')['default'];
+
+var _inherits = require('babel-runtime/helpers/inherits')['default'];
 
 var _createClass = require('babel-runtime/helpers/create-class')['default'];
 
@@ -1748,6 +1782,10 @@ var _hypertyDiscoveryHypertyDiscovery = require('../hyperty-discovery/HypertyDis
 
 var _hypertyDiscoveryHypertyDiscovery2 = _interopRequireDefault(_hypertyDiscoveryHypertyDiscovery);
 
+var _utilsEventEmitter = require('../utils/EventEmitter');
+
+var _utilsEventEmitter2 = _interopRequireDefault(_utilsEventEmitter);
+
 var _communication = require('./communication');
 
 var _communication2 = _interopRequireDefault(_communication);
@@ -1757,6 +1795,10 @@ var _utilsUtils = require('../utils/utils');
 var _syncherSyncher = require('../syncher/Syncher');
 
 var _syncherSyncher2 = _interopRequireDefault(_syncherSyncher);
+
+var _participant = require('./participant');
+
+var _participant2 = _interopRequireDefault(_participant);
 
 var _Chat = require('./Chat');
 
@@ -1768,7 +1810,9 @@ var _Chat2 = _interopRequireDefault(_Chat);
 * @version 0.1.0
 */
 
-var HypertyChat = (function () {
+var HypertyChat = (function (_EventEmitter) {
+  _inherits(HypertyChat, _EventEmitter);
+
   function HypertyChat(hypertyURL, bus, configuration) {
     _classCallCheck(this, HypertyChat);
 
@@ -1776,7 +1820,7 @@ var HypertyChat = (function () {
     if (!bus) throw new Error('The MiniBus is a needed parameter');
     if (!configuration) throw new Error('The configuration is a needed parameter');
 
-    // super(hypertyURL, bus, configuration);
+    _get(Object.getPrototypeOf(HypertyChat.prototype), 'constructor', this).call(this, hypertyURL, bus, configuration);
 
     var _this = this;
     var syncher = new _syncherSyncher2['default'](hypertyURL, bus, configuration);
@@ -1786,20 +1830,31 @@ var HypertyChat = (function () {
 
     _this._objectDescURL = 'hyperty-catalogue://localhost/.well-known/dataschemas/FakeDataSchema';
 
+    _this._hypertyURL = hypertyURL;
     _this._syncher = syncher;
     _this._hypertyDiscovery = hypertyDiscovery;
+
+    syncher.onNotification(function (event) {
+      console.log('Notification: ', event);
+      _this._autoSubscribe(event.url);
+    });
   }
 
-  /**
-   * This function is used to create a new Group Chat providing the identifier of the Group to be notified.
-   * @param  {String} name             chat name
-   * @param  {URL.UserURL} UserURLList List of User allowed
-   * @return {Promise}
-   */
-
   _createClass(HypertyChat, [{
+    key: '_autoSubscribe',
+    value: function _autoSubscribe(resource) {
+      _this.join(resource);
+    }
+
+    /**
+     * This function is used to create a new Group Chat providing the identifier of the Group to be notified.
+     * @param  {String} name             chat name
+     * @param  {URL.UserURL} UserURLList List of User allowed
+     * @return {Promise}
+     */
+  }, {
     key: 'create',
-    value: function create(name) {
+    value: function create(name, participants) {
 
       var _this = this;
       var syncher = _this._syncher;
@@ -1807,12 +1862,47 @@ var HypertyChat = (function () {
 
       return new _Promise(function (resolve, reject) {
 
-        console.info('------------------------ Syncher Create ---------------------- \n');
-        syncher.create(_this._objectDescURL, [], { communication: _communication2['default'] }).then(function (dataObjectReporter) {
+        // Create owner participant
+        // TODO: create all information to communication;
+        _communication2['default'].owner = _this._hypertyURL;
+        _communication2['default'].id = name;
+
+        // Set the other subscription like a participant
+        _participant2['default'].hypertyResource = _this._hypertyURL;
+        _communication2['default'].participants.push(_participant2['default']);
+
+        console.info('----------------------- Mapping Particpants -------------------- \n');
+        _this._mappingUser(participants).then(function (hyperties) {
+          console.info('------------------------ Syncher Create ---------------------- \n');
+          return syncher.create(_this._objectDescURL, hyperties, { communication: _communication2['default'] });
+        }).then(function (dataObjectReporter) {
           console.info('3. Return Create Data Object Reporter', dataObjectReporter);
 
           var chat = new _Chat2['default'](syncher, hypertyDiscovery);
           chat.dataObjectReporter = dataObjectReporter;
+
+          resolve(chat);
+        })['catch'](function (reason) {
+          reject(reason);
+        });
+      });
+    }
+  }, {
+    key: 'join',
+    value: function join(resource) {
+      var _this = this;
+      var syncher = _this._syncher;
+
+      return new _Promise(function (resolve, reject) {
+
+        var chat = new _Chat2['default'](syncher, _this._hypertyDiscovery);
+
+        console.info('------------------------ Syncher subscribe ---------------------- \n');
+        console.info(resource);
+
+        syncher.subscribe(_this._objectDescURL, resource).then(function (dataObjectObserver) {
+          console.info('Data Object Observer: ', dataObjectObserver);
+          chat.dataObjectObserver = dataObjectObserver;
 
           resolve(chat);
         })['catch'](function (reason) {
@@ -1830,7 +1920,9 @@ var HypertyChat = (function () {
         var promiseList = [];
 
         userList.forEach(function (email) {
-          promiseList.push(_this._hypertyDiscovery(email));
+          if (email.length) {
+            promiseList.push(_this._hypertyDiscovery.discoverHypertyPerUser(email));
+          }
         });
 
         _Promise.all(promiseList).then(function (values) {
@@ -1849,7 +1941,7 @@ var HypertyChat = (function () {
   }]);
 
   return HypertyChat;
-})();
+})(_utilsEventEmitter2['default']);
 
 function activate(hypertyURL, bus, configuration) {
 
@@ -1861,7 +1953,7 @@ function activate(hypertyURL, bus, configuration) {
 
 module.exports = exports['default'];
 
-},{"../hyperty-discovery/HypertyDiscovery":95,"../syncher/Syncher":102,"../utils/utils":104,"./Chat":92,"./communication":94,"babel-runtime/core-js/promise":7,"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12,"babel-runtime/helpers/interop-require-default":16}],94:[function(require,module,exports){
+},{"../hyperty-discovery/HypertyDiscovery":96,"../syncher/Syncher":103,"../utils/EventEmitter":104,"../utils/utils":105,"./Chat":92,"./communication":94,"./participant":95,"babel-runtime/core-js/promise":7,"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12,"babel-runtime/helpers/get":14,"babel-runtime/helpers/inherits":15,"babel-runtime/helpers/interop-require-default":16}],94:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1884,14 +1976,29 @@ var communication = {
   lastModified: '',
   duration: '',
   communicationStatus: '',
-  participant: '',
-  CommunicationQuality: '',
+  communicationQuality: '',
+  participants: [],
   chatMessage: {}
 };
 
 exports['default'] = communication;
 
 },{}],95:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var participant = {
+  participantStatus: '',
+  hypertyResource: '',
+  identity: ''
+};
+
+exports['default'] = participant;
+module.exports = exports['default'];
+
+},{}],96:[function(require,module,exports){
 'use strict';
 
 var _createClass = require('babel-runtime/helpers/create-class')['default'];
@@ -1976,7 +2083,7 @@ var HypertyDiscovery = (function () {
 exports['default'] = HypertyDiscovery;
 module.exports = exports['default'];
 
-},{"../utils/utils.js":104,"babel-runtime/core-js/promise":7,"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12}],96:[function(require,module,exports){
+},{"../utils/utils.js":105,"babel-runtime/core-js/promise":7,"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12}],97:[function(require,module,exports){
 'use strict';
 
 var _createClass = require('babel-runtime/helpers/create-class')['default'];
@@ -2318,7 +2425,7 @@ var DataObject = (function () {
 exports['default'] = DataObject;
 module.exports = exports['default'];
 
-},{"../utils/utils.js":104,"./DataObjectChild":97,"./SyncObject":101,"babel-runtime/core-js/promise":7,"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12,"babel-runtime/helpers/interop-require-default":16}],97:[function(require,module,exports){
+},{"../utils/utils.js":105,"./DataObjectChild":98,"./SyncObject":102,"babel-runtime/core-js/promise":7,"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12,"babel-runtime/helpers/interop-require-default":16}],98:[function(require,module,exports){
 'use strict';
 
 var _createClass = require('babel-runtime/helpers/create-class')['default'];
@@ -2429,7 +2536,7 @@ var DataObjectChild /* implements SyncStatus */ = (function () {
 exports['default'] = DataObjectChild;
 module.exports = exports['default'];
 
-},{"./SyncObject":101,"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12,"babel-runtime/helpers/interop-require-default":16}],98:[function(require,module,exports){
+},{"./SyncObject":102,"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12,"babel-runtime/helpers/interop-require-default":16}],99:[function(require,module,exports){
 'use strict';
 
 var _get = require('babel-runtime/helpers/get')['default'];
@@ -2546,7 +2653,7 @@ var DataObjectObserver = (function (_DataObject) {
 exports['default'] = DataObjectObserver;
 module.exports = exports['default'];
 
-},{"./DataObject":96,"babel-runtime/core-js/object/keys":5,"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12,"babel-runtime/helpers/get":14,"babel-runtime/helpers/inherits":15,"babel-runtime/helpers/interop-require-default":16}],99:[function(require,module,exports){
+},{"./DataObject":97,"babel-runtime/core-js/object/keys":5,"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12,"babel-runtime/helpers/get":14,"babel-runtime/helpers/inherits":15,"babel-runtime/helpers/interop-require-default":16}],100:[function(require,module,exports){
 'use strict';
 
 var _get = require('babel-runtime/helpers/get')['default'];
@@ -2726,7 +2833,7 @@ var DataObjectReporter = (function (_DataObject) {
 exports['default'] = DataObjectReporter;
 module.exports = exports['default'];
 
-},{"../utils/utils.js":104,"./DataObject":96,"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12,"babel-runtime/helpers/get":14,"babel-runtime/helpers/inherits":15,"babel-runtime/helpers/interop-require-default":16}],100:[function(require,module,exports){
+},{"../utils/utils.js":105,"./DataObject":97,"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12,"babel-runtime/helpers/get":14,"babel-runtime/helpers/inherits":15,"babel-runtime/helpers/interop-require-default":16}],101:[function(require,module,exports){
 /**
  * @access private
  */
@@ -2806,7 +2913,7 @@ var DataProvisional = (function () {
 exports['default'] = DataProvisional;
 module.exports = exports['default'];
 
-},{"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12}],101:[function(require,module,exports){
+},{"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12}],102:[function(require,module,exports){
 'use strict';
 
 var _createClass = require('babel-runtime/helpers/create-class')['default'];
@@ -3137,7 +3244,7 @@ var ObjectType = { OBJECT: 'object', ARRAY: 'array' };
 exports.ObjectType = ObjectType;
 exports['default'] = SyncObject;
 
-},{"../utils/utils.js":104,"babel-runtime/core-js/object/keys":5,"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12}],102:[function(require,module,exports){
+},{"../utils/utils.js":105,"babel-runtime/core-js/object/keys":5,"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12}],103:[function(require,module,exports){
 'use strict';
 
 var _createClass = require('babel-runtime/helpers/create-class')['default'];
@@ -3378,7 +3485,7 @@ var Syncher = (function () {
 exports['default'] = Syncher;
 module.exports = exports['default'];
 
-},{"./DataObjectObserver":98,"./DataObjectReporter":99,"./DataProvisional":100,"babel-runtime/core-js/promise":7,"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12,"babel-runtime/helpers/interop-require-default":16}],103:[function(require,module,exports){
+},{"./DataObjectObserver":99,"./DataObjectReporter":100,"./DataProvisional":101,"babel-runtime/core-js/promise":7,"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12,"babel-runtime/helpers/interop-require-default":16}],104:[function(require,module,exports){
 /**
  * EventEmitter
  * All classes which extends this, can have addEventListener and trigger events;
@@ -3433,7 +3540,7 @@ var EventEmitter = (function () {
 exports["default"] = EventEmitter;
 module.exports = exports["default"];
 
-},{"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12}],104:[function(require,module,exports){
+},{"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12}],105:[function(require,module,exports){
 /**
  * Support module with some functions will be useful
  * @module utils

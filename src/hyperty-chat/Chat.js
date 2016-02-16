@@ -1,4 +1,5 @@
 import EventEmitter from '../utils/EventEmitter';
+import participant from './participant';
 
 class ChatGroup extends EventEmitter {
 
@@ -14,12 +15,6 @@ class ChatGroup extends EventEmitter {
     _this._hypertyDiscovery = hypertyDiscovery;
 
     _this._objectDescURL = 'hyperty-catalogue://localhost/.well-known/dataschemas/FakeDataSchema';
-
-    syncher.onNotification(function(event) {
-      console.log('Notification: ', event);
-      _this.trigger('have:new:notification', event);
-    });
-
   }
 
   set dataObjectReporter(dataObjectReporter) {
@@ -29,19 +24,22 @@ class ChatGroup extends EventEmitter {
     let _this = this;
     _this._dataObjectReporter = dataObjectReporter;
 
-    let data = dataObjectReporter.data;
-
-    console.info('Set data object reporter: ', data);
+    console.info('Set data object reporter: ', dataObjectReporter);
 
     dataObjectReporter.onSubscription(function(event) {
-      console.log('Subscription: ', event);
+
       event.accept();
 
-      _this.trigger('participant:added', event.url);
+      // Set the other subscription like a participant
+      participant.hypertyResource = event.url;
+      dataObjectReporter.data.communication.participants.push(participant);
 
+      _this.trigger('participant:added', participant);
     });
 
-    dataObjectReporter.onAddChildren('*', _this._processChildren);
+    dataObjectReporter.onAddChildren(function(children){
+      _this._processChildren(children);
+    });
 
   }
 
@@ -55,13 +53,14 @@ class ChatGroup extends EventEmitter {
 
     _this._dataObjectObserver = dataObjectObserver;
 
-    console.log('set data Object Observer: ', dataObjectObserver);
-
     dataObjectObserver.onChange('*', function(event) {
       console.info('Change Event: ', event);
+      _this.processPartipants(dataObjectObserver);
     });
 
-    dataObjectObserver.onAddChildren(_this._processChildren);
+    dataObjectObserver.onAddChildren(function(children){
+      _this._processChildren(children);
+    });
 
   }
 
@@ -70,8 +69,37 @@ class ChatGroup extends EventEmitter {
     return _this._dataObjectObserver;
   }
 
+  get dataObject() {
+    let _this = this;
+    return _this._dataObjectReporter ? _this.dataObjectReporter : _this.dataObjectObserver;
+  }
+
+  processPartipants(dataObject) {
+    let _this = this;
+    let participants = dataObject.data.communication.participants;
+
+    console.log('Process Participants: ', participants);
+
+    participants.forEach(function(participant) {
+      if (dataObject._owner !== participant.hypertyResource){
+        console.log('Each Participant will be trigger: ', participant);
+        _this.trigger('participant:added', participant);
+      }
+    });
+
+  }
+
+  /**
+   * Process children messages
+   * @param  {[type]} children [description]
+   * @return {[type]}          [description]
+   */
   _processChildren(children) {
-    console.info('on add children: ', children);
+    let _this = this;
+
+    console.info('Process Message:', children);
+
+    _this.trigger('new:message:recived', children);
   }
 
   /**
@@ -85,11 +113,16 @@ class ChatGroup extends EventEmitter {
 
     return new Promise(function(resolve, reject) {
 
-      console.log(dataObject);
+      dataObject.addChildren('message', {chatMessage: message}).then(function(dataObjectChild) {
+        console.info(dataObjectChild);
+        let msg = {
+          childId: dataObjectChild._childId,
+          from: dataObjectChild._owner,
+          value: dataObjectChild.data
+        };
 
-      dataObject.addChildren('message', {message: message}).then(function(result) {
-        console.info(result);
-        resolve(result);
+        _this._processChildren(msg);
+        resolve(dataObjectChild);
       }).catch(function(reason) {
         console.error('Reason:', reason);
         reject(reason);
@@ -127,21 +160,13 @@ class ChatGroup extends EventEmitter {
    * This function is used to add / invite new participant on an existing Group Chat instance.
    * @return {Promise} Promise with the status
    */
-  addParticipant(resource) {
+  addParticipant(email) {
 
     let _this = this;
     let syncher = _this._syncher;
 
     return new Promise(function(resolve, reject) {
 
-      console.info('------------------------ Syncher subscribe ---------------------- \n');
-      console.info(resource);
-      syncher.subscribe(_this._objectDescURL, resource).then(function(dataObjectObserver) {
-        console.info('Data Object Observer: ', dataObjectObserver);
-        _this.dataObjectObserver = dataObjectObserver;
-      }).catch(function(reason) {
-        reject(reason);
-      });
 
     });
 

@@ -13,7 +13,7 @@ export function removeLoader(target) {
   target.removeClass('center-align');
 }
 
-export function documentReady() {
+export function ready() {
   let progress = document.querySelector('.progress');
   progress.parentElement.removeChild(progress);
 

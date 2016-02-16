@@ -7,10 +7,9 @@ class RuntimeLoader {
     if (!coreFactory) throw Error('You need specifi the Core Factory');
 
     let _this = this;
-    let miniBus = new MiniBus();
-    _this._miniBus = miniBus;
+    _this._minibus = new MiniBus();
 
-    coreFactory.install(miniBus);
+    coreFactory.install(_this._minibus);
   }
 
   /**
@@ -39,17 +38,17 @@ class RuntimeLoader {
             descriptor: hypertyDescriptorURL
           }
         }
-      }
+      };
 
-      console.log(msg);
-      _this._miniBus.postMessage(msg);
-      _this._miniBus.addListener(from, function(msg) {
+      _this._minibus._onMessage(msg);
+
+      _this._minibus.addListener(from, function(msg) {
         if (!msg.body.hasOwnProperty('code')){
           resolve(msg.body.value);
         } else {
           reject(msg.body.value);
         }
-      })
+      });
 
     });
 
@@ -74,13 +73,13 @@ class RuntimeLoader {
             domain: domain
           }
         }
-      }
+      };
 
-      _this._miniBus.postMessage(msg);
-      _this._miniBus.addListener(from, function(msg) {
+      _this._minibus._onMessage(msg);
+      _this._minibus.addListener(from, function(msg) {
         resolve(msg);
-      })
-    })
+      });
+    });
   }
 }
 
