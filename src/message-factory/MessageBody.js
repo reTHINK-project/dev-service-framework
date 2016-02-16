@@ -17,92 +17,19 @@ export class MessageBody{
      */
 	constructor(idToken, accessToken, resource, schema, assertedIdentity){
 
-        if(typeof idToken !== 'undefined')
+        //if(idToken)
             this.idToken = idToken;
-        if(typeof accessToken  !== 'undefined')
+       // if(accessToken)
             this.accessToken = accessToken;
-        if(typeof resource !== 'undefined' )
+       // if(resource )
             this.resource = resource;
-        if(typeof schema !== 'undefined' )
+        //if(schema )
             this.schema = schema;
-        if(typeof assertedIdentity !== 'undefined')
+        //if(assertedIdentity)
             this.assertedIdentity = assertedIdentity;
 	}
 
-    /**
-     * Get the id token
-     * @return {Identity.JWT}
-     */
-    get idToken(){ return this.idToken; }
 
-    /**
-     * Get the access token
-     * @return {Identity.JWT}
-     */
-    get accessToken(){ return this.accessToken; }
-
-    /**
-     * The the resource URL
-     * @return {URL.URL}
-     */
-    get resource() { return this.resource; }
-
-    /**
-     * Return the URL of the schema on the HypertyCatalogue
-     * @return {URL.HypertyCatalogueURL}
-     */
-    get schema(){ return this.schema; }
-
-    /**
-     * Return the asserted Identity
-     * @return {Identity.Identity}
-     */
-    get assertedIdentity() { return this.assertedIdentity; }
-
-    /**
-     * set the token identifier
-     * @param {Identity.JWT} token
-     */
-    set idToken(token){
-        if(token)
-            this.idToken = token;
-    }
-
-    /**
-     * set the access token
-     * @param {Identity.JWT} token
-     */
-    set accessToken(token){
-        if(token)
-            this.accessToken = token;
-    }
-
-    /**
-     * set the resource
-     * @param {URL.URL}resource
-     */
-    set resource(resource){
-        if(resource)
-            this.resource = resource;
-    }
-
-    /**
-     * set the schema URL
-     * @param {URL.HypertyCatalogueURL} schema
-     */
-    set schema(schema){
-        if(schema)
-            this.schema = schema;
-    }
-
-    /**
-     * set the asserted identity
-     * @param {Identity.Identity} assertedIdentity
-     */
-    set assertedIdentity(assertedIdentity){
-        if(assertedIdentity)
-            this.assertedIdentity = assertedIdentity;
-    }
 }
 
 /**
@@ -126,19 +53,6 @@ export class CreateMessageBody extends MessageBody {
         super(idToken,accessToken, resource, schema, assertedIdentity, schema, assertedIdentity);
 
         this.value = value;
-        if(policy)
-            this.policy = policy;
-    }
-    get value() { return this.value; }
-
-    set value(val){
-        if(val)
-            this.value = val;
-    }
-
-    get policy() { return this.policy; }
-
-    set policy(policy){
         if(policy)
             this.policy = policy;
     }
