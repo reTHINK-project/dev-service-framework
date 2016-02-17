@@ -31,12 +31,28 @@ class CoreFactory extends Core  {
         resultMsg.body.value = reason;
         resultMsg.body.code = 400;
         minibus._onMessage(resultMsg);
-      })
+      });
 
     });
 
     minibus.addListener('core:loadStub', function(msg){
       console.log('Load Stub:', msg);
+
+      let resultMsg = {};
+      resultMsg.from = msg.to;
+      resultMsg.to = msg.from;
+      resultMsg.body = {};
+
+      //TODO: Work the message errors, probably use message factory
+      runtimeUA.loadStub(msg.body.value.domain).then(function(result) {
+        resultMsg.body.value = result;
+        minibus._onMessage(resultMsg);
+      }).catch(function(reason) {
+        resultMsg.body.value = reason;
+        resultMsg.body.code = 400;
+        minibus._onMessage(resultMsg);
+      });
+
     });
 
     console.log('Runtime Instaled: ', minibus);

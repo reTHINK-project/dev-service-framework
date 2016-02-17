@@ -44,7 +44,17 @@ class RuntimeLoader {
 
       _this._minibus.addListener(from, function(msg) {
         if (!msg.body.hasOwnProperty('code')){
-          resolve(msg.body.value);
+          let hypertyURL = msg.body.value.runtimeHypertyURL;
+          let hypertyComponent = window.components[hypertyURL];
+          let hyperty = {
+            runtimeHypertyURL: hypertyURL,
+            status: msg.body.value.status,
+            instance: hypertyComponent.instance,
+            name: hypertyComponent.name
+          }
+
+          resolve(hyperty);
+
         } else {
           reject(msg.body.value);
         }
@@ -77,7 +87,21 @@ class RuntimeLoader {
 
       _this._minibus._onMessage(msg);
       _this._minibus.addListener(from, function(msg) {
-        resolve(msg);
+        if (!msg.body.hasOwnProperty('code')){
+          let protostubURL = msg.body.value.runtimeProtoStubURL;
+          let protostubComponent = window.components[protostubURL];
+          let protostub = {
+            runtimeProtostubURL: protostubURL,
+            status: msg.body.value.status,
+            instance: protostubComponent.instance,
+            name: protostubComponent.name
+          };
+
+          resolve(protostub);
+
+        } else {
+          reject(msg.body.value);
+        }
       });
     });
   }

@@ -60,8 +60,6 @@ function hypertyDeployed(result) {
 
   hypertyChat = result.instance;
 
-  console.log(result);
-
   let loginPanel = $('.login-panel');
   let cardAction = loginPanel.find('.card-action');
   let hypertyInfo = '<span class="white-text"><p><b>hypertyURL:</b> ' + result.runtimeHypertyURL + '</br><b>status:</b> ' + result.status + '</p></span>';
