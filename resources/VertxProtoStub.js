@@ -14,11 +14,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var VertxProtoStub = (function () {
   /* private
     _continuousOpen: boolean
-     _runtimeProtoStubURL: string
+      _runtimeProtoStubURL: string
     _bus: MiniBus
     _msgCallback: (Message) => void
     _config: { url, runtimeURL }
-     _sock: (WebSocket | SockJS)
+      _sock: (WebSocket | SockJS)
     _reOpen: boolean
   */
 

@@ -1,0 +1,95 @@
+{
+  "type": "Program",
+  "body": [],
+  "sourceType": "module",
+  "range": [
+    134,
+    134
+  ],
+  "loc": {
+    "start": {
+      "line": 4,
+      "column": 90
+    },
+    "end": {
+      "line": 4,
+      "column": 90
+    }
+  },
+  "leadingComments": [
+    {
+      "type": "Block",
+      "value": "*\r\n * Created by amo on 16/11/2015.\r\n ",
+      "range": [
+        0,
+        42
+      ],
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 3,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": " Probably not going to be needed. Not clearly defined on the specification what this is.",
+      "range": [
+        44,
+        134
+      ],
+      "loc": {
+        "start": {
+          "line": 4,
+          "column": 0
+        },
+        "end": {
+          "line": 4,
+          "column": 90
+        }
+      }
+    }
+  ],
+  "comments": [
+    {
+      "type": "Block",
+      "value": "*\r\n * Created by amo on 16/11/2015.\r\n ",
+      "range": [
+        0,
+        42
+      ],
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 3,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": " Probably not going to be needed. Not clearly defined on the specification what this is.",
+      "range": [
+        44,
+        134
+      ],
+      "loc": {
+        "start": {
+          "line": 4,
+          "column": 0
+        },
+        "end": {
+          "line": 4,
+          "column": 90
+        }
+      }
+    }
+  ]
+}

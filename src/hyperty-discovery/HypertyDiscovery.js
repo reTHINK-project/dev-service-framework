@@ -1,34 +1,33 @@
-import {divideURL} from '../utils/utils.js';
 
 /**
 * Core HypertyDiscovery interface
-* Class to allow applications to search for hyperties using the message bus
+* Hyperty Discovery class provides the functionality to query hyperties instances registered in Domain registry* for a given user
 */
 class HypertyDiscovery {
 
   /**
   * To initialise the HypertyDiscover, which will provide the support for hyperties to
   * query users registered in outside the internal core.
-  * @param  {RuntimeURL}          runtimeURL            runtimeURL
-  * @param  {MessageBus}          msgbus                msgbus
+  * @param  {RuntimeURL}          domainURL            runtimeURL
+  * @param  {MessageBus}          msgBus                msgBus
   */
-  constructor(domain, msgBus) {
+  constructor(domainURL, msgBus) {
     let _this = this;
     _this.messageBus = msgBus;
 
-    _this.domain = domain;
-    _this.discoveryURL = 'hyperty://' + domain + '/hypertyDisovery';
+    _this.domain = domainURL;
+    _this.discoveryURL = 'hyperty://' + domainURL + '/hypertyDisovery';
   }
 
   /**
-  * function to request about users registered in domain registry, and
+  * Function to request about users registered in domain registry, and
   * return the hyperty instance if found.
-  * @param  {email}              email
+  * @param  {Identity.Identity}  userIdentifier
   * @return {Promise}          Promise
   */
-  discoverHypertyPerUser(email) {
+  discoverHypertyPerUser(userIdentifier) {
     let _this = this;
-    let identityURL = 'user://' + email.substring(email.indexOf('@') + 1, email.length) + '/' + email.substring(0, email.indexOf('@'));
+    let identityURL = 'user://' + userIdentifier.substring(userIdentifier.indexOf('@') + 1, userIdentifier.length) + '/' + userIdentifier.substring(0, userIdentifier.indexOf('@'));
 
     // message to query domain registry, asking for a user hyperty.
     let message = {
@@ -46,7 +45,7 @@ class HypertyDiscovery {
         }
 
         let idPackage = {
-          id: email,
+          id: userIdentifier,
           descriptor: reply.body.hyperties[hypertyURL].descriptor,
           hypertyURL: hypertyURL
         };

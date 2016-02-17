@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/hyperty/ConnectionController.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <a data-ice="repoURL" href="git+ssh://git@github.com/reTHINK-project/core-framework.git">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">catalogue-factory</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html">CatalogueDataObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/CatalogueDataObjectFactory.js~CatalogueDataObjectFactory.html">CatalogueDataObjectFactory</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~CommunicationDataObjectSchema.html">CommunicationDataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~ConnectionDataObjectSchema.html">ConnectionDataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~ContextDataObjectSchema.html">ContextDataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~DataObjectSchema.html">DataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~HypertyDataObjectSchema.html">HypertyDataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~IdentifyDataObjectSchema.html">IdentifyDataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~MessageDataObjectSchema.html">MessageDataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/HypertyDescriptor.js~HypertyDescriptor.html">HypertyDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/HypertyRuntimeDescriptor.js~HypertyRuntimeDescriptor.html">HypertyRuntimeDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/PolicyEnforcerDescriptor.js~PolicyEnforcerDescriptor.html">PolicyEnforcerDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor.html">ProtocolStubDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/RuntimeConstraint.js~RuntimeConstraint.html">RuntimeConstraint</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/SourcePackage.js~SourcePackage.html">SourcePackage</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-CatalogueObjectType">CatalogueObjectType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-DataObjectSourceLanguage">DataObjectSourceLanguage</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-catalogueDataObject">catalogueDataObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-catalogueDataObjectFactory">catalogueDataObjectFactory</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-dataObjectSchema">dataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HypertyType">HypertyType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RuntimeHypertyCapabilityType">RuntimeHypertyCapabilityType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-hypertyDescriptor">hypertyDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RuntimeHypertyCapabilityType">RuntimeHypertyCapabilityType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RuntimeProtocolCapabilityType">RuntimeProtocolCapabilityType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RuntimeType">RuntimeType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-hypertyRuntimeDescriptor">hypertyRuntimeDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-policyEnforcerDescriptor">policyEnforcerDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-protocolStubDescriptor">protocolStubDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-runtimeConstraint">runtimeConstraint</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-sourcePackage">sourcePackage</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">hyperty</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/hyperty/Connection.js~Connection.html">Connection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/hyperty/ConnectionController.js~ConnectionController.html">ConnectionController</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/hyperty/OwnerPeer.js~OwnerPeer.html">OwnerPeer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/hyperty/Peer.js~Peer.html">Peer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-activate">activate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-connection">connection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-connectionController">connectionController</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ownerPeer">ownerPeer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-peer">peer</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">hyperty-discovery</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/hyperty-discovery/HypertyDiscovery.js~HypertyDiscovery.html">HypertyDiscovery</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-hypertyDiscovery">hypertyDiscovery</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">message-factory</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/Message.js~Message.html">Message</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~CreateMessageBody.html">CreateMessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~DeleteMessageBody.html">DeleteMessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~ForwardMessageBody.html">ForwardMessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~MessageBody.html">MessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~ReadMessageBody.html">ReadMessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~ResponseMessageBody.html">ResponseMessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~UpdateMessageBody.html">UpdateMessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageFactory.js~IdGenerator.html">IdGenerator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageFactory.js~MessageFactory.html">MessageFactory</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Enum">Enum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-MessageType">MessageType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-REASON_PHRASE">REASON_PHRASE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RESPONSE_CODE">RESPONSE_CODE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-messageFactory">messageFactory</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">reTHINKObject</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/reTHINKObject/RethinkObject.js~RethinkObject.html">RethinkObject</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">syncher</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/DataObject.js~DataObject.html">DataObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/DataObjectChild.js~DataObjectChild.html">DataObjectChild</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/DataObjectObserver.js~DataObjectObserver.html">DataObjectObserver</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/DataObjectReporter.js~DataObjectReporter.html">DataObjectReporter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/Syncher.js~Syncher.html">Syncher</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-dataObject">dataObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-dataObjectChild">dataObjectChild</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-dataObjectObserver">dataObjectObserver</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-dataObjectReporter">dataObjectReporter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-dataProvisional">dataProvisional</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ChangeType">ChangeType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ObjectType">ObjectType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-syncObject">syncObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-syncher">syncher</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">utils</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/utils/EventEmitter.js~EventEmitter.html">EventEmitter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-deepClone">deepClone</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-divideURL">divideURL</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-eventEmitter">eventEmitter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-divideURL">divideURL</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/hyperty/ConnectionController.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/* jshint undef: true */
+/* globals RTCPeerConnection */
+/* globals RTCSessionDescription */
+/* globals RTCIceCandidate */
+
+import &apos;webrtc-adapter-test&apos;;
+
+import EventEmitter from &apos;../utils/EventEmitter&apos;;
+import Connection from &apos;./Connection&apos;;
+import Peer from &apos;./Peer&apos;;
+
+class ConnectionController extends EventEmitter {
+
+  constructor(syncher) {
+
+    super(syncher);
+
+    let _this = this;
+
+    _this.syncher = syncher;
+    _this.mode = &apos;offer&apos;;
+
+    _this._objectDescURL = &apos;hyperty-catalogue://localhost/.well-known/dataschemas/FakeDataSchema&apos;;
+
+    _this.mediaConstraints = {
+      optional: [],
+      mandatory: {
+        offerToReceiveAudio:true,
+        offerToReceiveVideo:true
+      }
+    };
+
+    // Prepare the PeerConnection
+    let peerConnection = new RTCPeerConnection();
+
+    peerConnection.addEventListener(&apos;signalingstatechange&apos;, function(event) {
+
+      console.info(&apos;signalingstatechange&apos;, event.currentTarget.signalingState);
+
+      if (event.currentTarget.signalingState === &apos;have-local-offer&apos;) {
+        _this.trigger(&apos;controller:state:change&apos;, _this.mode);
+      }
+
+      if (event.currentTarget.signalingState === &apos;have-remote-offer&apos;) {
+        _this.mode = &apos;answer&apos;;
+        _this.trigger(&apos;controller:state:change&apos;, _this.mode);
+      }
+
+    });
+
+    peerConnection.addEventListener(&apos;iceconnectionstatechange&apos;, function(event) {
+      console.info(&apos;iceconnectionstatechange&apos;, event.currentTarget.iceConnectionState);
+      let data = _this._dataObjectReporter.data;
+      if (data.hasOwnProperty(&apos;connection&apos;)) {
+        data.connection.status = event.currentTarget.iceConnectionState;
+      }
+    });
+
+    peerConnection.addEventListener(&apos;icecandidate&apos;, function(event) {
+
+      if (!event.candidate) return;
+
+      let icecandidate = {
+        type: &apos;candidate&apos;,
+        candidate: event.candidate.candidate,
+        sdpMid: event.candidate.sdpMid,
+        sdpMLineIndex: event.candidate.sdpMLineIndex
+      };
+
+      let data = _this._dataObjectReporter.data;
+
+      if (_this.mode === &apos;offer&apos;) {
+        data.connection.ownerPeer.iceCandidates.push(icecandidate);
+      } else {
+        data.peer.iceCandidates.push(icecandidate);
+      }
+
+    });
+
+    // Add stream to PeerConnection
+    peerConnection.addEventListener(&apos;addstream&apos;, function(event) {
+      _this.trigger(&apos;stream:added&apos;, URL.createObjectURL(event.stream), _this.dataObjectReporter, _this.dataObjectObserver);
+    });
+
+    _this.peerConnection = peerConnection;
+
+  }
+
+  // TODO: check if it is realy necessary this remotePeerInformation;
+  /**
+   * Set Remote peer information, like Hyperty.
+   * @param  {Object} remotePeerInformation information about the peer;
+   */
+  set remotePeerInformation(remotePeerInformation) {
+    let _this = this;
+    _this._remotePeerInformation = remotePeerInformation;
+  }
+
+  /**
+   * Get information relative to the Remote Peer;
+   * @return {Object} remotePeerInformation;
+   */
+  get remotePeerInformation() {
+    let _this = this;
+    return _this._remotePeerInformation;
+  }
+
+  /**
+  * Set the dataObject in the controller
+  * @param {ConnectionDataObject} dataObject - have all information about the syncher object;
+  */
+  set dataObjectReporter(dataObjectReporter) {
+    if (!dataObjectReporter) throw new Error(&apos;The Data Object Reporter is a needed parameter&apos;);
+
+    let _this = this;
+    _this._dataObjectReporter = dataObjectReporter;
+
+    let data = _this._dataObjectReporter.data;
+
+    if (_this.mode === &apos;offer&apos;) {
+      let connection = new Connection();
+
+      // TODO: Set on connection object the owner, peer, and status;
+      connection.owner = _this._dataObjectReporter._owner;
+      data.connection = connection;
+
+      _this.createOffer();
+    } else {
+      let peer = new Peer();
+      data.peer = peer;
+
+      _this.createAnswer();
+    }
+
+    console.debug(_this._dataObjectReporter);
+
+    // TODO: Check if is realy necessary the setTimeout
+    dataObjectReporter.onSubscription(function(event) {
+
+      setTimeout(function() {
+        event.accept();
+      }, 200);
+
+    });
+  }
+
+  /**
+  * return the dataObject in the controller
+  * @return {ConnectionDataObject} dataObject
+  */
+  get dataObjectReporter() {
+    let _this = this;
+    return _this._dataObjectReporter;
+  }
+
+  /**
+  * Set the dataObject in the controller
+  * @param {ConnectionDataObject} dataObject - have all information about the syncher object;
+  */
+  set dataObjectObserver(dataObjectObserver) {
+    if (!dataObjectObserver) throw new Error(&apos;The Data Object Observer is a needed parameter&apos;);
+
+    let _this = this;
+    _this._dataObjectObserver = dataObjectObserver;
+    _this.changePeerInformation(dataObjectObserver);
+
+  }
+
+  /**
+  * return the dataObject in the controller
+  * @return {ConnectionDataObject} dataObject
+  */
+  get dataObjectObserver() {
+    let _this = this;
+    return _this._dataObjectObserver;
+  }
+
+  /**
+   * Get WebRTC API resources
+   * @param  {Object}     options Object containing the information that resources will be used (camera, mic, resolution, etc);
+   * @return {Promise}
+   */
+  getUserMedia(constraints) {
+
+    let _this = this;
+
+    return new Promise(function(resolve, reject) {
+
+      navigator.mediaDevices.getUserMedia(constraints)
+      .then(function(mediaStream) {
+        _this.peerConnection.addStream(mediaStream);
+        resolve(mediaStream);
+      })
+      .catch(function(reason) {
+        reject(reason);
+      });
+    });
+  }
+
+  changePeerInformation(dataObjectObserver) {
+
+    let _this = this;
+
+    _this.processPeerInformation(dataObjectObserver.data);
+
+    dataObjectObserver.onChange(&apos;*&apos;, function(event) {
+      console.info(&apos;Observer on change message: &apos;, event.data);
+      _this.processPeerInformation(event.data);
+    });
+
+  }
+
+  processPeerInformation(data) {
+    let _this = this;
+    let isOwner = data.hasOwnProperty(&apos;connection&apos;);
+
+    let connectionDescription = isOwner ? data.connection.ownerPeer.connectionDescription : data.peer.connectionDescription;
+    let iceCandidates = isOwner ? data.connection.ownerPeer.iceCandidates : data.peer.iceCandidates;
+
+    if (!connectionDescription) return;
+
+    if (connectionDescription.type === &apos;offer&apos; || connectionDescription.type === &apos;answer&apos;) {
+      console.info(&apos;Process Connection Description: &apos;, connectionDescription);
+      _this.peerConnection.setRemoteDescription(new RTCSessionDescription(connectionDescription), _this.remoteDescriptionSuccess, _this.remoteDescriptionError);
+    }
+
+    if (iceCandidates) {
+      iceCandidates.forEach(function(ice) {
+        if (ice.type === &apos;candidate&apos;) {
+          console.info(&apos;Process Ice Candidate: &apos;, ice);
+          _this.peerConnection.addIceCandidate(new RTCIceCandidate({candidate: ice.candidate}), _this.remoteDescriptionSuccess, _this.remoteDescriptionError);
+        }
+      });
+    }
+
+  }
+
+  remoteDescriptionSuccess() {
+    console.info(&apos;remote success&apos;);
+  }
+
+  remoteDescriptionError(error) {
+    console.error(&apos;error: &apos;, error);
+  }
+
+  createOffer() {
+    let _this = this;
+
+    _this.peerConnection.createOffer(function(description) {
+      _this.onLocalSessionCreated(description);
+    }, _this.infoError, _this.mediaConstraints);
+
+  }
+
+  createAnswer() {
+    let _this = this;
+
+    _this.peerConnection.createAnswer(function(description) {
+      _this.onLocalSessionCreated(description);
+    }, _this.infoError);
+  }
+
+  onLocalSessionCreated(description) {
+
+    let _this = this;
+
+    _this.peerConnection.setLocalDescription(description, function() {
+
+      let data = _this._dataObjectReporter.data;
+      let sdp = {
+        sdp: description.sdp,
+        type: description.type
+      };
+
+      if (_this.mode === &apos;offer&apos;) {
+        data.connection.ownerPeer.connectionDescription = sdp;
+      } else {
+        data.peer.connectionDescription = sdp;
+      }
+
+    }, _this.infoError);
+
+  }
+
+  infoError(err) {
+    console.error(err.toString(), err);
+  }
+
+  /**
+   * Used to accept an incoming connection request.
+   * @method accept
+   * @return {Promise}
+   */
+  accept(options) {
+
+    let _this = this;
+    let syncher = _this.syncher;
+
+    options = options || {video: true, audio: true};
+
+    console.log(&apos;Remote Peer Information: &apos;, _this._remotePeerInformation);
+    let remotePeer = _this._remotePeerInformation.from;
+
+    return new Promise(function(resolve, reject) {
+
+      try {
+
+        console.info(&apos;------------------------ Syncher Create ---------------------- \n&apos;);
+        _this.getUserMedia(options).then(function(mediaConstraints) {
+          console.info(&apos;1. Return media constraints &apos;, mediaConstraints);
+          return syncher.create(_this._objectDescURL, [remotePeer], {});
+        }).then(function(dataObjectReporter) {
+          console.info(&apos;2. Return the Data Object Reporter &apos;, dataObjectReporter);
+          _this.dataObjectReporter = dataObjectReporter;
+
+          resolve(&apos;accepted&apos;);
+        })
+        .catch(function(reason) {
+          reject(reason);
+        });
+
+      } catch (e) {
+        reject(&apos;error accepting connection&apos;);
+      }
+    });
+
+  }
+
+  /**
+  * Used to decline an incoming connection request.
+  * @method decline
+  * @return {Promise}
+  */
+  decline() {
+
+    let _this = this;
+    let syncher = _this.syncher;
+
+    return new Promise(function(resolve, reject) {
+
+      try {
+        console.log(&apos;syncher: &apos;, syncher);
+        resolve(&apos;Declined&apos;);
+      } catch (e) {
+        reject(e);
+      }
+    });
+
+  }
+
+  /**
+   * Used to close an existing connection instance.
+   * @method disconnect
+   * @return {Promise}
+   */
+  disconnect() {
+
+    // TODO: optimize the disconnect function
+
+    let _this = this;
+
+    return new Promise(function(resolve, reject) {
+
+      try {
+
+        _this.peerConnection.close();
+
+        resolve(true);
+      } catch (e) {
+        reject(&apos;error disconnecting connection&apos;);
+      }
+
+    });
+
+  }
+
+  /**
+   * Used to add/invite new peers on an existing connection instance (for multiparty connections).
+   * @method addPeer
+   * @return {Promise}
+   */
+   addPeer() {
+
+   }
+
+  /**
+   * Used to remove a peer from an existing connection instance.
+   * @method removePeer
+   * @return {Promise}
+   */
+  removePeer() {
+
+  }
+
+  // Peer Actions
+  disableMic() {
+    let _this = this;
+
+    return new Promise(function(resolve, reject) {
+
+      try {
+        let localStream = _this.peerConnection.getLocalStreams()[0];
+        let audioTrack = localStream.getAudioTracks()[0];
+
+        audioTrack.enabled = audioTrack.enabled ? false : true;
+        resolve(audioTrack.enabled);
+      } catch (e) {
+        reject(e);
+      }
+
+    });
+
+  }
+
+  disableCam() {
+    let _this = this;
+
+    return new Promise(function(resolve, reject) {
+
+      try {
+        let localStream = _this.peerConnection.getLocalStreams()[0];
+        let videoTrack = localStream.getVideoTracks()[0];
+
+        videoTrack.enabled = videoTrack.enabled ? false : true;
+
+        resolve(videoTrack.enabled);
+      } catch (e) {
+        reject(e);
+      }
+    });
+
+  }
+
+  mute() {
+
+    let _this = this;
+
+    return new Promise(function(resolve, reject) {
+
+      try {
+        let remoteStream = _this.peerConnection.getRemoteStreams()[0];
+        let audioTrack = remoteStream.getAudioTracks()[0];
+
+        audioTrack.enabled = audioTrack.enabled ? false : true;
+
+        resolve(audioTrack.enabled);
+      } catch (e) {
+        reject(e);
+      }
+    });
+
+  }
+
+}
+
+export default ConnectionController;
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.3)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>
