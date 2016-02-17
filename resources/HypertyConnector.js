@@ -4125,6 +4125,11 @@ exports["default"] = peer;
 module.exports = exports["default"];
 
 },{}],97:[function(require,module,exports){
+
+/**
+* Core HypertyDiscovery interface
+* Hyperty Discovery class provides the functionality to query hyperties instances registered in Domain registry* for a given user
+*/
 'use strict';
 
 var _createClass = require('babel-runtime/helpers/create-class')['default'];
@@ -4137,48 +4142,41 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-var _utilsUtilsJs = require('../utils/utils.js');
-
-/**
-* Core HypertyDiscovery interface
-* Class to allow applications to search for hyperties using the message bus
-*/
-
 var HypertyDiscovery = (function () {
 
   /**
   * To initialise the HypertyDiscover, which will provide the support for hyperties to
   * query users registered in outside the internal core.
-  * @param  {RuntimeURL}          runtimeURL            runtimeURL
-  * @param  {MessageBus}          msgbus                msgbus
+  * @param  {RuntimeURL}          domainURL            runtimeURL
+  * @param  {MessageBus}          msgBus                msgBus
   */
 
-  function HypertyDiscovery(domain, msgBus) {
+  function HypertyDiscovery(domainURL, msgBus) {
     _classCallCheck(this, HypertyDiscovery);
 
     var _this = this;
     _this.messageBus = msgBus;
 
-    _this.domain = domain;
-    _this.discoveryURL = 'hyperty://' + domain + '/hypertyDisovery';
+    _this.domain = domainURL;
+    _this.discoveryURL = 'hyperty://' + domainURL + '/hypertyDisovery';
   }
 
   /**
-  * function to request about users registered in domain registry, and
+  * Function to request about users registered in domain registry, and
   * return the hyperty instance if found.
-  * @param  {email}              email
+  * @param  {Identity.Identity}  userIdentifier
   * @return {Promise}          Promise
   */
 
   _createClass(HypertyDiscovery, [{
     key: 'discoverHypertyPerUser',
-    value: function discoverHypertyPerUser(email) {
+    value: function discoverHypertyPerUser(userIdentifier) {
       var _this = this;
-      var identityURL = 'user://' + email.substring(email.indexOf('@') + 1, email.length) + '/' + email.substring(0, email.indexOf('@'));
+      var identityURL = 'user://' + userIdentifier.substring(userIdentifier.indexOf('@') + 1, userIdentifier.length) + '/' + userIdentifier.substring(0, userIdentifier.indexOf('@'));
 
       // message to query domain registry, asking for a user hyperty.
       var message = {
-        type: 'READ', from: _this.discoveryURL, to: 'domain://registry.' + _this.domain + '/', body: { user: identityURL }
+        type: 'READ', from: _this.discoveryURL, to: 'domain://registry.' + _this.domain + '/', body: { resource: identityURL }
       };
 
       return new _Promise(function (resolve, reject) {
@@ -4192,7 +4190,7 @@ var HypertyDiscovery = (function () {
           }
 
           var idPackage = {
-            id: email,
+            id: userIdentifier,
             descriptor: reply.body.hyperties[hypertyURL].descriptor,
             hypertyURL: hypertyURL
           };
@@ -4209,7 +4207,7 @@ var HypertyDiscovery = (function () {
 exports['default'] = HypertyDiscovery;
 module.exports = exports['default'];
 
-},{"../utils/utils.js":106,"babel-runtime/core-js/promise":7,"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12}],98:[function(require,module,exports){
+},{"babel-runtime/core-js/promise":7,"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12}],98:[function(require,module,exports){
 'use strict';
 
 var _createClass = require('babel-runtime/helpers/create-class')['default'];
@@ -4493,7 +4491,7 @@ var DataObject = (function () {
       var children = _this._children[childId];
 
       if (children) {
-        _this._changeObject(children, msg);
+        _this._changeObject(children._syncObj, msg);
       } else {
         console.log('No children found for: ', childId);
       }
@@ -5716,7 +5714,7 @@ function divideURL(url) {
 
 function deepClone(obj) {
   //TODO: simple but inefficient JSON deep clone...
-  return JSON.parse(JSON.stringify(obj));
+  if (obj) return JSON.parse(JSON.stringify(obj));
 }
 
 },{}]},{},[94])(94)

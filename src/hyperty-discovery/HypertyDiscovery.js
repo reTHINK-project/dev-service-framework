@@ -31,7 +31,7 @@ class HypertyDiscovery {
 
     // message to query domain registry, asking for a user hyperty.
     let message = {
-      type: 'READ', from: _this.discoveryURL, to: 'domain://registry.' + _this.domain + '/', body: { user: identityURL}
+      type: 'READ', from: _this.discoveryURL, to: 'domain://registry.' + _this.domain + '/', body: { resource: identityURL}
     };
 
     return new Promise(function(resolve, reject) {

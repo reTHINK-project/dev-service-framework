@@ -2056,7 +2056,7 @@ var HypertyDiscovery = (function () {
 
       // message to query domain registry, asking for a user hyperty.
       var message = {
-        type: 'READ', from: _this.discoveryURL, to: 'domain://registry.' + _this.domain + '/', body: { user: identityURL }
+        type: 'READ', from: _this.discoveryURL, to: 'domain://registry.' + _this.domain + '/', body: { resource: identityURL }
       };
 
       return new _Promise(function (resolve, reject) {
@@ -2371,7 +2371,7 @@ var DataObject = (function () {
       var children = _this._children[childId];
 
       if (children) {
-        _this._changeObject(children, msg);
+        _this._changeObject(children._syncObj, msg);
       } else {
         console.log('No children found for: ', childId);
       }
@@ -3594,7 +3594,7 @@ function divideURL(url) {
 
 function deepClone(obj) {
   //TODO: simple but inefficient JSON deep clone...
-  return JSON.parse(JSON.stringify(obj));
+  if (obj) return JSON.parse(JSON.stringify(obj));
 }
 
 },{}]},{},[93])(93)
