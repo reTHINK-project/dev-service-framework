@@ -48,7 +48,7 @@ The Message Body is a JSON object that varies according to the message type, spe
 
 Optionaly, all message bodies can contain JWT tokens for Access Control for Identity Assertion purposes that are inserted by the Identity Module before the message is routed to protostubs. When these message bodies reach the destination runtime MessageBUS, the JWT tokens are decoded and verified by the Identity Module. The result of this process (if successful) is inserted in the MessageBody as assertedIdentity objects and the JWT tokens removed, before the message is delivered to the Hyperty. AssertedIdentity is compliant with User Identity Data Model.
 
-Detailed specifications of these Message bodies can be found at [Message Model](https://github.com/reTHINK-project/dev-service-framework/blob/develop/docs/datamodel/message/readme.md).
+Detailed specifications of these Message bodies can be found at [Message Model](https://github.com/reTHINK-project/dev-service-framework/blob/master/docs/datamodel/message/readme.md).
 
 #### Request - Response transactions
 
