@@ -99,7 +99,6 @@
   },
   "dependencies": {
     "ortc-over-rtc": "^0.1.0",
-    "runtime-core": "github:rethink-project/dev-runtime-core#dev-0.3",
     "webrtc-adapter-test": "^0.2.5",
     "webrtc-shim": "^0.1.2"
   }
