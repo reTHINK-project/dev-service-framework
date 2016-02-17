@@ -3,7 +3,7 @@ Message Node and Protostubs Development
 
 ### Overview
 
-The protocol stubs play a central role in the protocol on-the-fly concept. A stub is the piece of code that a reTHINK runtime downloads, instantiates and executes on-the-fly in order to exchange messages with a backend system from a foreign or even from the own domain. From the runtime's point of view the stub is the required "glue" between the reTHINK Message Model and the backend domain's protocols. The stub implements a well defined interface for the bi-directional asynchronous exchange of messages and hides all potential complexity of protocol translations for the interoperability with the backend domain.
+The protocol stubs (AKA protostub) play a central role in the [protocol on-the-fly concept](hyperty-messaging-framework.md#protocol-on-the-fly-protofly-and-protostubs). A stub is the piece of code that a reTHINK runtime downloads, instantiates and executes on-the-fly in order to exchange messages with a backend system from a foreign or even from the own domain. From the runtime's point of view the stub is the required "glue" between the reTHINK Message Model and the backend domain's protocols. The stub implements a well defined interface for the bi-directional asynchronous exchange of messages and hides all potential complexity of protocol translations for the interoperability with the backend domain.
 
 The communication endpoint of a stub in a domains backend is the Messaging Node (MN). The MN and the stub build a unit that shall be designed and implemented together. The implementor of a protocol stub and the corresponding MN has to take some decisions. How much of the potential complexity shall be placed in the stub itself? Shall the stub do everything that is necessary to translate the protocol to the backend domains specifics? Or shall the stub just forward messages and let the MN perform the major tasks of the protocol translations? These are some hints that the developer should take into account:
 
@@ -14,6 +14,13 @@ The communication endpoint of a stub in a domains backend is the Messaging Node 
 These questions shall be kept in mind, when the design decisions for a stub/MN couple are made. If one of the above questions can be answered with yes, then it might perhaps be an option to implement a basic stub that uses a simple connection mechanism like a WebSocket or similar to forward the reTHINK messages directly to the MN. In this case the MN itself would be responsible for the required protocol translations on the server side for its domain.
 
 An example for such a situation is the Matrix.org based MN and its stub [TODO: add reference] - which have been realized in the scope of this project. The decision was made to let the stub just forward reTHINK messages and therefore keep it simple and small. The implementation of the Matrix.org client logic was done on the MN side. If the stub would have implemented a full Matrix.org client, there would have been a set of dependent SDK-libraries with their own set of dependencies each. Furthermore a Matrix.org client produces additional overhead traffic that should be restricted to the MN internal system and therefore be kept away from the runtime device.
+
+In addition, on the back-end side different design architectures are also possible depending on the starting point:
+
+1.  Is the Message Node based on an existing Messaging Solution that can be extended?
+2. Is the Message Node based on an existing Messaging solution that is already deployed and used in production?
+
+*to be further elaborated: I see at least 3 types of design, 1) MN is extended from an existing core and the protostub directly connects with it (Vertx, Nodejs), 2) a GW between an existing messaging core (Matrix), 3) MN specific functionalities (allocation manager, subscription manager, registry connector) are provided by a separated Support Service server, while Hyperty messages are delivered to the messaging core with or without GW in between. Probably, the 3rd option is more appropriate to an existing solution already in production (eg core IMS, cloud messaging like pubnub, firebase, etc). We should have pictures to better depict*
 
 ### Messaging Model
 
