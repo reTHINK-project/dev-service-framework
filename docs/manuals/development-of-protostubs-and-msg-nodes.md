@@ -30,9 +30,6 @@ Another aspect to be taken into account is whether the Message Node is based on 
 
 ![Message Node with separated Support Services](msg-node-with-nodess.png)
 
-In case the message translation takes to much computing power in the protostub, a Message Delivery Gateway can also be used:
-
-![Message Node with separated Support Services and Gateway](msg-node-with-gw-and-nodess.png)
 
 ### Messaging Model
 
@@ -149,7 +146,7 @@ The MN is the connectivity endpoint for stubs that are deployed in several runti
 
 A valid method for the MN to identify a stub connection is to use the "runtimeURL", which each stub is constructed with in the runtime. If the stub provides this url during the connection handshake procedure, then the MN can identify the stub/runtime, even after a potential re-connect, e.g. due to temporary loss of network connectivity.
 
-It is the responsibility of the MN to release resources if the "disconnect" method was invoked on the stub . This is the official indication that the runtime does not need this stub connection anymore has has released the stub. In the alternative case, that a stub was not sending messages for a longer period, but was also not officially disconnected, it is up to the MN implementation to run a kind of garbage collection mechanism to release stale resources.
+It is the responsibility of the MN to release resources if the "disconnect" method was invoked on the stub . This is the official indication that the runtime does not need this stub connection anymore and has released the stub. In the alternative case, that a stub was not sending messages for a longer period, but was also not officially disconnected, it is up to the MN implementation to run a kind of garbage collection mechanism to release stale resources.
 
 **TODO:** Verify identity parameter of the "connect" method.
 
@@ -164,7 +161,7 @@ The MN must support address allocation for Hyperties as well as for data object.
 "type" : "CREATE",
 "from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/registry/allocation",
 "to" : "domain://msg-node.<sp-domain>/<type>-address-allocation",
-"body" : { "value" : {"number" : <integer> , "scheme" : <scheme>, "allocationKey" : "<key>"} }
+"body" : { "scheme" : <scheme>, "childrenResources" : [{"<resource-children-name>"}], "value" : {"number" : <integer> ,  "allocationKey" : "<key>"} }
 ```
 
 where the "number" attribute stands for the number of requested addresses, the "scheme" defines the requested url scheme (or protocol) of the address and the "allocationKey" serves as identifier of this set of allocated addresses. This key can be used to identify addresses to be deleted later on.  
@@ -224,7 +221,7 @@ Additional messages are defined to perform lookups of registered entities (hyper
 
 #### Subscription management
 
-A core concept in the reTHINK architecture is that Hyperties interact with each other by exchanging and synchronizing their managed data objects based on the Reporter - Observer pattern. The MN supports this concept by allowing observers (hyperties, running in one or more runtimes) to subscribe for changes of certain allocated data object urls deployed in other runtimes. Whenever a hyperty runtime reports a change in a monitored data object it sends a change message to the MN. The "to" address of this message will just be the allocated address of the updated data object, not the address of the subscribers directly.
+A core concept in the reTHINK architecture is that Hyperties interact with each other by exchanging and synchronizing their managed data objects based on the [Reporter - Observer pattern](p2p-data-sync.md). The MN supports this concept by allowing observers (hyperties, running in one or more runtimes) to subscribe for changes of certain allocated data object urls deployed in other runtimes. Whenever a hyperty runtime reports a change in a monitored data object it sends a change message to the MN. The "to" address of this message will just be the allocated address of the updated data object, not the address of the subscribers directly.
 
 In order to route such object change messages to the subscribed listeners, the MN has to maintain an own list of subscribers per allocated data object. Therefore the MN must intercept subscription messages which have the following format:
 
@@ -237,7 +234,7 @@ In order to route such object change messages to the subscribed listeners, the M
 
 This message of type "SUBSCRIBE" is addressed to "domain://msg-node.<observer-sp-domain>/sm", which is the identifier of the MNs "Synch Manager (sm)" component. In the body the most important field is the "resource", which contains the allocated address of the object that shall be subscribed by the runtimes sync manager (as identified by the "from" field).
 
-The MN must extract the <ObjectURL> from the body and assign this url internally to the given "from" URL. This means for the MN that every future "changes"-message to this ObjectURL must be forwarded to this "from" URL. If the "childrenResources" arrays contains values, than additional assignments must be created for each <ObjectURL> + / + <resource-children-name>.
+The MN must extract the <ObjectURL> from the body and assign this url internally to the given HypertyURL contained in the "from" URL. This means for the MN that every future "changes"-message to this ObjectURL must be forwarded to the Hyperty Runtime Instance. If the "childrenResources" arrays contains values, than additional assignments must be created for each <ObjectURL> + / + <resource-children-name>.
 
 After extraction of the parameters and the creation of the assignments, the MN must respond with a message of code 200 back to the runtime.
 
@@ -296,6 +293,8 @@ and vice versa. This implies that in future versions the MN has to implement a m
 ### Message routing procedure
 
 This section tries to summarize all the descriptions of the individual MN components from above and describe the basic messaging handling and routing procedures inside a MN. It uses a pseudo-code like format to describe the order of the operational steps.
+
+*to be reviewed. we should separate routing of hyperty messages from management messages. See msg node topologies at the beginning*
 
 Several checks must be applied:
 
