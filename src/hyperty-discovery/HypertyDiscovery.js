@@ -1,33 +1,32 @@
-
 /**
 * Core HypertyDiscovery interface
-* Hyperty Discovery class provides the functionality to query hyperties instances registered in Domain registry* for a given user
+* Class to allow applications to search for hyperties using the message bus
 */
 class HypertyDiscovery {
 
   /**
   * To initialise the HypertyDiscover, which will provide the support for hyperties to
   * query users registered in outside the internal core.
-  * @param  {RuntimeURL}          domainURL            runtimeURL
-  * @param  {MessageBus}          msgBus                msgBus
+  * @param  {MessageBus}          msgbus                msgbus
+  * @param  {RuntimeURL}          runtimeURL            runtimeURL
   */
-  constructor(domainURL, msgBus) {
+  constructor(domain, msgBus) {
     let _this = this;
     _this.messageBus = msgBus;
 
-    _this.domain = domainURL;
-    _this.discoveryURL = 'hyperty://' + domainURL + '/hypertyDisovery';
+    _this.domain = domain;
+    _this.discoveryURL = 'hyperty://' + domain + '/hypertyDisovery';
   }
 
   /**
-  * Function to request about users registered in domain registry, and
+  * function to request about users registered in domain registry, and
   * return the hyperty instance if found.
-  * @param  {Identity.Identity}  userIdentifier
+  * @param  {email}              email
   * @return {Promise}          Promise
   */
-  discoverHypertyPerUser(userIdentifier) {
+  discoverHypertyPerUser(email) {
     let _this = this;
-    let identityURL = 'user://' + userIdentifier.substring(userIdentifier.indexOf('@') + 1, userIdentifier.length) + '/' + userIdentifier.substring(0, userIdentifier.indexOf('@'));
+    let identityURL = 'user://' + email.substring(email.indexOf('@') + 1, email.length) + '/' + email.substring(0, email.indexOf('@'));
 
     // message to query domain registry, asking for a user hyperty.
     let message = {
@@ -37,19 +36,42 @@ class HypertyDiscovery {
     return new Promise(function(resolve, reject) {
 
       _this.messageBus.postMessage(message, (reply) => {
+        //console.log('MESSAGE', reply);
 
-        let hypertyURL = reply.body.last;
+        let hyperty;
+        let mostRecent;
+        let lastHyperty;
+        let value = reply.body.value;
+
+        //console.log('valueParsed', valueParsed);
+        for (hyperty in value) {
+          if (value[hyperty].lastModified !== undefined) {
+            if (mostRecent === undefined) {
+              mostRecent = new Date(value[hyperty].lastModified);
+              lastHyperty = hyperty;
+            } else {
+              let hypertyDate = new Date(value[hyperty].lastModified);
+              if (mostRecent.getTime() < hypertyDate.getTime()) {
+                mostRecent = hypertyDate;
+                lastHyperty = hyperty;
+              }
+            }
+          }
+
+        }
+        let hypertyURL = lastHyperty;
 
         if (hypertyURL === undefined) {
           return reject('User Hyperty not found');
         }
 
         let idPackage = {
-          id: userIdentifier,
-          descriptor: reply.body.hyperties[hypertyURL].descriptor,
+          id: email,
+          descriptor: value[hypertyURL].descriptor,
           hypertyURL: hypertyURL
         };
 
+        console.log('===> RegisterHyperty messageBundle: ', idPackage);
         resolve(idPackage);
       });
     });
