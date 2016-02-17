@@ -263,7 +263,7 @@ class DataObject {
     let children = _this._children[childId];
 
     if (children) {
-      _this._changeObject(children, msg);
+      _this._changeObject(children._syncObj, msg);
     } else {
       console.log('No children found for: ', childId);
     }
