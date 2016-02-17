@@ -57,10 +57,15 @@ The Message Body is a JSON object that varies according to the message type, spe
 -	DeleteMessageBody
 -	ForwardMessageBody
 -	ResponseMessageBody
+- SubscribeMessageBody
+- UnsubscribeMessageBody
 
-Optionaly, all message bodies can contain JWT tokens for Access Control for Identity Assertion purposes that are inserted by the Identity Module before the message is routed to protostubs. When these message bodies reach the destination runtime MessageBUS, the JWT tokens are decoded and verified by the Identity Module. The result of this process (if successful) is inserted in the MessageBody as assertedIdentity objects and the JWT tokens removed, before the message is delivered to the Hyperty. AssertedIdentity is compliant with User Identity Data Model.
 
-Detailed specifications of these Message bodies can be found at [Message Model](https://github.com/reTHINK-project/dev-service-framework/blob/master/docs/datamodel/message/readme.md).
+Message bodies can contain JWT tokens for Access Control or for Identity Assertion purposes. See [here](../specs/dynamic-view/identity-management/user-identity-assertion.md) for more details.
+
+The "MessageBody.via" attribute contains a list of all Protostub addresses (Protostub) that the message has been passed through. It is used to prevent infinite cycles in the Hyperty Messaging Framework.
+
+Detailed specifications of these Message bodies can be found at [Message Model](../datamodel/message/readme.md).
 
 #### Request - Response transactions
 
@@ -187,7 +192,7 @@ The MN must de-allocate addresses, if it receives a DELETE message of this forma
 
 The "key" value in the body serves as an identifier of the previously allocated address(es).
 
-For more detailed information about the allocation Messages refer to [Address allocation messages](https://github.com/reTHINK-project/dev-service-framework/blob/d3.2-working-docs/docs/specs/messages/address-allocation-messages.md).
+For more detailed information about the allocation Messages refer to [Address allocation messages](../specs/messages/address-allocation-messages.md).
 
 #### Interaction with the Domain Registry
 
