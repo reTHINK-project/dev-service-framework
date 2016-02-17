@@ -1731,6 +1731,8 @@ var ChatGroup = (function (_EventEmitter) {
 
       _this._dataObjectObserver = dataObjectObserver;
 
+      _this.processPartipants(dataObjectObserver);
+
       dataObjectObserver.onChange('*', function (event) {
         console.info('Change Event: ', event);
         _this.processPartipants(dataObjectObserver);
@@ -1843,7 +1845,12 @@ var HypertyChat = (function (_EventEmitter) {
   _createClass(HypertyChat, [{
     key: '_autoSubscribe',
     value: function _autoSubscribe(resource) {
-      _this.join(resource);
+      var _this = this;
+      _this.join(resource).then(function (chatGroup) {
+        _this.trigger('chat:subscribe', chatGroup);
+      })['catch'](function (reason) {
+        console.error(reason);
+      });
     }
 
     /**
@@ -1895,13 +1902,12 @@ var HypertyChat = (function (_EventEmitter) {
 
       return new _Promise(function (resolve, reject) {
 
-        var chat = new _Chat2['default'](syncher, _this._hypertyDiscovery);
-
         console.info('------------------------ Syncher subscribe ---------------------- \n');
         console.info(resource);
 
         syncher.subscribe(_this._objectDescURL, resource).then(function (dataObjectObserver) {
           console.info('Data Object Observer: ', dataObjectObserver);
+          var chat = new _Chat2['default'](syncher, _this._hypertyDiscovery);
           chat.dataObjectObserver = dataObjectObserver;
 
           resolve(chat);

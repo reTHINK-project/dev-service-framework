@@ -75,40 +75,15 @@ function hypertyDeployed(result) {
   let chatSection = $('.chat-section');
   chatSection.removeClass('hide');
 
-  hypertyChat.addEventListener('have:new:notification', function(chatGroup) {
-    console.log('notification event: ', chatGroup);
-
-    prepareChat(chatGroup);
-  });
-
-  Handlebars.getTemplate('chat-actions').then(function(template) {
-
-    let html = template();
-    $('.chat-section').append(html);
-
-    let createBtn = $('.create-room-btn');
-    let joinBtn = $('.join-room-btn');
-
-    createBtn.on('click', createRoom);
-    joinBtn.on('click', joinRoom);
-
-  });
-
-}
-
-function createRoom(event) {
-  event.preventDefault();
-
+  // Create Chat section
   let createRoomModal = $('.create-chat');
   let participantsForm = createRoomModal.find('.participants-form');
   let createRoomBtn = createRoomModal.find('.btn-create');
-  let participants = [];
-
-  createRoomModal.openModal();
 
   createRoomBtn.on('click', function(event) {
     event.preventDefault();
 
+    let participants = [];
     participantsForm.find('.input-email').each(function() {
       participants.push($(this).val());
     });
@@ -127,14 +102,12 @@ function createRoom(event) {
     });
   });
 
-}
+  hypertyChat.addEventListener('chat:subscribe', function(chatGroup) {
+    prepareChat(chatGroup);
+  });
 
-function joinRoom(event) {
-  event.preventDefault();
-
+  // Join Chat Modal
   let joinModal = $('.join-chat');
-  joinModal.openModal();
-
   let joinBtn = joinModal.find('.btn-join');
   joinBtn.on('click', function(event) {
 
@@ -150,6 +123,35 @@ function joinRoom(event) {
 
   });
 
+  // Add actions
+  Handlebars.getTemplate('chat-actions').then(function(template) {
+
+    let html = template();
+    $('.chat-section').append(html);
+
+    let createBtn = $('.create-room-btn');
+    let joinBtn = $('.join-room-btn');
+
+    createBtn.on('click', createRoom);
+    joinBtn.on('click', joinRoom);
+  });
+
+}
+
+function createRoom(event) {
+  event.preventDefault();
+
+  let createRoomModal = $('.create-chat');
+  createRoomModal.openModal();
+
+}
+
+function joinRoom(event) {
+  event.preventDefault();
+
+  let joinModal = $('.join-chat');
+  joinModal.openModal();
+
 }
 
 function prepareChat(chatGroup) {
@@ -161,18 +163,12 @@ function prepareChat(chatGroup) {
 
     console.log('Chat Group Controller: ', chatGroup);
 
-    chatGroup.addEventListener('participant:added', function(event) {
-      Materialize.toast('New participant added ' + event.hypertyResource, 3000, 'rounded');
-      addParticipant(event);
-    });
-
     chatGroup.addEventListener('have:new:notification', function(event) {
       console.log('have:new:notification: ', event);
       Materialize.toast('Have new notification', 3000, 'rounded');
     });
 
     chatGroup.addEventListener('new:message:recived', function(message) {
-
       console.info('new message recived: ', message);
       processMessage(message);
     });
@@ -191,6 +187,7 @@ function chatManagerReady(chatGroup) {
   let btnCancel = addParticipantModal.find('.btn-cancel');
 
   let messageForm = chatSection.find('.message-form');
+  let textArea = messageForm.find('.materialize-textarea');
 
   Handlebars.getTemplate('chat-header').then(function(template) {
     let name = chatGroup.dataObject.data.communication.id;
@@ -209,16 +206,26 @@ function chatManagerReady(chatGroup) {
   let items = collection.find('.collection-item').length;
   badge.html(items);
 
+  textArea.on('keyup', function(event) {
+
+    if (event.keyCode === 13 && !event.shiftKey) {
+      messageForm.submit();
+    }
+
+  });
+
   messageForm.on('submit', function(event) {
     event.preventDefault();
+
     let object = $(this).serializeObject();
-
-    console.log('Send Message:', object);
-
     let message = object.message;
-    chatGroup.send(message).then(function(){
-
+    chatGroup.send(message).then(function(result){
+      console.log('message sent', result);
+      messageForm[0].reset();
+    }).catch(function(reason) {
+      console.error('message error', reason);
     });
+
   });
 
   btnAdd.on('click', function(event) {

@@ -53,6 +53,8 @@ class ChatGroup extends EventEmitter {
 
     _this._dataObjectObserver = dataObjectObserver;
 
+    _this.processPartipants(dataObjectObserver);
+
     dataObjectObserver.onChange('*', function(event) {
       console.info('Change Event: ', event);
       _this.processPartipants(dataObjectObserver);

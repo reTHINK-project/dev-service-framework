@@ -40,7 +40,12 @@ class HypertyChat extends EventEmitter {
   }
 
   _autoSubscribe(resource) {
-    _this.join(resource);
+    let _this = this;
+    _this.join(resource).then(function(chatGroup){
+      _this.trigger('chat:subscribe', chatGroup);
+    }).catch(function(reason) {
+      console.error(reason);
+    })
   }
 
   /**
@@ -92,21 +97,20 @@ class HypertyChat extends EventEmitter {
 
     return new Promise(function(resolve, reject){
 
-      let chat = new ChatGroup(syncher, _this._hypertyDiscovery);
-
       console.info('------------------------ Syncher subscribe ---------------------- \n');
       console.info(resource);
 
       syncher.subscribe(_this._objectDescURL, resource).then(function(dataObjectObserver) {
         console.info('Data Object Observer: ', dataObjectObserver);
+        let chat = new ChatGroup(syncher, _this._hypertyDiscovery);
         chat.dataObjectObserver = dataObjectObserver;
 
         resolve(chat);
       }).catch(function(reason) {
         reject(reason);
       });
+    });
 
-    })
   }
 
   _mappingUser(userList) {
