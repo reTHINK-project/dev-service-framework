@@ -7,11 +7,16 @@ This doc specifies Messages to be used to manage Identities, where,
 
 #### Relying Party Login
 
-Message sent by the Identity Module function to Identity Management (IDP Proxy) to trigger a Relying Party login. The GUI to support this login will be provided by the IDP Proxy, probably a windows downloaded from the IDP.
+(since the login will be handled by the IDP Proxy this message is an RPC to execute the login)
+<<<<<<< .mine
+
+=======
+Message sent by the Identity Module function to Identity Management (IDP Proxy). Change the body to be compliant with RPC-JSON.
+>>>>>>> .theirs
 
 ```
 "id" : "1"
-"type" : "CREATE",
+"type" : "EXECUTE",
 "from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/id-module",
 "to" : "domain://<idp-domain>",
 "body" : { "resource" : "/identity/<user identifier>/idtoken", "value" : <IdentityDataObject> }
