@@ -73,15 +73,15 @@ package Message <<Rect>> {
 	}
 
 	class MessageType {
-	  	CREATE
-	  	UPDATE
-	  	DELETE
-	  	READ
-	  	SUBSCRIBE
-	  	UNSUBSCRIBE
-	  	RESPONSE
-			FORWARD
-			EXECUTE
+			create
+			update
+			delete
+			read
+			subscribe
+			unsubscribe
+			response
+			forward
+			execute
 	}
 
 	class AttributeType {
