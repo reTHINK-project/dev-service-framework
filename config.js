@@ -27,7 +27,7 @@ System.config({
     "mutationobserver-shim": "npm:mutationobserver-shim@0.3.1",
     "object.observe": "npm:object.observe@0.2.6",
     "ortc-over-rtc": "npm:ortc-over-rtc@0.1.0",
-    "runtime-core": "github:rethink-project/dev-runtime-core@dev-0.3",
+    "runtime-core": "github:rethink-project/dev-runtime-core@master",
     "tr46": "npm:tr46@0.0.2",
     "tv4": "npm:tv4@1.2.7",
     "webrtc-adapter-test": "npm:webrtc-adapter-test@0.2.10",
@@ -104,8 +104,7 @@ System.config({
     "github:jspm/nodelibs-zlib@0.1.0": {
       "browserify-zlib": "npm:browserify-zlib@0.1.4"
     },
-    "github:rethink-project/dev-runtime-core@dev-0.3": {
-      "base64-url": "npm:base64-url@1.2.1",
+    "github:rethink-project/dev-runtime-core@master": {
       "bip39": "npm:bip39@2.2.0",
       "bitcoinjs-lib": "npm:bitcoinjs-lib@2.2.0",
       "hellojs": "npm:hellojs@1.10.1",
@@ -190,9 +189,6 @@ System.config({
       "path": "github:jspm/nodelibs-path@0.1.0",
       "stream": "github:jspm/nodelibs-stream@0.1.0",
       "util": "github:jspm/nodelibs-util@0.1.0"
-    },
-    "npm:base64-url@1.2.1": {
-      "buffer": "github:jspm/nodelibs-buffer@0.1.0"
     },
     "npm:base64id@0.1.0": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
