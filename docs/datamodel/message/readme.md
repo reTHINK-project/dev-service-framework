@@ -100,6 +100,10 @@ Identifies the attribute in the Object that is deleted (optional)
 
 Contains forwarded message.
 
+#### ExecuteMessageBody
+
+Contains the name of method to be invoked and an array and an Array of objects to be passed as parameters to the defined method. This is compliant with [JSON-RPC Spec](http://www.jsonrpc.org/specification).
+
 ### Procedures
 
 #### Request - Response transactions

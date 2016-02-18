@@ -68,8 +68,8 @@ package Message <<Rect>> {
 	}
 
 	class ExecuteMessageBody {
-		executable : string
-		configuration ?: string
+		method : string
+		params ?: array
 	}
 
 	class MessageType {

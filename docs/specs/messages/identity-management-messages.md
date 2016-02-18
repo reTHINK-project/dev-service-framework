@@ -7,7 +7,7 @@ This doc specifies Messages to be used to manage Identities, where,
 
 #### Relying Party Login
 
-Message sent by the Identity Module function to Identity Management (IDP Proxy).
+Message sent by the Identity Module function to Identity Management (IDP Proxy) to trigger a Relying Party login. The GUI to support this login will be provided by the IDP Proxy, probably a windows downloaded from the IDP.
 
 ```
 "id" : "1"
