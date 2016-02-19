@@ -2,7 +2,7 @@
 (Adopted from dev-core-runtime)
 
  - [Tasks](#tasks)
- - [Example](#example)
+ - [Example](/example)
 
 ### How to install this repository like a NPM Module;
 
@@ -148,15 +148,3 @@ The address data factory can be tested independently by calling
 
     cd <base folder>/test
     mocha addressFactoryTest.js
-
-
-### <a id="example">Example</a>
-
-This repository have a folder with an working example of Hyperty Connector and we can send message and make a WebRTC call between remote hyperties through the vertx;
-
-To run the demo on example folder:
- - this example have a dependecy from [dev-msg-node-vertx](https://github.com/reTHINK-project/dev-msg-node-vertx/tree/dev-0.2#unit-testing) and [dev-registry-domain](https://github.com/reTHINK-project/dev-registry-domain#dev-registry-domain) for communication between hyperties in two distinct browsers or tabs. **At this moment you need run locally [dev-msg-node-vertx](https://github.com/reTHINK-project/dev-msg-node-vertx/tree/dev-0.2#unit-testing) and [dev-registry-domain](https://github.com/reTHINK-project/dev-registry-domain#dev-registry-domain)**
- - you need, in the root folder, run command: ``` npm start ```
- - in your browser, access to https://127.0.0.1:8080/example
-
-This example works over https protocol, but how we are running in the 127.0.0.1, this address is considered secure and the webRTC will works well;
