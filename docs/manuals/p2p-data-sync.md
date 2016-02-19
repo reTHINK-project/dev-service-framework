@@ -18,8 +18,6 @@ The API to handle Hyperty Data Objects is extremely simple and fun to use. The D
     console.info('---------------- Syncher Create Reporter Hyperty Data ---------------------- \n');
     syncher.create({}, [hypertyURL], {}).then(function(dataObjectReporter) {
       console.info('1. Return Create Data Object Reporter', dataObjectReporter);
-
-    })
       console.info('--------------- END Create Reporter Hyperty Data------------------ \n');
     })
     .catch(function(reason) {
@@ -42,8 +40,10 @@ On the Hyperty Observer side, Data Objects are also created with the Syncher API
     syncher.subscribe(objectUrl).then(function(dataObjectObserver) {
       console.info('1. Return Subscribe Data Object Observer', dataObjectObserver);
 
-      // TODO: put source code to add listeners to updates by using Object.observer()
-
+      // Source code to add listeners to updates by using Object.observer()      
+      dataObjectObserver.onChange('*', function(event) {
+        console.info('on change event: ', event);
+      });
 
       console.info('------------------------ END ---------------------- \n');
     }).catch(function(reason) {
