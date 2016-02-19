@@ -16,6 +16,7 @@ The example of hyperty chat is running on files **[index2.html](index2.html)/[de
 These examples have an dependecy from [dev-msg-node-vertx](https://github.com/reTHINK-project/dev-msg-node-vertx/tree/dev-0.2#unit-testing) and [dev-registry-domain](https://github.com/reTHINK-project/dev-registry-domain#dev-registry-domain) for communication between hyperties in two distinct browsers or tabs. **At this moment you need run locally [dev-msg-node-vertx](https://github.com/reTHINK-project/dev-msg-node-vertx/tree/dev-0.2#unit-testing) and [dev-registry-domain](https://github.com/reTHINK-project/dev-registry-domain#dev-registry-domain)**
 
 How can start the example:
+
 1. you need, in the root folder, run command: ```npm start```
 2. in your browser, access to:
  - Hyperty Connector: [http://127.0.0.1:8080/example](http://127.0.0.1:8080/example)
