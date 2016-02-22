@@ -3,8 +3,9 @@ import DataObjectObserver from './DataObjectObserver';
 import DataProvisional from './DataProvisional';
 
 /**
- * @author micaelpedrosa@gmail.com
- * Client API Syncronization system.
+ * The main class for the syncher package.
+ * The Syncher is a singleton class per Hyperty/URL and it is the owner of all created Data Sync Objects according to the Reporter - Observer pattern.
+ * Main functionality is to create reporters and to subscribe to existing ones.
  */
 class Syncher {
   /* private
@@ -23,9 +24,9 @@ class Syncher {
 
  /**
   * Constructor that should be used by the Hyperty owner
-  * @param {HypertyURL} owner - Hyperty URL owner
-  * @param {MiniBus} bus - The internal sandbox MiniBus used by the Hyperty
-  * @param {JSON} config - The only required field for now is runtimeURL
+  * @param {HypertyURL} owner - Hyperty URL owner. An URL allocated by the runtime that uniquely identifies the Hyperty.
+  * @param {MiniBus} bus - An instance of the MiniBus provided in the sandbox. When an object (Reporter or Observed) is created, the SyncherManager will add a listener in the MiniBus to receive/send Messages of that object.
+  * @param {JSON} config - Configuration data. The only required field for now is the runtimeURL.
   */
  constructor(owner, bus, config) {
    let _this = this;

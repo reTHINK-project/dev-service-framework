@@ -1,68 +1,23 @@
 {
   "type": "Program",
+  "start": 0,
+  "end": 800,
+  "loc": {
+    "start": {
+      "line": 1,
+      "column": 0
+    },
+    "end": {
+      "line": 16,
+      "column": 0
+    }
+  },
+  "sourceType": "module",
   "body": [
     {
       "type": "ImportDeclaration",
-      "specifiers": [
-        {
-          "type": "ImportDefaultSpecifier",
-          "local": {
-            "type": "Identifier",
-            "name": "CatalogueFactory",
-            "range": [
-              63,
-              79
-            ],
-            "loc": {
-              "start": {
-                "line": 2,
-                "column": 7
-              },
-              "end": {
-                "line": 2,
-                "column": 23
-              }
-            }
-          },
-          "range": [
-            63,
-            79
-          ],
-          "loc": {
-            "start": {
-              "line": 2,
-              "column": 7
-            },
-            "end": {
-              "line": 2,
-              "column": 23
-            }
-          }
-        }
-      ],
-      "source": {
-        "type": "Literal",
-        "value": "./catalogue-factory/CatalogueDataObjectFactory",
-        "raw": "'./catalogue-factory/CatalogueDataObjectFactory'",
-        "range": [
-          85,
-          133
-        ],
-        "loc": {
-          "start": {
-            "line": 2,
-            "column": 29
-          },
-          "end": {
-            "line": 2,
-            "column": 77
-          }
-        }
-      },
-      "range": [
-        56,
-        134
-      ],
+      "start": 56,
+      "end": 134,
       "loc": {
         "start": {
           "line": 2,
@@ -73,14 +28,66 @@
           "column": 78
         }
       },
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "start": 63,
+          "end": 79,
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 7
+            },
+            "end": {
+              "line": 2,
+              "column": 23
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 63,
+            "end": 79,
+            "loc": {
+              "start": {
+                "line": 2,
+                "column": 7
+              },
+              "end": {
+                "line": 2,
+                "column": 23
+              }
+            },
+            "name": "CatalogueFactory",
+            "leadingComments": null
+          },
+          "leadingComments": null
+        }
+      ],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "start": 85,
+        "end": 133,
+        "loc": {
+          "start": {
+            "line": 2,
+            "column": 29
+          },
+          "end": {
+            "line": 2,
+            "column": 77
+          }
+        },
+        "value": "./catalogue-factory/CatalogueDataObjectFactory",
+        "rawValue": "./catalogue-factory/CatalogueDataObjectFactory",
+        "raw": "'./catalogue-factory/CatalogueDataObjectFactory'"
+      },
       "leadingComments": [
         {
-          "type": "Line",
+          "type": "CommentLine",
           "value": " import AddressFactory from './address-factory/url';",
-          "range": [
-            0,
-            54
-          ],
+          "start": 0,
+          "end": 54,
           "loc": {
             "start": {
               "line": 1,
@@ -90,37 +97,33 @@
               "line": 1,
               "column": 54
             }
-          }
+          },
+          "range": [
+            0,
+            54
+          ]
         }
       ]
     },
     {
       "type": "ImportDeclaration",
+      "start": 136,
+      "end": 198,
+      "loc": {
+        "start": {
+          "line": 3,
+          "column": 0
+        },
+        "end": {
+          "line": 3,
+          "column": 62
+        }
+      },
       "specifiers": [
         {
           "type": "ImportDefaultSpecifier",
-          "local": {
-            "type": "Identifier",
-            "name": "MessageFactory",
-            "range": [
-              143,
-              157
-            ],
-            "loc": {
-              "start": {
-                "line": 3,
-                "column": 7
-              },
-              "end": {
-                "line": 3,
-                "column": 21
-              }
-            }
-          },
-          "range": [
-            143,
-            157
-          ],
+          "start": 143,
+          "end": 157,
           "loc": {
             "start": {
               "line": 3,
@@ -130,17 +133,30 @@
               "line": 3,
               "column": 21
             }
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 143,
+            "end": 157,
+            "loc": {
+              "start": {
+                "line": 3,
+                "column": 7
+              },
+              "end": {
+                "line": 3,
+                "column": 21
+              }
+            },
+            "name": "MessageFactory"
           }
         }
       ],
+      "importKind": "value",
       "source": {
         "type": "Literal",
-        "value": "./message-factory/MessageFactory",
-        "raw": "'./message-factory/MessageFactory'",
-        "range": [
-          163,
-          197
-        ],
+        "start": 163,
+        "end": 197,
         "loc": {
           "start": {
             "line": 3,
@@ -150,85 +166,16 @@
             "line": 3,
             "column": 61
           }
-        }
-      },
-      "range": [
-        136,
-        198
-      ],
-      "loc": {
-        "start": {
-          "line": 3,
-          "column": 0
         },
-        "end": {
-          "line": 3,
-          "column": 62
-        }
+        "value": "./message-factory/MessageFactory",
+        "rawValue": "./message-factory/MessageFactory",
+        "raw": "'./message-factory/MessageFactory'"
       }
     },
     {
       "type": "ImportDeclaration",
-      "specifiers": [
-        {
-          "type": "ImportDefaultSpecifier",
-          "local": {
-            "type": "Identifier",
-            "name": "Syncher",
-            "range": [
-              207,
-              214
-            ],
-            "loc": {
-              "start": {
-                "line": 4,
-                "column": 7
-              },
-              "end": {
-                "line": 4,
-                "column": 14
-              }
-            }
-          },
-          "range": [
-            207,
-            214
-          ],
-          "loc": {
-            "start": {
-              "line": 4,
-              "column": 7
-            },
-            "end": {
-              "line": 4,
-              "column": 14
-            }
-          }
-        }
-      ],
-      "source": {
-        "type": "Literal",
-        "value": "./syncher/Syncher",
-        "raw": "'./syncher/Syncher'",
-        "range": [
-          220,
-          239
-        ],
-        "loc": {
-          "start": {
-            "line": 4,
-            "column": 20
-          },
-          "end": {
-            "line": 4,
-            "column": 39
-          }
-        }
-      },
-      "range": [
-        200,
-        240
-      ],
+      "start": 200,
+      "end": 240,
       "loc": {
         "start": {
           "line": 4,
@@ -238,35 +185,79 @@
           "line": 4,
           "column": 40
         }
+      },
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "start": 207,
+          "end": 214,
+          "loc": {
+            "start": {
+              "line": 4,
+              "column": 7
+            },
+            "end": {
+              "line": 4,
+              "column": 14
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 207,
+            "end": 214,
+            "loc": {
+              "start": {
+                "line": 4,
+                "column": 7
+              },
+              "end": {
+                "line": 4,
+                "column": 14
+              }
+            },
+            "name": "Syncher"
+          }
+        }
+      ],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "start": 220,
+        "end": 239,
+        "loc": {
+          "start": {
+            "line": 4,
+            "column": 20
+          },
+          "end": {
+            "line": 4,
+            "column": 39
+          }
+        },
+        "value": "./syncher/Syncher",
+        "rawValue": "./syncher/Syncher",
+        "raw": "'./syncher/Syncher'"
       }
     },
     {
       "type": "ImportDeclaration",
+      "start": 242,
+      "end": 304,
+      "loc": {
+        "start": {
+          "line": 5,
+          "column": 0
+        },
+        "end": {
+          "line": 5,
+          "column": 62
+        }
+      },
       "specifiers": [
         {
           "type": "ImportDefaultSpecifier",
-          "local": {
-            "type": "Identifier",
-            "name": "DataObjectReporter",
-            "range": [
-              249,
-              267
-            ],
-            "loc": {
-              "start": {
-                "line": 5,
-                "column": 7
-              },
-              "end": {
-                "line": 5,
-                "column": 25
-              }
-            }
-          },
-          "range": [
-            249,
-            267
-          ],
+          "start": 249,
+          "end": 267,
           "loc": {
             "start": {
               "line": 5,
@@ -276,70 +267,64 @@
               "line": 5,
               "column": 25
             }
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 249,
+            "end": 267,
+            "loc": {
+              "start": {
+                "line": 5,
+                "column": 7
+              },
+              "end": {
+                "line": 5,
+                "column": 25
+              }
+            },
+            "name": "DataObjectReporter"
           }
         }
       ],
+      "importKind": "value",
       "source": {
         "type": "Literal",
+        "start": 273,
+        "end": 303,
+        "loc": {
+          "start": {
+            "line": 5,
+            "column": 31
+          },
+          "end": {
+            "line": 5,
+            "column": 61
+          }
+        },
         "value": "./syncher/DataObjectReporter",
-        "raw": "'./syncher/DataObjectReporter'",
-        "range": [
-          273,
-          303
-        ],
-        "loc": {
-          "start": {
-            "line": 5,
-            "column": 31
-          },
-          "end": {
-            "line": 5,
-            "column": 61
-          }
-        }
-      },
-      "range": [
-        242,
-        304
-      ],
-      "loc": {
-        "start": {
-          "line": 5,
-          "column": 0
-        },
-        "end": {
-          "line": 5,
-          "column": 62
-        }
+        "rawValue": "./syncher/DataObjectReporter",
+        "raw": "'./syncher/DataObjectReporter'"
       }
     },
     {
       "type": "ImportDeclaration",
+      "start": 306,
+      "end": 368,
+      "loc": {
+        "start": {
+          "line": 6,
+          "column": 0
+        },
+        "end": {
+          "line": 6,
+          "column": 62
+        }
+      },
       "specifiers": [
         {
           "type": "ImportDefaultSpecifier",
-          "local": {
-            "type": "Identifier",
-            "name": "DataObjectObserver",
-            "range": [
-              313,
-              331
-            ],
-            "loc": {
-              "start": {
-                "line": 6,
-                "column": 7
-              },
-              "end": {
-                "line": 6,
-                "column": 25
-              }
-            }
-          },
-          "range": [
-            313,
-            331
-          ],
+          "start": 313,
+          "end": 331,
           "loc": {
             "start": {
               "line": 6,
@@ -349,17 +334,30 @@
               "line": 6,
               "column": 25
             }
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 313,
+            "end": 331,
+            "loc": {
+              "start": {
+                "line": 6,
+                "column": 7
+              },
+              "end": {
+                "line": 6,
+                "column": 25
+              }
+            },
+            "name": "DataObjectObserver"
           }
         }
       ],
+      "importKind": "value",
       "source": {
         "type": "Literal",
-        "value": "./syncher/DataObjectObserver",
-        "raw": "'./syncher/DataObjectObserver'",
-        "range": [
-          337,
-          367
-        ],
+        "start": 337,
+        "end": 367,
         "loc": {
           "start": {
             "line": 6,
@@ -369,85 +367,16 @@
             "line": 6,
             "column": 61
           }
-        }
-      },
-      "range": [
-        306,
-        368
-      ],
-      "loc": {
-        "start": {
-          "line": 6,
-          "column": 0
         },
-        "end": {
-          "line": 6,
-          "column": 62
-        }
+        "value": "./syncher/DataObjectObserver",
+        "rawValue": "./syncher/DataObjectObserver",
+        "raw": "'./syncher/DataObjectObserver'"
       }
     },
     {
       "type": "ImportDeclaration",
-      "specifiers": [
-        {
-          "type": "ImportDefaultSpecifier",
-          "local": {
-            "type": "Identifier",
-            "name": "HypertyConnector",
-            "range": [
-              377,
-              393
-            ],
-            "loc": {
-              "start": {
-                "line": 7,
-                "column": 7
-              },
-              "end": {
-                "line": 7,
-                "column": 23
-              }
-            }
-          },
-          "range": [
-            377,
-            393
-          ],
-          "loc": {
-            "start": {
-              "line": 7,
-              "column": 7
-            },
-            "end": {
-              "line": 7,
-              "column": 23
-            }
-          }
-        }
-      ],
-      "source": {
-        "type": "Literal",
-        "value": "./hyperty/HypertyConnector",
-        "raw": "'./hyperty/HypertyConnector'",
-        "range": [
-          399,
-          427
-        ],
-        "loc": {
-          "start": {
-            "line": 7,
-            "column": 29
-          },
-          "end": {
-            "line": 7,
-            "column": 57
-          }
-        }
-      },
-      "range": [
-        370,
-        428
-      ],
+      "start": 370,
+      "end": 440,
       "loc": {
         "start": {
           "line": 7,
@@ -455,72 +384,66 @@
         },
         "end": {
           "line": 7,
-          "column": 58
+          "column": 70
         }
-      }
-    },
-    {
-      "type": "ImportDeclaration",
+      },
       "specifiers": [
         {
           "type": "ImportDefaultSpecifier",
-          "local": {
-            "type": "Identifier",
-            "name": "HypertyDescriptor",
-            "range": [
-              437,
-              454
-            ],
-            "loc": {
-              "start": {
-                "line": 8,
-                "column": 7
-              },
-              "end": {
-                "line": 8,
-                "column": 24
-              }
-            }
-          },
-          "range": [
-            437,
-            454
-          ],
+          "start": 377,
+          "end": 394,
           "loc": {
             "start": {
-              "line": 8,
+              "line": 7,
               "column": 7
             },
             "end": {
-              "line": 8,
+              "line": 7,
               "column": 24
             }
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 377,
+            "end": 394,
+            "loc": {
+              "start": {
+                "line": 7,
+                "column": 7
+              },
+              "end": {
+                "line": 7,
+                "column": 24
+              }
+            },
+            "name": "HypertyDescriptor"
           }
         }
       ],
+      "importKind": "value",
       "source": {
         "type": "Literal",
-        "value": "./catalogue-factory/HypertyDescriptor",
-        "raw": "'./catalogue-factory/HypertyDescriptor'",
-        "range": [
-          460,
-          499
-        ],
+        "start": 400,
+        "end": 439,
         "loc": {
           "start": {
-            "line": 8,
+            "line": 7,
             "column": 30
           },
           "end": {
-            "line": 8,
+            "line": 7,
             "column": 69
           }
-        }
-      },
-      "range": [
-        430,
-        500
-      ],
+        },
+        "value": "./catalogue-factory/HypertyDescriptor",
+        "rawValue": "./catalogue-factory/HypertyDescriptor",
+        "raw": "'./catalogue-factory/HypertyDescriptor'"
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "start": 442,
+      "end": 522,
       "loc": {
         "start": {
           "line": 8,
@@ -528,333 +451,333 @@
         },
         "end": {
           "line": 8,
-          "column": 70
+          "column": 80
         }
-      }
-    },
-    {
-      "type": "ImportDeclaration",
+      },
       "specifiers": [
         {
           "type": "ImportDefaultSpecifier",
-          "local": {
-            "type": "Identifier",
-            "name": "ProtocolStubDescriptor",
-            "range": [
-              509,
-              531
-            ],
-            "loc": {
-              "start": {
-                "line": 9,
-                "column": 7
-              },
-              "end": {
-                "line": 9,
-                "column": 29
-              }
-            }
-          },
-          "range": [
-            509,
-            531
-          ],
+          "start": 449,
+          "end": 471,
           "loc": {
             "start": {
-              "line": 9,
+              "line": 8,
               "column": 7
             },
             "end": {
-              "line": 9,
+              "line": 8,
               "column": 29
             }
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 449,
+            "end": 471,
+            "loc": {
+              "start": {
+                "line": 8,
+                "column": 7
+              },
+              "end": {
+                "line": 8,
+                "column": 29
+              }
+            },
+            "name": "ProtocolStubDescriptor"
           }
         }
       ],
+      "importKind": "value",
       "source": {
         "type": "Literal",
-        "value": "./catalogue-factory/ProtocolStubDescriptor",
-        "raw": "'./catalogue-factory/ProtocolStubDescriptor'",
-        "range": [
-          537,
-          581
-        ],
+        "start": 477,
+        "end": 521,
         "loc": {
           "start": {
-            "line": 9,
+            "line": 8,
             "column": 35
           },
           "end": {
-            "line": 9,
+            "line": 8,
             "column": 79
           }
-        }
-      },
-      "range": [
-        502,
-        582
-      ],
-      "loc": {
-        "start": {
-          "line": 9,
-          "column": 0
         },
-        "end": {
-          "line": 9,
-          "column": 80
-        }
+        "value": "./catalogue-factory/ProtocolStubDescriptor",
+        "rawValue": "./catalogue-factory/ProtocolStubDescriptor",
+        "raw": "'./catalogue-factory/ProtocolStubDescriptor'"
       }
     },
     {
       "type": "ImportDeclaration",
-      "specifiers": [
-        {
-          "type": "ImportDefaultSpecifier",
-          "local": {
-            "type": "Identifier",
-            "name": "SourcePackage",
-            "range": [
-              591,
-              604
-            ],
-            "loc": {
-              "start": {
-                "line": 10,
-                "column": 7
-              },
-              "end": {
-                "line": 10,
-                "column": 20
-              }
-            }
-          },
-          "range": [
-            591,
-            604
-          ],
-          "loc": {
-            "start": {
-              "line": 10,
-              "column": 7
-            },
-            "end": {
-              "line": 10,
-              "column": 20
-            }
-          }
-        }
-      ],
-      "source": {
-        "type": "Literal",
-        "value": "./catalogue-factory/SourcePackage",
-        "raw": "'./catalogue-factory/SourcePackage'",
-        "range": [
-          610,
-          645
-        ],
-        "loc": {
-          "start": {
-            "line": 10,
-            "column": 26
-          },
-          "end": {
-            "line": 10,
-            "column": 61
-          }
-        }
-      },
-      "range": [
-        584,
-        646
-      ],
+      "start": 524,
+      "end": 586,
       "loc": {
         "start": {
-          "line": 10,
+          "line": 9,
           "column": 0
         },
         "end": {
-          "line": 10,
+          "line": 9,
           "column": 62
         }
       },
-      "trailingComments": [
+      "specifiers": [
         {
-          "type": "Line",
-          "value": " export {AddressFactory};",
-          "range": [
-            650,
-            677
-          ],
+          "type": "ImportDefaultSpecifier",
+          "start": 531,
+          "end": 544,
           "loc": {
             "start": {
-              "line": 12,
+              "line": 9,
+              "column": 7
+            },
+            "end": {
+              "line": 9,
+              "column": 20
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 531,
+            "end": 544,
+            "loc": {
+              "start": {
+                "line": 9,
+                "column": 7
+              },
+              "end": {
+                "line": 9,
+                "column": 20
+              }
+            },
+            "name": "SourcePackage"
+          }
+        }
+      ],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "start": 550,
+        "end": 585,
+        "loc": {
+          "start": {
+            "line": 9,
+            "column": 26
+          },
+          "end": {
+            "line": 9,
+            "column": 61
+          }
+        },
+        "value": "./catalogue-factory/SourcePackage",
+        "rawValue": "./catalogue-factory/SourcePackage",
+        "raw": "'./catalogue-factory/SourcePackage'"
+      },
+      "trailingComments": [
+        {
+          "type": "CommentLine",
+          "value": " export {AddressFactory};",
+          "start": 590,
+          "end": 617,
+          "loc": {
+            "start": {
+              "line": 11,
               "column": 0
             },
             "end": {
-              "line": 12,
+              "line": 11,
               "column": 27
             }
-          }
+          },
+          "range": [
+            590,
+            617
+          ]
         }
       ]
     },
     {
       "type": "ExportNamedDeclaration",
-      "declaration": null,
-      "specifiers": [
-        {
-          "type": "ExportSpecifier",
-          "exported": {
-            "type": "Identifier",
-            "name": "CatalogueFactory",
-            "range": [
-              687,
-              703
-            ],
-            "loc": {
-              "start": {
-                "line": 13,
-                "column": 8
-              },
-              "end": {
-                "line": 13,
-                "column": 24
-              }
-            }
-          },
-          "local": {
-            "type": "Identifier",
-            "name": "CatalogueFactory",
-            "range": [
-              687,
-              703
-            ],
-            "loc": {
-              "start": {
-                "line": 13,
-                "column": 8
-              },
-              "end": {
-                "line": 13,
-                "column": 24
-              }
-            }
-          },
-          "range": [
-            687,
-            703
-          ],
-          "loc": {
-            "start": {
-              "line": 13,
-              "column": 8
-            },
-            "end": {
-              "line": 13,
-              "column": 24
-            }
-          }
-        }
-      ],
-      "source": null,
-      "range": [
-        679,
-        705
-      ],
+      "start": 619,
+      "end": 645,
       "loc": {
         "start": {
-          "line": 13,
+          "line": 12,
           "column": 0
         },
         "end": {
-          "line": 13,
+          "line": 12,
           "column": 26
         }
       },
-      "leadingComments": [
+      "declaration": null,
+      "specifiers": [
         {
-          "type": "Line",
-          "value": " export {AddressFactory};",
-          "range": [
-            650,
-            677
-          ],
+          "type": "ExportSpecifier",
+          "start": 627,
+          "end": 643,
           "loc": {
             "start": {
               "line": 12,
-              "column": 0
+              "column": 8
             },
             "end": {
               "line": 12,
+              "column": 24
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 627,
+            "end": 643,
+            "loc": {
+              "start": {
+                "line": 12,
+                "column": 8
+              },
+              "end": {
+                "line": 12,
+                "column": 24
+              }
+            },
+            "name": "CatalogueFactory",
+            "leadingComments": null
+          },
+          "exported": {
+            "type": "Identifier",
+            "start": 627,
+            "end": 643,
+            "loc": {
+              "start": {
+                "line": 12,
+                "column": 8
+              },
+              "end": {
+                "line": 12,
+                "column": 24
+              }
+            },
+            "name": "CatalogueFactory",
+            "leadingComments": [
+              {
+                "type": "CommentLine",
+                "value": " export {AddressFactory};",
+                "start": 590,
+                "end": 617,
+                "loc": {
+                  "start": {
+                    "line": 11,
+                    "column": 0
+                  },
+                  "end": {
+                    "line": 11,
+                    "column": 27
+                  }
+                },
+                "range": [
+                  590,
+                  617
+                ]
+              }
+            ]
+          },
+          "leadingComments": null
+        }
+      ],
+      "source": null,
+      "leadingComments": [
+        {
+          "type": "CommentLine",
+          "value": " export {AddressFactory};",
+          "start": 590,
+          "end": 617,
+          "loc": {
+            "start": {
+              "line": 11,
+              "column": 0
+            },
+            "end": {
+              "line": 11,
               "column": 27
             }
-          }
+          },
+          "range": [
+            590,
+            617
+          ]
         }
       ]
     },
     {
       "type": "ExportNamedDeclaration",
+      "start": 647,
+      "end": 671,
+      "loc": {
+        "start": {
+          "line": 13,
+          "column": 0
+        },
+        "end": {
+          "line": 13,
+          "column": 24
+        }
+      },
       "declaration": null,
       "specifiers": [
         {
           "type": "ExportSpecifier",
-          "exported": {
-            "type": "Identifier",
-            "name": "MessageFactory",
-            "range": [
-              715,
-              729
-            ],
-            "loc": {
-              "start": {
-                "line": 14,
-                "column": 8
-              },
-              "end": {
-                "line": 14,
-                "column": 22
-              }
+          "start": 655,
+          "end": 669,
+          "loc": {
+            "start": {
+              "line": 13,
+              "column": 8
+            },
+            "end": {
+              "line": 13,
+              "column": 22
             }
           },
           "local": {
             "type": "Identifier",
-            "name": "MessageFactory",
-            "range": [
-              715,
-              729
-            ],
+            "start": 655,
+            "end": 669,
             "loc": {
               "start": {
-                "line": 14,
+                "line": 13,
                 "column": 8
               },
               "end": {
-                "line": 14,
+                "line": 13,
                 "column": 22
               }
-            }
-          },
-          "range": [
-            715,
-            729
-          ],
-          "loc": {
-            "start": {
-              "line": 14,
-              "column": 8
             },
-            "end": {
-              "line": 14,
-              "column": 22
-            }
+            "name": "MessageFactory"
+          },
+          "exported": {
+            "type": "Identifier",
+            "start": 655,
+            "end": 669,
+            "loc": {
+              "start": {
+                "line": 13,
+                "column": 8
+              },
+              "end": {
+                "line": 13,
+                "column": 22
+              }
+            },
+            "name": "MessageFactory"
           }
         }
       ],
-      "source": null,
-      "range": [
-        707,
-        731
-      ],
+      "source": null
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "start": 673,
+      "end": 730,
       "loc": {
         "start": {
           "line": 14,
@@ -862,179 +785,159 @@
         },
         "end": {
           "line": 14,
-          "column": 24
+          "column": 57
         }
-      }
-    },
-    {
-      "type": "ExportNamedDeclaration",
+      },
       "declaration": null,
       "specifiers": [
         {
           "type": "ExportSpecifier",
-          "exported": {
-            "type": "Identifier",
-            "name": "Syncher",
-            "range": [
-              741,
-              748
-            ],
-            "loc": {
-              "start": {
-                "line": 15,
-                "column": 8
-              },
-              "end": {
-                "line": 15,
-                "column": 15
-              }
+          "start": 681,
+          "end": 688,
+          "loc": {
+            "start": {
+              "line": 14,
+              "column": 8
+            },
+            "end": {
+              "line": 14,
+              "column": 15
             }
           },
           "local": {
             "type": "Identifier",
-            "name": "Syncher",
-            "range": [
-              741,
-              748
-            ],
+            "start": 681,
+            "end": 688,
             "loc": {
               "start": {
-                "line": 15,
+                "line": 14,
                 "column": 8
               },
               "end": {
-                "line": 15,
+                "line": 14,
                 "column": 15
               }
-            }
-          },
-          "range": [
-            741,
-            748
-          ],
-          "loc": {
-            "start": {
-              "line": 15,
-              "column": 8
             },
-            "end": {
-              "line": 15,
-              "column": 15
-            }
+            "name": "Syncher"
+          },
+          "exported": {
+            "type": "Identifier",
+            "start": 681,
+            "end": 688,
+            "loc": {
+              "start": {
+                "line": 14,
+                "column": 8
+              },
+              "end": {
+                "line": 14,
+                "column": 15
+              }
+            },
+            "name": "Syncher"
           }
         },
         {
           "type": "ExportSpecifier",
-          "exported": {
-            "type": "Identifier",
-            "name": "DataObjectReporter",
-            "range": [
-              750,
-              768
-            ],
-            "loc": {
-              "start": {
-                "line": 15,
-                "column": 17
-              },
-              "end": {
-                "line": 15,
-                "column": 35
-              }
-            }
-          },
-          "local": {
-            "type": "Identifier",
-            "name": "DataObjectReporter",
-            "range": [
-              750,
-              768
-            ],
-            "loc": {
-              "start": {
-                "line": 15,
-                "column": 17
-              },
-              "end": {
-                "line": 15,
-                "column": 35
-              }
-            }
-          },
-          "range": [
-            750,
-            768
-          ],
+          "start": 690,
+          "end": 708,
           "loc": {
             "start": {
-              "line": 15,
+              "line": 14,
               "column": 17
             },
             "end": {
-              "line": 15,
+              "line": 14,
               "column": 35
-            }
-          }
-        },
-        {
-          "type": "ExportSpecifier",
-          "exported": {
-            "type": "Identifier",
-            "name": "DataObjectObserver",
-            "range": [
-              770,
-              788
-            ],
-            "loc": {
-              "start": {
-                "line": 15,
-                "column": 37
-              },
-              "end": {
-                "line": 15,
-                "column": 55
-              }
             }
           },
           "local": {
             "type": "Identifier",
-            "name": "DataObjectObserver",
-            "range": [
-              770,
-              788
-            ],
+            "start": 690,
+            "end": 708,
             "loc": {
               "start": {
-                "line": 15,
-                "column": 37
+                "line": 14,
+                "column": 17
               },
               "end": {
-                "line": 15,
-                "column": 55
+                "line": 14,
+                "column": 35
               }
-            }
+            },
+            "name": "DataObjectReporter"
           },
-          "range": [
-            770,
-            788
-          ],
+          "exported": {
+            "type": "Identifier",
+            "start": 690,
+            "end": 708,
+            "loc": {
+              "start": {
+                "line": 14,
+                "column": 17
+              },
+              "end": {
+                "line": 14,
+                "column": 35
+              }
+            },
+            "name": "DataObjectReporter"
+          }
+        },
+        {
+          "type": "ExportSpecifier",
+          "start": 710,
+          "end": 728,
           "loc": {
             "start": {
-              "line": 15,
+              "line": 14,
               "column": 37
             },
             "end": {
-              "line": 15,
+              "line": 14,
               "column": 55
             }
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 710,
+            "end": 728,
+            "loc": {
+              "start": {
+                "line": 14,
+                "column": 37
+              },
+              "end": {
+                "line": 14,
+                "column": 55
+              }
+            },
+            "name": "DataObjectObserver"
+          },
+          "exported": {
+            "type": "Identifier",
+            "start": 710,
+            "end": 728,
+            "loc": {
+              "start": {
+                "line": 14,
+                "column": 37
+              },
+              "end": {
+                "line": 14,
+                "column": 55
+              }
+            },
+            "name": "DataObjectObserver"
           }
         }
       ],
-      "source": null,
-      "range": [
-        733,
-        790
-      ],
+      "source": null
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "start": 732,
+      "end": 798,
       "loc": {
         "start": {
           "line": 15,
@@ -1042,316 +945,154 @@
         },
         "end": {
           "line": 15,
-          "column": 57
+          "column": 66
         }
-      }
-    },
-    {
-      "type": "ExportNamedDeclaration",
+      },
       "declaration": null,
       "specifiers": [
         {
           "type": "ExportSpecifier",
-          "exported": {
-            "type": "Identifier",
-            "name": "HypertyConnector",
-            "range": [
-              800,
-              816
-            ],
-            "loc": {
-              "start": {
-                "line": 16,
-                "column": 8
-              },
-              "end": {
-                "line": 16,
-                "column": 24
-              }
-            }
-          },
-          "local": {
-            "type": "Identifier",
-            "name": "HypertyConnector",
-            "range": [
-              800,
-              816
-            ],
-            "loc": {
-              "start": {
-                "line": 16,
-                "column": 8
-              },
-              "end": {
-                "line": 16,
-                "column": 24
-              }
-            }
-          },
-          "range": [
-            800,
-            816
-          ],
+          "start": 740,
+          "end": 757,
           "loc": {
             "start": {
-              "line": 16,
+              "line": 15,
               "column": 8
             },
             "end": {
-              "line": 16,
-              "column": 24
-            }
-          }
-        }
-      ],
-      "source": null,
-      "range": [
-        792,
-        818
-      ],
-      "loc": {
-        "start": {
-          "line": 16,
-          "column": 0
-        },
-        "end": {
-          "line": 16,
-          "column": 26
-        }
-      }
-    },
-    {
-      "type": "ExportNamedDeclaration",
-      "declaration": null,
-      "specifiers": [
-        {
-          "type": "ExportSpecifier",
-          "exported": {
-            "type": "Identifier",
-            "name": "HypertyDescriptor",
-            "range": [
-              828,
-              845
-            ],
-            "loc": {
-              "start": {
-                "line": 17,
-                "column": 8
-              },
-              "end": {
-                "line": 17,
-                "column": 25
-              }
-            }
-          },
-          "local": {
-            "type": "Identifier",
-            "name": "HypertyDescriptor",
-            "range": [
-              828,
-              845
-            ],
-            "loc": {
-              "start": {
-                "line": 17,
-                "column": 8
-              },
-              "end": {
-                "line": 17,
-                "column": 25
-              }
-            }
-          },
-          "range": [
-            828,
-            845
-          ],
-          "loc": {
-            "start": {
-              "line": 17,
-              "column": 8
-            },
-            "end": {
-              "line": 17,
+              "line": 15,
               "column": 25
             }
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 740,
+            "end": 757,
+            "loc": {
+              "start": {
+                "line": 15,
+                "column": 8
+              },
+              "end": {
+                "line": 15,
+                "column": 25
+              }
+            },
+            "name": "HypertyDescriptor"
+          },
+          "exported": {
+            "type": "Identifier",
+            "start": 740,
+            "end": 757,
+            "loc": {
+              "start": {
+                "line": 15,
+                "column": 8
+              },
+              "end": {
+                "line": 15,
+                "column": 25
+              }
+            },
+            "name": "HypertyDescriptor"
           }
         },
         {
           "type": "ExportSpecifier",
-          "exported": {
-            "type": "Identifier",
-            "name": "ProtocolStubDescriptor",
-            "range": [
-              847,
-              869
-            ],
-            "loc": {
-              "start": {
-                "line": 17,
-                "column": 27
-              },
-              "end": {
-                "line": 17,
-                "column": 49
-              }
-            }
-          },
-          "local": {
-            "type": "Identifier",
-            "name": "ProtocolStubDescriptor",
-            "range": [
-              847,
-              869
-            ],
-            "loc": {
-              "start": {
-                "line": 17,
-                "column": 27
-              },
-              "end": {
-                "line": 17,
-                "column": 49
-              }
-            }
-          },
-          "range": [
-            847,
-            869
-          ],
+          "start": 759,
+          "end": 781,
           "loc": {
             "start": {
-              "line": 17,
+              "line": 15,
               "column": 27
             },
             "end": {
-              "line": 17,
+              "line": 15,
               "column": 49
-            }
-          }
-        },
-        {
-          "type": "ExportSpecifier",
-          "exported": {
-            "type": "Identifier",
-            "name": "SourcePackage",
-            "range": [
-              871,
-              884
-            ],
-            "loc": {
-              "start": {
-                "line": 17,
-                "column": 51
-              },
-              "end": {
-                "line": 17,
-                "column": 64
-              }
             }
           },
           "local": {
             "type": "Identifier",
-            "name": "SourcePackage",
-            "range": [
-              871,
-              884
-            ],
+            "start": 759,
+            "end": 781,
             "loc": {
               "start": {
-                "line": 17,
-                "column": 51
+                "line": 15,
+                "column": 27
               },
               "end": {
-                "line": 17,
-                "column": 64
+                "line": 15,
+                "column": 49
               }
-            }
+            },
+            "name": "ProtocolStubDescriptor"
           },
-          "range": [
-            871,
-            884
-          ],
+          "exported": {
+            "type": "Identifier",
+            "start": 759,
+            "end": 781,
+            "loc": {
+              "start": {
+                "line": 15,
+                "column": 27
+              },
+              "end": {
+                "line": 15,
+                "column": 49
+              }
+            },
+            "name": "ProtocolStubDescriptor"
+          }
+        },
+        {
+          "type": "ExportSpecifier",
+          "start": 783,
+          "end": 796,
           "loc": {
             "start": {
-              "line": 17,
+              "line": 15,
               "column": 51
             },
             "end": {
-              "line": 17,
+              "line": 15,
               "column": 64
             }
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 783,
+            "end": 796,
+            "loc": {
+              "start": {
+                "line": 15,
+                "column": 51
+              },
+              "end": {
+                "line": 15,
+                "column": 64
+              }
+            },
+            "name": "SourcePackage"
+          },
+          "exported": {
+            "type": "Identifier",
+            "start": 783,
+            "end": 796,
+            "loc": {
+              "start": {
+                "line": 15,
+                "column": 51
+              },
+              "end": {
+                "line": 15,
+                "column": 64
+              }
+            },
+            "name": "SourcePackage"
           }
         }
       ],
-      "source": null,
-      "range": [
-        820,
-        886
-      ],
-      "loc": {
-        "start": {
-          "line": 17,
-          "column": 0
-        },
-        "end": {
-          "line": 17,
-          "column": 66
-        }
-      }
-    }
-  ],
-  "sourceType": "module",
-  "range": [
-    56,
-    886
-  ],
-  "loc": {
-    "start": {
-      "line": 2,
-      "column": 0
-    },
-    "end": {
-      "line": 17,
-      "column": 66
-    }
-  },
-  "comments": [
-    {
-      "type": "Line",
-      "value": " import AddressFactory from './address-factory/url';",
-      "range": [
-        0,
-        54
-      ],
-      "loc": {
-        "start": {
-          "line": 1,
-          "column": 0
-        },
-        "end": {
-          "line": 1,
-          "column": 54
-        }
-      }
-    },
-    {
-      "type": "Line",
-      "value": " export {AddressFactory};",
-      "range": [
-        650,
-        677
-      ],
-      "loc": {
-        "start": {
-          "line": 12,
-          "column": 0
-        },
-        "end": {
-          "line": 12,
-          "column": 27
-        }
-      }
+      "source": null
     }
   ]
 }

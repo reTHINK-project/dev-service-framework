@@ -1,5 +1,9 @@
 import SyncObject from './SyncObject';
 
+/**
+ * The class returned from the DataObject addChildren call or from onAddChildren if remotely created.
+ * Children object synchronization is a a fast forward mechanism, no need for direct subscriptions, it uses the already authorized subscription from the parent DataObject.
+ */
 class DataObjectChild /* implements SyncStatus */ {
   /* private
 

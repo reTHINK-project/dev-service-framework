@@ -3,6 +3,10 @@ import DataObjectChild from './DataObjectChild';
 import { ChangeType, ObjectType } from './SyncObject';
 import {deepClone} from '../utils/utils.js';
 
+/**
+ * Main extension class for observers and reporters, with common properties and methods.
+ * Children management is common for observers and reporters.
+ */
 class DataObject {
   /* private
   _version: number

@@ -1,6 +1,10 @@
 import DataObject from './DataObject';
 import { deepClone } from '../utils/utils.js';
 
+/**
+ * The class returned from the Syncher create call.
+ * To be used as a reporter point, changes will be submited to DataObjectObserver instances.
+ */
 class DataObjectReporter extends DataObject /* implements SyncStatus */ {
   /* private
   _subscriptions: <hypertyUrl: { status: string } }>

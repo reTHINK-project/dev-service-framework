@@ -1,14 +1,10 @@
 {
   "type": "Program",
-  "body": [],
-  "sourceType": "module",
-  "range": [
-    127,
-    127
-  ],
+  "start": 0,
+  "end": 127,
   "loc": {
     "start": {
-      "line": 6,
+      "line": 1,
       "column": 0
     },
     "end": {
@@ -16,14 +12,14 @@
       "column": 0
     }
   },
+  "sourceType": "module",
+  "body": [],
   "leadingComments": [
     {
       "type": "Block",
       "value": "*\r\n * Created by amo on 16/11/2015.\r\n ",
-      "range": [
-        0,
-        42
-      ],
+      "start": 0,
+      "end": 42,
       "loc": {
         "start": {
           "line": 1,
@@ -33,15 +29,17 @@
           "line": 3,
           "column": 3
         }
-      }
+      },
+      "range": [
+        0,
+        42
+      ]
     },
     {
-      "type": "Line",
+      "type": "CommentLine",
       "value": "Probably not going to be needed. We could use the Date Object from JavaScript",
-      "range": [
-        46,
-        125
-      ],
+      "start": 46,
+      "end": 125,
       "loc": {
         "start": {
           "line": 5,
@@ -51,17 +49,19 @@
           "line": 5,
           "column": 79
         }
-      }
+      },
+      "range": [
+        46,
+        125
+      ]
     }
   ],
-  "comments": [
+  "innerComments": [
     {
       "type": "Block",
       "value": "*\r\n * Created by amo on 16/11/2015.\r\n ",
-      "range": [
-        0,
-        42
-      ],
+      "start": 0,
+      "end": 42,
       "loc": {
         "start": {
           "line": 1,
@@ -71,15 +71,17 @@
           "line": 3,
           "column": 3
         }
-      }
+      },
+      "range": [
+        0,
+        42
+      ]
     },
     {
-      "type": "Line",
+      "type": "CommentLine",
       "value": "Probably not going to be needed. We could use the Date Object from JavaScript",
-      "range": [
-        46,
-        125
-      ],
+      "start": 46,
+      "end": 125,
       "loc": {
         "start": {
           "line": 5,
@@ -89,7 +91,11 @@
           "line": 5,
           "column": 79
         }
-      }
+      },
+      "range": [
+        46,
+        125
+      ]
     }
   ]
 }

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/hyperty-connector/HypertyConnector.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <a data-ice="repoURL" href="git+ssh://git@github.com/reTHINK-project/core-framework.git">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">catalogue-factory</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html">CatalogueDataObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/CatalogueDataObjectFactory.js~CatalogueDataObjectFactory.html">CatalogueDataObjectFactory</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~CommunicationDataObjectSchema.html">CommunicationDataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~ConnectionDataObjectSchema.html">ConnectionDataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~ContextDataObjectSchema.html">ContextDataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~DataObjectSchema.html">DataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~HypertyDataObjectSchema.html">HypertyDataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~IdentifyDataObjectSchema.html">IdentifyDataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~MessageDataObjectSchema.html">MessageDataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/HypertyDescriptor.js~HypertyDescriptor.html">HypertyDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/HypertyRuntimeDescriptor.js~HypertyRuntimeDescriptor.html">HypertyRuntimeDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/PolicyEnforcerDescriptor.js~PolicyEnforcerDescriptor.html">PolicyEnforcerDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor.html">ProtocolStubDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/RuntimeConstraint.js~RuntimeConstraint.html">RuntimeConstraint</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/SourcePackage.js~SourcePackage.html">SourcePackage</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-CatalogueObjectType">CatalogueObjectType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-DataObjectSourceLanguage">DataObjectSourceLanguage</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HypertyType">HypertyType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RuntimeHypertyCapabilityType">RuntimeHypertyCapabilityType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RuntimeHypertyCapabilityType">RuntimeHypertyCapabilityType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RuntimeProtocolCapabilityType">RuntimeProtocolCapabilityType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RuntimeType">RuntimeType</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">hyperty-chat</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/hyperty-chat/Chat.js~ChatGroup.html">ChatGroup</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-activate">activate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-CommunicationStatus">CommunicationStatus</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-communication">communication</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-participant">participant</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">hyperty-connector</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/hyperty-connector/ConnectionController.js~ConnectionController.html">ConnectionController</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-activate">activate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-connection">connection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-peer">peer</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">hyperty-discovery</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/hyperty-discovery/HypertyDiscovery.js~HypertyDiscovery.html">HypertyDiscovery</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">message-factory</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/Message.js~Message.html">Message</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~CreateMessageBody.html">CreateMessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~DeleteMessageBody.html">DeleteMessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~ForwardMessageBody.html">ForwardMessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~MessageBody.html">MessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~ReadMessageBody.html">ReadMessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~ResponseMessageBody.html">ResponseMessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~UpdateMessageBody.html">UpdateMessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageFactory.js~IdGenerator.html">IdGenerator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageFactory.js~MessageFactory.html">MessageFactory</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Enum">Enum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-MessageType">MessageType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-REASON_PHRASE">REASON_PHRASE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RESPONSE_CODE">RESPONSE_CODE</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">reTHINKObject</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/reTHINKObject/RethinkObject.js~RethinkObject.html">RethinkObject</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">runtime-loader</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/runtime-loader/Core.js~Core.html">Core</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/runtime-loader/RuntimeLoader.js~RuntimeLoader.html">RuntimeLoader</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">syncher</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/DataObject.js~DataObject.html">DataObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/DataObjectChild.js~DataObjectChild.html">DataObjectChild</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/DataObjectObserver.js~DataObjectObserver.html">DataObjectObserver</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/DataObjectReporter.js~DataObjectReporter.html">DataObjectReporter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/Syncher.js~Syncher.html">Syncher</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ChangeType">ChangeType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ObjectType">ObjectType</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">utils</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/utils/EventEmitter.js~EventEmitter.html">EventEmitter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-deepClone">deepClone</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-divideURL">divideURL</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-divideURL">divideURL</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/hyperty-connector/HypertyConnector.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/* jshint undef: true */
+
+import HypertyDiscovery from &apos;../hyperty-discovery/HypertyDiscovery&apos;;
+import ConnectionController from &apos;./ConnectionController&apos;;
+import EventEmitter from &apos;../utils/EventEmitter&apos;;
+import Syncher from &apos;../syncher/Syncher&apos;;
+import {divideURL} from &apos;../utils/utils&apos;;
+
+/**
+* Hyperty Connector;
+* @author Vitor Silva [vitor-t-silva@telecom.pt]
+* @version 0.1.0
+*/
+class HypertyConnector extends EventEmitter {
+
+  /**
+  * Create a new Hyperty Connector
+  * @param  {Syncher} syncher - Syncher provided from the runtime core
+  */
+  constructor(hypertyURL, bus, configuration) {
+
+    if (!hypertyURL) throw new Error(&apos;The hypertyURL is a needed parameter&apos;);
+    if (!bus) throw new Error(&apos;The MiniBus is a needed parameter&apos;);
+    if (!configuration) throw new Error(&apos;The configuration is a needed parameter&apos;);
+
+    super(hypertyURL, bus, configuration);
+
+    let _this = this;
+    _this._hypertyURL = hypertyURL;
+    _this._bus = bus;
+    _this._configuration = configuration;
+
+    _this._objectDescURL = &apos;hyperty-catalogue://localhost/.well-known/dataschemas/FakeDataSchema&apos;;
+
+    _this._controllers = {};
+
+    let domain = divideURL(hypertyURL).domain;
+    _this.hypertyDiscovery = new HypertyDiscovery(domain, bus);
+
+    let syncher = new Syncher(hypertyURL, bus, configuration);
+    syncher.onNotification(function(event) {
+      _this._onNotification(event);
+    });
+
+    _this._syncher = syncher;
+  }
+
+  _onNotification(event) {
+
+    let _this = this;
+
+    console.info(&apos;------------ Acknowledges the Reporter ------------ \n&apos;);
+    event.ack();
+    console.info(&apos;------------------------ END ---------------------- \n&apos;);
+
+    console.log(_this._controllers[event.from]);
+    if (_this._controllers[event.from]) {
+      _this._autoSubscribe(event);
+    } else {
+      _this._autoAccept(event);
+    }
+
+  }
+
+  _autoAccept(event) {
+    let _this = this;
+    let syncher = _this._syncher;
+
+    console.info(&apos;---------------- Syncher Subscribe ---------------- \n&apos;);
+    console.info(&apos;Subscribe URL Object &apos;, event, syncher);
+
+    syncher.subscribe(_this._objectDescURL, event.url).then(function(dataObjectObserver) {
+      console.info(&apos;1. Return Subscribe Data Object Observer&apos;, dataObjectObserver);
+
+      let connectionController = new ConnectionController(syncher);
+
+      // TODO: remove this remotePeerInformation;
+      connectionController.remotePeerInformation = event;
+      connectionController.dataObjectObserver = dataObjectObserver;
+
+      console.info(&apos;2. Data Object Observer data: &apos;, JSON.stringify(dataObjectObserver.data));
+
+      _this.trigger(&apos;connector:connected&apos;, connectionController);
+      _this.trigger(&apos;have:notification&apos;, event);
+
+      console.info(&apos;------------------------ END ---------------------- \n&apos;);
+    }).catch(function(reason) {
+      console.error(reason);
+    });
+  }
+
+  _autoSubscribe(event) {
+    let _this = this;
+    let syncher = _this._syncher;
+
+    console.info(&apos;---------------- Syncher Subscribe ---------------- \n&apos;);
+    console.info(&apos;Subscribe URL Object &apos;, event, syncher);
+    syncher.subscribe(_this._objectDescURL, event.url).then(function(dataObjectObserver) {
+      console.info(&apos;1. Return Subscribe Data Object Observer&apos;, dataObjectObserver);
+
+      _this._controllers[event.from].dataObjectObserver = dataObjectObserver;
+
+    }).catch(function(reason) {
+      console.error(reason);
+    });
+
+  }
+
+  /**
+  * Establish connection with other client identifier
+  * @param  {HypertyURL} HypertyURL - Define the identifier of the other component
+  * @param  {Object} options - Object with options to improve the connect
+  */
+  connect(hypertyURL, options) {
+    // TODO: CHange the hypertyURL for a list of URLS
+    let _this = this;
+    let syncher = _this._syncher;
+
+    options = options || {video: true, audio: true};
+
+    return new Promise(function(resolve, reject) {
+
+      let connectionController;
+      let _dataObjectReporter;
+
+      console.info(&apos;------------------------ Syncher Create ---------------------- \n&apos;);
+      syncher.create(_this._objectDescURL, [hypertyURL], {}).then(function(dataObjectReporter) {
+        console.info(&apos;1. Return Create Data Object Reporter&apos;, dataObjectReporter);
+
+        _dataObjectReporter = dataObjectReporter;
+
+        connectionController = new ConnectionController(syncher);
+        return connectionController.getUserMedia(options);
+      })
+      .then(function(mediaConstraints) {
+        console.info(&apos;2. Return the media constraints from controller: &apos;, mediaConstraints);
+
+        connectionController.dataObjectReporter = _dataObjectReporter;
+        _this._controllers[hypertyURL] = connectionController;
+
+        resolve(connectionController);
+        console.info(&apos;--------------------------- END --------------------------- \n&apos;);
+      })
+      .catch(function(reason) {
+        console.error(reason);
+        reject(reason);
+      });
+
+    });
+  }
+
+  // /**
+  // * Accept the incoming call
+  // * @method accept
+  // * @return {Promise}
+  // */
+  // accept() {
+  //   let _this = this;
+  //
+  //   return new Promise(function(resolve, reject) {
+  //
+  //     let objectURL = _this.notificationEvent.url;
+  //
+  //     // step 6 - https://github.com/reTHINK-project/scenario-service-implementation/tree/master/docs/hyperties/connector#notification-about-incoming-connection-request
+  //     // after waiting for an answer, we can now subscribe the objectURL
+  //     _this._syncher.subscribe(objectURL).then(function(connectionDataObject) {
+  //       console.info(&apos;Return Subscribe Connection Data Object&apos;, connectionDataObject);
+  //
+  //       // step 7 and 10 - https://github.com/reTHINK-project/scenario-service-implementation/tree/master/docs/hyperties/connector#notification-about-incoming-connection-request
+  //       _this.connectionController.dataObjectObserver = connectionDataObject;
+  //       resolve(_this.connectionController);
+  //
+  //       let resources = connectionDataObject.data.resources;
+  //       return _this.connectionController.getUserMedia(resources);
+  //     })
+  //     .then(function(commResources) {
+  //       console.info(&apos;Get webRTC common resources&apos;, commResources);
+  //     })
+  //     .catch(function(reason) {
+  //       console.error(reason);
+  //       reject(reason);
+  //     });
+  //   });
+  // }
+  //
+  // /**
+  // * Connection is closed by local peer and disconnected;
+  // * @method disconnect
+  // * @return {Promise}
+  // */
+  // disconnect() {
+  //
+  //   let _this = this;
+  //
+  //   return new Promise(function(resolve, reject) {
+  //
+  //     _this.connectionController.disconnect()
+  //     .then(function(disconnected) {
+  //
+  //       console.info(&apos;disconnected: &apos;, disconnected);
+  //
+  //       resolve(disconnected);
+  //     })
+  //     .catch(function(reason) {
+  //       reject(reason);
+  //     });
+  //
+  //   });
+  //
+  // }
+  //
+  // _autoConnect(hypertyURL) {
+  //   let _this = this;
+  //
+  //   _this._syncher.create({}, [hypertyURL], {}).then(function(connectionDataObject) {
+  //     console.info(&apos;Return Create Connection Data Object&apos;, connectionDataObject);
+  //     _this.connectionController.connectionDataObjectReporter = connectionDataObject;
+  //   }).catch(function(reason) {
+  //     console.error(reason);
+  //   });
+  // }
+
+}
+
+export default function activate(hypertyURL, bus, configuration) {
+
+  return {
+    name: &apos;HypertyConnector&apos;,
+    instance: new HypertyConnector(hypertyURL, bus, configuration)
+  };
+
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.4)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

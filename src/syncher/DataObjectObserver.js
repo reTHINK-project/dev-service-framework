@@ -2,6 +2,10 @@ import DataObject from './DataObject';
 
 let FilterType = {ANY: 'any', START: 'start', EXACT: 'exact'};
 
+/**
+ * The class returned from the Syncher subscribe call.
+ * To be used as an observation point from a DataObjectReporter change.
+ */
 class DataObjectObserver extends DataObject /* implements SyncStatus */ {
   /* private
 
