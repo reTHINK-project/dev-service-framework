@@ -19,13 +19,25 @@ The Hyperty Concept is introduced [here](hyperty.md) as a secure user associated
 -	*GUI independent*: Hyperty should not provide Graphical User Interfaces. *to be clarified*
 -	*APIs*: A Hyperty can expose Javascript APIs within the runtime environment that can to be used by web applications
 
-While designing and specifying service logics, it should be noted that Hyperties are not suitable for all use cases. In some case, making use of a simple resusable JavaScript file as library may suffice. The next section explaines the criteria under which the decision to use a Hyperty or not could apply.
+While designing and specifying service logics, it should be noted that Hyperties are not suitable for all use cases. In some case, making use of a simple reusable JavaScript file as library may suffice. The next section explains the criteria under which the decision to use a Hyperty or not could apply.
 
 ### Criteria to use the Hyperty Concept
 
-These are guidelines to help developers decide if they should provide specific service logic as Hyperty or via a simple JavaScript library. Consider these as guidelines and not misinstruction. Before you embark on a new feature development, ask yourself the following questions:* Is the feature delivery directly associated with a user?* Does the feature delivery involve communication between users?* Is the feature modular and reusbale on different applications?* Can the feature be delivered and developed by different stakeholders (i.e domain specific implementation)?
+These are guidelines to help developers decide if they should provide specific service logic as Hyperty or via a simple JavaScript library. Consider these as guidelines and not misinstruction. Before you embark on a new feature development, ask yourself the following questions:
 
-If the answers to the above questions are "YES" then most likely, you should go for the Hyperty Concept. The reTHINK Service Framework is what you want to look at next. The Service Framework provides APIs for developers to facilitate the development of Hyperties.
+* Is the feature delivery directly associated with a "User" (e.g. Human beings, physical objects, physical spaces, organizations)?
+* Does the feature delivery involve communication between "Users"?
+* Is the feature modular and reusable on different applications?
+* Can the feature be delivered and developed by different stakeholders (i.e domain specific implementation)?
+
+If the answers to the above questions are "YES" then most likely, you should go for the Hyperty Concept. Some examples are:
+
+* Video Chat between human beings;
+* a Human-being or a Data Analysis service collecting data from sensors in a Room.
+* ..
+
+
+The reTHINK Service Framework is what you want to look at next. The Service Framework provides APIs for developers to facilitate the development of Hyperties.
 
 ### Getting Started with the Service Framework
 
@@ -34,14 +46,40 @@ So you have decided for the Hyperty Concept and now ask yourself where to start.
 1) Install the Service Framework
 
 ```
-npm install git+git@github.com:reTHINK-project/dev-service-framework.git#develop --save
-jspm install service-framework=github:reTHINK-project/dev-service-framework.git@develop
+npm install git+git@github.com:reTHINK-project/dev-service-framework.git --save
+jspm install service-framework=github:reTHINK-project/dev-service-framework.git
 ```
+
+**put here helloWorldReporter example with short comments in the middle of the code. Explain later in detail the API**
 
 2) Import Module(s)
 
 ```
-import {Syncher} from 'service-framework';
+
+// import framework modules
+
+import {Syncher, MessageFactory} from '../src/service-framework';
+
+class HelloWorldReporterHyperty{
+
+    constructor(hypertyURL, bus, configuration)
+    {
+            let _this = this;
+            _this.bus = bus;
+            _this.configuration = configuration;
+            _this.hypertyURL = hypertyURL;
+
+        // Create Hyperty Syncher
+
+            let syncher = new Syncher(hypertyURL, bus, configuration);
+            _this.syncher = syncher;
+
+        // Create HelloWorld Data Sync Object
+
+        _this.hypertyConnector = new HypertyConnector(syncher);
+        _this.hypertyConnector.name = 'My Awesome Hyperty';
+  }
+}
 ```
 
 or if you need more than one dependency:
@@ -50,7 +88,7 @@ or if you need more than one dependency:
 import {Syncher, MessageFactory, AddressFactory} from 'service-framework';
 ```
 
-The next section explains the availble modules and APIs they expose.
+The next section explains the available modules and APIs they expose.
 
 ### APIs
 
@@ -58,7 +96,7 @@ Here we describe useful functionalities that are exposed by the Service Framewor
 
 #### Syncher API
 
-The Syncher is a singleton class per Hyperty/URL and it is the owner of all created DataObjects. The main class for the package. Should only be available one per Hyperty/URL. It's the owner of all kind of DataObjects.
+The Syncher is a singleton class per Hyperty/URL and it is the owner of all created Data Sync Objects according to the [Reporter - Observer pattern](p2p-data-sync.md). The main class for the package. Should only be available one per Hyperty/URL. It's the owner of all kind of Data Sync Objects.
 
 `new Syncher(hypertyURL, bus.MiniBus, configuration)`
 
@@ -72,7 +110,7 @@ The Syncher is a singleton class per Hyperty/URL and it is the owner of all crea
 
 ##### Methods
 
-The create method request a DataObjectReporter creation. The URL will be be requested by the allocation mechanism..
+The create method request a DataObjectReporter creation. The URL will be  requested by the allocation mechanism..
 
 ```
 create(schema, List, initialData)
@@ -102,27 +140,6 @@ subscribe(objURL)
 
 *Returns:* Return Promise to a new Observer of Type Promise.<DataObjectObserver>
 
-#### Minibus API
-
-The MiniBus API is a minimal interface to send and receive messages. It can be reused in many type of components. Components that need a message system should receive this class as a dependency or extend it. Classes extending this interface have to implement the following private methods: `_onPostMessage` and `_registerExternalListener` which are described below.
-
-The `_onPostMessage` method is a private class and used by the classes extending the Minibus class to process messages from the public "postMessage" without a registered listener. It can be used to send the message to an external interface, like a WebWorker or an IFrame.
-
-```
-onPostMessage(msg)
-```
-
-*Parameters:*
-
-| name | type            | description    |
-|------|-----------------|----------------|
-| msg  | Message.Message | posted Message |
-
-The `_registerExternalListener()` method is not publicly available. It can be used by the class extension implementation to process all messages that enter the MiniBus from an external interface, like a WebWorker or IFrame. This method is called one time in the constructor to register external listeners. The implementation will probably call the `_onMessage` method to publish in the local listeners.
-
-*NOTE:* DO NOT call "postMessage", there is a danger that the message enters in a cycle!`
-registerExternalListener()
-`
 
 #### Hyperty Discovery API
 
@@ -189,6 +206,29 @@ class MyAwesomeHyperty{
   }
 }
 ```
+
+#### Minibus API
+
+The MiniBus API is a minimal interface to send and receive messages. It can be reused in many type of components. Components that need a message system should receive this class as a dependency or extend it. Classes extending this interface have to implement the following private methods: `_onPostMessage` and `_registerExternalListener` which are described below.
+
+The `_onPostMessage` method is a private class and used by the classes extending the Minibus class to process messages from the public "postMessage" without a registered listener. It can be used to send the message to an external interface, like a WebWorker or an IFrame.
+
+```
+onPostMessage(msg)
+```
+
+*Parameters:*
+
+| name | type            | description    |
+|------|-----------------|----------------|
+| msg  | Message.Message | posted Message |
+
+The `_registerExternalListener()` method is not publicly available. It can be used by the class extension implementation to process all messages that enter the MiniBus from an external interface, like a WebWorker or IFrame. This method is called one time in the constructor to register external listeners. The implementation will probably call the `_onMessage` method to publish in the local listeners.
+
+*NOTE:* DO NOT call "postMessage", there is a danger that the message enters in a cycle!`
+registerExternalListener()
+`
+
 
 #### MiniBus API Example
 
