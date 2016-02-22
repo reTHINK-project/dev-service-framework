@@ -1,0 +1,45 @@
+@startuml
+
+
+PolicyEngine "1" *-- "1" PDP
+PolicyEngine "1" *-- "1" PEP
+PolicyEngine "1" *-- "0..*" Policy
+
+PolicyEngine : policies : table
+PolicyEngine : addPolicies()
+PolicyEngine : addToBlackList()
+PolicyEngine : addToWhiteList()
+PolicyEngine : authorise()
+PolicyEngine : getApplicablePolicies()
+PolicyEngine : removeFromBlackList()
+PolicyEngine : removeFromWhiteList()
+PolicyEngine : removePolicies()
+
+Policy : id : string
+Policy : scope : string
+Policy : condition : string
+Policy : authorise : bool
+Policy : actions : array
+
+PDP : blackList : array
+PDP : whiteList : array
+PDP : addToBlackList()
+PDP : addToWhiteList()
+PDP : evaluate()
+PDP : getDecision()
+PDP : isBlackListed()
+PDP : isContext()
+PDP : isHypertyType()
+PDP : isSameOrigin()
+PDP : isTimeBetween()
+PDP : isWhiteListed()
+PDP : removeFromBlackList()
+PDP : removeFromWhiteList()
+
+PEP : enforce()
+PEP : forwardToID()
+PEP : forwardToHyperty()
+PEP : sendAutomaticMsg()
+
+
+@enduml
