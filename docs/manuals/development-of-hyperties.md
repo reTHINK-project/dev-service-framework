@@ -50,7 +50,7 @@ npm install git+git@github.com:reTHINK-project/dev-service-framework.git --save
 jspm install service-framework=github:reTHINK-project/dev-service-framework.git
 ```
 
-**put here a helloWorldReporter and a helloWorldObserver example with short comments in the middle of the code. Explain later in detail the API**
+**Use here a helloWorldReporter and a helloWorldObserver example with short comments in the middle of the code. API documentation should be provided in the source code.**
 
 2) Import Module(s)
 
@@ -91,6 +91,8 @@ import {Syncher, MessageFactory, AddressFactory} from 'service-framework';
 The next section explains the available modules and APIs they expose.
 
 ### APIs
+
+**to be moved to the source code. Add link to generated Web Documentation.**
 
 Here we describe useful functionalities that are exposed by the Service Framework Module, which developers can use in development process.
 
@@ -142,6 +144,8 @@ subscribe(objURL)
 
 
 #### Hyperty Discovery API
+
+**to be moved to the source code. Add link to generated Web Documentation.**
 
 Hyperty Discovery interface provides the functionality to query hyperties instances registered in the domain registry of a given user
 
@@ -208,6 +212,9 @@ class MyAwesomeHyperty{
 ```
 
 #### Minibus API
+
+**This is core runtime. To be moved to the MiniBus source code in the dev-core-runtime**
+
 
 The MiniBus API is a minimal interface to send and receive messages. It can be reused in many type of components. Components that need a message system should receive this class as a dependency or extend it. Classes extending this interface have to implement the following private methods: `_onPostMessage` and `_registerExternalListener` which are described below.
 
