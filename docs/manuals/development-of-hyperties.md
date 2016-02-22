@@ -50,7 +50,7 @@ npm install git+git@github.com:reTHINK-project/dev-service-framework.git --save
 jspm install service-framework=github:reTHINK-project/dev-service-framework.git
 ```
 
-**put here helloWorldReporter example with short comments in the middle of the code. Explain later in detail the API**
+**put here a helloWorldReporter and a helloWorldObserver example with short comments in the middle of the code. Explain later in detail the API**
 
 2) Import Module(s)
 
