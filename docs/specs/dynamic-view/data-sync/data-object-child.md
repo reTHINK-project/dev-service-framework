@@ -10,7 +10,7 @@ In the [Data Object creation procedure](data-object-creation.md), the Data Objec
 
 ##### Subscription of Data Object Parent
 
-In the [Data Object Parent subscription procedure](data-object-subscription.md), the Data Object Schema is parsed by the Observer Sync-Managers (at Runtime and Msg Node level), to extract resources that can contain Data Object Child. For each Data Child Resource URL (<ObjectURL>/<resource>/child) the Hyperty Observer listener is added to the Bus .
+In the [Data Object Parent subscription procedure](data-object-subscription.md), the Data Object Schema is parsed by the Observer Sync-Managers (at Runtime and Msg Node level), to extract resources that can contain Data Object Child. For each Data Child Resource URL (<ObjectURL>/<resource>/child) the Hyperty Observer listener is added to the Bus. The subscription response contains the most updated parent data object including previously created child data objects.
 
 ![Figure @data-object-parent-subscribe Request to subscribe a Data Object Parent](data-object-child_001.png)
 
