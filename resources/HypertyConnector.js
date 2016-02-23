@@ -4158,7 +4158,7 @@ var HypertyDiscovery = (function () {
     _this.messageBus = msgBus;
 
     _this.domain = domain;
-    _this.discoveryURL = 'hyperty://' + domain + '/hypertyDiscovery';
+    _this.discoveryURL = 'hyperty://' + domain + '/hypertyDisovery';
   }
 
   /**
@@ -4188,8 +4188,6 @@ var HypertyDiscovery = (function () {
           var mostRecent = undefined;
           var lastHyperty = undefined;
           var value = reply.body.value;
-
-          console.log(reply);
 
           //console.log('valueParsed', valueParsed);
           for (hyperty in value) {
@@ -4255,6 +4253,11 @@ var _DataObjectChild = require('./DataObjectChild');
 var _DataObjectChild2 = _interopRequireDefault(_DataObjectChild);
 
 var _utilsUtilsJs = require('../utils/utils.js');
+
+/**
+ * Main extension class for observers and reporters, with common properties and methods.
+ * Children management is common for observers and reporters.
+ */
 
 var DataObject = (function () {
   /* private
@@ -4590,6 +4593,11 @@ var _SyncObject = require('./SyncObject');
 
 var _SyncObject2 = _interopRequireDefault(_SyncObject);
 
+/**
+ * The class returned from the DataObject addChildren call or from onAddChildren if remotely created.
+ * Children object synchronization is a a fast forward mechanism, no need for direct subscriptions, it uses the already authorized subscription from the parent DataObject.
+ */
+
 var DataObjectChild /* implements SyncStatus */ = (function () {
   /* private
    ----event handlers----
@@ -4709,6 +4717,11 @@ var _DataObject3 = _interopRequireDefault(_DataObject2);
 
 var FilterType = { ANY: 'any', START: 'start', EXACT: 'exact' };
 
+/**
+ * The class returned from the Syncher subscribe call.
+ * To be used as an observation point from a DataObjectReporter change.
+ */
+
 var DataObjectObserver = (function (_DataObject) {
   _inherits(DataObjectObserver, _DataObject);
 
@@ -4823,6 +4836,11 @@ var _DataObject2 = require('./DataObject');
 var _DataObject3 = _interopRequireDefault(_DataObject2);
 
 var _utilsUtilsJs = require('../utils/utils.js');
+
+/**
+ * The class returned from the Syncher create call.
+ * To be used as a reporter point, changes will be submited to DataObjectObserver instances.
+ */
 
 var DataObjectReporter = (function (_DataObject) {
   _inherits(DataObjectReporter, _DataObject);
@@ -5420,8 +5438,9 @@ var _DataProvisional = require('./DataProvisional');
 var _DataProvisional2 = _interopRequireDefault(_DataProvisional);
 
 /**
- * @author micaelpedrosa@gmail.com
- * Client API Syncronization system.
+ * The main class for the syncher package.
+ * The Syncher is a singleton class per Hyperty/URL and it is the owner of all created Data Sync Objects according to the Reporter - Observer pattern.
+ * Main functionality is to create reporters and to subscribe to existing ones.
  */
 
 var Syncher = (function () {
@@ -5438,9 +5457,9 @@ var Syncher = (function () {
 
   /**
    * Constructor that should be used by the Hyperty owner
-   * @param {HypertyURL} owner - Hyperty URL owner
-   * @param {MiniBus} bus - The internal sandbox MiniBus used by the Hyperty
-   * @param {JSON} config - The only required field for now is runtimeURL
+   * @param {HypertyURL} owner - Hyperty URL owner. An URL allocated by the runtime that uniquely identifies the Hyperty.
+   * @param {MiniBus} bus - An instance of the MiniBus provided in the sandbox. When an object (Reporter or Observed) is created, the SyncherManager will add a listener in the MiniBus to receive/send Messages of that object.
+   * @param {JSON} config - Configuration data. The only required field for now is the runtimeURL.
    */
 
   function Syncher(owner, bus, config) {
