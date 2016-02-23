@@ -1,3 +1,4 @@
+import config from '../system.config.json!json';
 import Core from '../src/runtime-loader/Core';
 import RuntimeUA from 'runtime-core/dist/runtimeUA';
 import SandboxFactory from '../resources/sandboxes/SandboxFactory';
@@ -11,9 +12,10 @@ class CoreFactory extends Core  {
   install(minibus) {
 
     let sandboxFactory = new SandboxFactory();
-    let runtimeUA = new RuntimeUA(sandboxFactory, 'localhost');
+    let domain = config.domain;
 
-    console.log(this);
+    let runtimeUA = new RuntimeUA(sandboxFactory, domain);
+    window.runtime = runtimeUA;
 
     minibus.addListener('core:loadHyperty', function(msg){
       console.log('Load Hyperty: ', msg);

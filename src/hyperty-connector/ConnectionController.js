@@ -11,7 +11,7 @@ import peer from './peer';
 
 class ConnectionController extends EventEmitter {
 
-  constructor(syncher) {
+  constructor(syncher, domain) {
 
     super(syncher);
 
@@ -20,7 +20,7 @@ class ConnectionController extends EventEmitter {
     _this.syncher = syncher;
     _this.mode = 'offer';
 
-    _this._objectDescURL = 'hyperty-catalogue://localhost/.well-known/dataschemas/FakeDataSchema';
+    _this._objectDescURL = 'hyperty-catalogue://' + domain + '/.well-known/dataschemas/FakeDataSchema';
 
     _this.mediaConstraints = {
       optional: [],

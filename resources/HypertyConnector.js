@@ -3344,7 +3344,7 @@ var _peer2 = _interopRequireDefault(_peer);
 var ConnectionController = (function (_EventEmitter) {
   _inherits(ConnectionController, _EventEmitter);
 
-  function ConnectionController(syncher) {
+  function ConnectionController(syncher, domain) {
     _classCallCheck(this, ConnectionController);
 
     _get(Object.getPrototypeOf(ConnectionController.prototype), 'constructor', this).call(this, syncher);
@@ -3354,7 +3354,7 @@ var ConnectionController = (function (_EventEmitter) {
     _this.syncher = syncher;
     _this.mode = 'offer';
 
-    _this._objectDescURL = 'hyperty-catalogue://localhost/.well-known/dataschemas/FakeDataSchema';
+    _this._objectDescURL = 'hyperty-catalogue://' + domain + '/.well-known/dataschemas/FakeDataSchema';
 
     _this.mediaConstraints = {
       optional: [],
@@ -3859,8 +3859,9 @@ var HypertyConnector = (function (_EventEmitter) {
     _this._hypertyURL = hypertyURL;
     _this._bus = bus;
     _this._configuration = configuration;
+    _this._domain = (0, _utilsUtils.divideURL)(hypertyURL).domain;
 
-    _this._objectDescURL = 'hyperty-catalogue://localhost/.well-known/dataschemas/FakeDataSchema';
+    _this._objectDescURL = 'hyperty-catalogue://' + _this._domain + '/.well-known/dataschemas/FakeDataSchema';
 
     _this._controllers = {};
 
@@ -3904,7 +3905,7 @@ var HypertyConnector = (function (_EventEmitter) {
       syncher.subscribe(_this._objectDescURL, event.url).then(function (dataObjectObserver) {
         console.info('1. Return Subscribe Data Object Observer', dataObjectObserver);
 
-        var connectionController = new _ConnectionController2['default'](syncher);
+        var connectionController = new _ConnectionController2['default'](syncher, _this._domain);
 
         // TODO: remove this remotePeerInformation;
         connectionController.remotePeerInformation = event;
@@ -3962,7 +3963,7 @@ var HypertyConnector = (function (_EventEmitter) {
 
           _dataObjectReporter = dataObjectReporter;
 
-          connectionController = new _ConnectionController2['default'](syncher);
+          connectionController = new _ConnectionController2['default'](syncher, _this._domain);
           return connectionController.getUserMedia(options);
         }).then(function (mediaConstraints) {
           console.info('2. Return the media constraints from controller: ', mediaConstraints);
@@ -4157,7 +4158,7 @@ var HypertyDiscovery = (function () {
     _this.messageBus = msgBus;
 
     _this.domain = domain;
-    _this.discoveryURL = 'hyperty://' + domain + '/hypertyDisovery';
+    _this.discoveryURL = 'hyperty://' + domain + '/hypertyDiscovery';
   }
 
   /**
@@ -4187,6 +4188,8 @@ var HypertyDiscovery = (function () {
           var mostRecent = undefined;
           var lastHyperty = undefined;
           var value = reply.body.value;
+
+          console.log(reply);
 
           //console.log('valueParsed', valueParsed);
           for (hyperty in value) {

@@ -29,8 +29,9 @@ class HypertyConnector extends EventEmitter {
     _this._hypertyURL = hypertyURL;
     _this._bus = bus;
     _this._configuration = configuration;
+    _this._domain = divideURL(hypertyURL).domain;
 
-    _this._objectDescURL = 'hyperty-catalogue://localhost/.well-known/dataschemas/FakeDataSchema';
+    _this._objectDescURL = 'hyperty-catalogue://' + _this._domain + '/.well-known/dataschemas/FakeDataSchema';
 
     _this._controllers = {};
 
@@ -72,7 +73,7 @@ class HypertyConnector extends EventEmitter {
     syncher.subscribe(_this._objectDescURL, event.url).then(function(dataObjectObserver) {
       console.info('1. Return Subscribe Data Object Observer', dataObjectObserver);
 
-      let connectionController = new ConnectionController(syncher);
+      let connectionController = new ConnectionController(syncher, _this._domain);
 
       // TODO: remove this remotePeerInformation;
       connectionController.remotePeerInformation = event;
@@ -129,7 +130,7 @@ class HypertyConnector extends EventEmitter {
 
         _dataObjectReporter = dataObjectReporter;
 
-        connectionController = new ConnectionController(syncher);
+        connectionController = new ConnectionController(syncher, _this._domain);
         return connectionController.getUserMedia(options);
       })
       .then(function(mediaConstraints) {

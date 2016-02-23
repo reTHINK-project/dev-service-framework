@@ -26,7 +26,7 @@ class HypertyChat extends EventEmitter {
     let domain = divideURL(hypertyURL).domain;
     let hypertyDiscovery = new HypertyDiscovery(domain, bus);
 
-    _this._objectDescURL = 'hyperty-catalogue://localhost/.well-known/dataschemas/FakeDataSchema';
+    _this._objectDescURL = 'hyperty-catalogue://' + domain + '/.well-known/dataschemas/FakeDataSchema';
 
     _this._hypertyURL = hypertyURL;
     _this._syncher = syncher;
@@ -79,7 +79,7 @@ class HypertyChat extends EventEmitter {
       .then(function(dataObjectReporter) {
         console.info('3. Return Create Data Object Reporter', dataObjectReporter);
 
-        let chat = new ChatGroup(syncher, hypertyDiscovery);
+        let chat = new ChatGroup(syncher, hypertyDiscovery, _this._domain);
         chat.dataObjectReporter = dataObjectReporter;
 
         resolve(chat);
@@ -102,7 +102,7 @@ class HypertyChat extends EventEmitter {
 
       syncher.subscribe(_this._objectDescURL, resource).then(function(dataObjectObserver) {
         console.info('Data Object Observer: ', dataObjectObserver);
-        let chat = new ChatGroup(syncher, _this._hypertyDiscovery);
+        let chat = new ChatGroup(syncher, _this._hypertyDiscovery, _this._domain);
         chat.dataObjectObserver = dataObjectObserver;
 
         resolve(chat);

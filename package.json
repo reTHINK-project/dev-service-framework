@@ -83,6 +83,7 @@
       "array.observe": "npm:array.observe@^0.0.1",
       "babel-polyfill": "npm:babel-polyfill@^6.3.14",
       "indexeddbshim": "npm:indexeddbshim@^2.2.1",
+      "json": "github:systemjs/plugin-json@^0.1.0",
       "object.observe": "npm:object.observe@^0.2.6",
       "ortc-over-rtc": "npm:ortc-over-rtc@^0.1.0",
       "webrtc-adapter-test": "npm:webrtc-adapter-test@^0.2.5",

@@ -2,6 +2,7 @@
 /* global Handlebars */
 /* global Materialize */
 
+import config from '../system.config.json!json';
 import {removeLoader, ready, errorMessage} from './support';
 
 // polyfills
@@ -22,7 +23,7 @@ import CoreFactory from '../resources/CoreFactory';
 let avatar = 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg';
 
 // You can change this at your own domain
-let domain = 'localhost';
+let domain = config.domain;
 //
 // let runtime = new RuntimeUA(sandboxFactory, domain);
 // window.runtime = runtime;

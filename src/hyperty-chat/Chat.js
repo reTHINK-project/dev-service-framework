@@ -3,7 +3,7 @@ import participant from './participant';
 
 class ChatGroup extends EventEmitter {
 
-  constructor(syncher, hypertyDiscovery) {
+  constructor(syncher, hypertyDiscovery, domain) {
 
     if (!syncher) throw Error('Syncher is a necessary dependecy');
     if (!hypertyDiscovery) throw Error('Hyperty discover is a necessary dependecy');
@@ -14,7 +14,7 @@ class ChatGroup extends EventEmitter {
     _this._syncher = syncher;
     _this._hypertyDiscovery = hypertyDiscovery;
 
-    _this._objectDescURL = 'hyperty-catalogue://localhost/.well-known/dataschemas/FakeDataSchema';
+    _this._objectDescURL = 'hyperty-catalogue://' + domain + '/.well-known/dataschemas/FakeDataSchema';
   }
 
   set dataObjectReporter(dataObjectReporter) {

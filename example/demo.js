@@ -1,8 +1,7 @@
 // jshint browser:true, jquery: true
-/* global Handlebars */
-/* global Materialize */
 
-import {addLoader, removeLoader, ready, errorMessage} from './support';
+import config from '../system.config.json!json';
+import {ready, errorMessage} from './support';
 
 // polyfills
 import 'babel-polyfill';
@@ -22,7 +21,7 @@ import CoreFactory from '../resources/CoreFactory';
 let avatar = 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg';
 
 // You can change this at your own domain
-let domain = 'localhost';
+let domain = config.domain;
 
 // let runtime = new RuntimeUA(sandboxFactory, domain);
 // window.runtime = runtime;
@@ -84,8 +83,6 @@ function hypertyDeployed(result) {
     });
 
   });
-
-  // runtime.messageBus.addListener(result.runtimeHypertyURL, newMessageRecived);
 }
 
 function discoverEmail(hypertyDiscovery) {
@@ -204,15 +201,6 @@ function openChat(result, video) {
 
 }
 
-function newMessageRecived(msg) {
-
-  // Object {to: "hyperty://ua.pt/71552726-ae61-411a-bab0-41843b26b56f", from: "hyperty://ua.pt/586f5f0a-aa98-4d23-b864-a6efd3ccdd74", type: "message", body: Object, id: 2}
-  if (msg.type === 'message') {
-    processMessage(msg, 'in');
-  }
-
-}
-
 function processVideo(stream) {
 
   let messageChat = $('.hyperty-chat');
@@ -247,7 +235,6 @@ function sendMessage(from, to, message) {
   };
 
   processMessage(msg, 'out');
-  runtime.messageBus.postMessage(msg);
 }
 
 function notification(event) {

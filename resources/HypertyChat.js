@@ -1556,7 +1556,7 @@ var _participant2 = _interopRequireDefault(_participant);
 var ChatGroup = (function (_EventEmitter) {
   _inherits(ChatGroup, _EventEmitter);
 
-  function ChatGroup(syncher, hypertyDiscovery) {
+  function ChatGroup(syncher, hypertyDiscovery, domain) {
     _classCallCheck(this, ChatGroup);
 
     if (!syncher) throw Error('Syncher is a necessary dependecy');
@@ -1568,7 +1568,7 @@ var ChatGroup = (function (_EventEmitter) {
     _this._syncher = syncher;
     _this._hypertyDiscovery = hypertyDiscovery;
 
-    _this._objectDescURL = 'hyperty-catalogue://localhost/.well-known/dataschemas/FakeDataSchema';
+    _this._objectDescURL = 'hyperty-catalogue://' + domain + '/.well-known/dataschemas/FakeDataSchema';
   }
 
   _createClass(ChatGroup, [{
@@ -1830,7 +1830,7 @@ var HypertyChat = (function (_EventEmitter) {
     var domain = (0, _utilsUtils.divideURL)(hypertyURL).domain;
     var hypertyDiscovery = new _hypertyDiscoveryHypertyDiscovery2['default'](domain, bus);
 
-    _this._objectDescURL = 'hyperty-catalogue://localhost/.well-known/dataschemas/FakeDataSchema';
+    _this._objectDescURL = 'hyperty-catalogue://' + domain + '/.well-known/dataschemas/FakeDataSchema';
 
     _this._hypertyURL = hypertyURL;
     _this._syncher = syncher;
@@ -1885,7 +1885,7 @@ var HypertyChat = (function (_EventEmitter) {
         }).then(function (dataObjectReporter) {
           console.info('3. Return Create Data Object Reporter', dataObjectReporter);
 
-          var chat = new _Chat2['default'](syncher, hypertyDiscovery);
+          var chat = new _Chat2['default'](syncher, hypertyDiscovery, _this._domain);
           chat.dataObjectReporter = dataObjectReporter;
 
           resolve(chat);
@@ -1907,7 +1907,7 @@ var HypertyChat = (function (_EventEmitter) {
 
         syncher.subscribe(_this._objectDescURL, resource).then(function (dataObjectObserver) {
           console.info('Data Object Observer: ', dataObjectObserver);
-          var chat = new _Chat2['default'](syncher, _this._hypertyDiscovery);
+          var chat = new _Chat2['default'](syncher, _this._hypertyDiscovery, _this._domain);
           chat.dataObjectObserver = dataObjectObserver;
 
           resolve(chat);
@@ -2037,7 +2037,7 @@ var HypertyDiscovery = (function () {
     _this.messageBus = msgBus;
 
     _this.domain = domain;
-    _this.discoveryURL = 'hyperty://' + domain + '/hypertyDisovery';
+    _this.discoveryURL = 'hyperty://' + domain + '/hypertyDiscovery';
   }
 
   /**
@@ -2067,6 +2067,8 @@ var HypertyDiscovery = (function () {
           var mostRecent = undefined;
           var lastHyperty = undefined;
           var value = reply.body.value;
+
+          console.log(reply);
 
           //console.log('valueParsed', valueParsed);
           for (hyperty in value) {

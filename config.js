@@ -23,6 +23,7 @@ System.config({
     "browserify": "npm:browserify@11.1.0",
     "core-js": "npm:core-js@1.2.6",
     "indexeddbshim": "npm:indexeddbshim@2.2.1",
+    "json": "github:systemjs/plugin-json@0.1.0",
     "karma-browserify": "npm:karma-browserify@4.3.0",
     "mutationobserver-shim": "npm:mutationobserver-shim@0.3.1",
     "object.observe": "npm:object.observe@0.2.6",
@@ -105,14 +106,15 @@ System.config({
       "browserify-zlib": "npm:browserify-zlib@0.1.4"
     },
     "github:rethink-project/dev-runtime-core@master": {
+      "base64-url": "npm:base64-url@1.2.1",
       "bip39": "npm:bip39@2.2.0",
       "bitcoinjs-lib": "npm:bitcoinjs-lib@2.2.0",
       "hellojs": "npm:hellojs@1.10.1",
       "jsrsasign": "npm:jsrsasign@5.0.5",
-      "service-framework": "github:rethink-project/dev-service-framework@develop",
+      "service-framework": "github:rethink-project/dev-service-framework@master",
       "sjcl": "npm:sjcl@1.0.3"
     },
-    "github:rethink-project/dev-service-framework@develop": {
+    "github:rethink-project/dev-service-framework@master": {
       "array.observe": "npm:array.observe@0.0.1",
       "babel-polyfill": "npm:babel-polyfill@6.5.0",
       "indexeddbshim": "npm:indexeddbshim@2.2.1",
@@ -154,10 +156,11 @@ System.config({
     "npm:array.observe@0.0.1": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:asn1.js@4.4.0": {
+    "npm:asn1.js@4.5.0": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",
       "bn.js": "npm:bn.js@4.10.3",
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
       "inherits": "npm:inherits@2.0.1",
       "minimalistic-assert": "npm:minimalistic-assert@1.0.0",
       "vm": "github:jspm/nodelibs-vm@0.1.0"
@@ -189,6 +192,9 @@ System.config({
       "path": "github:jspm/nodelibs-path@0.1.0",
       "stream": "github:jspm/nodelibs-stream@0.1.0",
       "util": "github:jspm/nodelibs-util@0.1.0"
+    },
+    "npm:base64-url@1.2.1": {
+      "buffer": "github:jspm/nodelibs-buffer@0.1.0"
     },
     "npm:base64id@0.1.0": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
@@ -1244,7 +1250,7 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:parse-asn1@5.0.0": {
-      "asn1.js": "npm:asn1.js@4.4.0",
+      "asn1.js": "npm:asn1.js@4.5.0",
       "browserify-aes": "npm:browserify-aes@1.0.6",
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "create-hash": "npm:create-hash@1.1.2",
