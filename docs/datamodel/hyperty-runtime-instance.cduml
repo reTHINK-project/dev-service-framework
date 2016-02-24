@@ -1,5 +1,7 @@
 @startuml "Hyperty-Runtime-Instance-Data-Object-Model.png"
 
+package RegistryDataObject <<Rect>> {
+
 package HypertyRuntimeInstance <<Rect>> {
 
 	class HypertyRuntimeInstance {
@@ -10,5 +12,5 @@ package HypertyRuntimeInstance <<Rect>> {
 	HypertyRuntimeInstance .up.|> RegistryDataObject.RegistryDataObject
 
 	}
-
+}
 @enduml

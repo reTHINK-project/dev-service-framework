@@ -1,5 +1,8 @@
 @startuml "Data-Object-Schema.png"
 
+package CatalogueDataObject <<Rect>> {
+
+
 package DataObjectSchema <<Rect>> {
 
 	class DataObjectSchema {
@@ -48,4 +51,5 @@ package DataObjectSchema <<Rect>> {
 	ContextDataObjectSchema -down-> Context.Context : schema for
 }
 
+}
 @enduml

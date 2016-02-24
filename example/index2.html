@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Demo of Hyperty and Protostubs</title>
+
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+
+</head>
+<body>
+
+  <div class="progress"><div class="indeterminate"></div></div>
+
+  <div class="row container hide">
+    <div class="login-panel">
+      <div class="card blue-grey darken-1">
+        <div class="card-content not-logged white-text">
+          <span class="card-title">Login</span>
+          <p>So that an application can use Google's OAuth 2.0 authentication system for user login.
+            A test account was created to set the project in the Google Developers with
+            this credentials:</p>
+
+            <span class="row">
+              <span class="col s6">
+                <h5>1º Account</h5>
+                <p><b>username:</b> openidtest10@gmail.com</p>
+                <p><b>password:</b> testOpenID10</p>
+              </span>
+              <span class="col s6">
+                <h5>2º Account</h5>
+                <p><b>username:</b> openidtest20@gmail.com</p>
+                <p><b>password:</b> testOpenID20</p>
+              </span>
+            </span>
+          </div>
+          <div class="card-action">
+          </div>
+        </div>
+      </div>
+
+      <section class="chat-section hide">
+
+      </section>
+
+    </div>
+
+    <!-- Modal Structure -->
+    <div class="modal create-chat">
+      <div class="modal-content">
+        <div class="chat-name">
+          <h4>Name of Chat Group</h4>
+          <input class="input-name" placeholder="chat name" id="name" required aria-required="true" type="text">
+        </div>
+        <div class="participants">
+          <form class="participants-form">
+            <div class="row">
+              <div class="input-field col s8">
+                <i class="material-icons prefix">user</i>
+                <input class="input-email" name="email1" placeholder="Participant email" id="email1" required aria-required="true" type="text">
+                <label for="email1">Email</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s8">
+                <i class="material-icons prefix">user</i>
+                <input class="input-email" name="email2" placeholder="Participant email" id="email2" type="text">
+                <label for="email2">Email</label>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat btn-cancel">Cancel</a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat btn-create">Create</a>
+      </div>
+    </div>
+
+  <!-- Modal Structure -->
+  <div class="modal join-chat">
+    <div class="modal-content">
+      <h4>Name of Chat Group</h4>
+      <input class="input-name" placeholder="chat name" id="name" required aria-required="true" type="text">
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat btn-cancel">Cancel</a>
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat btn-join">Join</a>
+    </div>
+  </div>
+
+  <!-- Modal Structure -->
+  <div class="modal add-participant">
+    <div class="modal-content">
+      <h4>Participant Email</h4>
+      <input class="input-name" placeholder="email" id="email" required aria-required="true" type="email">
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat btn-cancel">Cancel</a>
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat btn-add">Add</a>
+    </div>
+  </div>
+
+
+
+  <script src="../vendor/system.js"></script>
+  <script src="../config.js"></script>
+  <script>System.import("../example/demo2");</script>
+</body>
+</html>

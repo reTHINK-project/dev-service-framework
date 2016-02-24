@@ -7,6 +7,7 @@ Catalogue Data Model includes all Objects to be handled by the Catalogue functio
 
 -	Hyperty Descriptors
 -	Protocol Stub Descriptors
+-	Idp Proxy Descriptors
 -	Hyperty Interceptors Descriptors
 -	Hyperty Runtime Descriptors
 -	Data Object Schemas

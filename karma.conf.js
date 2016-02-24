@@ -24,6 +24,7 @@ module.exports = function(config) {
 
     // list of files to exclude
     exclude: [
+      'src/**/RuntimeLoader.js'
     ],
 
     // preprocess matching files before serving them to the browser
@@ -36,6 +37,13 @@ module.exports = function(config) {
     browserify: {
       debug: true,
       transform: ['babelify']
+    },
+
+    babelPreprocessor: {
+      options: {
+        presets: ['es2015'],
+        sourceMap: 'inline'
+      }
     },
 
     // test results reporter to use
@@ -58,7 +66,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS2'],
+    browsers: ['PhantomJS'],
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits

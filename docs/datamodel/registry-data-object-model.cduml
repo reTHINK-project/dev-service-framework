@@ -6,11 +6,11 @@ package RegistryDataObject <<Rect>> {
 		id : string
 		url : URL.URL
 		descriptor : URL.HypertyCatalogueURL
-		startingTime : RethinkType.Date
-		lastModified : RethinkType.Date
+		startingTime : RethinkCore.RethinkType.Date
+		lastModified : RethinkCore.RethinkType.Date
 		status : RegistryDataObjectStatus
 		stubs : URL.HypertyCatalogueURL
-		stubsConfiguration : ProtoStubDescriptor.ProtostubConfiguration
+		stubsConfiguration : RethinkCore.CatalogueDataObject.ProtoStubDescriptor.ProtostubConfiguration
 	}
 
 	enum RegistryDataObjectStatus {
@@ -20,12 +20,19 @@ package RegistryDataObject <<Rect>> {
 		DEAD
 	}
 
-	RegistryDataObject .up.> RegistryDataObjectStatus
+	package HypertyInstance <<Rect>> {
+	}
 
+	package HypertyRuntimeInstance <<Rect>> {
+	}
+
+	package HypertyDataObjectInstance <<Rect>> {
+	}
+
+	RegistryDataObject .up.> RegistryDataObjectStatus
 
 	HypertyInstance.HypertyInstance .up.|> RegistryDataObject
 	HypertyRuntimeInstance.HypertyRuntimeInstance .up.|> RegistryDataObject
-	ProtoStubInstance.ProtoStubInstance .up.|> RegistryDataObject
 	HypertyDataObjectInstance.HypertyDataObjectInstance .up.|> RegistryDataObject
 
 }

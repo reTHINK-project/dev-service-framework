@@ -12,20 +12,24 @@ package Message <<Rect>> {
 
 	class MessageBody {
 		resource ?: URL.URL
+		childrenResources ?: URL.URLList
 		schema ?: URL.HypertyCatalogueURL
-		idToken ?: Identity.JWT
-		accessToken ?: Identity.JWT
-		assertedIdentity ?: Identity.Identity
+		idToken ?: RethinkCore.Identity.JWT
+		accessToken ?: RethinkCore.Identity.JWT
+		assertedIdentity ?: RethinkCore.Identity.Identity
 	}
 
 	class CreateMessageBody {
 		policy ?: URL.URL
+		authorise ?: URL.URLList
 		value : string
 	}
 
 	class UpdateMessageBody {
-		attribute ?: string
 		value : string
+		attribute ?: string
+		attributeType ?: string
+		operation ?: string
 	}
 
 	class ResponseCode {
@@ -35,6 +39,7 @@ package Message <<Rect>> {
 		code : ResponseCode
 		description?: string
 		value ?: string
+		source ?: URL.URL
 	}
 	note bottom : to be compliant with RFC7231
 
@@ -49,18 +54,21 @@ package Message <<Rect>> {
 	}
 
 	class SubscribeMessageBody {
-		resource ?: URL.URL
-		schema ?: URL.HypertyCatalogueURL
+		subscriber ?: URL.URL
 	}
 
 	class UnsubscribeMessageBody {
-		resource ?: URL.URL
+		subscriber ?: URL.URL
 	}
 
 	class FowardMessageBody {
 		message ?: Message.Message
 	}
 
+	class ExecuteMessageBody {
+		executable : string
+		configuration ?: string
+	}
 
 	class MessageType {
 	  	CREATE
@@ -70,7 +78,18 @@ package Message <<Rect>> {
 	  	SUBSCRIBE
 	  	UNSUBSCRIBE
 	  	RESPONSE
-		FORWARD
+			FORWARD
+			EXECUTE
+	}
+
+	class AttributeType {
+	  	OBJECT
+	  	ARRAY
+	}
+
+	class UpdateOperation {
+	  	ADD
+	  	REMOVE
 	}
 
 	Message --> MessageType
@@ -79,13 +98,16 @@ package Message <<Rect>> {
 	CreateMessageBody -up-|> MessageBody
 	UpdateMessageBody -up-|> MessageBody
 	ResponseMessageBody -up-|> MessageBody
-	DeleteMessageBody -up-|> MessageBody
+	SubscribeMessageBody -up-|> MessageBody
+	UnsubscribeMessageBody -up-|> MessageBody
+	DeleteMessageBody -down-|> MessageBody
 	ReadMessageBody -down-|> MessageBody
-	SubscribeMessageBody -down-|> MessageBody
-	UnsubscribeMessageBody -down-|> MessageBody
 	FowardMessageBody -down-|> MessageBody
+	ExecuteMessageBody -down-|> MessageBody
 
 	ResponseMessageBody --> ResponseCode
+	UpdateMessageBody --> UpdateOperation
+	UpdateMessageBody --> AttributeType
 }
 
 @enduml

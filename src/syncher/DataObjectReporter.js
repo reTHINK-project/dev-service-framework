@@ -1,66 +1,61 @@
-import SyncObject from './SyncObject';
-import {deepClone} from '../utils/utils.js';
+import DataObject from './DataObject';
+import { deepClone } from '../utils/utils.js';
 
-class DataObjectReporter /* implements SyncStatus */ {
+/**
+ * The class returned from the Syncher create call.
+ * To be used as a reporter point, changes will be submited to DataObjectObserver instances.
+ */
+class DataObjectReporter extends DataObject /* implements SyncStatus */ {
   /* private
-  _version: number
-
-  _url: ObjectURL
-  _schema: Schema
-  _bus: MiniBus
-  _status: on | paused
-
-  _syncObj: SyncData
   _subscriptions: <hypertyUrl: { status: string } }>
 
   ----event handlers----
   _onSubscriptionHandler: (event) => void
+  _onResponseHandler: (event) => void
   */
 
-  constructor(owner, url, schema, bus, initialStatus, initialData) {
+  /**
+   * @ignore
+   * Should not be used directly by Hyperties. It's called by the Syncher.create method
+   */
+  constructor(owner, url, schema, bus, initialStatus, initialData, children) {
+    super(owner, url, schema, bus, initialStatus, initialData, children);
     let _this = this;
 
-    _this._version = 0;
-    _this._owner = owner;
-    _this._url = url;
-    _this._schema = schema;
-    _this._bus = bus;
+    bus.addListener(owner, (msg) => {
+      if (msg.type === 'response' && msg.body.source === url) {
+        _this._onResponse(msg);
+      }
+    });
 
-    _this._subscriptions = {};
-
-    _this._status = initialStatus;
-    _this._syncObj = new SyncObject(initialData);
     _this._syncObj.observe((event) => {
+      console.log('DataObjectReporter-' + url + '-SEND: ', event);
       _this._onChange(event);
     });
+
+    _this._subscriptions = {};
   }
 
-  get version() { return this._version; }
-
-  get url() { return this._url; }
-
-  get schema() { return this._schema; }
-
-  get status() { return this._status; }
-
-  get data() { return this._syncObj.data; }
-
+  /**
+   * Subscriptions requested and accepted to this reporter
+   * @type {Object<HypertyURL, SyncSubscription>}
+   */
   get subscriptions() { return this._subscriptions; }
 
-  pause() {
-    //TODO: pause change reports?
-  }
-
-  resume() {
-    //TODO: resume change reports?
-  }
-
-  stop() {
-    //TODO: destroy reporter?
-  }
-
+  /**
+   * Setup the callback to process subscribe and unsubscribe notifications
+   * @param {function(event: MsgEvent)} callback
+   */
   onSubscription(callback) {
     this._onSubscriptionHandler = callback;
+  }
+
+  /**
+   * Setup the callback to process response notifications of the create's
+   * @param {function(event: MsgEvent)} callback
+   */
+  onResponse(callback) {
+    this._onResponseHandler = callback;
   }
 
   _onForward(msg) {
@@ -83,13 +78,16 @@ class DataObjectReporter /* implements SyncStatus */ {
 
       accept: () => {
         //create new subscription
-        _this._subscriptions[hypertyUrl] = { status: 'on' };
+        let sub = { url: hypertyUrl, status: 'on' };
+        _this._subscriptions[hypertyUrl] = sub;
 
         //send ok response message
         _this._bus.postMessage({
           id: msg.id, type: 'response', from: msg.to, to: msg.from,
           body: { code: 200, schema: _this._schema, version: _this._version, value: deepClone(_this.data) }
         });
+
+        return sub;
       },
 
       reject: (reason) => {
@@ -124,19 +122,20 @@ class DataObjectReporter /* implements SyncStatus */ {
     }
   }
 
-  //send delta messages to subscriptions
-  _onChange(event) {
+  _onResponse(msg) {
     let _this = this;
 
-    _this._version++;
+    let event = {
+      type: msg.type,
+      url: msg.from,
+      code: msg.body.code
+    };
 
-    if (_this._status === 'on') {
-      _this._bus.postMessage({
-        type: event.cType, from: _this._owner, to: _this._url,
-        body: {version: _this._version, oType: event.oType, attrib: event.field, value: event.data}
-      });
+    if (_this._onResponseHandler) {
+      _this._onResponseHandler(event);
     }
   }
+
 }
 
 export default DataObjectReporter;

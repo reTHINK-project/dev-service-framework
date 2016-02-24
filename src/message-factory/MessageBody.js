@@ -1,32 +1,54 @@
-class MessageBody{
+/**
+ * @author alice.cheambe[at]fokus.fraunhofer.de
+ * The MessageBody class is the base implementation of the Message Body Data Model from which the other body types extend.
+ *
+ */
+
+export class MessageBody{
 
     /**
      *
      * @param {Identity.JWT} idToken - token for Identity assertion purpose
-     * @param {Identity.JWT} accessToken
-     * @param {URL.URL} resource
-     * @param {URL.HypertyCatalogueURL} schema
-     * @param {Identity.JWT} assertedIdentity
+     * @param {Identity.JWT} accessToken - token for access control
+     * @param {URL.URL} resource - URL of the object
+     * @param {URL.HypertyCatalogueURL} schema - URL of the Data object schema stored in the Catalogue
+     * @param {Identity.Identity} assertedIdentity - AssertedIdentity is compliant with User Identity Data Model
      *
      */
 	constructor(idToken, accessToken, resource, schema, assertedIdentity){
-        //let _this = this;
-        if(typeof idoken !== 'undefined')
+
+        //if(idToken)
             this.idToken = idToken;
-        if(typeof accessToken  !== 'undefined')
+       // if(accessToken)
             this.accessToken = accessToken;
-        if(typeof resource !== 'undefined' )
+       // if(resource )
             this.resource = resource;
-        if(typeof schema !== 'undefined' )
+        //if(schema )
             this.schema = schema;
-        if(typeof assertedIdentity !== 'undefined')
+        //if(assertedIdentity)
             this.assertedIdentity = assertedIdentity;
 	}
+
+
 }
 
+/**
+ * Class representation of the CreateMessageBody object
+ */
 export class CreateMessageBody extends MessageBody {
+
+    /**
+     *
+     * @param {String} value - Contains the created object in JSON format.
+     * @param {URL.URL} policy - URL from where access policy control can be downloaded
+     * @param {Identity.JWT} idToken -
+     * @param {Identity.JWT} accessToken
+     * @param {URL.URL} resource - URL of the object
+     * @param {URL.HypertyCatalogueURL} schema - URL of the Data object schema stored in the Catalogue
+     * @param {Identity.Identity} assertedIdentity - AssertedIdentity is compliant with User Identity Data Model
+     */
     constructor(value, policy, idToken, accessToken, resource, schema, assertedIdentity){
-        if(typeof value === 'undefined')
+        if(!value)
             throw new Error("The value parameter is null");
         super(idToken,accessToken, resource, schema, assertedIdentity, schema, assertedIdentity);
 
@@ -36,7 +58,23 @@ export class CreateMessageBody extends MessageBody {
     }
 }
 
+/**
+ * Class representation of the ReadMessageBody data object
+ */
 export class ReadMessageBody extends MessageBody {
+    /**
+     *
+     * @param {Identity.JWT} idToken -
+     * @param {Identity.JWT} accessToken
+     * @param {URL.URL} resource - URL of the objec
+     * @param {URL.HypertyCatalogueURL} schema - URL of the Data object schema stored in the Catalogue
+     * @param {Identity.Identity} assertedIdentity - AssertedIdentity is compliant with User Identity Data Model
+     * @param {String} attribute - Identifies the attribute in the Object to be read (optional)
+     * @param {String} criteriaSyntax - Defines the criteria syntax used in criteria field. To be used for search purposes.
+     * Valid criteria Syntax are: "key-value", "mongodb", "sql"(?), ...
+     * @param {String} criteria -Defines the criteria to be used for search purposes. Syntax used to define the criteria
+     * is set in the criteriaSyntax.
+     */
     constructor( idToken, accessToken, resource, schema, assertedIdentity, attribute, criteriaSyntax, criteria){
 
         super(idToken,accessToken ,resource, schema, assertedIdentity );
@@ -53,7 +91,19 @@ export class ReadMessageBody extends MessageBody {
 }
 
 
+/**
+ * Class representation of the DeleteMessageBody data object
+ */
 export class DeleteMessageBody extends MessageBody {
+    /**
+     *
+     * @param {Identity.JWT} idToken -
+     * @param {Identity.JWT} accessToken
+     * @param {URL.URL} resource - URL of the object
+     * @param {URL.HypertyCatalogueURL} schema - URL of the Data object schema stored in the Catalogue
+     * @param {Identity.Identity} assertedIdentity - AssertedIdentity is compliant with User Identity Data Model
+     * @param {String} attribute - Identifies the attribute in the Object to be deleted (optional)
+     */
     constructor(idToken, accessToken, resource, schema, assertedIdentity,attribute ){
 
         super(idToken,accessToken ,resource, schema, assertedIdentity );
@@ -65,18 +115,42 @@ export class DeleteMessageBody extends MessageBody {
 
 }
 
+/**
+ * Class representation of the UpdateMessageBody data object
+ */
 export class UpdateMessageBody extends MessageBody {
+    /**
+     * Constructor to create the object
+     * @param {Identity.JWT} idToken -
+     * @param {Identity.JWT} accessToken
+     * @param {URL.URL} resource - URL of the object
+     * @param {URL.HypertyCatalogueURL} schema - URL of the Data object schema stored in the Catalogue
+     * @param {Identity.Identity} assertedIdentity - AssertedIdentity is compliant with User Identity Data Model
+     * @param {String} attribute - Identifies the attribute in the Object to be deleted (optional)
+     * @param {String} value - Contains the updated value object in JSON format.
+     */
     constructor(idToken, accessToken, resource, schema, assertedIdentity, attribute, value){
 
-
         super(idToken,accessToken ,resource, schema, assertedIdentity );
-
         this.attribute = attribute;
         this.value = value;
     }
 }
 
+/**
+ * Class representation of the ForwardMessageBody data object
+ */
 export class ForwardMessageBody extends MessageBody {
+    /**
+     * Constructor to create the object
+     *
+     * @param {Identity.JWT} idToken -
+     * @param {Identity.JWT} accessToken
+     * @param {URL.URL} resource - URL of the object
+     * @param {URL.HypertyCatalogueURL} schema - URL of the Data object schema stored in the Catalogue
+     * @param {Identity.Identity} assertedIdentity - AssertedIdentity is compliant with User Identity Data Model
+     * @param {Message} message - Message to be forwarded
+     */
     constructor(idToken, accessToken, resource, schema, assertedIdentity, message){
 
 
@@ -86,24 +160,51 @@ export class ForwardMessageBody extends MessageBody {
     }
 }
 
+/**
+ * Class representation of the ResponseMessageBody data object
+ */
 export class ResponseMessageBody extends MessageBody {
 
+    /**
+     * Constructor to create the object
+     *
+     * @param {Identity.JWT} idToken -
+     * @param {Identity.JWT} accessToken
+     * @param {URL.URL} resource - URL of the object
+     * @param code - A response code compliant with HTTP response codes (RFC7231)
+     * @param value - Contains a data value in JSON format. Applicable to Responses to READ MessageType.
+     */
     constructor(idToken, accessToken, resource, code, value){
 
-        super(idToken,accessToken ,resource );
+        super(idToken, accessToken ,resource );
 
         if(code)
         {
             this.code = code;
             this.description = REASON_PHRASE[code];
         }
-
         if(value)
             this.value = value;
-    }
 
+    }
 }
-export var RESPONS_CODE = {
+
+export function Enum(a){
+    let i = Object
+        .keys(a)
+        .reduce((o,k)=>(o[a[k]]=k,o),{});
+
+    return Object.freeze(
+        Object.keys(a).reduce(
+            (o,k)=>(o[k]=a[k],o), v=>i[v]
+        )
+    );
+}
+
+/**
+ * Represents response code compliant with HTTP response codes (RFC7231).
+ */
+export const RESPONSE_CODE = Enum({
     100: '100',
     101: '101',
     200: '200',
@@ -145,8 +246,12 @@ export var RESPONS_CODE = {
     503: '503',
     504: '504',
     505: '505'
-};
-export var REASON_PHRASE = {
+});
+
+/**
+ * Represents response phrases to response code compliant with HTTP response codes (RFC7231).
+ */
+export const REASON_PHRASE = Enum({
     100: 'Continue',
     101: 'Switching Protocols',
     200: 'OK',
@@ -188,6 +293,6 @@ export var REASON_PHRASE = {
     503: 'Service Unavailable',
     504: 'Gateway Time-out',
     505: 'HTTP Version Not Supported'
-};
+});
 
 export default MessageBody;

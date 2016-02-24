@@ -46,8 +46,8 @@ package Connection <<Rect>> {
 	    closed
 	}
 
-	Connection -up-|> SyncData
-	Peer -up-|> SyncData
+	Connection -up-|> RethinkCore.SyncData
+	Peer -up-|> RethinkCore.SyncData
 
 
 	Connection *--> "1" OwnerPeer

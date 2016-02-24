@@ -1,11 +1,13 @@
 @startuml "Protostub-Descriptor-Data-Object-Model.png"
 
+package CatalogueDataObject <<Rect>> {
+
 package ProtoStubDescriptor <<Rect>> {
 
 	class ProtoStubDescriptor {
-		messageSchemas : URL.HypertyCatalogueURL
+		messageSchema : URL.HypertyCatalogueURL
 		configuration : ProtostubConfiguration
-		constraints : HypertyRuntimeDescriptor.RuntimeProtocolCapabilities
+		constraints : CatalogueDataObject.HypertyRuntimeDescriptor.RuntimeProtocolCapabilities
 	}
 
 	class ProtostubConfiguration {
@@ -13,10 +15,10 @@ package ProtoStubDescriptor <<Rect>> {
 
 	ProtoStubDescriptor .up.|> CatalogueDataObject.CatalogueDataObject
 
-	ProtoStubDescriptor *.. HypertyRuntimeDescriptor.RuntimeProtocolCapabilities
 	ProtoStubDescriptor *.. ProtostubConfiguration
 
-	ProtoStubDescriptor *..> URL.HypertyCatalogueURL : url of the schemas describing \nmessages supported by the Protocol Stub
+
 }
 
+}
 @enduml

@@ -3,8 +3,9 @@
 package CatalogueDataObject <<Rect>> {
 
 	class CatalogueDataObject {
-		guid : string
+		cguid : string
 		type : CatalogueObjectType
+		version : string
 		objectName : string
 		description : string
 		language : DataObjectSourceLanguage
@@ -16,6 +17,7 @@ package CatalogueDataObject <<Rect>> {
 	class CatalogueObjectType {
 	HYPERTY
 	PROTOSTUB
+	IDP_PROXY
 	HYPERTY_RUNTIME
 	HYPERTY_INTERCEPTOR
 	HYPERTY_DATA_OBJECT
@@ -36,12 +38,31 @@ package CatalogueDataObject <<Rect>> {
 	signature ?: string
 	}
 
+	package HypertyDescriptor <<Rect>> {
+	}
+
+	package ProtoStubDescriptor <<Rect>> {
+	}
+
+	package HypertyRuntimeDescriptor <<Rect>> {
+	}
+
+	package HypertyInterceptorDescriptor <<Rect>> {
+	}
+
+	package DataObjectSchema <<Rect>> {
+	}
+
+	package IdpProxyDescriptor <<Rect>> {
+	}
+
 	CatalogueDataObject -right-> SourcePackage
 	CatalogueDataObject -left-> CatalogueObjectType
 	CatalogueDataObject -up-> DataObjectSourceLanguage
 
 	HypertyDescriptor.HypertyDescriptor .up.|> CatalogueDataObject
 	ProtoStubDescriptor.ProtoStubDescriptor .up.|> CatalogueDataObject
+	ProtoStubDescriptor.ProtoStubDescriptor <|.down. IdpProxyDescriptor.IdpProxyDescriptor
 	HypertyRuntimeDescriptor.HypertyRuntimeDescriptor .up.|> CatalogueDataObject
 	HypertyInterceptorDescriptor.HypertyInterceptorDescriptor .up.|> CatalogueDataObject
 	DataObjectSchema.DataObjectSchema .up.|> CatalogueDataObject

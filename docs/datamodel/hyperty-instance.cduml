@@ -1,9 +1,7 @@
 @startuml "Hyperty-Instance-Data-Object-Model.png"
 
-package Context {
-	class Context {
-	}
-}
+
+package RegistryDataObject <<Rect>> {
 
 package HypertyInstance <<Rect>> {
 
@@ -12,17 +10,17 @@ package HypertyInstance <<Rect>> {
 		url : URL.HypertyURL
 		user : URL.UserURL
 		guid : URL.UserGUIDURL
-		runtime : HypertyRuntimeInstance.HypertyRuntimeInstance
+		runtime : URL.HypertyRuntimeURL
 		context : URL.ContextURL
 	}
 
+}
+
+
 	HypertyInstance .up.|> RegistryDataObject.RegistryDataObject
 
-	HypertyInstance ..> HypertyDescriptor.HypertyDescriptor : described by
-	HypertyInstance ..> Identity.Identity : associated with
-	HypertyInstance ..> HypertyRuntimeInstance.HypertyRuntimeInstance : executing at
 
-	HypertyInstance ..> Context.Context
 }
+
 
 @enduml

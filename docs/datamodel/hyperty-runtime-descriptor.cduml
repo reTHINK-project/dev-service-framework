@@ -1,9 +1,11 @@
 @startuml "Hyperty-Runtime-Descriptor-Data-Object-Model.png"
 
+package CatalogueDataObject <<Rect>> {
+
 package HypertyRuntimeDescriptor <<Rect>> {
 
 	class HypertyRuntimeDescriptor {
-		type : RuntimeType
+		runtimeType : RuntimeType
 		hypertyCapabilities : RuntimeHypertyCapabilities
 		protocolCapabilities : RuntimeProtocolCapabilities
 	}
@@ -39,4 +41,5 @@ package HypertyRuntimeDescriptor <<Rect>> {
 
 }
 
+}
 @enduml

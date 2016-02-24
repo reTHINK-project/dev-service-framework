@@ -1,5 +1,8 @@
 import {deepClone} from '../utils/utils.js';
 
+/**
+ * @access private
+ */
 class SyncObject {
   /* private
     _data: any;
@@ -13,7 +16,7 @@ class SyncObject {
     _this._filters = {};
 
     if (initialData) {
-      _this._data = initialData;
+      _this._data = deepClone(initialData);
     } else {
       _this._data = {};
     }
@@ -97,11 +100,11 @@ class SyncObject {
       let obj = changes[i].object;
       let objType;
 
-      if (obj.constructor == Object) {
+      if (obj.constructor === Object) {
         objType = ObjectType.OBJECT;
       }
 
-      if (obj.constructor == Array) {
+      if (obj.constructor === Array) {
         objType = ObjectType.ARRAY;
       }
 
@@ -146,7 +149,7 @@ class SyncObject {
         }
 
         //re-define paths...
-        if (idx != obj.length - 1) {
+        if (idx !== obj.length - 1) {
           path.reIndexFrom(obj);
         }
       } else {

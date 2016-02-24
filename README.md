@@ -1,7 +1,8 @@
 # dev-service-framework
 (Adopted from dev-core-runtime)
 
-[Example](#example)
+ - [Tasks](#tasks)
+ - [Example](/example)
 
 ### How to install this repository like a NPM Module;
 
@@ -62,9 +63,79 @@ On the root directory you will find **.jshintrc** and **.jscsrc**, these files a
 
 All IDE's and Text Editors can handle these tools.
 
-#### Documentation
+### <a id="Tasks">Tasks</a>
 
-To generates api documentation you can run ```gulp doc```
+ - [Documentation](#documentation)
+ - [Dist](#dist)
+ - [Build](#build)
+ - [Encode](#encode)
+ - [Watch Hyperty](#watch-hyperty)
+ - [Watch](#watch)
+
+#### <a id="documentation">Documentation</a>
+
+To generates api documentation you can run
+
+```
+gulp doc
+```
+
+##### <a id="dist">Dist</a>
+
+To distribute the runtime-core, you can make a distribution file.
+
+Run the command:
+```
+gulp dist
+```
+
+##### <a id="build">Build</a>
+
+To distribute the runtime-core, but with the source code maps, and to detect where is some error.
+
+Run the command:
+```
+gulp build
+```
+
+##### <a id="encode">Encode</a>
+
+In this repository, we have some tasks which can help you.
+If you need change some resource file, like an Hyperty or ProtoStub, and load it to the Hyperties.json or ProtoStubs.json, run the following command, and answer to the questions;
+
+```
+gulp encode
+
+```
+you need to answer this questions:
+File to be converted?
+> resources/VertxProtoStub.js
+
+Configuration file like an object or url to ProtoStub have on configuration:
+> something like: {"url":"wss://msg-node.localhost:9090/ws"} or only wss://msg-node.localhost:9090/ws
+
+This will be a default file to be loaded? (yes/no)
+> yes or no
+
+// TODO: optimize this to read if it is an hyperty or protocol stub;
+
+##### <a id="watch-hyperty">Watch Hyperty</a>
+
+If you need change some resource file, like an Hyperty, you need run this task first.
+This task will be covert ES6 to ES5 and encode the Hyperty file changes in a base64 file and add it to the descriptor folder in the respective place;
+
+in your command line run:
+```
+gulp watch-hyperty --dest=resources
+```
+
+##### <a id="watch">Watch</a>
+if you need watch all changes on src folder and convert them to a dist file, run:
+
+```
+gulp watch
+```
+This will convert all the files from ES6 to ES5 and update the distribution file;
 
 ### Unit Testing
 Unit testing can be launched manually with **karma start**.
@@ -77,26 +148,3 @@ The address data factory can be tested independently by calling
 
     cd <base folder>/test
     mocha addressFactoryTest.js
-
-### <a id="Tasks">Tasks</a>
-
-In this repository, we have some tasks which can help you.
-If you need change some resource file, like an Hyperty, you need run task watch first, to encode the Hyperty file changes in a base64 file and add it to the descriptor folder in the respective place;
-
-in your command line run:
-```
-gulp watch
-```
-
-this is temporary until the dev-catalogue is ready;
-
-### <a id="example">Example</a>
-
-This repository have a folder with an working example of Hyperty Connector and we can send message and make a WebRTC call between remote hyperties through the vertx;
-
-To run the demo on example folder:
- - this example have a dependecy from [dev-msg-node-vertx](https://github.com/reTHINK-project/dev-msg-node-vertx/tree/dev-0.2#unit-testing) and [dev-registry-domain](https://github.com/reTHINK-project/dev-registry-domain#dev-registry-domain) for communication between hyperties in two distinct browsers or tabs. **At this moment you need run locally [dev-msg-node-vertx](https://github.com/reTHINK-project/dev-msg-node-vertx/tree/dev-0.2#unit-testing) and [dev-registry-domain](https://github.com/reTHINK-project/dev-registry-domain#dev-registry-domain)**
- - you need, in the root folder, run command: ``` npm start ```
- - in your browser, access to https://127.0.0.1:8080/example
-
-This example works over https protocol, but how we are running in the 127.0.0.1, this address is considered secure and the webRTC will works well;

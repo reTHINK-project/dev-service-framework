@@ -1,5 +1,7 @@
 // jshint browser:true, jquery: true
-import {addLoader, removeLoader, documentReady, errorMessage} from './support';
+
+import config from '../system.config.json!json';
+import {ready, errorMessage} from './support';
 
 // polyfills
 import 'babel-polyfill';
@@ -8,15 +10,21 @@ import 'mutationobserver-shim';
 import 'object.observe';
 import 'array.observe';
 
+import RuntimeLoader from '../src/runtime-loader/RuntimeLoader';
+import CoreFactory from '../resources/CoreFactory';
+
 // reTHINK modules
-import RuntimeUA from 'runtime-core/dist/runtimeUA';
-
-import SandboxFactory from '../resources/sandboxes/SandboxFactory';
-let sandboxFactory = new SandboxFactory();
+// import RuntimeUA from 'runtime-core/dist/runtimeUA';
+//
+// import SandboxFactory from '../resources/sandboxes/SandboxFactory';
+// let sandboxFactory = new SandboxFactory();
 let avatar = 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg';
-let runtime = new RuntimeUA(sandboxFactory);
 
-window.runtime = runtime;
+// You can change this at your own domain
+let domain = config.domain;
+
+// let runtime = new RuntimeUA(sandboxFactory, domain);
+// window.runtime = runtime;
 
 // Check if the document is ready
 if (document.readyState === 'complete') {
@@ -26,49 +34,28 @@ if (document.readyState === 'complete') {
   document.addEventListener('DOMContentLoaded', documentReady, false);
 }
 
-let loginBtn = document.querySelector('.login');
-loginBtn.addEventListener('click', function(e) {
+function documentReady() {
 
-  let loginPanel = document.querySelector('.login-panel');
-  let content = loginPanel.querySelector('.card-action');
-  addLoader(content);
-
-  runtime.identityModule.loginWithRP().then(function(result) {
-    removeLoader(content);
-    userLoged(result);
-  }).catch(function(reason) {
-    removeLoader(content);
-    let cardHolder = $('.card-content');
-    let html = '<div class="row"><div class="col s12"><span class="card-title">Login</span></div><div class="col s12">' + reason.error.message + '</div>';
-
-    cardHolder.html(html);
-  });
-
-  let btn = $(e.currentTarget);
-  btn.addClass('hide');
-
-});
-
-function userLoged(result) {
+  ready();
 
   let hypertyHolder = $('.hyperties');
   hypertyHolder.removeClass('hide');
 
-  let cardHolder = $('.card-content');
-  let html = '<div class="row"><div class="col s12"><span class="card-title">Logged</span></div><div class="col s2"><img alt="" class="circle responsive-img" src=' + result.picture + ' ></div><div class="col s8"><p><b>id:</b> ' + result.id + '</p><p><b>email:</b> ' + result.email + '</p><p><b>name:</b> ' + result.name + '</p><p><b>locale:</b> ' + result.locale + '</p></div>';
+  let hyperty = 'hyperty-catalogue://' + domain + '/.well-known/hyperty/HypertyConnector';
 
-  cardHolder.html(html);
+  let core = new CoreFactory();
+  let runtimeLoader = new RuntimeLoader(core);
 
-  console.log(result);
-
-  let hyperty = 'http://ua.pt/HelloHyperty';
+  console.log(runtimeLoader, hyperty);
 
   // Load First Hyperty
-  runtime.loadHyperty(hyperty).then(hypertyDeployed).catch(function(reason) {
+  runtimeLoader.requireHyperty(hyperty).then(hypertyDeployed).catch(function(reason) {
     errorMessage(reason);
   });
 
 }
+
+let connector;
 
 function hypertyDeployed(result) {
 
@@ -80,22 +67,25 @@ function hypertyDeployed(result) {
   cardAction.append(hypertyInfo);
 
   // Prepare to discover email:
-  discoverEmail();
+  let hypertyDiscovery = result.instance.hypertyDiscovery;
+  discoverEmail(hypertyDiscovery);
 
   // Prepare the chat
   let messageChat = $('.hyperty-chat');
   messageChat.removeClass('hide');
 
-  let connector = window.components[result.runtimeHypertyURL].hypertyCode.hypertyConnector;
+  connector = result.instance;
 
-  connector.addEventListener('connector:notification', notificationHandler);
+  connector.addEventListener('connector:connected', function(controller) {
 
-  connector.connectionController.addEventListener('stream:added', processVideo);
+    connector.addEventListener('have:notification', function(event) {
+      notificationHandler(controller, event);
+    });
 
-  runtime.messageBus.addListener(result.runtimeHypertyURL, newMessageRecived);
+  });
 }
 
-function discoverEmail() {
+function discoverEmail(hypertyDiscovery) {
 
   let section = $('.discover');
   let searchForm = section.find('.form');
@@ -115,14 +105,13 @@ function discoverEmail() {
 
     let email = inputField.val();
     console.log(email);
-    runtime.registry.getUserHyperty(email).then(emailDiscovered).catch(emailDiscoveredError);
+
+    hypertyDiscovery.discoverHypertyPerUser(email).then(emailDiscovered).catch(emailDiscoveredError);
 
   });
 }
 
 function emailDiscovered(result) {
-  // Email Discovered:  Object {id: "openidtest10@gmail.com", descriptor: "http://ua.pt/HelloHyperty", hypertyURL: "hyperty://ua.pt/27d080c8-22ef-445f-9f9a-f2c750fc6d5a"}
-
   console.log('Email Discovered: ', result);
 
   let section = $('.discover');
@@ -148,14 +137,6 @@ function emailDiscovered(result) {
 }
 
 function emailDiscoveredError(result) {
-
-  // result = {
-  //   id: 'openidtest10@gmail.com',
-  //   descriptor: 'http://ua.pt/HelloHyperty',
-  //   hypertyURL: 'hyperty://ua.pt/27d080c8-22ef-445f-9f9a-f2c750fc6d5a'
-  // };
-  //
-  // emailDiscovered(result);
 
   console.error('Email Discovered Error: ', result);
 
@@ -183,11 +164,17 @@ function openChat(result, video) {
 
   if (video) {
 
-    let a = window.components[fromUser].hypertyCode;
+    connector.connect(toUser).then(function(controller) {
 
-    console.log(toUser);
+      showVideo(controller);
 
-    a.connect(toUser).then(function(controller) {
+      controller.addEventListener('stream:added', processVideo);
+      controller.addEventListener('on:notification', notification);
+      controller.addEventListener('on:subscribe', function(controller) {
+        console.info('on:subscribe:event ', controller);
+      });
+
+      controller.addEventListener('connector:notification', notification);
 
       controller.addEventListener('stream:added', processVideo);
 
@@ -214,22 +201,12 @@ function openChat(result, video) {
 
 }
 
-function newMessageRecived(msg) {
-
-  console.log(msg);
-
-  // Object {to: "hyperty://ua.pt/71552726-ae61-411a-bab0-41843b26b56f", from: "hyperty://ua.pt/586f5f0a-aa98-4d23-b864-a6efd3ccdd74", type: "message", body: Object, id: 2}
-  processMessage(msg, 'in');
-
-}
-
 function processVideo(stream) {
 
   let messageChat = $('.hyperty-chat');
   let video = messageChat.find('.video');
-
-  video.removeClass('hide');
   video[0].src = stream;
+
 }
 
 function processMessage(msg, type) {
@@ -258,35 +235,40 @@ function sendMessage(from, to, message) {
   };
 
   processMessage(msg, 'out');
-  runtime.messageBus.postMessage(msg);
 }
 
-function notificationHandler(event) {
+function notification(event) {
+  console.log('Event: ', event);
+}
 
-  let loginPanel = $('.login-panel');
-  let hypertyId = loginPanel.attr('data-url');
+function notificationHandler(controller, event) {
+
+  let calleeInfo = event.identity;
   let incoming = $('.modal-call');
+  let acceptBtn = incoming.find('.btn-accept');
+  let rejectBtn = incoming.find('.btn-reject');
   let informationHolder = incoming.find('.information');
-  let agreeBtn = incoming.find('.modal-action');
 
-  let parseInformation = '<label>From: </label>' + event.from;
+  showVideo(controller);
 
-  parseInformation += '<h5>Resources</h5><ul>';
-  Object.keys(event.resources).map(function(key) {
-    parseInformation += '<li>' + key + '</li>';
+  controller.addEventListener('stream:added', processVideo);
+
+  acceptBtn.on('click', function(e) {
+
+    e.preventDefault();
+
+    controller.accept().then(function(result) {
+      console.log(result);
+    }).catch(function(reason) {
+      console.error(reason);
+    });
+
   });
 
-  parseInformation += '</ul>';
+  rejectBtn.on('click', function(e) {
 
-  informationHolder.html(parseInformation);
-
-  console.log(event);
-
-  agreeBtn.on('click', function(e) {
-
-    let a = window.components[hypertyId].hypertyCode;
-    a.accept().then(function(controller) {
-      console.log('Controller: ', controller);
+    controller.decline().then(function(result) {
+      console.log(result);
     }).catch(function(reason) {
       console.error(reason);
     });
@@ -294,6 +276,113 @@ function notificationHandler(event) {
     e.preventDefault();
   });
 
+  let parseInformation = '<div class="col s12">' +
+        '<div class="row valign-wrapper">' +
+          '<div class="col s2">' +
+            '<img src="' + calleeInfo.picture + '" alt="" class="circle responsive-img">' +
+          '</div>' +
+          '<span class="col s10">' +
+            '<div class="row">' +
+              '<span class="col s3 text-right">Name: </span>' +
+              '<span class="col s9 black-text">' + calleeInfo.name + '</span>' +
+            '</span>' +
+            '<span class="row">' +
+              '<span class="col s3 text-right">Email: </span>' +
+              '<span class="col s9 black-text">' + calleeInfo.email + '</span>' +
+            '</span>' +
+            '<span class="row">' +
+              '<span class="col s3 text-right">locale: </span>' +
+              '<span class="col s9 black-text">' + calleeInfo.locale + '</span>' +
+            '</span>' +
+          '</div>' +
+        '</div>';
+
+  informationHolder.html(parseInformation);
   $('.modal-call').openModal();
 
+}
+
+function showVideo(controller) {
+  let messageChat = $('.hyperty-chat');
+  let videoHolder = messageChat.find('.video-holder');
+  videoHolder.removeClass('hide');
+
+  let btnCamera = videoHolder.find('.camera');
+  let btnMute = videoHolder.find('.mute');
+  let btnMic = videoHolder.find('.mic');
+  let btnHangout = videoHolder.find('.hangout');
+
+  console.log(controller);
+
+  btnCamera.on('click', function(event) {
+
+    event.preventDefault();
+
+    controller.disableCam().then(function(status) {
+      console.log(status, 'camera');
+      let icon = 'videocam_off';
+      let text = 'Disable Camera';
+      if (!status) {
+        text = 'Enable Camera';
+        icon = 'videocam';
+      }
+
+      let iconEl = '<i class="material-icons left">' + icon + '</i>';
+      $(event.currentTarget).html(iconEl);
+    }).catch(function(e) {
+      console.error(e);
+    });
+
+  });
+
+  btnMute.on('click', function(event) {
+
+    event.preventDefault();
+
+    controller.mute().then(function(status) {
+      console.log(status, 'audio');
+      let icon = 'volume_off';
+      let text = 'Disable Sound';
+      if (!status) {
+        text = 'Enable Sound';
+        icon = 'volume_up';
+      }
+
+      let iconEl = '<i class="material-icons left">' + icon + '</i>';
+      $(event.currentTarget).html(iconEl);
+    }).catch(function(e) {
+      console.error(e);
+    });
+
+    console.log('mute other peer');
+
+  });
+
+  btnMic.on('click', function(event) {
+
+    event.preventDefault();
+
+    controller.disableMic().then(function(status) {
+      console.log(status, 'mic');
+      let icon = 'mic_off';
+      let text = 'Disable Microphone';
+      if (!status) {
+        icon = 'mic';
+        text = 'Enable Microphone';
+      }
+
+      let iconEl = '<i class="material-icons left">' + icon + '</i>';
+      $(event.currentTarget).html(iconEl);
+    }).catch(function(e) {
+      console.error(e);
+    });
+
+  });
+
+  btnHangout.on('click', function(event) {
+
+    event.preventDefault();
+
+    console.log('hangout');
+  });
 }

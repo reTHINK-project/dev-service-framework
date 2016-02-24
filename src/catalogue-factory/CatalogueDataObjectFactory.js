@@ -30,6 +30,16 @@ class CatalogueDataObjectFactory extends RethinkObject {
         super(validation, schema);
     }
 
+    /**
+     * Create CatalogueDataObject
+     * @param {string} guid - Catalogue Global Unique identifier of the Catalogue Object
+     * @param {CatalogueObjectType} type - Indicates the type of Catalogue Data Object
+     * @param {string} objectName - Human-understandable name of the catalogue object
+     * @param {string} description
+     * @param {DataObjectSourceLanguage} language - Programming language used in the SourcePackage
+     * @param {string} sourcePackageURL - URL from where the source code package of the corresponding catalogue object can be downloaded.
+     * @returns {CatalogueDataObject}
+     */
     createCatalogueDataObject(guid, type, objectName, description, language, sourcePackageURL) {
         if (
             typeof guid === "undefined"
@@ -43,6 +53,17 @@ class CatalogueDataObjectFactory extends RethinkObject {
         return new CatalogueDataObject(guid, type, objectName, description, language, sourcePackageURL);
     }
 
+    /**
+     * Create HypertyDescriptor
+     * @param {string} guid - Catalogue Global Unique identifier of the Catalogue Object
+     * @param {string} objectName - Human-understandable name of the catalogue object
+     * @param {string} description
+     * @param {DataObjectSourceLanguage} language - Programming language used in the SourcePackage
+     * @param {string} sourcePackageURL - URL from where the source code package of the corresponding catalogue object can be downloaded.
+     * @param {int} hypertyType - A tag that identifies what type of hyperty is described in the object.
+     * @param {URL.URLList} dataObjects - Defines the Data Object Schemas supported by the Hyperty through a list of Catalogue URLs from where these schemas can be reached.
+     * @returns {HypertyDescriptor}
+     */
     createHypertyDescriptorObject(guid, objectName, description, language, sourcePackageURL, hypertyType,
                                   dataObjects) {
         if (
@@ -59,6 +80,18 @@ class CatalogueDataObjectFactory extends RethinkObject {
             language, sourcePackageURL, hypertyType, dataObjects);
     }
 
+    /**
+     * Create ProtocolStubDescriptor
+     * @param {string} guid - Catalogue Global Unique identifier of the Catalogue Object
+     * @param {string} objectName - Human-understandable name of the catalogue object
+     * @param {string} description
+     * @param {DataObjectSourceLanguage} language - Programming language used in the SourcePackage
+     * @param {string} sourcePackageURL - URL from where the source code package of the corresponding catalogue object can be downloaded.
+     * @param {URL.URL} messageSchemas - Defines the Schema describing the Message Data Model used by the Hyperty through the Catalogue URL from where the Message schema can be reached. If not defined, by default it is assumed the standard Message Model is used.
+     * @param configuration - Data required to configure the ProtocolStub
+     * @param constraints - Describes capabilities required from the Hyperty Runtime in order to be able to execute the ProtocolStub
+     * @returns {ProtocolStubDescriptor}
+     */
     createProtoStubDescriptorObject(guid, objectName, description, language, sourcePackageURL, messageSchemas,
                                     configuration, constraints) {
         if (
@@ -76,6 +109,18 @@ class CatalogueDataObjectFactory extends RethinkObject {
             language, sourcePackageURL, messageSchemas, configuration, constraints);
     }
 
+    /**
+     * Create HypertyRuntimeDescriptor
+     * @param {string} guid - Catalogue Global Unique identifier of the Catalogue Object
+     * @param {string} objectName - Human-understandable name of the catalogue object
+     * @param {string} description
+     * @param {DataObjectSourceLanguage} language - Programming language used in the SourcePackage
+     * @param {string} sourcePackageURL - URL from where the source code package of the corresponding catalogue object can be downloaded.
+     * @param runtimeType
+     * @param hypertyCapabilities - Supported capabilities to execute Hyperties
+     * @param protocolCapabilities - Supported capabilities to execute Protocol Stubs
+     * @returns {HypertyRuntimeDescriptor}
+     */
     createHypertyRuntimeDescriptorObject(guid, objectName, description, language, sourcePackageURL,
                                          runtimeType, hypertyCapabilities, protocolCapabilities) {
         if (
@@ -94,6 +139,17 @@ class CatalogueDataObjectFactory extends RethinkObject {
             description, language, sourcePackageURL, runtimeType, hypertyCapabilities, protocolCapabilities);
     }
 
+    /**
+     * Create PolicyEnforcerDescriptor
+     * @param {string} guid - Catalogue Global Unique identifier of the Catalogue Object
+     * @param {string} objectName - Human-understandable name of the catalogue object
+     * @param {string} description
+     * @param {DataObjectSourceLanguage} language - Programming language used in the SourcePackage
+     * @param {string} sourcePackageURL - URL from where the source code package of the corresponding catalogue object can be downloaded.
+     * @param configuration
+     * @param policies
+     * @returns {PolicyEnforcerDescriptor}
+     */
     createPolicyEnforcerDescriptorObject(guid, objectName, description, language, sourcePackageURL, configuration,
                                          policies) {
         if (
@@ -111,10 +167,18 @@ class CatalogueDataObjectFactory extends RethinkObject {
             description, language, sourcePackageURL, configuration, policies);
     }
 
-    createDataObjectSchema(guid, type, objectName, description, language, sourcePackageURL) {
+    /**
+     * Create DataObjectSchema
+     * @param {string} guid - Catalogue Global Unique identifier of the Catalogue Object
+     * @param {string} objectName - Human-understandable name of the catalogue object
+     * @param {string} description
+     * @param {DataObjectSourceLanguage} language - Programming language used in the SourcePackage
+     * @param {string} sourcePackageURL - URL from where the source code package of the corresponding catalogue object can be downloaded.
+     * @returns {DataObjectSchema}
+     */
+    createDataObjectSchema(guid, objectName, description, language, sourcePackageURL) {
         if (
             typeof guid === "undefined"
-            || typeof type === "undefined"
             || typeof objectName === "undefined"
             || typeof description === "undefined"
             || typeof language === "undefined"
@@ -122,17 +186,23 @@ class CatalogueDataObjectFactory extends RethinkObject {
         )
             throw new Error("Invalid parameters!");
 
-        return new DataObjectSchema(guid, type, objectName, description, language, sourcePackageURL);
+        return new DataObjectSchema(guid, CatalogueObjectType.DATA_SCHEMA, objectName, description, language, sourcePackageURL);
     }
 
-    createSourcePackage(sourceCode, sourceCodeClassname) {
+    /**
+     * Create SourcePackage
+     * @param sourceCodeClassname - The Class-name of the SourceCode
+     * @param sourceCode - The source code of the catalogue object
+     * @returns {SourcePackage}
+     */
+    createSourcePackage(sourceCodeClassname, sourceCode) {
         if (
             typeof sourceCode === "undefined"
             || typeof sourceCodeClassname === "undefined"
         )
             throw new Error("Invalid parameters!");
 
-        return new SourcePackage(sourceCode, sourceCodeClassname);
+        return new SourcePackage(sourceCodeClassname, sourceCode);
 
     }
 }

@@ -6,7 +6,7 @@ package Context <<Rect>> {
 		id: string
 		type : ContextType
 		description ?: string
-		time?: RethinkType.Date
+		time?: RethinkCore.RethinkType.Date
 		units?: ContextUnit
 		version?: integer
 		value: ContextValueList
@@ -23,7 +23,7 @@ package Context <<Rect>> {
 	}
 
 	class ContextValueList {
-	
+
 	}
 
 	class ContextValue {
@@ -49,7 +49,7 @@ package Context <<Rect>> {
 	Context --> ContextUnit
 	ContextValue --> ContextUnit
 	ContextValue --> RethinkType.Basic
-	
+
 	ContextValueList *-- ContextValue
 
 	ContextValue --|> RethinkType.ListElement
