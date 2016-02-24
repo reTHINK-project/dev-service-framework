@@ -11,9 +11,9 @@ import peer from './peer';
 
 class ConnectionController extends EventEmitter {
 
-  constructor(syncher, domain) {
+  constructor(syncher, domain, configuration) {
 
-    super(syncher);
+    super(syncher, domain, configuration);
 
     let _this = this;
 
@@ -22,16 +22,13 @@ class ConnectionController extends EventEmitter {
 
     _this._objectDescURL = 'hyperty-catalogue://' + domain + '/.well-known/dataschemas/FakeDataSchema';
 
-    _this.mediaConstraints = {
-      optional: [],
-      mandatory: {
-        offerToReceiveAudio:true,
-        offerToReceiveVideo:true
-      }
-    };
+    console.info(configuration);
+
+    _this.mediaConstraints = configuration.mediaConstraints;
+    _this.configuration = configuration.webrtc;
 
     // Prepare the PeerConnection
-    let peerConnection = new RTCPeerConnection();
+    let peerConnection = new RTCPeerConnection(_this.configuration);
 
     peerConnection.addEventListener('signalingstatechange', function(event) {
 

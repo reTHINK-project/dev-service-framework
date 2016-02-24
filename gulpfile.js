@@ -88,7 +88,7 @@ function compile(file, destination, cb) {
     entries: [filename],
     standalone: 'activate',
     debug: false
-  }).transform(babel, {compact: false, optional: 'runtime'})
+  }).transform(babel, {global: true, compact: false})
   .bundle()
   .on('error', function(err) {
     console.error(err);
@@ -172,7 +172,10 @@ function encode(filename, descriptorName, configuration, isDefault) {
     json[value].version = '0.1';
     json[value].description = 'Description of ' + filename;
     json[value].objectName = filename;
-    json[value].configuration = configuration;
+    if (!json[value].hasOwnProperty('configuration') && configuration){
+      json[value].configuration = configuration;
+      console.log('setting configuration: ', configuration);
+    }
     json[value].sourcePackageURL = '/sourcePackage';
     json[value].sourcePackage.sourceCode = encoded;
     json[value].sourcePackage.sourceCodeClassname = filename;
@@ -216,17 +219,10 @@ function resource(file, configuration, isDefault) {
     descriptorName = 'DataSchemas';
   }
 
-  console.log('DATA:', descriptorName);
+  console.log('DATA:', descriptorName, filename);
 
   if (extension === 'js') {
-    return browserify({
-      entries: ['resources/' + filename + '.js'],
-      standalone: 'activate',
-      debug: false
-    })
-    .transform(babel)
-    .bundle()
-    .pipe(source('bundle.js'))
+    return gulp.src(['resources/' + filename + '.js'])
     .pipe(gulp.dest('resources/'))
     .pipe(buffer())
     .pipe(encode(filename, descriptorName, configuration, isDefault))
