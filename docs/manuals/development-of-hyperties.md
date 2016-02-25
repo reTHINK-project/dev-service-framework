@@ -50,203 +50,75 @@ npm install git+git@github.com:reTHINK-project/dev-service-framework.git --save
 jspm install service-framework=github:reTHINK-project/dev-service-framework.git
 ```
 
-**Use here a helloWorldReporter and a helloWorldObserver example with short comments in the middle of the code. API documentation should be provided in the source code.**
 
-2) Import Module(s)
+2) Select or specify the descriptor of the Hyperty Data Objects in json-schema. Let's assume we define a simple Hello Hyperty object:
 
 ```
-
-// import framework modules
-
-import {Syncher, MessageFactory} from '../src/service-framework';
-
-class HelloWorldReporterHyperty{
-
-    constructor(hypertyURL, bus, configuration)
-    {
-            let _this = this;
-            _this.bus = bus;
-            _this.configuration = configuration;
-            _this.hypertyURL = hypertyURL;
-
-        // Create Hyperty Syncher
-
-            let syncher = new Syncher(hypertyURL, bus, configuration);
-            _this.syncher = syncher;
-
-        // Create HelloWorld Data Sync Object
-
-        _this.hypertyConnector = new HypertyConnector(syncher);
-        _this.hypertyConnector.name = 'My Awesome Hyperty';
-  }
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "HelloObject",
+	"type": "object",
+	"required": ["scheme","hello"],
+	"additionalProperties": false,
+  "properties": {
+		"scheme": {
+			"constant": "hello"
+		},
+		"hello": {
+			"type": "string"
+		}
+	}
 }
 ```
 
-or if you need more than one dependency:
+3) Then we can start developing the Hyperty Reporter of the previously defined Hello Hyperty Object. First the constructor where we are going to instantiate the Hyperty syncher. For that, we take as input parameter the Hyperty address (HypertyURL), the MiniBus used to receive and send data synchronization messages (bus) and the configuration.
 
 ```
-import {Syncher, MessageFactory, AddressFactory} from 'service-framework';
-```
+constructor(hypertyURL, bus, configuration) {
 
-The next section explains the available modules and APIs they expose.
-
-### APIs
-
-**to be moved to the source code. Add link to generated Web Documentation.**
-
-Here we describe useful functionalities that are exposed by the Service Framework Module, which developers can use in development process.
-
-#### Syncher API
-
-The Syncher is a singleton class per Hyperty/URL and it is the owner of all created Data Sync Objects according to the [Reporter - Observer pattern](p2p-data-sync.md). The main class for the package. Should only be available one per Hyperty/URL. It's the owner of all kind of Data Sync Objects.
-
-`new Syncher(hypertyURL, bus.MiniBus, configuration)`
-
-*Parameters:*
-
-| name          | type           | description                                                                                                                                                                                          |
-|---------------|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| hypertyURL    | URL.HypertyURL | A URL allocated by the runtime that uniquely identifies the Hyperty                                                                                                                                  |
-| bus.MiniBus   | MiniBus        | An instance of the MiniBus provided in the sandbox. When an object (Reporter or Observed) is created, the SyncherManager will add a listener in the MiniBus to receive/send Messages of that object. |
-| configuration | Config         | Configuration data containing the runtimeURL.                                                                                                                                                        |
-
-##### Methods
-
-The create method request a DataObjectReporter creation. The URL will be  requested by the allocation mechanism..
-
-```
-create(schema, List, initialData)
-```
-
-*Parameters:*
-
-| name        | type              | description                     |
-|-------------|-------------------|---------------------------------|
-| schema      | Schema            | The Schema of the object        |
-| List        | Array<HypertyURL> | of hyperties to send the create |
-| initialData | JSON              | Object initial data             |
-
--	Returns: Return Promise to a new Reporter. The reporter can be accepted or rejected by the PEP Type Promise.<DataObjectReporter>
-
-The subscribe method can be used to request subscription to an existent object.
-
-```
-subscribe(objURL)
-```
-
-*Parameters:*
-
-| name   | type      | description                    |
-|--------|-----------|--------------------------------|
-| objURL | ObjectURL | Address of the existent object |
-
-*Returns:* Return Promise to a new Observer of Type Promise.<DataObjectObserver>
-
-
-#### Hyperty Discovery API
-
-**to be moved to the source code. Add link to generated Web Documentation.**
-
-Hyperty Discovery interface provides the functionality to query hyperties instances registered in the domain registry of a given user
-
-```
-new HypertyDiscovery(domainURL, msgBus)
-```
-
-*Parameters:*
-
-| name           | type           | description                                                         |
-|----------------|----------------|---------------------------------------------------------------------|
-| domainURL      | URL.RuntimeURL | A URL allocated by the runtime that uniquely identifies the Hyperty |
-| msgBus.MiniBus | MiniBus        | An instance of the MiniBus used to post messages to the Message Bus |
-
-##### Methods
-
-The discoverHypertyPerUser function is used to query hyperties instances registered in Domain registry for a given user.
-
-```
- discoverHypertyPerUser(userIdentifier)
-```
-
-*Parameters:*
-
-| name           | type              | description                  |
-|----------------|-------------------|------------------------------|
-| userIdentifier | Identity.Identity | The user's unique identifier |
-
--	Returns:\* Return Promise
-
-### Examples
-
-#### Syncher Example
-
-Here is an example on how a Hyperty can instantiate and use the syncher.
-
-```
-import {Syncher, MessageFactory} from '../src/service-framework';
-
-class MyAwesomeHyperty{
-
-    constructor(hypertyURL, bus, configuration)
-    {
-            let _this = this;
-            _this.bus = bus;
-            _this.configuration = configuration;
-            _this.hypertyURL = hypertyURL;
-        // Syncher Object
-            let syncher = new Syncher(hypertyURL, bus, configuration);
-            _this.syncher = syncher;
-
-            //MessageFactory Object
-            let messageFactory = new MessageFactory("false", '{}');
-            _this.messageFactory = messageFactory;
-
-            _this.syncher.onNotification(function(event) {
-            console.log('My Awesome Hyperty just recieved a notification: ', event);
-            _this.hypertyConnector._onNotification(event, hypertyURL);
-     });
-        _this.hypertyConnector = new HypertyConnector(syncher);
-        _this.hypertyConnector.name = 'My Awesome Hyperty';
-  }
+  let syncher = new Syncher(hypertyURL, bus, configuration);
 }
 ```
 
-#### Minibus API
+4) Then we prepare the creation of the Hyperty Hello Data Object by defining the Catalogue URL from where the previously defined Hyperty Data Object schema can be retrieved and initial data to be used in the creation:
 
-**This is core runtime. To be moved to the MiniBus source code in the dev-core-runtime**
-
-
-The MiniBus API is a minimal interface to send and receive messages. It can be reused in many type of components. Components that need a message system should receive this class as a dependency or extend it. Classes extending this interface have to implement the following private methods: `_onPostMessage` and `_registerExternalListener` which are described below.
-
-The `_onPostMessage` method is a private class and used by the classes extending the Minibus class to process messages from the public "postMessage" without a registered listener. It can be used to send the message to an external interface, like a WebWorker or an IFrame.
 
 ```
-onPostMessage(msg)
+_this._objectDescriptorURL = 'hyperty-catalogue://example.com/.well-known/dataschemas/HelloWorldDataSchema';
+
+let hello = {
+   hello : "Hello World!!"
+};
 ```
 
-*Parameters:*
-
-| name | type            | description    |
-|------|-----------------|----------------|
-| msg  | Message.Message | posted Message |
-
-The `_registerExternalListener()` method is not publicly available. It can be used by the class extension implementation to process all messages that enter the MiniBus from an external interface, like a WebWorker or IFrame. This method is called one time in the constructor to register external listeners. The implementation will probably call the `_onMessage` method to publish in the local listeners.
-
-*NOTE:* DO NOT call "postMessage", there is a danger that the message enters in a cycle!`
-registerExternalListener()
-`
-
-
-#### MiniBus API Example
-
-We shall now provide more functionality to our MyAwesomeHyperty example above. The above class already has an instance of the MiniBus object which was provided in the constructor parameter. The example below shows how to use this instance to send a Message on the Message Bus.
+5) The object is created and another Hyperty is invited to be an observer.
 
 ```
-sendMessage() {
-    let _this = this;
-    let message = messageFactory.createCreateMessageRequest( _this.hypertyURL,
-    'hyperty-runtime://sp1/AnotherHyperty'
-    "Hello from My Awesome Hyperty");
-    _this.bus.postMessage(message);
-  }
+    syncher.create(_this._objectDescriptorURL, [hypertyURL], hello).then(function(dataObjectReporter) {
+
+    console.info('Hello Data Object was created: ', dataObjectReporter);
+```
+
+6) Changes to the object will be immediately received by Authorised Observers.
+
+```
+  dataObjectReporter.data.hello = "Bye!!";
+```
+
+7) In order to observe Hello Data Object, the Observer Hyperty has to subscribe it, by passing it URL and the Catalogue URL from where its schema can be retrieved. As soon as the subscription is accepted the most updated version of the Hello Data Object is received ...
+
+```
+syncher.subscribe(_this._objectDescriptorURL, event.url).then(function(dataObjectObserver) {}
+
+  console.info( dataObjectObserver);
+
+```
+
+8) ... and any change made in the object by the Reporter will be immediately received by the Observer:
+
+```
+  dataObjectObserver.onChange('*', function(event) {
+          // Hello World Object was changed
+          console.info(dataObjectObserver);
+        });
 ```
