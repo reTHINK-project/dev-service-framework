@@ -293,6 +293,16 @@ Message sent by Object Reporter Hyperty to Data Object Changes Handler.
 "body" : { "value" : "changed value"  }
 ```
 
+Message sent by Object Reporter Hyperty to Data Object Changes Handler when an array is changed.
+
+```
+"id" : "3"
+"type" : "UPDATE",
+"from" : "<ObjectURL>",
+"to" : "<ObjectURL>/changes",
+"body" : { "attributeType" : "ARRAY", "operation" : "ADD|REMOVE", "value" : <changed value>  }
+```
+
 ##### Creation of Data Object child
 
 Message sent by Child Object Reporter Hyperty to Data Object Parent Children Handler.
