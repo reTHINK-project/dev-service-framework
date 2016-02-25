@@ -40,7 +40,7 @@ Reporter Runtime Sync Manager Response Message sent to the Reporter Syncher Hype
 "type" : "RESPONSE",
 "from" : "hyperty-runtime://<sp-domain>/<hyperty-runtime-instance-identifier>/sm",
 "to" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
-"body" : { "code" : "200", "value" : "{ "resource" : "<ObjectURL>", "childrenResources" : [{"<resource-children-name>"}] } }
+"body" : { "code" : "200", "resource" : "<ObjectURL>", "childrenResources" : [{"<resource-children-name>"}] }
 ```
 
 Reporter Runtime Sync Manager forwards to the Reporter Syncher Hyperty, Response Messages sent by invited Observer Hyperties.
@@ -88,10 +88,20 @@ Message sent by Observer (candidate) Hyperty Instance to the Observer Runtime Sy
 "type" : "SUBSCRIBE",
 "from" : "hyperty://<observer-sp-domain>/<hyperty-observer-instance-identifier>",
 "to" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
-"body" : { "resource" : "<ObjectURL>" , "childrenResources" : [{"<resource-children-name>"}], "schema" : "hyperty-catalogue://<sp-domain>/dataObjectSchema/<schema-identifier>" }
+"body" : { "resource" : "<ObjectURL>" , "schema" : "hyperty-catalogue://<sp-domain>/dataObjectSchema/<schema-identifier>" }
 ```
 
 ###### Response
+
+100OK Provisional Response Message sent back by Observer Runtime Sync Manager to Observer Hyperty Instance containing in the body the childrenResources, in case they exist.
+
+```
+"id" : "1"
+"type" : "RESPONSE",
+"from" : "hyperty-runtime://<sp-domain>/<hyperty-runtime-instance-identifier>/sm",
+"to" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
+"body" : { "code" : "100", "resource" : "<ObjectURL>", "childrenResources" : [{"<resource-children-name>"}] }
+```
 
 200OK Response Message sent back by Observer Runtime Sync Manager to Observer Hyperty Instance containing in the body the most updated version of Data Object.
 
@@ -291,6 +301,16 @@ Message sent by Object Reporter Hyperty to Data Object Changes Handler.
 "from" : "<ObjectURL>",
 "to" : "<ObjectURL>/changes",
 "body" : { "value" : "changed value"  }
+```
+
+Message sent by Object Reporter Hyperty to Data Object Changes Handler when an array is changed.
+
+```
+"id" : "3"
+"type" : "UPDATE",
+"from" : "<ObjectURL>",
+"to" : "<ObjectURL>/changes",
+"body" : { "attributeType" : "ARRAY", "operation" : "ADD|REMOVE", "value" : <changed value>  }
 ```
 
 ##### Creation of Data Object child

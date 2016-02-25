@@ -80,13 +80,21 @@ Defines the criteria to be used for search purposes. Syntax used to define the c
 
 #### UpdateMessageBody
 
-##### attribute
+##### attribute (optional)
 
-Identifies the attribute in the Object that is updated (optional)
+Identifies the attribute in the Object that is updated
 
 ##### value
 
 Contains the updated value object in JSON format.
+
+##### attributeType (optional)
+
+To indicate whether it is an array that is updated.
+
+##### operation (optional)
+
+Operation to be performed in an array: add or remove
 
 #### DeleteMessageBody
 
