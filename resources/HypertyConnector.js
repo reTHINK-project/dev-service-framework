@@ -2349,20 +2349,18 @@ var HypertyConnector = (function (_EventEmitter) {
       return new Promise(function (resolve, reject) {
 
         var connectionController = undefined;
-        var _dataObjectReporter = undefined;
 
         console.info('------------------------ Syncher Create ---------------------- \n');
-        syncher.create(_this._objectDescURL, [hypertyURL], {}).then(function (dataObjectReporter) {
-          console.info('1. Return Create Data Object Reporter', dataObjectReporter);
+        connectionController = new _ConnectionController2['default'](syncher, _this._domain, _this._configuration);
 
-          _dataObjectReporter = dataObjectReporter;
-
-          connectionController = new _ConnectionController2['default'](syncher, _this._domain, _this._configuration);
-          return connectionController.getUserMedia(options);
-        }).then(function (mediaConstraints) {
+        connectionController.getUserMedia(options).then(function (mediaConstraints) {
           console.info('2. Return the media constraints from controller: ', mediaConstraints);
 
-          connectionController.dataObjectReporter = _dataObjectReporter;
+          return syncher.create(_this._objectDescURL, [hypertyURL], {});
+        }).then(function (dataObjectReporter) {
+          console.info('1. Return Create Data Object Reporter', dataObjectReporter);
+          connectionController.dataObjectReporter = dataObjectReporter;
+
           _this._controllers[hypertyURL] = connectionController;
 
           resolve(connectionController);

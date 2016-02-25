@@ -46,8 +46,6 @@ function documentReady() {
   let core = new CoreFactory();
   let runtimeLoader = new RuntimeLoader(core);
 
-  console.log(runtimeLoader, hyperty);
-
   // Load First Hyperty
   runtimeLoader.requireHyperty(hyperty).then(hypertyDeployed).catch(function(reason) {
     errorMessage(reason);
