@@ -40,7 +40,7 @@ Reporter Runtime Sync Manager Response Message sent to the Reporter Syncher Hype
 "type" : "RESPONSE",
 "from" : "hyperty-runtime://<sp-domain>/<hyperty-runtime-instance-identifier>/sm",
 "to" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
-"body" : { "code" : "200", "value" : "{ "resource" : "<ObjectURL>", "childrenResources" : [{"<resource-children-name>"}] } }
+"body" : { "code" : "200", "resource" : "<ObjectURL>", "childrenResources" : [{"<resource-children-name>"}] }
 ```
 
 Reporter Runtime Sync Manager forwards to the Reporter Syncher Hyperty, Response Messages sent by invited Observer Hyperties.
