@@ -39,9 +39,9 @@ If the answers to the above questions are "YES" then most likely, you should go 
 
 The reTHINK Service Framework is what you want to look at next. The Service Framework provides APIs for developers to facilitate the development of Hyperties.
 
-### Getting Started with the Service Framework
+### Getting Started
 
-So you have decided for the Hyperty Concept and now ask yourself where to start. This section describes the basic steps any developer needs to undertake to include the Service Framework into their projects. There are two simple steps to get you started.
+So you have decided for the Hyperty Concept and now ask yourself where to start. This section describes the basic steps any developer needs to undertake to develop Hyperties.
 
 1) Install the Service Framework
 
@@ -71,7 +71,7 @@ jspm install service-framework=github:reTHINK-project/dev-service-framework.git
 }
 ```
 
-3) Then we can start developing the Hyperty Reporter of the previously defined Hello Hyperty Object. First the constructor where we are going to instantiate the Hyperty syncher. For that, we take as input parameter the Hyperty address (HypertyURL), the MiniBus used to receive and send data synchronization messages (bus) and the configuration.
+3) Then we can start developing the Hyperty Reporter of the previously defined Hello Hyperty Object. First the constructor where we are going to instantiate the Hyperty syncher. For that, we take as input parameter the Hyperty address (HypertyURL), the MiniBus used to receive and send data synchronization messages (bus), and any required configuration data.
 
 ```
 constructor(hypertyURL, bus, configuration) {
@@ -94,27 +94,29 @@ let hello = {
 5) The object is created and another Hyperty is invited to be an observer.
 
 ```
-    syncher.create(_this._objectDescriptorURL, [hypertyURL], hello).then(function(dataObjectReporter) {
+    syncher.create(_this._objectDescriptorURL, [invitedHypertyURL], hello).then(function(dataObjectReporter) {
 
     console.info('Hello Data Object was created: ', dataObjectReporter);
 ```
 
-6) Changes to the object will be immediately received by Authorised Observers.
+6) From the Observer side, in order to observe the Hello Data Object, it has to subscribe it, by passing its URL and the Catalogue URL from where its schema can be retrieved. As soon as the subscription is accepted the most updated version of the Hello Data Object is received ...
 
 ```
-  dataObjectReporter.data.hello = "Bye!!";
-```
-
-7) In order to observe Hello Data Object, the Observer Hyperty has to subscribe it, by passing it URL and the Catalogue URL from where its schema can be retrieved. As soon as the subscription is accepted the most updated version of the Hello Data Object is received ...
-
-```
-syncher.subscribe(_this._objectDescriptorURL, event.url).then(function(dataObjectObserver) {}
+syncher.subscribe(_this._objectDescriptorURL, ObjectUrl).then(function(dataObjectObserver) {}
 
   console.info( dataObjectObserver);
 
 ```
 
-8) ... and any change made in the object by the Reporter will be immediately received by the Observer:
+
+7) Any change performed by the Reporter in the the object.
+
+```
+  dataObjectReporter.data.hello = "Bye!!";
+```
+
+
+8) ... will be immediately received by the Observer:
 
 ```
   dataObjectObserver.onChange('*', function(event) {
