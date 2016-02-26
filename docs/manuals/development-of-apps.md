@@ -14,14 +14,13 @@ The usage of Hyperties is very simple and similar to the usage of any common Jav
 1- the App has to ensure the runtime is instantiated:
 
 ```
-let core = new CoreFactory();
-let runtimeLoader = new RuntimeLoader(core);
+let runtime = new RuntimeLoader('hyperty-catalogue://example.com/.well-known/hyperty.runtime/default');
 ```
 
 2- then load and deploy the required Hyperty from the Catalogue
 
 ```
-runtimeLoader.requireHyperty('hyperty-catalogue://example.com/.well-known/hyperty/HelloWorldReporter').then(
+runtime.requireHyperty('hyperty-catalogue://example.com/.well-known/hyperty/HelloWorldReporter').then(
 
   startUsingHpertyDeployed;
 
