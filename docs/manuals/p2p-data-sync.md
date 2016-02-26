@@ -9,52 +9,36 @@ Hyperty Reporter - Observer communication pattern goes beyond current solutions 
 
 ![Reporter-Observer Communication Pattern](reporter-observer.png)
 
-The API to handle Hyperty Data Objects is extremely simple and fun to use. The Developer of the Hyperty Reporter just has to create the Data Sync object with the Syncher API, and write on the object every time there is data to be updated and shared with Hyperty Observers.
+The API to handle Hyperty Data Objects is extremely simple and fun to use. The Developer of the Hyperty Reporter just has to create the Data Sync object with the Syncher API,
 
-```javascript
+```
+    syncher.create(_this._objectDescriptorURL, [invitedHypertyURL], hello).then(function(dataObjectReporter) {
 
-    ....
+    console.info('Hello Data Object was created: ', dataObjectReporter);
+```
+... and write on the object every time there is data to be updated and shared with Hyperty Observers:
 
-    console.info('---------------- Syncher Create Reporter Hyperty Data ---------------------- \n');
-    syncher.create({}, [hypertyURL], {}).then(function(dataObjectReporter) {
-      console.info('1. Return Create Data Object Reporter', dataObjectReporter);
-      console.info('--------------- END Create Reporter Hyperty Data------------------ \n');
-    })
-    .catch(function(reason) {
-      console.error(reason);
-      reject(reason);
-    });
+```
+  dataObjectReporter.data.hello = "Bye!!";
+```
 
-    // missing snippet for updates and delete
 
-    ...
+On the Hyperty Observer side, Data Objects are  subscribed with the Syncher API,
 
+```
+syncher.subscribe(_this._objectDescriptorURL, ObjectUrl).then(function(dataObjectObserver) {}
+
+  console.info( dataObjectObserver);
 
 ```
 
-On the Hyperty Observer side, Data Objects are also created with the Syncher API and the emerging [Object.observer() Javascript method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/observe) is used to receive the stream of data changes coming from the Reporter Hyperty.
+... and the emerging [Object.observer() Javascript method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/observe) is used to receive the stream of data changes coming from the Reporter Hyperty.
 
-```javascript
-  onNotification() {
-    console.info('---------------- Syncher Subscribe ---------------- \n');
-    syncher.subscribe(objectUrl).then(function(dataObjectObserver) {
-      console.info('1. Return Subscribe Data Object Observer', dataObjectObserver);
-
-      // Source code to add listeners to updates by using Object.observer()      
-      dataObjectObserver.onChange('*', function(event) {
-        console.info('on change event: ', event);
-      });
-
-      console.info('------------------------ END ---------------------- \n');
-    }).catch(function(reason) {
-      console.error(reason);
-    });
-  }
-
-  ...
-
-  // missing snippet for updates and delete
-
+```
+  dataObjectObserver.onChange('*', function(event) {
+          // Hello World Object was changed
+          console.info(dataObjectObserver);
+        });
 ```
 
 ### Hyperty Data Object URL address
