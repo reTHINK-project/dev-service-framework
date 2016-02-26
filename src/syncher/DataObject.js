@@ -202,9 +202,21 @@ class DataObject {
 
     if (_this._status === 'on') {
       let changeMsg = {
-        type: event.cType, from: _this._owner, to: _this._url,
-        body: { version: _this._version, oType: event.oType, attrib: event.field, value: event.data }
+        type: 'update', from: _this._url, to: _this._url + '/changes',
+        body: { version: _this._version, attribute: event.field }
       };
+
+      if (event.oType === ObjectType.OBJECT) {
+        if (event.cType !== ChangeType.REMOVE) {
+          changeMsg.body.value = event.data;
+        }
+      } else {
+        changeMsg.body.attributeType = event.oType;
+        changeMsg.body.value = event.data;
+        if (event.cType !== ChangeType.UPDATE) {
+          changeMsg.body.operation = event.cType;
+        }
+      }
 
       //childInfo must have (path, childId)
       if (childInfo) {
@@ -225,32 +237,27 @@ class DataObject {
     //will we need to confirm the reception ?
     if (_this._version + 1 === msg.body.version) {
       _this._version++;
-      let path = msg.body.attrib;
+      let path = msg.body.attribute;
       let value = deepClone(msg.body.value);
       let findResult = syncObj.findBefore(path);
 
-      if (msg.type === ChangeType.UPDATE) {
-        findResult.obj[findResult.last] = value;
-      } else {
-        if (msg.type === ChangeType.ADD) {
-          if (msg.body.oType === ObjectType.OBJECT) {
-            findResult.obj[findResult.last] = value;
-          } else {
-            //ARRAY
-            let arr = findResult.obj;
-            let index = findResult.last;
-            Array.prototype.splice.apply(arr, [index, 0].concat(value));
-          }
+      if (msg.body.attributeType === ObjectType.ARRAY) {
+        if (msg.body.operation === ChangeType.ADD) {
+          let arr = findResult.obj;
+          let index = findResult.last;
+          Array.prototype.splice.apply(arr, [index, 0].concat(value));
+        } else if (msg.body.operation === ChangeType.REMOVE) {
+          let arr = findResult.obj;
+          let index = findResult.last;
+          arr.splice(index, value);
         } else {
-          //REMOVE
-          if (msg.body.oType === ObjectType.OBJECT) {
-            delete findResult.obj[findResult.last];
-          } else {
-            //ARRAY
-            let arr = findResult.obj;
-            let index = findResult.last;
-            arr.splice(index, value);
-          }
+          findResult.obj[findResult.last] = value; // UPDATE
+        }
+      } else {
+        if (msg.body.value) {
+          findResult.obj[findResult.last] = value; // UPDATE or ADD
+        } else {
+          delete findResult.obj[findResult.last]; // REMOVE
         }
       }
     } else {
