@@ -22,10 +22,10 @@ where,
 Message sent by the Reporter Syncher Hyperty to Reporter Runtime Sync Manager.
 
 ```
-"id" : "1"
-"type" : "CREATE",
+"id"   : "1",
+"type" : "create",
 "from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
-"to" : "hyperty-runtime://<sp-domain>/<hyperty-runtime-instance-identifier>/sm",
+"to"   : "hyperty-runtime://<sp-domain>/<hyperty-runtime-instance-identifier>/sm",
 "body" : { "resource" : "<ObjectURL>", "authorise" : [{"HypertyURL"}], "value" : "<json object> , "schema" : "hyperty-catalogue://<sp-domain>/dataObjectSchema/<schema-identifier>" }
 ```
 
@@ -36,20 +36,20 @@ Message sent by the Reporter Syncher Hyperty to Reporter Runtime Sync Manager.
 Reporter Runtime Sync Manager Response Message sent to the Reporter Syncher Hyperty to confirm Object Data creation.
 
 ```
-"id" : "1"
-"type" : "RESPONSE",
+"id"   : "1",
+"type" : "response",
 "from" : "hyperty-runtime://<sp-domain>/<hyperty-runtime-instance-identifier>/sm",
-"to" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
+"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "body" : { "code" : "200", "resource" : "<ObjectURL>", "childrenResources" : [{"<resource-children-name>"}] }
 ```
 
 Reporter Runtime Sync Manager forwards to the Reporter Syncher Hyperty, Response Messages sent by invited Observer Hyperties.
 
 ```
-"id" : "1"
-"type" : "RESPONSE",
-"from" : "hyperty-runtime://<sp-domain>/<hyperty-runtime-instance-identifier>/sm",
-"to" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
+"id"   : "1",
+"type" : "response",
+"from" : "<ObjectURL>/subscription",
+"to"   : "<ObjectURL>",
 "body" : { "code" : "1XX\2XX" , "source" : "hyperty://<sp-domain>/<hyperty-observer-instance-identifier>" }
 ```
 
@@ -58,10 +58,10 @@ Reporter Runtime Sync Manager forwards to the Reporter Syncher Hyperty, Response
 Message sent by Object Reporter Hyperty to Reporter Runtime Sync Manager.
 
 ```
-"id" : "6"
-"type" : "DELETE",
+"id"   : "6",
+"type" : "delete",
 "from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
-"to" : "hyperty-runtime://<sp-domain>/<hyperty-runtime-instance-identifier>/sm",
+"to"   : "hyperty-runtime://<sp-domain>/<hyperty-runtime-instance-identifier>/sm",
 "body" : { "resource" : "<ObjectURL>" }
 ```
 
@@ -70,10 +70,10 @@ Message sent by Object Reporter Hyperty to Reporter Runtime Sync Manager.
 Response Message sent back by Reporter Runtime Sync Manager to Object Reporter Hyperty.
 
 ```
-"id" : "6"
-"type" : "RESPONSE",
+"id"   : "6",
+"type" : "response",
 "from" : "hyperty-runtime://<sp-domain>/<hyperty-runtime-instance-identifier>/sm",
-"to" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
+"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "body" : { "code" : "200" }
 ```
 
@@ -84,8 +84,8 @@ Response Message sent back by Reporter Runtime Sync Manager to Object Reporter H
 Message sent by Observer (candidate) Hyperty Instance to the Observer Runtime Sync Manager.
 
 ```
-"id" : "1"
-"type" : "SUBSCRIBE",
+"id" : "1",
+"type" : "subscribe",
 "from" : "hyperty://<observer-sp-domain>/<hyperty-observer-instance-identifier>",
 "to" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
 "body" : { "resource" : "<ObjectURL>" , "schema" : "hyperty-catalogue://<sp-domain>/dataObjectSchema/<schema-identifier>" }
@@ -96,18 +96,18 @@ Message sent by Observer (candidate) Hyperty Instance to the Observer Runtime Sy
 100OK Provisional Response Message sent back by Observer Runtime Sync Manager to Observer Hyperty Instance containing in the body the childrenResources, in case they exist.
 
 ```
-"id" : "1"
-"type" : "RESPONSE",
+"id" : "1",
+"type" : "response",
 "from" : "hyperty-runtime://<sp-domain>/<hyperty-runtime-instance-identifier>/sm",
 "to" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
-"body" : { "code" : "100", "resource" : "<ObjectURL>", "childrenResources" : [{"<resource-children-name>"}] }
+"body" : { "code" : "100", "childrenResources" : [{"<resource-children-name>"}] }
 ```
 
 200OK Response Message sent back by Observer Runtime Sync Manager to Observer Hyperty Instance containing in the body the most updated version of Data Object.
 
 ```
-"id" : "1"
-"type" : "RESPONSE",
+"id" : "1",
+"type" : "response",
 "from" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
 "to" : "hyperty://<observer-sp-domain>/<hyperty-observer-instance-identifier>",
 "body" : { "code" : "2XX", "value" : "<data object>"  }
@@ -118,11 +118,11 @@ Message sent by Observer (candidate) Hyperty Instance to the Observer Runtime Sy
 Message sent by Object Observer Hyperty to Runtime Observer Sync Manager .
 
 ```
-"id" : "7"
-"type" : "UNSUBSCRIBE",
+"id" : "7",
+"type" : "unsubscribe",
 "from" : "hyperty://<observer-sp-domain>/<hyperty-observer-instance-identifier>",
 "to" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
-"body" : { "resource" : "<ObjectURL>" , "childrenResources" : [{"<resource-children-name>"}]}
+"body" : { "resource" : "<ObjectURL>" }
 ```
 
 ###### Unsubscription Response
@@ -130,8 +130,8 @@ Message sent by Object Observer Hyperty to Runtime Observer Sync Manager .
 Response Message sent back by Runtime Observer Sync Manager to Object Observer Hyperty.
 
 ```
-"id" : "7"
-"type" : "RESPONSE",
+"id" : "7",
+"type" : "response",
 "from" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
 "to" : "hyperty://<observer-sp-domain>/<hyperty-observer-instance-identifier>",
 "body" : { "code" : "2XX" }
@@ -147,11 +147,11 @@ Response to Object Delete sent by Runtime Reporter
 Message sent by the Reporter Runtime Sync Manager to invited Observer Hyperty Instance.
 
 ```
-"id" : "1"
-"type" : "CREATE",
-"from" : "hyperty-runtime://<sp-domain>/<hyperty-runtime-instance-identifier>/sm",
+"id" : "1",
+"type" : "create",
+"from" : "<ObjectURL>/subscription",
 "to" : "hyperty://<sp-domain>/<hyperty-observer-instance-identifier>",
-"body" : { "resource" : "<ObjectURL>", "childrenResources" : [{"<resource-children-name>"}] , "value" : "<json object > , "schema" : "hyperty-catalogue://<sp-domain>/dataObjectSchema/<schema-identifier>" }
+"body" : { "value" : "<json object >", "schema" : "hyperty-catalogue://<sp-domain>/dataObjectSchema/<schema-identifier>" }
 ```
 
 ###### Response
@@ -159,11 +159,11 @@ Message sent by the Reporter Runtime Sync Manager to invited Observer Hyperty In
 Response Message sent back by invited Hyperty Instance to the Reporter Runtime Sync Manager.
 
 ```
-"id" : "1"
-"type" : "RESPONSE",
+"id" : "1",
+"type" : "response",
 "from" : "hyperty://<observer-sp-domain>/<hyperty-observer-instance-identifier>",
-"to" : "hyperty-runtime://<sp-domain>/<hyperty-runtime-instance-identifier>/sm",
-"body" : { "code" : "1XX\2XX"  }
+"to" : "<ObjectURL>/subscription",
+"body" : { "code" : "1XX\2XX" }
 ```
 
 ##### All Observers are requested to delete Data Object
@@ -171,8 +171,8 @@ Response Message sent back by invited Hyperty Instance to the Reporter Runtime S
 Message sent by Reporter Runtime Sync Manager to Object Changes Handler.
 
 ```
-"id" : "6"
-"type" : "DELETE",
+"id" : "6",
+"type" : "delete",
 "from" : "<ObjectURL>/subscription",
 "to" : "<ObjectURL>/changes"
 ```
@@ -182,8 +182,8 @@ Message sent by Reporter Runtime Sync Manager to Object Changes Handler.
 Message sent by Observer Runtime Sync Manager to Object Subscription Handler, on behalf of Observer Hyperty.
 
 ```
-"id" : "6"
-"type" : "RESPONSE",
+"id" : "6",
+"type" : "response",
 "from" : "<ObjectURL>/changes",
 "to" : "<ObjectURL>/subscription",
 "body" : { "code" : "2XX", "source" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>" }
@@ -196,8 +196,8 @@ Message sent by Observer Runtime Sync Manager to Object Subscription Handler, on
 Message sent by Observer Runtime Sync Manager to Data Object Subscription Handler.
 
 ```
-"id" : "2"
-"type" : "SUBSCRIBE",
+"id" : "2",
+"type" : "subscribe",
 "from" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
 "to" : "<ObjectURL>/subscription",
 "body" : {  "subscriber" : "hyperty://<observer-sp-domain>/<hyperty-observer-instance-identifier>" }
@@ -208,8 +208,8 @@ Message sent by Observer Runtime Sync Manager to Data Object Subscription Handle
 200OK Response Message sent back by Data Object Subscription Handler to Observer Runtime Sync Manager containing in the body the most updated version of Data Object.
 
 ```
-"id" : "2"
-"type" : "RESPONSE",
+"id" : "2",
+"type" : "response",
 "from" : "<ObjectURL>/subscription",
 "to" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
 "body" : { "code" : "2XX", "value" : "<data object>"  }
@@ -220,8 +220,8 @@ Message sent by Observer Runtime Sync Manager to Data Object Subscription Handle
 Message sent by Observer Runtime Sync Manager to Data Object Subscription Handler.
 
 ```
-"id" : "8"
-"type" : "UNSUBSCRIBE",
+"id" : "8",
+"type" : "unsubscribe",
 "from" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
 "to" : "<ObjectURL>/subscription",
 "body" : {  "subscriber" : "hyperty://<observer-sp-domain>/<hyperty-observer-instance-identifier>", "childrenResources" : [{"<resource-children-name>"}] }
@@ -233,10 +233,10 @@ Message sent by Observer Runtime Sync Manager to Data Object Subscription Handle
 
 ```
 "id" : "8"
-"type" : "RESPONSE",
+"type" : "response",
 "from" : "<ObjectURL>/subscription",
 "to" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
-"body" : { "code" : "2XX"   }
+"body" : { "code" : "2XX" }
 ```
 
 #### Synchronisation Management by Message Node
@@ -246,11 +246,11 @@ Message sent by Observer Runtime Sync Manager to Data Object Subscription Handle
 Message sent by Observer Runtime Sync Manager to Message Node to request the setup of the Data Sync Routing Path.
 
 ```
-"id" : "1"
-"type" : "SUBSCRIBE",
+"id" : "1",
+"type" : "subscribe",
 "from" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
 "to" : "domain://msg-node.<observer-sp-domain>/sm",
-"body" : { "resource" : "<ObjectURL>" , "childrenResources" : [{"<resource-children-name>"}], "schema" : "hyperty-catalogue://<sp-domain>/dataObjectSchema/<schema-identifier>"}
+"body" : { "resource" : "<ObjectURL>", "childrenResources" : [{"<resource-children-name>"}], "schema" : "hyperty-catalogue://<sp-domain>/dataObjectSchema/<schema-identifier>" }
 ```
 
 ###### Response
@@ -258,11 +258,11 @@ Message sent by Observer Runtime Sync Manager to Message Node to request the set
 200OK Response Message sent back by Message Node to Observer Runtime Sync Manager.
 
 ```
-"id" : "1"
-"type" : "RESPONSE",
+"id" : "1",
+"type" : "response",
 "from" : "domain://msg-node.<observer-sp-domain>/sm",
 "to" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
-"body" : { "code" : "2XX"  }
+"body" : { "code" : "2XX" }
 ```
 
 ##### Request to remove Data Sync Routing Path at Observer Message Node
@@ -270,8 +270,8 @@ Message sent by Observer Runtime Sync Manager to Message Node to request the set
 Message sent by Observer Runtime Sync Manager to Message Node to request the removal of the Data Sync Routing Path.
 
 ```
-"id" : "9"
-"type" : "UNSUBSCRIBE",
+"id" : "9",
+"type" : "unsubscribe",
 "from" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
 "to" : "domain://msg-node.<observer-sp-domain>/sm",
 "body" : { "resource" : "<ObjectURL>" , "childrenResources" : [{"<resource-children-name>"}] }
@@ -282,11 +282,11 @@ Message sent by Observer Runtime Sync Manager to Message Node to request the rem
 200OK Response Message sent back by Message Node to Observer Runtime Sync Manager.
 
 ```
-"id" : "9"
-"type" : "RESPONSE",
+"id" : "9",
+"type" : "response",
 "from" : "domain://msg-node.<observer-sp-domain>/sm",
 "to" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
-"body" : { "code" : "2XX"  }
+"body" : { "code" : "2XX" }
 ```
 
 #### Synchronisation Messages among Synchers
@@ -296,21 +296,31 @@ Message sent by Observer Runtime Sync Manager to Message Node to request the rem
 Message sent by Object Reporter Hyperty to Data Object Changes Handler.
 
 ```
-"id" : "3"
-"type" : "UPDATE",
+"id" : "3",
+"type" : "update",
 "from" : "<ObjectURL>",
 "to" : "<ObjectURL>/changes",
-"body" : { "value" : "changed value"  }
+"body" : { "attribute": "attribute path, dot separated", "value" : "changed value" }
+```
+
+Message sent by Object Reporter Hyperty to Data Object Changes Handler when a field should be removed.
+
+```
+"id" : "3",
+"type" : "update",
+"from" : "<ObjectURL>",
+"to" : "<ObjectURL>/changes",
+"body" : { "attribute": "attribute path, dot separated" }
 ```
 
 Message sent by Object Reporter Hyperty to Data Object Changes Handler when an array is changed.
 
 ```
-"id" : "3"
-"type" : "UPDATE",
+"id" : "3",
+"type" : "update",
 "from" : "<ObjectURL>",
 "to" : "<ObjectURL>/changes",
-"body" : { "attributeType" : "ARRAY", "operation" : "ADD|REMOVE", "value" : <changed value>  }
+"body" : { "attributeType" : "array", "operation" : "add | remove", "value" : <changed value>  }
 ```
 
 ##### Creation of Data Object child
@@ -318,11 +328,11 @@ Message sent by Object Reporter Hyperty to Data Object Changes Handler when an a
 Message sent by Child Object Reporter Hyperty to Data Object Parent Children Handler.
 
 ```
-"id" : "4"
-"type" : "CREATE",
+"id" : "4",
+"type" : "create",
 "from" : "hyperty://<sp-domain>/<hyperty-child-reporter-identifier>",
 "to" : "<ObjectURL>/children/<resource-children-name>",
-"body" : { "resource" : "hyperty://<sp-domain>/<hyperty-child-reporter-identifier>#<1>", "value" : "{  "<ChildDataObject>" }  }
+"body" : { "resource" : "hyperty://<sp-domain>/<hyperty-child-reporter-identifier>#<1>", "value" : { "<ChildDataObject>" } }
 ```
 
 ###### Response
@@ -330,11 +340,11 @@ Message sent by Child Object Reporter Hyperty to Data Object Parent Children Han
 (Optional) Response Message from Child Object Observer Hyperty to Child Object Reporter Hyperty.
 
 ```
-"id" : "4"
-"type" : "RESPONSE",
+"id" : "4",
+"type" : "response",
 "from" : "<ObjectURL>/children/<resource-children-name>",
 "to" : "hyperty://<sp-domain>/<hyperty-child-reporter-identifier>",
-"body" : { "code" : "2XX" , "source" : "hyperty://<sp-domain>/<hyperty-child-observer-identifier>"   }
+"body" : { "code" : "2XX" , "source" : "hyperty://<sp-domain>/<hyperty-child-observer-identifier>" }
 ```
 
 ##### Update of Data Object Child
@@ -342,11 +352,11 @@ Message sent by Child Object Reporter Hyperty to Data Object Parent Children Han
 Message sent by Child Object Reporter Hyperty to Data Object Parent Children Handler.
 
 ```
-"id" : "5"
-"type" : "UPDATE",
+"id" : "5",
+"type" : "update",
 "from" : "hyperty://<sp-domain>/<hyperty-child-reporter-identifier>",
 "to" : "<ObjectURL>/children/<resource-children-name>",
-"body" : { "resource" : "hyperty://<sp-domain>/<hyperty-child-reporter-identifier>#<1>", "value" : "{ "<UpdatedChildDataObject>" }  }
+"body" : { "resource" : "hyperty://<sp-domain>/<hyperty-child-reporter-identifier>#<1>", "value" : { "<UpdatedChildDataObject>" } }
 ```
 
 ##### Delete of Data Object Child
@@ -354,8 +364,8 @@ Message sent by Child Object Reporter Hyperty to Data Object Parent Children Han
 Message sent by Child Object Reporter Hyperty to Data Object Parent Children Handler.
 
 ```
-"id" : "5"
-"type" : "DELETE",
+"id" : "5",
+"type" : "delete",
 "from" : "hyperty://<sp-domain>/<hyperty-child-reporter-identifier>",
 "to" : "<ObjectURL>/children/<resource-children-name>",
 "body" : { "resource" : "hyperty://<sp-domain>/<hyperty-child-reporter-identifier>#<1>" }
