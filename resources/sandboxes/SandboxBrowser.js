@@ -12,7 +12,7 @@ class SandboxBrowser extends Sandbox {
     //simulate sandbox frontier
     _this._bus = new MiniBus();
     _this._bus._onPostMessage = function(msg) {
-      console.log('SandboxBrowser._onPostMessage -> external', 'from: ', msg.from, 'to: ', msg.to);
+      console.log('SandboxBrowser._onPostMessage -> external (out)', 'from: ', msg.from, 'to: ', msg.to, 'msg: ', msg);
 
       //redirect messages to the external part of the sandbox
       _this._onMessage(msg);
@@ -28,7 +28,7 @@ class SandboxBrowser extends Sandbox {
 
   _onPostMessage(msg) {
     let _this = this;
-    console.log('SandboxBrowser._onPostMessage -> internal', 'from: ', msg.from, 'to: ', msg.to);
+    console.log('SandboxBrowser._onPostMessage -> internal (in)', 'from: ', msg.from, 'to: ', msg.to, 'msg: ', msg);
 
     //redirect messages to the internal part of the sandbox
     _this._bus._onMessage(msg);

@@ -1,5 +1,7 @@
 // jshint browser:true, jquery: true
-import {addLoader, removeLoader, documentReady, errorMessage} from './support';
+
+import config from '../system.config.json!json';
+import {ready, errorMessage} from './support';
 
 // polyfills
 import 'babel-polyfill';
@@ -8,19 +10,21 @@ import 'mutationobserver-shim';
 import 'object.observe';
 import 'array.observe';
 
-// reTHINK modules
-import RuntimeUA from 'runtime-core/dist/runtimeUA';
+import RuntimeLoader from '../src/runtime-loader/RuntimeLoader';
+import CoreFactory from '../resources/CoreFactory';
 
-import SandboxFactory from '../resources/sandboxes/SandboxFactory';
-let sandboxFactory = new SandboxFactory();
+// reTHINK modules
+// import RuntimeUA from 'runtime-core/dist/runtimeUA';
+//
+// import SandboxFactory from '../resources/sandboxes/SandboxFactory';
+// let sandboxFactory = new SandboxFactory();
 let avatar = 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg';
 
 // You can change this at your own domain
-let domain = 'localhost';
+let domain = config.domain;
 
-let runtime = new RuntimeUA(sandboxFactory, domain);
-
-window.runtime = runtime;
+// let runtime = new RuntimeUA(sandboxFactory, domain);
+// window.runtime = runtime;
 
 // Check if the document is ready
 if (document.readyState === 'complete') {
@@ -30,49 +34,28 @@ if (document.readyState === 'complete') {
   document.addEventListener('DOMContentLoaded', documentReady, false);
 }
 
-let loginBtn = document.querySelector('.login');
-loginBtn.addEventListener('click', function(e) {
+function documentReady() {
 
-  let loginPanel = document.querySelector('.login-panel');
-  let content = loginPanel.querySelector('.card-action');
-  addLoader(content);
-
-  runtime.identityModule.loginWithRP().then(function(result) {
-    removeLoader(content);
-    userLoged(result);
-  }).catch(function(reason) {
-    removeLoader(content);
-    let cardHolder = $('.card-content');
-    let html = '<div class="row"><div class="col s12"><span class="card-title">Login</span></div><div class="col s12">' + reason.error.message + '</div>';
-
-    cardHolder.html(html);
-  });
-
-  let btn = $(e.currentTarget);
-  btn.addClass('hide');
-
-});
-
-function userLoged(result) {
+  ready();
 
   let hypertyHolder = $('.hyperties');
   hypertyHolder.removeClass('hide');
 
-  let cardHolder = $('.card-content');
-  let html = '<div class="row"><div class="col s12"><span class="card-title">Logged</span></div><div class="col s2"><img alt="" class="circle responsive-img" src=' + result.picture + ' ></div><div class="col s8"><p><b>id:</b> ' + result.id + '</p><p><b>email:</b> ' + result.email + '</p><p><b>name:</b> ' + result.name + '</p><p><b>locale:</b> ' + result.locale + '</p></div>';
-
-  cardHolder.html(html);
-
-  console.log(result);
-
   let hyperty = 'hyperty-catalogue://' + domain + '/.well-known/hyperty/HypertyConnector';
 
+  let core = new CoreFactory();
+  let runtimeLoader = new RuntimeLoader(core);
+
+  console.log(runtimeLoader, hyperty);
+
   // Load First Hyperty
-  runtime.loadHyperty(hyperty).then(hypertyDeployed).catch(function(reason) {
+  runtimeLoader.requireHyperty(hyperty).then(hypertyDeployed).catch(function(reason) {
     errorMessage(reason);
   });
 
 }
+
+let connector;
 
 function hypertyDeployed(result) {
 
@@ -84,20 +67,25 @@ function hypertyDeployed(result) {
   cardAction.append(hypertyInfo);
 
   // Prepare to discover email:
-  discoverEmail();
+  let hypertyDiscovery = result.instance.hypertyDiscovery;
+  discoverEmail(hypertyDiscovery);
 
   // Prepare the chat
   let messageChat = $('.hyperty-chat');
   messageChat.removeClass('hide');
 
-  let connector = window.components[result.runtimeHypertyURL].instance;
+  connector = result.instance;
 
-  connector.addEventListener('have:notification', notificationHandler);
+  connector.addEventListener('connector:connected', function(controller) {
 
-  runtime.messageBus.addListener(result.runtimeHypertyURL, newMessageRecived);
+    connector.addEventListener('have:notification', function(event) {
+      notificationHandler(controller, event);
+    });
+
+  });
 }
 
-function discoverEmail() {
+function discoverEmail(hypertyDiscovery) {
 
   let section = $('.discover');
   let searchForm = section.find('.form');
@@ -117,7 +105,8 @@ function discoverEmail() {
 
     let email = inputField.val();
     console.log(email);
-    runtime.registry.getUserHyperty(email).then(emailDiscovered).catch(emailDiscoveredError);
+
+    hypertyDiscovery.discoverHypertyPerUser(email).then(emailDiscovered).catch(emailDiscoveredError);
 
   });
 }
@@ -173,8 +162,6 @@ function openChat(result, video) {
 
   toUserEl.html(toUser);
 
-  let connector = window.components[fromUser].instance;
-
   if (video) {
 
     connector.connect(toUser).then(function(controller) {
@@ -214,15 +201,6 @@ function openChat(result, video) {
 
 }
 
-function newMessageRecived(msg) {
-
-  // Object {to: "hyperty://ua.pt/71552726-ae61-411a-bab0-41843b26b56f", from: "hyperty://ua.pt/586f5f0a-aa98-4d23-b864-a6efd3ccdd74", type: "message", body: Object, id: 2}
-  if (msg.type === 'message') {
-    processMessage(msg, 'in');
-  }
-
-}
-
 function processVideo(stream) {
 
   let messageChat = $('.hyperty-chat');
@@ -257,7 +235,6 @@ function sendMessage(from, to, message) {
   };
 
   processMessage(msg, 'out');
-  runtime.messageBus.postMessage(msg);
 }
 
 function notification(event) {
@@ -266,16 +243,11 @@ function notification(event) {
 
 function notificationHandler(controller, event) {
 
-  console.log(controller, event);
-
-  let loginPanel = $('.login-panel');
+  let calleeInfo = event.identity;
   let incoming = $('.modal-call');
   let acceptBtn = incoming.find('.btn-accept');
   let rejectBtn = incoming.find('.btn-reject');
-
-  // let hypertyId = loginPanel.attr('data-url');
-  // let informationHolder = incoming.find('.information');
-  // let resources = {};
+  let informationHolder = incoming.find('.information');
 
   showVideo(controller);
 
@@ -304,62 +276,30 @@ function notificationHandler(controller, event) {
     e.preventDefault();
   });
 
+  let parseInformation = '<div class="col s12">' +
+        '<div class="row valign-wrapper">' +
+          '<div class="col s2">' +
+            '<img src="' + calleeInfo.picture + '" alt="" class="circle responsive-img">' +
+          '</div>' +
+          '<span class="col s10">' +
+            '<div class="row">' +
+              '<span class="col s3 text-right">Name: </span>' +
+              '<span class="col s9 black-text">' + calleeInfo.name + '</span>' +
+            '</span>' +
+            '<span class="row">' +
+              '<span class="col s3 text-right">Email: </span>' +
+              '<span class="col s9 black-text">' + calleeInfo.email + '</span>' +
+            '</span>' +
+            '<span class="row">' +
+              '<span class="col s3 text-right">locale: </span>' +
+              '<span class="col s9 black-text">' + calleeInfo.locale + '</span>' +
+            '</span>' +
+          '</div>' +
+        '</div>';
+
+  informationHolder.html(parseInformation);
   $('.modal-call').openModal();
 
-  // if (msg.body.hasOwnProperty('value') && msg.body.value.hasOwnProperty('resources')) {
-  //   resources = msg.body.value.resources;
-  // }
-  //
-  // console.log(calleeInfo, resources);
-  //
-  // let parseInformation = '<div class="col s12">' +
-  //       '<div class="row valign-wrapper">' +
-  //         '<div class="col s2">' +
-  //           '<img src="' + calleeInfo.picture + '" alt="" class="circle responsive-img">' +
-  //         '</div>' +
-  //         '<span class="col s10">' +
-  //           '<div class="row">' +
-  //             '<span class="col s3 text-right">Name: </span>' +
-  //             '<span class="col s9 black-text">' + calleeInfo.name + '</span>' +
-  //           '</span>' +
-  //           '<span class="row">' +
-  //             '<span class="col s3 text-right">Email: </span>' +
-  //             '<span class="col s9 black-text">' + calleeInfo.email + '</span>' +
-  //           '</span>' +
-  //           '<span class="row">' +
-  //             '<span class="col s3 text-right">locale: </span>' +
-  //             '<span class="col s9 black-text">' + calleeInfo.locale + '</span>' +
-  //           '</span>' +
-  //         '</div>' +
-  //       '</div>';
-  //
-  // parseInformation += '<div class="row"><h5>Resources</h5><ul>';
-  // Object.keys(resources).map(function(key) {
-  //   parseInformation += '<li>' + key + '</li>';
-  // });
-  //
-  // parseInformation += '</ul></div></div>';
-  //
-  // informationHolder.html(parseInformation);
-  //
-  // acceptBtn.on('click', function(e) {
-  //
-  //   let a = window.components[hypertyId].hypertyCode;
-  //   a.accept().then(function(controller) {
-  //     console.log('Controller: ', controller);
-  //   }).catch(function(reason) {
-  //     console.error(reason);
-  //   });
-  //
-  //   e.preventDefault();
-  // });
-  //
-  // rejectBtn.on('click', function(e) {
-  //   console.log('rejected');
-  //   e.preventDefault();
-  // });
-  //
-  // $('.modal-call').openModal();
 }
 
 function showVideo(controller) {

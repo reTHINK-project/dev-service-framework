@@ -1,7 +1,12 @@
 import SyncObject from './SyncObject';
 import DataObjectChild from './DataObjectChild';
 import { ChangeType, ObjectType } from './SyncObject';
+import {deepClone} from '../utils/utils.js';
 
+/**
+ * Main extension class for observers and reporters, with common properties and methods.
+ * Children management is common for observers and reporters.
+ */
 class DataObject {
   /* private
   _version: number
@@ -19,6 +24,10 @@ class DataObject {
   _onAddChildrenHandler: (event) => void
   */
 
+  /**
+   * @ignore
+   * Should not be used directly by Hyperties. It's called by the Syncher create or subscribe method's
+   */
   constructor(owner, url, schema, bus, initialStatus, initialData, children) {
     let _this = this;
 
@@ -35,48 +44,91 @@ class DataObject {
     _this._children = { };
 
     let childBaseURL = url + '/children/';
-    children.forEach((child) => {
-      let childURL = childBaseURL + child;
-      bus.addListener(childURL, (msg) => {
-        //ignore msg sent by himself
-        if (msg.from !== this._owner) {
-          switch (msg.type) {
-            case 'create': _this._onChildrenCreate(msg); break;
-            case 'delete': console.log(msg); break;
-            default: _this._changeChildren(msg); break;
+
+    if (children) {
+      children.forEach((child) => {
+        let childURL = childBaseURL + child;
+        bus.addListener(childURL, (msg) => {
+          //ignore msg sent by himself
+          if (msg.from !== this._owner) {
+            switch (msg.type) {
+              case 'create': _this._onChildrenCreate(msg); break;
+              case 'delete': console.log(msg); break;
+              default: _this._changeChildren(msg); break;
+            }
           }
-        }
+        });
       });
-    });
+    }
   }
 
-  get version() { return this._version; }
-
+  /**
+   * Object URL of reporter or observer
+   * @type {ObjectURL}
+   */
   get url() { return this._url; }
 
+  /**
+   * Object schema URL (this field is not yet stable, and is subsject to change)
+   * @type {SchemaURL}
+   */
   get schema() { return this._schema; }
 
+  /**
+   * Status of the reporter or observer connection (this field is not yet stable, and is subsject to change)
+   * @type {Status} - Enum of: on | paused
+   */
   get status() { return this._status; }
 
+  /**
+   * Data structure to be synchronized.
+   * @type {JSON} - JSON structure that should follow the defined schema, if any.
+   */
   get data() { return this._syncObj.data; }
 
+  /**
+   * All created children's since the subscription, doesn't contain all children's since reporter creation.
+   * @type {Object<ChildId, DataObjectChild>}
+   */
   get children() { return this._children; }
 
+  /**
+   * @ignore
+   */
   pause() {
     //TODO: this feature needs more analise
     throw 'Not implemented';
   }
 
+  /**
+   * @ignore
+   */
   resume() {
     //TODO: this feature needs more analise
     throw 'Not implemented';
   }
 
+  /**
+   * @ignore
+   */
   stop() {
     //TODO: should remove the subscription and send message unsubscribe?
     throw 'Not implemented';
   }
 
+  /**
+   * @ignore
+   */
+  release() {
+    //TODO: remove all listeners for this object
+  }
+
+  /**
+   * Create and add a children to the subscription group.
+   * @param {String} resource - Resource name, one of the items in the schema.properties.scheme of the parent object.
+   * @param {JSON} initialData - Initial data of the child
+   * @return {Promise<DataObjectChild>} - Return Promise to a new Children.
+   */
   addChildren(resource, initialData) {
     let _this = this;
 
@@ -106,6 +158,10 @@ class DataObject {
     });
   }
 
+  /**
+   * Setup the callback to process create and delete childrens
+   * @param {function(event: MsgEvent)} callback
+   */
   onAddChildren(callback) {
     this._onAddChildrenHandler = callback;
   }
@@ -146,9 +202,21 @@ class DataObject {
 
     if (_this._status === 'on') {
       let changeMsg = {
-        type: event.cType, from: _this._owner, to: _this._url,
-        body: { version: _this._version, oType: event.oType, attrib: event.field, value: event.data }
+        type: 'update', from: _this._url, to: _this._url + '/changes',
+        body: { version: _this._version, attribute: event.field }
       };
+
+      if (event.oType === ObjectType.OBJECT) {
+        if (event.cType !== ChangeType.REMOVE) {
+          changeMsg.body.value = event.data;
+        }
+      } else {
+        changeMsg.body.attributeType = event.oType;
+        changeMsg.body.value = event.data;
+        if (event.cType !== ChangeType.UPDATE) {
+          changeMsg.body.operation = event.cType;
+        }
+      }
 
       //childInfo must have (path, childId)
       if (childInfo) {
@@ -169,37 +237,32 @@ class DataObject {
     //will we need to confirm the reception ?
     if (_this._version + 1 === msg.body.version) {
       _this._version++;
-      let path = msg.body.attrib;
-      let value = msg.body.value;
+      let path = msg.body.attribute;
+      let value = deepClone(msg.body.value);
       let findResult = syncObj.findBefore(path);
 
-      if (msg.type === ChangeType.UPDATE) {
-        findResult.obj[findResult.last] = value;
-      } else {
-        if (msg.type === ChangeType.ADD) {
-          if (msg.body.oType === ObjectType.OBJECT) {
-            findResult.obj[findResult.last] = value;
-          } else {
-            //ARRAY
-            let arr = findResult.obj;
-            let index = findResult.last;
-            Array.prototype.splice.apply(arr, [index, 0].concat(value));
-          }
+      if (msg.body.attributeType === ObjectType.ARRAY) {
+        if (msg.body.operation === ChangeType.ADD) {
+          let arr = findResult.obj;
+          let index = findResult.last;
+          Array.prototype.splice.apply(arr, [index, 0].concat(value));
+        } else if (msg.body.operation === ChangeType.REMOVE) {
+          let arr = findResult.obj;
+          let index = findResult.last;
+          arr.splice(index, value);
         } else {
-          //REMOVE
-          if (msg.body.oType === ObjectType.OBJECT) {
-            delete findResult.obj[findResult.last];
-          } else {
-            //ARRAY
-            let arr = findResult.obj;
-            let index = findResult.last;
-            arr.splice(index, value);
-          }
+          findResult.obj[findResult.last] = value; // UPDATE
+        }
+      } else {
+        if (msg.body.value) {
+          findResult.obj[findResult.last] = value; // UPDATE or ADD
+        } else {
+          delete findResult.obj[findResult.last]; // REMOVE
         }
       }
     } else {
       //TODO: how to handle unsynchronized versions?
-      console.log('unsynchronized versions');
+      console.log('UNSYNCHRONIZED VERSION: (data => ' + _this._version + ', msg => ' + msg.body.version + ')');
     }
   }
 
@@ -211,7 +274,7 @@ class DataObject {
     let children = _this._children[childId];
 
     if (children) {
-      _this._changeObject(children, msg);
+      _this._changeObject(children._syncObj, msg);
     } else {
       console.log('No children found for: ', childId);
     }

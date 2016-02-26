@@ -1,5 +1,9 @@
 import SyncObject from './SyncObject';
 
+/**
+ * The class returned from the DataObject addChildren call or from onAddChildren if remotely created.
+ * Children object synchronization is a a fast forward mechanism, no need for direct subscriptions, it uses the already authorized subscription from the parent DataObject.
+ */
 class DataObjectChild /* implements SyncStatus */ {
   /* private
 
@@ -7,6 +11,10 @@ class DataObjectChild /* implements SyncStatus */ {
   _onResponseHandler: (event) => void
   */
 
+  /**
+   * @ignore
+   * Should not be used directly by Hyperties. It's called by the DataObject.addChildren
+   */
   constructor(owner, childId, msgId, bus, initialData) {
     let _this = this;
 
@@ -24,14 +32,32 @@ class DataObjectChild /* implements SyncStatus */ {
 
   }
 
+  /**
+   * Children ID generated on addChildren. Unique identifier
+   * @type {URL} - URL of the format <HypertyURL>#<numeric-sequence>
+   */
+  get childId() { return this._childId; }
+
+  /**
+   * Data Structure to be synchronized.
+   * @type {JSON} - JSON structure that should follow the defined schema, if any.
+   */
   get data() { return this._syncObj.data; }
 
+  /**
+   * Register the change listeners sent by the reporter child
+   * @param {function(event: MsgEvent)} callback
+   */
   onChange(callback) {
     this._syncObj.observe((event) => {
       callback(event);
     });
   }
 
+  /**
+   * Setup the callback to process response notifications of the creates
+   * @param {function(event: MsgEvent)} callback
+   */
   onResponse(callback) {
     this._onResponseHandler = callback;
   }

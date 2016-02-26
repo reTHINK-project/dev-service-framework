@@ -1,7 +1,7 @@
 /**
+ * @author alice.cheambe[at]fokus.fraunhofer.de
+ * The MessageBody class is the base implementation of the Message Body Data Model from which the other body types extend.
  *
- * @author alice.cheambe@fokus.fraunhofer.de
- * Class implementation of Message Body Data Model
  */
 
 export class MessageBody{
@@ -16,52 +16,20 @@ export class MessageBody{
      *
      */
 	constructor(idToken, accessToken, resource, schema, assertedIdentity){
-        //let _this = this;
-        if(typeof idToken !== 'undefined')
-            this._idToken = idToken;
-        if(typeof accessToken  !== 'undefined')
-            this._accessToken = accessToken;
-        if(typeof resource !== 'undefined' )
-            this._resource = resource;
-        if(typeof schema !== 'undefined' )
-            this._schema = schema;
-        if(typeof assertedIdentity !== 'undefined')
-            this._assertedIdentity = assertedIdentity;
+
+        //if(idToken)
+            this.idToken = idToken;
+       // if(accessToken)
+            this.accessToken = accessToken;
+       // if(resource )
+            this.resource = resource;
+        //if(schema )
+            this.schema = schema;
+        //if(assertedIdentity)
+            this.assertedIdentity = assertedIdentity;
 	}
 
-    get idToken(){ return this._idToken; }
 
-    get accessToken(){ return this._accessToken; }
-
-    get resource() { return this._resource; }
-
-    get schema(){ return this._schema; }
-
-    get assertedIdentity() { return this._assertedIdentity; }
-
-    set idToken(token){
-        if(token)
-            this._idToken = token;
-    }
-
-    set accessToken(token){
-        if(token)
-            this._accessToken = token;
-    }
-
-    set resource(resource){
-        if(resource)
-            this._resource = resource;
-    }
-
-    set schema(schema){
-        if(schema)
-            this._schema = schema;
-    }
-    set assertedIdentity(assertedIdentity){
-        if(assertedIdentity)
-            this._assertedIdentity = assertedIdentity;
-    }
 }
 
 /**
@@ -75,7 +43,7 @@ export class CreateMessageBody extends MessageBody {
      * @param {URL.URL} policy - URL from where access policy control can be downloaded
      * @param {Identity.JWT} idToken -
      * @param {Identity.JWT} accessToken
-     * @param {URL.URL} resource - URL of the objec
+     * @param {URL.URL} resource - URL of the object
      * @param {URL.HypertyCatalogueURL} schema - URL of the Data object schema stored in the Catalogue
      * @param {Identity.Identity} assertedIdentity - AssertedIdentity is compliant with User Identity Data Model
      */
@@ -84,22 +52,9 @@ export class CreateMessageBody extends MessageBody {
             throw new Error("The value parameter is null");
         super(idToken,accessToken, resource, schema, assertedIdentity, schema, assertedIdentity);
 
-        this._value = value;
+        this.value = value;
         if(policy)
-            this._policy = policy;
-    }
-    get value() { return this._value; }
-
-    set value(val){
-        if(val)
-            this._value = val;
-    }
-
-    get policy() { return this._policy; }
-
-    set policy(policy){
-        if(policy)
-            this._policy = policy;
+            this.policy = policy;
     }
 }
 
@@ -125,13 +80,13 @@ export class ReadMessageBody extends MessageBody {
         super(idToken,accessToken ,resource, schema, assertedIdentity );
 
         if(attribute)
-            this._attribute = attribute;
+            this.attribute = attribute;
 
         if(criteriaSyntax)
-            this._criteriaSyntax = criteriaSyntax;
+            this.criteriaSyntax = criteriaSyntax;
 
         if(criteria)
-            this._criteria = criteria;
+            this.criteria = criteria;
     }
 }
 
@@ -154,7 +109,7 @@ export class DeleteMessageBody extends MessageBody {
         super(idToken,accessToken ,resource, schema, assertedIdentity );
 
         if(attribute){
-            this._attribute = attribute;
+            this.attribute = attribute;
         }
     }
 
@@ -165,7 +120,7 @@ export class DeleteMessageBody extends MessageBody {
  */
 export class UpdateMessageBody extends MessageBody {
     /**
-     *
+     * Constructor to create the object
      * @param {Identity.JWT} idToken -
      * @param {Identity.JWT} accessToken
      * @param {URL.URL} resource - URL of the object
@@ -177,8 +132,8 @@ export class UpdateMessageBody extends MessageBody {
     constructor(idToken, accessToken, resource, schema, assertedIdentity, attribute, value){
 
         super(idToken,accessToken ,resource, schema, assertedIdentity );
-        this._attribute = attribute;
-        this._value = value;
+        this.attribute = attribute;
+        this.value = value;
     }
 }
 
@@ -187,7 +142,7 @@ export class UpdateMessageBody extends MessageBody {
  */
 export class ForwardMessageBody extends MessageBody {
     /**
-     * constructor
+     * Constructor to create the object
      *
      * @param {Identity.JWT} idToken -
      * @param {Identity.JWT} accessToken
@@ -201,7 +156,7 @@ export class ForwardMessageBody extends MessageBody {
 
         super(idToken,accessToken ,resource, schema, assertedIdentity );
 
-        this._message = message;
+        this.message = message;
     }
 }
 
@@ -211,6 +166,7 @@ export class ForwardMessageBody extends MessageBody {
 export class ResponseMessageBody extends MessageBody {
 
     /**
+     * Constructor to create the object
      *
      * @param {Identity.JWT} idToken -
      * @param {Identity.JWT} accessToken
@@ -224,11 +180,11 @@ export class ResponseMessageBody extends MessageBody {
 
         if(code)
         {
-            this._code = code;
-            this._description = REASON_PHRASE[code];
+            this.code = code;
+            this.description = REASON_PHRASE[code];
         }
         if(value)
-            this._value = value;
+            this.value = value;
 
     }
 }

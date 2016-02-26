@@ -8,7 +8,7 @@ var prompt = require('gulp-prompt');
 gulp.task('doc', function(done) {
 
   console.log('Generating documentation...');
-  exec('node_modules/.bin/jsdoc -R readme.md -d docs src/*', function(err) {
+  exec('node_modules/.bin/jsdoc -d api src/*', function(err) {
     if (err) return done(err);
     console.log('Documentation generated in "docs" directory');
     done();
@@ -33,7 +33,7 @@ gulp.task('dist', function() {
 
   return browserify('./src/service-framework.js', {
     standalone: 'service-framework', debug: false}
-  ).transform(babel, {compact: true, optional: 'runtime'})
+  ).transform(babel, {compact: false, optional: 'runtime'})
   .bundle()
   .on('error', function(err) {
     console.error(err);
@@ -88,7 +88,7 @@ function compile(file, destination, cb) {
     entries: [filename],
     standalone: 'activate',
     debug: false
-  }).transform(babel)
+  }).transform(babel, {compact: false, optional: 'runtime'})
   .bundle()
   .on('error', function(err) {
     console.error(err);
@@ -109,8 +109,18 @@ gulp.task('watch-hyperty', function(cb) {
 
   var destination = argv.dest;
 
-  gulp.watch(['src/hyperty/*.js'], function() {
-    return compile('src/hyperty/HypertyConnector.js', destination, cb);
+  gulp.watch(['src/hyperty-connector/*.js', 'src/hyperty-chat/*.js'], function(event) {
+    var pathSplit = event.path.split('/');
+    var dir = pathSplit[pathSplit.length - 2];
+
+    switch (dir) {
+      case 'hyperty-chat':
+        return compile('src/' + dir + '/HypertyChat.js', destination, cb);
+
+      case 'hyperty-connector':
+        return compile('src/' + dir + '/HypertyConnector.js', destination, cb);
+    }
+
   });
 
 });
@@ -133,7 +143,6 @@ function encode(filename, descriptorName, configuration, isDefault) {
     if (file.isNull()) {
       return cb(null, file);
     }
-
     if (file.isStream()) {
       return cb(new Error('Streaming not supported'));
     }
@@ -142,28 +151,38 @@ function encode(filename, descriptorName, configuration, isDefault) {
     var value = 'default';
 
     if (isDefault) {
-      if (json.hasOwnProperty(filename)) {
-        value = filename;
-      }
+      value = 'default';
     } else {
-      var newObject;
-      try {
-        newObject = JSON.parse(JSON.stringify(json['default']));
-      } catch (e) {
-        newObject = JSON.parse(JSON.stringify(json.HelloHyperty));
-      }
-
-      json[filename] = newObject;
       value = filename;
     }
 
+    if (!json.hasOwnProperty(value)) {
+      var newObject = {};
+      json[value] = newObject;
+      json[value].sourcePackage = {};
+    }
+
+    var language = 'javascript';
+    if (descriptorName === 'DataSchemas') {
+      language = 'JSON-Schema';
+    }
+
+    json[value].cguid = Math.floor(Math.random() + 1);
+    json[value].type = descriptorName;
+    json[value].version = '0.1';
     json[value].description = 'Description of ' + filename;
     json[value].objectName = filename;
-    if (configuration) json[value].configuration = configuration;
+    json[value].configuration = configuration;
+    json[value].sourcePackageURL = '/sourcePackage';
     json[value].sourcePackage.sourceCode = encoded;
     json[value].sourcePackage.sourceCodeClassname = filename;
-    json[value].sourcePackage.encoding = 'Base64';
+    json[value].sourcePackage.encoding = 'base64';
     json[value].sourcePackage.signature = '';
+    json[value].language = language;
+    json[value].signature = '';
+    json[value].messageSchemas = '';
+    json[value].dataObjects = [];
+    json[value].accessControlPolicy = 'somePolicy';
 
     var newDescriptor = new Buffer(JSON.stringify(json, null, 2));
     console.log(value);
@@ -177,75 +196,115 @@ function resource(file, configuration, isDefault) {
 
   var filename = file;
   var splitIndex = filename.lastIndexOf('/') + 1;
-  filename = filename.substr(splitIndex).replace('.js', '');
+  var extension = filename.substr(filename.lastIndexOf('.') + 1);
 
-  var descriptorName = 'Hyperties';
-  if (filename.indexOf('Hyperty') === -1) {
-    descriptorName = 'ProtoStubs';
+  switch (extension) {
+    case 'js':
+      filename = filename.substr(splitIndex).replace('.js', '');
+      break;
+    case 'json':
+      filename = filename.substr(splitIndex).replace('.json', '');
+      break;
   }
 
-  return browserify({
-    entries: ['resources/' + filename + '.js'],
-    standalone: 'activate',
-    debug: false
-  })
-  .transform(babel)
-  .bundle()
-  .pipe(source('bundle.js'))
-  .pipe(gulp.dest('resources/'))
-  .pipe(buffer())
-  .pipe(encode(filename, descriptorName, configuration, isDefault))
-  .pipe(source(descriptorName + '.json'))
-  .pipe(gulp.dest('resources/descriptors/'));
+  var descriptorName;
+  if (filename.indexOf('Hyperty') !== -1) {
+    descriptorName = 'Hyperties';
+  } else if (filename.indexOf('ProtoStub') !== -1) {
+    descriptorName = 'ProtoStubs';
+  } else if (filename.indexOf('DataSchema')) {
+    descriptorName = 'DataSchemas';
+  }
+
+  console.log('DATA:', descriptorName);
+
+  if (extension === 'js') {
+    return browserify({
+      entries: ['resources/' + filename + '.js'],
+      standalone: 'activate',
+      debug: false
+    })
+    .transform(babel)
+    .bundle()
+    .pipe(source('bundle.js'))
+    .pipe(gulp.dest('resources/'))
+    .pipe(buffer())
+    .pipe(encode(filename, descriptorName, configuration, isDefault))
+    .pipe(source(descriptorName + '.json'))
+    .pipe(gulp.dest('resources/descriptors/'));
+  } else if (extension === 'json') {
+
+    return gulp.src(['resources/' + filename + '.json'])
+    .pipe(gulp.dest('resources/'))
+    .pipe(buffer())
+    .pipe(encode(filename, descriptorName, configuration, isDefault))
+    .pipe(source(descriptorName + '.json'))
+    .pipe(gulp.dest('resources/descriptors/'));
+
+  }
 
 }
 
 gulp.task('encode', function(done) {
 
+  var files = [];
+  var dirFiles = fs.readdirSync('resources');
+  files = dirFiles.filter(isFile);
+  files = files.map(function(file) {
+    return 'resources/' + file;
+  });
+
+  function isFile(file) {
+    if (file.indexOf('Hyperty') !== -1 || file.indexOf('ProtoStub') !== -1 || file.indexOf('DataSchema') !== -1){
+      return fs.statSync('resources/' + file).isFile();
+    }
+  }
+
   gulp.src('./', {buffer:false})
-  .pipe(prompt.prompt([{
-    type: 'input',
-    name: 'file',
-    message: 'File to be converted? (resources/<ProtoStub.js or Hyperty.js>)'
-  },
-  {
-    type: 'input',
-    name: 'configuration',
-    message: 'ProtoStub Configuration, use something like:\n{"url": "wss://msg-node.localhost:9090/ws"}\nConfiguration:',
-    validate: function(value) {
-      try {
-        JSON.parse(value);
-        return true;
-      } catch (e) {
-        console.error('Check your configuration JSON\nShould be something like:\n{"url": "wss://msg-node.localhost:9090/ws"}');
-        return false;
+    .pipe(prompt.prompt([{
+      type: 'list',
+      name: 'file',
+      message: 'File to be converted:',
+      choices: files
+    },
+    {
+      type: 'input',
+      name: 'configuration',
+      message: 'ProtoStub Configuration, use something like:\n{"url": "wss://msg-node.localhost:9090/ws"}\nConfiguration:',
+      validate: function(value) {
+        try {
+          JSON.parse(value);
+          return true;
+        } catch (e) {
+          console.error('Check your configuration JSON\nShould be something like:\n{"url": "wss://msg-node.localhost:9090/ws"}');
+          return false;
+        }
       }
-    }
-  },
-  {
-    type: 'radio',
-    name: 'defaultFile',
-    message: 'This will be a default file to be loaded? (yes/no)',
-    choices: ['yes', 'no']
-  }], function(res) {
+    },
+    {
+      type: 'list',
+      name: 'defaultFile',
+      message: 'This will be a default file to be loaded?',
+      choices: ['yes', 'no']
+    }], function(res) {
 
-    fs.access(res.file, fs.R_OK | fs.W_OK, function(err) {
-      if (err) done(new Error('No such file or directory'));
-      return;
-    });
+      fs.access(res.file, fs.R_OK | fs.W_OK, function(err) {
+        if (err) done(new Error('No such file or directory'));
+        return;
+      });
 
-    var configuration = JSON.parse(res.configuration);
+      var configuration = JSON.parse(res.configuration);
 
-    var isDefault = true;
-    if (res.defaultFile === 'no') {
-      isDefault = false;
-    }
+      var isDefault = true;
+      if (res.defaultFile === 'no' || res.defaultFile === 'n') {
+        isDefault = false;
+      }
 
-    if (res.file) {
-      resource(res.file, configuration, isDefault);
-    }
-  })
-);
+      if (res.file) {
+        resource(res.file, configuration, isDefault);
+      }
+    })
+  );
 
 });
 

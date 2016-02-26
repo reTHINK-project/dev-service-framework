@@ -7,6 +7,7 @@ A Hyperty is a module of software logic that is dynamically deployed in web runt
 
 
 ### How to use Hyperties
+\* Here we can explain how hyperties are being used based on this example from PTIN: https://github.com/reTHINK-project/dev-service-framework/blob/develop/example/demo.js\*
 
 
 The usage of Hyperties is very simple and similar to the usage of any common Javascript library:

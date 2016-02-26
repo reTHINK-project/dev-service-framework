@@ -78,10 +78,15 @@ Response.id = Request.id
 The Request.id MUST be incremented every time a new Request message is created.
 
 ### APIs
-
 #### The ProtoStub API
 
+#### The ProtoStub API
+- take from msg-node architecture at https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/msg-node/msg-node-architecture.md
+
 The interface that a protocol stub has to implement is kept very small and simple by intent.
+describe main flow as UML for:
+- stub connection
+- message routing
 
 A protocolStub is constructed with a set of parameters that ensures that the stub can be uniquely identified, can connect to its backend Messaging Node and can communicate with the messaging bus in the runtime.
 

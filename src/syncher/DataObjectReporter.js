@@ -1,6 +1,10 @@
 import DataObject from './DataObject';
 import { deepClone } from '../utils/utils.js';
 
+/**
+ * The class returned from the Syncher create call.
+ * To be used as a reporter point, changes will be submited to DataObjectObserver instances.
+ */
 class DataObjectReporter extends DataObject /* implements SyncStatus */ {
   /* private
   _subscriptions: <hypertyUrl: { status: string } }>
@@ -10,6 +14,10 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
   _onResponseHandler: (event) => void
   */
 
+  /**
+   * @ignore
+   * Should not be used directly by Hyperties. It's called by the Syncher.create method
+   */
   constructor(owner, url, schema, bus, initialStatus, initialData, children) {
     super(owner, url, schema, bus, initialStatus, initialData, children);
     let _this = this;
@@ -21,18 +29,31 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     });
 
     _this._syncObj.observe((event) => {
+      console.log('DataObjectReporter-' + url + '-SEND: ', event);
       _this._onChange(event);
     });
 
     _this._subscriptions = {};
   }
 
+  /**
+   * Subscriptions requested and accepted to this reporter
+   * @type {Object<HypertyURL, SyncSubscription>}
+   */
   get subscriptions() { return this._subscriptions; }
 
+  /**
+   * Setup the callback to process subscribe and unsubscribe notifications
+   * @param {function(event: MsgEvent)} callback
+   */
   onSubscription(callback) {
     this._onSubscriptionHandler = callback;
   }
 
+  /**
+   * Setup the callback to process response notifications of the create's
+   * @param {function(event: MsgEvent)} callback
+   */
   onResponse(callback) {
     this._onResponseHandler = callback;
   }
@@ -57,13 +78,16 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
 
       accept: () => {
         //create new subscription
-        _this._subscriptions[hypertyUrl] = { status: 'on' };
+        let sub = { url: hypertyUrl, status: 'on' };
+        _this._subscriptions[hypertyUrl] = sub;
 
         //send ok response message
         _this._bus.postMessage({
           id: msg.id, type: 'response', from: msg.to, to: msg.from,
           body: { code: 200, schema: _this._schema, version: _this._version, value: deepClone(_this.data) }
         });
+
+        return sub;
       },
 
       reject: (reason) => {

@@ -1,12 +1,13 @@
 /**
- * Created by amo on 14/11/2015.
+ * @author alice.cheambe[at]fokus.fraunhofer.de
+ * The CatalogueDataObject class is the representation of the reTHINK Catalogue Data Model
  */
 class CatalogueDataObject {
     /**
      * Creates the Catalogue Data Object
      * @param guid - Global Unique identifier of the Catalogue Object (e.g. Hyperty descriptor, ProtocolStub descriptor,
      * etc) enabling the same object to be stored and discovered in different Catalogues. That means, guid corresponds to
-     * <resource-type-id> per BNF of Resource Path. Couldn't we have problems with too long URL paths?
+     * [resource-type-id] per BNF of Resource Path. Couldn't we have problems with too long URL paths?
      * @param type - indicates the type of Catalogue Data Object e.g. Hyperty, ProtocolStub, etc
      * @param objectName - human-understandable name of the catalogue object e.g. "My Awesome Hyperty"
      * @param description - description of the source package
@@ -106,12 +107,12 @@ class CatalogueDataObject {
     }
 }
 
-export var CatalogueObjectType = {
+export const CatalogueObjectType = {
     HYPERTY: 'hyperty', PROTOSTUB: 'protostub', HYPERTY_RUNTIME: 'hyperty_runtime',
     HYPERTY_INTERCEPTOR: 'hyperty_inspector', HYPERTY_DATA_OBJECT: 'hyperty_data_object',
     POLICY_ENFORCER: 'policy_enforcer', DATA_SCHEMA: 'data_schema'
 };
-export var DataObjectSourceLanguage = {
+export const DataObjectSourceLanguage = {
     JAVASCRIPT_ECMA6: 'javascript_ecma6', JAVASCRIPT_ECMA5: 'javascript_ecma5',
     JSON_SCHEMA_V4: 'json_schema_v4', PYTHON: 'python', TYPESCRIPT: 'typescript'
 };
