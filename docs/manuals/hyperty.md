@@ -31,39 +31,23 @@ More details about Hyperties unique characteristics:
 
 The API to handle the Synchronisation of Hyperty Data Objects is extremely simple and fun to use. The Developer of the Hyperty Reporter just has to create the Data Sync object with the Syncher API, and write on the object every time there is data to be updated and shared with Hyperty Observers.
 
-```javascript
-    console.info('---------------- Syncher Create Reporter Hyperty Data ---------------------- \n');
-    syncher.create({}, [hypertyURL], {}).then(function(dataObjectReporter) {
-      console.info('1. Return Create Data Object Reporter', dataObjectReporter);
+```
+    syncher.create(_this._objectDescriptorURL, [invitedHypertyURL], hello).then(function(dataObjectReporter) {
 
-    })
-      console.info('--------------- END Create Reporter Hyperty Data------------------ \n');
-    })
-    .catch(function(reason) {
-      console.error(reason);
-      reject(reason);
-    });
+    console.info('Hello Data Object was created: ', dataObjectReporter);
 
-    // missing snippet for updates and delete
+    dataObjectReporter.data.hello = "Bye!!";
 ```
 
 On the Hyperty Observer side, Data Objects are also created with the Syncher API and the emerging [Object.observer() Javascript method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/observe) is used to receive the stream of data changes coming from the Reporter Hyperty.
 
-```javascript
-  onNotification() {
-    console.info('---------------- Syncher Subscribe ---------------- \n');
-    syncher.subscribe(objectUrl).then(function(dataObjectObserver) {
-      console.info('1. Return Subscribe Data Object Observer', dataObjectObserver);
+```
+  syncher.subscribe(_this._objectDescriptorURL, ObjectUrl).then(function(dataObjectObserver) {}
 
-      // TODO: put source code to add listeners to updates by using Object.observer()
-
-
-      console.info('------------------------ END ---------------------- \n');
-    }).catch(function(reason) {
-      console.error(reason);
-    });
-  }
-  // missing snippet for updates and delete
+  dataObjectObserver.onChange('*', function(event) {
+          // Hello World Object was changed
+          console.info(dataObjectObserver);
+        });
 ```
 
 -	Hyperties can easily cooperate with Hyperties from other domains with no federation required or the standardisation of Protocols thanks to the [Protocol On-the Fly powered Messaging Framework](hyperty-messaging-framework.md). Hyperties only have to agree on a common json-schema for one or more Hyperty Data Objects, in order to be able to cooperate each other.

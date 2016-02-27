@@ -99,7 +99,7 @@ new ProtoStub(runtimeProtoStubURL, busPostMessage, configuration)
 | name                | type                                      | description                                                                                                                                                                           |
 |---------------------|-------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | runtimeProtoStubURL | URL.RuntimeURL                            | A URL allocated by the runtime that uniquely identifies this protocolStub.                                                                                                            |
-| busPostMessage      | Message.Message (???)                     | The runtime BUS postMessage function to be invoked on messages received by the protocol stub.                                                                                         |
+| busPostMessage      | Message.Message                     | The runtime BUS postMessage function to be invoked on messages received by the protocol stub.                                                                                         |
 | configuration       | ProtoStubDescriptor.ConfigurationDataList | Configuration data that is retrieved from the protocolStub descriptor. This data is implementation-specific and ensures that the Stub can address and connect its own Messaging Node. |
 
 ##### Methods
@@ -199,31 +199,7 @@ For more detailed information about the allocation Messages refer to [Address al
 
 #### Interaction with the Domain Registry
 
-The allocation of a unique address is only the first step on the way to make an entity (hyperty or data object) discoverable and usable from another runtime. In order to make it discoverable the allocated addresses must be registered in the domain registry component. The interaction with the domain registry is also the task of the MN. The MN has to intercept messages from a runtime that address the <registry> subdomain of the MNs own url and to create a corresponding asynchronous request to the domain registry. As soon as it receives an answer, the MN has to respond this answer back to the runtime.
-
-A message to register an entity look as follows:
-
-```
-"id" : "1"
-"type" : "CREATE",
-"from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/registry",
-"to" : "domain://registry.<sp-domain>",
-"body" : { "value" : <RegistryDataObject> }
-```
-
-The specification of a <RegistryDataObject> can be found [here](https://github.com/reTHINK-project/dev-service-framework/tree/master/docs/datamodeal/hyperty-registry).
-
-If the MN receives a positive response from the domain registry, it has to respond back to the runtime with a message like this:
-
-```
-"id" : "<1>"
-"type" : "RESPONSE",
-"from" : "domain://registry.<sp-domain>",
-"to" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/registry",
-"body" : { "code": 200 }
-```
-
-Additional messages are defined to perform lookups of registered entities (hyperties or data objects) for a given user id. The full specification of these messages can be found here [Registration Messages](https://github.com/reTHINK-project/dev-service-framework/blob/d3.2-working-docs/docs/specs/messages/registration-messages.md)
+The allocation of a unique address is only the first step on the way to make an entity (hyperty or data object) discoverable and usable from another runtime. In order to make it discoverable the allocated addresses must be registered in the domain registry component. The interaction with the domain registry is also the task of the MN. The MN just has to route messages from a runtime that address the <registry> subdomain of the MNs own url towards the Domain Registry connector and a callback is used to deliver responses back to the runtime. In this way, the MN is not aware of the Registration messages payload. The full specification of these messages can be found here [Registration Messages](https://github.com/reTHINK-project/dev-service-framework/blob/d3.2-working-docs/docs/specs/messages/registration-messages.md)
 
 #### Subscription management
 
@@ -235,7 +211,7 @@ In order to route such object change messages to the subscribed listeners, the M
 "type" : "SUBSCRIBE",
 "from" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
 "to" : "domain://msg-node.<observer-sp-domain>/sm",
-"body" : { "resource" : "<ObjectURL>" , "childrenResources" : [{"<resource-children-name>"}], "schema" : "hyperty-catalogue://<sp-domain>/dataObjectSchema/<schema-identifier>"}
+"body" : { "resource" : "<ObjectURL>" , "childrenResources" : [{"<resource-children-name>"}]}
 `
 
 This message of type "SUBSCRIBE" is addressed to "domain://msg-node.<observer-sp-domain>/sm", which is the identifier of the MNs "Synch Manager (sm)" component. In the body the most important field is the "resource", which contains the allocated address of the object that shall be subscribed by the runtimes sync manager (as identified by the "from" field).
@@ -299,8 +275,6 @@ and vice versa. This implies that in future versions the MN has to implement a m
 ### Message routing procedure
 
 This section tries to summarize all the descriptions of the individual MN components from above and describe the basic messaging handling and routing procedures inside a MN. It uses a pseudo-code like format to describe the order of the operational steps.
-
-*to be reviewed. we should separate routing of hyperty messages from management messages. See msg node topologies at the beginning*
 
 Several checks must be applied:
 
@@ -404,16 +378,22 @@ _onWSClose() { this._sendStatus("disconnected"); }
 
 Protocol stubs are tightly integrated with the messaging bus of the runtime. This integration is bi-directional. A reference to the messaging bus is provided as second paramenter of the stub constructor.
 
-In order to receive messages from the runtime's messaging bus, the stub has to add itself as a listener. This can be done directly in the stubs constructor by adding such a code snippet:`
+In order to receive messages from the runtime's messaging bus, the stub has to add itself as a listener. This can be done directly in the stubs constructor by adding such a code snippet:
+
+```
 this._bus.addListener('*', (msg) => {
     this._assumeOpen = true;
     this._sendWSMsg(msg);
 });
-` Whenever now the stub receives a message via this listener callback it sends it forward (in this case via a Websocke connection) to its MN.
+```
 
-For every message that is received from the MN, the stub forwards this message to the bus by using its postMessage method like shown here:`
+Whenever now the stub receives a message via this listener callback it sends it forward (in this case via a Websocke connection) to its MN.
+
+For every message that is received from the MN, the stub forwards this message to the bus by using its postMessage method like shown here:
+
+```
 // parse msg and forward it locally to the runtimes messaging bus
 _onWSMessage(msg) {
   this._bus.postMessage(JSON.parse(msg.data));
 }
-`
+```
