@@ -90,7 +90,7 @@ class Syncher {
          let objURL = reply.body.resource;
 
          //reporter creation accepted
-         let newObj = new DataObjectReporter(_this._owner, objURL, schema, _this._bus, 'on', initialData, reply.body.children);
+         let newObj = new DataObjectReporter(_this._owner, objURL, schema, _this._bus, 'on', initialData, reply.body.childrenResources);
          _this._reporters[objURL] = newObj;
 
          resolve(newObj);
@@ -159,10 +159,13 @@ class Syncher {
  _onRemoteCreate(msg) {
    let _this = this;
 
+   //remove "/subscription" from the URL
+   let resource = msg.from.slice(0, -13);
+
    let event = {
      type: msg.type,
-     from: msg.from,
-     url: msg.body.resource,
+     from: msg.body.source,
+     url: resource,
      schema: msg.body.schema,
      value: msg.body.value,
      identity: msg.body.idToken,
@@ -176,12 +179,13 @@ class Syncher {
        //send ack response message
        _this._bus.postMessage({
          id: msg.id, type: 'response', from: msg.to, to: msg.from,
-         body: { code: lType, source: msg.body.resource }
+         body: { code: lType }
        });
      }
    };
 
    if (_this._onNotificationHandler) {
+     console.log('NOTIFICATION-EVENT: ', event);
      _this._onNotificationHandler(event);
    }
  }

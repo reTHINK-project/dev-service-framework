@@ -607,14 +607,14 @@ var _utilsUtilsJs = require('../utils/utils.js');
 var DataObject = (function () {
   /* private
   _version: number
-   _owner: HypertyURL
+    _owner: HypertyURL
   _url: ObjectURL
   _schema: Schema
   _bus: MiniBus
   _status: on | paused
   _syncObj: SyncData
-   _children: { id: DataObjectChild }
-   ----event handlers----
+    _children: { id: DataObjectChild }
+    ----event handlers----
   _onAddChildrenHandler: (event) => void
   */
 
@@ -795,9 +795,21 @@ var DataObject = (function () {
 
       if (_this._status === 'on') {
         var changeMsg = {
-          type: event.cType, from: _this._owner, to: _this._url,
-          body: { version: _this._version, oType: event.oType, attrib: event.field, value: event.data }
+          type: 'update', from: _this._url, to: _this._url + '/changes',
+          body: { version: _this._version, attribute: event.field }
         };
+
+        if (event.oType === _SyncObject.ObjectType.OBJECT) {
+          if (event.cType !== _SyncObject.ChangeType.REMOVE) {
+            changeMsg.body.value = event.data;
+          }
+        } else {
+          changeMsg.body.attributeType = event.oType;
+          changeMsg.body.value = event.data;
+          if (event.cType !== _SyncObject.ChangeType.UPDATE) {
+            changeMsg.body.operation = event.cType;
+          }
+        }
 
         //childInfo must have (path, childId)
         if (childInfo) {
@@ -820,38 +832,33 @@ var DataObject = (function () {
       //will we need to confirm the reception ?
       if (_this._version + 1 === msg.body.version) {
         _this._version++;
-        var path = msg.body.attrib;
+        var path = msg.body.attribute;
         var value = (0, _utilsUtilsJs.deepClone)(msg.body.value);
         var findResult = syncObj.findBefore(path);
 
-        if (msg.type === _SyncObject.ChangeType.UPDATE) {
-          findResult.obj[findResult.last] = value;
-        } else {
-          if (msg.type === _SyncObject.ChangeType.ADD) {
-            if (msg.body.oType === _SyncObject.ObjectType.OBJECT) {
-              findResult.obj[findResult.last] = value;
-            } else {
-              //ARRAY
-              var arr = findResult.obj;
-              var index = findResult.last;
-              Array.prototype.splice.apply(arr, [index, 0].concat(value));
-            }
+        if (msg.body.attributeType === _SyncObject.ObjectType.ARRAY) {
+          if (msg.body.operation === _SyncObject.ChangeType.ADD) {
+            var arr = findResult.obj;
+            var index = findResult.last;
+            Array.prototype.splice.apply(arr, [index, 0].concat(value));
+          } else if (msg.body.operation === _SyncObject.ChangeType.REMOVE) {
+            var arr = findResult.obj;
+            var index = findResult.last;
+            arr.splice(index, value);
           } else {
-            //REMOVE
-            if (msg.body.oType === _SyncObject.ObjectType.OBJECT) {
-              delete findResult.obj[findResult.last];
-            } else {
-              //ARRAY
-              var arr = findResult.obj;
-              var index = findResult.last;
-              arr.splice(index, value);
-            }
+            findResult.obj[findResult.last] = value; // UPDATE
           }
-        }
+        } else {
+            if (msg.body.value) {
+              findResult.obj[findResult.last] = value; // UPDATE or ADD
+            } else {
+                delete findResult.obj[findResult.last]; // REMOVE
+              }
+          }
       } else {
-        //TODO: how to handle unsynchronized versions?
-        console.log('UNSYNCHRONIZED VERSION: (data => ' + _this._version + ', msg => ' + msg.body.version + ')');
-      }
+          //TODO: how to handle unsynchronized versions?
+          console.log('UNSYNCHRONIZED VERSION: (data => ' + _this._version + ', msg => ' + msg.body.version + ')');
+        }
     }
   }, {
     key: '_changeChildren',
@@ -945,7 +952,7 @@ var _SyncObject2 = _interopRequireDefault(_SyncObject);
 
 var DataObjectChild /* implements SyncStatus */ = (function () {
   /* private
-   ----event handlers----
+    ----event handlers----
   _onResponseHandler: (event) => void
   */
 
@@ -1069,7 +1076,7 @@ var DataObjectObserver = (function (_DataObject) {
   _inherits(DataObjectObserver, _DataObject);
 
   /* private
-   ----event handlers----
+    ----event handlers----
   _filters: {<filter>: {type: <start, exact>, callback: <function>} }
   */
 
@@ -1087,7 +1094,7 @@ var DataObjectObserver = (function (_DataObject) {
     _this._version = initialVersion;
 
     //add listener for objURL
-    bus.addListener(url, function (msg) {
+    bus.addListener(url + '/changes', function (msg) {
       console.log('DataObjectObserver-' + url + '-RCV: ', msg);
       _this._changeObject(_this._syncObj, msg);
     });
@@ -1190,7 +1197,7 @@ var DataObjectReporter = (function (_DataObject) {
 
   /* private
   _subscriptions: <hypertyUrl: { status: string } }>
-   ----event handlers----
+    ----event handlers----
   _onSubscriptionHandler: (event) => void
   _onResponseHandler: (event) => void
   */
@@ -1206,8 +1213,8 @@ var DataObjectReporter = (function (_DataObject) {
     _get(Object.getPrototypeOf(DataObjectReporter.prototype), 'constructor', this).call(this, owner, url, schema, bus, initialStatus, initialData, children);
     var _this = this;
 
-    bus.addListener(owner, function (msg) {
-      if (msg.type === 'response' && msg.body.source === url) {
+    bus.addListener(url, function (msg) {
+      if (msg.type === 'response') {
         _this._onResponse(msg);
       }
     });
@@ -1292,6 +1299,7 @@ var DataObjectReporter = (function (_DataObject) {
       };
 
       if (_this._onSubscriptionHandler) {
+        console.log('SUBSCRIPTION-EVENT: ', event);
         _this._onSubscriptionHandler(event);
       }
     }
@@ -1311,6 +1319,7 @@ var DataObjectReporter = (function (_DataObject) {
       };
 
       if (_this._onSubscriptionHandler) {
+        console.log('UN-SUBSCRIPTION-EVENT: ', event);
         _this._onSubscriptionHandler(event);
       }
     }
@@ -1326,6 +1335,7 @@ var DataObjectReporter = (function (_DataObject) {
       };
 
       if (_this._onResponseHandler) {
+        console.log('RESPONSE-EVENT: ', event);
         _this._onResponseHandler(event);
       }
     }
@@ -1360,7 +1370,7 @@ var DataProvisional = (function () {
   /* private
   _childrenListeners: [MsgListener]
   _listener: MsgListener
-   _changes: []
+    _changes: []
   */
 
   function DataProvisional(owner, url, bus, children) {
@@ -1387,7 +1397,7 @@ var DataProvisional = (function () {
             console.log(msg);
           }
         });
-         _this._childrenListeners.push(listener);
+          _this._childrenListeners.push(listener);
       });
     }*/
   }
@@ -1786,11 +1796,11 @@ var Syncher = (function () {
   /* private
   _owner: URL
   _bus: MiniBus
-   _subURL: URL
-   _reporters: <url: DataObjectReporter>
+    _subURL: URL
+    _reporters: <url: DataObjectReporter>
   _observers: <url: DataObjectObserver>
   _provisionals: <url: DataProvisional>
-   ----event handlers----
+    ----event handlers----
   _onNotificationHandler: (event) => void
   */
 
@@ -1857,7 +1867,7 @@ var Syncher = (function () {
             var objURL = reply.body.resource;
 
             //reporter creation accepted
-            var newObj = new _DataObjectReporter2['default'](_this._owner, objURL, schema, _this._bus, 'on', initialData, reply.body.children);
+            var newObj = new _DataObjectReporter2['default'](_this._owner, objURL, schema, _this._bus, 'on', initialData, reply.body.childrenResources);
             _this._reporters[objURL] = newObj;
 
             resolve(newObj);
@@ -1932,10 +1942,13 @@ var Syncher = (function () {
     value: function _onRemoteCreate(msg) {
       var _this = this;
 
+      //remove "/subscription" from the URL
+      var resource = msg.from.slice(0, -13);
+
       var event = {
         type: msg.type,
-        from: msg.from,
-        url: msg.body.resource,
+        from: msg.body.source,
+        url: resource,
         schema: msg.body.schema,
         value: msg.body.value,
         identity: msg.body.idToken,
@@ -1949,12 +1962,13 @@ var Syncher = (function () {
           //send ack response message
           _this._bus.postMessage({
             id: msg.id, type: 'response', from: msg.to, to: msg.from,
-            body: { code: lType, source: msg.body.resource }
+            body: { code: lType }
           });
         }
       };
 
       if (_this._onNotificationHandler) {
+        console.log('NOTIFICATION-EVENT: ', event);
         _this._onNotificationHandler(event);
       }
     }
