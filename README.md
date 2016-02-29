@@ -66,6 +66,7 @@ All IDE's and Text Editors can handle these tools.
 ### <a id="Tasks">Tasks</a>
 
  - [Documentation](#documentation)
+ - [License](#license)
  - [Dist](#dist)
  - [Build](#build)
  - [Encode](#encode)
@@ -78,6 +79,15 @@ To generates api documentation you can run
 
 ```
 gulp doc
+```
+
+##### <a id="license">License</a>
+
+This task put in each file inside the src folder, the license;
+If, for some reason, you need to remove from all files the license run the command with the argument `--clean`;
+
+```
+gulp license
 ```
 
 ##### <a id="dist">Dist</a>

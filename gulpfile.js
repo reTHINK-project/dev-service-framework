@@ -26,8 +26,72 @@ var insert = require('gulp-insert');
 var uglify = require('gulp-uglify');
 var bump = require('gulp-bump');
 var argv = require('yargs').argv;
+var through = require('through2');
+var path = require('path');
+var gulpif = require('gulp-if');
 
 var pkg = require('./package.json');
+
+gulp.task('license', function() {
+
+  var clean = argv.clean;
+  if (!clean) clean = false;
+
+  return gulp.src(['src/**/*.js'])
+  .pipe(prependLicense(clean));
+
+});
+
+function prependLicense(clean) {
+
+  var license = `/**
+* Copyright 2016 PT Inovação e Sistemas SA
+* Copyright 2016 INESC-ID
+* Copyright 2016 QUOBIS NETWORKS SL
+* Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
+* Copyright 2016 ORANGE SA
+* Copyright 2016 Deutsche Telekom AG
+* Copyright 2016 Apizee
+* Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*   http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+**/
+
+`;
+
+  return through.obj(function(file, enc, cb) {
+
+    if (file.isNull()) {
+      return cb(new Error('Fil is null'));
+    }
+
+    if (file.isStream()) {
+      return cb(new Error('Streaming not supported'));
+    }
+
+    var dest = path.dirname(file.path);
+
+    return gulp.src(file.path)
+    .pipe(replace(license, ''))
+    .pipe(gulpif(!clean, insert.prepend(license)))
+    .pipe(gulp.dest(dest))
+    .on('end', function() {
+      cb();
+    });
+
+  });
+
+}
 
 gulp.task('dist', function() {
 
@@ -61,42 +125,6 @@ gulp.task('build', function() {
   })
   .pipe(source('service-framework.js'))
   .pipe(gulp.dest('./dist'));
-
-});
-
-gulp.task('base64', function() {
-
-  var destination = argv.dest || 'resources';
-
-  var files = [];
-  var dirFiles = fs.readdirSync('resources');
-  files = dirFiles.filter(isFile);
-  files = files.map(function(file) {
-    return 'resources/' + file;
-  });
-
-  function isFile(file) {
-    return fs.statSync('resources/' + file).isFile();
-  }
-
-  return gulp.src('./', {buffer:false})
-    .pipe(prompt.prompt([{
-      type: 'list',
-      name: 'file',
-      message: 'File to be converted:',
-      choices: files
-    }], function(res) {
-
-      var splitIndex = res.file.lastIndexOf('/') + 1;
-      var name = res.file.substr(splitIndex).replace('.js', '');
-
-      var content = fs.readFileSync(res.file, 'utf8');
-      var encoded = Base64.encode(content);
-      var stream = source(name + '.encoded.js');
-
-      stream.write(new Buffer(encoded));
-      stream.pipe(gulp.dest(destination));
-    }));
 
 });
 
@@ -165,7 +193,6 @@ gulp.task('watch', function(cb) {
   gulp.watch(['src/**/*.js'], ['dist'], cb);
 });
 
-var through = require('through2');
 var Base64 = require('js-base64').Base64;
 var fs = require('fs');
 
