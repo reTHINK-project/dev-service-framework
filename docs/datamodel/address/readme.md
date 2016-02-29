@@ -1,12 +1,12 @@
 ## reTHINK Address Model
 
-It is proposed to use as much as possible Web URLs model for reTHINK addressing model as defined in the [WHATWG standard](https://url.spec.whatwg.org/). According to this standard, there is no distinguish betweeb URL and URI. The intention is not to depend on existing DNS based naming resolution but to keep it open as such decision will take place in WP4. 
+It is proposed to use as much as possible Web URLs model for reTHINK addressing model as defined in the [WHATWG standard](https://url.spec.whatwg.org/). According to this standard, there is no distinguish betweeb URL and URI. The intention is not to depend on existing DNS based naming resolution but to keep it open as such decision will take place in WP4.
 
 reTHINK URL is used by the [Message model](../message/readme.md) to identify the message recipient, message sender and resources where operations carried by the message will be performed. It is to be noted, that in some situations, there is no need to resolve URL into IP addresses in order to reach the URL endpoint. For example, it is possible that Hyperty instances served by a messaging service like vertx.io would use a dedicated name space to manage message routing between Hyperty instances.
 
 We should consider the introduction of new URL schemes for the different types of addresses needed but re-use as much as possible existing schemes that are handled by [IANA](https://www.iana.org/assignments/uri-schemes/uri-schemes.xhtml)
 
-The different types of URLs required by reTHINK are defined in the picture below: 
+The different types of URLs required by reTHINK are defined in the picture below:
 
 ![reTHINK Address Model](../Address-Model.png)
 
@@ -26,7 +26,7 @@ Usage examples:
 Analysis of existing schemes for users (improve consistency):
 * [acct](http://tools.ietf.org/html/rfc7565): is not appropriate since it is associated to a service provider and this address must be portable between service provider domains
 
-Proposal: to use a new scheme eg "user": 
+Proposal: to use a new scheme eg "user":
 
     user://<idpdomain>/<user-identifier>
 
@@ -125,13 +125,7 @@ No existing scheme was found appropriate. It is proposed a new "hyperty-runtime"
 
     hyperty-runtime://<runtime-provider-domain>/<runtime-identifier>
 
-Where <runtime-provider-domain> identifies the stakeholder that provides and manages the Hyperty Runtime execution environment. This URL type should be compliant with OMA LWM2M identifier for endpoint client name defined at §6.2.1 from OMA-TS-LightweightM2M-V1_0-20141126-C. According to recommendations about URNs to be used in LWM2M endpoint client name the following Runtime URLs may be valid:
-
-    hyperty-runtime-uuid://<device-unique-identifier>/<runtime-identifier>
-    hyperty-runtime-dev-os://<device-unique-identifier>/<runtime-identifier>
-    hyperty-runtime-imei://<device-unique-identifier>/<runtime-identifier>
-    hyperty-runtime-esn://<device-unique-identifier>/<runtime-identifier>
-    hyperty-runtime-meid://<device-unique-identifier>/<runtime-identifier>
+Where `<runtime-provider-domain>` identifies the stakeholder that provides and manages the Hyperty Runtime execution environment. 
 
 **example**
 
@@ -208,4 +202,3 @@ It is proposed to use a new scheme eg "comm"
 In case the Context data is about energy context of "myhouse" domain:
 
     ctxt://myhouse/energy
-    
