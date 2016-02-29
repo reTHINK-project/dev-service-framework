@@ -1745,7 +1745,11 @@ var ConnectionController = (function (_EventEmitter) {
   function ConnectionController(syncher, domain, configuration) {
     _classCallCheck(this, ConnectionController);
 
-    _get(Object.getPrototypeOf(ConnectionController.prototype), 'constructor', this).call(this, syncher, domain, configuration);
+    if (!syncher) throw new Error('The syncher is a needed parameter');
+    if (!domain) throw new Error('The domain is a needed parameter');
+    if (!configuration) throw new Error('The configuration is a needed parameter');
+
+    _get(Object.getPrototypeOf(ConnectionController.prototype), 'constructor', this).call(this);
 
     var _this = this;
 
@@ -1806,53 +1810,37 @@ var ConnectionController = (function (_EventEmitter) {
 
     // Add stream to PeerConnection
     peerConnection.addEventListener('addstream', function (event) {
-      _this.trigger('stream:added', URL.createObjectURL(event.stream), _this.dataObjectReporter, _this.dataObjectObserver);
+      console.info('Add Stream: ', event);
+      _this.trigger('stream:added', event);
     });
 
     _this.peerConnection = peerConnection;
   }
 
-  // TODO: check if it is realy necessary this remotePeerInformation;
-  /**
-   * Set Remote peer information, like Hyperty.
-   * @param  {Object} remotePeerInformation information about the peer;
-   */
-
   _createClass(ConnectionController, [{
-    key: 'getUserMedia',
-
-    /**
-     * Get WebRTC API resources
-     * @param  {Object}     options Object containing the information that resources will be used (camera, mic, resolution, etc);
-     * @return {Promise}
-     */
-    value: function getUserMedia(constraints) {
-
-      var _this = this;
-
-      return new Promise(function (resolve, reject) {
-
-        navigator.mediaDevices.getUserMedia(constraints).then(function (mediaStream) {
-          _this.peerConnection.addStream(mediaStream);
-          resolve(mediaStream);
-        })['catch'](function (reason) {
-          reject(reason);
-        });
-      });
-    }
-  }, {
     key: 'changePeerInformation',
     value: function changePeerInformation(dataObjectObserver) {
-
       var _this = this;
+      var data = dataObjectObserver.data;
+      var isOwner = data.hasOwnProperty('connection');
 
-      console.info(JSON.stringify(dataObjectObserver.data));
+      var peerData = isOwner ? data.connection.ownerPeer : data.peer;
 
-      _this.processPeerInformation(dataObjectObserver.data);
+      console.info('Peer Data:', JSON.stringify(peerData));
+
+      if (peerData.hasOwnProperty('connectionDescription')) {
+        _this.processPeerInformation(peerData.connectionDescription);
+      }
+
+      if (peerData.hasOwnProperty('iceCandidates')) {
+        peerData.iceCandidates.forEach(function (ice) {
+          _this.processPeerInformation(ice);
+        });
+      }
 
       dataObjectObserver.onChange('*', function (event) {
         console.info('Observer on change message: ', event);
-        _this.processPeerInformation(dataObjectObserver.data);
+        _this.processPeerInformation(event.data);
       });
     }
   }, {
@@ -1860,27 +1848,16 @@ var ConnectionController = (function (_EventEmitter) {
     value: function processPeerInformation(data) {
       var _this = this;
 
-      console.debug(JSON.stringify(data));
+      console.info(JSON.stringify(data));
 
-      var isOwner = data.hasOwnProperty('connection');
-
-      var connectionDescription = isOwner ? data.connection.ownerPeer.connectionDescription : data.peer.connectionDescription;
-      var iceCandidates = isOwner ? data.connection.ownerPeer.iceCandidates : data.peer.iceCandidates;
-
-      console.log(connectionDescription, iceCandidates);
-
-      if (connectionDescription.type === 'offer' || connectionDescription.type === 'answer') {
-        console.info('Process Connection Description: ', connectionDescription);
-        _this.peerConnection.setRemoteDescription(new RTCSessionDescription(connectionDescription), _this.remoteDescriptionSuccess, _this.remoteDescriptionError);
+      if (data.type === 'offer' || data.type === 'answer') {
+        console.info('Process Connection Description: ', data.sdp);
+        _this.peerConnection.setRemoteDescription(new RTCSessionDescription(data), _this.remoteDescriptionSuccess, _this.remoteDescriptionError);
       }
 
-      if (iceCandidates) {
-        iceCandidates.forEach(function (ice) {
-          if (ice.type === 'candidate') {
-            console.info('Process Ice Candidate: ', ice);
-            _this.peerConnection.addIceCandidate(new RTCIceCandidate({ candidate: ice.candidate }), _this.remoteDescriptionSuccess, _this.remoteDescriptionError);
-          }
-        });
+      if (data.type === 'candidate') {
+        console.info('Process Ice Candidate: ', data);
+        _this.peerConnection.addIceCandidate(new RTCIceCandidate({ candidate: data.candidate }), _this.remoteDescriptionSuccess, _this.remoteDescriptionError);
       }
     }
   }, {
@@ -1945,12 +1922,11 @@ var ConnectionController = (function (_EventEmitter) {
      */
   }, {
     key: 'accept',
-    value: function accept(options) {
+    value: function accept(stream) {
+      // TODO: Pass argument options as a stream, because is specific of implementation;
 
       var _this = this;
       var syncher = _this.syncher;
-
-      options = options || { video: true, audio: true };
 
       console.log('Remote Peer Information: ', _this._remotePeerInformation);
       var remotePeer = _this._remotePeerInformation.from;
@@ -1960,11 +1936,10 @@ var ConnectionController = (function (_EventEmitter) {
         try {
 
           console.info('------------------------ Syncher Create ---------------------- \n');
-          _this.getUserMedia(options).then(function (mediaConstraints) {
-            console.info('1. Return media constraints ', mediaConstraints);
-            return syncher.create(_this._objectDescURL, [remotePeer], {});
-          }).then(function (dataObjectReporter) {
+          syncher.create(_this._objectDescURL, [remotePeer], {}).then(function (dataObjectReporter) {
             console.info('2. Return the Data Object Reporter ', dataObjectReporter);
+
+            _this.stream = stream;
             _this.dataObjectReporter = dataObjectReporter;
             resolve('accepted');
           })['catch'](function (reason) {
@@ -2101,6 +2076,32 @@ var ConnectionController = (function (_EventEmitter) {
         }
       });
     }
+  }, {
+    key: 'stream',
+    set: function set(mediaStream) {
+      if (!mediaStream) throw new Error('The mediaStream is a needed parameter');
+
+      var _this = this;
+      console.info('set stream: ', mediaStream);
+      _this.peerConnection.addStream(mediaStream);
+    }
+  }, {
+    key: 'getLocalStreams',
+    get: function get() {
+      var _this = this;
+      return _this.peerConnection.getLocalStreams();
+    }
+  }, {
+    key: 'getRemoteStreams',
+    get: function get() {
+      var _this = this;
+      return _this.peerConnection.getRemoteStreams();
+    }
+
+    /**
+     * Set Remote peer information, like Hyperty.
+     * @param  {Object} remotePeerInformation information about the peer;
+     */
   }, {
     key: 'remotePeerInformation',
     set: function set(remotePeerInformation) {
@@ -2259,8 +2260,7 @@ var HypertyConnector = (function (_EventEmitter) {
 
     _this._controllers = {};
 
-    var domain = (0, _utilsUtils.divideURL)(hypertyURL).domain;
-    _this.hypertyDiscovery = new _hypertyDiscoveryHypertyDiscovery2['default'](domain, bus);
+    _this.hypertyDiscovery = new _hypertyDiscoveryHypertyDiscovery2['default'](_this._domain, bus);
 
     var syncher = new _syncherSyncher2['default'](hypertyURL, bus, configuration);
     syncher.onNotification(function (event) {
@@ -2280,40 +2280,11 @@ var HypertyConnector = (function (_EventEmitter) {
       event.ack();
       console.info('------------------------ END ---------------------- \n');
 
-      console.log(_this._controllers[event.from]);
       if (_this._controllers[event.from]) {
         _this._autoSubscribe(event);
       } else {
         _this._autoAccept(event);
       }
-    }
-  }, {
-    key: '_autoAccept',
-    value: function _autoAccept(event) {
-      var _this = this;
-      var syncher = _this._syncher;
-
-      console.info('---------------- Syncher Subscribe ---------------- \n');
-      console.info('Subscribe URL Object ', event, syncher);
-
-      syncher.subscribe(_this._objectDescURL, event.url).then(function (dataObjectObserver) {
-        console.info('1. Return Subscribe Data Object Observer', dataObjectObserver);
-
-        var connectionController = new _ConnectionController2['default'](syncher, _this._domain, _this._configuration);
-
-        // TODO: remove this remotePeerInformation;
-        connectionController.remotePeerInformation = event;
-        connectionController.dataObjectObserver = dataObjectObserver;
-
-        console.info('2. Data Object Observer data: ', JSON.stringify(dataObjectObserver.data));
-
-        _this.trigger('connector:connected', connectionController);
-        _this.trigger('have:notification', event);
-
-        console.info('------------------------ END ---------------------- \n');
-      })['catch'](function (reason) {
-        console.error(reason);
-      });
     }
   }, {
     key: '_autoSubscribe',
@@ -2325,8 +2296,31 @@ var HypertyConnector = (function (_EventEmitter) {
       console.info('Subscribe URL Object ', event, syncher);
       syncher.subscribe(_this._objectDescURL, event.url).then(function (dataObjectObserver) {
         console.info('1. Return Subscribe Data Object Observer', dataObjectObserver);
-
+        console.log(_this._controllers);
         _this._controllers[event.from].dataObjectObserver = dataObjectObserver;
+      })['catch'](function (reason) {
+        console.error(reason);
+      });
+    }
+  }, {
+    key: '_autoAccept',
+    value: function _autoAccept(event) {
+      var _this = this;
+      var syncher = _this._syncher;
+
+      console.info('---------------- Syncher Subscribe ---------------- \n');
+      console.info('Subscribe URL Object ', event, syncher);
+      syncher.subscribe(_this._objectDescURL, event.url).then(function (dataObjectObserver) {
+        console.info('1. Return Subscribe Data Object Observer', dataObjectObserver);
+
+        var connectionController = new _ConnectionController2['default'](syncher, _this._domain, _this._configuration);
+        connectionController.remotePeerInformation = event;
+        connectionController.dataObjectObserver = dataObjectObserver;
+
+        _this.trigger('connector:connected', connectionController);
+        _this.trigger('have:notification', event);
+
+        console.info('------------------------ END ---------------------- \n');
       })['catch'](function (reason) {
         console.error(reason);
       });
@@ -2339,26 +2333,21 @@ var HypertyConnector = (function (_EventEmitter) {
     */
   }, {
     key: 'connect',
-    value: function connect(hypertyURL, options) {
+    value: function connect(hypertyURL, stream) {
+      // TODO: Pass argument options as a stream, because is specific of implementation;
       // TODO: CHange the hypertyURL for a list of URLS
       var _this = this;
       var syncher = _this._syncher;
 
-      options = options || { video: true, audio: true };
-
       return new Promise(function (resolve, reject) {
 
         var connectionController = undefined;
-
         console.info('------------------------ Syncher Create ---------------------- \n');
-        connectionController = new _ConnectionController2['default'](syncher, _this._domain, _this._configuration);
-
-        connectionController.getUserMedia(options).then(function (mediaConstraints) {
-          console.info('2. Return the media constraints from controller: ', mediaConstraints);
-
-          return syncher.create(_this._objectDescURL, [hypertyURL], {});
-        }).then(function (dataObjectReporter) {
+        syncher.create(_this._objectDescURL, [hypertyURL], {}).then(function (dataObjectReporter) {
           console.info('1. Return Create Data Object Reporter', dataObjectReporter);
+
+          connectionController = new _ConnectionController2['default'](syncher, _this._domain, _this._configuration);
+          connectionController.stream = stream;
           connectionController.dataObjectReporter = dataObjectReporter;
 
           _this._controllers[hypertyURL] = connectionController;
@@ -2371,78 +2360,6 @@ var HypertyConnector = (function (_EventEmitter) {
         });
       });
     }
-
-    // /**
-    // * Accept the incoming call
-    // * @method accept
-    // * @return {Promise}
-    // */
-    // accept() {
-    //   let _this = this;
-    //
-    //   return new Promise(function(resolve, reject) {
-    //
-    //     let objectURL = _this.notificationEvent.url;
-    //
-    //     // step 6 - https://github.com/reTHINK-project/scenario-service-implementation/tree/master/docs/hyperties/connector#notification-about-incoming-connection-request
-    //     // after waiting for an answer, we can now subscribe the objectURL
-    //     _this._syncher.subscribe(objectURL).then(function(connectionDataObject) {
-    //       console.info('Return Subscribe Connection Data Object', connectionDataObject);
-    //
-    //       // step 7 and 10 - https://github.com/reTHINK-project/scenario-service-implementation/tree/master/docs/hyperties/connector#notification-about-incoming-connection-request
-    //       _this.connectionController.dataObjectObserver = connectionDataObject;
-    //       resolve(_this.connectionController);
-    //
-    //       let resources = connectionDataObject.data.resources;
-    //       return _this.connectionController.getUserMedia(resources);
-    //     })
-    //     .then(function(commResources) {
-    //       console.info('Get webRTC common resources', commResources);
-    //     })
-    //     .catch(function(reason) {
-    //       console.error(reason);
-    //       reject(reason);
-    //     });
-    //   });
-    // }
-    //
-    // /**
-    // * Connection is closed by local peer and disconnected;
-    // * @method disconnect
-    // * @return {Promise}
-    // */
-    // disconnect() {
-    //
-    //   let _this = this;
-    //
-    //   return new Promise(function(resolve, reject) {
-    //
-    //     _this.connectionController.disconnect()
-    //     .then(function(disconnected) {
-    //
-    //       console.info('disconnected: ', disconnected);
-    //
-    //       resolve(disconnected);
-    //     })
-    //     .catch(function(reason) {
-    //       reject(reason);
-    //     });
-    //
-    //   });
-    //
-    // }
-    //
-    // _autoConnect(hypertyURL) {
-    //   let _this = this;
-    //
-    //   _this._syncher.create({}, [hypertyURL], {}).then(function(connectionDataObject) {
-    //     console.info('Return Create Connection Data Object', connectionDataObject);
-    //     _this.connectionController.connectionDataObjectReporter = connectionDataObject;
-    //   }).catch(function(reason) {
-    //     console.error(reason);
-    //   });
-    // }
-
   }]);
 
   return HypertyConnector;

@@ -27,6 +27,25 @@ export function errorMessage(reason) {
   console.error(reason);
 }
 
+/**
+ * Get WebRTC API resources
+ * @param  {Object}     options Object containing the information that resources will be used (camera, mic, resolution, etc);
+ * @return {Promise}
+ */
+export function getUserMedia(constraints) {
+
+  return new Promise(function(resolve, reject) {
+
+    navigator.mediaDevices.getUserMedia(constraints)
+    .then(function(mediaStream) {
+      resolve(mediaStream);
+    })
+    .catch(function(reason) {
+      reject(reason);
+    });
+  });
+}
+
 export function serialize() {
 
   $.fn.serializeObject = function()

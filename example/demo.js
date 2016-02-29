@@ -1,7 +1,8 @@
 // jshint browser:true, jquery: true
+// jshint varstmt: true
 
 import config from '../system.config.json!json';
-import {ready, errorMessage} from './support';
+import {ready, errorMessage, getUserMedia} from './support';
 
 // polyfills
 import 'babel-polyfill';
@@ -10,8 +11,8 @@ import 'mutationobserver-shim';
 import 'object.observe';
 import 'array.observe';
 
+import InstallerFactory from '../resources/factories/InstallerFactory';
 import RuntimeLoader from '../src/runtime-loader/RuntimeLoader';
-import CoreFactory from '../resources/CoreFactory';
 
 // reTHINK modules
 // import RuntimeUA from 'runtime-core/dist/runtimeUA';
@@ -34,6 +35,8 @@ if (document.readyState === 'complete') {
   document.addEventListener('DOMContentLoaded', documentReady, false);
 }
 
+var runtimeLoader;
+
 function documentReady() {
 
   ready();
@@ -41,10 +44,17 @@ function documentReady() {
   let hypertyHolder = $('.hyperties');
   hypertyHolder.removeClass('hide');
 
-  let hyperty = 'hyperty-catalogue://' + domain + '/.well-known/hyperty/HypertyConnector';
+  let installerFactory = new InstallerFactory();
+  let runtimeURL = 'runtime://' + domain + '/.well-known/runtime/MyRuntime';
+  runtimeLoader = new RuntimeLoader(installerFactory, runtimeURL);
+  runtimeLoader.install().then(runtimeInstalled).catch(errorMessage);
+}
 
-  let core = new CoreFactory();
-  let runtimeLoader = new RuntimeLoader(core);
+function runtimeInstalled() {
+
+  console.log(runtimeLoader);
+
+  let hyperty = 'hyperty-catalogue://' + domain + '/.well-known/hyperty/HypertyConnector';
 
   // Load First Hyperty
   runtimeLoader.requireHyperty(hyperty).then(hypertyDeployed).catch(function(reason) {
@@ -71,6 +81,8 @@ function hypertyDeployed(result) {
   // Prepare the chat
   let messageChat = $('.hyperty-chat');
   messageChat.removeClass('hide');
+
+  console.log(result);
 
   connector = result.instance;
 
@@ -162,11 +174,15 @@ function openChat(result, video) {
 
   if (video) {
 
-    connector.connect(toUser).then(function(controller) {
+    let options = options || {video: true, audio: true};
+    getUserMedia(options).then(function(mediaStream) {
+      console.info('recived media stream: ', mediaStream);
+      return connector.connect(toUser, mediaStream);
+    })
+    .then(function(controller) {
 
       showVideo(controller);
 
-      controller.addEventListener('stream:added', processVideo);
       controller.addEventListener('on:notification', notification);
       controller.addEventListener('on:subscribe', function(controller) {
         console.info('on:subscribe:event ', controller);
@@ -199,11 +215,13 @@ function openChat(result, video) {
 
 }
 
-function processVideo(stream) {
+function processVideo(event) {
+
+  console.log('Process Video: ', event);
 
   let messageChat = $('.hyperty-chat');
   let video = messageChat.find('.video');
-  video[0].src = stream;
+  video[0].src = URL.createObjectURL(event.stream);
 
 }
 
@@ -255,7 +273,12 @@ function notificationHandler(controller, event) {
 
     e.preventDefault();
 
-    controller.accept().then(function(result) {
+    let options = options || {video: true, audio: true};
+    getUserMedia(options).then(function(mediaStream) {
+      console.info('recived media stream: ', mediaStream);
+      return controller.accept(mediaStream);
+    })
+    .then(function(result) {
       console.log(result);
     }).catch(function(reason) {
       console.error(reason);
@@ -299,6 +322,15 @@ function notificationHandler(controller, event) {
   $('.modal-call').openModal();
 
 }
+
+// function processLocalVideo(controller) {
+//
+//   let localStreams = controller.getLocalStreams;
+//   for (let stream of localStreams) {
+//     console.log('Local stream: ' + stream.id);
+//   }
+//
+// }
 
 function showVideo(controller) {
   let messageChat = $('.hyperty-chat');

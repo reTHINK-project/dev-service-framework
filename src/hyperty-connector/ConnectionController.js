@@ -13,7 +13,11 @@ class ConnectionController extends EventEmitter {
 
   constructor(syncher, domain, configuration) {
 
-    super(syncher, domain, configuration);
+    if (!syncher) throw new Error('The syncher is a needed parameter');
+    if (!domain) throw new Error('The domain is a needed parameter');
+    if (!configuration) throw new Error('The configuration is a needed parameter');
+
+    super();
 
     let _this = this;
 
@@ -76,14 +80,32 @@ class ConnectionController extends EventEmitter {
 
     // Add stream to PeerConnection
     peerConnection.addEventListener('addstream', function(event) {
-      _this.trigger('stream:added', URL.createObjectURL(event.stream), _this.dataObjectReporter, _this.dataObjectObserver);
+      console.info('Add Stream: ', event);
+      _this.trigger('stream:added', event);
     });
 
     _this.peerConnection = peerConnection;
 
   }
 
-  // TODO: check if it is realy necessary this remotePeerInformation;
+  set stream(mediaStream) {
+    if (!mediaStream) throw new Error('The mediaStream is a needed parameter');
+
+    let _this = this;
+    console.info('set stream: ', mediaStream);
+    _this.peerConnection.addStream(mediaStream);
+  }
+
+  get getLocalStreams() {
+    let _this = this;
+    return _this.peerConnection.getLocalStreams();
+  }
+
+  get getRemoteStreams() {
+    let _this = this;
+    return _this.peerConnection.getRemoteStreams();
+  }
+
   /**
    * Set Remote peer information, like Hyperty.
    * @param  {Object} remotePeerInformation information about the peer;
@@ -163,69 +185,47 @@ class ConnectionController extends EventEmitter {
     return _this._dataObjectObserver;
   }
 
-  /**
-   * Get WebRTC API resources
-   * @param  {Object}     options Object containing the information that resources will be used (camera, mic, resolution, etc);
-   * @return {Promise}
-   */
-  getUserMedia(constraints) {
-
+  changePeerInformation(dataObjectObserver) {
     let _this = this;
+    let data = dataObjectObserver.data;
+    let isOwner = data.hasOwnProperty('connection');
 
-    return new Promise(function(resolve, reject) {
+    let peerData = isOwner ? data.connection.ownerPeer : data.peer;
 
-      navigator.mediaDevices.getUserMedia(constraints)
-      .then(function(mediaStream) {
-        _this.peerConnection.addStream(mediaStream);
-        resolve(mediaStream);
-      })
-      .catch(function(reason) {
-        reject(reason);
+    console.info('Peer Data:', JSON.stringify(peerData));
+
+    if (peerData.hasOwnProperty('connectionDescription')) {
+      _this.processPeerInformation(peerData.connectionDescription);
+    }
+
+    if (peerData.hasOwnProperty('iceCandidates')) {
+      peerData.iceCandidates.forEach(function(ice) {
+        _this.processPeerInformation(ice);
       });
+    }
+
+    dataObjectObserver.onChange('*', function(event) {
+      console.info('Observer on change message: ', event);
+      _this.processPeerInformation(event.data);
     });
+
   }
 
-  changePeerInformation(dataObjectObserver) {
+  processPeerInformation(data) {
+    let _this = this;
 
-      let _this = this;
+    console.info(JSON.stringify(data));
 
-      console.info(JSON.stringify(dataObjectObserver.data));
-
-      _this.processPeerInformation(dataObjectObserver.data);
-
-      dataObjectObserver.onChange('*', function(event) {
-        console.info('Observer on change message: ', event);
-        _this.processPeerInformation(dataObjectObserver.data);
-      });
+    if (data.type === 'offer' || data.type === 'answer') {
+      console.info('Process Connection Description: ', data.sdp);
+      _this.peerConnection.setRemoteDescription(new RTCSessionDescription(data), _this.remoteDescriptionSuccess, _this.remoteDescriptionError);
     }
 
-    processPeerInformation(data) {
-      let _this = this;
-
-      console.debug(JSON.stringify(data));
-
-      let isOwner = data.hasOwnProperty('connection');
-
-      let connectionDescription = isOwner ? data.connection.ownerPeer.connectionDescription : data.peer.connectionDescription;
-      let iceCandidates = isOwner ? data.connection.ownerPeer.iceCandidates : data.peer.iceCandidates;
-
-      console.log(connectionDescription, iceCandidates);
-
-      if (connectionDescription.type === 'offer' || connectionDescription.type === 'answer') {
-        console.info('Process Connection Description: ', connectionDescription);
-        _this.peerConnection.setRemoteDescription(new RTCSessionDescription(connectionDescription), _this.remoteDescriptionSuccess, _this.remoteDescriptionError);
-      }
-
-      if (iceCandidates) {
-        iceCandidates.forEach(function(ice) {
-          if (ice.type === 'candidate') {
-            console.info('Process Ice Candidate: ', ice);
-            _this.peerConnection.addIceCandidate(new RTCIceCandidate({candidate: ice.candidate}), _this.remoteDescriptionSuccess, _this.remoteDescriptionError);
-          }
-        });
-      }
-
+    if (data.type === 'candidate') {
+      console.info('Process Ice Candidate: ', data);
+      _this.peerConnection.addIceCandidate(new RTCIceCandidate({candidate: data.candidate}), _this.remoteDescriptionSuccess, _this.remoteDescriptionError);
     }
+  }
 
   remoteDescriptionSuccess() {
     console.info('remote success');
@@ -283,12 +283,11 @@ class ConnectionController extends EventEmitter {
    * @method accept
    * @return {Promise}
    */
-  accept(options) {
+  accept(stream) {
+    // TODO: Pass argument options as a stream, because is specific of implementation;
 
     let _this = this;
     let syncher = _this.syncher;
-
-    options = options || {video: true, audio: true};
 
     console.log('Remote Peer Information: ', _this._remotePeerInformation);
     let remotePeer = _this._remotePeerInformation.from;
@@ -298,11 +297,11 @@ class ConnectionController extends EventEmitter {
       try {
 
         console.info('------------------------ Syncher Create ---------------------- \n');
-        _this.getUserMedia(options).then(function(mediaConstraints) {
-          console.info('1. Return media constraints ', mediaConstraints);
-          return syncher.create(_this._objectDescURL, [remotePeer], {});
-        }).then(function(dataObjectReporter) {
+        syncher.create(_this._objectDescURL, [remotePeer], {})
+        .then(function(dataObjectReporter) {
           console.info('2. Return the Data Object Reporter ', dataObjectReporter);
+
+          _this.stream = stream;
           _this.dataObjectReporter = dataObjectReporter;
           resolve('accepted');
         })

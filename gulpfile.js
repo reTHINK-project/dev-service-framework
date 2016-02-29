@@ -64,6 +64,42 @@ gulp.task('build', function() {
 
 });
 
+gulp.task('base64', function() {
+
+  var destination = argv.dest || 'resources';
+
+  var files = [];
+  var dirFiles = fs.readdirSync('resources');
+  files = dirFiles.filter(isFile);
+  files = files.map(function(file) {
+    return 'resources/' + file;
+  });
+
+  function isFile(file) {
+    return fs.statSync('resources/' + file).isFile();
+  }
+
+  return gulp.src('./', {buffer:false})
+    .pipe(prompt.prompt([{
+      type: 'list',
+      name: 'file',
+      message: 'File to be converted:',
+      choices: files
+    }], function(res) {
+
+      var splitIndex = res.file.lastIndexOf('/') + 1;
+      var name = res.file.substr(splitIndex).replace('.js', '');
+
+      var content = fs.readFileSync(res.file, 'utf8');
+      var encoded = Base64.encode(content);
+      var stream = source(name + '.encoded.js');
+
+      stream.write(new Buffer(encoded));
+      stream.pipe(gulp.dest(destination));
+    }));
+
+});
+
 /**
 * Compile on specific file from ES6 to ES5
 * @param  {string} 'compile' task name
@@ -143,6 +179,7 @@ function encode(filename, descriptorName, configuration, isDefault) {
     if (file.isNull()) {
       return cb(null, file);
     }
+
     if (file.isStream()) {
       return cb(new Error('Streaming not supported'));
     }
@@ -172,10 +209,18 @@ function encode(filename, descriptorName, configuration, isDefault) {
     json[value].version = '0.1';
     json[value].description = 'Description of ' + filename;
     json[value].objectName = filename;
-    if (!json[value].hasOwnProperty('configuration') && configuration){
+
+    if (!json[value].hasOwnProperty('configuration') && configuration) {
       json[value].configuration = configuration;
       console.log('setting configuration: ', configuration);
     }
+
+    if (descriptorName === 'Runtimes') {
+      json[value].runtimeType = 'browser';
+      json[value].hypertyCapabilities = {mic: false };
+      json[value].protocolCapabilities = {http: true };
+    }
+
     json[value].sourcePackageURL = '/sourcePackage';
     json[value].sourcePackage.sourceCode = encoded;
     json[value].sourcePackage.sourceCodeClassname = filename;
@@ -215,8 +260,10 @@ function resource(file, configuration, isDefault) {
     descriptorName = 'Hyperties';
   } else if (filename.indexOf('ProtoStub') !== -1) {
     descriptorName = 'ProtoStubs';
-  } else if (filename.indexOf('DataSchema')) {
+  } else if (filename.indexOf('DataSchema') !== -1) {
     descriptorName = 'DataSchemas';
+  } else if (filename.indexOf('runtime') !== -1 || filename.indexOf('Runtime') !== -1) {
+    descriptorName = 'Runtimes';
   }
 
   console.log('DATA:', descriptorName, filename);
@@ -251,7 +298,7 @@ gulp.task('encode', function(done) {
   });
 
   function isFile(file) {
-    if (file.indexOf('Hyperty') !== -1 || file.indexOf('ProtoStub') !== -1 || file.indexOf('DataSchema') !== -1){
+    if (file.indexOf('Hyperty') !== -1 || file.indexOf('ProtoStub') !== -1 || file.indexOf('DataSchema') !== -1 || (file.indexOf('runtime') !== -1 || file.indexOf('Runtime') !== -1)) {
       return fs.statSync('resources/' + file).isFile();
     }
   }
