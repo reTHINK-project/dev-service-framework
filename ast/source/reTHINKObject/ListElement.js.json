@@ -1,0 +1,101 @@
+{
+  "type": "Program",
+  "start": 0,
+  "end": 134,
+  "loc": {
+    "start": {
+      "line": 1,
+      "column": 0
+    },
+    "end": {
+      "line": 4,
+      "column": 90
+    }
+  },
+  "sourceType": "module",
+  "body": [],
+  "leadingComments": [
+    {
+      "type": "Block",
+      "value": "*\r\n * Created by amo on 16/11/2015.\r\n ",
+      "start": 0,
+      "end": 42,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 3,
+          "column": 3
+        }
+      },
+      "range": [
+        0,
+        42
+      ]
+    },
+    {
+      "type": "CommentLine",
+      "value": " Probably not going to be needed. Not clearly defined on the specification what this is.",
+      "start": 44,
+      "end": 134,
+      "loc": {
+        "start": {
+          "line": 4,
+          "column": 0
+        },
+        "end": {
+          "line": 4,
+          "column": 90
+        }
+      },
+      "range": [
+        44,
+        134
+      ]
+    }
+  ],
+  "innerComments": [
+    {
+      "type": "Block",
+      "value": "*\r\n * Created by amo on 16/11/2015.\r\n ",
+      "start": 0,
+      "end": 42,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 3,
+          "column": 3
+        }
+      },
+      "range": [
+        0,
+        42
+      ]
+    },
+    {
+      "type": "CommentLine",
+      "value": " Probably not going to be needed. Not clearly defined on the specification what this is.",
+      "start": 44,
+      "end": 134,
+      "loc": {
+        "start": {
+          "line": 4,
+          "column": 0
+        },
+        "end": {
+          "line": 4,
+          "column": 90
+        }
+      },
+      "range": [
+        44,
+        134
+      ]
+    }
+  ]
+}
