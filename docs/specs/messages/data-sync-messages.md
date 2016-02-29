@@ -151,7 +151,7 @@ Message sent by the Reporter Runtime Sync Manager to invited Observer Hyperty In
 "type" : "create",
 "from" : "<ObjectURL>/subscription",
 "to" : "hyperty://<sp-domain>/<hyperty-observer-instance-identifier>",
-"body" : { "value" : "<json object >", "schema" : "hyperty-catalogue://<sp-domain>/dataObjectSchema/<schema-identifier>" }
+"body" : { "source" : "hyperty://<sp-domain>/<hyperty-instance-identifier>", "value" : "<json object >", "schema" : "hyperty-catalogue://<sp-domain>/dataObjectSchema/<schema-identifier>" }
 ```
 
 ###### Response
@@ -232,7 +232,7 @@ Message sent by Observer Runtime Sync Manager to Data Object Subscription Handle
 200OK Response Message sent back by Data Object Subscription Handler to Observer Runtime Sync Manager.
 
 ```
-"id" : "8"
+"id" : "8",
 "type" : "response",
 "from" : "<ObjectURL>/subscription",
 "to" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
