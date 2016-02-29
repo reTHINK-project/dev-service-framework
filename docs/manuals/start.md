@@ -7,6 +7,6 @@ In order to setup your own reTHINK Framework, you should install the following c
 
 -	the [Hyperty Catalogue](https://github.com/reTHINK-project/dev-catalogue)
 -	the [Hyperty Domain Registry](https://github.com/reTHINK-project/dev-registry-domain)
--	the [Vertx Message Node](https://github.com/reTHINK-project/dev-msg-node-vertx). Other Message Nodes will be available including for [Matrix](https://matrix.org/) and for [NodeJS](https://nodejs.org/en/).
+-	any of the three available Message Nodes: the [Vertx Message Node](https://github.com/reTHINK-project/dev-msg-node-vertx), [Matrix](https://matrix.org/) or [NodeJS](https://nodejs.org/en/).
 
 Very soon a live public reTHINK environment will be provided, to let you publish and try your Hyperties or Apps without the need to install anything.
