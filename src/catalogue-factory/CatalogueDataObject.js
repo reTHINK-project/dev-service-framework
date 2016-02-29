@@ -9,15 +9,17 @@ class CatalogueDataObject {
      * etc) enabling the same object to be stored and discovered in different Catalogues. That means, guid corresponds to
      * [resource-type-id] per BNF of Resource Path. Couldn't we have problems with too long URL paths?
      * @param type - indicates the type of Catalogue Data Object e.g. Hyperty, ProtocolStub, etc
+     * @param {string} version - Indicates the version of Catalogue Data
      * @param objectName - human-understandable name of the catalogue object e.g. "My Awesome Hyperty"
      * @param description - description of the source package
      * @param language - the programming language used in the SourcePackage.SourceCode
      * @param sourcePackageURL - A string containing the URL from where the source code package of the corresponding
      * catalogue object, e.g. deployable packages containing executable code for Hyperties or ProtoStubs, can be downloaded
      */
-    constructor(guid, type, objectName, description, language, sourcePackageURL) {
+    constructor(guid, type, version, objectName, description, language, sourcePackageURL) {
         this._guid = guid;
         this._type = type;
+        this._version = version;
         this._objectName = objectName;
         this._description = description;
         this._language = language;
@@ -34,6 +36,10 @@ class CatalogueDataObject {
 
     get type() {
         return this._type;
+    }
+
+    get version() {
+        return this._version;
     }
 
     get objectName() {
@@ -84,6 +90,12 @@ class CatalogueDataObject {
     set type(type) {
         if (type)
             this._type = type;
+    }
+
+    set version(version) {
+        if (version) {
+            this._version = version;
+        }
     }
 
     set objectName(objectName) {

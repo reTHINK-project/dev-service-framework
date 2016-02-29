@@ -6,9 +6,9 @@ import CatalogueDataObject from './CatalogueDataObject';
 import RuntimeProtocolCapabilityType from './HypertyRuntimeDescriptor';
 
 class ProtocolStubDescriptor extends CatalogueDataObject {
-    constructor(guid, type, objectName, description, language, sourcePackageURL, messageSchemas, configuration,
+    constructor(guid, type, version, objectName, description, language, sourcePackageURL, messageSchemas, configuration,
                 constraints) {
-        super(guid, type, objectName, description, language, sourcePackageURL);
+        super(guid, type, version, objectName, description, language, sourcePackageURL);
 
         this._messageSchemas = messageSchemas;
         if (configuration)

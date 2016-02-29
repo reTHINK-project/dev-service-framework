@@ -34,28 +34,31 @@ class CatalogueDataObjectFactory extends RethinkObject {
      * Create CatalogueDataObject
      * @param {string} guid - Catalogue Global Unique identifier of the Catalogue Object
      * @param {CatalogueObjectType} type - Indicates the type of Catalogue Data Object
+     * @param {string} version - Indicates the version of Catalogue Data
      * @param {string} objectName - Human-understandable name of the catalogue object
      * @param {string} description
      * @param {DataObjectSourceLanguage} language - Programming language used in the SourcePackage
      * @param {string} sourcePackageURL - URL from where the source code package of the corresponding catalogue object can be downloaded.
      * @returns {CatalogueDataObject}
      */
-    createCatalogueDataObject(guid, type, objectName, description, language, sourcePackageURL) {
+    createCatalogueDataObject(guid, type, version, objectName, description, language, sourcePackageURL) {
         if (
             typeof guid === "undefined"
             || typeof type === "undefined"
+            || typeof version === "undefined"
             || typeof objectName === "undefined"
             || typeof description === "undefined"
             || typeof language === "undefined"
             || typeof sourcePackageURL === "undefined"
         )
             throw new Error("Invalid parameters!");
-        return new CatalogueDataObject(guid, type, objectName, description, language, sourcePackageURL);
+        return new CatalogueDataObject(guid, type, version, objectName, description, language, sourcePackageURL);
     }
 
     /**
      * Create HypertyDescriptor
      * @param {string} guid - Catalogue Global Unique identifier of the Catalogue Object
+     * @param {string} version - Indicates the version of Catalogue Data
      * @param {string} objectName - Human-understandable name of the catalogue object
      * @param {string} description
      * @param {DataObjectSourceLanguage} language - Programming language used in the SourcePackage
@@ -64,10 +67,11 @@ class CatalogueDataObjectFactory extends RethinkObject {
      * @param {URL.URLList} dataObjects - Defines the Data Object Schemas supported by the Hyperty through a list of Catalogue URLs from where these schemas can be reached.
      * @returns {HypertyDescriptor}
      */
-    createHypertyDescriptorObject(guid, objectName, description, language, sourcePackageURL, hypertyType,
+    createHypertyDescriptorObject(guid, version, objectName, description, language, sourcePackageURL, hypertyType,
                                   dataObjects) {
         if (
             typeof guid === "undefined"
+            || typeof version === "undefined"
             || typeof objectName === "undefined"
             || typeof description === "undefined"
             || typeof language === "undefined"
@@ -76,13 +80,14 @@ class CatalogueDataObjectFactory extends RethinkObject {
             || typeof dataObjects === "undefined"
         )
             throw new Error("Invalid parameters!");
-        return new HypertyDescriptor(guid, CatalogueObjectType.HYPERTY, objectName, description,
+        return new HypertyDescriptor(guid, CatalogueObjectType.HYPERTY, version, objectName, description,
             language, sourcePackageURL, hypertyType, dataObjects);
     }
 
     /**
      * Create ProtocolStubDescriptor
      * @param {string} guid - Catalogue Global Unique identifier of the Catalogue Object
+     * @param {string} version - Indicates the version of Catalogue Data
      * @param {string} objectName - Human-understandable name of the catalogue object
      * @param {string} description
      * @param {DataObjectSourceLanguage} language - Programming language used in the SourcePackage
@@ -92,10 +97,11 @@ class CatalogueDataObjectFactory extends RethinkObject {
      * @param constraints - Describes capabilities required from the Hyperty Runtime in order to be able to execute the ProtocolStub
      * @returns {ProtocolStubDescriptor}
      */
-    createProtoStubDescriptorObject(guid, objectName, description, language, sourcePackageURL, messageSchemas,
+    createProtoStubDescriptorObject(guid, version, objectName, description, language, sourcePackageURL, messageSchemas,
                                     configuration, constraints) {
         if (
             typeof guid === "undefined"
+            || typeof version === "undefined"
             || typeof objectName === "undefined"
             || typeof description === "undefined"
             || typeof language === "undefined"
@@ -105,13 +111,14 @@ class CatalogueDataObjectFactory extends RethinkObject {
             || typeof constraints === "undefined"
         )
             throw new Error("Invalid parameters!");
-        return new ProtocolStubDescriptor(guid, CatalogueObjectType.PROTOSTUB, objectName, description,
+        return new ProtocolStubDescriptor(guid, CatalogueObjectType.PROTOSTUB, version, objectName, description,
             language, sourcePackageURL, messageSchemas, configuration, constraints);
     }
 
     /**
      * Create HypertyRuntimeDescriptor
      * @param {string} guid - Catalogue Global Unique identifier of the Catalogue Object
+     * @param {string} version - Indicates the version of Catalogue Data
      * @param {string} objectName - Human-understandable name of the catalogue object
      * @param {string} description
      * @param {DataObjectSourceLanguage} language - Programming language used in the SourcePackage
@@ -121,10 +128,11 @@ class CatalogueDataObjectFactory extends RethinkObject {
      * @param protocolCapabilities - Supported capabilities to execute Protocol Stubs
      * @returns {HypertyRuntimeDescriptor}
      */
-    createHypertyRuntimeDescriptorObject(guid, objectName, description, language, sourcePackageURL,
+    createHypertyRuntimeDescriptorObject(guid, version, objectName, description, language, sourcePackageURL,
                                          runtimeType, hypertyCapabilities, protocolCapabilities) {
         if (
             typeof guid === "undefined"
+            || typeof version === "undefined"
             || typeof objectName === "undefined"
             || typeof description === "undefined"
             || typeof language === "undefined"
@@ -135,13 +143,14 @@ class CatalogueDataObjectFactory extends RethinkObject {
         )
             throw new Error("Invalid parameters!");
 
-        return new HypertyRuntimeDescriptor(guid, CatalogueObjectType.HYPERTY_RUNTIME, objectName,
+        return new HypertyRuntimeDescriptor(guid, CatalogueObjectType.HYPERTY_RUNTIME, version, objectName,
             description, language, sourcePackageURL, runtimeType, hypertyCapabilities, protocolCapabilities);
     }
 
     /**
      * Create PolicyEnforcerDescriptor
      * @param {string} guid - Catalogue Global Unique identifier of the Catalogue Object
+     * @param {string} version - Indicates the version of Catalogue Data
      * @param {string} objectName - Human-understandable name of the catalogue object
      * @param {string} description
      * @param {DataObjectSourceLanguage} language - Programming language used in the SourcePackage
@@ -150,10 +159,11 @@ class CatalogueDataObjectFactory extends RethinkObject {
      * @param policies
      * @returns {PolicyEnforcerDescriptor}
      */
-    createPolicyEnforcerDescriptorObject(guid, objectName, description, language, sourcePackageURL, configuration,
+    createPolicyEnforcerDescriptorObject(guid, version, objectName, description, language, sourcePackageURL, configuration,
                                          policies) {
         if (
             typeof guid === "undefined"
+            || typeof version === "undefined"
             || typeof objectName === "undefined"
             || typeof description === "undefined"
             || typeof language === "undefined"
@@ -163,22 +173,24 @@ class CatalogueDataObjectFactory extends RethinkObject {
         )
             throw new Error("Invalid parameters!");
 
-        return new PolicyEnforcerDescriptor(guid, CatalogueObjectType.POLICY_ENFORCER, objectName,
+        return new PolicyEnforcerDescriptor(guid, CatalogueObjectType.POLICY_ENFORCER, version, objectName,
             description, language, sourcePackageURL, configuration, policies);
     }
 
     /**
      * Create DataObjectSchema
      * @param {string} guid - Catalogue Global Unique identifier of the Catalogue Object
+     * @param {string} version - Indicates the version of Catalogue Data
      * @param {string} objectName - Human-understandable name of the catalogue object
      * @param {string} description
      * @param {DataObjectSourceLanguage} language - Programming language used in the SourcePackage
      * @param {string} sourcePackageURL - URL from where the source code package of the corresponding catalogue object can be downloaded.
      * @returns {DataObjectSchema}
      */
-    createDataObjectSchema(guid, objectName, description, language, sourcePackageURL) {
+    createDataObjectSchema(guid, version, objectName, description, language, sourcePackageURL) {
         if (
             typeof guid === "undefined"
+            || typeof version === "undefined"
             || typeof objectName === "undefined"
             || typeof description === "undefined"
             || typeof language === "undefined"
@@ -186,7 +198,7 @@ class CatalogueDataObjectFactory extends RethinkObject {
         )
             throw new Error("Invalid parameters!");
 
-        return new DataObjectSchema(guid, CatalogueObjectType.DATA_SCHEMA, objectName, description, language, sourcePackageURL);
+        return new DataObjectSchema(guid, CatalogueObjectType.DATA_SCHEMA, version, objectName, description, language, sourcePackageURL);
     }
 
     /**
