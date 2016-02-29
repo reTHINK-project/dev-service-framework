@@ -90,7 +90,7 @@ class Syncher {
          let objURL = reply.body.resource;
 
          //reporter creation accepted
-         let newObj = new DataObjectReporter(_this._owner, objURL, schema, _this._bus, 'on', initialData, reply.body.children);
+         let newObj = new DataObjectReporter(_this._owner, objURL, schema, _this._bus, 'on', initialData, reply.body.childrenResources);
          _this._reporters[objURL] = newObj;
 
          resolve(newObj);
