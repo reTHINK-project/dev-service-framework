@@ -78,6 +78,7 @@ Response.id = Request.id
 The Request.id MUST be incremented every time a new Request message is created.
 
 ### APIs
+#### The ProtoStub API
 
 #### The ProtoStub API
 
@@ -399,16 +400,22 @@ _onWSClose() { this._sendStatus("disconnected"); }
 
 Protocol stubs are tightly integrated with the messaging bus of the runtime. This integration is bi-directional. A reference to the messaging bus is provided as second paramenter of the stub constructor.
 
-In order to receive messages from the runtime's messaging bus, the stub has to add itself as a listener. This can be done directly in the stubs constructor by adding such a code snippet:`
+In order to receive messages from the runtime's messaging bus, the stub has to add itself as a listener. This can be done directly in the stubs constructor by adding such a code snippet:
+
+```
 this._bus.addListener('*', (msg) => {
     this._assumeOpen = true;
     this._sendWSMsg(msg);
 });
-` Whenever now the stub receives a message via this listener callback it sends it forward (in this case via a Websocke connection) to its MN.
+```
 
-For every message that is received from the MN, the stub forwards this message to the bus by using its postMessage method like shown here:`
+Whenever now the stub receives a message via this listener callback it sends it forward (in this case via a Websocke connection) to its MN.
+
+For every message that is received from the MN, the stub forwards this message to the bus by using its postMessage method like shown here:
+
+```
 // parse msg and forward it locally to the runtimes messaging bus
 _onWSMessage(msg) {
   this._bus.postMessage(JSON.parse(msg.data));
 }
-`
+```

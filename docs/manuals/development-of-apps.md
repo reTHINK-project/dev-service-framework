@@ -7,6 +7,38 @@ A Hyperty is a module of software logic that is dynamically deployed in web runt
 
 
 ### How to use Hyperties
+\* Here we can explain how hyperties are being used based on this example from PTIN: https://github.com/reTHINK-project/dev-service-framework/blob/develop/example/demo.js\*
+
+
+The usage of Hyperties is very simple and similar to the usage of any common Javascript library:
+
+1- the App has to ensure the runtime is instantiated:
+
+```
+let runtime = new RuntimeLoader('hyperty-catalogue://example.com/.well-known/hyperty.runtime/default');
+```
+
+2- then load and deploy the required Hyperty from the Catalogue
+
+```
+runtime.requireHyperty('hyperty-catalogue://example.com/.well-known/hyperty/HelloWorldReporter').then(
+
+  startUsingHpertyDeployed;
+
+  ).catch(function(reason) {
+  errorMessage(reason);
+});
+```
+
+3- and invoke Hyperty functions from its API as a common Javascript Lib:
+
+```
+startUsingHpertyDeployed(hyperty){
+  hyperty.instance.hello();
+}
+
+```
+
 
 
 The usage of Hyperties is very simple and similar to the usage of any common Javascript library:
