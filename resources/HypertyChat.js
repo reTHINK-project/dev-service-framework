@@ -2737,8 +2737,8 @@ var DataObjectReporter = (function (_DataObject) {
     _get(Object.getPrototypeOf(DataObjectReporter.prototype), 'constructor', this).call(this, owner, url, schema, bus, initialStatus, initialData, children);
     var _this = this;
 
-    bus.addListener(owner, function (msg) {
-      if (msg.type === 'response' && msg.body.source === url) {
+    bus.addListener(url, function (msg) {
+      if (msg.type === 'response') {
         _this._onResponse(msg);
       }
     });
@@ -2823,6 +2823,7 @@ var DataObjectReporter = (function (_DataObject) {
       };
 
       if (_this._onSubscriptionHandler) {
+        console.log('SUBSCRIPTION-EVENT: ', event);
         _this._onSubscriptionHandler(event);
       }
     }
@@ -2842,6 +2843,7 @@ var DataObjectReporter = (function (_DataObject) {
       };
 
       if (_this._onSubscriptionHandler) {
+        console.log('UN-SUBSCRIPTION-EVENT: ', event);
         _this._onSubscriptionHandler(event);
       }
     }
@@ -2857,6 +2859,7 @@ var DataObjectReporter = (function (_DataObject) {
       };
 
       if (_this._onResponseHandler) {
+        console.log('RESPONSE-EVENT: ', event);
         _this._onResponseHandler(event);
       }
     }
@@ -3467,10 +3470,13 @@ var Syncher = (function () {
     value: function _onRemoteCreate(msg) {
       var _this = this;
 
+      //remove "/subscription" from the URL
+      var resource = msg.from.slice(0, -13);
+
       var event = {
         type: msg.type,
-        from: msg.from,
-        url: msg.body.resource,
+        from: msg.body.source,
+        url: resource,
         schema: msg.body.schema,
         value: msg.body.value,
         identity: msg.body.idToken,
@@ -3484,12 +3490,13 @@ var Syncher = (function () {
           //send ack response message
           _this._bus.postMessage({
             id: msg.id, type: 'response', from: msg.to, to: msg.from,
-            body: { code: lType, source: msg.body.resource }
+            body: { code: lType }
           });
         }
       };
 
       if (_this._onNotificationHandler) {
+        console.log('NOTIFICATION-EVENT: ', event);
         _this._onNotificationHandler(event);
       }
     }
