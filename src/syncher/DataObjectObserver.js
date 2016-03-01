@@ -47,7 +47,7 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
     _this._version = initialVersion;
 
     //add listener for objURL
-    bus.addListener(url, (msg) => {
+    bus.addListener(url + '/changes', (msg) => {
       console.log('DataObjectObserver-' + url + '-RCV: ', msg);
       _this._changeObject(_this._syncObj, msg);
     });

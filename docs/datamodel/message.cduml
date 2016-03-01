@@ -16,7 +16,9 @@ package Message <<Rect>> {
 		schema ?: URL.HypertyCatalogueURL
 		idToken ?: RethinkCore.Identity.JWT
 		accessToken ?: RethinkCore.Identity.JWT
-		assertedIdentity ?: RethinkCore.Identity.Identity
+		identity ?: RethinkCore.Identity.Identity
+		assertedIdentity ?: boolean
+		via ?: URL.URLList
 	}
 
 	class CreateMessageBody {
@@ -66,20 +68,20 @@ package Message <<Rect>> {
 	}
 
 	class ExecuteMessageBody {
-		executable : string
-		configuration ?: string
+		method : string
+		params ?: array
 	}
 
 	class MessageType {
-	  	CREATE
-	  	UPDATE
-	  	DELETE
-	  	READ
-	  	SUBSCRIBE
-	  	UNSUBSCRIBE
-	  	RESPONSE
-			FORWARD
-			EXECUTE
+			create
+			update
+			delete
+			read
+			subscribe
+			unsubscribe
+			response
+			forward
+			execute
 	}
 
 	class AttributeType {

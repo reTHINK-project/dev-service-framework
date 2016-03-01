@@ -26,9 +26,9 @@ One or more [URLs](../address/readme.md) of Message recipients. According to the
 
 ### Message Body
 
-Optionaly, all message bodies exchanged between different Runtime Messge BUS can contain JWT tokens for Access Control for Identity Assertion purposes that are inserted by the Identity Module before the message is routed to protostubs.
+Optionally, message bodies can contain JWT tokens for Access Control or for Identity Assertion purposes. See [here](../../specs/dynamic-view/identity-management/user-identity-assertion.md) for more details.
 
-When these message bodies reach the destination MessageBUS, the JWT tokens are decoded and verified by the Identity Module. The result of this process (if successful) is inserted in the MessageBody as assertedIdentity objects and the JWT tokens removed, before the message is delivered to the Hyperty. AssertedIdentity is compliant with [User Identity Data Model](https://github.com/reTHINK-project/architecture/tree/master/docs/datamodel/user-identity).
+The "MessageBody.via" attribute contains a list of all Protostub addresses (Protostub) that the message has been passed through. It is used to prevent infinite cycles in the Hyperty Messaging Framework.
 
 #### CreateMessageBody
 
@@ -80,13 +80,21 @@ Defines the criteria to be used for search purposes. Syntax used to define the c
 
 #### UpdateMessageBody
 
-##### attribute
+##### attribute (optional)
 
-Identifies the attribute in the Object that is updated (optional)
+Identifies the attribute in the Object that is updated
 
 ##### value
 
 Contains the updated value object in JSON format.
+
+##### attributeType (optional)
+
+To indicate whether it is an array that is updated.
+
+##### operation (optional)
+
+Operation to be performed in an array: add or remove
 
 #### DeleteMessageBody
 
@@ -100,6 +108,10 @@ Identifies the attribute in the Object that is deleted (optional)
 
 Contains forwarded message.
 
+#### ExecuteMessageBody
+
+Contains the name of method to be invoked and an array and an Array of objects to be passed as parameters to the defined method. This is compliant with [JSON-RPC Spec](http://www.jsonrpc.org/specification).
+
 ### Procedures
 
 #### Request - Response transactions
@@ -111,5 +123,3 @@ A Response to a Request message should follow this rule:
 -	Response.id = Request.id
 
 It should be note, the Request.id MUST be incremented every time a new Request message is created.
-
-

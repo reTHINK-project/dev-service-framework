@@ -45,8 +45,8 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     super(owner, url, schema, bus, initialStatus, initialData, children);
     let _this = this;
 
-    bus.addListener(owner, (msg) => {
-      if (msg.type === 'response' && msg.body.source === url) {
+    bus.addListener(url, (msg) => {
+      if (msg.type === 'response') {
         _this._onResponse(msg);
       }
     });
@@ -123,6 +123,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     };
 
     if (_this._onSubscriptionHandler) {
+      console.log('SUBSCRIPTION-EVENT: ', event);
       _this._onSubscriptionHandler(event);
     }
   }
@@ -141,6 +142,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     };
 
     if (_this._onSubscriptionHandler) {
+      console.log('UN-SUBSCRIPTION-EVENT: ', event);
       _this._onSubscriptionHandler(event);
     }
   }
@@ -155,6 +157,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     };
 
     if (_this._onResponseHandler) {
+      console.log('RESPONSE-EVENT: ', event);
       _this._onResponseHandler(event);
     }
   }
