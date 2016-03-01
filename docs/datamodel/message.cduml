@@ -19,6 +19,7 @@ package Message <<Rect>> {
 		identity ?: RethinkCore.Identity.Identity
 		assertedIdentity ?: boolean
 		via ?: URL.URLList
+		source ?: URL.URL
 	}
 
 	class CreateMessageBody {
@@ -41,7 +42,6 @@ package Message <<Rect>> {
 		code : ResponseCode
 		description?: string
 		value ?: string
-		source ?: URL.URL
 	}
 	note bottom : to be compliant with RFC7231
 
@@ -56,11 +56,11 @@ package Message <<Rect>> {
 	}
 
 	class SubscribeMessageBody {
-		subscriber ?: URL.URL
+		subscribe ?: URL.URL[]
 	}
 
 	class UnsubscribeMessageBody {
-		subscriber ?: URL.URL
+		unsubscribe ?: URL.URL[]
 	}
 
 	class FowardMessageBody {
