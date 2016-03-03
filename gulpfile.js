@@ -32,6 +32,29 @@ var gulpif = require('gulp-if');
 
 var pkg = require('./package.json');
 
+var license = '/**\n' +
+'* Copyright 2016 PT Inovação e Sistemas SA\n' +
+'* Copyright 2016 INESC-ID\n' +
+'* Copyright 2016 QUOBIS NETWORKS SL\n' +
+'* Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V\n' +
+'* Copyright 2016 ORANGE SA\n' +
+'* Copyright 2016 Deutsche Telekom AG\n' +
+'* Copyright 2016 Apizee\n' +
+'* Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN\n' +
+'*\n' +
+'* Licensed under the Apache License, Version 2.0 (the "License");\n' +
+'* you may not use this file except in compliance with the License.\n' +
+'* You may obtain a copy of the License at\n' +
+'*\n' +
+'*   http://www.apache.org/licenses/LICENSE-2.0\n' +
+'*\n' +
+'* Unless required by applicable law or agreed to in writing, software\n' +
+'* distributed under the License is distributed on an "AS IS" BASIS,\n' +
+'* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n' +
+'* See the License for the specific language governing permissions and\n' +
+'* limitations under the License.\n' +
+'**/\n\n';
+
 gulp.task('license', function() {
 
   var clean = argv.clean;
@@ -43,31 +66,6 @@ gulp.task('license', function() {
 });
 
 function prependLicense(clean) {
-
-  var license = `/**
-* Copyright 2016 PT Inovação e Sistemas SA
-* Copyright 2016 INESC-ID
-* Copyright 2016 QUOBIS NETWORKS SL
-* Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
-* Copyright 2016 ORANGE SA
-* Copyright 2016 Deutsche Telekom AG
-* Copyright 2016 Apizee
-* Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*   http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-**/
-
-`;
 
   return through.obj(function(file, enc, cb) {
 
@@ -93,38 +91,60 @@ function prependLicense(clean) {
 
 }
 
+function dist(debug) {
+
+  if (!debug) debug = false;
+
+  return through.obj(function(file, enc, cb) {
+
+    if (file.isNull()) {
+      return cb(new Error('Fil is null'));
+    }
+
+    if (file.isStream()) {
+      return cb(new Error('Streaming not supported'));
+    }
+
+    var filename = path.basename(file.path, '.js');
+
+    console.log('Make a distribution file from', filename + '.js');
+
+    return browserify({
+      entries: [file.path],
+      standalone: filename,
+      debug: debug
+    }).transform(babel, {compact: debug, optional: 'runtime'})
+    .bundle()
+    .on('error', function(err) {
+      console.error(err);
+      this.emit('end');
+    })
+    .pipe(source(filename + '.js'))
+    .pipe(buffer())
+    .pipe(gulpif(!debug, uglify()))
+    .pipe(gulpif(!debug, insert.prepend(license + '// Distribution file for {{package}} \n// version: {{version}}\n\n')))
+    .pipe(gulpif(!debug, replace('{{version}}', pkg.version)))
+    .pipe(gulpif(!debug, replace('{{package}}', filename + '.js')))
+    .pipe(gulp.dest(__dirname + '/dist'))
+    .on('end', function() {
+      console.log('Distribution done;\n');
+      cb();
+    });
+  });
+
+}
+
 gulp.task('dist', function() {
 
-  return browserify('./src/service-framework.js', {
-    standalone: 'service-framework', debug: false}
-  ).transform(babel, {compact: false, optional: 'runtime'})
-  .bundle()
-  .on('error', function(err) {
-    console.error(err);
-    this.emit('end');
-  })
-  .pipe(source('service-framework.js'))
-  .pipe(buffer())
-  .pipe(uglify())
-  .pipe(insert.prepend('// Service Framework \n\n// version: {{version}}\n\n'))
-  .pipe(replace('{{version}}', pkg.version))
-  .pipe(gulp.dest('./dist'));
+  return gulp.src(['src/*.js'])
+  .pipe(dist());
 
 });
 
 gulp.task('build', function() {
 
-  return browserify('./src/service-framework.js', {
-    standalone: 'service-framework',
-    debug: true
-  }).transform(babel, {compact: false, optional: 'runtime'})
-  .bundle()
-  .on('error', function(err) {
-    console.error(err);
-    this.emit('end');
-  })
-  .pipe(source('service-framework.js'))
-  .pipe(gulp.dest('./dist'));
+  return gulp.src(['src/*.js'])
+  .pipe(dist(true));
 
 });
 
@@ -136,20 +156,16 @@ gulp.task('build', function() {
 */
 function compile(file, destination, cb) {
 
-  var filename = file;
-  var path = destination;
-
-  if (!filename) {
+  if (!file) {
     cb(new Error('No such file or directory'));
   }
 
-  var splitIndex = filename.lastIndexOf('/') + 1;
-  var name = filename.substr(splitIndex).replace('.js', '');
+  var fileObject = path.parse(file);
 
-  console.log('Converting ' + filename + ' on ' + path + ' to ES5');
+  console.log('Converting ' + fileObject.base + ' on ' + fileObject.dir + ' to ES5');
 
   return browserify({
-    entries: [filename],
+    entries: [file],
     standalone: 'activate',
     debug: false
   }).transform(babel, {global: true, compact: false})
@@ -157,10 +173,10 @@ function compile(file, destination, cb) {
   .on('error', function(err) {
     console.error(err);
   })
-  .pipe(source(name + '.js'))
-  .pipe(gulp.dest(path))
+  .pipe(source(fileObject.base))
+  .pipe(gulp.dest(destination))
   .pipe(buffer())
-  .pipe(encode(name, 'Hyperties'))
+  .pipe(encode(fileObject.name, 'Hyperties'))
   .pipe(source('Hyperties.json'))
   .pipe(gulp.dest('resources/descriptors/'))
   .on('end', function() {
@@ -174,15 +190,16 @@ gulp.task('watch-hyperty', function(cb) {
   var destination = argv.dest;
 
   gulp.watch(['src/hyperty-connector/*.js', 'src/hyperty-chat/*.js'], function(event) {
-    var pathSplit = event.path.split('/');
+
+    var pathSplit = event.path.split(path.sep); // on windows is backslash;
     var dir = pathSplit[pathSplit.length - 2];
 
     switch (dir) {
       case 'hyperty-chat':
-        return compile('src/' + dir + '/HypertyChat.js', destination, cb);
+        return compile(__dirname + '/src/' + dir + '/HypertyChat.js', destination, cb);
 
       case 'hyperty-connector':
-        return compile('src/' + dir + '/HypertyConnector.js', destination, cb);
+        return compile(__dirname + '/src/' + dir + '/HypertyConnector.js', destination, cb);
     }
 
   });
@@ -269,19 +286,9 @@ function encode(filename, descriptorName, configuration, isDefault) {
 
 function resource(file, configuration, isDefault) {
 
-  var filename = file;
-  var splitIndex = filename.lastIndexOf('/') + 1;
-  var extension = filename.substr(filename.lastIndexOf('.') + 1);
-
-  switch (extension) {
-    case 'js':
-      filename = filename.substr(splitIndex).replace('.js', '');
-      break;
-    case 'json':
-      filename = filename.substr(splitIndex).replace('.json', '');
-      break;
-  }
-
+  var fileObject = path.parse(file);
+  var filename = fileObject.name;
+  var extension = fileObject.ext;
   var descriptorName;
   if (filename.indexOf('Hyperty') !== -1) {
     descriptorName = 'Hyperties';
@@ -293,16 +300,16 @@ function resource(file, configuration, isDefault) {
     descriptorName = 'Runtimes';
   }
 
-  console.log('DATA:', descriptorName, filename);
+  console.log('DATA:', descriptorName, filename, extension);
 
-  if (extension === 'js') {
+  if (extension === '.js') {
     return gulp.src(['resources/' + filename + '.js'])
     .pipe(gulp.dest('resources/'))
     .pipe(buffer())
     .pipe(encode(filename, descriptorName, configuration, isDefault))
     .pipe(source(descriptorName + '.json'))
     .pipe(gulp.dest('resources/descriptors/'));
-  } else if (extension === 'json') {
+  } else if (extension === '.json') {
 
     return gulp.src(['resources/' + filename + '.json'])
     .pipe(gulp.dest('resources/'))
