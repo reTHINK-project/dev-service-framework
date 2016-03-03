@@ -8,6 +8,7 @@ let FilterType = {ANY: 'any', START: 'start', EXACT: 'exact'};
  */
 class DataObjectObserver extends DataObject /* implements SyncStatus */ {
   /* private
+  _changeListener: MsgListener
 
   ----event handlers----
   _filters: {<filter>: {type: <start, exact>, callback: <function>} }
@@ -17,14 +18,14 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
    * @ignore
    * Should not be used directly by Hyperties. It's called by the Syncher.subscribe method
    */
-  constructor(owner, url, schema, bus, initialStatus, initialData, children, initialVersion) {
-    super(owner, url, schema, bus, initialStatus, initialData, children);
+  constructor(syncher, url, schema, initialStatus, initialData, children, initialVersion) {
+    super(syncher, url, schema, initialStatus, initialData, children);
     let _this = this;
 
     _this._version = initialVersion;
 
     //add listener for objURL
-    bus.addListener(url + '/changes', (msg) => {
+    _this._changeListener = _this._bus.addListener(url + '/changes', (msg) => {
       console.log('DataObjectObserver-' + url + '-RCV: ', msg);
       _this._changeObject(_this._syncObj, msg);
     });
@@ -34,6 +35,21 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
     });
 
     _this._filters = {};
+  }
+
+  /**
+   * Release internal used listeners
+   */
+  release() {
+    this._changeListener.remove();
+    super.release();
+  }
+
+  unsubscribe() {
+    let _this = this;
+
+    _this.release();
+    _this._syncher._unsubscribe(_this.url);
   }
 
   /**

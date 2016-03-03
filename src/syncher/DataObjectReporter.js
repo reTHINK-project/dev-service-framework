@@ -18,11 +18,11 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
    * @ignore
    * Should not be used directly by Hyperties. It's called by the Syncher.create method
    */
-  constructor(owner, url, schema, bus, initialStatus, initialData, children) {
-    super(owner, url, schema, bus, initialStatus, initialData, children);
+  constructor(syncher, url, schema, initialStatus, initialData, children) {
+    super(syncher, url, schema, initialStatus, initialData, children);
     let _this = this;
 
-    bus.addListener(url, (msg) => {
+    _this._bus.addListener(url, (msg) => {
       if (msg.type === 'response') {
         _this._onResponse(msg);
       }
