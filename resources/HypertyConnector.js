@@ -529,6 +529,29 @@ if (typeof module !== 'undefined') {
   }
 
 },{}],2:[function(require,module,exports){
+/**
+* Copyright 2016 PT Inovação e Sistemas SA
+* Copyright 2016 INESC-ID
+* Copyright 2016 QUOBIS NETWORKS SL
+* Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
+* Copyright 2016 ORANGE SA
+* Copyright 2016 Deutsche Telekom AG
+* Copyright 2016 Apizee
+* Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*   http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+**/
+
 /* jshint undef: true */
 /* globals RTCPeerConnection */
 /* globals RTCSessionDescription */
@@ -1014,6 +1037,29 @@ exports['default'] = ConnectionController;
 module.exports = exports['default'];
 
 },{"../utils/EventEmitter":14,"./connection":4,"./peer":5,"webrtc-adapter-test":1}],3:[function(require,module,exports){
+/**
+* Copyright 2016 PT Inovação e Sistemas SA
+* Copyright 2016 INESC-ID
+* Copyright 2016 QUOBIS NETWORKS SL
+* Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
+* Copyright 2016 ORANGE SA
+* Copyright 2016 Deutsche Telekom AG
+* Copyright 2016 Apizee
+* Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*   http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+**/
+
 /* jshint undef: true */
 
 'use strict';
@@ -1201,6 +1247,29 @@ function activate(hypertyURL, bus, configuration) {
 module.exports = exports['default'];
 
 },{"../hyperty-discovery/HypertyDiscovery":6,"../syncher/Syncher":13,"../utils/EventEmitter":14,"../utils/utils":15,"./ConnectionController":2}],4:[function(require,module,exports){
+/**
+* Copyright 2016 PT Inovação e Sistemas SA
+* Copyright 2016 INESC-ID
+* Copyright 2016 QUOBIS NETWORKS SL
+* Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
+* Copyright 2016 ORANGE SA
+* Copyright 2016 Deutsche Telekom AG
+* Copyright 2016 Apizee
+* Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*   http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+**/
+
 // dataObjectReporter.data = {
 //    status : "connected",
 //    owner : "hyperty://example.com/alicehy",
@@ -1246,6 +1315,29 @@ exports["default"] = connection;
 module.exports = exports["default"];
 
 },{}],5:[function(require,module,exports){
+/**
+* Copyright 2016 PT Inovação e Sistemas SA
+* Copyright 2016 INESC-ID
+* Copyright 2016 QUOBIS NETWORKS SL
+* Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
+* Copyright 2016 ORANGE SA
+* Copyright 2016 Deutsche Telekom AG
+* Copyright 2016 Apizee
+* Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*   http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+**/
+
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1260,6 +1352,29 @@ exports["default"] = peer;
 module.exports = exports["default"];
 
 },{}],6:[function(require,module,exports){
+/**
+* Copyright 2016 PT Inovação e Sistemas SA
+* Copyright 2016 INESC-ID
+* Copyright 2016 QUOBIS NETWORKS SL
+* Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
+* Copyright 2016 ORANGE SA
+* Copyright 2016 Deutsche Telekom AG
+* Copyright 2016 Apizee
+* Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*   http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+**/
+
 /**
 * Core HypertyDiscovery interface
 * Class to allow applications to search for hyperties using the message bus
@@ -1362,6 +1477,29 @@ exports['default'] = HypertyDiscovery;
 module.exports = exports['default'];
 
 },{}],7:[function(require,module,exports){
+/**
+* Copyright 2016 PT Inovação e Sistemas SA
+* Copyright 2016 INESC-ID
+* Copyright 2016 QUOBIS NETWORKS SL
+* Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
+* Copyright 2016 ORANGE SA
+* Copyright 2016 Deutsche Telekom AG
+* Copyright 2016 Apizee
+* Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*   http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+**/
+
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1399,6 +1537,7 @@ var DataObject = (function () {
   _status: on | paused
   _syncObj: SyncData
     _children: { id: DataObjectChild }
+  _childrenListeners: [MsgListener]
     ----event handlers----
   _onAddChildrenHandler: (event) => void
   */
@@ -1408,7 +1547,7 @@ var DataObject = (function () {
    * Should not be used directly by Hyperties. It's called by the Syncher create or subscribe method's
    */
 
-  function DataObject(owner, url, schema, bus, initialStatus, initialData, children) {
+  function DataObject(syncher, url, schema, initialStatus, initialData, children) {
     var _this2 = this;
 
     _classCallCheck(this, DataObject);
@@ -1417,22 +1556,25 @@ var DataObject = (function () {
 
     _this._version = 0;
 
-    _this._owner = owner;
+    _this._syncher = syncher;
+    _this._owner = syncher._owner;
+    _this._bus = syncher._bus;
+
     _this._url = url;
     _this._schema = schema;
-    _this._bus = bus;
     _this._status = initialStatus;
     _this._syncObj = new _SyncObject2['default'](initialData);
 
     _this._childId = 0;
     _this._children = {};
+    _this._childrenListeners = [];
 
     var childBaseURL = url + '/children/';
 
     if (children) {
       children.forEach(function (child) {
         var childURL = childBaseURL + child;
-        bus.addListener(childURL, function (msg) {
+        var listener = _this._bus.addListener(childURL, function (msg) {
           //ignore msg sent by himself
           if (msg.from !== _this2._owner) {
             switch (msg.type) {
@@ -1445,6 +1587,8 @@ var DataObject = (function () {
             }
           }
         });
+
+        _this._childrenListeners.push(listener);
       });
     }
   }
@@ -1486,12 +1630,17 @@ var DataObject = (function () {
     }
 
     /**
-     * @ignore
+     * Release internal used listeners
      */
   }, {
     key: 'release',
-    value: function release() {}
-    //TODO: remove all listeners for this object
+    value: function release() {
+      this._childrenListeners.forEach(function (listener) {
+        listener.remove();
+      });
+
+      //TODO: relase all _this._children ?
+    }
 
     /**
      * Create and add a children to the subscription group.
@@ -1499,7 +1648,6 @@ var DataObject = (function () {
      * @param {JSON} initialData - Initial data of the child
      * @return {Promise<DataObjectChild>} - Return Promise to a new Children.
      */
-
   }, {
     key: 'addChildren',
     value: function addChildren(resource, initialData) {
@@ -1714,6 +1862,29 @@ exports['default'] = DataObject;
 module.exports = exports['default'];
 
 },{"../utils/utils.js":15,"./DataObjectChild":8,"./SyncObject":12}],8:[function(require,module,exports){
+/**
+* Copyright 2016 PT Inovação e Sistemas SA
+* Copyright 2016 INESC-ID
+* Copyright 2016 QUOBIS NETWORKS SL
+* Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
+* Copyright 2016 ORANGE SA
+* Copyright 2016 Deutsche Telekom AG
+* Copyright 2016 Apizee
+* Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*   http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+**/
+
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1756,7 +1927,7 @@ var DataObjectChild /* implements SyncStatus */ = (function () {
     _this._bus = bus;
     _this._syncObj = new _SyncObject2['default'](initialData);
 
-    bus.addListener(owner, function (msg) {
+    _this._listener = bus.addListener(owner, function (msg) {
       if (msg.type === 'response' && msg.id === msgId) {
         console.log('DataObjectChild.onResponse:', msg);
         _this._onResponse(msg);
@@ -1770,12 +1941,21 @@ var DataObjectChild /* implements SyncStatus */ = (function () {
    */
 
   _createClass(DataObjectChild, [{
-    key: 'onChange',
+    key: 'release',
+
+    /**
+     * Release internal used listeners
+     */
+    value: function release() {
+      this._listener.remove();
+    }
 
     /**
      * Register the change listeners sent by the reporter child
      * @param {function(event: MsgEvent)} callback
      */
+  }, {
+    key: 'onChange',
     value: function onChange(callback) {
       this._syncObj.observe(function (event) {
         callback(event);
@@ -1830,6 +2010,29 @@ exports['default'] = DataObjectChild;
 module.exports = exports['default'];
 
 },{"./SyncObject":12}],9:[function(require,module,exports){
+/**
+* Copyright 2016 PT Inovação e Sistemas SA
+* Copyright 2016 INESC-ID
+* Copyright 2016 QUOBIS NETWORKS SL
+* Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
+* Copyright 2016 ORANGE SA
+* Copyright 2016 Deutsche Telekom AG
+* Copyright 2016 Apizee
+* Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*   http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+**/
+
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1861,6 +2064,7 @@ var DataObjectObserver = (function (_DataObject) {
   _inherits(DataObjectObserver, _DataObject);
 
   /* private
+  _changeListener: MsgListener
     ----event handlers----
   _filters: {<filter>: {type: <start, exact>, callback: <function>} }
   */
@@ -1870,16 +2074,16 @@ var DataObjectObserver = (function (_DataObject) {
    * Should not be used directly by Hyperties. It's called by the Syncher.subscribe method
    */
 
-  function DataObjectObserver(owner, url, schema, bus, initialStatus, initialData, children, initialVersion) {
+  function DataObjectObserver(syncher, url, schema, initialStatus, initialData, children, initialVersion) {
     _classCallCheck(this, DataObjectObserver);
 
-    _get(Object.getPrototypeOf(DataObjectObserver.prototype), 'constructor', this).call(this, owner, url, schema, bus, initialStatus, initialData, children);
+    _get(Object.getPrototypeOf(DataObjectObserver.prototype), 'constructor', this).call(this, syncher, url, schema, initialStatus, initialData, children);
     var _this = this;
 
     _this._version = initialVersion;
 
     //add listener for objURL
-    bus.addListener(url + '/changes', function (msg) {
+    _this._changeListener = _this._bus.addListener(url + '/changes', function (msg) {
       console.log('DataObjectObserver-' + url + '-RCV: ', msg);
       _this._changeObject(_this._syncObj, msg);
     });
@@ -1892,12 +2096,30 @@ var DataObjectObserver = (function (_DataObject) {
   }
 
   /**
-   * Register the change listeners sent by the reporter
-   * @param {string} filter - Filter that identifies the field (separeted dot path). Accepts * at the end for a more unrestricted filtering.
-   * @param {function(event: MsgEvent)} callback
+   * Release internal used listeners
    */
 
   _createClass(DataObjectObserver, [{
+    key: 'release',
+    value: function release() {
+      this._changeListener.remove();
+      _get(Object.getPrototypeOf(DataObjectObserver.prototype), 'release', this).call(this);
+    }
+  }, {
+    key: 'unsubscribe',
+    value: function unsubscribe() {
+      var _this = this;
+
+      _this.release();
+      _this._syncher._unsubscribe(_this.url);
+    }
+
+    /**
+     * Register the change listeners sent by the reporter
+     * @param {string} filter - Filter that identifies the field (separeted dot path). Accepts * at the end for a more unrestricted filtering.
+     * @param {function(event: MsgEvent)} callback
+     */
+  }, {
     key: 'onChange',
     value: function onChange(filter, callback) {
       var key = filter;
@@ -1950,6 +2172,29 @@ exports['default'] = DataObjectObserver;
 module.exports = exports['default'];
 
 },{"./DataObject":7}],10:[function(require,module,exports){
+/**
+* Copyright 2016 PT Inovação e Sistemas SA
+* Copyright 2016 INESC-ID
+* Copyright 2016 QUOBIS NETWORKS SL
+* Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
+* Copyright 2016 ORANGE SA
+* Copyright 2016 Deutsche Telekom AG
+* Copyright 2016 Apizee
+* Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*   http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+**/
+
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1992,13 +2237,13 @@ var DataObjectReporter = (function (_DataObject) {
    * Should not be used directly by Hyperties. It's called by the Syncher.create method
    */
 
-  function DataObjectReporter(owner, url, schema, bus, initialStatus, initialData, children) {
+  function DataObjectReporter(syncher, url, schema, initialStatus, initialData, children) {
     _classCallCheck(this, DataObjectReporter);
 
-    _get(Object.getPrototypeOf(DataObjectReporter.prototype), 'constructor', this).call(this, owner, url, schema, bus, initialStatus, initialData, children);
+    _get(Object.getPrototypeOf(DataObjectReporter.prototype), 'constructor', this).call(this, syncher, url, schema, initialStatus, initialData, children);
     var _this = this;
 
-    bus.addListener(url, function (msg) {
+    _this._bus.addListener(url, function (msg) {
       if (msg.type === 'response') {
         _this._onResponse(msg);
       }
@@ -2139,6 +2384,29 @@ module.exports = exports['default'];
 
 },{"../utils/utils.js":15,"./DataObject":7}],11:[function(require,module,exports){
 /**
+* Copyright 2016 PT Inovação e Sistemas SA
+* Copyright 2016 INESC-ID
+* Copyright 2016 QUOBIS NETWORKS SL
+* Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
+* Copyright 2016 ORANGE SA
+* Copyright 2016 Deutsche Telekom AG
+* Copyright 2016 Apizee
+* Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*   http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+**/
+
+/**
  * @access private
  */
 'use strict';
@@ -2218,6 +2486,29 @@ exports['default'] = DataProvisional;
 module.exports = exports['default'];
 
 },{}],12:[function(require,module,exports){
+/**
+* Copyright 2016 PT Inovação e Sistemas SA
+* Copyright 2016 INESC-ID
+* Copyright 2016 QUOBIS NETWORKS SL
+* Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
+* Copyright 2016 ORANGE SA
+* Copyright 2016 Deutsche Telekom AG
+* Copyright 2016 Apizee
+* Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*   http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+**/
+
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2547,6 +2838,29 @@ exports.ObjectType = ObjectType;
 exports['default'] = SyncObject;
 
 },{"../utils/utils.js":15}],13:[function(require,module,exports){
+/**
+* Copyright 2016 PT Inovação e Sistemas SA
+* Copyright 2016 INESC-ID
+* Copyright 2016 QUOBIS NETWORKS SL
+* Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
+* Copyright 2016 ORANGE SA
+* Copyright 2016 Deutsche Telekom AG
+* Copyright 2016 Apizee
+* Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*   http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+**/
+
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2652,7 +2966,7 @@ var Syncher = (function () {
             var objURL = reply.body.resource;
 
             //reporter creation accepted
-            var newObj = new _DataObjectReporter2['default'](_this._owner, objURL, schema, _this._bus, 'on', initialData, reply.body.childrenResources);
+            var newObj = new _DataObjectReporter2['default'](_this, objURL, schema, 'on', initialData, reply.body.childrenResources);
             _this._reporters[objURL] = newObj;
 
             resolve(newObj);
@@ -2693,7 +3007,8 @@ var Syncher = (function () {
             newProvisional = new _DataProvisional2['default'](_this._owner, objURL, _this._bus, reply.body.childrenResources);
             _this._provisionals[objURL] = newProvisional;
           } else if (reply.body.code === 200) {
-            var newObj = new _DataObjectObserver2['default'](_this._owner, objURL, schema, _this._bus, 'on', reply.body.value, newProvisional.children, reply.body.version);
+            var newObj = new _DataObjectObserver2['default'](_this, objURL, schema, 'on', reply.body.value, newProvisional.children, reply.body.version);
+            _this._observers[objURL] = newObj;
 
             resolve(newObj);
             newProvisional.apply(newObj);
@@ -2713,6 +3028,18 @@ var Syncher = (function () {
     key: 'onNotification',
     value: function onNotification(callback) {
       this._onNotificationHandler = callback;
+    }
+  }, {
+    key: '_unsubscribe',
+    value: function _unsubscribe(objURL) {
+      var _this = this;
+
+      delete _this._observers[objURL];
+
+      _this._bus.postMessage({
+        type: 'unsubscribe', from: _this._owner, to: _this._subURL,
+        body: { resource: objURL }
+      });
     }
   }, {
     key: '_onForward',
@@ -2792,6 +3119,29 @@ module.exports = exports['default'];
 
 },{"./DataObjectObserver":9,"./DataObjectReporter":10,"./DataProvisional":11}],14:[function(require,module,exports){
 /**
+* Copyright 2016 PT Inovação e Sistemas SA
+* Copyright 2016 INESC-ID
+* Copyright 2016 QUOBIS NETWORKS SL
+* Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
+* Copyright 2016 ORANGE SA
+* Copyright 2016 Deutsche Telekom AG
+* Copyright 2016 Apizee
+* Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*   http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+**/
+
+/**
  * EventEmitter
  * All classes which extends this, can have addEventListener and trigger events;
  */
@@ -2846,6 +3196,29 @@ exports["default"] = EventEmitter;
 module.exports = exports["default"];
 
 },{}],15:[function(require,module,exports){
+/**
+* Copyright 2016 PT Inovação e Sistemas SA
+* Copyright 2016 INESC-ID
+* Copyright 2016 QUOBIS NETWORKS SL
+* Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
+* Copyright 2016 ORANGE SA
+* Copyright 2016 Deutsche Telekom AG
+* Copyright 2016 Apizee
+* Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*   http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+**/
+
 /**
  * Support module with some functions will be useful
  * @module utils

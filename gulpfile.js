@@ -172,7 +172,7 @@ gulp.task('watch-hyperty', function(cb) {
   var destination = argv.dest;
 
   gulp.watch(['src/hyperty-connector/*.js', 'src/hyperty-chat/*.js'], function(event) {
-    var pathSplit = event.path.split('/');
+    var pathSplit = event.path.split(path.sep);
     var dir = pathSplit[pathSplit.length - 2];
 
     switch (dir) {
