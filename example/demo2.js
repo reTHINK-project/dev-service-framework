@@ -25,8 +25,8 @@ let avatar = 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAA
 // You can change this at your own domain
 let domain = config.domain;
 
-// let runtime = new RuntimeUA(sandboxFactory, domain);
-// window.runtime = runtime;
+// Hack because the GraphConnector jsrsasign module;
+window.KJUR = {};
 
 // Check if the document is ready
 if (document.readyState === 'complete') {
@@ -46,7 +46,7 @@ function documentReady() {
   hypertyHolder.removeClass('hide');
 
   let installerFactory = new InstallerFactory();
-  let runtimeURL = 'runtime://' + domain + '/.well-known/runtime/MyRuntime';
+  let runtimeURL = 'runtime://' + domain + '/.well-known/runtime/RuntimeUA';
   runtimeLoader = new RuntimeLoader(installerFactory, runtimeURL);
   runtimeLoader.install().then(runtimeInstalled).catch(errorMessage);
 }

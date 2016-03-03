@@ -17,13 +17,14 @@ System.config({
   map: {
     "array.observe": "npm:array.observe@0.0.1",
     "babel": "npm:babel-core@5.8.35",
-    "babel-polyfill": "npm:babel-polyfill@6.5.0",
+    "babel-polyfill": "npm:babel-polyfill@6.6.1",
     "babel-runtime": "npm:babel-runtime@5.8.35",
     "babelify": "npm:babelify@6.3.0",
     "browserify": "npm:browserify@11.1.0",
     "core-js": "npm:core-js@1.2.6",
     "indexeddbshim": "npm:indexeddbshim@2.2.1",
     "json": "github:systemjs/plugin-json@0.1.0",
+    "jsrsasign": "npm:jsrsasign@5.0.5",
     "karma-browserify": "npm:karma-browserify@4.3.0",
     "mutationobserver-shim": "npm:mutationobserver-shim@0.3.1",
     "object.observe": "npm:object.observe@0.2.6",
@@ -116,8 +117,9 @@ System.config({
     },
     "github:rethink-project/dev-service-framework@master": {
       "array.observe": "npm:array.observe@0.0.1",
-      "babel-polyfill": "npm:babel-polyfill@6.5.0",
+      "babel-polyfill": "npm:babel-polyfill@6.6.1",
       "indexeddbshim": "npm:indexeddbshim@2.2.1",
+      "json": "github:systemjs/plugin-json@0.1.0",
       "object.observe": "npm:object.observe@0.2.6",
       "ortc-over-rtc": "npm:ortc-over-rtc@0.1.0",
       "webrtc-adapter-test": "npm:webrtc-adapter-test@0.2.10",
@@ -174,10 +176,10 @@ System.config({
     "npm:async@0.2.10": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:babel-polyfill@6.5.0": {
+    "npm:babel-polyfill@6.6.1": {
       "babel-regenerator-runtime": "npm:babel-regenerator-runtime@6.5.0",
       "babel-runtime": "npm:babel-runtime@5.8.35",
-      "core-js": "npm:core-js@1.2.6",
+      "core-js": "npm:core-js@2.1.3",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:babel-regenerator-runtime@6.5.0": {
@@ -573,6 +575,12 @@ System.config({
       "path": "github:jspm/nodelibs-path@0.1.0"
     },
     "npm:core-js@1.2.6": {
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "systemjs-json": "github:systemjs/plugin-json@0.1.0"
+    },
+    "npm:core-js@2.1.3": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",

@@ -29,7 +29,7 @@ class InstallerFactory extends Core  {
 
         eval(descriptor.sourcePackage.sourceCode);
 
-        let runtime = new runtimeUA(runtimeFactory, domain);
+        let runtime = new RuntimeUA(runtimeFactory, domain);
         window.runtime = runtime;
 
         minibus.addListener('core:loadHyperty', function(msg) {
