@@ -2603,7 +2603,7 @@ var HypertyDiscovery = (function () {
         activeDomain = domain;
       }
 
-      var activediscoveryURL = 'hyperty://' + activeDomain + '/hypertyDiscovery';
+      var activediscoveryURL = 'hyperty://' + _this.domain + '/hypertyDiscovery';
       var identityURL = 'user://' + email.substring(email.indexOf('@') + 1, email.length) + '/' + email.substring(0, email.indexOf('@'));
 
       // message to query domain registry, asking for a user hyperty.
@@ -2611,11 +2611,13 @@ var HypertyDiscovery = (function () {
         type: 'READ', from: activediscoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: identityURL }
       };
 
+      console.log('Message: ', message, activeDomain, identityURL);
+
       //console.log('message READ', message);
       return new Promise(function (resolve, reject) {
 
         _this.messageBus.postMessage(message, function (reply) {
-          //console.log('message reply', reply);
+          console.log('message reply', reply);
 
           var hyperty = undefined;
           var mostRecent = undefined;
@@ -2636,6 +2638,8 @@ var HypertyDiscovery = (function () {
               }
             }
           }
+
+          console.log('Last Hyperty: ', lastHyperty, mostRecent);
 
           var hypertyURL = lastHyperty;
 

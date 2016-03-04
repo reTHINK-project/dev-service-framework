@@ -100,6 +100,7 @@ function discoverEmail(hypertyDiscovery) {
   let section = $('.discover');
   let searchForm = section.find('.form');
   let inputField = searchForm.find('.friend-email');
+  let inputDomain = searchForm.find('.friend-domain');
 
   section.removeClass('hide');
 
@@ -114,7 +115,8 @@ function discoverEmail(hypertyDiscovery) {
     collection.html(collectionItem);
 
     let email = inputField.val();
-    console.log(email);
+    let domain = inputDomain.val();
+    console.log(email, domain);
 
     hypertyDiscovery.discoverHypertyPerUser(email, domain).then(emailDiscovered).catch(emailDiscoveredError);
 

@@ -31,8 +31,12 @@ class Request {
     console.log(method, url);
 
     return new Promise(function(resolve, reject) {
+      // TODO: Check why the url have localhost and undefined like a protocol
+      // check the RuntimeUA
       let protocolmap = {
-        'hyperty-catalogue://': 'http://',
+        'localhost://': 'https://',
+        'undefined://': 'https://',
+        'hyperty-catalogue://': 'https://',
         'https://': 'https://',
         'http://': 'http://'
       };
