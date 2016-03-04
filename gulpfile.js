@@ -173,23 +173,23 @@ gulp.task('watch-hyperty', function(cb) {
 
   var destination = argv.dest;
 
-  gulp.watch(['src/hyperty-connector/*.js', 'src/hyperty-chat/*.js', 'example/hyperties/hello-world/*.js'], function(event) {
+  gulp.watch(['src/hyperty-connector/*.js', 'src/hello-world/*.js', 'src/hyperty-chat/*.js', 'example/hyperties/**/*.js'], function(event) {
     var pathSplit = event.path.split(path.sep);
     var dir = pathSplit[pathSplit.length - 2];
+    var file = pathSplit[pathSplit.length - 1];
+
+    console.log(file);
 
     switch (dir) {
       case 'hyperty-chat':
         return compile('src/' + dir + '/HypertyChat.js', destination, cb);
 
+
       case 'hyperty-connector':
         return compile('src/' + dir + '/HypertyConnector.js', destination, cb);
 
-      case 'hello-world':
-        console.log(dir);
-
-        compile('example/hyperties/' + dir + '/HelloWorldReporter.js', destination, cb);
-        compile('example/hyperties/' + dir + '/HelloWorldObserver.js', destination, cb);
-        return;
+      default:
+        compile('example/hyperties/' + dir + '/' + file, destination, cb);
     }
 
   });

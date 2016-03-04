@@ -23,6 +23,21 @@ Very soon we will provide a live public reTHINK environment, to let you publish 
 
 ### Getting Started
 
+
+*to be moved to the tutorial?*
+
+**Requirements**
+
+npm, jspm and gulp is globaly available in your environment.
+
+*after your json-schema is ready run:*
+
+`gulp ?`
+
+*after your hyperty is ready to be tested run:*
+
+`gulp watch-hyperty --dest=resources`
+
 Different development manuals are available, including:
 
 -	[Hyperty Development manual](docs/manuals/development-of-hyperties.md)
