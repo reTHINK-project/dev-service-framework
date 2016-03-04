@@ -117,7 +117,7 @@ System.config({
     },
     "github:rethink-project/dev-service-framework@master": {
       "array.observe": "npm:array.observe@0.0.1",
-      "babel-polyfill": "npm:babel-polyfill@6.5.0",
+      "babel-polyfill": "npm:babel-polyfill@6.6.1",
       "indexeddbshim": "npm:indexeddbshim@2.2.1",
       "json": "github:systemjs/plugin-json@0.1.0",
       "object.observe": "npm:object.observe@0.2.6",
@@ -174,12 +174,6 @@ System.config({
       "acorn": "npm:acorn@1.2.2"
     },
     "npm:async@0.2.10": {
-      "process": "github:jspm/nodelibs-process@0.1.2"
-    },
-    "npm:babel-polyfill@6.5.0": {
-      "babel-regenerator-runtime": "npm:babel-regenerator-runtime@6.5.0",
-      "babel-runtime": "npm:babel-runtime@5.8.35",
-      "core-js": "npm:core-js@1.2.6",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:babel-polyfill@6.6.1": {

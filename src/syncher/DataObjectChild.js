@@ -46,7 +46,7 @@ class DataObjectChild /* implements SyncStatus */ {
     _this._bus = bus;
     _this._syncObj = new SyncObject(initialData);
 
-    bus.addListener(owner, (msg) => {
+    _this._listener = bus.addListener(owner, (msg) => {
       if (msg.type === 'response' && msg.id === msgId) {
         console.log('DataObjectChild.onResponse:', msg);
         _this._onResponse(msg);
@@ -66,6 +66,13 @@ class DataObjectChild /* implements SyncStatus */ {
    * @type {JSON} - JSON structure that should follow the defined schema, if any.
    */
   get data() { return this._syncObj.data; }
+
+  /**
+   * Release internal used listeners
+   */
+  release() {
+    this._listener.remove();
+  }
 
   /**
    * Register the change listeners sent by the reporter child

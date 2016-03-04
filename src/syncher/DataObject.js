@@ -42,6 +42,7 @@ class DataObject {
   _syncObj: SyncData
 
   _children: { id: DataObjectChild }
+  _childrenListeners: [MsgListener]
 
   ----event handlers----
   _onAddChildrenHandler: (event) => void
@@ -51,27 +52,30 @@ class DataObject {
    * @ignore
    * Should not be used directly by Hyperties. It's called by the Syncher create or subscribe method's
    */
-  constructor(owner, url, schema, bus, initialStatus, initialData, children) {
+  constructor(syncher, url, schema, initialStatus, initialData, children) {
     let _this = this;
 
     _this._version = 0;
 
-    _this._owner = owner;
+    _this._syncher = syncher;
+    _this._owner = syncher._owner;
+    _this._bus = syncher._bus;
+
     _this._url = url;
     _this._schema = schema;
-    _this._bus = bus;
     _this._status = initialStatus;
     _this._syncObj = new SyncObject(initialData);
 
     _this._childId = 0;
-    _this._children = { };
+    _this._children = {};
+    _this._childrenListeners = [];
 
     let childBaseURL = url + '/children/';
 
     if (children) {
       children.forEach((child) => {
         let childURL = childBaseURL + child;
-        bus.addListener(childURL, (msg) => {
+        let listener = _this._bus.addListener(childURL, (msg) => {
           //ignore msg sent by himself
           if (msg.from !== this._owner) {
             switch (msg.type) {
@@ -81,6 +85,8 @@ class DataObject {
             }
           }
         });
+
+        _this._childrenListeners.push(listener);
       });
     }
   }
@@ -140,10 +146,14 @@ class DataObject {
   }
 
   /**
-   * @ignore
+   * Release internal used listeners
    */
   release() {
-    //TODO: remove all listeners for this object
+    this._childrenListeners.forEach((listener) => {
+      listener.remove();
+    });
+
+    //TODO: relase all _this._children ?
   }
 
   /**

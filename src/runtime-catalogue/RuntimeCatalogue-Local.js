@@ -1,26 +1,3 @@
-/**
-* Copyright 2016 PT Inovação e Sistemas SA
-* Copyright 2016 INESC-ID
-* Copyright 2016 QUOBIS NETWORKS SL
-* Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
-* Copyright 2016 ORANGE SA
-* Copyright 2016 Deutsche Telekom AG
-* Copyright 2016 Apizee
-* Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*   http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-**/
-
 import {divideURL} from '../utils/utils';
 import CatalogueFactory from '../catalogue-factory/CatalogueDataObjectFactory';
 
@@ -69,6 +46,7 @@ class RuntimeCatalogue {
     return new Promise(function(resolve, reject) {
 
       let dividedURL = divideURL(hypertyURL);
+      let type = dividedURL.type;
       let domain = dividedURL.domain;
       let hyperty = dividedURL.identity;
 
@@ -80,7 +58,7 @@ class RuntimeCatalogue {
         hyperty = hyperty.substring(hyperty.lastIndexOf('/') + 1);
       }
 
-      _this.httpRequest.get('../resources/descriptors/Hyperties.json').then(function(descriptor) {
+      _this.httpRequest.get(type + '://' + domain + '/resources/descriptors/Hyperties.json').then(function(descriptor) {
         _this.Hyperties = JSON.parse(descriptor);
 
         let result = _this.Hyperties[hyperty];
@@ -102,7 +80,12 @@ class RuntimeCatalogue {
             result.dataObjects
           );
 
-          // console.log("created hyperty descriptor object:", hyperty);
+          // optional fields
+          hyperty.configuration = result.configuration;
+          hyperty.constraints = result.constraints;
+          hyperty.messageSchema = result.messageSchema;
+          hyperty.policies = result.policies;
+          hyperty.signature = result.signature;
 
           // parse and attach sourcePackage
           let sourcePackage = result.sourcePackage;
@@ -128,22 +111,19 @@ class RuntimeCatalogue {
    getRuntimeDescriptor(runtimeURL) {
      let _this = this;
 
-     let dividedURL = divideURL(runtimeURL);
-     let domain = dividedURL.domain;
-     let runtime = dividedURL.identity;
-
-     if (!domain) {
-       domain = runtime;
-     }
-
-     if (runtime) {
-       runtime = runtime.substring(runtime.lastIndexOf('/') + 1);
-     }
-
      return new Promise(function(resolve, reject) {
 
+       let dividedURL = divideURL(runtimeURL);
+       let type = dividedURL.type;
+       let domain = dividedURL.domain;
+       let runtime = dividedURL.identity;
+
+       if (runtime) {
+         runtime = runtime.substring(runtime.lastIndexOf('/') + 1);
+       }
+
        // request the json
-       _this.httpRequest.get('../resources/descriptors/Runtimes.json').then(function(descriptor) {
+       _this.httpRequest.get(type + '://' + domain + '/resources/descriptors/Runtimes.json').then(function(descriptor) {
          _this.Runtimes = JSON.parse(descriptor);
 
          let result = _this.Runtimes[runtime];
@@ -159,7 +139,6 @@ class RuntimeCatalogue {
              result.protocolCapabilities = JSON.parse(result.protocolCapabilities);
            } catch (e) {
              // already json object
-
            }
 
            console.log('creating runtime descriptor based on: ', result);
@@ -170,7 +149,7 @@ class RuntimeCatalogue {
              result.objectName,
              result.description,
              result.language,
-             result.sourcePackageURL || result.sourcePackage,
+             result.sourcePackageURL,
              result.type || result.runtimeType,
              result.hypertyCapabilities,
              result.protocolCapabilities
@@ -178,52 +157,17 @@ class RuntimeCatalogue {
 
            console.log('created runtime descriptor object:', runtime);
 
-           if (result.sourcePackageURL === '/sourcePackage') {
-
-             // parse and attach sourcePackage
-             let sourcePackage = result.sourcePackage;
-             if (sourcePackage) {
-               // console.log('runtime has sourcePackage:', sourcePackage);
-               runtime.sourcePackage = _this._createSourcePackage(_this._factory, sourcePackage);
-             }
-
-             resolve(runtime);
-
-           } else {
-             console.log(result.sourcePackageURL);
-             _this.getSourceCodeFromURL(result.sourcePackageURL).then(function(sourceCode) {
-               resolve(sourceCode);
-             }).catch(function(reason) {
-               reject(reason);
-             });
+           // parse and attach sourcePackage
+           let sourcePackage = result.sourcePackage;
+           if (sourcePackage) {
+             // console.log('runtime has sourcePackage:', sourcePackage);
+             runtime.sourcePackage = _this._createSourcePackage(_this._factory, sourcePackage);
            }
 
+           resolve(runtime);
          }
        });
      });
-   }
-
-   /**
-    * [getFileFromURL description]
-    * @param  {[type]} sourceCodeURL [description]
-    * @return {[type]}               [description]
-    */
-   getSourceCodeFromURL(sourceCodeURL) {
-
-     let _this = this;
-
-     // console.log("getting sourcePackage from:", sourcePackageURL);
-
-     return new Promise(function(resolve, reject) {
-
-       _this.httpRequest.get(sourceCodeURL).then(function(sourceCode) {
-         resolve(sourceCode);
-       }).catch(function(reason) {
-         reject(reason);
-       });
-
-     });
-
    }
 
   /**
@@ -278,6 +222,7 @@ class RuntimeCatalogue {
     return new Promise(function(resolve, reject) {
 
       let dividedURL = divideURL(stubURL);
+      let type = divideURL.type;
       let domain = dividedURL.domain;
       let protoStub = dividedURL.identity;
 
@@ -291,7 +236,7 @@ class RuntimeCatalogue {
         protoStub = protoStub.substring(protoStub.lastIndexOf('/') + 1);
       }
 
-      _this.httpRequest.get('../resources/descriptors/ProtoStubs.json').then(function(descriptor) {
+      _this.httpRequest.get(type + '://' + domain + '/resources/descriptors/ProtoStubs.json').then(function(descriptor) {
         _this.ProtoStubs = JSON.parse(descriptor);
 
         let result = _this.ProtoStubs[protoStub];
@@ -339,16 +284,21 @@ class RuntimeCatalogue {
 
     return new Promise(function(resolve, reject) {
 
+      let dividedURL = divideURL(dataSchemaURL);
+      let type = divideURL.type;
+      let domain = dividedURL.domain;
+      let schemaURL = dividedURL.identity;
+
       // request the json
-      if (dataSchemaURL) {
-        dataSchemaURL = dataSchemaURL.substring(dataSchemaURL.lastIndexOf('/') + 1);
+      if (schemaURL) {
+        schemaURL = schemaURL.substring(schemaURL.lastIndexOf('/') + 1);
       }
 
-      _this.httpRequest.get('../resources/descriptors/DataSchemas.json').then(function(descriptor) {
+      _this.httpRequest.get(type + '://' + domain + '/resources/descriptors/DataSchemas.json').then(function(descriptor) {
 
         _this.DataSchemas = JSON.parse(descriptor);
 
-        let result = _this.DataSchemas[dataSchemaURL];
+        let result = _this.DataSchemas[schemaURL];
 
         if (result.ERROR) {
           // TODO handle error properly

@@ -113,7 +113,7 @@ class Syncher {
          let objURL = reply.body.resource;
 
          //reporter creation accepted
-         let newObj = new DataObjectReporter(_this._owner, objURL, schema, _this._bus, 'on', initialData, reply.body.childrenResources);
+         let newObj = new DataObjectReporter(_this, objURL, schema, 'on', initialData, reply.body.childrenResources);
          _this._reporters[objURL] = newObj;
 
          resolve(newObj);
@@ -152,7 +152,8 @@ class Syncher {
          newProvisional = new DataProvisional(_this._owner, objURL, _this._bus, reply.body.childrenResources);
          _this._provisionals[objURL] = newProvisional;
        } else if (reply.body.code === 200) {
-         let newObj = new DataObjectObserver(_this._owner, objURL, schema, _this._bus, 'on', reply.body.value, newProvisional.children, reply.body.version);
+         let newObj = new DataObjectObserver(_this, objURL, schema, 'on', reply.body.value, newProvisional.children, reply.body.version);
+         _this._observers[objURL] = newObj;
 
          resolve(newObj);
          newProvisional.apply(newObj);
@@ -170,6 +171,17 @@ class Syncher {
   */
  onNotification(callback) {
    this._onNotificationHandler = callback;
+ }
+
+ _unsubscribe(objURL) {
+   let _this = this;
+
+   delete _this._observers[objURL];
+
+   _this._bus.postMessage({
+     type: 'unsubscribe', from: _this._owner, to: _this._subURL,
+     body: { resource: objURL }
+   });
  }
 
  _onForward(msg) {

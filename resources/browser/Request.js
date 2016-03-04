@@ -28,19 +28,23 @@ class Request {
 
   _makeLocalRequest(method, url) {
 
-    console.log(url);
+    console.log(method, url);
 
     return new Promise(function(resolve, reject) {
       let protocolmap = {
         'hyperty-catalogue://': 'http://',
-        '../': '../'
+        'https://': 'https://',
+        'http://': 'http://'
       };
+
+      let usedProtocol;
 
       let foundProtocol = false;
       for (let protocol in protocolmap) {
         if (url.slice(0, protocol.length) === protocol) {
-          // console.log('exchanging ' + protocol + " with " + protocolmap[protocol]);
+          // console.log("exchanging " + protocol + " with " + protocolmap[protocol]);
           url = protocolmap[protocol] + url.slice(protocol.length, url.length);
+          usedProtocol = protocolmap[protocol];
           foundProtocol = true;
           break;
         }

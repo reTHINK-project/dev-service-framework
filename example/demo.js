@@ -45,7 +45,7 @@ function documentReady() {
   hypertyHolder.removeClass('hide');
 
   let installerFactory = new InstallerFactory();
-  let runtimeURL = 'runtime://' + domain + '/.well-known/runtime/RuntimeUA';
+  let runtimeURL = 'hyperty-catalogue://' + domain + '/.well-known/runtime/RuntimeUA';
   runtimeLoader = new RuntimeLoader(installerFactory, runtimeURL);
   runtimeLoader.install().then(runtimeInstalled).catch(errorMessage);
 }
@@ -116,7 +116,7 @@ function discoverEmail(hypertyDiscovery) {
     let email = inputField.val();
     console.log(email);
 
-    hypertyDiscovery.discoverHypertyPerUser(email).then(emailDiscovered).catch(emailDiscoveredError);
+    hypertyDiscovery.discoverHypertyPerUser(email, domain).then(emailDiscovered).catch(emailDiscoveredError);
 
   });
 }

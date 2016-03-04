@@ -620,38 +620,48 @@ var HypertyDiscovery = (function () {
     _this.messageBus = msgBus;
 
     _this.domain = domain;
-    _this.discoveryURL = 'hyperty://' + domain + '/hypertyDisovery';
+    _this.discoveryURL = 'hyperty://' + domain + '/hypertyDiscovery';
   }
 
   /**
   * function to request about users registered in domain registry, and
   * return the hyperty instance if found.
   * @param  {email}              email
+  * @param  {domain}            domain (Optional)
   * @return {Promise}          Promise
   */
 
   _createClass(HypertyDiscovery, [{
     key: 'discoverHypertyPerUser',
-    value: function discoverHypertyPerUser(email) {
+    value: function discoverHypertyPerUser(email, domain) {
       var _this = this;
+      var activeDomain = undefined;
+
+      if (domain === undefined) {
+        activeDomain = _this.domain;
+      } else {
+        activeDomain = domain;
+      }
+
+      var activediscoveryURL = 'hyperty://' + activeDomain + '/hypertyDiscovery';
       var identityURL = 'user://' + email.substring(email.indexOf('@') + 1, email.length) + '/' + email.substring(0, email.indexOf('@'));
 
       // message to query domain registry, asking for a user hyperty.
       var message = {
-        type: 'READ', from: _this.discoveryURL, to: 'domain://registry.' + _this.domain + '/', body: { resource: identityURL }
+        type: 'READ', from: activediscoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: identityURL }
       };
 
+      //console.log('message READ', message);
       return new Promise(function (resolve, reject) {
 
         _this.messageBus.postMessage(message, function (reply) {
-          //console.log('MESSAGE', reply);
+          //console.log('message reply', reply);
 
           var hyperty = undefined;
           var mostRecent = undefined;
           var lastHyperty = undefined;
           var value = reply.body.value;
 
-          //console.log('valueParsed', valueParsed);
           for (hyperty in value) {
             if (value[hyperty].lastModified !== undefined) {
               if (mostRecent === undefined) {
@@ -666,6 +676,7 @@ var HypertyDiscovery = (function () {
               }
             }
           }
+
           var hypertyURL = lastHyperty;
 
           if (hypertyURL === undefined) {
@@ -678,7 +689,7 @@ var HypertyDiscovery = (function () {
             hypertyURL: hypertyURL
           };
 
-          console.log('===> RegisterHyperty messageBundle: ', idPackage);
+          console.log('===> hypertyDiscovery messageBundle: ', idPackage);
           resolve(idPackage);
         });
       });
@@ -752,6 +763,7 @@ var DataObject = (function () {
   _status: on | paused
   _syncObj: SyncData
    _children: { id: DataObjectChild }
+  _childrenListeners: [MsgListener]
    ----event handlers----
   _onAddChildrenHandler: (event) => void
   */
@@ -761,7 +773,7 @@ var DataObject = (function () {
    * Should not be used directly by Hyperties. It's called by the Syncher create or subscribe method's
    */
 
-  function DataObject(owner, url, schema, bus, initialStatus, initialData, children) {
+  function DataObject(syncher, url, schema, initialStatus, initialData, children) {
     var _this2 = this;
 
     _classCallCheck(this, DataObject);
@@ -770,22 +782,25 @@ var DataObject = (function () {
 
     _this._version = 0;
 
-    _this._owner = owner;
+    _this._syncher = syncher;
+    _this._owner = syncher._owner;
+    _this._bus = syncher._bus;
+
     _this._url = url;
     _this._schema = schema;
-    _this._bus = bus;
     _this._status = initialStatus;
     _this._syncObj = new _SyncObject2['default'](initialData);
 
     _this._childId = 0;
     _this._children = {};
+    _this._childrenListeners = [];
 
     var childBaseURL = url + '/children/';
 
     if (children) {
       children.forEach(function (child) {
         var childURL = childBaseURL + child;
-        bus.addListener(childURL, function (msg) {
+        var listener = _this._bus.addListener(childURL, function (msg) {
           //ignore msg sent by himself
           if (msg.from !== _this2._owner) {
             switch (msg.type) {
@@ -798,6 +813,8 @@ var DataObject = (function () {
             }
           }
         });
+
+        _this._childrenListeners.push(listener);
       });
     }
   }
@@ -839,12 +856,17 @@ var DataObject = (function () {
     }
 
     /**
-     * @ignore
+     * Release internal used listeners
      */
   }, {
     key: 'release',
-    value: function release() {}
-    //TODO: remove all listeners for this object
+    value: function release() {
+      this._childrenListeners.forEach(function (listener) {
+        listener.remove();
+      });
+
+      //TODO: relase all _this._children ?
+    }
 
     /**
      * Create and add a children to the subscription group.
@@ -852,7 +874,6 @@ var DataObject = (function () {
      * @param {JSON} initialData - Initial data of the child
      * @return {Promise<DataObjectChild>} - Return Promise to a new Children.
      */
-
   }, {
     key: 'addChildren',
     value: function addChildren(resource, initialData) {
@@ -1132,7 +1153,7 @@ var DataObjectChild /* implements SyncStatus */ = (function () {
     _this._bus = bus;
     _this._syncObj = new _SyncObject2['default'](initialData);
 
-    bus.addListener(owner, function (msg) {
+    _this._listener = bus.addListener(owner, function (msg) {
       if (msg.type === 'response' && msg.id === msgId) {
         console.log('DataObjectChild.onResponse:', msg);
         _this._onResponse(msg);
@@ -1146,12 +1167,21 @@ var DataObjectChild /* implements SyncStatus */ = (function () {
    */
 
   _createClass(DataObjectChild, [{
-    key: 'onChange',
+    key: 'release',
+
+    /**
+     * Release internal used listeners
+     */
+    value: function release() {
+      this._listener.remove();
+    }
 
     /**
      * Register the change listeners sent by the reporter child
      * @param {function(event: MsgEvent)} callback
      */
+  }, {
+    key: 'onChange',
     value: function onChange(callback) {
       this._syncObj.observe(function (event) {
         callback(event);
@@ -1260,6 +1290,7 @@ var DataObjectObserver = (function (_DataObject) {
   _inherits(DataObjectObserver, _DataObject);
 
   /* private
+  _changeListener: MsgListener
    ----event handlers----
   _filters: {<filter>: {type: <start, exact>, callback: <function>} }
   */
@@ -1269,16 +1300,16 @@ var DataObjectObserver = (function (_DataObject) {
    * Should not be used directly by Hyperties. It's called by the Syncher.subscribe method
    */
 
-  function DataObjectObserver(owner, url, schema, bus, initialStatus, initialData, children, initialVersion) {
+  function DataObjectObserver(syncher, url, schema, initialStatus, initialData, children, initialVersion) {
     _classCallCheck(this, DataObjectObserver);
 
-    _get(Object.getPrototypeOf(DataObjectObserver.prototype), 'constructor', this).call(this, owner, url, schema, bus, initialStatus, initialData, children);
+    _get(Object.getPrototypeOf(DataObjectObserver.prototype), 'constructor', this).call(this, syncher, url, schema, initialStatus, initialData, children);
     var _this = this;
 
     _this._version = initialVersion;
 
     //add listener for objURL
-    bus.addListener(url + '/changes', function (msg) {
+    _this._changeListener = _this._bus.addListener(url + '/changes', function (msg) {
       console.log('DataObjectObserver-' + url + '-RCV: ', msg);
       _this._changeObject(_this._syncObj, msg);
     });
@@ -1291,12 +1322,30 @@ var DataObjectObserver = (function (_DataObject) {
   }
 
   /**
-   * Register the change listeners sent by the reporter
-   * @param {string} filter - Filter that identifies the field (separeted dot path). Accepts * at the end for a more unrestricted filtering.
-   * @param {function(event: MsgEvent)} callback
+   * Release internal used listeners
    */
 
   _createClass(DataObjectObserver, [{
+    key: 'release',
+    value: function release() {
+      this._changeListener.remove();
+      _get(Object.getPrototypeOf(DataObjectObserver.prototype), 'release', this).call(this);
+    }
+  }, {
+    key: 'unsubscribe',
+    value: function unsubscribe() {
+      var _this = this;
+
+      _this.release();
+      _this._syncher._unsubscribe(_this.url);
+    }
+
+    /**
+     * Register the change listeners sent by the reporter
+     * @param {string} filter - Filter that identifies the field (separeted dot path). Accepts * at the end for a more unrestricted filtering.
+     * @param {function(event: MsgEvent)} callback
+     */
+  }, {
     key: 'onChange',
     value: function onChange(filter, callback) {
       var key = filter;
@@ -1414,13 +1463,13 @@ var DataObjectReporter = (function (_DataObject) {
    * Should not be used directly by Hyperties. It's called by the Syncher.create method
    */
 
-  function DataObjectReporter(owner, url, schema, bus, initialStatus, initialData, children) {
+  function DataObjectReporter(syncher, url, schema, initialStatus, initialData, children) {
     _classCallCheck(this, DataObjectReporter);
 
-    _get(Object.getPrototypeOf(DataObjectReporter.prototype), 'constructor', this).call(this, owner, url, schema, bus, initialStatus, initialData, children);
+    _get(Object.getPrototypeOf(DataObjectReporter.prototype), 'constructor', this).call(this, syncher, url, schema, initialStatus, initialData, children);
     var _this = this;
 
-    bus.addListener(url, function (msg) {
+    _this._bus.addListener(url, function (msg) {
       if (msg.type === 'response') {
         _this._onResponse(msg);
       }
@@ -2143,7 +2192,7 @@ var Syncher = (function () {
             var objURL = reply.body.resource;
 
             //reporter creation accepted
-            var newObj = new _DataObjectReporter2['default'](_this._owner, objURL, schema, _this._bus, 'on', initialData, reply.body.childrenResources);
+            var newObj = new _DataObjectReporter2['default'](_this, objURL, schema, 'on', initialData, reply.body.childrenResources);
             _this._reporters[objURL] = newObj;
 
             resolve(newObj);
@@ -2184,7 +2233,8 @@ var Syncher = (function () {
             newProvisional = new _DataProvisional2['default'](_this._owner, objURL, _this._bus, reply.body.childrenResources);
             _this._provisionals[objURL] = newProvisional;
           } else if (reply.body.code === 200) {
-            var newObj = new _DataObjectObserver2['default'](_this._owner, objURL, schema, _this._bus, 'on', reply.body.value, newProvisional.children, reply.body.version);
+            var newObj = new _DataObjectObserver2['default'](_this, objURL, schema, 'on', reply.body.value, newProvisional.children, reply.body.version);
+            _this._observers[objURL] = newObj;
 
             resolve(newObj);
             newProvisional.apply(newObj);
@@ -2204,6 +2254,18 @@ var Syncher = (function () {
     key: 'onNotification',
     value: function onNotification(callback) {
       this._onNotificationHandler = callback;
+    }
+  }, {
+    key: '_unsubscribe',
+    value: function _unsubscribe(objURL) {
+      var _this = this;
+
+      delete _this._observers[objURL];
+
+      _this._bus.postMessage({
+        type: 'unsubscribe', from: _this._owner, to: _this._subURL,
+        body: { resource: objURL }
+      });
     }
   }, {
     key: '_onForward',

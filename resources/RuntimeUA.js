@@ -37728,68 +37728,74 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _utils = require('../utils/utils.js');
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Policy = function () {
-  function Policy(id, target, when, authorise, actions) {
-    _classCallCheck(this, Policy);
+var PDP = function () {
+  function PDP() {
+    _classCallCheck(this, PDP);
 
     var _this = this;
-    _this.id = id;
-    _this.target = target;
-    _this.when = when;
-    _this.authorise = authorise;
-    _this.actions = actions;
+    _this.blackList = [];
+    _this.whiteList = [];
   }
 
-  /* TODO: sanitization needed */
+  /* TODO: sanitization needed for eval() */
 
 
-  _createClass(Policy, [{
+  _createClass(PDP, [{
     key: 'evaluate',
-    value: function evaluate(message, userID) {
+    value: function evaluate(message, userID, policies) {
       var _this = this;
-      var result = [];
-      switch (_this.target) {
-        case 'domain':
-          var domainURL = (0, _utils.divideURL)(userID).domain;
-          result[0] = domainURL === _this.when ? _this.authorise : !_this.authorise;
-          break;
-        case 'lists':
-          result[0] = eval('_this.' + _this.when + '(\'' + userID + '\')') ? _this.authorise : !_this.authorise;
-          break;
-        case 'time':
-          result[0] = eval('_this.' + _this.when) ? _this.authorise : !_this.authorise;
-          break;
-        default:
-          result[1] = _this.actions;
-          break;
+      var results = [true];
+      var actions = [];
+
+      for (var i in policies) {
+        var policy = policies[i];
+        var result = [];
+        var condition = policy.condition.split(' ');
+        switch (condition[0]) {
+          case 'blacklisted':
+            result[0] = _this.isBlackListed(userID) ? policy.authorise : !policy.authorise;
+            break;
+          case 'whitelisted':
+            result[0] = _this.isWhiteListed(userID) ? policy.authorise : !policy.authorise;
+            break;
+          case 'time':
+            var start = condition[1];
+            var end = condition[2];
+            result[0] = _this.isTimeBetween(start, end) ? policy.authorise : !policy.authorise;
+            break;
+          default:
+
+            // TODO: do actions depend on the decision?
+            result[1] = policy.actions;
+        }
+
+        results.push(result[0]);
+        actions.push(result[1]);
       }
-      return _result;
+
+      var authDecision = _this.getDecision(results);
+      return [authDecision, actions];
     }
   }, {
+    key: 'isSameOrigin',
+    value: function isSameOrigin() {}
+  }, {
     key: 'isBlackListed',
-    value: function isBlackListed(user) {
-      // let blackList = trustEngine.getBlackList();
-      var blackList = [];
-      return blackList.indexOf(user) > -1;
+    value: function isBlackListed(userID) {
+      var _this = this;
+      return _this.blackList.indexOf(userID) > -1;
     }
   }, {
     key: 'isWhiteListed',
-    value: function isWhiteListed(user) {
-      // let whiteList = trustEngine.getWhiteList();
-      var whiteList = [];
-      //whiteList.push('user://gmail.com/openidtest10');
-      return whiteList.indexOf(from) > -1;
+    value: function isWhiteListed(userID) {
+      var _this = this;
+      return _this.whiteList.indexOf(userID) > -1;
     }
-  }, {
-    key: 'getMinutes',
-    value: function getMinutes(time) {
-      var timeSplit = time.split(':');
-      return parseInt(timeSplit[0] * 60 + timeSplit[1]);
-    }
+
+    // TODO: implement for start > end
+
   }, {
     key: 'isTimeBetween',
     value: function isTimeBetween(start, end) {
@@ -37798,17 +37804,143 @@ var Policy = function () {
       var nowMinutes = _this.getMinutes(parseInt(now.getHours()) + ':' + now.getMinutes());
       var startMinutes = _this.getMinutes(start);
       var endMinutes = _this.getMinutes(end);
-      return nowMinutes > startMinutes && nowMinutes < endMinutes;
+      if (endMinutes > startMinutes) {
+        return nowMinutes > startMinutes && nowMinutes < endMinutes;
+      } else {
+        if (nowMinutes < startMinutes) {
+          nowMinutes += 24 * 60;
+        }
+        endMinutes += 24 * 60;
+        return nowMinutes > startMinutes && nowMinutes < endMinutes;
+      }
+    }
+
+    /* Aux function for isTimeBetween() */
+
+  }, {
+    key: 'getMinutes',
+    value: function getMinutes(time) {
+      var timeSplit = time.split(':');
+      return parseInt(timeSplit[0]) * 60 + parseInt(timeSplit[1]);
+    }
+  }, {
+    key: 'isContext',
+    value: function isContext() {}
+  }, {
+    key: 'isHypertyType',
+    value: function isHypertyType() {}
+
+    /* Aux function for evaluate() */
+
+  }, {
+    key: 'getDecision',
+    value: function getDecision(results) {
+      return results.indexOf(false) === -1;
+    }
+  }, {
+    key: 'addToBlackList',
+    value: function addToBlackList(userID) {
+      var _this = this;
+      _this.blackList.push(userID);
+    }
+  }, {
+    key: 'removeFromBlackList',
+    value: function removeFromBlackList(userID) {
+      var _this = this;
+      var blackList = _this.blackList;
+      for (var i in blackList) {
+        if (blackList[i] === userID) {
+          blackList.splice(i, 1);
+          break;
+        }
+      }
+    }
+  }, {
+    key: 'addToWhiteList',
+    value: function addToWhiteList(userID) {
+      var _this = this;
+      _this.whiteList.push(userID);
+    }
+  }, {
+    key: 'removeFromWhiteList',
+    value: function removeFromWhiteList(userID) {
+      var _this = this;
+      var whiteList = _this.whiteList;
+      for (var i in whiteList) {
+        if (whiteList[i] === userID) {
+          whiteList.splice(i, 1);
+          break;
+        }
+      }
     }
   }]);
 
-  return Policy;
+  return PDP;
 }();
+
+exports.default = PDP;
+module.exports = exports['default'];
+
+},{}],188:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var PEP = function () {
+  function PEP() {
+    _classCallCheck(this, PEP);
+  }
+
+  _createClass(PEP, [{
+    key: "enforce",
+    value: function enforce() {}
+  }, {
+    key: "sendAutomaticMessage",
+    value: function sendAutomaticMessage() {}
+  }, {
+    key: "forwardToID",
+    value: function forwardToID() {}
+  }, {
+    key: "forwardToHyperty",
+    value: function forwardToHyperty() {}
+  }]);
+
+  return PEP;
+}();
+
+exports.default = PEP;
+module.exports = exports['default'];
+
+},{}],189:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Policy = function Policy(id, scope, condition, authorise, actions) {
+  _classCallCheck(this, Policy);
+
+  var _this = this;
+  _this.id = id;
+  _this.scope = scope;
+  _this.condition = condition;
+  _this.authorise = authorise;
+  _this.actions = actions;
+};
 
 exports.default = Policy;
 module.exports = exports['default'];
 
-},{"../utils/utils.js":199}],188:[function(require,module,exports){
+},{}],190:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -37817,11 +37949,17 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _PEP = require('./PEP');
+
+var _PEP2 = _interopRequireDefault(_PEP);
+
+var _PDP = require('./PDP');
+
+var _PDP2 = _interopRequireDefault(_PDP);
+
 var _Policy = require('./Policy');
 
 var _Policy2 = _interopRequireDefault(_Policy);
-
-var _utils = require('../utils/utils.js');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -37834,10 +37972,13 @@ var PolicyEngine = function () {
     var _this = this;
     _this.idModule = identityModule;
     _this.registry = runtimeRegistry;
+    _this.pep = new _PEP2.default();
+    _this.pdp = new _PDP2.default();
     _this.policies = {};
   }
 
-  /* TODO: validation needed */
+  // TODO: verify duplicates
+  // TODO: conflict detection
 
 
   _createClass(PolicyEngine, [{
@@ -37856,34 +37997,34 @@ var PolicyEngine = function () {
     value: function simulate(key) {
       var _this = this;
 
-      var id = 'allow-only-gmail';
-      var target = 'domain';
-      var when = 'gmail.com';
-      var authorise = true;
-      var actions = [];
-      var policy1 = new _Policy2.default(id, target, when, authorise, actions);
+      var policy = {
+        id: 'block-blacklisted',
+        scope: 'user',
+        condition: 'blacklisted',
+        authorise: false,
+        actions: []
+      };
+      var policy2 = new _Policy2.default(policy.id, policy.scope, policy.condition, policy.authorise, policy.actions);
 
-      id = 'block-blacklisted';
-      target = 'lists';
-      when = 'isBlackListed';
-      authorise = false;
-      actions = [];
-      var policy2 = new _Policy2.default(id, target, when, authorise, actions);
+      policy = {
+        id: 'allow-whitelisted',
+        scope: 'user',
+        condition: 'whitelisted',
+        authorise: true,
+        actions: []
+      };
+      var policy3 = new _Policy2.default(policy.id, policy.scope, policy.condition, policy.authorise, policy.actions);
 
-      /*id = 'allow-whitelisted';
-      target = 'lists';
-      when = 'isWhiteListed';
-      authorise = true;
-      actions = [];
-      let policy3 = new Policy(id, target, when, authorise, actions);
-       id = 'allow-8-23';
-      target = 'time';
-      when = 'isTimeBetween(\'8:00\', \'20:00\')';
-      authorise = true;
-      actions = [];
-      let policy4 = new Policy(id, target, when, authorise, actions);*/
+      policy = {
+        id: 'block-08-20',
+        scope: 'user',
+        condition: 'time 08:00 20:00',
+        authorise: false,
+        actions: []
+      };
+      var policy4 = new _Policy2.default(policy.id, policy.scope, policy.condition, policy.authorise, policy.actions);
 
-      _this.addPolicies(key, [policy1, policy2]);
+      _this.addPolicies(key, [policy4]);
     }
   }, {
     key: 'removePolicies',
@@ -37896,9 +38037,9 @@ var PolicyEngine = function () {
           var policies = allPolicies[key];
           var numPolicies = policies.length;
 
-          for (var i = 0; i < numPolicies; i++) {
-            if (policies[i].id === policyId) {
-              policies.splice(i, 1);
+          for (var policy = 0; policy < numPolicies; policy++) {
+            if (policies[policy].id === policyId) {
+              policies.splice(policy, 1);
               break;
             }
           }
@@ -37908,10 +38049,32 @@ var PolicyEngine = function () {
       }
     }
   }, {
+    key: 'addToBlackList',
+    value: function addToBlackList(userID) {
+      this.pdp.addToBlackList(userID);
+    }
+  }, {
+    key: 'removeFromBlackList',
+    value: function removeFromBlackList(userID) {
+      this.pdp.removeFromBlackList(userID);
+    }
+  }, {
+    key: 'addToWhiteList',
+    value: function addToWhiteList(userID) {
+      this.pdp.addToWhiteList(userID);
+    }
+  }, {
+    key: 'removeFromWhiteList',
+    value: function removeFromWhiteList(userID) {
+      this.pdp.removeFromWhiteList(userID);
+    }
+  }, {
     key: 'authorise',
     value: function authorise(message) {
       var _this = this;
-      //_this.simulate(message.from);
+      /*let message = { id: 123, type:'READ', from:'hyperty://ua.pt/asdf',
+                    to:'domain://registry.ua.pt/hyperty-instance/user' };
+      _this.simulate(message.from);*/
       return new Promise(function (resolve, reject) {
         _this.idModule.loginWithRP('google identity', 'scope').then(function (value) {
           var assertedID = _this.idModule.getIdentities();
@@ -37925,7 +38088,10 @@ var PolicyEngine = function () {
             message.body.idToken = value;
           }
 
-          var policiesResult = _this.checkPolicies(message, userID);
+          var applicablePolicies = _this.getApplicablePolicies(message.from, message.to, userID);
+          var policiesResult = _this.pdp.evaluate(message, userID, applicablePolicies);
+          _this.pep.enforce(policiesResult[1]);
+
           if (policiesResult[0]) {
             message.body.authorised = true;
             resolve(message);
@@ -37939,23 +38105,9 @@ var PolicyEngine = function () {
         });
       });
     }
-  }, {
-    key: 'checkPolicies',
-    value: function checkPolicies(message, userID) {
-      var _this = this;
-      var applicablePolicies = _this.getApplicablePolicies(message.from, message.to, userID);
-      var results = [true];
-      var actions = [];
 
-      for (var policy in applicablePolicies) {
-        var result = applicablePolicies[policy].evaluate(message, userID);
-        results.push(result[0]);
-        actions.push(result[1]);
-      }
+    // TODO: applicability is to be based on scope
 
-      var authorisationDecision = _this.getAuthorisationDecision(results);
-      return [authorisationDecision, actions];
-    }
   }, {
     key: 'getApplicablePolicies',
     value: function getApplicablePolicies(hypertyFrom, hypertyTo, userID) {
@@ -37979,11 +38131,6 @@ var PolicyEngine = function () {
       }
       return applicablePolicies;
     }
-  }, {
-    key: 'getAuthorisationDecision',
-    value: function getAuthorisationDecision(results) {
-      return results.indexOf(false) == -1;
-    }
   }]);
 
   return PolicyEngine;
@@ -37992,7 +38139,7 @@ var PolicyEngine = function () {
 exports.default = PolicyEngine;
 module.exports = exports['default'];
 
-},{"../utils/utils.js":199,"./Policy":187}],189:[function(require,module,exports){
+},{"./PDP":187,"./PEP":188,"./Policy":189}],191:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -38090,7 +38237,7 @@ var AddressAllocation = function () {
 exports.default = AddressAllocation;
 module.exports = exports['default'];
 
-},{}],190:[function(require,module,exports){
+},{}],192:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -38196,7 +38343,7 @@ var HypertyDiscovery = function () {
 exports.default = HypertyDiscovery;
 module.exports = exports['default'];
 
-},{"../utils/utils.js":199}],191:[function(require,module,exports){
+},{"../utils/utils.js":201}],193:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -38263,7 +38410,7 @@ var HypertyInstance = function (_RegistryDataModel) {
 exports.default = HypertyInstance;
 module.exports = exports['default'];
 
-},{"./RegistryDataModel":193}],192:[function(require,module,exports){
+},{"./RegistryDataModel":195}],194:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -38798,7 +38945,7 @@ var Registry = function (_EventEmitter) {
 exports.default = Registry;
 module.exports = exports['default'];
 
-},{"../utils/EventEmitter":198,"../utils/utils.js":199,"./AddressAllocation":189,"./HypertyDiscovery":190,"./HypertyInstance":191,"service-framework":160}],193:[function(require,module,exports){
+},{"../utils/EventEmitter":200,"../utils/utils.js":201,"./AddressAllocation":191,"./HypertyDiscovery":192,"./HypertyInstance":193,"service-framework":160}],195:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38856,7 +39003,7 @@ var RegistryDataModel = function () {
 exports.default = RegistryDataModel;
 module.exports = exports['default'];
 
-},{}],194:[function(require,module,exports){
+},{}],196:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -38914,6 +39061,7 @@ var RuntimeCatalogue = function () {
       return new Promise(function (resolve, reject) {
 
         var dividedURL = (0, _utils.divideURL)(hypertyURL);
+        var type = dividedURL.type;
         var domain = dividedURL.domain;
         var hyperty = dividedURL.identity;
 
@@ -38925,7 +39073,7 @@ var RuntimeCatalogue = function () {
           hyperty = hyperty.substring(hyperty.lastIndexOf('/') + 1);
         }
 
-        _this.httpRequest.get('../resources/descriptors/Hyperties.json').then(function (descriptor) {
+        _this.httpRequest.get(type + '://' + domain + '/resources/descriptors/Hyperties.json').then(function (descriptor) {
           _this.Hyperties = JSON.parse(descriptor);
 
           var result = _this.Hyperties[hyperty];
@@ -38939,7 +39087,12 @@ var RuntimeCatalogue = function () {
             // create the descriptor
             var _hyperty = _this._factory.createHypertyDescriptorObject(result.cguid, result.objectName, result.description, result.language, result.sourcePackageURL, result.type, result.dataObjects);
 
-            // console.log("created hyperty descriptor object:", hyperty);
+            // optional fields
+            _hyperty.configuration = result.configuration;
+            _hyperty.constraints = result.constraints;
+            _hyperty.messageSchema = result.messageSchema;
+            _hyperty.policies = result.policies;
+            _hyperty.signature = result.signature;
 
             // parse and attach sourcePackage
             var sourcePackage = result.sourcePackage;
@@ -38969,9 +39122,20 @@ var RuntimeCatalogue = function () {
 
       return new Promise(function (resolve, reject) {
 
+        var dividedURL = (0, _utils.divideURL)(runtimeURL);
+        var type = dividedURL.type;
+        var domain = dividedURL.domain;
+        var runtime = dividedURL.identity;
+
+        if (runtime) {
+          runtime = runtime.substring(runtime.lastIndexOf('/') + 1);
+        }
+
         // request the json
-        _this._makeExternalRequest(runtimeURL, _this._nodeHttp, _this._nodeHttps).then(function (result) {
-          result = JSON.parse(result);
+        _this.httpRequest.get(type + '://' + domain + '/resources/descriptors/Runtimes.json').then(function (descriptor) {
+          _this.Runtimes = JSON.parse(descriptor);
+
+          var result = _this.Runtimes[runtime];
 
           if (result.ERROR) {
             // TODO handle error properly
@@ -38985,21 +39149,22 @@ var RuntimeCatalogue = function () {
             } catch (e) {
               // already json object
             }
+
             console.log('creating runtime descriptor based on: ', result);
 
             // create the descriptor
-            var runtime = _this._factory.createHypertyRuntimeDescriptorObject(result.cguid, result.objectName, result.description, result.language, result.sourcePackageURL, result.type || result.runtimeType, result.hypertyCapabilities, result.protocolCapabilities);
+            var _runtime = _this._factory.createHypertyRuntimeDescriptorObject(result.cguid, result.objectName, result.description, result.language, result.sourcePackageURL, result.type || result.runtimeType, result.hypertyCapabilities, result.protocolCapabilities);
 
-            console.log('created runtime descriptor object:', runtime);
+            console.log('created runtime descriptor object:', _runtime);
 
             // parse and attach sourcePackage
             var sourcePackage = result.sourcePackage;
             if (sourcePackage) {
               // console.log('runtime has sourcePackage:', sourcePackage);
-              runtime.sourcePackage = _this._createSourcePackage(_this._factory, sourcePackage);
+              _runtime.sourcePackage = _this._createSourcePackage(_this._factory, sourcePackage);
             }
 
-            resolve(runtime);
+            resolve(_runtime);
           }
         });
       });
@@ -39024,7 +39189,7 @@ var RuntimeCatalogue = function () {
           reject('sourcePackage is already contained in descriptor, please use it directly');
         }
 
-        _this._makeExternalRequest(sourcePackageURL).then(function (result) {
+        _this.httpRequest.get(sourcePackageURL).then(function (result) {
           // console.log("got raw sourcePackage:", result);
           if (result.error) {
             // TODO handle error properly
@@ -39061,6 +39226,7 @@ var RuntimeCatalogue = function () {
       return new Promise(function (resolve, reject) {
 
         var dividedURL = (0, _utils.divideURL)(stubURL);
+        var type = dividedURL.type;
         var domain = dividedURL.domain;
         var protoStub = dividedURL.identity;
 
@@ -39069,12 +39235,14 @@ var RuntimeCatalogue = function () {
         }
 
         if (!protoStub) {
+          // TODO: Check this to correct the protocal;
+          type = 'http';
           protoStub = 'default';
         } else {
           protoStub = protoStub.substring(protoStub.lastIndexOf('/') + 1);
         }
 
-        _this.httpRequest.get('../resources/descriptors/ProtoStubs.json').then(function (descriptor) {
+        _this.httpRequest.get(type + '://' + domain + '/resources/descriptors/ProtoStubs.json').then(function (descriptor) {
           _this.ProtoStubs = JSON.parse(descriptor);
 
           var result = _this.ProtoStubs[protoStub];
@@ -39114,16 +39282,23 @@ var RuntimeCatalogue = function () {
 
       return new Promise(function (resolve, reject) {
 
+        var dividedURL = (0, _utils.divideURL)(dataSchemaURL);
+        var type = dividedURL.type;
+        var domain = dividedURL.domain;
+        var schemaURL = dividedURL.identity;
+
         // request the json
-        if (dataSchemaURL) {
-          dataSchemaURL = dataSchemaURL.substring(dataSchemaURL.lastIndexOf('/') + 1);
+        if (schemaURL) {
+          schemaURL = schemaURL.substring(schemaURL.lastIndexOf('/') + 1);
         }
 
-        _this.httpRequest.get('../resources/descriptors/DataSchemas.json').then(function (descriptor) {
+        console.log('getDataSchemaDescriptor: ', dataSchemaURL, dividedURL);
+
+        _this.httpRequest.get(type + '://' + domain + '/resources/descriptors/DataSchemas.json').then(function (descriptor) {
 
           _this.DataSchemas = JSON.parse(descriptor);
 
-          var result = _this.DataSchemas[dataSchemaURL];
+          var result = _this.DataSchemas[schemaURL];
 
           if (result.ERROR) {
             // TODO handle error properly
@@ -39194,7 +39369,7 @@ var RuntimeCatalogue = function () {
 exports.default = RuntimeCatalogue;
 module.exports = exports['default'];
 
-},{"../utils/utils":199,"service-framework":160}],195:[function(require,module,exports){
+},{"../utils/utils":201,"service-framework":160}],197:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -39495,7 +39670,11 @@ var RuntimeUA = function () {
           // Extend original hyperty configuration;
           var configuration = {};
           if (!(0, _utils.emptyObject)(_hypertyDescriptor.configuration)) {
-            configuration = Object.assign({}, JSON.parse(_hypertyDescriptor.configuration));
+            try {
+              configuration = Object.assign({}, JSON.parse(_hypertyDescriptor.configuration));
+            } catch (e) {
+              configuration = _hypertyDescriptor.configuration;
+            }
           }
           configuration.runtimeURL = _this.runtimeURL;
 
@@ -39689,7 +39868,7 @@ var RuntimeUA = function () {
 exports.default = RuntimeUA;
 module.exports = exports['default'];
 
-},{"../bus/MessageBus":180,"../graphconnector/GraphConnector":184,"../identity/IdentityModule":186,"../policy/PolicyEngine":188,"../registry/Registry":192,"../syncher/SyncherManager":197,"../utils/utils":199,"./RuntimeCatalogue-Local":194}],196:[function(require,module,exports){
+},{"../bus/MessageBus":180,"../graphconnector/GraphConnector":184,"../identity/IdentityModule":186,"../policy/PolicyEngine":190,"../registry/Registry":194,"../syncher/SyncherManager":199,"../utils/utils":201,"./RuntimeCatalogue-Local":196}],198:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -39768,7 +39947,7 @@ var ObjectAllocation = function () {
 exports.default = ObjectAllocation;
 module.exports = exports['default'];
 
-},{}],197:[function(require,module,exports){
+},{}],199:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -40071,7 +40250,7 @@ var SyncherManager = function () {
 exports.default = SyncherManager;
 module.exports = exports['default'];
 
-},{"../utils/utils":199,"./ObjectAllocation":196}],198:[function(require,module,exports){
+},{"../utils/utils":201,"./ObjectAllocation":198}],200:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -40129,7 +40308,7 @@ var EventEmitter = function () {
 exports.default = EventEmitter;
 module.exports = exports['default'];
 
-},{}],199:[function(require,module,exports){
+},{}],201:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -40190,5 +40369,5 @@ function deepClone(obj) {
   if (obj) return JSON.parse(JSON.stringify(obj));
 }
 
-},{}]},{},[195])(195)
+},{}]},{},[197])(197)
 });
