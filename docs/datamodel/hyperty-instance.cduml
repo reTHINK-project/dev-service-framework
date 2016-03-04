@@ -10,6 +10,7 @@ package HypertyInstance <<Rect>> {
 		url : URL.HypertyURL
 		user : URL.UserURL
 		guid : URL.UserGUIDURL
+		objects : string[]
 		runtime : URL.HypertyRuntimeURL
 		context : URL.ContextURL
 	}

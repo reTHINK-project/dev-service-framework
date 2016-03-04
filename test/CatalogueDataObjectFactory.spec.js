@@ -32,8 +32,9 @@ describe('CatalogueDataObjectFactory', function () {
 
         it('should generate HypertyDescriptor', function () {
             hypertyDescriptor = catalogueDataObjectFactory.createHypertyDescriptorObject(
-                "525f4671-ebd8-4b35-b062-5a126bf44628", "My awesome Hyperty", "Description of Hyperty", DataObjectSourceLanguage.JAVASCRIPT_ECMA6,
-                "https://example.org/my-awesome-hyperty/source", HypertyType.COMMUNICATOR, {});
+                "525f4671-ebd8-4b35-b062-5a126bf44628", "1.0", "My awesome Hyperty", "Description of Hyperty",
+                DataObjectSourceLanguage.JAVASCRIPT_ECMA6, "https://example.org/my-awesome-hyperty/source",
+                HypertyType.COMMUNICATOR, {});
             expect(hypertyDescriptor).not.to.be.empty;
         });
 
@@ -66,7 +67,7 @@ describe('CatalogueDataObjectFactory', function () {
 
         it('should generate ProtocolStubDescriptor', function () {
             protocolStubDescriptor = catalogueDataObjectFactory.createProtoStubDescriptorObject(
-                "3339515e-e457-4fe0-b780-68263ca216db", "My awesome Hyperty 2", "Description of Hyperty 2",
+                "3339515e-e457-4fe0-b780-68263ca216db", "1.1", "My awesome Hyperty 2", "Description of Hyperty 2",
                 DataObjectSourceLanguage.JAVASCRIPT_ECMA6, "https://example.org/my-awesome-hyperty-2/source", {}, {},
                 new RuntimeConstraint());
             expect(protocolStubDescriptor).not.to.be.empty;
@@ -87,7 +88,7 @@ describe('CatalogueDataObjectFactory', function () {
 
         it('should generate PolicyEnforcerDescriptor', function () {
             policyEnforcerDescriptor = catalogueDataObjectFactory.createPolicyEnforcerDescriptorObject(
-                "5dc08572-56e5-4ad1-99c8-79c49578a5b0", "My awesome Hyperty 3", "Description of Hyperty 2",
+                "5dc08572-56e5-4ad1-99c8-79c49578a5b0", "1.0", "My awesome Hyperty 3", "Description of Hyperty 2",
                 DataObjectSourceLanguage.PYTHON, "https://example.com/my-awesome-hyperty-3/source", {},
                 []);
             expect(policyEnforcerDescriptor).not.to.be.empty;
@@ -118,7 +119,7 @@ describe('CatalogueDataObjectFactory', function () {
 
         it('should generate CatalogueDataObject of type HypertyDescriptor', function () {
             catalogueDataObject = catalogueDataObjectFactory.createCatalogueDataObject(
-                "df7c7237-03e4-4547-89ca-c0c8b8d88f63", CatalogueObjectType.HYPERTY, "My awesome Hyperty 4",
+                "df7c7237-03e4-4547-89ca-c0c8b8d88f63", CatalogueObjectType.HYPERTY, "2.5.1", "My awesome Hyperty 4",
                 "Description of Hyperty 4", DataObjectSourceLanguage.JAVASCRIPT_ECMA6,
                 "https://example.org/my-awesome-hyperty/source");
             expect(catalogueDataObject).not.to.be.empty;
@@ -139,7 +140,7 @@ describe('CatalogueDataObjectFactory', function () {
 
         it('should generate HypertyRuntimeDescriptor', function () {
             hypertyRuntimeDescriptor = catalogueDataObjectFactory.createHypertyRuntimeDescriptorObject(
-                "b36392c3-73d4-4a63-942b-4a9c2c663eea", "My awesome Hyperty 5", "Description of Hyperty 5",
+                "b36392c3-73d4-4a63-942b-4a9c2c663eea", "0.4.4", "My awesome Hyperty 5", "Description of Hyperty 5",
                 DataObjectSourceLanguage.JAVASCRIPT_ECMA6, "https://example.org/my-awesome-hyperty-5/source", {}, {},
                 {});
             expect(hypertyRuntimeDescriptor).not.to.be.empty;
@@ -160,7 +161,7 @@ describe('CatalogueDataObjectFactory', function () {
 
         it('should generate DataObjectSchema', function () {
             dataObjectSchema = catalogueDataObjectFactory.createDataObjectSchema(
-                "b36392c3-73d4-4a63-942b-4a9c2c663eea", "My awesome Schema",
+                "b36392c3-73d4-4a63-942b-4a9c2c663eea", "1.2.1", "My awesome Schema",
                 "Description of Schema",
                 DataObjectSourceLanguage.JAVASCRIPT_ECMA6, "https://example.org/my-awesome-schema/source");
             expect(dataObjectSchema).not.to.be.empty;

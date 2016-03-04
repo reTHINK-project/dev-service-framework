@@ -26,9 +26,9 @@ var insert = require('gulp-insert');
 var uglify = require('gulp-uglify');
 var bump = require('gulp-bump');
 var argv = require('yargs').argv;
-var through = require('through2');
-var path = require('path');
+
 var gulpif = require('gulp-if');
+var path = require('path');
 
 var pkg = require('./package.json');
 
@@ -44,28 +44,30 @@ gulp.task('license', function() {
 
 function prependLicense(clean) {
 
-  var license = '/**\n' +
-'* Copyright 2016 PT Inovação e Sistemas SA\n' +
-'* Copyright 2016 INESC-ID\n' +
-'* Copyright 2016 QUOBIS NETWORKS SL\n' +
-'* Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V\n' +
-'* Copyright 2016 ORANGE SA\n' +
-'* Copyright 2016 Deutsche Telekom AG\n' +
-'* Copyright 2016 Apizee\n' +
-'* Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN\n' +
-'*\n' +
-'* Licensed under the Apache License, Version 2.0 (the "License");\n' +
-'* you may not use this file except in compliance with the License.\n' +
-'* You may obtain a copy of the License at\n' +
-'*\n' +
-'*   http://www.apache.org/licenses/LICENSE-2.0\n' +
-'*\n' +
-'* Unless required by applicable law or agreed to in writing, software\n' +
-'* distributed under the License is distributed on an "AS IS" BASIS,\n' +
-'* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n' +
-'* See the License for the specific language governing permissions and\n' +
-'* limitations under the License.\n' +
-'**/\n\n';
+  var license = `/**
+* Copyright 2016 PT Inovação e Sistemas SA
+* Copyright 2016 INESC-ID
+* Copyright 2016 QUOBIS NETWORKS SL
+* Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
+* Copyright 2016 ORANGE SA
+* Copyright 2016 Deutsche Telekom AG
+* Copyright 2016 Apizee
+* Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*   http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+**/
+
+`;
 
   return through.obj(function(file, enc, cb) {
 
@@ -150,7 +152,7 @@ function compile(file, destination, cb) {
     entries: [filename],
     standalone: 'activate',
     debug: false
-  }).transform(babel, {global: true, compact: false})
+  }).transform(babel, {compact: false, optional: 'runtime'})
   .bundle()
   .on('error', function(err) {
     console.error(err);
@@ -171,7 +173,7 @@ gulp.task('watch-hyperty', function(cb) {
 
   var destination = argv.dest;
 
-  gulp.watch(['src/hyperty-connector/*.js', 'src/hyperty-chat/*.js'], function(event) {
+  gulp.watch(['src/hyperty-connector/*.js', 'src/hyperty-chat/*.js', 'example/hyperties/hello-world/*.js'], function(event) {
     var pathSplit = event.path.split(path.sep);
     var dir = pathSplit[pathSplit.length - 2];
 
@@ -181,6 +183,13 @@ gulp.task('watch-hyperty', function(cb) {
 
       case 'hyperty-connector':
         return compile('src/' + dir + '/HypertyConnector.js', destination, cb);
+
+      case 'hello-world':
+        console.log(dir);
+
+        compile('example/hyperties/' + dir + '/HelloWorldReporter.js', destination, cb);
+        compile('example/hyperties/' + dir + '/HelloWorldObserver.js', destination, cb);
+        return;
     }
 
   });
@@ -191,6 +200,7 @@ gulp.task('watch', function(cb) {
   gulp.watch(['src/**/*.js'], ['dist'], cb);
 });
 
+var through = require('through2');
 var Base64 = require('js-base64').Base64;
 var fs = require('fs');
 
@@ -234,18 +244,7 @@ function encode(filename, descriptorName, configuration, isDefault) {
     json[value].version = '0.1';
     json[value].description = 'Description of ' + filename;
     json[value].objectName = filename;
-
-    if (!json[value].hasOwnProperty('configuration') && configuration) {
-      json[value].configuration = configuration;
-      console.log('setting configuration: ', configuration);
-    }
-
-    if (descriptorName === 'Runtimes') {
-      json[value].runtimeType = 'browser';
-      json[value].hypertyCapabilities = {mic: false };
-      json[value].protocolCapabilities = {http: true };
-    }
-
+    json[value].configuration = configuration;
     json[value].sourcePackageURL = '/sourcePackage';
     json[value].sourcePackage.sourceCode = encoded;
     json[value].sourcePackage.sourceCodeClassname = filename;
@@ -285,16 +284,21 @@ function resource(file, configuration, isDefault) {
     descriptorName = 'Hyperties';
   } else if (filename.indexOf('ProtoStub') !== -1) {
     descriptorName = 'ProtoStubs';
-  } else if (filename.indexOf('DataSchema') !== -1) {
+  } else if (filename.indexOf('DataSchema')) {
     descriptorName = 'DataSchemas';
-  } else if (filename.indexOf('runtime') !== -1 || filename.indexOf('Runtime') !== -1) {
-    descriptorName = 'Runtimes';
   }
 
-  console.log('DATA:', descriptorName, filename);
+  console.log('DATA:', descriptorName);
 
   if (extension === 'js') {
-    return gulp.src(['resources/' + filename + '.js'])
+    return browserify({
+      entries: ['resources/' + filename + '.js'],
+      standalone: 'activate',
+      debug: false
+    })
+    .transform(babel)
+    .bundle()
+    .pipe(source('bundle.js'))
     .pipe(gulp.dest('resources/'))
     .pipe(buffer())
     .pipe(encode(filename, descriptorName, configuration, isDefault))
@@ -323,7 +327,7 @@ gulp.task('encode', function(done) {
   });
 
   function isFile(file) {
-    if (file.indexOf('Hyperty') !== -1 || file.indexOf('ProtoStub') !== -1 || file.indexOf('DataSchema') !== -1 || (file.indexOf('runtime') !== -1 || file.indexOf('Runtime') !== -1)) {
+    if (file.indexOf('Hyperty') !== -1 || file.indexOf('ProtoStub') !== -1 || file.indexOf('DataSchema') !== -1){
       return fs.statSync('resources/' + file).isFile();
     }
   }

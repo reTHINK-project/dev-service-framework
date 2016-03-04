@@ -27,8 +27,8 @@
 import CatalogueDataObject from './CatalogueDataObject';
 
 class PolicyEnforcerDescriptor extends CatalogueDataObject {
-    constructor(guid, type, objectName, description, language, sourcePackageURL, configuration, policies) {
-        super(guid, type, objectName, description, language, sourcePackageURL);
+    constructor(guid, type, version, objectName, description, language, sourcePackageURL, configuration, policies) {
+        super(guid, type, version, objectName, description, language, sourcePackageURL);
 
         this._configuration = configuration;
         this._policies = policies;

@@ -53,7 +53,7 @@ Message sent by the Registry Domain server (Connector or Protostub) to Hyperty R
 "body" : { "code": 200 }
 ```
 
-#### Update lastModified registration request
+#### keep registration alive
 
 Message sent by the Hyperty Runtime Registry function to Registry Domain server (Connector or Protostub).
 
@@ -62,7 +62,7 @@ Message sent by the Hyperty Runtime Registry function to Registry Domain server 
 "type" : "update",
 "from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/registry",
 "to" : "domain://registry.<sp-domain>",
-"body" : { "resource" : "/<registry-object-url-scheme>/<registry-object-identifier>/lastModified", "value" : <ISO8601-Date> }
+"body" : { "resource" : "/<registry-object-url-scheme>/<registry-object-identifier>" }
 ```
 
 Response Message sent back by the Registry Domain server (Connector or Protostub) to Hyperty Runtime Registry function.
@@ -108,7 +108,31 @@ Message sent by an Hyperty Instance to Registry Domain server (Connector or Prot
 "type" : "read",
 "from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "to" : "domain://registry.<sp1>"
-"body" : { "resource" : "/hyperty/user/<userURL>", "criteria" : { "descriptor.hypertyType" = <hyperty-type> } }
+"body" : { "resource" : "/hyperty/user/<userURL>", "criteria" : { "descriptor.hypertyType" : <hyperty-type> } }
+```
+
+**Response Message returning the discovered Hyperty Instances**
+
+Message sent by Registry Domain server (Connector or Protostub) to an Hyperty Instance.
+
+```
+"id" : "2"
+"type" : "response",
+"from" : "domain://registry.<sp-domain>",
+"to" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
+"body" : { "code": 200, "value" : ["<discoveredHypertyInstance>"] }
+```
+
+#### Hyperty Instance Query per User and per Object Scheme
+
+Message sent by an Hyperty Instance to Registry Domain server (Connector or Protostub).
+
+```
+"id" : "2",
+"type" : "read",
+"from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
+"to" : "domain://registry.<sp1>"
+"body" : { "resource" : "/hyperty/user/<userURL>", "criteria" : { "objects" : [{"<Object URL Scheme>",..}] } }
 ```
 
 **Response Message returning the discovered Hyperty Instances**
