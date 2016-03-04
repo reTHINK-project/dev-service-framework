@@ -620,38 +620,48 @@ var HypertyDiscovery = (function () {
     _this.messageBus = msgBus;
 
     _this.domain = domain;
-    _this.discoveryURL = 'hyperty://' + domain + '/hypertyDisovery';
+    _this.discoveryURL = 'hyperty://' + domain + '/hypertyDiscovery';
   }
 
   /**
   * function to request about users registered in domain registry, and
   * return the hyperty instance if found.
   * @param  {email}              email
+  * @param  {domain}            domain (Optional)
   * @return {Promise}          Promise
   */
 
   _createClass(HypertyDiscovery, [{
     key: 'discoverHypertyPerUser',
-    value: function discoverHypertyPerUser(email) {
+    value: function discoverHypertyPerUser(email, domain) {
       var _this = this;
+      var activeDomain = undefined;
+
+      if (domain === undefined) {
+        activeDomain = _this.domain;
+      } else {
+        activeDomain = domain;
+      }
+
+      var activediscoveryURL = 'hyperty://' + activeDomain + '/hypertyDiscovery';
       var identityURL = 'user://' + email.substring(email.indexOf('@') + 1, email.length) + '/' + email.substring(0, email.indexOf('@'));
 
       // message to query domain registry, asking for a user hyperty.
       var message = {
-        type: 'READ', from: _this.discoveryURL, to: 'domain://registry.' + _this.domain + '/', body: { resource: identityURL }
+        type: 'READ', from: activediscoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: identityURL }
       };
 
+      //console.log('message READ', message);
       return new Promise(function (resolve, reject) {
 
         _this.messageBus.postMessage(message, function (reply) {
-          //console.log('MESSAGE', reply);
+          //console.log('message reply', reply);
 
           var hyperty = undefined;
           var mostRecent = undefined;
           var lastHyperty = undefined;
           var value = reply.body.value;
 
-          //console.log('valueParsed', valueParsed);
           for (hyperty in value) {
             if (value[hyperty].lastModified !== undefined) {
               if (mostRecent === undefined) {
@@ -666,6 +676,7 @@ var HypertyDiscovery = (function () {
               }
             }
           }
+
           var hypertyURL = lastHyperty;
 
           if (hypertyURL === undefined) {
@@ -678,7 +689,7 @@ var HypertyDiscovery = (function () {
             hypertyURL: hypertyURL
           };
 
-          console.log('===> RegisterHyperty messageBundle: ', idPackage);
+          console.log('===> hypertyDiscovery messageBundle: ', idPackage);
           resolve(idPackage);
         });
       });
@@ -745,15 +756,15 @@ var _utilsUtilsJs = require('../utils/utils.js');
 var DataObject = (function () {
   /* private
   _version: number
-    _owner: HypertyURL
+   _owner: HypertyURL
   _url: ObjectURL
   _schema: Schema
   _bus: MiniBus
   _status: on | paused
   _syncObj: SyncData
-    _children: { id: DataObjectChild }
+   _children: { id: DataObjectChild }
   _childrenListeners: [MsgListener]
-    ----event handlers----
+   ----event handlers----
   _onAddChildrenHandler: (event) => void
   */
 
@@ -1123,7 +1134,7 @@ var _SyncObject2 = _interopRequireDefault(_SyncObject);
 
 var DataObjectChild /* implements SyncStatus */ = (function () {
   /* private
-    ----event handlers----
+   ----event handlers----
   _onResponseHandler: (event) => void
   */
 
@@ -1280,7 +1291,7 @@ var DataObjectObserver = (function (_DataObject) {
 
   /* private
   _changeListener: MsgListener
-    ----event handlers----
+   ----event handlers----
   _filters: {<filter>: {type: <start, exact>, callback: <function>} }
   */
 
@@ -1442,7 +1453,7 @@ var DataObjectReporter = (function (_DataObject) {
 
   /* private
   _subscriptions: <hypertyUrl: { status: string } }>
-    ----event handlers----
+   ----event handlers----
   _onSubscriptionHandler: (event) => void
   _onResponseHandler: (event) => void
   */
@@ -1638,7 +1649,7 @@ var DataProvisional = (function () {
   /* private
   _childrenListeners: [MsgListener]
   _listener: MsgListener
-    _changes: []
+   _changes: []
   */
 
   function DataProvisional(owner, url, bus, children) {
@@ -1665,7 +1676,7 @@ var DataProvisional = (function () {
             console.log(msg);
           }
         });
-          _this._childrenListeners.push(listener);
+         _this._childrenListeners.push(listener);
       });
     }*/
   }
@@ -2110,11 +2121,11 @@ var Syncher = (function () {
   /* private
   _owner: URL
   _bus: MiniBus
-    _subURL: URL
-    _reporters: <url: DataObjectReporter>
+   _subURL: URL
+   _reporters: <url: DataObjectReporter>
   _observers: <url: DataObjectObserver>
   _provisionals: <url: DataProvisional>
-    ----event handlers----
+   ----event handlers----
   _onNotificationHandler: (event) => void
   */
 

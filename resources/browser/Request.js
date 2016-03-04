@@ -28,19 +28,27 @@ class Request {
 
   _makeLocalRequest(method, url) {
 
-    console.log(url);
+    console.log(method, url);
 
     return new Promise(function(resolve, reject) {
+      // TODO: Check why the url have localhost and undefined like a protocol
+      // check the RuntimeUA
       let protocolmap = {
-        'hyperty-catalogue://': 'http://',
-        '../': '../'
+        'localhost://': 'https://',
+        'undefined://': 'https://',
+        'hyperty-catalogue://': 'https://',
+        'https://': 'https://',
+        'http://': 'http://'
       };
+
+      let usedProtocol;
 
       let foundProtocol = false;
       for (let protocol in protocolmap) {
         if (url.slice(0, protocol.length) === protocol) {
-          // console.log('exchanging ' + protocol + " with " + protocolmap[protocol]);
+          // console.log("exchanging " + protocol + " with " + protocolmap[protocol]);
           url = protocolmap[protocol] + url.slice(protocol.length, url.length);
+          usedProtocol = protocolmap[protocol];
           foundProtocol = true;
           break;
         }

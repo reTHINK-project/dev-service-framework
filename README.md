@@ -46,22 +46,27 @@ This section provides guidelines on how to contribute to reTHINK Service Framewo
 -	[NodeJS Message Node Development guidelines](https://github.com/reTHINK-project/dev-msg-node-nodejs);
 -	[Development guidelines for new Message Nodes](docs/manuals/development-of-protostubs-and-msg-nodes.md); -
 
-#### How to install this repository like a NPM Module;
+#### <a id="how-to-install"></a>How to install this repository like a NPM Module;
 
 How to include this repository in other software parts, like [dev-runtime-browser](https://github.com/reTHINK-project/dev-runtime-browser), [dev-runtime-node](https://github.com/reTHINK-project/dev-runtime-node) or [dev-runtime-core](https://github.com/reTHINK-project/dev-runtime-core);
 
-```
+```shell
 jspm install service-framework=github:github:reTHINK-project/dev-service-framework
 ```
 
 or
 
-```
+```shell
 npm install github:reTHINK-project/dev-service-framework --save
 ```
 
-If you have problems with the `npm install` service framework module, you may need following the steps present on [Github Help](https://help.github.com/articles/generating-ssh-keys/). and select operation system you are using.
+**New Way**
 
+<<<<<<< .mine
+
+=======
+
+>>>>>>> .theirs
 #### Setup Environment
 
 On the first time you are cloning this repository, you need to run the command `npm run init-setup`;

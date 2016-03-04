@@ -58,7 +58,7 @@ class HypertyDiscovery {
       activeDomain = domain;
     }
 
-    let activediscoveryURL = 'hyperty://' + activeDomain + '/hypertyDiscovery';
+    let activediscoveryURL = 'hyperty://' + _this.domain + '/hypertyDiscovery';
     let identityURL = 'user://' + email.substring(email.indexOf('@') + 1, email.length) + '/' + email.substring(0, email.indexOf('@'));
 
     // message to query domain registry, asking for a user hyperty.
@@ -66,11 +66,13 @@ class HypertyDiscovery {
       type: 'READ', from: activediscoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: identityURL}
     };
 
+    console.log('Message: ', message, activeDomain, identityURL);
+
     //console.log('message READ', message);
     return new Promise(function(resolve, reject) {
 
       _this.messageBus.postMessage(message, (reply) => {
-        //console.log('message reply', reply);
+        console.log('message reply', reply);
 
         let hyperty;
         let mostRecent;
@@ -91,6 +93,8 @@ class HypertyDiscovery {
             }
           }
         }
+
+        console.log('Last Hyperty: ', lastHyperty, mostRecent);
 
         let hypertyURL = lastHyperty;
 

@@ -1,1819 +1,4 @@
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.activate = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-module.exports = { "default": require("core-js/library/fn/object/create"), __esModule: true };
-},{"core-js/library/fn/object/create":19}],2:[function(require,module,exports){
-module.exports = { "default": require("core-js/library/fn/object/define-property"), __esModule: true };
-},{"core-js/library/fn/object/define-property":20}],3:[function(require,module,exports){
-module.exports = { "default": require("core-js/library/fn/object/get-own-property-descriptor"), __esModule: true };
-},{"core-js/library/fn/object/get-own-property-descriptor":21}],4:[function(require,module,exports){
-module.exports = { "default": require("core-js/library/fn/object/get-prototype-of"), __esModule: true };
-},{"core-js/library/fn/object/get-prototype-of":22}],5:[function(require,module,exports){
-module.exports = { "default": require("core-js/library/fn/object/keys"), __esModule: true };
-},{"core-js/library/fn/object/keys":23}],6:[function(require,module,exports){
-module.exports = { "default": require("core-js/library/fn/object/set-prototype-of"), __esModule: true };
-},{"core-js/library/fn/object/set-prototype-of":24}],7:[function(require,module,exports){
-module.exports = { "default": require("core-js/library/fn/promise"), __esModule: true };
-},{"core-js/library/fn/promise":25}],8:[function(require,module,exports){
-module.exports = { "default": require("core-js/library/fn/symbol"), __esModule: true };
-},{"core-js/library/fn/symbol":26}],9:[function(require,module,exports){
-module.exports = { "default": require("core-js/library/fn/symbol/iterator"), __esModule: true };
-},{"core-js/library/fn/symbol/iterator":27}],10:[function(require,module,exports){
-module.exports = require("./classCallCheck.js");
-},{"./classCallCheck.js":11}],11:[function(require,module,exports){
-"use strict";
-
-exports.__esModule = true;
-
-exports.default = function (instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-};
-},{}],12:[function(require,module,exports){
-module.exports = require("./createClass.js");
-},{"./createClass.js":13}],13:[function(require,module,exports){
-"use strict";
-
-exports.__esModule = true;
-
-var _defineProperty = require("babel-runtime/core-js/object/define-property");
-
-var _defineProperty2 = _interopRequireDefault(_defineProperty);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = function () {
-  function defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      (0, _defineProperty2.default)(target, descriptor.key, descriptor);
-    }
-  }
-
-  return function (Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) defineProperties(Constructor, staticProps);
-    return Constructor;
-  };
-}();
-},{"babel-runtime/core-js/object/define-property":2}],14:[function(require,module,exports){
-"use strict";
-
-exports.__esModule = true;
-
-var _getPrototypeOf = require("babel-runtime/core-js/object/get-prototype-of");
-
-var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-var _getOwnPropertyDescriptor = require("babel-runtime/core-js/object/get-own-property-descriptor");
-
-var _getOwnPropertyDescriptor2 = _interopRequireDefault(_getOwnPropertyDescriptor);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = function get(object, property, receiver) {
-  if (object === null) object = Function.prototype;
-  var desc = (0, _getOwnPropertyDescriptor2.default)(object, property);
-
-  if (desc === undefined) {
-    var parent = (0, _getPrototypeOf2.default)(object);
-
-    if (parent === null) {
-      return undefined;
-    } else {
-      return get(parent, property, receiver);
-    }
-  } else if ("value" in desc) {
-    return desc.value;
-  } else {
-    var getter = desc.get;
-
-    if (getter === undefined) {
-      return undefined;
-    }
-
-    return getter.call(receiver);
-  }
-};
-},{"babel-runtime/core-js/object/get-own-property-descriptor":3,"babel-runtime/core-js/object/get-prototype-of":4}],15:[function(require,module,exports){
-"use strict";
-
-exports.__esModule = true;
-
-var _setPrototypeOf = require("babel-runtime/core-js/object/set-prototype-of");
-
-var _setPrototypeOf2 = _interopRequireDefault(_setPrototypeOf);
-
-var _create = require("babel-runtime/core-js/object/create");
-
-var _create2 = _interopRequireDefault(_create);
-
-var _typeof2 = require("babel-runtime/helpers/typeof");
-
-var _typeof3 = _interopRequireDefault(_typeof2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = function (subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : (0, _typeof3.default)(superClass)));
-  }
-
-  subClass.prototype = (0, _create2.default)(superClass && superClass.prototype, {
-    constructor: {
-      value: subClass,
-      enumerable: false,
-      writable: true,
-      configurable: true
-    }
-  });
-  if (superClass) _setPrototypeOf2.default ? (0, _setPrototypeOf2.default)(subClass, superClass) : subClass.__proto__ = superClass;
-};
-},{"babel-runtime/core-js/object/create":1,"babel-runtime/core-js/object/set-prototype-of":6,"babel-runtime/helpers/typeof":18}],16:[function(require,module,exports){
-module.exports = require("./interopRequireDefault.js");
-},{"./interopRequireDefault.js":17}],17:[function(require,module,exports){
-"use strict";
-
-exports.__esModule = true;
-
-exports.default = function (obj) {
-  return obj && obj.__esModule ? obj : {
-    default: obj
-  };
-};
-},{}],18:[function(require,module,exports){
-"use strict";
-
-exports.__esModule = true;
-
-var _iterator = require("babel-runtime/core-js/symbol/iterator");
-
-var _iterator2 = _interopRequireDefault(_iterator);
-
-var _symbol = require("babel-runtime/core-js/symbol");
-
-var _symbol2 = _interopRequireDefault(_symbol);
-
-var _typeof = typeof _symbol2.default === "function" && typeof _iterator2.default === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default ? "symbol" : typeof obj; };
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = typeof _symbol2.default === "function" && _typeof(_iterator2.default) === "symbol" ? function (obj) {
-  return typeof obj === "undefined" ? "undefined" : _typeof(obj);
-} : function (obj) {
-  return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof(obj);
-};
-},{"babel-runtime/core-js/symbol":8,"babel-runtime/core-js/symbol/iterator":9}],19:[function(require,module,exports){
-require('../../modules/es6.object.create');
-var $Object = require('../../modules/_core').Object;
-module.exports = function create(P, D){
-  return $Object.create(P, D);
-};
-},{"../../modules/_core":35,"../../modules/es6.object.create":98}],20:[function(require,module,exports){
-require('../../modules/es6.object.define-property');
-var $Object = require('../../modules/_core').Object;
-module.exports = function defineProperty(it, key, desc){
-  return $Object.defineProperty(it, key, desc);
-};
-},{"../../modules/_core":35,"../../modules/es6.object.define-property":99}],21:[function(require,module,exports){
-require('../../modules/es6.object.get-own-property-descriptor');
-var $Object = require('../../modules/_core').Object;
-module.exports = function getOwnPropertyDescriptor(it, key){
-  return $Object.getOwnPropertyDescriptor(it, key);
-};
-},{"../../modules/_core":35,"../../modules/es6.object.get-own-property-descriptor":100}],22:[function(require,module,exports){
-require('../../modules/es6.object.get-prototype-of');
-module.exports = require('../../modules/_core').Object.getPrototypeOf;
-},{"../../modules/_core":35,"../../modules/es6.object.get-prototype-of":101}],23:[function(require,module,exports){
-require('../../modules/es6.object.keys');
-module.exports = require('../../modules/_core').Object.keys;
-},{"../../modules/_core":35,"../../modules/es6.object.keys":102}],24:[function(require,module,exports){
-require('../../modules/es6.object.set-prototype-of');
-module.exports = require('../../modules/_core').Object.setPrototypeOf;
-},{"../../modules/_core":35,"../../modules/es6.object.set-prototype-of":103}],25:[function(require,module,exports){
-require('../modules/es6.object.to-string');
-require('../modules/es6.string.iterator');
-require('../modules/web.dom.iterable');
-require('../modules/es6.promise');
-module.exports = require('../modules/_core').Promise;
-},{"../modules/_core":35,"../modules/es6.object.to-string":104,"../modules/es6.promise":105,"../modules/es6.string.iterator":106,"../modules/web.dom.iterable":108}],26:[function(require,module,exports){
-require('../../modules/es6.symbol');
-require('../../modules/es6.object.to-string');
-module.exports = require('../../modules/_core').Symbol;
-},{"../../modules/_core":35,"../../modules/es6.object.to-string":104,"../../modules/es6.symbol":107}],27:[function(require,module,exports){
-require('../../modules/es6.string.iterator');
-require('../../modules/web.dom.iterable');
-module.exports = require('../../modules/_wks')('iterator');
-},{"../../modules/_wks":95,"../../modules/es6.string.iterator":106,"../../modules/web.dom.iterable":108}],28:[function(require,module,exports){
-module.exports = function(it){
-  if(typeof it != 'function')throw TypeError(it + ' is not a function!');
-  return it;
-};
-},{}],29:[function(require,module,exports){
-module.exports = function(){ /* empty */ };
-},{}],30:[function(require,module,exports){
-module.exports = function(it, Constructor, name, forbiddenField){
-  if(!(it instanceof Constructor) || (forbiddenField !== undefined && forbiddenField in it)){
-    throw TypeError(name + ': incorrect invocation!');
-  } return it;
-};
-},{}],31:[function(require,module,exports){
-var isObject = require('./_is-object');
-module.exports = function(it){
-  if(!isObject(it))throw TypeError(it + ' is not an object!');
-  return it;
-};
-},{"./_is-object":54}],32:[function(require,module,exports){
-// false -> Array#indexOf
-// true  -> Array#includes
-var toIObject = require('./_to-iobject')
-  , toLength  = require('./_to-length')
-  , toIndex   = require('./_to-index');
-module.exports = function(IS_INCLUDES){
-  return function($this, el, fromIndex){
-    var O      = toIObject($this)
-      , length = toLength(O.length)
-      , index  = toIndex(fromIndex, length)
-      , value;
-    // Array#includes uses SameValueZero equality algorithm
-    if(IS_INCLUDES && el != el)while(length > index){
-      value = O[index++];
-      if(value != value)return true;
-    // Array#toIndex ignores holes, Array#includes - not
-    } else for(;length > index; index++)if(IS_INCLUDES || index in O){
-      if(O[index] === el)return IS_INCLUDES || index;
-    } return !IS_INCLUDES && -1;
-  };
-};
-},{"./_to-index":88,"./_to-iobject":90,"./_to-length":91}],33:[function(require,module,exports){
-// getting tag from 19.1.3.6 Object.prototype.toString()
-var cof = require('./_cof')
-  , TAG = require('./_wks')('toStringTag')
-  // ES3 wrong here
-  , ARG = cof(function(){ return arguments; }()) == 'Arguments';
-
-module.exports = function(it){
-  var O, T, B;
-  return it === undefined ? 'Undefined' : it === null ? 'Null'
-    // @@toStringTag case
-    : typeof (T = (O = Object(it))[TAG]) == 'string' ? T
-    // builtinTag case
-    : ARG ? cof(O)
-    // ES3 arguments fallback
-    : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
-};
-},{"./_cof":34,"./_wks":95}],34:[function(require,module,exports){
-var toString = {}.toString;
-
-module.exports = function(it){
-  return toString.call(it).slice(8, -1);
-};
-},{}],35:[function(require,module,exports){
-var core = module.exports = {version: '2.1.3'};
-if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
-},{}],36:[function(require,module,exports){
-// optional / simple context binding
-var aFunction = require('./_a-function');
-module.exports = function(fn, that, length){
-  aFunction(fn);
-  if(that === undefined)return fn;
-  switch(length){
-    case 1: return function(a){
-      return fn.call(that, a);
-    };
-    case 2: return function(a, b){
-      return fn.call(that, a, b);
-    };
-    case 3: return function(a, b, c){
-      return fn.call(that, a, b, c);
-    };
-  }
-  return function(/* ...args */){
-    return fn.apply(that, arguments);
-  };
-};
-},{"./_a-function":28}],37:[function(require,module,exports){
-// 7.2.1 RequireObjectCoercible(argument)
-module.exports = function(it){
-  if(it == undefined)throw TypeError("Can't call method on  " + it);
-  return it;
-};
-},{}],38:[function(require,module,exports){
-// Thank's IE8 for his funny defineProperty
-module.exports = !require('./_fails')(function(){
-  return Object.defineProperty({}, 'a', {get: function(){ return 7; }}).a != 7;
-});
-},{"./_fails":43}],39:[function(require,module,exports){
-var isObject = require('./_is-object')
-  , document = require('./_global').document
-  // in old IE typeof document.createElement is 'object'
-  , is = isObject(document) && isObject(document.createElement);
-module.exports = function(it){
-  return is ? document.createElement(it) : {};
-};
-},{"./_global":45,"./_is-object":54}],40:[function(require,module,exports){
-// IE 8- don't enum bug keys
-module.exports = (
-  'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'
-).split(',');
-},{}],41:[function(require,module,exports){
-// all enumerable object keys, includes symbols
-var getKeys = require('./_object-keys')
-  , gOPS    = require('./_object-gops')
-  , pIE     = require('./_object-pie');
-module.exports = function(it){
-  var result     = getKeys(it)
-    , getSymbols = gOPS.f;
-  if(getSymbols){
-    var symbols = getSymbols(it)
-      , isEnum  = pIE.f
-      , i       = 0
-      , key;
-    while(symbols.length > i)if(isEnum.call(it, key = symbols[i++]))result.push(key);
-  } return result;
-};
-},{"./_object-gops":71,"./_object-keys":74,"./_object-pie":75}],42:[function(require,module,exports){
-var global    = require('./_global')
-  , core      = require('./_core')
-  , ctx       = require('./_ctx')
-  , hide      = require('./_hide')
-  , PROTOTYPE = 'prototype';
-
-var $export = function(type, name, source){
-  var IS_FORCED = type & $export.F
-    , IS_GLOBAL = type & $export.G
-    , IS_STATIC = type & $export.S
-    , IS_PROTO  = type & $export.P
-    , IS_BIND   = type & $export.B
-    , IS_WRAP   = type & $export.W
-    , exports   = IS_GLOBAL ? core : core[name] || (core[name] = {})
-    , expProto  = exports[PROTOTYPE]
-    , target    = IS_GLOBAL ? global : IS_STATIC ? global[name] : (global[name] || {})[PROTOTYPE]
-    , key, own, out;
-  if(IS_GLOBAL)source = name;
-  for(key in source){
-    // contains in native
-    own = !IS_FORCED && target && target[key] !== undefined;
-    if(own && key in exports)continue;
-    // export native or passed
-    out = own ? target[key] : source[key];
-    // prevent global pollution for namespaces
-    exports[key] = IS_GLOBAL && typeof target[key] != 'function' ? source[key]
-    // bind timers to global for call from export context
-    : IS_BIND && own ? ctx(out, global)
-    // wrap global constructors for prevent change them in library
-    : IS_WRAP && target[key] == out ? (function(C){
-      var F = function(a, b, c){
-        if(this instanceof C){
-          switch(arguments.length){
-            case 0: return new C;
-            case 1: return new C(a);
-            case 2: return new C(a, b);
-          } return new C(a, b, c);
-        } return C.apply(this, arguments);
-      };
-      F[PROTOTYPE] = C[PROTOTYPE];
-      return F;
-    // make static versions for prototype methods
-    })(out) : IS_PROTO && typeof out == 'function' ? ctx(Function.call, out) : out;
-    // export proto methods to core.%CONSTRUCTOR%.methods.%NAME%
-    if(IS_PROTO){
-      (exports.virtual || (exports.virtual = {}))[key] = out;
-      // export proto methods to core.%CONSTRUCTOR%.prototype.%NAME%
-      if(type & $export.R && expProto && !expProto[key])hide(expProto, key, out);
-    }
-  }
-};
-// type bitmap
-$export.F = 1;   // forced
-$export.G = 2;   // global
-$export.S = 4;   // static
-$export.P = 8;   // proto
-$export.B = 16;  // bind
-$export.W = 32;  // wrap
-$export.U = 64;  // safe
-$export.R = 128; // real proto method for `library` 
-module.exports = $export;
-},{"./_core":35,"./_ctx":36,"./_global":45,"./_hide":47}],43:[function(require,module,exports){
-module.exports = function(exec){
-  try {
-    return !!exec();
-  } catch(e){
-    return true;
-  }
-};
-},{}],44:[function(require,module,exports){
-var ctx         = require('./_ctx')
-  , call        = require('./_iter-call')
-  , isArrayIter = require('./_is-array-iter')
-  , anObject    = require('./_an-object')
-  , toLength    = require('./_to-length')
-  , getIterFn   = require('./core.get-iterator-method');
-module.exports = function(iterable, entries, fn, that, ITERATOR){
-  var iterFn = ITERATOR ? function(){ return iterable; } : getIterFn(iterable)
-    , f      = ctx(fn, that, entries ? 2 : 1)
-    , index  = 0
-    , length, step, iterator;
-  if(typeof iterFn != 'function')throw TypeError(iterable + ' is not iterable!');
-  // fast case for arrays with default iterator
-  if(isArrayIter(iterFn))for(length = toLength(iterable.length); length > index; index++){
-    entries ? f(anObject(step = iterable[index])[0], step[1]) : f(iterable[index]);
-  } else for(iterator = iterFn.call(iterable); !(step = iterator.next()).done; ){
-    call(iterator, f, step.value, entries);
-  }
-};
-},{"./_an-object":31,"./_ctx":36,"./_is-array-iter":52,"./_iter-call":55,"./_to-length":91,"./core.get-iterator-method":96}],45:[function(require,module,exports){
-// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
-var global = module.exports = typeof window != 'undefined' && window.Math == Math
-  ? window : typeof self != 'undefined' && self.Math == Math ? self : Function('return this')();
-if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
-},{}],46:[function(require,module,exports){
-var hasOwnProperty = {}.hasOwnProperty;
-module.exports = function(it, key){
-  return hasOwnProperty.call(it, key);
-};
-},{}],47:[function(require,module,exports){
-var dP         = require('./_object-dp')
-  , createDesc = require('./_property-desc');
-module.exports = require('./_descriptors') ? function(object, key, value){
-  return dP.f(object, key, createDesc(1, value));
-} : function(object, key, value){
-  object[key] = value;
-  return object;
-};
-},{"./_descriptors":38,"./_object-dp":66,"./_property-desc":77}],48:[function(require,module,exports){
-module.exports = require('./_global').document && document.documentElement;
-},{"./_global":45}],49:[function(require,module,exports){
-module.exports = !require('./_descriptors') && !require('./_fails')(function(){
-  return Object.defineProperty(require('./_dom-create')('div'), 'a', {get: function(){ return 7; }}).a != 7;
-});
-},{"./_descriptors":38,"./_dom-create":39,"./_fails":43}],50:[function(require,module,exports){
-// fast apply, http://jsperf.lnkit.com/fast-apply/5
-module.exports = function(fn, args, that){
-  var un = that === undefined;
-  switch(args.length){
-    case 0: return un ? fn()
-                      : fn.call(that);
-    case 1: return un ? fn(args[0])
-                      : fn.call(that, args[0]);
-    case 2: return un ? fn(args[0], args[1])
-                      : fn.call(that, args[0], args[1]);
-    case 3: return un ? fn(args[0], args[1], args[2])
-                      : fn.call(that, args[0], args[1], args[2]);
-    case 4: return un ? fn(args[0], args[1], args[2], args[3])
-                      : fn.call(that, args[0], args[1], args[2], args[3]);
-  } return              fn.apply(that, args);
-};
-},{}],51:[function(require,module,exports){
-// fallback for non-array-like ES3 and non-enumerable old V8 strings
-var cof = require('./_cof');
-module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
-  return cof(it) == 'String' ? it.split('') : Object(it);
-};
-},{"./_cof":34}],52:[function(require,module,exports){
-// check on default Array iterator
-var Iterators  = require('./_iterators')
-  , ITERATOR   = require('./_wks')('iterator')
-  , ArrayProto = Array.prototype;
-
-module.exports = function(it){
-  return it !== undefined && (Iterators.Array === it || ArrayProto[ITERATOR] === it);
-};
-},{"./_iterators":60,"./_wks":95}],53:[function(require,module,exports){
-// 7.2.2 IsArray(argument)
-var cof = require('./_cof');
-module.exports = Array.isArray || function isArray(arg){
-  return cof(arg) == 'Array';
-};
-},{"./_cof":34}],54:[function(require,module,exports){
-module.exports = function(it){
-  return typeof it === 'object' ? it !== null : typeof it === 'function';
-};
-},{}],55:[function(require,module,exports){
-// call something on iterator step with safe closing on error
-var anObject = require('./_an-object');
-module.exports = function(iterator, fn, value, entries){
-  try {
-    return entries ? fn(anObject(value)[0], value[1]) : fn(value);
-  // 7.4.6 IteratorClose(iterator, completion)
-  } catch(e){
-    var ret = iterator['return'];
-    if(ret !== undefined)anObject(ret.call(iterator));
-    throw e;
-  }
-};
-},{"./_an-object":31}],56:[function(require,module,exports){
-'use strict';
-var create         = require('./_object-create')
-  , descriptor     = require('./_property-desc')
-  , setToStringTag = require('./_set-to-string-tag')
-  , IteratorPrototype = {};
-
-// 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
-require('./_hide')(IteratorPrototype, require('./_wks')('iterator'), function(){ return this; });
-
-module.exports = function(Constructor, NAME, next){
-  Constructor.prototype = create(IteratorPrototype, {next: descriptor(1, next)});
-  setToStringTag(Constructor, NAME + ' Iterator');
-};
-},{"./_hide":47,"./_object-create":65,"./_property-desc":77,"./_set-to-string-tag":82,"./_wks":95}],57:[function(require,module,exports){
-'use strict';
-var LIBRARY        = require('./_library')
-  , $export        = require('./_export')
-  , redefine       = require('./_redefine')
-  , hide           = require('./_hide')
-  , has            = require('./_has')
-  , Iterators      = require('./_iterators')
-  , $iterCreate    = require('./_iter-create')
-  , setToStringTag = require('./_set-to-string-tag')
-  , getPrototypeOf = require('./_object-gpo')
-  , ITERATOR       = require('./_wks')('iterator')
-  , BUGGY          = !([].keys && 'next' in [].keys()) // Safari has buggy iterators w/o `next`
-  , FF_ITERATOR    = '@@iterator'
-  , KEYS           = 'keys'
-  , VALUES         = 'values';
-
-var returnThis = function(){ return this; };
-
-module.exports = function(Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCED){
-  $iterCreate(Constructor, NAME, next);
-  var getMethod = function(kind){
-    if(!BUGGY && kind in proto)return proto[kind];
-    switch(kind){
-      case KEYS: return function keys(){ return new Constructor(this, kind); };
-      case VALUES: return function values(){ return new Constructor(this, kind); };
-    } return function entries(){ return new Constructor(this, kind); };
-  };
-  var TAG        = NAME + ' Iterator'
-    , DEF_VALUES = DEFAULT == VALUES
-    , VALUES_BUG = false
-    , proto      = Base.prototype
-    , $native    = proto[ITERATOR] || proto[FF_ITERATOR] || DEFAULT && proto[DEFAULT]
-    , $default   = $native || getMethod(DEFAULT)
-    , $entries   = DEFAULT ? !DEF_VALUES ? $default : getMethod('entries') : undefined
-    , $anyNative = NAME == 'Array' ? proto.entries || $native : $native
-    , methods, key, IteratorPrototype;
-  // Fix native
-  if($anyNative){
-    IteratorPrototype = getPrototypeOf($anyNative.call(new Base));
-    if(IteratorPrototype !== Object.prototype){
-      // Set @@toStringTag to native iterators
-      setToStringTag(IteratorPrototype, TAG, true);
-      // fix for some old engines
-      if(!LIBRARY && !has(IteratorPrototype, ITERATOR))hide(IteratorPrototype, ITERATOR, returnThis);
-    }
-  }
-  // fix Array#{values, @@iterator}.name in V8 / FF
-  if(DEF_VALUES && $native && $native.name !== VALUES){
-    VALUES_BUG = true;
-    $default = function values(){ return $native.call(this); };
-  }
-  // Define iterator
-  if((!LIBRARY || FORCED) && (BUGGY || VALUES_BUG || !proto[ITERATOR])){
-    hide(proto, ITERATOR, $default);
-  }
-  // Plug for library
-  Iterators[NAME] = $default;
-  Iterators[TAG]  = returnThis;
-  if(DEFAULT){
-    methods = {
-      values:  DEF_VALUES ? $default : getMethod(VALUES),
-      keys:    IS_SET     ? $default : getMethod(KEYS),
-      entries: $entries
-    };
-    if(FORCED)for(key in methods){
-      if(!(key in proto))redefine(proto, key, methods[key]);
-    } else $export($export.P + $export.F * (BUGGY || VALUES_BUG), NAME, methods);
-  }
-  return methods;
-};
-},{"./_export":42,"./_has":46,"./_hide":47,"./_iter-create":56,"./_iterators":60,"./_library":62,"./_object-gpo":72,"./_redefine":79,"./_set-to-string-tag":82,"./_wks":95}],58:[function(require,module,exports){
-var ITERATOR     = require('./_wks')('iterator')
-  , SAFE_CLOSING = false;
-
-try {
-  var riter = [7][ITERATOR]();
-  riter['return'] = function(){ SAFE_CLOSING = true; };
-  Array.from(riter, function(){ throw 2; });
-} catch(e){ /* empty */ }
-
-module.exports = function(exec, skipClosing){
-  if(!skipClosing && !SAFE_CLOSING)return false;
-  var safe = false;
-  try {
-    var arr  = [7]
-      , iter = arr[ITERATOR]();
-    iter.next = function(){ safe = true; };
-    arr[ITERATOR] = function(){ return iter; };
-    exec(arr);
-  } catch(e){ /* empty */ }
-  return safe;
-};
-},{"./_wks":95}],59:[function(require,module,exports){
-module.exports = function(done, value){
-  return {value: value, done: !!done};
-};
-},{}],60:[function(require,module,exports){
-module.exports = {};
-},{}],61:[function(require,module,exports){
-var getKeys   = require('./_object-keys')
-  , toIObject = require('./_to-iobject');
-module.exports = function(object, el){
-  var O      = toIObject(object)
-    , keys   = getKeys(O)
-    , length = keys.length
-    , index  = 0
-    , key;
-  while(length > index)if(O[key = keys[index++]] === el)return key;
-};
-},{"./_object-keys":74,"./_to-iobject":90}],62:[function(require,module,exports){
-module.exports = true;
-},{}],63:[function(require,module,exports){
-var META     = require('./_uid')('meta')
-  , isObject = require('./_is-object')
-  , has      = require('./_has')
-  , setDesc  = require('./_object-dp').f
-  , id       = 0;
-var isExtensible = Object.isExtensible || function(){
-  return true;
-};
-var FREEZE = !require('./_fails')(function(){
-  return isExtensible(Object.preventExtensions({}));
-});
-var setMeta = function(it){
-  setDesc(it, META, {value: {
-    i: 'O' + ++id, // object ID
-    w: {}          // weak collections IDs
-  }});
-};
-var fastKey = function(it, create){
-  // return primitive with prefix
-  if(!isObject(it))return typeof it == 'symbol' ? it : (typeof it == 'string' ? 'S' : 'P') + it;
-  if(!has(it, META)){
-    // can't set metadata to uncaught frozen object
-    if(!isExtensible(it))return 'F';
-    // not necessary to add metadata
-    if(!create)return 'E';
-    // add missing metadata
-    setMeta(it);
-  // return object ID
-  } return it[META].i;
-};
-var getWeak = function(it, create){
-  if(!has(it, META)){
-    // can't set metadata to uncaught frozen object
-    if(!isExtensible(it))return true;
-    // not necessary to add metadata
-    if(!create)return false;
-    // add missing metadata
-    setMeta(it);
-  // return hash weak collections IDs
-  } return it[META].w;
-};
-// add metadata on freeze-family methods calling
-var onFreeze = function(it){
-  if(FREEZE && meta.NEED && isExtensible(it) && !has(it, META))setMeta(it);
-  return it;
-};
-var meta = module.exports = {
-  KEY:      META,
-  NEED:     false,
-  fastKey:  fastKey,
-  getWeak:  getWeak,
-  onFreeze: onFreeze
-};
-},{"./_fails":43,"./_has":46,"./_is-object":54,"./_object-dp":66,"./_uid":94}],64:[function(require,module,exports){
-var global    = require('./_global')
-  , macrotask = require('./_task').set
-  , Observer  = global.MutationObserver || global.WebKitMutationObserver
-  , process   = global.process
-  , Promise   = global.Promise
-  , isNode    = require('./_cof')(process) == 'process'
-  , head, last, notify;
-
-var flush = function(){
-  var parent, domain, fn;
-  if(isNode && (parent = process.domain)){
-    process.domain = null;
-    parent.exit();
-  }
-  while(head){
-    domain = head.domain;
-    fn     = head.fn;
-    if(domain)domain.enter();
-    fn(); // <- currently we use it only for Promise - try / catch not required
-    if(domain)domain.exit();
-    head = head.next;
-  } last = undefined;
-  if(parent)parent.enter();
-};
-
-// Node.js
-if(isNode){
-  notify = function(){
-    process.nextTick(flush);
-  };
-// browsers with MutationObserver
-} else if(Observer){
-  var toggle = 1
-    , node   = document.createTextNode('');
-  new Observer(flush).observe(node, {characterData: true}); // eslint-disable-line no-new
-  notify = function(){
-    node.data = toggle = -toggle;
-  };
-// environments with maybe non-completely correct, but existent Promise
-} else if(Promise && Promise.resolve){
-  notify = function(){
-    Promise.resolve().then(flush);
-  };
-// for other environments - macrotask based on:
-// - setImmediate
-// - MessageChannel
-// - window.postMessag
-// - onreadystatechange
-// - setTimeout
-} else {
-  notify = function(){
-    // strange IE + webpack dev server bug - use .call(global)
-    macrotask.call(global, flush);
-  };
-}
-
-module.exports = function(fn){
-  var task = {fn: fn, next: undefined, domain: isNode && process.domain};
-  if(last)last.next = task;
-  if(!head){
-    head = task;
-    notify();
-  } last = task;
-};
-},{"./_cof":34,"./_global":45,"./_task":87}],65:[function(require,module,exports){
-// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-var anObject    = require('./_an-object')
-  , dPs         = require('./_object-dps')
-  , enumBugKeys = require('./_enum-bug-keys')
-  , IE_PROTO    = require('./_shared-key')('IE_PROTO')
-  , Empty       = function(){ /* empty */ }
-  , PROTOTYPE   = 'prototype';
-
-// Create object with fake `null` prototype: use iframe Object with cleared prototype
-var createDict = function(){
-  // Thrash, waste and sodomy: IE GC bug
-  var iframe = require('./_dom-create')('iframe')
-    , i      = enumBugKeys.length
-    , gt     = '>'
-    , iframeDocument;
-  iframe.style.display = 'none';
-  require('./_html').appendChild(iframe);
-  iframe.src = 'javascript:'; // eslint-disable-line no-script-url
-  // createDict = iframe.contentWindow.Object;
-  // html.removeChild(iframe);
-  iframeDocument = iframe.contentWindow.document;
-  iframeDocument.open();
-  iframeDocument.write('<script>document.F=Object</script' + gt);
-  iframeDocument.close();
-  createDict = iframeDocument.F;
-  while(i--)delete createDict[PROTOTYPE][enumBugKeys[i]];
-  return createDict();
-};
-
-module.exports = Object.create || function create(O, Properties){
-  var result;
-  if(O !== null){
-    Empty[PROTOTYPE] = anObject(O);
-    result = new Empty;
-    Empty[PROTOTYPE] = null;
-    // add "__proto__" for Object.getPrototypeOf polyfill
-    result[IE_PROTO] = O;
-  } else result = createDict();
-  return Properties === undefined ? result : dPs(result, Properties);
-};
-},{"./_an-object":31,"./_dom-create":39,"./_enum-bug-keys":40,"./_html":48,"./_object-dps":67,"./_shared-key":83}],66:[function(require,module,exports){
-var anObject       = require('./_an-object')
-  , IE8_DOM_DEFINE = require('./_ie8-dom-define')
-  , toPrimitive    = require('./_to-primitive')
-  , dP             = Object.defineProperty;
-
-exports.f = require('./_descriptors') ? Object.defineProperty : function defineProperty(O, P, Attributes){
-  anObject(O);
-  P = toPrimitive(P, true);
-  anObject(Attributes);
-  if(IE8_DOM_DEFINE)try {
-    return dP(O, P, Attributes);
-  } catch(e){ /* empty */ }
-  if('get' in Attributes || 'set' in Attributes)throw TypeError('Accessors not supported!');
-  if('value' in Attributes)O[P] = Attributes.value;
-  return O;
-};
-},{"./_an-object":31,"./_descriptors":38,"./_ie8-dom-define":49,"./_to-primitive":93}],67:[function(require,module,exports){
-var dP       = require('./_object-dp')
-  , anObject = require('./_an-object')
-  , getKeys  = require('./_object-keys');
-
-module.exports = require('./_descriptors') ? Object.defineProperties : function defineProperties(O, Properties){
-  anObject(O);
-  var keys   = getKeys(Properties)
-    , length = keys.length
-    , i = 0
-    , P;
-  while(length > i)dP.f(O, P = keys[i++], Properties[P]);
-  return O;
-};
-},{"./_an-object":31,"./_descriptors":38,"./_object-dp":66,"./_object-keys":74}],68:[function(require,module,exports){
-var pIE            = require('./_object-pie')
-  , createDesc     = require('./_property-desc')
-  , toIObject      = require('./_to-iobject')
-  , toPrimitive    = require('./_to-primitive')
-  , has            = require('./_has')
-  , IE8_DOM_DEFINE = require('./_ie8-dom-define')
-  , gOPD           = Object.getOwnPropertyDescriptor;
-
-exports.f = require('./_descriptors') ? gOPD : function getOwnPropertyDescriptor(O, P){
-  O = toIObject(O);
-  P = toPrimitive(P, true);
-  if(IE8_DOM_DEFINE)try {
-    return gOPD(O, P);
-  } catch(e){ /* empty */ }
-  if(has(O, P))return createDesc(!pIE.f.call(O, P), O[P]);
-};
-},{"./_descriptors":38,"./_has":46,"./_ie8-dom-define":49,"./_object-pie":75,"./_property-desc":77,"./_to-iobject":90,"./_to-primitive":93}],69:[function(require,module,exports){
-// fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
-var toIObject = require('./_to-iobject')
-  , gOPN      = require('./_object-gopn').f
-  , toString  = {}.toString;
-
-var windowNames = typeof window == 'object' && window && Object.getOwnPropertyNames
-  ? Object.getOwnPropertyNames(window) : [];
-
-var getWindowNames = function(it){
-  try {
-    return gOPN.f(it);
-  } catch(e){
-    return windowNames.slice();
-  }
-};
-
-module.exports.f = function getOwnPropertyNames(it){
-  return windowNames && toString.call(it) == '[object Window]' ? getWindowNames(it) : gOPN(toIObject(it));
-};
-},{"./_object-gopn":70,"./_to-iobject":90}],70:[function(require,module,exports){
-// 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)
-var $keys      = require('./_object-keys-internal')
-  , hiddenKeys = require('./_enum-bug-keys').concat('length', 'prototype');
-
-exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O){
-  return $keys(O, hiddenKeys);
-};
-},{"./_enum-bug-keys":40,"./_object-keys-internal":73}],71:[function(require,module,exports){
-exports.f = Object.getOwnPropertySymbols;
-},{}],72:[function(require,module,exports){
-// 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
-var has         = require('./_has')
-  , toObject    = require('./_to-object')
-  , IE_PROTO    = require('./_shared-key')('IE_PROTO')
-  , ObjectProto = Object.prototype;
-
-module.exports = Object.getPrototypeOf || function(O){
-  O = toObject(O);
-  if(has(O, IE_PROTO))return O[IE_PROTO];
-  if(typeof O.constructor == 'function' && O instanceof O.constructor){
-    return O.constructor.prototype;
-  } return O instanceof Object ? ObjectProto : null;
-};
-},{"./_has":46,"./_shared-key":83,"./_to-object":92}],73:[function(require,module,exports){
-var has          = require('./_has')
-  , toIObject    = require('./_to-iobject')
-  , arrayIndexOf = require('./_array-includes')(false)
-  , IE_PROTO     = require('./_shared-key')('IE_PROTO');
-
-module.exports = function(object, names){
-  var O      = toIObject(object)
-    , i      = 0
-    , result = []
-    , key;
-  for(key in O)if(key != IE_PROTO)has(O, key) && result.push(key);
-  // Don't enum bug & hidden keys
-  while(names.length > i)if(has(O, key = names[i++])){
-    ~arrayIndexOf(result, key) || result.push(key);
-  }
-  return result;
-};
-},{"./_array-includes":32,"./_has":46,"./_shared-key":83,"./_to-iobject":90}],74:[function(require,module,exports){
-// 19.1.2.14 / 15.2.3.14 Object.keys(O)
-var $keys       = require('./_object-keys-internal')
-  , enumBugKeys = require('./_enum-bug-keys');
-
-module.exports = Object.keys || function keys(O){
-  return $keys(O, enumBugKeys);
-};
-},{"./_enum-bug-keys":40,"./_object-keys-internal":73}],75:[function(require,module,exports){
-exports.f = {}.propertyIsEnumerable;
-},{}],76:[function(require,module,exports){
-// most Object methods by ES6 should accept primitives
-var $export = require('./_export')
-  , core    = require('./_core')
-  , fails   = require('./_fails');
-module.exports = function(KEY, exec){
-  var fn  = (core.Object || {})[KEY] || Object[KEY]
-    , exp = {};
-  exp[KEY] = exec(fn);
-  $export($export.S + $export.F * fails(function(){ fn(1); }), 'Object', exp);
-};
-},{"./_core":35,"./_export":42,"./_fails":43}],77:[function(require,module,exports){
-module.exports = function(bitmap, value){
-  return {
-    enumerable  : !(bitmap & 1),
-    configurable: !(bitmap & 2),
-    writable    : !(bitmap & 4),
-    value       : value
-  };
-};
-},{}],78:[function(require,module,exports){
-var hide = require('./_hide');
-module.exports = function(target, src, safe){
-  for(var key in src){
-    if(safe && target[key])target[key] = src[key];
-    else hide(target, key, src[key]);
-  } return target;
-};
-},{"./_hide":47}],79:[function(require,module,exports){
-module.exports = require('./_hide');
-},{"./_hide":47}],80:[function(require,module,exports){
-// Works with __proto__ only. Old v8 can't work with null proto objects.
-/* eslint-disable no-proto */
-var isObject = require('./_is-object')
-  , anObject = require('./_an-object');
-var check = function(O, proto){
-  anObject(O);
-  if(!isObject(proto) && proto !== null)throw TypeError(proto + ": can't set as prototype!");
-};
-module.exports = {
-  set: Object.setPrototypeOf || ('__proto__' in {} ? // eslint-disable-line
-    function(test, buggy, set){
-      try {
-        set = require('./_ctx')(Function.call, require('./_object-gopd').f(Object.prototype, '__proto__').set, 2);
-        set(test, []);
-        buggy = !(test instanceof Array);
-      } catch(e){ buggy = true; }
-      return function setPrototypeOf(O, proto){
-        check(O, proto);
-        if(buggy)O.__proto__ = proto;
-        else set(O, proto);
-        return O;
-      };
-    }({}, false) : undefined),
-  check: check
-};
-},{"./_an-object":31,"./_ctx":36,"./_is-object":54,"./_object-gopd":68}],81:[function(require,module,exports){
-'use strict';
-var global      = require('./_global')
-  , core        = require('./_core')
-  , dP          = require('./_object-dp')
-  , DESCRIPTORS = require('./_descriptors')
-  , SPECIES     = require('./_wks')('species');
-
-module.exports = function(KEY){
-  var C = typeof core[KEY] == 'function' ? core[KEY] : global[KEY];
-  if(DESCRIPTORS && C && !C[SPECIES])dP.f(C, SPECIES, {
-    configurable: true,
-    get: function(){ return this; }
-  });
-};
-},{"./_core":35,"./_descriptors":38,"./_global":45,"./_object-dp":66,"./_wks":95}],82:[function(require,module,exports){
-var def = require('./_object-dp').f
-  , has = require('./_has')
-  , TAG = require('./_wks')('toStringTag');
-
-module.exports = function(it, tag, stat){
-  if(it && !has(it = stat ? it : it.prototype, TAG))def(it, TAG, {configurable: true, value: tag});
-};
-},{"./_has":46,"./_object-dp":66,"./_wks":95}],83:[function(require,module,exports){
-var shared = require('./_shared')('keys')
-  , uid    = require('./_uid');
-module.exports = function(key){
-  return shared[key] || (shared[key] = uid(key));
-};
-},{"./_shared":84,"./_uid":94}],84:[function(require,module,exports){
-var global = require('./_global')
-  , SHARED = '__core-js_shared__'
-  , store  = global[SHARED] || (global[SHARED] = {});
-module.exports = function(key){
-  return store[key] || (store[key] = {});
-};
-},{"./_global":45}],85:[function(require,module,exports){
-// 7.3.20 SpeciesConstructor(O, defaultConstructor)
-var anObject  = require('./_an-object')
-  , aFunction = require('./_a-function')
-  , SPECIES   = require('./_wks')('species');
-module.exports = function(O, D){
-  var C = anObject(O).constructor, S;
-  return C === undefined || (S = anObject(C)[SPECIES]) == undefined ? D : aFunction(S);
-};
-},{"./_a-function":28,"./_an-object":31,"./_wks":95}],86:[function(require,module,exports){
-var toInteger = require('./_to-integer')
-  , defined   = require('./_defined');
-// true  -> String#at
-// false -> String#codePointAt
-module.exports = function(TO_STRING){
-  return function(that, pos){
-    var s = String(defined(that))
-      , i = toInteger(pos)
-      , l = s.length
-      , a, b;
-    if(i < 0 || i >= l)return TO_STRING ? '' : undefined;
-    a = s.charCodeAt(i);
-    return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff
-      ? TO_STRING ? s.charAt(i) : a
-      : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
-  };
-};
-},{"./_defined":37,"./_to-integer":89}],87:[function(require,module,exports){
-var ctx                = require('./_ctx')
-  , invoke             = require('./_invoke')
-  , html               = require('./_html')
-  , cel                = require('./_dom-create')
-  , global             = require('./_global')
-  , process            = global.process
-  , setTask            = global.setImmediate
-  , clearTask          = global.clearImmediate
-  , MessageChannel     = global.MessageChannel
-  , counter            = 0
-  , queue              = {}
-  , ONREADYSTATECHANGE = 'onreadystatechange'
-  , defer, channel, port;
-var run = function(){
-  var id = +this;
-  if(queue.hasOwnProperty(id)){
-    var fn = queue[id];
-    delete queue[id];
-    fn();
-  }
-};
-var listener = function(event){
-  run.call(event.data);
-};
-// Node.js 0.9+ & IE10+ has setImmediate, otherwise:
-if(!setTask || !clearTask){
-  setTask = function setImmediate(fn){
-    var args = [], i = 1;
-    while(arguments.length > i)args.push(arguments[i++]);
-    queue[++counter] = function(){
-      invoke(typeof fn == 'function' ? fn : Function(fn), args);
-    };
-    defer(counter);
-    return counter;
-  };
-  clearTask = function clearImmediate(id){
-    delete queue[id];
-  };
-  // Node.js 0.8-
-  if(require('./_cof')(process) == 'process'){
-    defer = function(id){
-      process.nextTick(ctx(run, id, 1));
-    };
-  // Browsers with MessageChannel, includes WebWorkers
-  } else if(MessageChannel){
-    channel = new MessageChannel;
-    port    = channel.port2;
-    channel.port1.onmessage = listener;
-    defer = ctx(port.postMessage, port, 1);
-  // Browsers with postMessage, skip WebWorkers
-  // IE8 has postMessage, but it's sync & typeof its postMessage is 'object'
-  } else if(global.addEventListener && typeof postMessage == 'function' && !global.importScripts){
-    defer = function(id){
-      global.postMessage(id + '', '*');
-    };
-    global.addEventListener('message', listener, false);
-  // IE8-
-  } else if(ONREADYSTATECHANGE in cel('script')){
-    defer = function(id){
-      html.appendChild(cel('script'))[ONREADYSTATECHANGE] = function(){
-        html.removeChild(this);
-        run.call(id);
-      };
-    };
-  // Rest old browsers
-  } else {
-    defer = function(id){
-      setTimeout(ctx(run, id, 1), 0);
-    };
-  }
-}
-module.exports = {
-  set:   setTask,
-  clear: clearTask
-};
-},{"./_cof":34,"./_ctx":36,"./_dom-create":39,"./_global":45,"./_html":48,"./_invoke":50}],88:[function(require,module,exports){
-var toInteger = require('./_to-integer')
-  , max       = Math.max
-  , min       = Math.min;
-module.exports = function(index, length){
-  index = toInteger(index);
-  return index < 0 ? max(index + length, 0) : min(index, length);
-};
-},{"./_to-integer":89}],89:[function(require,module,exports){
-// 7.1.4 ToInteger
-var ceil  = Math.ceil
-  , floor = Math.floor;
-module.exports = function(it){
-  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
-};
-},{}],90:[function(require,module,exports){
-// to indexed object, toObject with fallback for non-array-like ES3 strings
-var IObject = require('./_iobject')
-  , defined = require('./_defined');
-module.exports = function(it){
-  return IObject(defined(it));
-};
-},{"./_defined":37,"./_iobject":51}],91:[function(require,module,exports){
-// 7.1.15 ToLength
-var toInteger = require('./_to-integer')
-  , min       = Math.min;
-module.exports = function(it){
-  return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
-};
-},{"./_to-integer":89}],92:[function(require,module,exports){
-// 7.1.13 ToObject(argument)
-var defined = require('./_defined');
-module.exports = function(it){
-  return Object(defined(it));
-};
-},{"./_defined":37}],93:[function(require,module,exports){
-// 7.1.1 ToPrimitive(input [, PreferredType])
-var isObject = require('./_is-object');
-// instead of the ES6 spec version, we didn't implement @@toPrimitive case
-// and the second argument - flag - preferred type is a string
-module.exports = function(it, S){
-  if(!isObject(it))return it;
-  var fn, val;
-  if(S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it)))return val;
-  if(typeof (fn = it.valueOf) == 'function' && !isObject(val = fn.call(it)))return val;
-  if(!S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it)))return val;
-  throw TypeError("Can't convert object to primitive value");
-};
-},{"./_is-object":54}],94:[function(require,module,exports){
-var id = 0
-  , px = Math.random();
-module.exports = function(key){
-  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
-};
-},{}],95:[function(require,module,exports){
-var store      = require('./_shared')('wks')
-  , uid        = require('./_uid')
-  , Symbol     = require('./_global').Symbol
-  , USE_SYMBOL = typeof Symbol == 'function';
-module.exports = function(name){
-  return store[name] || (store[name] =
-    USE_SYMBOL && Symbol[name] || (USE_SYMBOL ? Symbol : uid)('Symbol.' + name));
-};
-},{"./_global":45,"./_shared":84,"./_uid":94}],96:[function(require,module,exports){
-var classof   = require('./_classof')
-  , ITERATOR  = require('./_wks')('iterator')
-  , Iterators = require('./_iterators');
-module.exports = require('./_core').getIteratorMethod = function(it){
-  if(it != undefined)return it[ITERATOR]
-    || it['@@iterator']
-    || Iterators[classof(it)];
-};
-},{"./_classof":33,"./_core":35,"./_iterators":60,"./_wks":95}],97:[function(require,module,exports){
-'use strict';
-var addToUnscopables = require('./_add-to-unscopables')
-  , step             = require('./_iter-step')
-  , Iterators        = require('./_iterators')
-  , toIObject        = require('./_to-iobject');
-
-// 22.1.3.4 Array.prototype.entries()
-// 22.1.3.13 Array.prototype.keys()
-// 22.1.3.29 Array.prototype.values()
-// 22.1.3.30 Array.prototype[@@iterator]()
-module.exports = require('./_iter-define')(Array, 'Array', function(iterated, kind){
-  this._t = toIObject(iterated); // target
-  this._i = 0;                   // next index
-  this._k = kind;                // kind
-// 22.1.5.2.1 %ArrayIteratorPrototype%.next()
-}, function(){
-  var O     = this._t
-    , kind  = this._k
-    , index = this._i++;
-  if(!O || index >= O.length){
-    this._t = undefined;
-    return step(1);
-  }
-  if(kind == 'keys'  )return step(0, index);
-  if(kind == 'values')return step(0, O[index]);
-  return step(0, [index, O[index]]);
-}, 'values');
-
-// argumentsList[@@iterator] is %ArrayProto_values% (9.4.4.6, 9.4.4.7)
-Iterators.Arguments = Iterators.Array;
-
-addToUnscopables('keys');
-addToUnscopables('values');
-addToUnscopables('entries');
-},{"./_add-to-unscopables":29,"./_iter-define":57,"./_iter-step":59,"./_iterators":60,"./_to-iobject":90}],98:[function(require,module,exports){
-var $export = require('./_export')
-// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-$export($export.S, 'Object', {create: require('./_object-create')});
-},{"./_export":42,"./_object-create":65}],99:[function(require,module,exports){
-var $export = require('./_export');
-// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
-$export($export.S + $export.F * !require('./_descriptors'), 'Object', {defineProperty: require('./_object-dp').f});
-},{"./_descriptors":38,"./_export":42,"./_object-dp":66}],100:[function(require,module,exports){
-// 19.1.2.6 Object.getOwnPropertyDescriptor(O, P)
-var toIObject                 = require('./_to-iobject')
-  , $getOwnPropertyDescriptor = require('./_object-gopd').f;
-
-require('./_object-sap')('getOwnPropertyDescriptor', function(){
-  return function getOwnPropertyDescriptor(it, key){
-    return $getOwnPropertyDescriptor(toIObject(it), key);
-  };
-});
-},{"./_object-gopd":68,"./_object-sap":76,"./_to-iobject":90}],101:[function(require,module,exports){
-// 19.1.2.9 Object.getPrototypeOf(O)
-var toObject        = require('./_to-object')
-  , $getPrototypeOf = require('./_object-gpo');
-
-require('./_object-sap')('getPrototypeOf', function(){
-  return function getPrototypeOf(it){
-    return $getPrototypeOf(toObject(it));
-  };
-});
-},{"./_object-gpo":72,"./_object-sap":76,"./_to-object":92}],102:[function(require,module,exports){
-// 19.1.2.14 Object.keys(O)
-var toObject = require('./_to-object')
-  , $keys    = require('./_object-keys');
-
-require('./_object-sap')('keys', function(){
-  return function keys(it){
-    return $keys(toObject(it));
-  };
-});
-},{"./_object-keys":74,"./_object-sap":76,"./_to-object":92}],103:[function(require,module,exports){
-// 19.1.3.19 Object.setPrototypeOf(O, proto)
-var $export = require('./_export');
-$export($export.S, 'Object', {setPrototypeOf: require('./_set-proto').set});
-},{"./_export":42,"./_set-proto":80}],104:[function(require,module,exports){
-
-},{}],105:[function(require,module,exports){
-'use strict';
-var LIBRARY            = require('./_library')
-  , global             = require('./_global')
-  , ctx                = require('./_ctx')
-  , classof            = require('./_classof')
-  , $export            = require('./_export')
-  , isObject           = require('./_is-object')
-  , anObject           = require('./_an-object')
-  , aFunction          = require('./_a-function')
-  , anInstance         = require('./_an-instance')
-  , forOf              = require('./_for-of')
-  , setProto           = require('./_set-proto').set
-  , speciesConstructor = require('./_species-constructor')
-  , task               = require('./_task').set
-  , microtask          = require('./_microtask')
-  , PROMISE            = 'Promise'
-  , TypeError          = global.TypeError
-  , process            = global.process
-  , $Promise           = global[PROMISE]
-  , isNode             = classof(process) == 'process'
-  , empty              = function(){ /* empty */ }
-  , Internal, GenericPromiseCapability, Wrapper;
-
-var USE_NATIVE = !!function(){
-  try {
-    // correct subclassing with @@species support
-    var promise     = $Promise.resolve(1)
-      , FakePromise = (promise.constructor = {})[require('./_wks')('species')] = function(exec){ exec(empty, empty); };
-    // unhandled rejections tracking support, NodeJS Promise without it fails @@species test
-    return (isNode || typeof PromiseRejectionEvent == 'function') && promise.then(empty) instanceof FakePromise;
-  } catch(e){ /* empty */ }
-}();
-
-// helpers
-var sameConstructor = function(a, b){
-  // with library wrapper special case
-  return a === b || a === $Promise && b === Wrapper;
-};
-var isThenable = function(it){
-  var then;
-  return isObject(it) && typeof (then = it.then) == 'function' ? then : false;
-};
-var newPromiseCapability = function(C){
-  return sameConstructor($Promise, C)
-    ? new PromiseCapability(C)
-    : new GenericPromiseCapability(C);
-};
-var PromiseCapability = GenericPromiseCapability = function(C){
-  var resolve, reject;
-  this.promise = new C(function($$resolve, $$reject){
-    if(resolve !== undefined || reject !== undefined)throw TypeError('Bad Promise constructor');
-    resolve = $$resolve;
-    reject  = $$reject;
-  });
-  this.resolve = aFunction(resolve);
-  this.reject  = aFunction(reject);
-};
-var perform = function(exec){
-  try {
-    exec();
-  } catch(e){
-    return {error: e};
-  }
-};
-var notify = function(promise, isReject){
-  if(promise._n)return;
-  promise._n = true;
-  var chain = promise._c;
-  microtask(function(){
-    var value = promise._v
-      , ok    = promise._s == 1
-      , i     = 0;
-    var run = function(reaction){
-      var handler = ok ? reaction.ok : reaction.fail
-        , resolve = reaction.resolve
-        , reject  = reaction.reject
-        , result, then;
-      try {
-        if(handler){
-          if(!ok){
-            if(promise._h == 2)onHandleUnhandled(promise);
-            promise._h = 1;
-          }
-          result = handler === true ? value : handler(value);
-          if(result === reaction.promise){
-            reject(TypeError('Promise-chain cycle'));
-          } else if(then = isThenable(result)){
-            then.call(result, resolve, reject);
-          } else resolve(result);
-        } else reject(value);
-      } catch(e){
-        reject(e);
-      }
-    };
-    while(chain.length > i)run(chain[i++]); // variable length - can't use forEach
-    promise._c = [];
-    promise._n = false;
-    if(isReject && !promise._h)onUnhandled(promise);
-  });
-};
-var onUnhandled = function(promise){
-  task.call(global, function(){
-    var value = promise._v
-      , abrupt, handler, console;
-    if(isUnhandled(promise)){
-      abrupt = perform(function(){
-        if(isNode){
-          process.emit('unhandledRejection', value, promise);
-        } else if(handler = global.onunhandledrejection){
-          handler({promise: promise, reason: value});
-        } else if((console = global.console) && console.error){
-          console.error('Unhandled promise rejection', value);
-        }
-      });
-      // Browsers should not trigger `rejectionHandled` event if it was handled here, NodeJS - should
-      promise._h = isNode || isUnhandled(promise) ? 2 : 1;
-    } promise._a = undefined;
-    if(abrupt)throw abrupt.error;
-  });
-};
-var isUnhandled = function(promise){
-  if(promise._h == 1)return false;
-  var chain = promise._a || promise._c
-    , i     = 0
-    , reaction;
-  while(chain.length > i){
-    reaction = chain[i++];
-    if(reaction.fail || !isUnhandled(reaction.promise))return false;
-  } return true;
-};
-var onHandleUnhandled = function(promise){
-  task.call(global, function(){
-    var handler;
-    if(isNode){
-      process.emit('rejectionHandled', promise);
-    } else if(handler = global.onrejectionhandled){
-      handler({promise: promise, reason: promise._v});
-    }
-  });
-};
-var $reject = function(value){
-  var promise = this;
-  if(promise._d)return;
-  promise._d = true;
-  promise = promise._w || promise; // unwrap
-  promise._v = value;
-  promise._s = 2;
-  if(!promise._a)promise._a = promise._c.slice();
-  notify(promise, true);
-};
-var $resolve = function(value){
-  var promise = this
-    , then;
-  if(promise._d)return;
-  promise._d = true;
-  promise = promise._w || promise; // unwrap
-  try {
-    if(promise === value)throw TypeError("Promise can't be resolved itself");
-    if(then = isThenable(value)){
-      microtask(function(){
-        var wrapper = {_w: promise, _d: false}; // wrap
-        try {
-          then.call(value, ctx($resolve, wrapper, 1), ctx($reject, wrapper, 1));
-        } catch(e){
-          $reject.call(wrapper, e);
-        }
-      });
-    } else {
-      promise._v = value;
-      promise._s = 1;
-      notify(promise, false);
-    }
-  } catch(e){
-    $reject.call({_w: promise, _d: false}, e); // wrap
-  }
-};
-
-// constructor polyfill
-if(!USE_NATIVE){
-  // 25.4.3.1 Promise(executor)
-  $Promise = function Promise(executor){
-    anInstance(this, $Promise, PROMISE, '_h');
-    aFunction(executor);
-    Internal.call(this);
-    try {
-      executor(ctx($resolve, this, 1), ctx($reject, this, 1));
-    } catch(err){
-      $reject.call(this, err);
-    }
-  };
-  Internal = function Promise(executor){
-    this._c = [];             // <- awaiting reactions
-    this._a = undefined;      // <- checked in isUnhandled reactions
-    this._s = 0;              // <- state
-    this._d = false;          // <- done
-    this._v = undefined;      // <- value
-    this._h = 0;              // <- rejection state, 0 - default, 1 - handled, 2 - unhandled
-    this._n = false;          // <- notify
-  };
-  Internal.prototype = require('./_redefine-all')($Promise.prototype, {
-    // 25.4.5.3 Promise.prototype.then(onFulfilled, onRejected)
-    then: function then(onFulfilled, onRejected){
-      var reaction = newPromiseCapability(speciesConstructor(this, $Promise));
-      reaction.ok   = typeof onFulfilled == 'function' ? onFulfilled : true;
-      reaction.fail = typeof onRejected == 'function' && onRejected;
-      this._c.push(reaction);
-      if(this._a)this._a.push(reaction);
-      if(this._s)notify(this, false);
-      return reaction.promise;
-    },
-    // 25.4.5.1 Promise.prototype.catch(onRejected)
-    'catch': function(onRejected){
-      return this.then(undefined, onRejected);
-    }
-  });
-  PromiseCapability = function(){
-    var promise  = new Internal;
-    this.promise = promise;
-    this.resolve = ctx($resolve, promise, 1);
-    this.reject  = ctx($reject, promise, 1);
-  };
-}
-
-$export($export.G + $export.W + $export.F * !USE_NATIVE, {Promise: $Promise});
-require('./_set-to-string-tag')($Promise, PROMISE);
-require('./_set-species')(PROMISE);
-Wrapper = require('./_core')[PROMISE];
-
-// statics
-$export($export.S + $export.F * !USE_NATIVE, PROMISE, {
-  // 25.4.4.5 Promise.reject(r)
-  reject: function reject(r){
-    var capability = newPromiseCapability(this)
-      , $$reject   = capability.reject;
-    $$reject(r);
-    return capability.promise;
-  }
-});
-$export($export.S + $export.F * (LIBRARY || !USE_NATIVE), PROMISE, {
-  // 25.4.4.6 Promise.resolve(x)
-  resolve: function resolve(x){
-    // instanceof instead of internal slot check because we should fix it without replacement native Promise core
-    if(x instanceof $Promise && sameConstructor(x.constructor, this))return x;
-    var capability = newPromiseCapability(this)
-      , $$resolve  = capability.resolve;
-    $$resolve(x);
-    return capability.promise;
-  }
-});
-$export($export.S + $export.F * !(USE_NATIVE && require('./_iter-detect')(function(iter){
-  $Promise.all(iter)['catch'](empty);
-})), PROMISE, {
-  // 25.4.4.1 Promise.all(iterable)
-  all: function all(iterable){
-    var C          = this
-      , capability = newPromiseCapability(C)
-      , resolve    = capability.resolve
-      , reject     = capability.reject;
-    var abrupt = perform(function(){
-      var values    = []
-        , index     = 0
-        , remaining = 1;
-      forOf(iterable, false, function(promise){
-        var $index        = index++
-          , alreadyCalled = false;
-        values.push(undefined);
-        remaining++;
-        C.resolve(promise).then(function(value){
-          if(alreadyCalled)return;
-          alreadyCalled  = true;
-          values[$index] = value;
-          --remaining || resolve(values);
-        }, reject);
-      });
-      --remaining || resolve(values);
-    });
-    if(abrupt)reject(abrupt.error);
-    return capability.promise;
-  },
-  // 25.4.4.4 Promise.race(iterable)
-  race: function race(iterable){
-    var C          = this
-      , capability = newPromiseCapability(C)
-      , reject     = capability.reject;
-    var abrupt = perform(function(){
-      forOf(iterable, false, function(promise){
-        C.resolve(promise).then(capability.resolve, reject);
-      });
-    });
-    if(abrupt)reject(abrupt.error);
-    return capability.promise;
-  }
-});
-},{"./_a-function":28,"./_an-instance":30,"./_an-object":31,"./_classof":33,"./_core":35,"./_ctx":36,"./_export":42,"./_for-of":44,"./_global":45,"./_is-object":54,"./_iter-detect":58,"./_library":62,"./_microtask":64,"./_redefine-all":78,"./_set-proto":80,"./_set-species":81,"./_set-to-string-tag":82,"./_species-constructor":85,"./_task":87,"./_wks":95}],106:[function(require,module,exports){
-'use strict';
-var $at  = require('./_string-at')(true);
-
-// 21.1.3.27 String.prototype[@@iterator]()
-require('./_iter-define')(String, 'String', function(iterated){
-  this._t = String(iterated); // target
-  this._i = 0;                // next index
-// 21.1.5.2.1 %StringIteratorPrototype%.next()
-}, function(){
-  var O     = this._t
-    , index = this._i
-    , point;
-  if(index >= O.length)return {value: undefined, done: true};
-  point = $at(O, index);
-  this._i += point.length;
-  return {value: point, done: false};
-});
-},{"./_iter-define":57,"./_string-at":86}],107:[function(require,module,exports){
-'use strict';
-// ECMAScript 6 symbols shim
-var global         = require('./_global')
-  , core           = require('./_core')
-  , has            = require('./_has')
-  , DESCRIPTORS    = require('./_descriptors')
-  , $export        = require('./_export')
-  , redefine       = require('./_redefine')
-  , META           = require('./_meta').KEY
-  , $fails         = require('./_fails')
-  , shared         = require('./_shared')
-  , setToStringTag = require('./_set-to-string-tag')
-  , uid            = require('./_uid')
-  , wks            = require('./_wks')
-  , keyOf          = require('./_keyof')
-  , enumKeys       = require('./_enum-keys')
-  , isArray        = require('./_is-array')
-  , anObject       = require('./_an-object')
-  , toIObject      = require('./_to-iobject')
-  , toPrimitive    = require('./_to-primitive')
-  , createDesc     = require('./_property-desc')
-  , _create        = require('./_object-create')
-  , gOPNExt        = require('./_object-gopn-ext')
-  , $GOPD          = require('./_object-gopd')
-  , $DP            = require('./_object-dp')
-  , gOPD           = $GOPD.f
-  , dP             = $DP.f
-  , gOPN           = gOPNExt.f
-  , $Symbol        = global.Symbol
-  , $JSON          = global.JSON
-  , _stringify     = $JSON && $JSON.stringify
-  , setter         = false
-  , HIDDEN         = wks('_hidden')
-  , isEnum         = {}.propertyIsEnumerable
-  , SymbolRegistry = shared('symbol-registry')
-  , AllSymbols     = shared('symbols')
-  , ObjectProto    = Object.prototype
-  , USE_NATIVE     = typeof $Symbol == 'function';
-
-// fallback for old Android, https://code.google.com/p/v8/issues/detail?id=687
-var setSymbolDesc = DESCRIPTORS && $fails(function(){
-  return _create(dP({}, 'a', {
-    get: function(){ return dP(this, 'a', {value: 7}).a; }
-  })).a != 7;
-}) ? function(it, key, D){
-  var protoDesc = gOPD(ObjectProto, key);
-  if(protoDesc)delete ObjectProto[key];
-  dP(it, key, D);
-  if(protoDesc && it !== ObjectProto)dP(ObjectProto, key, protoDesc);
-} : dP;
-
-var wrap = function(tag){
-  var sym = AllSymbols[tag] = _create($Symbol.prototype);
-  sym._k = tag;
-  DESCRIPTORS && setter && setSymbolDesc(ObjectProto, tag, {
-    configurable: true,
-    set: function(value){
-      if(has(this, HIDDEN) && has(this[HIDDEN], tag))this[HIDDEN][tag] = false;
-      setSymbolDesc(this, tag, createDesc(1, value));
-    }
-  });
-  return sym;
-};
-
-var isSymbol = function(it){
-  return typeof it == 'symbol';
-};
-
-var $defineProperty = function defineProperty(it, key, D){
-  anObject(it);
-  key = toPrimitive(key, true);
-  anObject(D);
-  if(has(AllSymbols, key)){
-    if(!D.enumerable){
-      if(!has(it, HIDDEN))dP(it, HIDDEN, createDesc(1, {}));
-      it[HIDDEN][key] = true;
-    } else {
-      if(has(it, HIDDEN) && it[HIDDEN][key])it[HIDDEN][key] = false;
-      D = _create(D, {enumerable: createDesc(0, false)});
-    } return setSymbolDesc(it, key, D);
-  } return dP(it, key, D);
-};
-var $defineProperties = function defineProperties(it, P){
-  anObject(it);
-  var keys = enumKeys(P = toIObject(P))
-    , i    = 0
-    , l = keys.length
-    , key;
-  while(l > i)$defineProperty(it, key = keys[i++], P[key]);
-  return it;
-};
-var $create = function create(it, P){
-  return P === undefined ? _create(it) : $defineProperties(_create(it), P);
-};
-var $propertyIsEnumerable = function propertyIsEnumerable(key){
-  var E = isEnum.call(this, key = toPrimitive(key, true));
-  return E || !has(this, key) || !has(AllSymbols, key) || has(this, HIDDEN) && this[HIDDEN][key] ? E : true;
-};
-var $getOwnPropertyDescriptor = function getOwnPropertyDescriptor(it, key){
-  var D = gOPD(it = toIObject(it), key = toPrimitive(key, true));
-  if(D && has(AllSymbols, key) && !(has(it, HIDDEN) && it[HIDDEN][key]))D.enumerable = true;
-  return D;
-};
-var $getOwnPropertyNames = function getOwnPropertyNames(it){
-  var names  = gOPN(toIObject(it))
-    , result = []
-    , i      = 0
-    , key;
-  while(names.length > i)if(!has(AllSymbols, key = names[i++]) && key != HIDDEN && key != META)result.push(key);
-  return result;
-};
-var $getOwnPropertySymbols = function getOwnPropertySymbols(it){
-  var names  = gOPN(toIObject(it))
-    , result = []
-    , i      = 0
-    , key;
-  while(names.length > i)if(has(AllSymbols, key = names[i++]))result.push(AllSymbols[key]);
-  return result;
-};
-var $stringify = function stringify(it){
-  if(it === undefined || isSymbol(it))return; // IE8 returns string on undefined
-  var args = [it]
-    , i    = 1
-    , replacer, $replacer;
-  while(arguments.length > i)args.push(arguments[i++]);
-  replacer = args[1];
-  if(typeof replacer == 'function')$replacer = replacer;
-  if($replacer || !isArray(replacer))replacer = function(key, value){
-    if($replacer)value = $replacer.call(this, key, value);
-    if(!isSymbol(value))return value;
-  };
-  args[1] = replacer;
-  return _stringify.apply($JSON, args);
-};
-var BUGGY_JSON = $fails(function(){
-  var S = $Symbol();
-  // MS Edge converts symbol values to JSON as {}
-  // WebKit converts symbol values to JSON as null
-  // V8 throws on boxed symbols
-  return _stringify([S]) != '[null]' || _stringify({a: S}) != '{}' || _stringify(Object(S)) != '{}';
-});
-
-// 19.4.1.1 Symbol([description])
-if(!USE_NATIVE){
-  $Symbol = function Symbol(){
-    if(isSymbol(this))throw TypeError('Symbol is not a constructor');
-    return wrap(uid(arguments.length > 0 ? arguments[0] : undefined));
-  };
-  redefine($Symbol.prototype, 'toString', function toString(){
-    return this._k;
-  });
-
-  isSymbol = function(it){
-    return it instanceof $Symbol;
-  };
-
-  $GOPD.f = $getOwnPropertyDescriptor;
-  $DP.f   = $defineProperty;
-  require('./_object-gopn').f = gOPNExt.f = $getOwnPropertyNames;
-  require('./_object-pie').f  = $propertyIsEnumerable
-  require('./_object-gops').f = $getOwnPropertySymbols;
-
-  if(DESCRIPTORS && !require('./_library')){
-    redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
-  }
-}
-
-$export($export.G + $export.W + $export.F * !USE_NATIVE, {Symbol: $Symbol});
-
-// 19.4.2.2 Symbol.hasInstance
-// 19.4.2.3 Symbol.isConcatSpreadable
-// 19.4.2.4 Symbol.iterator
-// 19.4.2.6 Symbol.match
-// 19.4.2.8 Symbol.replace
-// 19.4.2.9 Symbol.search
-// 19.4.2.10 Symbol.species
-// 19.4.2.11 Symbol.split
-// 19.4.2.12 Symbol.toPrimitive
-// 19.4.2.13 Symbol.toStringTag
-// 19.4.2.14 Symbol.unscopables
-for(var symbols = (
-  'hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables'
-).split(','), i = 0; symbols.length > i; ){
-  var key     = symbols[i++]
-    , Wrapper = core.Symbol
-    , sym     = wks(key);
-  if(!(key in Wrapper))dP(Wrapper, key, {value: USE_NATIVE ? sym : wrap(sym)});
-};
-
-setter = true;
-
-$export($export.S + $export.F * !USE_NATIVE, 'Symbol', {
-  // 19.4.2.1 Symbol.for(key)
-  'for': function(key){
-    return has(SymbolRegistry, key += '')
-      ? SymbolRegistry[key]
-      : SymbolRegistry[key] = $Symbol(key);
-  },
-  // 19.4.2.5 Symbol.keyFor(sym)
-  keyFor: function keyFor(key){
-    return keyOf(SymbolRegistry, key);
-  },
-  useSetter: function(){ setter = true; },
-  useSimple: function(){ setter = false; }
-});
-
-$export($export.S + $export.F * !USE_NATIVE, 'Object', {
-  // 19.1.2.2 Object.create(O [, Properties])
-  create: $create,
-  // 19.1.2.4 Object.defineProperty(O, P, Attributes)
-  defineProperty: $defineProperty,
-  // 19.1.2.3 Object.defineProperties(O, Properties)
-  defineProperties: $defineProperties,
-  // 19.1.2.6 Object.getOwnPropertyDescriptor(O, P)
-  getOwnPropertyDescriptor: $getOwnPropertyDescriptor,
-  // 19.1.2.7 Object.getOwnPropertyNames(O)
-  getOwnPropertyNames: $getOwnPropertyNames,
-  // 19.1.2.8 Object.getOwnPropertySymbols(O)
-  getOwnPropertySymbols: $getOwnPropertySymbols
-});
-
-// 24.3.2 JSON.stringify(value [, replacer [, space]])
-$JSON && $export($export.S + $export.F * (!USE_NATIVE || BUGGY_JSON), 'JSON', {stringify: $stringify});
-
-// 19.4.3.5 Symbol.prototype[@@toStringTag]
-setToStringTag($Symbol, 'Symbol');
-// 20.2.1.9 Math[@@toStringTag]
-setToStringTag(Math, 'Math', true);
-// 24.3.3 JSON[@@toStringTag]
-setToStringTag(global.JSON, 'JSON', true);
-},{"./_an-object":31,"./_core":35,"./_descriptors":38,"./_enum-keys":41,"./_export":42,"./_fails":43,"./_global":45,"./_has":46,"./_is-array":53,"./_keyof":61,"./_library":62,"./_meta":63,"./_object-create":65,"./_object-dp":66,"./_object-gopd":68,"./_object-gopn":70,"./_object-gopn-ext":69,"./_object-gops":71,"./_object-pie":75,"./_property-desc":77,"./_redefine":79,"./_set-to-string-tag":82,"./_shared":84,"./_to-iobject":90,"./_to-primitive":93,"./_uid":94,"./_wks":95}],108:[function(require,module,exports){
-require('./es6.array.iterator');
-var global        = require('./_global')
-  , hide          = require('./_hide')
-  , Iterators     = require('./_iterators')
-  , TO_STRING_TAG = require('./_wks')('toStringTag');
-
-for(var collections = ['NodeList', 'DOMTokenList', 'MediaList', 'StyleSheetList', 'CSSRuleList'], i = 0; i < 5; i++){
-  var NAME       = collections[i]
-    , Collection = global[NAME]
-    , proto      = Collection && Collection.prototype;
-  if(proto && !proto[TO_STRING_TAG])hide(proto, TO_STRING_TAG, NAME);
-  Iterators[NAME] = Iterators.Array;
-}
-},{"./_global":45,"./_hide":47,"./_iterators":60,"./_wks":95,"./es6.array.iterator":97}],109:[function(require,module,exports){
 /*
  *  Copyright (c) 2016 The WebRTC project authors. All Rights Reserved.
  *
@@ -1841,15 +26,14 @@ var webrtcDetectedBrowser = null;
 var webrtcDetectedVersion = null;
 var webrtcMinimumVersion = null;
 var webrtcUtils = {
-  log: function() {
+  log: function log() {
     // suppress console.log output when being included as a module.
-    if (typeof module !== 'undefined' ||
-        typeof require === 'function' && typeof define === 'function') {
+    if (typeof module !== 'undefined' || typeof require === 'function' && typeof define === 'function') {
       return;
     }
     console.log.apply(console, arguments);
   },
-  extractVersion: function(uastring, expr, pos) {
+  extractVersion: function extractVersion(uastring, expr, pos) {
     var match = uastring.match(expr);
     return match && match.length >= pos && parseInt(match[pos], 10);
   }
@@ -1869,16 +53,15 @@ function trace(text) {
 }
 
 if (typeof window === 'object') {
-  if (window.HTMLMediaElement &&
-    !('srcObject' in window.HTMLMediaElement.prototype)) {
+  if (window.HTMLMediaElement && !('srcObject' in window.HTMLMediaElement.prototype)) {
     // Shim the srcObject property, once, when HTMLMediaElement is found.
     Object.defineProperty(window.HTMLMediaElement.prototype, 'srcObject', {
-      get: function() {
+      get: function get() {
         // If prefixed srcObject property exists, return it.
         // Otherwise use the shimmed property, _srcObject
         return 'mozSrcObject' in this ? this.mozSrcObject : this._srcObject;
       },
-      set: function(stream) {
+      set: function set(stream) {
         if ('mozSrcObject' in this) {
           this.mozSrcObject = stream;
         } else {
@@ -1895,11 +78,11 @@ if (typeof window === 'object') {
 }
 
 // Attach a media stream to an element.
-attachMediaStream = function(element, stream) {
+attachMediaStream = function (element, stream) {
   element.srcObject = stream;
 };
 
-reattachMediaStream = function(to, from) {
+reattachMediaStream = function (to, from) {
   to.srcObject = from.srcObject;
 };
 
@@ -1912,15 +95,14 @@ if (typeof window === 'undefined' || !window.navigator) {
   webrtcDetectedBrowser = 'firefox';
 
   // the detected firefox version.
-  webrtcDetectedVersion = webrtcUtils.extractVersion(navigator.userAgent,
-      /Firefox\/([0-9]+)\./, 1);
+  webrtcDetectedVersion = webrtcUtils.extractVersion(navigator.userAgent, /Firefox\/([0-9]+)\./, 1);
 
   // the minimum firefox version still supported by adapter.
   webrtcMinimumVersion = 31;
 
   // Shim for RTCPeerConnection on older versions.
   if (!window.RTCPeerConnection) {
-    window.RTCPeerConnection = function(pcConfig, pcConstraints) {
+    window.RTCPeerConnection = function (pcConfig, pcConstraints) {
       if (webrtcDetectedVersion < 38) {
         // .urls is not supported in FF < 38.
         // create RTCIceServers with a single url.
@@ -1953,10 +135,9 @@ if (typeof window === 'undefined' || !window.navigator) {
     // wrap static methods. Currently just generateCertificate.
     if (mozRTCPeerConnection.generateCertificate) {
       Object.defineProperty(window.RTCPeerConnection, 'generateCertificate', {
-        get: function() {
+        get: function get() {
           if (arguments.length) {
-            return mozRTCPeerConnection.generateCertificate.apply(null,
-                arguments);
+            return mozRTCPeerConnection.generateCertificate.apply(null, arguments);
           } else {
             return mozRTCPeerConnection.generateCertificate;
           }
@@ -1969,20 +150,18 @@ if (typeof window === 'undefined' || !window.navigator) {
   }
 
   // getUserMedia constraints shim.
-  getUserMedia = function(constraints, onSuccess, onError) {
-    var constraintsToFF37 = function(c) {
+  getUserMedia = function (constraints, onSuccess, onError) {
+    var constraintsToFF37 = function constraintsToFF37(c) {
       if (typeof c !== 'object' || c.require) {
         return c;
       }
       var require = [];
-      Object.keys(c).forEach(function(key) {
+      Object.keys(c).forEach(function (key) {
         if (key === 'require' || key === 'advanced' || key === 'mediaSource') {
           return;
         }
-        var r = c[key] = (typeof c[key] === 'object') ?
-            c[key] : {ideal: c[key]};
-        if (r.min !== undefined ||
-            r.max !== undefined || r.exact !== undefined) {
+        var r = c[key] = typeof c[key] === 'object' ? c[key] : { ideal: c[key] };
+        if (r.min !== undefined || r.max !== undefined || r.exact !== undefined) {
           require.push(key);
         }
         if (r.exact !== undefined) {
@@ -1997,7 +176,7 @@ if (typeof window === 'undefined' || !window.navigator) {
           c.advanced = c.advanced || [];
           var oc = {};
           if (typeof r.ideal === 'number') {
-            oc[key] = {min: r.ideal, max: r.ideal};
+            oc[key] = { min: r.ideal, max: r.ideal };
           } else {
             oc[key] = r.ideal;
           }
@@ -2030,28 +209,23 @@ if (typeof window === 'undefined' || !window.navigator) {
 
   // Shim for mediaDevices on older versions.
   if (!navigator.mediaDevices) {
-    navigator.mediaDevices = {getUserMedia: requestUserMedia,
-      addEventListener: function() { },
-      removeEventListener: function() { }
+    navigator.mediaDevices = { getUserMedia: requestUserMedia,
+      addEventListener: function addEventListener() {},
+      removeEventListener: function removeEventListener() {}
     };
   }
-  navigator.mediaDevices.enumerateDevices =
-      navigator.mediaDevices.enumerateDevices || function() {
-    return new Promise(function(resolve) {
-      var infos = [
-        {kind: 'audioinput', deviceId: 'default', label: '', groupId: ''},
-        {kind: 'videoinput', deviceId: 'default', label: '', groupId: ''}
-      ];
+  navigator.mediaDevices.enumerateDevices = navigator.mediaDevices.enumerateDevices || function () {
+    return new Promise(function (resolve) {
+      var infos = [{ kind: 'audioinput', deviceId: 'default', label: '', groupId: '' }, { kind: 'videoinput', deviceId: 'default', label: '', groupId: '' }];
       resolve(infos);
     });
   };
 
   if (webrtcDetectedVersion < 41) {
     // Work around http://bugzil.la/1169665
-    var orgEnumerateDevices =
-        navigator.mediaDevices.enumerateDevices.bind(navigator.mediaDevices);
-    navigator.mediaDevices.enumerateDevices = function() {
-      return orgEnumerateDevices().then(undefined, function(e) {
+    var orgEnumerateDevices = navigator.mediaDevices.enumerateDevices.bind(navigator.mediaDevices);
+    navigator.mediaDevices.enumerateDevices = function () {
+      return orgEnumerateDevices().then(undefined, function (e) {
         if (e.name === 'NotFoundError') {
           return [];
         }
@@ -2065,14 +239,13 @@ if (typeof window === 'undefined' || !window.navigator) {
   webrtcDetectedBrowser = 'chrome';
 
   // the detected chrome version.
-  webrtcDetectedVersion = webrtcUtils.extractVersion(navigator.userAgent,
-      /Chrom(e|ium)\/([0-9]+)\./, 2);
+  webrtcDetectedVersion = webrtcUtils.extractVersion(navigator.userAgent, /Chrom(e|ium)\/([0-9]+)\./, 2);
 
   // the minimum chrome version still supported by adapter.
   webrtcMinimumVersion = 38;
 
   // The RTCPeerConnection object.
-  window.RTCPeerConnection = function(pcConfig, pcConstraints) {
+  window.RTCPeerConnection = function (pcConfig, pcConstraints) {
     // Translate iceTransportPolicy to iceTransports,
     // see https://code.google.com/p/webrtc/issues/detail?id=4869
     if (pcConfig && pcConfig.iceTransportPolicy) {
@@ -2081,7 +254,8 @@ if (typeof window === 'undefined' || !window.navigator) {
 
     var pc = new webkitRTCPeerConnection(pcConfig, pcConstraints); // jscs:ignore requireCapitalizedConstructors
     var origGetStats = pc.getStats.bind(pc);
-    pc.getStats = function(selector, successCallback, errorCallback) { // jshint ignore: line
+    pc.getStats = function (selector, successCallback, errorCallback) {
+      // jshint ignore: line
       var self = this;
       var args = arguments;
 
@@ -2091,16 +265,16 @@ if (typeof window === 'undefined' || !window.navigator) {
         return origGetStats(selector, successCallback);
       }
 
-      var fixChromeStats = function(response) {
+      var fixChromeStats = function fixChromeStats(response) {
         var standardReport = {};
         var reports = response.result();
-        reports.forEach(function(report) {
+        reports.forEach(function (report) {
           var standardStats = {
             id: report.id,
             timestamp: report.timestamp,
             type: report.type
           };
-          report.names().forEach(function(name) {
+          report.names().forEach(function (name) {
             standardStats[name] = report.stat(name);
           });
           standardReport[standardStats.id] = standardStats;
@@ -2110,7 +284,7 @@ if (typeof window === 'undefined' || !window.navigator) {
       };
 
       if (arguments.length >= 2) {
-        var successCallbackWrapper = function(response) {
+        var successCallbackWrapper = function successCallbackWrapper(response) {
           args[1](fixChromeStats(response));
         };
 
@@ -2118,12 +292,11 @@ if (typeof window === 'undefined' || !window.navigator) {
       }
 
       // promise-support
-      return new Promise(function(resolve, reject) {
+      return new Promise(function (resolve, reject) {
         if (args.length === 1 && selector === null) {
-          origGetStats.apply(self, [
-              function(response) {
-                resolve.apply(null, [fixChromeStats(response)]);
-              }, reject]);
+          origGetStats.apply(self, [function (response) {
+            resolve.apply(null, [fixChromeStats(response)]);
+          }, reject]);
         } else {
           origGetStats.apply(self, [resolve, reject]);
         }
@@ -2137,10 +310,9 @@ if (typeof window === 'undefined' || !window.navigator) {
   // wrap static methods. Currently just generateCertificate.
   if (webkitRTCPeerConnection.generateCertificate) {
     Object.defineProperty(window.RTCPeerConnection, 'generateCertificate', {
-      get: function() {
+      get: function get() {
         if (arguments.length) {
-          return webkitRTCPeerConnection.generateCertificate.apply(null,
-              arguments);
+          return webkitRTCPeerConnection.generateCertificate.apply(null, arguments);
         } else {
           return webkitRTCPeerConnection.generateCertificate;
         }
@@ -2149,14 +321,13 @@ if (typeof window === 'undefined' || !window.navigator) {
   }
 
   // add promise support
-  ['createOffer', 'createAnswer'].forEach(function(method) {
+  ['createOffer', 'createAnswer'].forEach(function (method) {
     var nativeMethod = webkitRTCPeerConnection.prototype[method];
-    webkitRTCPeerConnection.prototype[method] = function() {
+    webkitRTCPeerConnection.prototype[method] = function () {
       var self = this;
-      if (arguments.length < 1 || (arguments.length === 1 &&
-          typeof(arguments[0]) === 'object')) {
+      if (arguments.length < 1 || arguments.length === 1 && typeof arguments[0] === 'object') {
         var opts = arguments.length === 1 ? arguments[0] : undefined;
-        return new Promise(function(resolve, reject) {
+        return new Promise(function (resolve, reject) {
           nativeMethod.apply(self, [resolve, reject, opts]);
         });
       } else {
@@ -2165,50 +336,46 @@ if (typeof window === 'undefined' || !window.navigator) {
     };
   });
 
-  ['setLocalDescription', 'setRemoteDescription',
-      'addIceCandidate'].forEach(function(method) {
+  ['setLocalDescription', 'setRemoteDescription', 'addIceCandidate'].forEach(function (method) {
     var nativeMethod = webkitRTCPeerConnection.prototype[method];
-    webkitRTCPeerConnection.prototype[method] = function() {
+    webkitRTCPeerConnection.prototype[method] = function () {
       var args = arguments;
       var self = this;
-      return new Promise(function(resolve, reject) {
-        nativeMethod.apply(self, [args[0],
-            function() {
-              resolve();
-              if (args.length >= 2) {
-                args[1].apply(null, []);
-              }
-            },
-            function(err) {
-              reject(err);
-              if (args.length >= 3) {
-                args[2].apply(null, [err]);
-              }
-            }]
-          );
+      return new Promise(function (resolve, reject) {
+        nativeMethod.apply(self, [args[0], function () {
+          resolve();
+          if (args.length >= 2) {
+            args[1].apply(null, []);
+          }
+        }, function (err) {
+          reject(err);
+          if (args.length >= 3) {
+            args[2].apply(null, [err]);
+          }
+        }]);
       });
     };
   });
 
   // getUserMedia constraints shim.
-  var constraintsToChrome = function(c) {
+  var constraintsToChrome = function constraintsToChrome(c) {
     if (typeof c !== 'object' || c.mandatory || c.optional) {
       return c;
     }
     var cc = {};
-    Object.keys(c).forEach(function(key) {
+    Object.keys(c).forEach(function (key) {
       if (key === 'require' || key === 'advanced' || key === 'mediaSource') {
         return;
       }
-      var r = (typeof c[key] === 'object') ? c[key] : {ideal: c[key]};
+      var r = typeof c[key] === 'object' ? c[key] : { ideal: c[key] };
       if (r.exact !== undefined && typeof r.exact === 'number') {
         r.min = r.max = r.exact;
       }
-      var oldname = function(prefix, name) {
+      var oldname = function oldname(prefix, name) {
         if (prefix) {
           return prefix + name.charAt(0).toUpperCase() + name.slice(1);
         }
-        return (name === 'deviceId') ? 'sourceId' : name;
+        return name === 'deviceId' ? 'sourceId' : name;
       };
       if (r.ideal !== undefined) {
         cc.optional = cc.optional || [];
@@ -2228,7 +395,7 @@ if (typeof window === 'undefined' || !window.navigator) {
         cc.mandatory = cc.mandatory || {};
         cc.mandatory[oldname('', key)] = r.exact;
       } else {
-        ['min', 'max'].forEach(function(mix) {
+        ['min', 'max'].forEach(function (mix) {
           if (r[mix] !== undefined) {
             cc.mandatory = cc.mandatory || {};
             cc.mandatory[oldname(mix, key)] = r[mix];
@@ -2242,7 +409,7 @@ if (typeof window === 'undefined' || !window.navigator) {
     return cc;
   };
 
-  getUserMedia = function(constraints, onSuccess, onError) {
+  getUserMedia = function (constraints, onSuccess, onError) {
     if (constraints.audio) {
       constraints.audio = constraintsToChrome(constraints.audio);
     }
@@ -2255,35 +422,34 @@ if (typeof window === 'undefined' || !window.navigator) {
   navigator.getUserMedia = getUserMedia;
 
   if (!navigator.mediaDevices) {
-    navigator.mediaDevices = {getUserMedia: requestUserMedia,
-                              enumerateDevices: function() {
-      return new Promise(function(resolve) {
-        var kinds = {audio: 'audioinput', video: 'videoinput'};
-        return MediaStreamTrack.getSources(function(devices) {
-          resolve(devices.map(function(device) {
-            return {label: device.label,
-                    kind: kinds[device.kind],
-                    deviceId: device.id,
-                    groupId: ''};
-          }));
+    navigator.mediaDevices = { getUserMedia: requestUserMedia,
+      enumerateDevices: function enumerateDevices() {
+        return new Promise(function (resolve) {
+          var kinds = { audio: 'audioinput', video: 'videoinput' };
+          return MediaStreamTrack.getSources(function (devices) {
+            resolve(devices.map(function (device) {
+              return { label: device.label,
+                kind: kinds[device.kind],
+                deviceId: device.id,
+                groupId: '' };
+            }));
+          });
         });
-      });
-    }};
+      } };
   }
 
   // A shim for getUserMedia method on the mediaDevices object.
   // TODO(KaptenJansson) remove once implemented in Chrome stable.
   if (!navigator.mediaDevices.getUserMedia) {
-    navigator.mediaDevices.getUserMedia = function(constraints) {
+    navigator.mediaDevices.getUserMedia = function (constraints) {
       return requestUserMedia(constraints);
     };
   } else {
     // Even though Chrome 45 has navigator.mediaDevices and a getUserMedia
     // function which returns a Promise, it does not accept spec-style
     // constraints.
-    var origGetUserMedia = navigator.mediaDevices.getUserMedia.
-        bind(navigator.mediaDevices);
-    navigator.mediaDevices.getUserMedia = function(c) {
+    var origGetUserMedia = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
+    navigator.mediaDevices.getUserMedia = function (c) {
       webrtcUtils.log('spec:   ' + JSON.stringify(c)); // whitespace for alignment
       c.audio = constraintsToChrome(c.audio);
       c.video = constraintsToChrome(c.video);
@@ -2295,18 +461,18 @@ if (typeof window === 'undefined' || !window.navigator) {
   // Dummy devicechange event methods.
   // TODO(KaptenJansson) remove once implemented in Chrome stable.
   if (typeof navigator.mediaDevices.addEventListener === 'undefined') {
-    navigator.mediaDevices.addEventListener = function() {
+    navigator.mediaDevices.addEventListener = function () {
       webrtcUtils.log('Dummy mediaDevices.addEventListener called.');
     };
   }
   if (typeof navigator.mediaDevices.removeEventListener === 'undefined') {
-    navigator.mediaDevices.removeEventListener = function() {
+    navigator.mediaDevices.removeEventListener = function () {
       webrtcUtils.log('Dummy mediaDevices.removeEventListener called.');
     };
   }
 
   // Attach a media stream to an element.
-  attachMediaStream = function(element, stream) {
+  attachMediaStream = function (element, stream) {
     if (webrtcDetectedVersion >= 43) {
       element.srcObject = stream;
     } else if (typeof element.src !== 'undefined') {
@@ -2315,21 +481,18 @@ if (typeof window === 'undefined' || !window.navigator) {
       webrtcUtils.log('Error attaching stream to element.');
     }
   };
-  reattachMediaStream = function(to, from) {
+  reattachMediaStream = function (to, from) {
     if (webrtcDetectedVersion >= 43) {
       to.srcObject = from.srcObject;
     } else {
       to.src = from.src;
     }
   };
-
-} else if (navigator.mediaDevices && navigator.userAgent.match(
-    /Edge\/(\d+).(\d+)$/)) {
+} else if (navigator.mediaDevices && navigator.userAgent.match(/Edge\/(\d+).(\d+)$/)) {
   webrtcUtils.log('This appears to be Edge');
   webrtcDetectedBrowser = 'edge';
 
-  webrtcDetectedVersion = webrtcUtils.extractVersion(navigator.userAgent,
-      /Edge\/(\d+).(\d+)$/, 2);
+  webrtcDetectedVersion = webrtcUtils.extractVersion(navigator.userAgent, /Edge\/(\d+).(\d+)$/, 2);
 
   // The minimum version still supported by adapter.
   // This is the build number for Edge.
@@ -2338,7 +501,7 @@ if (typeof window === 'undefined' || !window.navigator) {
   if (window.RTCIceGatherer) {
     // Generate an alphanumeric identifier for cname or mids.
     // TODO: use UUIDs instead? https://gist.github.com/jed/982883
-    var generateIdentifier = function() {
+    var generateIdentifier = function generateIdentifier() {
       return Math.random().toString(36).substr(2, 10);
     };
 
@@ -2349,30 +512,30 @@ if (typeof window === 'undefined' || !window.navigator) {
     var SDPUtils = {};
 
     // Splits SDP into lines, dealing with both CRLF and LF.
-    SDPUtils.splitLines = function(blob) {
-      return blob.trim().split('\n').map(function(line) {
+    SDPUtils.splitLines = function (blob) {
+      return blob.trim().split('\n').map(function (line) {
         return line.trim();
       });
     };
 
     // Splits SDP into sessionpart and mediasections. Ensures CRLF.
-    SDPUtils.splitSections = function(blob) {
+    SDPUtils.splitSections = function (blob) {
       var parts = blob.split('\r\nm=');
-      return parts.map(function(part, index) {
+      return parts.map(function (part, index) {
         return (index > 0 ? 'm=' + part : part).trim() + '\r\n';
       });
     };
 
     // Returns lines that start with a certain prefix.
-    SDPUtils.matchPrefix = function(blob, prefix) {
-      return SDPUtils.splitLines(blob).filter(function(line) {
+    SDPUtils.matchPrefix = function (blob, prefix) {
+      return SDPUtils.splitLines(blob).filter(function (line) {
         return line.indexOf(prefix) === 0;
       });
     };
 
     // Parses an ICE candidate line. Sample input:
     // candidate:702786350 2 udp 41819902 8.8.8.8 60769 typ relay raddr 8.8.8.8 rport 55996"
-    SDPUtils.parseCandidate = function(line) {
+    SDPUtils.parseCandidate = function (line) {
       var parts;
       // Parse both variants.
       if (line.indexOf('a=candidate:') === 0) {
@@ -2403,7 +566,8 @@ if (typeof window === 'undefined' || !window.navigator) {
           case 'tcptype':
             candidate.tcpType = parts[i + 1];
             break;
-          default: // Unknown extensions are silently ignored.
+          default:
+            // Unknown extensions are silently ignored.
             break;
         }
       }
@@ -2411,7 +575,7 @@ if (typeof window === 'undefined' || !window.navigator) {
     };
 
     // Translates a candidate object into SDP candidate attribute.
-    SDPUtils.writeCandidate = function(candidate) {
+    SDPUtils.writeCandidate = function (candidate) {
       var sdp = [];
       sdp.push(candidate.foundation);
       sdp.push(candidate.component);
@@ -2423,8 +587,7 @@ if (typeof window === 'undefined' || !window.navigator) {
       var type = candidate.type;
       sdp.push('typ');
       sdp.push(type);
-      if (type !== 'host' && candidate.relatedAddress &&
-          candidate.relatedPort) {
+      if (type !== 'host' && candidate.relatedAddress && candidate.relatedPort) {
         sdp.push('raddr');
         sdp.push(candidate.relatedAddress); // was: relAddr
         sdp.push('rport');
@@ -2439,7 +602,7 @@ if (typeof window === 'undefined' || !window.navigator) {
 
     // Parses an rtpmap line, returns RTCRtpCoddecParameters. Sample input:
     // a=rtpmap:111 opus/48000/2
-    SDPUtils.parseRtpMap = function(line) {
+    SDPUtils.parseRtpMap = function (line) {
       var parts = line.substr(9).split(' ');
       var parsed = {
         payloadType: parseInt(parts.shift(), 10) // was: id
@@ -2454,19 +617,18 @@ if (typeof window === 'undefined' || !window.navigator) {
     };
 
     // Generate an a=rtpmap line from RTCRtpCodecCapability or RTCRtpCodecParameters.
-    SDPUtils.writeRtpMap = function(codec) {
+    SDPUtils.writeRtpMap = function (codec) {
       var pt = codec.payloadType;
       if (codec.preferredPayloadType !== undefined) {
         pt = codec.preferredPayloadType;
       }
-      return 'a=rtpmap:' + pt + ' ' + codec.name + '/' + codec.clockRate +
-          (codec.numChannels !== 1 ? '/' + codec.numChannels : '') + '\r\n';
+      return 'a=rtpmap:' + pt + ' ' + codec.name + '/' + codec.clockRate + (codec.numChannels !== 1 ? '/' + codec.numChannels : '') + '\r\n';
     };
 
     // Parses an ftmp line, returns dictionary. Sample input:
     // a=fmtp:96 vbr=on;cng=on
     // Also deals with vbr=on; cng=on
-    SDPUtils.parseFmtp = function(line) {
+    SDPUtils.parseFmtp = function (line) {
       var parsed = {};
       var kv;
       var parts = line.substr(line.indexOf(' ') + 1).split(';');
@@ -2478,7 +640,7 @@ if (typeof window === 'undefined' || !window.navigator) {
     };
 
     // Generates an a=ftmp line from RTCRtpCodecCapability or RTCRtpCodecParameters.
-    SDPUtils.writeFtmp = function(codec) {
+    SDPUtils.writeFtmp = function (codec) {
       var line = '';
       var pt = codec.payloadType;
       if (codec.preferredPayloadType !== undefined) {
@@ -2486,7 +648,7 @@ if (typeof window === 'undefined' || !window.navigator) {
       }
       if (codec.parameters && codec.parameters.length) {
         var params = [];
-        Object.keys(codec.parameters).forEach(function(param) {
+        Object.keys(codec.parameters).forEach(function (param) {
           params.push(param + '=' + codec.parameters[param]);
         });
         line += 'a=fmtp:' + pt + ' ' + params.join(';') + '\r\n';
@@ -2496,7 +658,7 @@ if (typeof window === 'undefined' || !window.navigator) {
 
     // Parses an rtcp-fb line, returns RTCPRtcpFeedback object. Sample input:
     // a=rtcp-fb:98 nack rpsi
-    SDPUtils.parseRtcpFb = function(line) {
+    SDPUtils.parseRtcpFb = function (line) {
       var parts = line.substr(line.indexOf(' ') + 1).split(' ');
       return {
         type: parts.shift(),
@@ -2504,7 +666,7 @@ if (typeof window === 'undefined' || !window.navigator) {
       };
     };
     // Generate a=rtcp-fb lines from RTCRtpCodecCapability or RTCRtpCodecParameters.
-    SDPUtils.writeRtcpFb = function(codec) {
+    SDPUtils.writeRtcpFb = function (codec) {
       var lines = '';
       var pt = codec.payloadType;
       if (codec.preferredPayloadType !== undefined) {
@@ -2512,9 +674,8 @@ if (typeof window === 'undefined' || !window.navigator) {
       }
       if (codec.rtcpFeedback && codec.rtcpFeedback.length) {
         // FIXME: special handling for trr-int?
-        codec.rtcpFeedback.forEach(function(fb) {
-          lines += 'a=rtcp-fb:' + pt + ' ' + fb.type + ' ' + fb.parameter +
-              '\r\n';
+        codec.rtcpFeedback.forEach(function (fb) {
+          lines += 'a=rtcp-fb:' + pt + ' ' + fb.type + ' ' + fb.parameter + '\r\n';
         });
       }
       return lines;
@@ -2522,10 +683,10 @@ if (typeof window === 'undefined' || !window.navigator) {
 
     // Parses an RFC 5576 ssrc media attribute. Sample input:
     // a=ssrc:3735928559 cname:something
-    SDPUtils.parseSsrcMedia = function(line) {
+    SDPUtils.parseSsrcMedia = function (line) {
       var sp = line.indexOf(' ');
       var parts = {
-        ssrc: line.substr(7, sp - 7),
+        ssrc: line.substr(7, sp - 7)
       };
       var colon = line.indexOf(':', sp);
       if (colon > -1) {
@@ -2540,10 +701,10 @@ if (typeof window === 'undefined' || !window.navigator) {
     // Extracts DTLS parameters from SDP media section or sessionpart.
     // FIXME: for consistency with other functions this should only
     //   get the fingerprint line as input. See also getIceParameters.
-    SDPUtils.getDtlsParameters = function(mediaSection, sessionpart) {
+    SDPUtils.getDtlsParameters = function (mediaSection, sessionpart) {
       var lines = SDPUtils.splitLines(mediaSection);
       lines = lines.concat(SDPUtils.splitLines(sessionpart)); // Search in session part, too.
-      var fpLine = lines.filter(function(line) {
+      var fpLine = lines.filter(function (line) {
         return line.indexOf('a=fingerprint:') === 0;
       })[0].substr(14);
       // Note: a=setup line is ignored since we use the 'auto' role.
@@ -2558,9 +719,9 @@ if (typeof window === 'undefined' || !window.navigator) {
     };
 
     // Serializes DTLS parameters to SDP.
-    SDPUtils.writeDtlsParameters = function(params, setupType) {
+    SDPUtils.writeDtlsParameters = function (params, setupType) {
       var sdp = 'a=setup:' + setupType + '\r\n';
-      params.fingerprints.forEach(function(fp) {
+      params.fingerprints.forEach(function (fp) {
         sdp += 'a=fingerprint:' + fp.algorithm + ' ' + fp.value + '\r\n';
       });
       return sdp;
@@ -2568,14 +729,14 @@ if (typeof window === 'undefined' || !window.navigator) {
     // Parses ICE information from SDP media section or sessionpart.
     // FIXME: for consistency with other functions this should only
     //   get the ice-ufrag and ice-pwd lines as input.
-    SDPUtils.getIceParameters = function(mediaSection, sessionpart) {
+    SDPUtils.getIceParameters = function (mediaSection, sessionpart) {
       var lines = SDPUtils.splitLines(mediaSection);
       lines = lines.concat(SDPUtils.splitLines(sessionpart)); // Search in session part, too.
       var iceParameters = {
-        usernameFragment: lines.filter(function(line) {
+        usernameFragment: lines.filter(function (line) {
           return line.indexOf('a=ice-ufrag:') === 0;
         })[0].substr(12),
-        password: lines.filter(function(line) {
+        password: lines.filter(function (line) {
           return line.indexOf('a=ice-pwd:') === 0;
         })[0].substr(10)
       };
@@ -2583,13 +744,12 @@ if (typeof window === 'undefined' || !window.navigator) {
     };
 
     // Serializes ICE parameters to SDP.
-    SDPUtils.writeIceParameters = function(params) {
-      return 'a=ice-ufrag:' + params.usernameFragment + '\r\n' +
-          'a=ice-pwd:' + params.password + '\r\n';
+    SDPUtils.writeIceParameters = function (params) {
+      return 'a=ice-ufrag:' + params.usernameFragment + '\r\n' + 'a=ice-pwd:' + params.password + '\r\n';
     };
 
     // Parses the SDP media section and returns RTCRtpParameters.
-    SDPUtils.parseRtpParameters = function(mediaSection) {
+    SDPUtils.parseRtpParameters = function (mediaSection) {
       var description = {
         codecs: [],
         headerExtensions: [],
@@ -2598,19 +758,16 @@ if (typeof window === 'undefined' || !window.navigator) {
       };
       var lines = SDPUtils.splitLines(mediaSection);
       var mline = lines[0].split(' ');
-      for (var i = 3; i < mline.length; i++) { // find all codecs from mline[3..]
+      for (var i = 3; i < mline.length; i++) {
+        // find all codecs from mline[3..]
         var pt = mline[i];
-        var rtpmapline = SDPUtils.matchPrefix(
-            mediaSection, 'a=rtpmap:' + pt + ' ')[0];
+        var rtpmapline = SDPUtils.matchPrefix(mediaSection, 'a=rtpmap:' + pt + ' ')[0];
         if (rtpmapline) {
           var codec = SDPUtils.parseRtpMap(rtpmapline);
-          var fmtps = SDPUtils.matchPrefix(
-              mediaSection, 'a=fmtp:' + pt + ' ');
+          var fmtps = SDPUtils.matchPrefix(mediaSection, 'a=fmtp:' + pt + ' ');
           // Only the first a=fmtp:<pt> is considered.
           codec.parameters = fmtps.length ? SDPUtils.parseFmtp(fmtps[0]) : {};
-          codec.rtcpFeedback = SDPUtils.matchPrefix(
-              mediaSection, 'a=rtcp-fb:' + pt + ' ')
-            .map(SDPUtils.parseRtcpFb);
+          codec.rtcpFeedback = SDPUtils.matchPrefix(mediaSection, 'a=rtcp-fb:' + pt + ' ').map(SDPUtils.parseRtcpFb);
           description.codecs.push(codec);
         }
       }
@@ -2619,14 +776,14 @@ if (typeof window === 'undefined' || !window.navigator) {
     };
 
     // Generates parts of the SDP media section describing the capabilities / parameters.
-    SDPUtils.writeRtpDescription = function(kind, caps) {
+    SDPUtils.writeRtpDescription = function (kind, caps) {
       var sdp = '';
 
       // Build the mline.
       sdp += 'm=' + kind + ' ';
       sdp += caps.codecs.length > 0 ? '9' : '0'; // reject if no codecs.
       sdp += ' UDP/TLS/RTP/SAVPF ';
-      sdp += caps.codecs.map(function(codec) {
+      sdp += caps.codecs.map(function (codec) {
         if (codec.preferredPayloadType !== undefined) {
           return codec.preferredPayloadType;
         }
@@ -2637,7 +794,7 @@ if (typeof window === 'undefined' || !window.navigator) {
       sdp += 'a=rtcp:9 IN IP4 0.0.0.0\r\n';
 
       // Add a=rtpmap lines for each codec. Also fmtp and rtcp-fb.
-      caps.codecs.forEach(function(codec) {
+      caps.codecs.forEach(function (codec) {
         sdp += SDPUtils.writeRtpMap(codec);
         sdp += SDPUtils.writeFtmp(codec);
         sdp += SDPUtils.writeRtcpFb(codec);
@@ -2647,25 +804,19 @@ if (typeof window === 'undefined' || !window.navigator) {
       return sdp;
     };
 
-    SDPUtils.writeSessionBoilerplate = function() {
+    SDPUtils.writeSessionBoilerplate = function () {
       // FIXME: sess-id should be an NTP timestamp.
-      return 'v=0\r\n' +
-          'o=thisisadapterortc 8169639915646943137 2 IN IP4 127.0.0.1\r\n' +
-          's=-\r\n' +
-          't=0 0\r\n';
+      return 'v=0\r\n' + 'o=thisisadapterortc 8169639915646943137 2 IN IP4 127.0.0.1\r\n' + 's=-\r\n' + 't=0 0\r\n';
     };
 
-    SDPUtils.writeMediaSection = function(transceiver, caps, type, stream) {
+    SDPUtils.writeMediaSection = function (transceiver, caps, type, stream) {
       var sdp = SDPUtils.writeRtpDescription(transceiver.kind, caps);
 
       // Map ICE parameters (ufrag, pwd) to SDP.
-      sdp += SDPUtils.writeIceParameters(
-          transceiver.iceGatherer.getLocalParameters());
+      sdp += SDPUtils.writeIceParameters(transceiver.iceGatherer.getLocalParameters());
 
       // Map DTLS parameters to SDP.
-      sdp += SDPUtils.writeDtlsParameters(
-          transceiver.dtlsTransport.getLocalParameters(),
-          type === 'offer' ? 'actpass' : 'active');
+      sdp += SDPUtils.writeDtlsParameters(transceiver.dtlsTransport.getLocalParameters(), type === 'offer' ? 'actpass' : 'active');
 
       sdp += 'a=mid:' + transceiver.mid + '\r\n';
 
@@ -2681,19 +832,17 @@ if (typeof window === 'undefined' || !window.navigator) {
 
       // FIXME: for RTX there might be multiple SSRCs. Not implemented in Edge yet.
       if (transceiver.rtpSender) {
-        var msid = 'msid:' + stream.id + ' ' +
-            transceiver.rtpSender.track.id + '\r\n';
+        var msid = 'msid:' + stream.id + ' ' + transceiver.rtpSender.track.id + '\r\n';
         sdp += 'a=' + msid;
         sdp += 'a=ssrc:' + transceiver.sendSsrc + ' ' + msid;
       }
       // FIXME: this should be written by writeRtpDescription.
-      sdp += 'a=ssrc:' + transceiver.sendSsrc + ' cname:' +
-          localCName + '\r\n';
+      sdp += 'a=ssrc:' + transceiver.sendSsrc + ' cname:' + localCName + '\r\n';
       return sdp;
     };
 
     // Gets the direction from the mediaSection or the sessionpart.
-    SDPUtils.getDirection = function(mediaSection, sessionpart) {
+    SDPUtils.getDirection = function (mediaSection, sessionpart) {
       // Look for sendrecv, sendonly, recvonly, inactive, default to sendrecv.
       var lines = SDPUtils.splitLines(mediaSection);
       for (var i = 0; i < lines.length; i++) {
@@ -2714,7 +863,7 @@ if (typeof window === 'undefined' || !window.navigator) {
     // ORTC defines an RTCIceCandidate object but no constructor.
     // Not implemented in Edge.
     if (!window.RTCIceCandidate) {
-      window.RTCIceCandidate = function(args) {
+      window.RTCIceCandidate = function (args) {
         return args;
       };
     }
@@ -2722,12 +871,12 @@ if (typeof window === 'undefined' || !window.navigator) {
     // other browsers (i.e. Chrome) that will support both PC and ORTC
     // in the future might have this defined already.
     if (!window.RTCSessionDescription) {
-      window.RTCSessionDescription = function(args) {
+      window.RTCSessionDescription = function (args) {
         return args;
       };
     }
 
-    window.RTCPeerConnection = function(config) {
+    window.RTCPeerConnection = function (config) {
       var self = this;
 
       this.onicecandidate = null;
@@ -2740,8 +889,12 @@ if (typeof window === 'undefined' || !window.navigator) {
 
       this.localStreams = [];
       this.remoteStreams = [];
-      this.getLocalStreams = function() { return self.localStreams; };
-      this.getRemoteStreams = function() { return self.remoteStreams; };
+      this.getLocalStreams = function () {
+        return self.localStreams;
+      };
+      this.getRemoteStreams = function () {
+        return self.remoteStreams;
+      };
 
       this.localDescription = new RTCSessionDescription({
         type: '',
@@ -2774,10 +927,10 @@ if (typeof window === 'undefined' || !window.navigator) {
         // 1) stun:
         // 2) turn: that does not have all of turn:host:port?transport=udp
         // 3) an array of urls
-        config.iceServers.forEach(function(server) {
+        config.iceServers.forEach(function (server) {
           if (server.urls) {
             var url;
-            if (typeof(server.urls) === 'string') {
+            if (typeof server.urls === 'string') {
               url = server.urls;
             } else {
               url = server.urls[0];
@@ -2803,10 +956,10 @@ if (typeof window === 'undefined' || !window.navigator) {
       this._localIceCandidatesBuffer = [];
     };
 
-    window.RTCPeerConnection.prototype._emitBufferedCandidates = function() {
+    window.RTCPeerConnection.prototype._emitBufferedCandidates = function () {
       var self = this;
       // FIXME: need to apply ice candidates in a way which is async but in-order
-      this._localIceCandidatesBuffer.forEach(function(event) {
+      this._localIceCandidatesBuffer.forEach(function (event) {
         if (self.onicecandidate !== null) {
           self.onicecandidate(event);
         }
@@ -2814,14 +967,14 @@ if (typeof window === 'undefined' || !window.navigator) {
       this._localIceCandidatesBuffer = [];
     };
 
-    window.RTCPeerConnection.prototype.addStream = function(stream) {
+    window.RTCPeerConnection.prototype.addStream = function (stream) {
       // Clone is necessary for local demos mostly, attaching directly
       // to two different senders does not work (build 10547).
       this.localStreams.push(stream.clone());
       this._maybeFireNegotiationNeeded();
     };
 
-    window.RTCPeerConnection.prototype.removeStream = function(stream) {
+    window.RTCPeerConnection.prototype.removeStream = function (stream) {
       var idx = this.localStreams.indexOf(stream);
       if (idx > -1) {
         this.localStreams.splice(idx, 1);
@@ -2830,19 +983,16 @@ if (typeof window === 'undefined' || !window.navigator) {
     };
 
     // Determines the intersection of local and remote capabilities.
-    window.RTCPeerConnection.prototype._getCommonCapabilities =
-        function(localCapabilities, remoteCapabilities) {
+    window.RTCPeerConnection.prototype._getCommonCapabilities = function (localCapabilities, remoteCapabilities) {
       var commonCapabilities = {
         codecs: [],
         headerExtensions: [],
         fecMechanisms: []
       };
-      localCapabilities.codecs.forEach(function(lCodec) {
+      localCapabilities.codecs.forEach(function (lCodec) {
         for (var i = 0; i < remoteCapabilities.codecs.length; i++) {
           var rCodec = remoteCapabilities.codecs[i];
-          if (lCodec.name.toLowerCase() === rCodec.name.toLowerCase() &&
-              lCodec.clockRate === rCodec.clockRate &&
-              lCodec.numChannels === rCodec.numChannels) {
+          if (lCodec.name.toLowerCase() === rCodec.name.toLowerCase() && lCodec.clockRate === rCodec.clockRate && lCodec.numChannels === rCodec.numChannels) {
             // push rCodec so we reply with offerer payload type
             commonCapabilities.codecs.push(rCodec);
 
@@ -2853,7 +1003,7 @@ if (typeof window === 'undefined' || !window.navigator) {
         }
       });
 
-      localCapabilities.headerExtensions.forEach(function(lHeaderExtension) {
+      localCapabilities.headerExtensions.forEach(function (lHeaderExtension) {
         for (var i = 0; i < remoteCapabilities.headerExtensions.length; i++) {
           var rHeaderExtension = remoteCapabilities.headerExtensions[i];
           if (lHeaderExtension.uri === rHeaderExtension.uri) {
@@ -2868,14 +1018,13 @@ if (typeof window === 'undefined' || !window.navigator) {
     };
 
     // Create ICE gatherer, ICE transport and DTLS transport.
-    window.RTCPeerConnection.prototype._createIceAndDtlsTransports =
-        function(mid, sdpMLineIndex) {
+    window.RTCPeerConnection.prototype._createIceAndDtlsTransports = function (mid, sdpMLineIndex) {
       var self = this;
       var iceGatherer = new RTCIceGatherer(self.iceOptions);
       var iceTransport = new RTCIceTransport(iceGatherer);
-      iceGatherer.onlocalcandidate = function(evt) {
+      iceGatherer.onlocalcandidate = function (evt) {
         var event = {};
-        event.candidate = {sdpMid: mid, sdpMLineIndex: sdpMLineIndex};
+        event.candidate = { sdpMid: mid, sdpMLineIndex: sdpMLineIndex };
 
         var cand = evt.candidate;
         // Edge emits an empty object for RTCIceCandidateComplete‥
@@ -2889,17 +1038,15 @@ if (typeof window === 'undefined' || !window.navigator) {
           // Edge requires addIceCandidate with this empty candidate to start checking.
           // The real solution is to signal end-of-candidates to the other side when
           // getting the null candidate but some apps (like the samples) don't do that.
-          event.candidate.candidate =
-              'candidate:1 1 udp 1 0.0.0.0 9 typ endOfCandidates';
+          event.candidate.candidate = 'candidate:1 1 udp 1 0.0.0.0 9 typ endOfCandidates';
         } else {
           // RTCIceCandidate doesn't have a component, needs to be added
           cand.component = iceTransport.component === 'RTCP' ? 2 : 1;
           event.candidate.candidate = SDPUtils.writeCandidate(cand);
         }
 
-        var complete = self.transceivers.every(function(transceiver) {
-          return transceiver.iceGatherer &&
-              transceiver.iceGatherer.state === 'completed';
+        var complete = self.transceivers.every(function (transceiver) {
+          return transceiver.iceGatherer && transceiver.iceGatherer.state === 'completed';
         });
         // FIXME: update .localDescription with candidate and (potentially) end-of-candidates.
         //     To make this harder, the gatherer might emit candidates before localdescription
@@ -2922,15 +1069,15 @@ if (typeof window === 'undefined' || !window.navigator) {
           }
         }
       };
-      iceTransport.onicestatechange = function() {
+      iceTransport.onicestatechange = function () {
         self._updateConnectionState();
       };
 
       var dtlsTransport = new RTCDtlsTransport(iceTransport);
-      dtlsTransport.ondtlsstatechange = function() {
+      dtlsTransport.ondtlsstatechange = function () {
         self._updateConnectionState();
       };
-      dtlsTransport.onerror = function() {
+      dtlsTransport.onerror = function () {
         // onerror does not set state to failed by itself.
         dtlsTransport.state = 'failed';
         self._updateConnectionState();
@@ -2944,10 +1091,8 @@ if (typeof window === 'undefined' || !window.navigator) {
     };
 
     // Start the RTP Sender and Receiver for a transceiver.
-    window.RTCPeerConnection.prototype._transceive = function(transceiver,
-        send, recv) {
-      var params = this._getCommonCapabilities(transceiver.localCapabilities,
-          transceiver.remoteCapabilities);
+    window.RTCPeerConnection.prototype._transceive = function (transceiver, send, recv) {
+      var params = this._getCommonCapabilities(transceiver.localCapabilities, transceiver.remoteCapabilities);
       if (send && transceiver.rtpSender) {
         params.encodings = [{
           ssrc: transceiver.sendSsrc
@@ -2970,46 +1115,38 @@ if (typeof window === 'undefined' || !window.navigator) {
       }
     };
 
-    window.RTCPeerConnection.prototype.setLocalDescription =
-        function(description) {
+    window.RTCPeerConnection.prototype.setLocalDescription = function (description) {
       var self = this;
       if (description.type === 'offer') {
-        if (!this._pendingOffer) {
-        } else {
+        if (!this._pendingOffer) {} else {
           this.transceivers = this._pendingOffer;
           delete this._pendingOffer;
         }
       } else if (description.type === 'answer') {
         var sections = SDPUtils.splitSections(self.remoteDescription.sdp);
         var sessionpart = sections.shift();
-        sections.forEach(function(mediaSection, sdpMLineIndex) {
+        sections.forEach(function (mediaSection, sdpMLineIndex) {
           var transceiver = self.transceivers[sdpMLineIndex];
           var iceGatherer = transceiver.iceGatherer;
           var iceTransport = transceiver.iceTransport;
           var dtlsTransport = transceiver.dtlsTransport;
           var localCapabilities = transceiver.localCapabilities;
           var remoteCapabilities = transceiver.remoteCapabilities;
-          var rejected = mediaSection.split('\n', 1)[0]
-              .split(' ', 2)[1] === '0';
+          var rejected = mediaSection.split('\n', 1)[0].split(' ', 2)[1] === '0';
 
           if (!rejected) {
-            var remoteIceParameters = SDPUtils.getIceParameters(mediaSection,
-                sessionpart);
+            var remoteIceParameters = SDPUtils.getIceParameters(mediaSection, sessionpart);
             iceTransport.start(iceGatherer, remoteIceParameters, 'controlled');
 
-            var remoteDtlsParameters = SDPUtils.getDtlsParameters(mediaSection,
-              sessionpart);
+            var remoteDtlsParameters = SDPUtils.getDtlsParameters(mediaSection, sessionpart);
             dtlsTransport.start(remoteDtlsParameters);
 
             // Calculate intersection of capabilities.
-            var params = self._getCommonCapabilities(localCapabilities,
-                remoteCapabilities);
+            var params = self._getCommonCapabilities(localCapabilities, remoteCapabilities);
 
             // Start the RTCRtpSender. The RTCRtpReceiver for this transceiver
             // has already been started in setRemoteDescription.
-            self._transceive(transceiver,
-                params.codecs.length > 0,
-                false);
+            self._transceive(transceiver, params.codecs.length > 0, false);
           }
         });
       }
@@ -3028,17 +1165,16 @@ if (typeof window === 'undefined' || !window.navigator) {
 
       // If a success callback was provided, emit ICE candidates after it has been
       // executed. Otherwise, emit callback after the Promise is resolved.
-      var hasCallback = arguments.length > 1 &&
-        typeof arguments[1] === 'function';
+      var hasCallback = arguments.length > 1 && typeof arguments[1] === 'function';
       if (hasCallback) {
         var cb = arguments[1];
-        window.setTimeout(function() {
+        window.setTimeout(function () {
           cb();
           self._emitBufferedCandidates();
         }, 0);
       }
       var p = Promise.resolve();
-      p.then(function() {
+      p.then(function () {
         if (!hasCallback) {
           window.setTimeout(self._emitBufferedCandidates.bind(self), 0);
         }
@@ -3046,13 +1182,12 @@ if (typeof window === 'undefined' || !window.navigator) {
       return p;
     };
 
-    window.RTCPeerConnection.prototype.setRemoteDescription =
-        function(description) {
+    window.RTCPeerConnection.prototype.setRemoteDescription = function (description) {
       var self = this;
       var stream = new MediaStream();
       var sections = SDPUtils.splitSections(description.sdp);
       var sessionpart = sections.shift();
-      sections.forEach(function(mediaSection, sdpMLineIndex) {
+      sections.forEach(function (mediaSection, sdpMLineIndex) {
         var lines = SDPUtils.splitLines(mediaSection);
         var mline = lines[0].substr(2).split(' ');
         var kind = mline[0];
@@ -3074,22 +1209,18 @@ if (typeof window === 'undefined' || !window.navigator) {
         var remoteIceParameters;
         var remoteDtlsParameters;
         if (!rejected) {
-          remoteIceParameters = SDPUtils.getIceParameters(mediaSection,
-              sessionpart);
-          remoteDtlsParameters = SDPUtils.getDtlsParameters(mediaSection,
-              sessionpart);
+          remoteIceParameters = SDPUtils.getIceParameters(mediaSection, sessionpart);
+          remoteDtlsParameters = SDPUtils.getDtlsParameters(mediaSection, sessionpart);
         }
         var mid = SDPUtils.matchPrefix(mediaSection, 'a=mid:')[0].substr(6);
 
         var cname;
         // Gets the first SSRC. Note that with RTX there might be multiple SSRCs.
-        var remoteSsrc = SDPUtils.matchPrefix(mediaSection, 'a=ssrc:')
-            .map(function(line) {
-              return SDPUtils.parseSsrcMedia(line);
-            })
-            .filter(function(obj) {
-              return obj.attribute === 'cname';
-            })[0];
+        var remoteSsrc = SDPUtils.matchPrefix(mediaSection, 'a=ssrc:').map(function (line) {
+          return SDPUtils.parseSsrcMedia(line);
+        }).filter(function (obj) {
+          return obj.attribute === 'cname';
+        })[0];
         if (remoteSsrc) {
           recvSsrc = parseInt(remoteSsrc.ssrc, 10);
           cname = remoteSsrc.value;
@@ -3108,8 +1239,7 @@ if (typeof window === 'undefined' || !window.navigator) {
           stream.addTrack(rtpReceiver.track);
 
           // FIXME: look at direction.
-          if (self.localStreams.length > 0 &&
-              self.localStreams[0].getTracks().length >= sdpMLineIndex) {
+          if (self.localStreams.length > 0 && self.localStreams[0].getTracks().length >= sdpMLineIndex) {
             // FIXME: actually more complicated, needs to match types etc
             var localtrack = self.localStreams[0].getTracks()[sdpMLineIndex];
             rtpSender = new RTCRtpSender(localtrack, transports.dtlsTransport);
@@ -3130,9 +1260,7 @@ if (typeof window === 'undefined' || !window.navigator) {
             recvSsrc: recvSsrc
           };
           // Start the RTCRtpReceiver now. The RTPSender is started in setLocalDescription.
-          self._transceive(self.transceivers[sdpMLineIndex],
-              false,
-              direction === 'sendrecv' || direction === 'sendonly');
+          self._transceive(self.transceivers[sdpMLineIndex], false, direction === 'sendrecv' || direction === 'sendonly');
         } else if (description.type === 'answer' && !rejected) {
           transceiver = self.transceivers[sdpMLineIndex];
           iceGatherer = transceiver.iceGatherer;
@@ -3145,19 +1273,15 @@ if (typeof window === 'undefined' || !window.navigator) {
           localCapabilities = transceiver.localCapabilities;
 
           self.transceivers[sdpMLineIndex].recvSsrc = recvSsrc;
-          self.transceivers[sdpMLineIndex].remoteCapabilities =
-              remoteCapabilities;
+          self.transceivers[sdpMLineIndex].remoteCapabilities = remoteCapabilities;
           self.transceivers[sdpMLineIndex].cname = cname;
 
           iceTransport.start(iceGatherer, remoteIceParameters, 'controlling');
           dtlsTransport.start(remoteDtlsParameters);
 
-          self._transceive(transceiver,
-              direction === 'sendrecv' || direction === 'recvonly',
-              direction === 'sendrecv' || direction === 'sendonly');
+          self._transceive(transceiver, direction === 'sendrecv' || direction === 'recvonly', direction === 'sendrecv' || direction === 'sendonly');
 
-          if (rtpReceiver &&
-              (direction === 'sendrecv' || direction === 'sendonly')) {
+          if (rtpReceiver && (direction === 'sendrecv' || direction === 'sendonly')) {
             stream.addTrack(rtpReceiver.track);
           } else {
             // FIXME: actually the receiver should be created later.
@@ -3177,11 +1301,11 @@ if (typeof window === 'undefined' || !window.navigator) {
         default:
           throw new TypeError('unsupported type "' + description.type + '"');
       }
-      window.setTimeout(function() {
+      window.setTimeout(function () {
         if (self.onaddstream !== null && stream.getTracks().length) {
           self.remoteStreams.push(stream);
-          window.setTimeout(function() {
-            self.onaddstream({stream: stream});
+          window.setTimeout(function () {
+            self.onaddstream({ stream: stream });
           }, 0);
         }
       }, 0);
@@ -3191,8 +1315,8 @@ if (typeof window === 'undefined' || !window.navigator) {
       return Promise.resolve();
     };
 
-    window.RTCPeerConnection.prototype.close = function() {
-      this.transceivers.forEach(function(transceiver) {
+    window.RTCPeerConnection.prototype.close = function () {
+      this.transceivers.forEach(function (transceiver) {
         /* not yet
         if (transceiver.iceGatherer) {
           transceiver.iceGatherer.close();
@@ -3216,8 +1340,7 @@ if (typeof window === 'undefined' || !window.navigator) {
     };
 
     // Update the signaling state.
-    window.RTCPeerConnection.prototype._updateSignalingState =
-        function(newState) {
+    window.RTCPeerConnection.prototype._updateSignalingState = function (newState) {
       this.signalingState = newState;
       if (this.onsignalingstatechange !== null) {
         this.onsignalingstatechange();
@@ -3225,8 +1348,7 @@ if (typeof window === 'undefined' || !window.navigator) {
     };
 
     // Determine whether to fire the negotiationneeded event.
-    window.RTCPeerConnection.prototype._maybeFireNegotiationNeeded =
-        function() {
+    window.RTCPeerConnection.prototype._maybeFireNegotiationNeeded = function () {
       // Fire away (for now).
       if (this.onnegotiationneeded !== null) {
         this.onnegotiationneeded();
@@ -3234,8 +1356,7 @@ if (typeof window === 'undefined' || !window.navigator) {
     };
 
     // Update the connection state.
-    window.RTCPeerConnection.prototype._updateConnectionState =
-        function() {
+    window.RTCPeerConnection.prototype._updateConnectionState = function () {
       var self = this;
       var newState;
       var states = {
@@ -3247,7 +1368,7 @@ if (typeof window === 'undefined' || !window.navigator) {
         completed: 0,
         failed: 0
       };
-      this.transceivers.forEach(function(transceiver) {
+      this.transceivers.forEach(function (transceiver) {
         states[transceiver.iceTransport.state]++;
         states[transceiver.dtlsTransport.state]++;
       });
@@ -3261,7 +1382,7 @@ if (typeof window === 'undefined' || !window.navigator) {
         newState = 'connecting';
       } else if (states.disconnected > 0) {
         newState = 'disconnected';
-      } else if (states.new > 0) {
+      } else if (states['new'] > 0) {
         newState = 'new';
       } else if (states.connecting > 0 || states.completed > 0) {
         newState = 'connected';
@@ -3275,7 +1396,7 @@ if (typeof window === 'undefined' || !window.navigator) {
       }
     };
 
-    window.RTCPeerConnection.prototype.createOffer = function() {
+    window.RTCPeerConnection.prototype.createOffer = function () {
       var self = this;
       if (this._pendingOffer) {
         throw new Error('createOffer called while there is a pending offer.');
@@ -3299,8 +1420,7 @@ if (typeof window === 'undefined' || !window.navigator) {
       if (offerOptions) {
         // Reject Chrome legacy constraints.
         if (offerOptions.mandatory || offerOptions.optional) {
-          throw new TypeError(
-              'Legacy mandatory/optional constraints not supported.');
+          throw new TypeError('Legacy mandatory/optional constraints not supported.');
         }
         if (offerOptions.offerToReceiveAudio !== undefined) {
           numAudioTracks = offerOptions.offerToReceiveAudio;
@@ -3311,12 +1431,11 @@ if (typeof window === 'undefined' || !window.navigator) {
       }
       if (this.localStreams.length) {
         // Push local streams.
-        this.localStreams[0].getTracks().forEach(function(track) {
+        this.localStreams[0].getTracks().forEach(function (track) {
           tracks.push({
             kind: track.kind,
             track: track,
-            wantReceive: track.kind === 'audio' ?
-                numAudioTracks > 0 : numVideoTracks > 0
+            wantReceive: track.kind === 'audio' ? numAudioTracks > 0 : numVideoTracks > 0
           });
           if (track.kind === 'audio') {
             numAudioTracks--;
@@ -3345,7 +1464,7 @@ if (typeof window === 'undefined' || !window.navigator) {
 
       var sdp = SDPUtils.writeSessionBoilerplate();
       var transceivers = [];
-      tracks.forEach(function(mline, sdpMLineIndex) {
+      tracks.forEach(function (mline, sdpMLineIndex) {
         // For each track, create an ice gatherer, ice transport, dtls transport,
         // potentially rtpsender and rtpreceiver.
         var track = mline.track;
@@ -3382,8 +1501,7 @@ if (typeof window === 'undefined' || !window.navigator) {
           recvSsrc: null
         };
         var transceiver = transceivers[sdpMLineIndex];
-        sdp += SDPUtils.writeMediaSection(transceiver,
-            transceiver.localCapabilities, 'offer', self.localStreams[0]);
+        sdp += SDPUtils.writeMediaSection(transceiver, transceiver.localCapabilities, 'offer', self.localStreams[0]);
       });
 
       this._pendingOffer = transceivers;
@@ -3397,7 +1515,7 @@ if (typeof window === 'undefined' || !window.navigator) {
       return Promise.resolve(desc);
     };
 
-    window.RTCPeerConnection.prototype.createAnswer = function() {
+    window.RTCPeerConnection.prototype.createAnswer = function () {
       var self = this;
       var answerOptions;
       if (arguments.length === 1 && typeof arguments[0] !== 'function') {
@@ -3407,14 +1525,11 @@ if (typeof window === 'undefined' || !window.navigator) {
       }
 
       var sdp = SDPUtils.writeSessionBoilerplate();
-      this.transceivers.forEach(function(transceiver) {
+      this.transceivers.forEach(function (transceiver) {
         // Calculate intersection of capabilities.
-        var commonCapabilities = self._getCommonCapabilities(
-            transceiver.localCapabilities,
-            transceiver.remoteCapabilities);
+        var commonCapabilities = self._getCommonCapabilities(transceiver.localCapabilities, transceiver.remoteCapabilities);
 
-        sdp += SDPUtils.writeMediaSection(transceiver, commonCapabilities,
-            'answer', self.localStreams[0]);
+        sdp += SDPUtils.writeMediaSection(transceiver, commonCapabilities, 'answer', self.localStreams[0]);
       });
 
       var desc = new RTCSessionDescription({
@@ -3427,7 +1542,7 @@ if (typeof window === 'undefined' || !window.navigator) {
       return Promise.resolve(desc);
     };
 
-    window.RTCPeerConnection.prototype.addIceCandidate = function(candidate) {
+    window.RTCPeerConnection.prototype.addIceCandidate = function (candidate) {
       var mLineIndex = candidate.sdpMLineIndex;
       if (candidate.sdpMid) {
         for (var i = 0; i < this.transceivers.length; i++) {
@@ -3439,8 +1554,7 @@ if (typeof window === 'undefined' || !window.navigator) {
       }
       var transceiver = this.transceivers[mLineIndex];
       if (transceiver) {
-        var cand = Object.keys(candidate.candidate).length > 0 ?
-            SDPUtils.parseCandidate(candidate.candidate) : {};
+        var cand = Object.keys(candidate.candidate).length > 0 ? SDPUtils.parseCandidate(candidate.candidate) : {};
         // Ignore Chrome's invalid candidates since Edge does not like them.
         if (cand.protocol === 'tcp' && cand.port === 0) {
           return;
@@ -3461,23 +1575,21 @@ if (typeof window === 'undefined' || !window.navigator) {
       return Promise.resolve();
     };
 
-    window.RTCPeerConnection.prototype.getStats = function() {
+    window.RTCPeerConnection.prototype.getStats = function () {
       var promises = [];
-      this.transceivers.forEach(function(transceiver) {
-        ['rtpSender', 'rtpReceiver', 'iceGatherer', 'iceTransport',
-            'dtlsTransport'].forEach(function(method) {
+      this.transceivers.forEach(function (transceiver) {
+        ['rtpSender', 'rtpReceiver', 'iceGatherer', 'iceTransport', 'dtlsTransport'].forEach(function (method) {
           if (transceiver[method]) {
             promises.push(transceiver[method].getStats());
           }
         });
       });
-      var cb = arguments.length > 1 && typeof arguments[1] === 'function' &&
-          arguments[1];
-      return new Promise(function(resolve) {
+      var cb = arguments.length > 1 && typeof arguments[1] === 'function' && arguments[1];
+      return new Promise(function (resolve) {
         var results = {};
-        Promise.all(promises).then(function(res) {
-          res.forEach(function(result) {
-            Object.keys(result).forEach(function(id) {
+        Promise.all(promises).then(function (res) {
+          res.forEach(function (result) {
+            Object.keys(result).forEach(function (id) {
               results[id] = result[id];
             });
           });
@@ -3494,44 +1606,45 @@ if (typeof window === 'undefined' || !window.navigator) {
 }
 
 // Polyfill ontrack on browsers that don't yet have it
-if (typeof window === 'object' && window.RTCPeerConnection && !('ontrack' in
-    window.RTCPeerConnection.prototype)) {
+if (typeof window === 'object' && window.RTCPeerConnection && !('ontrack' in window.RTCPeerConnection.prototype)) {
   Object.defineProperty(window.RTCPeerConnection.prototype, 'ontrack', {
-    get: function() { return this._ontrack; },
-    set: function(f) {
+    get: function get() {
+      return this._ontrack;
+    },
+    set: function set(f) {
       var self = this;
       if (this._ontrack) {
         this.removeEventListener('track', this._ontrack);
         this.removeEventListener('addstream', this._ontrackpoly);
       }
       this.addEventListener('track', this._ontrack = f);
-      this.addEventListener('addstream', this._ontrackpoly = function(e) {
+      this.addEventListener('addstream', this._ontrackpoly = (function (e) {
         if (webrtcDetectedBrowser === 'chrome') {
           // onaddstream does not fire when a track is added to an existing stream.
           // but stream.onaddtrack is implemented so we use thたt
-          e.stream.addEventListener('addtrack', function(te) {
+          e.stream.addEventListener('addtrack', function (te) {
             var event = new Event('track');
             event.track = te.track;
-            event.receiver = {track: te.track};
+            event.receiver = { track: te.track };
             event.streams = [e.stream];
             self.dispatchEvent(event);
           });
         }
-        e.stream.getTracks().forEach(function(track) {
+        e.stream.getTracks().forEach((function (track) {
           var event = new Event('track');
           event.track = track;
-          event.receiver = {track: track};
+          event.receiver = { track: track };
           event.streams = [e.stream];
           this.dispatchEvent(event);
-        }.bind(this));
-      }.bind(this));
+        }).bind(this));
+      }).bind(this));
     }
   });
 }
 
 // Returns the result of getUserMedia as a Promise.
 function requestUserMedia(constraints) {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     getUserMedia(constraints, resolve, reject);
   });
 }
@@ -3539,7 +1652,7 @@ function requestUserMedia(constraints) {
 var webrtcTesting = {};
 try {
   Object.defineProperty(webrtcTesting, 'version', {
-    set: function(version) {
+    set: function set(version) {
       webrtcDetectedVersion = version;
     }
   });
@@ -3569,28 +1682,28 @@ if (typeof module !== 'undefined') {
     //requestUserMedia: not exposed on purpose.
     //trace: not exposed on purpose.
   };
-} else if ((typeof require === 'function') && (typeof define === 'function')) {
-  // Expose objects and functions when RequireJS is doing the loading.
-  define([], function() {
-    return {
-      RTCPeerConnection: window.RTCPeerConnection,
-      RTCIceCandidate: window.RTCIceCandidate,
-      RTCSessionDescription: window.RTCSessionDescription,
-      getUserMedia: getUserMedia,
-      attachMediaStream: attachMediaStream,
-      reattachMediaStream: reattachMediaStream,
-      webrtcDetectedBrowser: webrtcDetectedBrowser,
-      webrtcDetectedVersion: webrtcDetectedVersion,
-      webrtcMinimumVersion: webrtcMinimumVersion,
-      webrtcTesting: webrtcTesting,
-      webrtcUtils: webrtcUtils
-      //requestUserMedia: not exposed on purpose.
-      //trace: not exposed on purpose.
-    };
-  });
-}
+} else if (typeof require === 'function' && typeof define === 'function') {
+    // Expose objects and functions when RequireJS is doing the loading.
+    define([], function () {
+      return {
+        RTCPeerConnection: window.RTCPeerConnection,
+        RTCIceCandidate: window.RTCIceCandidate,
+        RTCSessionDescription: window.RTCSessionDescription,
+        getUserMedia: getUserMedia,
+        attachMediaStream: attachMediaStream,
+        reattachMediaStream: reattachMediaStream,
+        webrtcDetectedBrowser: webrtcDetectedBrowser,
+        webrtcDetectedVersion: webrtcDetectedVersion,
+        webrtcMinimumVersion: webrtcMinimumVersion,
+        webrtcTesting: webrtcTesting,
+        webrtcUtils: webrtcUtils
+        //requestUserMedia: not exposed on purpose.
+        //trace: not exposed on purpose.
+      };
+    });
+  }
 
-},{}],110:[function(require,module,exports){
+},{}],2:[function(require,module,exports){
 /**
 * Copyright 2016 PT Inovação e Sistemas SA
 * Copyright 2016 INESC-ID
@@ -3621,21 +1734,19 @@ if (typeof module !== 'undefined') {
 
 'use strict';
 
-var _get = require('babel-runtime/helpers/get')['default'];
-
-var _inherits = require('babel-runtime/helpers/inherits')['default'];
-
-var _createClass = require('babel-runtime/helpers/create-class')['default'];
-
-var _classCallCheck = require('babel-runtime/helpers/class-call-check')['default'];
-
-var _Promise = require('babel-runtime/core-js/promise')['default'];
-
-var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
-
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 require('webrtc-adapter-test');
 
@@ -3670,7 +1781,6 @@ var ConnectionController = (function (_EventEmitter) {
 
     _this._objectDescURL = 'hyperty-catalogue://' + domain + '/.well-known/dataschemas/FakeDataSchema';
 
-    console.info(configuration);
     console.info(configuration);
 
     _this.mediaConstraints = configuration.mediaConstraints;
@@ -3844,7 +1954,7 @@ var ConnectionController = (function (_EventEmitter) {
       console.log('Remote Peer Information: ', _this._remotePeerInformation);
       var remotePeer = _this._remotePeerInformation.from;
 
-      return new _Promise(function (resolve, reject) {
+      return new Promise(function (resolve, reject) {
 
         try {
 
@@ -3876,7 +1986,7 @@ var ConnectionController = (function (_EventEmitter) {
       var _this = this;
       var syncher = _this.syncher;
 
-      return new _Promise(function (resolve, reject) {
+      return new Promise(function (resolve, reject) {
 
         try {
           console.log('syncher: ', syncher);
@@ -3900,7 +2010,7 @@ var ConnectionController = (function (_EventEmitter) {
 
       var _this = this;
 
-      return new _Promise(function (resolve, reject) {
+      return new Promise(function (resolve, reject) {
 
         try {
 
@@ -3937,7 +2047,7 @@ var ConnectionController = (function (_EventEmitter) {
     value: function disableMic() {
       var _this = this;
 
-      return new _Promise(function (resolve, reject) {
+      return new Promise(function (resolve, reject) {
 
         try {
           var localStream = _this.peerConnection.getLocalStreams()[0];
@@ -3955,7 +2065,7 @@ var ConnectionController = (function (_EventEmitter) {
     value: function disableCam() {
       var _this = this;
 
-      return new _Promise(function (resolve, reject) {
+      return new Promise(function (resolve, reject) {
 
         try {
           var localStream = _this.peerConnection.getLocalStreams()[0];
@@ -3975,7 +2085,7 @@ var ConnectionController = (function (_EventEmitter) {
 
       var _this = this;
 
-      return new _Promise(function (resolve, reject) {
+      return new Promise(function (resolve, reject) {
 
         try {
           var remoteStream = _this.peerConnection.getRemoteStreams()[0];
@@ -4101,7 +2211,7 @@ var ConnectionController = (function (_EventEmitter) {
 exports['default'] = ConnectionController;
 module.exports = exports['default'];
 
-},{"../utils/EventEmitter":122,"./connection":112,"./peer":113,"babel-runtime/core-js/promise":7,"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12,"babel-runtime/helpers/get":14,"babel-runtime/helpers/inherits":15,"babel-runtime/helpers/interop-require-default":16,"webrtc-adapter-test":109}],111:[function(require,module,exports){
+},{"../utils/EventEmitter":14,"./connection":4,"./peer":5,"webrtc-adapter-test":1}],3:[function(require,module,exports){
 /**
 * Copyright 2016 PT Inovação e Sistemas SA
 * Copyright 2016 INESC-ID
@@ -4129,22 +2239,21 @@ module.exports = exports['default'];
 
 'use strict';
 
-var _get = require('babel-runtime/helpers/get')['default'];
-
-var _inherits = require('babel-runtime/helpers/inherits')['default'];
-
-var _createClass = require('babel-runtime/helpers/create-class')['default'];
-
-var _classCallCheck = require('babel-runtime/helpers/class-call-check')['default'];
-
-var _Promise = require('babel-runtime/core-js/promise')['default'];
-
-var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
-
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
 exports['default'] = activate;
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var _hypertyDiscoveryHypertyDiscovery = require('../hyperty-discovery/HypertyDiscovery');
 
@@ -4229,7 +2338,7 @@ var HypertyConnector = (function (_EventEmitter) {
       var _this = this;
       var syncher = _this._syncher;
 
-      console.info('---------------- Syncher Subscribe ---------------- \n');
+      console.info('---------------- Syncher Auto Subscribe ---------------- \n');
       console.info('Subscribe URL Object ', event, syncher);
       syncher.subscribe(_this._objectDescURL, event.url).then(function (dataObjectObserver) {
         console.info('1. Return Subscribe Data Object Observer', dataObjectObserver);
@@ -4245,7 +2354,7 @@ var HypertyConnector = (function (_EventEmitter) {
       var _this = this;
       var syncher = _this._syncher;
 
-      console.info('---------------- Syncher Subscribe ---------------- \n');
+      console.info('----------- Syncher Subscribe (Auto Accept) ------------- \n');
       console.info('Subscribe URL Object ', event, syncher);
       syncher.subscribe(_this._objectDescURL, event.url).then(function (dataObjectObserver) {
         console.info('1. Return Subscribe Data Object Observer', dataObjectObserver);
@@ -4276,7 +2385,7 @@ var HypertyConnector = (function (_EventEmitter) {
       var _this = this;
       var syncher = _this._syncher;
 
-      return new _Promise(function (resolve, reject) {
+      return new Promise(function (resolve, reject) {
 
         var connectionController = undefined;
         console.info('------------------------ Syncher Create ---------------------- \n');
@@ -4312,7 +2421,7 @@ function activate(hypertyURL, bus, configuration) {
 
 module.exports = exports['default'];
 
-},{"../hyperty-discovery/HypertyDiscovery":114,"../syncher/Syncher":121,"../utils/EventEmitter":122,"../utils/utils":123,"./ConnectionController":110,"babel-runtime/core-js/promise":7,"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12,"babel-runtime/helpers/get":14,"babel-runtime/helpers/inherits":15,"babel-runtime/helpers/interop-require-default":16}],112:[function(require,module,exports){
+},{"../hyperty-discovery/HypertyDiscovery":6,"../syncher/Syncher":13,"../utils/EventEmitter":14,"../utils/utils":15,"./ConnectionController":2}],4:[function(require,module,exports){
 /**
 * Copyright 2016 PT Inovação e Sistemas SA
 * Copyright 2016 INESC-ID
@@ -4380,7 +2489,7 @@ var connection = {
 exports["default"] = connection;
 module.exports = exports["default"];
 
-},{}],113:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 /**
 * Copyright 2016 PT Inovação e Sistemas SA
 * Copyright 2016 INESC-ID
@@ -4417,7 +2526,7 @@ var peer = {
 exports["default"] = peer;
 module.exports = exports["default"];
 
-},{}],114:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 /**
 * Copyright 2016 PT Inovação e Sistemas SA
 * Copyright 2016 INESC-ID
@@ -4447,15 +2556,13 @@ module.exports = exports["default"];
 */
 'use strict';
 
-var _createClass = require('babel-runtime/helpers/create-class')['default'];
-
-var _classCallCheck = require('babel-runtime/helpers/class-call-check')['default'];
-
-var _Promise = require('babel-runtime/core-js/promise')['default'];
-
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 var HypertyDiscovery = (function () {
 
@@ -4496,7 +2603,7 @@ var HypertyDiscovery = (function () {
         activeDomain = domain;
       }
 
-      var activediscoveryURL = 'hyperty://' + activeDomain + '/hypertyDiscovery';
+      var activediscoveryURL = 'hyperty://' + _this.domain + '/hypertyDiscovery';
       var identityURL = 'user://' + email.substring(email.indexOf('@') + 1, email.length) + '/' + email.substring(0, email.indexOf('@'));
 
       // message to query domain registry, asking for a user hyperty.
@@ -4504,11 +2611,13 @@ var HypertyDiscovery = (function () {
         type: 'READ', from: activediscoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: identityURL }
       };
 
+      console.log('Message: ', message, activeDomain, identityURL);
+
       //console.log('message READ', message);
-      return new _Promise(function (resolve, reject) {
+      return new Promise(function (resolve, reject) {
 
         _this.messageBus.postMessage(message, function (reply) {
-          //console.log('message reply', reply);
+          console.log('message reply', reply);
 
           var hyperty = undefined;
           var mostRecent = undefined;
@@ -4529,6 +2638,8 @@ var HypertyDiscovery = (function () {
               }
             }
           }
+
+          console.log('Last Hyperty: ', lastHyperty, mostRecent);
 
           var hypertyURL = lastHyperty;
 
@@ -4555,7 +2666,7 @@ var HypertyDiscovery = (function () {
 exports['default'] = HypertyDiscovery;
 module.exports = exports['default'];
 
-},{"babel-runtime/core-js/promise":7,"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12}],115:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 /**
 * Copyright 2016 PT Inovação e Sistemas SA
 * Copyright 2016 INESC-ID
@@ -4581,17 +2692,15 @@ module.exports = exports['default'];
 
 'use strict';
 
-var _createClass = require('babel-runtime/helpers/create-class')['default'];
-
-var _classCallCheck = require('babel-runtime/helpers/class-call-check')['default'];
-
-var _Promise = require('babel-runtime/core-js/promise')['default'];
-
-var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
-
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 var _SyncObject = require('./SyncObject');
 
@@ -4611,15 +2720,15 @@ var _utilsUtilsJs = require('../utils/utils.js');
 var DataObject = (function () {
   /* private
   _version: number
-    _owner: HypertyURL
+   _owner: HypertyURL
   _url: ObjectURL
   _schema: Schema
   _bus: MiniBus
   _status: on | paused
   _syncObj: SyncData
-    _children: { id: DataObjectChild }
+   _children: { id: DataObjectChild }
   _childrenListeners: [MsgListener]
-    ----event handlers----
+   ----event handlers----
   _onAddChildrenHandler: (event) => void
   */
 
@@ -4745,7 +2854,7 @@ var DataObject = (function () {
       };
 
       //returns promise, in the future, the API may change to asynchronous call
-      return new _Promise(function (resolve) {
+      return new Promise(function (resolve) {
         var msgId = _this._bus.postMessage(requestMsg);
 
         console.log('create-reporter-child( ' + _this._owner + ' ): ', requestMsg);
@@ -4942,7 +3051,7 @@ var DataObject = (function () {
 exports['default'] = DataObject;
 module.exports = exports['default'];
 
-},{"../utils/utils.js":123,"./DataObjectChild":116,"./SyncObject":120,"babel-runtime/core-js/promise":7,"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12,"babel-runtime/helpers/interop-require-default":16}],116:[function(require,module,exports){
+},{"../utils/utils.js":15,"./DataObjectChild":8,"./SyncObject":12}],8:[function(require,module,exports){
 /**
 * Copyright 2016 PT Inovação e Sistemas SA
 * Copyright 2016 INESC-ID
@@ -4968,15 +3077,15 @@ module.exports = exports['default'];
 
 'use strict';
 
-var _createClass = require('babel-runtime/helpers/create-class')['default'];
-
-var _classCallCheck = require('babel-runtime/helpers/class-call-check')['default'];
-
-var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
-
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 var _SyncObject = require('./SyncObject');
 
@@ -4989,7 +3098,7 @@ var _SyncObject2 = _interopRequireDefault(_SyncObject);
 
 var DataObjectChild /* implements SyncStatus */ = (function () {
   /* private
-    ----event handlers----
+   ----event handlers----
   _onResponseHandler: (event) => void
   */
 
@@ -5090,7 +3199,7 @@ var DataObjectChild /* implements SyncStatus */ = (function () {
 exports['default'] = DataObjectChild;
 module.exports = exports['default'];
 
-},{"./SyncObject":120,"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12,"babel-runtime/helpers/interop-require-default":16}],117:[function(require,module,exports){
+},{"./SyncObject":12}],9:[function(require,module,exports){
 /**
 * Copyright 2016 PT Inovação e Sistemas SA
 * Copyright 2016 INESC-ID
@@ -5116,21 +3225,19 @@ module.exports = exports['default'];
 
 'use strict';
 
-var _get = require('babel-runtime/helpers/get')['default'];
-
-var _inherits = require('babel-runtime/helpers/inherits')['default'];
-
-var _createClass = require('babel-runtime/helpers/create-class')['default'];
-
-var _classCallCheck = require('babel-runtime/helpers/class-call-check')['default'];
-
-var _Object$keys = require('babel-runtime/core-js/object/keys')['default'];
-
-var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
-
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var _DataObject2 = require('./DataObject');
 
@@ -5148,7 +3255,7 @@ var DataObjectObserver = (function (_DataObject) {
 
   /* private
   _changeListener: MsgListener
-    ----event handlers----
+   ----event handlers----
   _filters: {<filter>: {type: <start, exact>, callback: <function>} }
   */
 
@@ -5228,7 +3335,7 @@ var DataObjectObserver = (function (_DataObject) {
     value: function _onFilter(event) {
       var _this = this;
 
-      _Object$keys(_this._filters).forEach(function (key) {
+      Object.keys(_this._filters).forEach(function (key) {
         var filter = _this._filters[key];
         if (filter.type === FilterType.ANY) {
           //match anything
@@ -5254,7 +3361,7 @@ var DataObjectObserver = (function (_DataObject) {
 exports['default'] = DataObjectObserver;
 module.exports = exports['default'];
 
-},{"./DataObject":115,"babel-runtime/core-js/object/keys":5,"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12,"babel-runtime/helpers/get":14,"babel-runtime/helpers/inherits":15,"babel-runtime/helpers/interop-require-default":16}],118:[function(require,module,exports){
+},{"./DataObject":7}],10:[function(require,module,exports){
 /**
 * Copyright 2016 PT Inovação e Sistemas SA
 * Copyright 2016 INESC-ID
@@ -5280,19 +3387,19 @@ module.exports = exports['default'];
 
 'use strict';
 
-var _get = require('babel-runtime/helpers/get')['default'];
-
-var _inherits = require('babel-runtime/helpers/inherits')['default'];
-
-var _createClass = require('babel-runtime/helpers/create-class')['default'];
-
-var _classCallCheck = require('babel-runtime/helpers/class-call-check')['default'];
-
-var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
-
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var _DataObject2 = require('./DataObject');
 
@@ -5310,7 +3417,7 @@ var DataObjectReporter = (function (_DataObject) {
 
   /* private
   _subscriptions: <hypertyUrl: { status: string } }>
-    ----event handlers----
+   ----event handlers----
   _onSubscriptionHandler: (event) => void
   _onResponseHandler: (event) => void
   */
@@ -5465,7 +3572,7 @@ var DataObjectReporter = (function (_DataObject) {
 exports['default'] = DataObjectReporter;
 module.exports = exports['default'];
 
-},{"../utils/utils.js":123,"./DataObject":115,"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12,"babel-runtime/helpers/get":14,"babel-runtime/helpers/inherits":15,"babel-runtime/helpers/interop-require-default":16}],119:[function(require,module,exports){
+},{"../utils/utils.js":15,"./DataObject":7}],11:[function(require,module,exports){
 /**
 * Copyright 2016 PT Inovação e Sistemas SA
 * Copyright 2016 INESC-ID
@@ -5494,19 +3601,19 @@ module.exports = exports['default'];
  */
 'use strict';
 
-var _createClass = require('babel-runtime/helpers/create-class')['default'];
-
-var _classCallCheck = require('babel-runtime/helpers/class-call-check')['default'];
-
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 var DataProvisional = (function () {
   /* private
   _childrenListeners: [MsgListener]
   _listener: MsgListener
-    _changes: []
+   _changes: []
   */
 
   function DataProvisional(owner, url, bus, children) {
@@ -5533,7 +3640,7 @@ var DataProvisional = (function () {
             console.log(msg);
           }
         });
-          _this._childrenListeners.push(listener);
+         _this._childrenListeners.push(listener);
       });
     }*/
   }
@@ -5568,7 +3675,7 @@ var DataProvisional = (function () {
 exports['default'] = DataProvisional;
 module.exports = exports['default'];
 
-},{"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12}],120:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 /**
 * Copyright 2016 PT Inovação e Sistemas SA
 * Copyright 2016 INESC-ID
@@ -5594,15 +3701,13 @@ module.exports = exports['default'];
 
 'use strict';
 
-var _createClass = require('babel-runtime/helpers/create-class')['default'];
-
-var _classCallCheck = require('babel-runtime/helpers/class-call-check')['default'];
-
-var _Object$keys = require('babel-runtime/core-js/object/keys')['default'];
-
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 var _utilsUtilsJs = require('../utils/utils.js');
 
@@ -5844,7 +3949,7 @@ var Path = (function () {
     value: function reIndexFrom(array) {
       var _this3 = this;
 
-      _Object$keys(this._observables).forEach(function (key) {
+      Object.keys(this._observables).forEach(function (key) {
         var arrayIndex = _this3._observables[key];
         var idx = array.indexOf(arrayIndex.obj);
         if (arrayIndex.idx != idx) {
@@ -5922,7 +4027,7 @@ var ObjectType = { OBJECT: 'object', ARRAY: 'array' };
 exports.ObjectType = ObjectType;
 exports['default'] = SyncObject;
 
-},{"../utils/utils.js":123,"babel-runtime/core-js/object/keys":5,"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12}],121:[function(require,module,exports){
+},{"../utils/utils.js":15}],13:[function(require,module,exports){
 /**
 * Copyright 2016 PT Inovação e Sistemas SA
 * Copyright 2016 INESC-ID
@@ -5948,17 +4053,15 @@ exports['default'] = SyncObject;
 
 'use strict';
 
-var _createClass = require('babel-runtime/helpers/create-class')['default'];
-
-var _classCallCheck = require('babel-runtime/helpers/class-call-check')['default'];
-
-var _Promise = require('babel-runtime/core-js/promise')['default'];
-
-var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
-
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 var _DataObjectReporter = require('./DataObjectReporter');
 
@@ -5982,11 +4085,11 @@ var Syncher = (function () {
   /* private
   _owner: URL
   _bus: MiniBus
-    _subURL: URL
-    _reporters: <url: DataObjectReporter>
+   _subURL: URL
+   _reporters: <url: DataObjectReporter>
   _observers: <url: DataObjectObserver>
   _provisionals: <url: DataProvisional>
-    ----event handlers----
+   ----event handlers----
   _onNotificationHandler: (event) => void
   */
 
@@ -6045,7 +4148,7 @@ var Syncher = (function () {
         body: { schema: schema, value: initialData, authorise: observers }
       };
 
-      return new _Promise(function (resolve, reject) {
+      return new Promise(function (resolve, reject) {
         //request create to the Allocation system? Can be rejected by the PolicyEngine.
         _this._bus.postMessage(requestMsg, function (reply) {
           console.log('create-response: ', reply);
@@ -6082,7 +4185,7 @@ var Syncher = (function () {
         body: { schema: schema, resource: objURL }
       };
 
-      return new _Promise(function (resolve, reject) {
+      return new Promise(function (resolve, reject) {
         //request subscription
         _this._bus.postMessage(subscribeMsg, function (reply) {
           console.log('subscribe-response: ', reply);
@@ -6204,7 +4307,7 @@ var Syncher = (function () {
 exports['default'] = Syncher;
 module.exports = exports['default'];
 
-},{"./DataObjectObserver":117,"./DataObjectReporter":118,"./DataProvisional":119,"babel-runtime/core-js/promise":7,"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12,"babel-runtime/helpers/interop-require-default":16}],122:[function(require,module,exports){
+},{"./DataObjectObserver":9,"./DataObjectReporter":10,"./DataProvisional":11}],14:[function(require,module,exports){
 /**
 * Copyright 2016 PT Inovação e Sistemas SA
 * Copyright 2016 INESC-ID
@@ -6234,13 +4337,13 @@ module.exports = exports['default'];
  */
 "use strict";
 
-var _createClass = require("babel-runtime/helpers/create-class")["default"];
-
-var _classCallCheck = require("babel-runtime/helpers/class-call-check")["default"];
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var EventEmitter = (function () {
   function EventEmitter() {
@@ -6282,7 +4385,7 @@ var EventEmitter = (function () {
 exports["default"] = EventEmitter;
 module.exports = exports["default"];
 
-},{"babel-runtime/helpers/class-call-check":10,"babel-runtime/helpers/create-class":12}],123:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 /**
 * Copyright 2016 PT Inovação e Sistemas SA
 * Copyright 2016 INESC-ID
@@ -6358,5 +4461,5 @@ function deepClone(obj) {
   if (obj) return JSON.parse(JSON.stringify(obj));
 }
 
-},{}]},{},[111])(111)
+},{}]},{},[3])(3)
 });
