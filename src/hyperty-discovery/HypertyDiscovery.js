@@ -52,7 +52,7 @@ class HypertyDiscovery {
     let _this = this;
     let activeDomain;
 
-    if (domain === undefined) {
+    if (!domain) {
       activeDomain = _this.domain;
     } else {
       activeDomain = domain;

@@ -4,6 +4,8 @@
 import config from '../system.config.json!json';
 import {ready, errorMessage, getUserMedia} from './support';
 
+import {divideURL} from '../src/utils/utils';
+
 // polyfills
 import 'babel-polyfill';
 import 'indexeddbshim';
@@ -23,6 +25,8 @@ let avatar = 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAA
 
 // You can change this at your own domain
 let domain = config.domain;
+
+window.divideURL = divideURL;
 
 // Hack because the GraphConnector jsrsasign module;
 window.KJUR = {};
