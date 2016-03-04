@@ -46,7 +46,7 @@ function documentReady() {
   hypertyHolder.removeClass('hide');
 
   let installerFactory = new InstallerFactory();
-  let runtimeURL = 'runtime://' + domain + '/.well-known/runtime/RuntimeUA';
+  let runtimeURL = 'hyperty-catalogue://' + domain + '/.well-known/runtime/RuntimeUA';
   runtimeLoader = new RuntimeLoader(installerFactory, runtimeURL);
   runtimeLoader.install().then(runtimeInstalled).catch(errorMessage);
 }
