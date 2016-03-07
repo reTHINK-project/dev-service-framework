@@ -637,13 +637,13 @@ var HypertyDiscovery = (function () {
       var _this = this;
       var activeDomain = undefined;
 
-      if (domain === undefined) {
+      if (!domain) {
         activeDomain = _this.domain;
       } else {
         activeDomain = domain;
       }
 
-      var activediscoveryURL = 'hyperty://' + activeDomain + '/hypertyDiscovery';
+      var activediscoveryURL = 'hyperty://' + _this.domain + '/hypertyDiscovery';
       var identityURL = 'user://' + email.substring(email.indexOf('@') + 1, email.length) + '/' + email.substring(0, email.indexOf('@'));
 
       // message to query domain registry, asking for a user hyperty.
@@ -651,11 +651,13 @@ var HypertyDiscovery = (function () {
         type: 'READ', from: activediscoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: identityURL }
       };
 
+      console.log('Message: ', message, activeDomain, identityURL);
+
       //console.log('message READ', message);
       return new Promise(function (resolve, reject) {
 
         _this.messageBus.postMessage(message, function (reply) {
-          //console.log('message reply', reply);
+          console.log('message reply', reply);
 
           var hyperty = undefined;
           var mostRecent = undefined;
@@ -676,6 +678,8 @@ var HypertyDiscovery = (function () {
               }
             }
           }
+
+          console.log('Last Hyperty: ', lastHyperty, mostRecent);
 
           var hypertyURL = lastHyperty;
 
@@ -756,15 +760,15 @@ var _utilsUtilsJs = require('../utils/utils.js');
 var DataObject = (function () {
   /* private
   _version: number
-   _owner: HypertyURL
+    _owner: HypertyURL
   _url: ObjectURL
   _schema: Schema
   _bus: MiniBus
   _status: on | paused
   _syncObj: SyncData
-   _children: { id: DataObjectChild }
+    _children: { id: DataObjectChild }
   _childrenListeners: [MsgListener]
-   ----event handlers----
+    ----event handlers----
   _onAddChildrenHandler: (event) => void
   */
 
@@ -773,58 +777,76 @@ var DataObject = (function () {
    * Should not be used directly by Hyperties. It's called by the Syncher create or subscribe method's
    */
 
-  function DataObject(syncher, url, schema, initialStatus, initialData, children) {
-    var _this2 = this;
-
+  function DataObject(syncher, url, schema, initialStatus, initialData, childrens) {
     _classCallCheck(this, DataObject);
 
     var _this = this;
 
-    _this._version = 0;
-
     _this._syncher = syncher;
-    _this._owner = syncher._owner;
-    _this._bus = syncher._bus;
-
     _this._url = url;
     _this._schema = schema;
     _this._status = initialStatus;
     _this._syncObj = new _SyncObject2['default'](initialData);
+    _this._childrens = childrens;
 
+    _this._version = 0;
     _this._childId = 0;
-    _this._children = {};
+    _this._childrenObjects = {};
     _this._childrenListeners = [];
 
-    var childBaseURL = url + '/children/';
-
-    if (children) {
-      children.forEach(function (child) {
-        var childURL = childBaseURL + child;
-        var listener = _this._bus.addListener(childURL, function (msg) {
-          //ignore msg sent by himself
-          if (msg.from !== _this2._owner) {
-            switch (msg.type) {
-              case 'create':
-                _this._onChildrenCreate(msg);break;
-              case 'delete':
-                console.log(msg);break;
-              default:
-                _this._changeChildren(msg);break;
-            }
-          }
-        });
-
-        _this._childrenListeners.push(listener);
-      });
-    }
+    _this._owner = syncher._owner;
+    _this._bus = syncher._bus;
   }
 
-  /**
-   * Object URL of reporter or observer
-   * @type {ObjectURL}
-   */
-
   _createClass(DataObject, [{
+    key: '_allocateListeners',
+    value: function _allocateListeners() {
+      var _this2 = this;
+
+      var _this = this;
+
+      var childBaseURL = _this._url + '/children/';
+      if (_this._childrens) {
+        _this._childrens.forEach(function (child) {
+          var childURL = childBaseURL + child;
+          var listener = _this._bus.addListener(childURL, function (msg) {
+            console.log('DataObject-Children-RCV: ', msg);
+            //ignore msg sent by himself
+            if (msg.from !== _this2._owner) {
+              switch (msg.type) {
+                case 'create':
+                  _this._onChildrenCreate(msg);break;
+                case 'delete':
+                  console.log(msg);break;
+                default:
+                  _this._changeChildren(msg);break;
+              }
+            }
+          });
+
+          _this._childrenListeners.push(listener);
+        });
+      }
+    }
+  }, {
+    key: '_releaseListeners',
+    value: function _releaseListeners() {
+      var _this = this;
+
+      _this._childrenListeners.forEach(function (listener) {
+        listener.remove();
+      });
+
+      Object.keys(_this._childrenObjects).forEach(function (key) {
+        _this._childrenObjects[key]._releaseListeners();
+      });
+    }
+
+    /**
+     * Object URL of reporter or observer
+     * @type {ObjectURL}
+     */
+  }, {
     key: 'pause',
 
     /**
@@ -856,19 +878,6 @@ var DataObject = (function () {
     }
 
     /**
-     * Release internal used listeners
-     */
-  }, {
-    key: 'release',
-    value: function release() {
-      this._childrenListeners.forEach(function (listener) {
-        listener.remove();
-      });
-
-      //TODO: relase all _this._children ?
-    }
-
-    /**
      * Create and add a children to the subscription group.
      * @param {String} resource - Resource name, one of the items in the schema.properties.scheme of the parent object.
      * @param {JSON} initialData - Initial data of the child
@@ -894,12 +903,12 @@ var DataObject = (function () {
         var msgId = _this._bus.postMessage(requestMsg);
 
         console.log('create-reporter-child( ' + _this._owner + ' ): ', requestMsg);
-        var newChild = new _DataObjectChild2['default'](_this._owner, msgChildId, msgId, _this._bus, initialData);
+        var newChild = new _DataObjectChild2['default'](_this, _this._owner, msgChildId, msgId, initialData);
         newChild.onChange(function (event) {
           _this._onChange(event, { path: msgChildPath, childId: msgChildId });
         });
 
-        _this._children[msgChildId] = newChild;
+        _this._childrenObjects[msgChildId] = newChild;
 
         resolve(newChild);
       });
@@ -921,8 +930,8 @@ var DataObject = (function () {
       var msgChildId = msg.body.resource;
 
       console.log('create-observer-child( ' + _this._owner + ' ): ', msg);
-      var newChild = new _DataObjectChild2['default'](msg.from, msgChildId, 0, _this._bus, msg.body.value);
-      _this._children[msgChildId] = newChild;
+      var newChild = new _DataObjectChild2['default'](_this, msg.from, msgChildId, 0, msg.body.value);
+      _this._childrenObjects[msgChildId] = newChild;
 
       setTimeout(function () {
         _this._bus.postMessage({
@@ -940,6 +949,7 @@ var DataObject = (function () {
       };
 
       if (_this._onAddChildrenHandler) {
+        console.log('ADD-CHILDREN-EVENT: ', event);
         _this._onAddChildrenHandler(event);
       }
     }
@@ -973,7 +983,7 @@ var DataObject = (function () {
         //childInfo must have (path, childId)
         if (childInfo) {
           changeMsg.to = childInfo.path;
-          changeMsg.body.childId = childInfo.childId;
+          changeMsg.body.resource = childInfo.childId;
         }
 
         _this._bus.postMessage(changeMsg);
@@ -1025,8 +1035,8 @@ var DataObject = (function () {
       var _this = this;
       console.log('Change children: ', _this._owner, msg);
 
-      var childId = msg.body.childId;
-      var children = _this._children[childId];
+      var childId = msg.body.resource;
+      var children = _this._childrenObjects[childId];
 
       if (children) {
         _this._changeObject(children._syncObj, msg);
@@ -1077,7 +1087,7 @@ var DataObject = (function () {
   }, {
     key: 'children',
     get: function get() {
-      return this._children;
+      return this._childrenObjects;
     }
   }]);
 
@@ -1134,7 +1144,7 @@ var _SyncObject2 = _interopRequireDefault(_SyncObject);
 
 var DataObjectChild /* implements SyncStatus */ = (function () {
   /* private
-   ----event handlers----
+    ----event handlers----
   _onResponseHandler: (event) => void
   */
 
@@ -1143,45 +1153,67 @@ var DataObjectChild /* implements SyncStatus */ = (function () {
    * Should not be used directly by Hyperties. It's called by the DataObject.addChildren
    */
 
-  function DataObjectChild(owner, childId, msgId, bus, initialData) {
+  function DataObjectChild(parent, owner, childId, msgId, initialData) {
     _classCallCheck(this, DataObjectChild);
 
     var _this = this;
 
+    _this._parent = parent;
     _this._owner = owner;
     _this._childId = childId;
-    _this._bus = bus;
+    _this._msgId = msgId;
     _this._syncObj = new _SyncObject2['default'](initialData);
 
-    _this._listener = bus.addListener(owner, function (msg) {
-      if (msg.type === 'response' && msg.id === msgId) {
-        console.log('DataObjectChild.onResponse:', msg);
-        _this._onResponse(msg);
-      }
-    });
+    _this._bus = parent._bus;
+    _this._allocateListeners();
   }
 
-  /**
-   * Children ID generated on addChildren. Unique identifier
-   * @type {URL} - URL of the format <HypertyURL>#<numeric-sequence>
-   */
-
   _createClass(DataObjectChild, [{
-    key: 'release',
+    key: '_allocateListeners',
+    value: function _allocateListeners() {
+      var _this = this;
+
+      _this._listener = _this._bus.addListener(_this._owner, function (msg) {
+        if (msg.type === 'response' && msg.id === _this._msgId) {
+          console.log('DataObjectChild.onResponse:', msg);
+          _this._onResponse(msg);
+        }
+      });
+    }
+  }, {
+    key: '_releaseListeners',
+    value: function _releaseListeners() {
+      var _this = this;
+
+      _this._listener.remove();
+    }
 
     /**
-     * Release internal used listeners
+     * Release and delete object data
      */
-    value: function release() {
-      this._listener.remove();
+  }, {
+    key: 'delete',
+    value: function _delete() {
+      var _this = this;
+
+      delete _this._parent._children[_this._childId];
+
+      _this._releaseListeners();
+
+      //TODO: send delete message ?
     }
+
+    /**
+     * Children ID generated on addChildren. Unique identifier
+     * @type {URL} - URL of the format <HypertyURL>#<numeric-sequence>
+     */
+  }, {
+    key: 'onChange',
 
     /**
      * Register the change listeners sent by the reporter child
      * @param {function(event: MsgEvent)} callback
      */
-  }, {
-    key: 'onChange',
     value: function onChange(callback) {
       this._syncObj.observe(function (event) {
         callback(event);
@@ -1291,7 +1323,7 @@ var DataObjectObserver = (function (_DataObject) {
 
   /* private
   _changeListener: MsgListener
-   ----event handlers----
+    ----event handlers----
   _filters: {<filter>: {type: <start, exact>, callback: <function>} }
   */
 
@@ -1300,44 +1332,74 @@ var DataObjectObserver = (function (_DataObject) {
    * Should not be used directly by Hyperties. It's called by the Syncher.subscribe method
    */
 
-  function DataObjectObserver(syncher, url, schema, initialStatus, initialData, children, initialVersion) {
+  function DataObjectObserver(syncher, url, schema, initialStatus, initialData, childrens, initialVersion) {
     _classCallCheck(this, DataObjectObserver);
 
-    _get(Object.getPrototypeOf(DataObjectObserver.prototype), 'constructor', this).call(this, syncher, url, schema, initialStatus, initialData, children);
+    _get(Object.getPrototypeOf(DataObjectObserver.prototype), 'constructor', this).call(this, syncher, url, schema, initialStatus, initialData, childrens);
     var _this = this;
 
     _this._version = initialVersion;
-
-    //add listener for objURL
-    _this._changeListener = _this._bus.addListener(url + '/changes', function (msg) {
-      console.log('DataObjectObserver-' + url + '-RCV: ', msg);
-      _this._changeObject(_this._syncObj, msg);
-    });
+    _this._filters = {};
 
     _this._syncObj.observe(function (event) {
       _this._onFilter(event);
     });
 
-    _this._filters = {};
+    _this._allocateListeners();
   }
 
-  /**
-   * Release internal used listeners
-   */
-
   _createClass(DataObjectObserver, [{
-    key: 'release',
-    value: function release() {
-      this._changeListener.remove();
-      _get(Object.getPrototypeOf(DataObjectObserver.prototype), 'release', this).call(this);
+    key: '_allocateListeners',
+    value: function _allocateListeners() {
+      _get(Object.getPrototypeOf(DataObjectObserver.prototype), '_allocateListeners', this).call(this);
+      var _this = this;
+
+      _this._changeListener = _this._bus.addListener(_this._url + '/changes', function (msg) {
+        console.log('DataObjectObserver-' + _this._url + '-RCV: ', msg);
+        _this._changeObject(_this._syncObj, msg);
+      });
     }
+  }, {
+    key: '_releaseListeners',
+    value: function _releaseListeners() {
+      _get(Object.getPrototypeOf(DataObjectObserver.prototype), '_releaseListeners', this).call(this);
+      var _this = this;
+
+      _this._changeListener.remove();
+    }
+
+    /**
+     * Release and delete object data
+     */
+  }, {
+    key: 'delete',
+    value: function _delete() {
+      var _this = this;
+
+      _this._releaseListeners();
+      delete _this._syncher._observers[_this._url];
+    }
+
+    /**
+     * Release and delete object data
+     */
   }, {
     key: 'unsubscribe',
     value: function unsubscribe() {
       var _this = this;
 
-      _this.release();
-      _this._syncher._unsubscribe(_this.url);
+      var unSubscribeMsg = {
+        type: 'unsubscribe', from: _this._owner, to: _this._syncher._subURL,
+        body: { resource: _this._url }
+      };
+
+      _this._bus.postMessage(unSubscribeMsg, function (reply) {
+        console.log('DataObjectObserver-UNSUBSCRIBE: ', reply);
+        if (reply.body.code === 200) {
+          _this._releaseListeners();
+          delete _this._syncher._observers[_this._url];
+        }
+      });
     }
 
     /**
@@ -1453,7 +1515,7 @@ var DataObjectReporter = (function (_DataObject) {
 
   /* private
   _subscriptions: <hypertyUrl: { status: string } }>
-   ----event handlers----
+    ----event handlers----
   _onSubscriptionHandler: (event) => void
   _onResponseHandler: (event) => void
   */
@@ -1463,32 +1525,70 @@ var DataObjectReporter = (function (_DataObject) {
    * Should not be used directly by Hyperties. It's called by the Syncher.create method
    */
 
-  function DataObjectReporter(syncher, url, schema, initialStatus, initialData, children) {
+  function DataObjectReporter(syncher, url, schema, initialStatus, initialData, childrens) {
     _classCallCheck(this, DataObjectReporter);
 
-    _get(Object.getPrototypeOf(DataObjectReporter.prototype), 'constructor', this).call(this, syncher, url, schema, initialStatus, initialData, children);
+    _get(Object.getPrototypeOf(DataObjectReporter.prototype), 'constructor', this).call(this, syncher, url, schema, initialStatus, initialData, childrens);
     var _this = this;
 
-    _this._bus.addListener(url, function (msg) {
-      if (msg.type === 'response') {
-        _this._onResponse(msg);
-      }
-    });
+    _this._subscriptions = {};
 
     _this._syncObj.observe(function (event) {
       console.log('DataObjectReporter-' + url + '-SEND: ', event);
       _this._onChange(event);
     });
 
-    _this._subscriptions = {};
+    _this._allocateListeners();
   }
 
-  /**
-   * Subscriptions requested and accepted to this reporter
-   * @type {Object<HypertyURL, SyncSubscription>}
-   */
-
   _createClass(DataObjectReporter, [{
+    key: '_allocateListeners',
+    value: function _allocateListeners() {
+      _get(Object.getPrototypeOf(DataObjectReporter.prototype), '_allocateListeners', this).call(this);
+      var _this = this;
+
+      _this._responseListener = _this._bus.addListener(_this._url, function (msg) {
+        if (msg.type === 'response') {
+          _this._onResponse(msg);
+        }
+      });
+    }
+  }, {
+    key: '_releaseListeners',
+    value: function _releaseListeners() {
+      _get(Object.getPrototypeOf(DataObjectReporter.prototype), '_releaseListeners', this).call(this);
+      var _this = this;
+
+      _this._responseListener.remove();
+    }
+
+    /**
+     * Release and delete object data
+     */
+  }, {
+    key: 'delete',
+    value: function _delete() {
+      var _this = this;
+
+      var deleteMsg = {
+        type: 'delete', from: _this._owner, to: _this._syncher._subURL,
+        body: { resource: _this._url }
+      };
+
+      _this._bus.postMessage(deleteMsg, function (reply) {
+        console.log('DataObjectReporter-DELETE: ', reply);
+        if (reply.body.code === 200) {
+          _this._releaseListeners();
+          delete _this._syncher._reporters[_this._url];
+        }
+      });
+    }
+
+    /**
+     * Subscriptions requested and accepted to this reporter
+     * @type {Object<HypertyURL, SyncSubscription>}
+     */
+  }, {
     key: 'onSubscription',
 
     /**
@@ -1649,7 +1749,7 @@ var DataProvisional = (function () {
   /* private
   _childrenListeners: [MsgListener]
   _listener: MsgListener
-   _changes: []
+    _changes: []
   */
 
   function DataProvisional(owner, url, bus, children) {
@@ -1657,46 +1757,59 @@ var DataProvisional = (function () {
 
     var _this = this;
 
-    _this._changes = [];
+    _this._owner = owner;
+    _this._url = url;
+    _this._bus = bus;
     _this._children = children;
-    _this._childrenListeners = [];
 
-    _this._listener = bus.addListener(url, function (msg) {
-      console.log('DataProvisional-' + url + '-RCV: ', msg);
-      _this._changes.push(msg);
-    });
-
-    /*if (children) {
-      let childBaseURL = url + '/children/';
-      children.forEach((child) => {
-        let childURL = childBaseURL + child;
-        let listener = bus.addListener(childURL, (msg) => {
-          //ignore msg sent by himself
-          if (msg.from !== owner) {
-            console.log(msg);
-          }
-        });
-         _this._childrenListeners.push(listener);
-      });
-    }*/
+    _this._changes = [];
+    _this._allocateListeners();
   }
 
   _createClass(DataProvisional, [{
+    key: '_allocateListeners',
+    value: function _allocateListeners() {
+      var _this = this;
+
+      _this._listener = _this._bus.addListener(_this._url, function (msg) {
+        console.log('DataProvisional-' + _this._url + '-RCV: ', msg);
+        _this._changes.push(msg);
+      });
+
+      /*
+      _this._childrenListeners = [];
+      if (_this._children) {
+        let childBaseURL = url + '/children/';
+        _this._children.forEach((child) => {
+          let childURL = childBaseURL + child;
+          let listener = _this._bus.addListener(childURL, (msg) => {
+            //ignore msg sent by himself
+            if (msg.from !== owner) {
+              console.log(msg);
+            }
+          });
+            _this._childrenListeners.push(listener);
+        });
+      }*/
+    }
+  }, {
+    key: '_releaseListeners',
+    value: function _releaseListeners() {
+      var _this = this;
+
+      _this._listener.remove();
+
+      /*_this._childrenListeners.forEach((listener) => {
+        listener.remove();
+      });*/
+    }
+  }, {
     key: 'apply',
     value: function apply(observer) {
       var _this = this;
       _this._changes.forEach(function (change) {
         observer._changeObject(observer._syncObj, change);
       });
-    }
-  }, {
-    key: 'release',
-    value: function release() {
-      this._listener.remove();
-
-      /*this._childrenListeners.forEach((listener) => {
-        listener.remove();
-      });*/
     }
   }, {
     key: 'children',
@@ -2121,11 +2234,11 @@ var Syncher = (function () {
   /* private
   _owner: URL
   _bus: MiniBus
-   _subURL: URL
-   _reporters: <url: DataObjectReporter>
+    _subURL: URL
+    _reporters: <url: DataObjectReporter>
   _observers: <url: DataObjectObserver>
   _provisionals: <url: DataProvisional>
-   ----event handlers----
+    ----event handlers----
   _onNotificationHandler: (event) => void
   */
 
@@ -2157,6 +2270,8 @@ var Syncher = (function () {
           _this._onForward(msg);break;
         case 'create':
           _this._onRemoteCreate(msg);break;
+        case 'delete':
+          _this._onRemoteDelete(msg);break;
       }
     });
   }
@@ -2227,7 +2342,7 @@ var Syncher = (function () {
           console.log('subscribe-response: ', reply);
           var newProvisional = _this._provisionals[objURL];
           delete _this._provisionals[objURL];
-          if (newProvisional) newProvisional.release();
+          if (newProvisional) newProvisional._releaseListeners();
 
           if (reply.body.code < 200) {
             newProvisional = new _DataProvisional2['default'](_this._owner, objURL, _this._bus, reply.body.childrenResources);
@@ -2254,18 +2369,6 @@ var Syncher = (function () {
     key: 'onNotification',
     value: function onNotification(callback) {
       this._onNotificationHandler = callback;
-    }
-  }, {
-    key: '_unsubscribe',
-    value: function _unsubscribe(objURL) {
-      var _this = this;
-
-      delete _this._observers[objURL];
-
-      _this._bus.postMessage({
-        type: 'unsubscribe', from: _this._owner, to: _this._subURL,
-        body: { resource: objURL }
-      });
     }
   }, {
     key: '_onForward',
@@ -2308,6 +2411,51 @@ var Syncher = (function () {
       if (_this._onNotificationHandler) {
         console.log('NOTIFICATION-EVENT: ', event);
         _this._onNotificationHandler(event);
+      }
+    }
+  }, {
+    key: '_onRemoteDelete',
+    value: function _onRemoteDelete(msg) {
+      var _this = this;
+
+      //remove "/subscription" from the URL
+      var resource = msg.from.slice(0, -13);
+
+      var object = _this._observers[resource];
+      if (object) {
+        var _event = {
+          type: msg.type,
+          url: resource,
+          identity: msg.body.idToken,
+
+          ack: function ack(type) {
+            var lType = 200;
+            if (type) {
+              lType = type;
+            }
+
+            //TODO: any other different options for the release process, like accept but nor release local?
+            if (lType === 200) {
+              object['delete']();
+            }
+
+            //send ack response message
+            _this._bus.postMessage({
+              id: msg.id, type: 'response', from: msg.to, to: msg.from,
+              body: { code: lType, source: _this._owner }
+            });
+          }
+        };
+
+        if (_this._onNotificationHandler) {
+          console.log('NOTIFICATION-EVENT: ', _event);
+          _this._onNotificationHandler(_event);
+        }
+      } else {
+        _this._bus.postMessage({
+          id: msg.id, type: 'response', from: msg.to, to: msg.from,
+          body: { code: 404, source: _this._owner }
+        });
       }
     }
   }, {
@@ -2477,6 +2625,13 @@ function divideURL(url) {
   var re = /([a-zA-Z-]*):\/\/(?:\.)?([-a-zA-Z0-9@:%._\+~#=]{2,256})([-a-zA-Z0-9@:%._\+~#=\/]*)/gi;
   var subst = '$1,$2,$3';
   var parts = url.replace(re, subst).split(',');
+
+  // If the url has no protocol, the default protocol set is https
+  if (parts[0] === url) {
+    parts[0] = 'https';
+    parts[1] = url;
+  }
+
   var result = {
     type: parts[0],
     domain: parts[1],

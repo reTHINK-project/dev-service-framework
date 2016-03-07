@@ -35,20 +35,30 @@ class DataProvisional {
   constructor(owner, url, bus, children) {
     let _this = this;
 
-    _this._changes = [];
+    _this._owner = owner;
+    _this._url = url;
+    _this._bus = bus;
     _this._children = children;
-    _this._childrenListeners = [];
 
-    _this._listener = bus.addListener(url, (msg) => {
-      console.log('DataProvisional-' + url + '-RCV: ', msg);
+    _this._changes = [];
+    _this._allocateListeners();
+  }
+
+  _allocateListeners() {
+    let _this = this;
+
+    _this._listener = _this._bus.addListener(_this._url, (msg) => {
+      console.log('DataProvisional-' + _this._url + '-RCV: ', msg);
       _this._changes.push(msg);
     });
 
-    /*if (children) {
+    /*
+    _this._childrenListeners = [];
+    if (_this._children) {
       let childBaseURL = url + '/children/';
-      children.forEach((child) => {
+      _this._children.forEach((child) => {
         let childURL = childBaseURL + child;
-        let listener = bus.addListener(childURL, (msg) => {
+        let listener = _this._bus.addListener(childURL, (msg) => {
           //ignore msg sent by himself
           if (msg.from !== owner) {
             console.log(msg);
@@ -58,7 +68,16 @@ class DataProvisional {
         _this._childrenListeners.push(listener);
       });
     }*/
+  }
 
+  _releaseListeners() {
+    let _this = this;
+
+    _this._listener.remove();
+
+    /*_this._childrenListeners.forEach((listener) => {
+      listener.remove();
+    });*/
   }
 
   get children() { return this._children; }
@@ -68,14 +87,6 @@ class DataProvisional {
     _this._changes.forEach((change) => {
       observer._changeObject(observer._syncObj, change);
     });
-  }
-
-  release() {
-    this._listener.remove();
-
-    /*this._childrenListeners.forEach((listener) => {
-      listener.remove();
-    });*/
   }
 }
 
