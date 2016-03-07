@@ -32,44 +32,6 @@ var path = require('path');
 
 var pkg = require('./package.json');
 
-<<<<<<< HEAD
-gulp.task('license', function() {
-
-  var clean = argv.clean;
-  if (!clean) clean = false;
-
-  return gulp.src(['src/**/*.js'])
-  .pipe(prependLicense(clean));
-
-});
-
-function prependLicense(clean) {
-
-  var license = `/**
-* Copyright 2016 PT Inovação e Sistemas SA
-* Copyright 2016 INESC-ID
-* Copyright 2016 QUOBIS NETWORKS SL
-* Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
-* Copyright 2016 ORANGE SA
-* Copyright 2016 Deutsche Telekom AG
-* Copyright 2016 Apizee
-* Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*   http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-**/
-
-`;
-=======
 var license = '/**\n' +
 '* Copyright 2016 PT Inovação e Sistemas SA\n' +
 '* Copyright 2016 INESC-ID\n' +
@@ -92,7 +54,6 @@ var license = '/**\n' +
 '* See the License for the specific language governing permissions and\n' +
 '* limitations under the License.\n' +
 '**/\n\n';
->>>>>>> remotes/origin/develop
 
 gulp.task('license', function() {
 
@@ -228,14 +189,9 @@ gulp.task('watch-hyperty', function(cb) {
 
   var destination = argv.dest;
 
-<<<<<<< HEAD
   gulp.watch(['src/hyperty-connector/*.js', 'src/hello-world/*.js', 'src/hyperty-chat/*.js', 'example/hyperties/**/*.js'], function(event) {
-    var pathSplit = event.path.split(path.sep);
-=======
-  gulp.watch(['src/hyperty-connector/*.js', 'src/hyperty-chat/*.js'], function(event) {
 
     var pathSplit = event.path.split(path.sep); // on windows is backslash;
->>>>>>> remotes/origin/develop
     var dir = pathSplit[pathSplit.length - 2];
     var file = pathSplit[pathSplit.length - 1];
 
@@ -247,14 +203,10 @@ gulp.task('watch-hyperty', function(cb) {
 
 
       case 'hyperty-connector':
-<<<<<<< HEAD
-        return compile('src/' + dir + '/HypertyConnector.js', destination, cb);
+        return compile(__dirname + '/src/' + dir + '/HypertyConnector.js', destination, cb);
 
       default:
         compile('example/hyperties/' + dir + '/' + file, destination, cb);
-=======
-        return compile(__dirname + '/src/' + dir + '/HypertyConnector.js', destination, cb);
->>>>>>> remotes/origin/develop
     }
 
   });
@@ -343,10 +295,9 @@ function resource(file, configuration, isDefault) {
     descriptorName = 'DataSchemas';
   }
 
-<<<<<<< HEAD
-  console.log('DATA:', descriptorName);
+  console.log('DATA:', descriptorName, filename, extension);
 
-  if (extension === 'js') {
+  if (extension === '.js') {
     return browserify({
       entries: ['resources/' + filename + '.js'],
       standalone: 'activate',
@@ -355,12 +306,6 @@ function resource(file, configuration, isDefault) {
     .transform(babel)
     .bundle()
     .pipe(source('bundle.js'))
-=======
-  console.log('DATA:', descriptorName, filename, extension);
-
-  if (extension === '.js') {
-    return gulp.src(['resources/' + filename + '.js'])
->>>>>>> remotes/origin/develop
     .pipe(gulp.dest('resources/'))
     .pipe(buffer())
     .pipe(encode(filename, descriptorName, configuration, isDefault))
