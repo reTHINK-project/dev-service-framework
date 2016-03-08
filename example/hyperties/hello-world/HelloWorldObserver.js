@@ -52,7 +52,7 @@ class HelloWorldObserver extends EventEmitter {
 
         dataObjectObserver.onChange('*', function(event) {
           // Hello World Object was changed
-          console.info('message received:',event);
+          console.info('message received: ',event);
           this.trigger('hello', event.data);
 
         });
