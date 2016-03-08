@@ -26,9 +26,9 @@ var insert = require('gulp-insert');
 var uglify = require('gulp-uglify');
 var bump = require('gulp-bump');
 var argv = require('yargs').argv;
-
-var gulpif = require('gulp-if');
+var through = require('through2');
 var path = require('path');
+var gulpif = require('gulp-if');
 
 var pkg = require('./package.json');
 
@@ -168,7 +168,7 @@ function compile(file, destination, cb) {
     entries: [file],
     standalone: 'activate',
     debug: false
-  }).transform(babel, {compact: false, optional: 'runtime'})
+  }).transform(babel, {global: true, compact: false})
   .bundle()
   .on('error', function(err) {
     console.error(err);
@@ -189,24 +189,17 @@ gulp.task('watch-hyperty', function(cb) {
 
   var destination = argv.dest;
 
-  gulp.watch(['src/hyperty-connector/*.js', 'src/hello-world/*.js', 'src/hyperty-chat/*.js', 'example/hyperties/**/*.js'], function(event) {
+  gulp.watch(['src/hyperty-connector/*.js', 'src/hyperty-chat/*.js'], function(event) {
 
     var pathSplit = event.path.split(path.sep); // on windows is backslash;
     var dir = pathSplit[pathSplit.length - 2];
-    var file = pathSplit[pathSplit.length - 1];
-
-    console.log(file);
 
     switch (dir) {
       case 'hyperty-chat':
         return compile(__dirname + '/src/' + dir + '/HypertyChat.js', destination, cb);
 
-
       case 'hyperty-connector':
         return compile(__dirname + '/src/' + dir + '/HypertyConnector.js', destination, cb);
-
-      default:
-        compile('example/hyperties/' + dir + '/' + file, destination, cb);
     }
 
   });
@@ -217,7 +210,6 @@ gulp.task('watch', function(cb) {
   gulp.watch(['src/**/*.js'], ['dist'], cb);
 });
 
-var through = require('through2');
 var Base64 = require('js-base64').Base64;
 var fs = require('fs');
 
@@ -261,7 +253,18 @@ function encode(filename, descriptorName, configuration, isDefault) {
     json[value].version = '0.1';
     json[value].description = 'Description of ' + filename;
     json[value].objectName = filename;
-    json[value].configuration = configuration;
+
+    if (!json[value].hasOwnProperty('configuration') && configuration) {
+      json[value].configuration = configuration;
+      console.log('setting configuration: ', configuration);
+    }
+
+    if (descriptorName === 'Runtimes') {
+      json[value].runtimeType = 'browser';
+      json[value].hypertyCapabilities = {mic: false };
+      json[value].protocolCapabilities = {http: true };
+    }
+
     json[value].sourcePackageURL = '/sourcePackage';
     json[value].sourcePackage.sourceCode = encoded;
     json[value].sourcePackage.sourceCodeClassname = filename;
@@ -291,21 +294,16 @@ function resource(file, configuration, isDefault) {
     descriptorName = 'Hyperties';
   } else if (filename.indexOf('ProtoStub') !== -1) {
     descriptorName = 'ProtoStubs';
-  } else if (filename.indexOf('DataSchema')) {
+  } else if (filename.indexOf('DataSchema') !== -1) {
     descriptorName = 'DataSchemas';
+  } else if (filename.indexOf('runtime') !== -1 || filename.indexOf('Runtime') !== -1) {
+    descriptorName = 'Runtimes';
   }
 
   console.log('DATA:', descriptorName, filename, extension);
 
   if (extension === '.js') {
-    return browserify({
-      entries: ['resources/' + filename + '.js'],
-      standalone: 'activate',
-      debug: false
-    })
-    .transform(babel)
-    .bundle()
-    .pipe(source('bundle.js'))
+    return gulp.src(['resources/' + filename + '.js'])
     .pipe(gulp.dest('resources/'))
     .pipe(buffer())
     .pipe(encode(filename, descriptorName, configuration, isDefault))
@@ -334,7 +332,7 @@ gulp.task('encode', function(done) {
   });
 
   function isFile(file) {
-    if (file.indexOf('Hyperty') !== -1 || file.indexOf('ProtoStub') !== -1 || file.indexOf('DataSchema') !== -1){
+    if (file.indexOf('Hyperty') !== -1 || file.indexOf('ProtoStub') !== -1 || file.indexOf('DataSchema') !== -1 || (file.indexOf('runtime') !== -1 || file.indexOf('Runtime') !== -1)) {
       return fs.statSync('resources/' + file).isFile();
     }
   }

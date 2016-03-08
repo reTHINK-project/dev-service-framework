@@ -40467,7 +40467,10 @@ function divideURL(url) {
   var parts = url.replace(re, subst).split(',');
 
   // If the url has no protocol, the default protocol set is https
-  if (parts[0] === url) parts[0] = 'https';
+  if (parts[0] === url) {
+    parts[0] = 'https';
+    parts[1] = url;
+  }
 
   var result = {
     type: parts[0],

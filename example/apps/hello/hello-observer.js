@@ -40,7 +40,7 @@ var runtimeLoader;
 
 function documentReady() {
 
-  ready();
+  // ready();
 
   let hypertyHolder = $('.hyperties');
   hypertyHolder.removeClass('hide');
@@ -85,7 +85,7 @@ function hypertyDeployed(result) {
 
   Handlebars.getTemplate('chat-section').then(function(html) {
     $('.chat-section').append(html);
-}
+  });
 
   hypertyChat.addEventListener('hello', function(msg) {
     processHello(msg);
@@ -102,9 +102,6 @@ function processHello(hello) {
   </li>`;
 
 }
-
-
-
 
 Handlebars.getTemplate = function(name) {
 
