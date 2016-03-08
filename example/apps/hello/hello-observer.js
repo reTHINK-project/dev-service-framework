@@ -13,7 +13,7 @@ import 'object.observe';
 import 'array.observe';
 
 import InstallerFactory from '../../../resources/factories/InstallerFactory';
-import RuntimeLoader from '../../../src/runtime-loader/RuntimeLoader';
+import RuntimeLoader from '../../../dist/RuntimeLoader';
 
 // reTHINK modules
 // import RuntimeUA from 'runtime-core/dist/runtimeUA';
@@ -87,7 +87,7 @@ function hypertyDeployed(result) {
     $('.chat-section').append(html);
   });
 
-  hypertyChat.addEventListener('hello', function(msg) {
+  hypertyObserver.addEventListener('hello', function(msg) {
     processHello(msg);
   });
 

@@ -40,6 +40,12 @@ npm, jspm and gulp is globaly available in your environment.
 
 `gulp watch-hyperty --dest=resources`
 
+`npm start`
+
+*The first command enables to Automatically update the local Catalogue with changes we do in the hyperty. The second command starts a local HTTPS server to work as Application Server and catalogue server. In case you have problems starting the HTTPS server pls ensure there is no other service using HTTPS port 443. If the problem persists, execute:*
+
+`http-server --cors -S -p 443 -C rethink-certificate.cert -K rethink-certificate.key`
+
 Different development manuals are available, including:
 
 -	[Hyperty Development manual](docs/manuals/development-of-hyperties.md)

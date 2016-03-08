@@ -41,38 +41,65 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
    * @ignore
    * Should not be used directly by Hyperties. It's called by the Syncher.subscribe method
    */
-  constructor(syncher, url, schema, initialStatus, initialData, children, initialVersion) {
-    super(syncher, url, schema, initialStatus, initialData, children);
+  constructor(syncher, url, schema, initialStatus, initialData, childrens, initialVersion) {
+    super(syncher, url, schema, initialStatus, initialData, childrens);
     let _this = this;
 
     _this._version = initialVersion;
-
-    //add listener for objURL
-    _this._changeListener = _this._bus.addListener(url + '/changes', (msg) => {
-      console.log('DataObjectObserver-' + url + '-RCV: ', msg);
-      _this._changeObject(_this._syncObj, msg);
-    });
+    _this._filters = {};
 
     _this._syncObj.observe((event) => {
       _this._onFilter(event);
     });
 
-    _this._filters = {};
+    _this._allocateListeners();
+  }
+
+  _allocateListeners() {
+    super._allocateListeners();
+    let _this = this;
+
+    _this._changeListener = _this._bus.addListener(_this._url + '/changes', (msg) => {
+      console.log('DataObjectObserver-' + _this._url + '-RCV: ', msg);
+      _this._changeObject(_this._syncObj, msg);
+    });
+  }
+
+  _releaseListeners() {
+    super._releaseListeners();
+    let _this = this;
+
+    _this._changeListener.remove();
   }
 
   /**
-   * Release internal used listeners
+   * Release and delete object data
    */
-  release() {
-    this._changeListener.remove();
-    super.release();
+  delete() {
+    let _this = this;
+
+    _this._releaseListeners();
+    delete _this._syncher._observers[_this._url];
   }
 
+  /**
+   * Release and delete object data
+   */
   unsubscribe() {
     let _this = this;
 
-    _this.release();
-    _this._syncher._unsubscribe(_this.url);
+    let unSubscribeMsg = {
+      type: 'unsubscribe', from: _this._owner, to: _this._syncher._subURL,
+      body: { resource: _this._url }
+    };
+
+    _this._bus.postMessage(unSubscribeMsg, (reply) => {
+      console.log('DataObjectObserver-UNSUBSCRIBE: ', reply);
+      if (reply.body.code === 200) {
+        _this._releaseListeners();
+        delete _this._syncher._observers[_this._url];
+      }
+    });
   }
 
   /**

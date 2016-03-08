@@ -6,6 +6,7 @@
   "scripts": {
     "init-setup": "npm init && npm install -g jspm karma-cli gulp-cli && npm install && jspm init && node setup.js",
     "test": "karma start",
+    "preinstall": "npm install -g http-server",
     "start": "http-server --cors -S -p 443 -C rethink-certificate.cert -K rethink-certificate.key",
     "build": "node scripts/transform.js"
   },
