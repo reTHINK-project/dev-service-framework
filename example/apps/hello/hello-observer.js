@@ -85,9 +85,9 @@ function hypertyDeployed(result) {
 
   Handlebars.getTemplate('chat-section').then(function(html) {
     $('.chat-section').append(html);
-}
+  });
 
-  hypertyChat.addEventListener('hello', function(msg) {
+  hypertyObserver.addEventListener('hello', function(msg) {
     processHello(msg);
   });
 
