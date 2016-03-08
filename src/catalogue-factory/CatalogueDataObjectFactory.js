@@ -68,7 +68,6 @@ class CatalogueDataObjectFactory extends RethinkObject {
         if (
             typeof guid === "undefined"
             || typeof type === "undefined"
-            || typeof version === "undefined"
             || typeof objectName === "undefined"
             || typeof description === "undefined"
             || typeof language === "undefined"
@@ -155,7 +154,6 @@ class CatalogueDataObjectFactory extends RethinkObject {
                                          runtimeType, hypertyCapabilities, protocolCapabilities) {
         if (
             typeof guid === "undefined"
-            || typeof version === "undefined"
             || typeof objectName === "undefined"
             || typeof description === "undefined"
             || typeof language === "undefined"
