@@ -2140,8 +2140,10 @@ var DataObjectObserver = (function (_DataObject) {
       var _this = this;
 
       _this._changeListener = _this._bus.addListener(_this._url + '/changes', function (msg) {
-        console.log('DataObjectObserver-' + _this._url + '-RCV: ', msg);
-        _this._changeObject(_this._syncObj, msg);
+        if (msg.type === 'update') {
+          console.log('DataObjectObserver-' + _this._url + '-RCV: ', msg);
+          _this._changeObject(_this._syncObj, msg);
+        }
       });
     }
   }, {
@@ -3204,7 +3206,7 @@ var Syncher = (function () {
       var _this = this;
 
       //remove "/subscription" from the URL
-      var resource = msg.from.slice(0, -13);
+      var resource = msg.body.resource;
 
       var object = _this._observers[resource];
       if (object) {
