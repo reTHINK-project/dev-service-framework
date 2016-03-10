@@ -144,6 +144,7 @@ All IDE's and Text Editors can handle these tools.
  - [Build](#build)
  - [Encode](#encode)
  - [Watch Hyperty](#watch-hyperty)
+ - [Build Hyperties](#build-hyperties)
  - [Watch](#watch)
 
 ##### <a id="documentation">Documentation</a>
@@ -167,30 +168,42 @@ gulp license
 
 To distribute the runtime-core, you can make a distribution file.
 
-Run the command:`
-gulp dist
-`
+Run the command:
+
+```shell
+gulp dis
+```
 
 ###### <a id="build">Build</a>
 
 To distribute the runtime-core, but with the source code maps, and to detect where is some error.
 
-Run the command:`
+Run the command:
+
+```shell
 gulp build
-`
+```
 
 ###### <a id="encode">Encode</a>
 
 In this repository, we have some tasks which can help you. If you need change some resource file, like an Hyperty or ProtoStub, and load it to the Hyperties.json or ProtoStubs.json, run the following command, and answer to the questions;
 
-```
+```shell
 gulp encode
-
 ```
 
 you need to answer this questions: File to be converted? > resources/VertxProtoStub.js
 
-Configuration file like an object or url to ProtoStub have on configuration: > something like: {"url":"wss://msg-node.localhost:9090/ws"} or only wss://msg-node.localhost:9090/ws
+Configuration file like an object or url to ProtoStub have on configuration: > something like:
+```json
+{
+  "url": "wss://msg-node.localhost:9090/ws"
+}
+```
+or an empty object
+```json
+{}
+```
 
 This will be a default file to be loaded? (yes/no) > yes or no
 
@@ -200,9 +213,21 @@ This will be a default file to be loaded? (yes/no) > yes or no
 
 If you need change some resource file, like an Hyperty, you need run this task first. This task will be covert ES6 to ES5 and encode the Hyperty file changes in a base64 file and add it to the descriptor folder in the respective place;
 
-in your command line run:`
+in your command line run:
+```shell
 gulp watch-hyperty --dest=resources
-`
+```
+
+###### <a id="build-hyperties">Build Hyperties</a>
+
+At this moment, the hyperties are placed on src folder, but will be moved for examples folder;
+
+If you need change some resource file, like an Hyperty, you need run this task first. This task will be covert ES6 to ES5 and encode the Hyperty file changes in a base64 file and add it to the descriptor folder in the respective place;
+
+in your command line run:
+```shell
+gulp build-hyperties --dest=resources
+```
 
 ###### <a id="watch">Watch</a>
 
@@ -232,6 +257,21 @@ mocha addressFactoryTest.js
 #### <a id="example">Example</a>
 
 *to be moved to My First reTHINK Applications?*
+
+**NOTE:** While this example folder isn't moved, you need to do the following:
+
+ - On linux, run with `sudo`,
+ - On Windows, execute the terminal with administration permissions;
+
+Install and run http-server:
+```shell
+npm install -g http-server
+# or
+npm install
+
+# after installed
+npm start;
+```
 
 This repository have a folder with an working example of Hyperty Connector and we can send message and make a WebRTC call between remote hyperties through the vertx;
 

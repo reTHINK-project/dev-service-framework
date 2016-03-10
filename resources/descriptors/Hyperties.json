@@ -57,7 +57,8 @@
     "signature": "",
     "messageSchemas": "",
     "dataObjects": [],
-    "accessControlPolicy": "somePolicy"
+    "accessControlPolicy": "somePolicy",
+    "configuration": {}
   },
   "HypertyConnector": {
     "sourcePackage": {
