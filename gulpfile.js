@@ -4,18 +4,6 @@ var gulp = require('gulp');
 var exec = require('child_process').exec;
 var prompt = require('gulp-prompt');
 
-// Gulp task to generate development documentation;
-gulp.task('doc', function(done) {
-
-  console.log('Generating documentation...');
-  exec('node_modules/.bin/jsdoc -d api src/*', function(err) {
-    if (err) return done(err);
-    console.log('Documentation generated in "docs" directory');
-    done();
-  });
-
-});
-
 // Task and dependencies to distribute for all environments;
 var babel = require('babelify');
 var browserify = require('browserify');
@@ -29,6 +17,9 @@ var argv = require('yargs').argv;
 var through = require('through2');
 var path = require('path');
 var gulpif = require('gulp-if');
+
+var Base64 = require('js-base64').Base64;
+var fs = require('fs');
 
 var pkg = require('./package.json');
 
@@ -54,6 +45,18 @@ var license = '/**\n' +
 '* See the License for the specific language governing permissions and\n' +
 '* limitations under the License.\n' +
 '**/\n\n';
+
+// Gulp task to generate development documentation;
+gulp.task('doc', function(done) {
+
+  console.log('Generating documentation...');
+  exec('node_modules/.bin/jsdoc -d api src/*', function(err) {
+    if (err) return done(err);
+    console.log('Documentation generated in "docs" directory');
+    done();
+  });
+
+});
 
 gulp.task('license', function() {
 
@@ -148,6 +151,54 @@ gulp.task('build', function() {
 
 });
 
+gulp.task('build-hyperties', function() {
+
+  var destination = argv.dest;
+  if (!destination) destination = __dirname + '/resources';
+
+  return gulp.src([
+    'src/hyperty-connector/HypertyConnector.js',
+    'src/hyperty-chat/HypertyChat.js'])
+  .pipe(buildHyperties(destination));
+
+});
+
+function buildHyperties(destination) {
+
+  return through.obj(function(file, enc, cb) {
+
+    if (file.isNull()) {
+      return cb(null, file);
+    }
+
+    if (file.isStream()) {
+      return cb(new Error('Streaming not supported'));
+    }
+
+    var fileObject = path.parse(file.path);
+
+    return browserify({
+      entries: [file.path],
+      standalone: 'activate',
+      debug: false
+    }).transform(babel, {global: true, compact: false})
+    .bundle()
+    .on('error', function(err) {
+      console.error(err);
+    })
+    .pipe(source(fileObject.base))
+    .pipe(gulp.dest(destination))
+    .pipe(buffer())
+    .pipe(resource(file.path, {}, false))
+    .on('end', function() {
+      console.log('File converted');
+      cb();
+    });
+
+  });
+
+}
+
 /**
 * Compile on specific file from ES6 to ES5
 * @param  {string} 'compile' task name
@@ -209,9 +260,6 @@ gulp.task('watch-hyperty', function(cb) {
 gulp.task('watch', function(cb) {
   gulp.watch(['src/**/*.js'], ['dist'], cb);
 });
-
-var Base64 = require('js-base64').Base64;
-var fs = require('fs');
 
 function encode(filename, descriptorName, configuration, isDefault) {
 

@@ -219,7 +219,7 @@ class Syncher {
    let _this = this;
 
    //remove "/subscription" from the URL
-   let resource = msg.from.slice(0, -13);
+   let resource = msg.body.resource;
 
    let object = _this._observers[resource];
    if (object) {

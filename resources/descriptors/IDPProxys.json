@@ -1,0 +1,18 @@
+{
+  "IDPProxy": {
+    "cguid": 44432065498481198,
+    "version": "1.0",
+    "objectName": "default",
+    "description": "This is a idp-proxy",
+    "language": "Javascript ECMA6",
+    "dataObjects": [],
+    "configuration": [],
+    "constraints": [],
+    "messageSchemas": [],
+    "sourcePackage": {
+      "encoding": "UTF8",
+      "sourceCodeClassname": "defaultProxy",
+      "sourceCode": "alert('hello world from a proxy!')"
+    }  
+  }
+}

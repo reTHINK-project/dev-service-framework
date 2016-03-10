@@ -29,6 +29,7 @@ System.config({
     "mutationobserver-shim": "npm:mutationobserver-shim@0.3.1",
     "object.observe": "npm:object.observe@0.2.6",
     "ortc-over-rtc": "npm:ortc-over-rtc@0.1.0",
+    "rethink-project/dev-runtime-core": "github:rethink-project/dev-runtime-core@dev-0.4",
     "runtime-core": "github:rethink-project/dev-runtime-core@dev-0.4",
     "tr46": "npm:tr46@0.0.2",
     "tv4": "npm:tv4@1.2.7",
@@ -112,7 +113,7 @@ System.config({
       "bitcoinjs-lib": "npm:bitcoinjs-lib@2.2.0",
       "hellojs": "npm:hellojs@1.12.0",
       "jsrsasign": "npm:jsrsasign@5.0.7",
-      "service-framework": "github:rethink-project/dev-service-framework@master",
+      "service-framework": "github:rethink-project/dev-service-framework@develop",
       "sjcl": "npm:sjcl@1.0.3"
     },
     "github:rethink-project/dev-service-framework@develop": {
@@ -122,6 +123,7 @@ System.config({
       "json": "github:systemjs/plugin-json@0.1.0",
       "object.observe": "npm:object.observe@0.2.6",
       "ortc-over-rtc": "npm:ortc-over-rtc@0.1.0",
+      "runtime-core": "github:rethink-project/dev-runtime-core@dev-0.4",
       "webrtc-adapter-test": "npm:webrtc-adapter-test@0.2.10",
       "webrtc-shim": "npm:webrtc-shim@0.1.2"
     },
@@ -1005,6 +1007,11 @@ System.config({
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "http": "github:jspm/nodelibs-http@1.7.1",
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:jsrsasign@5.0.7": {
+      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:jsrsasign@5.0.7": {
