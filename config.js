@@ -123,6 +123,7 @@ System.config({
       "json": "github:systemjs/plugin-json@0.1.0",
       "object.observe": "npm:object.observe@0.2.6",
       "ortc-over-rtc": "npm:ortc-over-rtc@0.1.0",
+      "runtime-core": "github:rethink-project/dev-runtime-core@dev-0.4",
       "webrtc-adapter-test": "npm:webrtc-adapter-test@0.2.10",
       "webrtc-shim": "npm:webrtc-shim@0.1.2"
     },

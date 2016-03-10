@@ -760,15 +760,15 @@ var _utilsUtilsJs = require('../utils/utils.js');
 var DataObject = (function () {
   /* private
   _version: number
-   _owner: HypertyURL
+    _owner: HypertyURL
   _url: ObjectURL
   _schema: Schema
   _bus: MiniBus
   _status: on | paused
   _syncObj: SyncData
-   _children: { id: DataObjectChild }
+    _children: { id: DataObjectChild }
   _childrenListeners: [MsgListener]
-   ----event handlers----
+    ----event handlers----
   _onAddChildrenHandler: (event) => void
   */
 
@@ -1144,7 +1144,7 @@ var _SyncObject2 = _interopRequireDefault(_SyncObject);
 
 var DataObjectChild /* implements SyncStatus */ = (function () {
   /* private
-   ----event handlers----
+    ----event handlers----
   _onResponseHandler: (event) => void
   */
 
@@ -1323,7 +1323,7 @@ var DataObjectObserver = (function (_DataObject) {
 
   /* private
   _changeListener: MsgListener
-   ----event handlers----
+    ----event handlers----
   _filters: {<filter>: {type: <start, exact>, callback: <function>} }
   */
 
@@ -1355,8 +1355,10 @@ var DataObjectObserver = (function (_DataObject) {
       var _this = this;
 
       _this._changeListener = _this._bus.addListener(_this._url + '/changes', function (msg) {
-        console.log('DataObjectObserver-' + _this._url + '-RCV: ', msg);
-        _this._changeObject(_this._syncObj, msg);
+        if (msg.type === 'update') {
+          console.log('DataObjectObserver-' + _this._url + '-RCV: ', msg);
+          _this._changeObject(_this._syncObj, msg);
+        }
       });
     }
   }, {
@@ -1515,7 +1517,7 @@ var DataObjectReporter = (function (_DataObject) {
 
   /* private
   _subscriptions: <hypertyUrl: { status: string } }>
-   ----event handlers----
+    ----event handlers----
   _onSubscriptionHandler: (event) => void
   _onResponseHandler: (event) => void
   */
@@ -1749,7 +1751,7 @@ var DataProvisional = (function () {
   /* private
   _childrenListeners: [MsgListener]
   _listener: MsgListener
-   _changes: []
+    _changes: []
   */
 
   function DataProvisional(owner, url, bus, children) {
@@ -1788,7 +1790,7 @@ var DataProvisional = (function () {
               console.log(msg);
             }
           });
-           _this._childrenListeners.push(listener);
+            _this._childrenListeners.push(listener);
         });
       }*/
     }
@@ -2234,11 +2236,11 @@ var Syncher = (function () {
   /* private
   _owner: URL
   _bus: MiniBus
-   _subURL: URL
-   _reporters: <url: DataObjectReporter>
+    _subURL: URL
+    _reporters: <url: DataObjectReporter>
   _observers: <url: DataObjectObserver>
   _provisionals: <url: DataProvisional>
-   ----event handlers----
+    ----event handlers----
   _onNotificationHandler: (event) => void
   */
 
@@ -2419,7 +2421,7 @@ var Syncher = (function () {
       var _this = this;
 
       //remove "/subscription" from the URL
-      var resource = msg.from.slice(0, -13);
+      var resource = msg.body.resource;
 
       var object = _this._observers[resource];
       if (object) {
