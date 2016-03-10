@@ -112,7 +112,7 @@ System.config({
       "bitcoinjs-lib": "npm:bitcoinjs-lib@2.2.0",
       "hellojs": "npm:hellojs@1.12.0",
       "jsrsasign": "npm:jsrsasign@5.0.7",
-      "service-framework": "github:rethink-project/dev-service-framework@develop",
+      "service-framework": "github:rethink-project/dev-service-framework@master",
       "sjcl": "npm:sjcl@1.0.3"
     },
     "github:rethink-project/dev-service-framework@develop": {
@@ -179,7 +179,7 @@ System.config({
     "npm:babel-polyfill@6.6.1": {
       "babel-regenerator-runtime": "npm:babel-regenerator-runtime@6.5.0",
       "babel-runtime": "npm:babel-runtime@5.8.35",
-      "core-js": "npm:core-js@2.1.3",
+      "core-js": "npm:core-js@2.1.4",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:babel-regenerator-runtime@6.5.0": {
@@ -580,7 +580,7 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2",
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
-    "npm:core-js@2.1.3": {
+    "npm:core-js@2.1.4": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
@@ -602,7 +602,7 @@ System.config({
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "inherits": "npm:inherits@2.0.1",
       "ripemd160": "npm:ripemd160@1.0.1",
-      "sha.js": "npm:sha.js@2.3.6"
+      "sha.js": "npm:sha.js@2.4.5"
     },
     "npm:create-hmac@1.1.4": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
@@ -1424,6 +1424,12 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:sha.js@2.3.6": {
+      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "inherits": "npm:inherits@2.0.1",
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:sha.js@2.4.5": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "inherits": "npm:inherits@2.0.1",

@@ -40,6 +40,8 @@ var runtimeLoader;
 
 function documentReady() {
 
+  // ready();
+
   let hypertyHolder = $('.hyperties');
   hypertyHolder.removeClass('hide');
 
@@ -100,9 +102,6 @@ function processHello(hello) {
   </li>`;
 
 }
-
-
-
 
 Handlebars.getTemplate = function(name) {
 
