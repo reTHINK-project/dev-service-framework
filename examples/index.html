@@ -18,8 +18,8 @@
 <body>
 
   <div class="progress"><div class="indeterminate"></div></div>
-<!--
-  <div class="row container hide">
+
+  <!--<div class="row container hide">
     <div class="login-panel">
       <div class="card blue-grey darken-1">
         <div class="card-content not-logged white-text">
@@ -41,16 +41,23 @@
               </span>
             </span>
           </div>
-          <div class="card-action">
-          </div>
         </div>
       </div>-->
+
+      <div class="selection-panel">
+      </div>
+
+      <div class="hyperty-panel">
+          <div class="card-action">
+          </div>
+      </div>
 
       <section class="chat-section hide">
 
       </section>
 
     </div>
+
 
     <!-- Modal Structure
     <div class="modal create-chat">
@@ -110,8 +117,11 @@
 
 
 
+
   <script src="../vendor/system.js"></script>
   <script src="../config.js"></script>
-  <script>System.import("./hello-observer");</script>
+  <script src="./helloObserver.js"></script>
+  <script src="./helloReporter.js"></script>
+  <script>System.import("./core");</script>
 </body>
 </html>
