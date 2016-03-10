@@ -1014,11 +1014,6 @@ System.config({
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:jsrsasign@5.0.7": {
-      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "process": "github:jspm/nodelibs-process@0.1.2"
-    },
     "npm:karma-browserify@4.3.0": {
       "browserify": "npm:browserify@10.2.3",
       "convert-source-map": "npm:convert-source-map@0.3.5",
