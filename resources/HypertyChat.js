@@ -590,10 +590,6 @@ module.exports = exports['default'];
 * limitations under the License.
 **/
 
-/**
-* Core HypertyDiscovery interface
-* Class to allow applications to search for hyperties using the message bus
-*/
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -604,6 +600,13 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
+var _utilsUtils = require('../utils/utils');
+
+/**
+* Core HypertyDiscovery interface
+* Class to allow applications to search for hyperties using the message bus
+*/
+
 var HypertyDiscovery = (function () {
 
   /**
@@ -613,14 +616,14 @@ var HypertyDiscovery = (function () {
   * @param  {RuntimeURL}          runtimeURL            runtimeURL
   */
 
-  function HypertyDiscovery(domain, msgBus) {
+  function HypertyDiscovery(hypertyURL, msgBus) {
     _classCallCheck(this, HypertyDiscovery);
 
     var _this = this;
     _this.messageBus = msgBus;
 
-    _this.domain = domain;
-    _this.discoveryURL = 'hyperty://' + domain + '/hypertyDiscovery';
+    _this.domain = (0, _utilsUtils.divideURL)(hypertyURL).domain;;
+    _this.discoveryURL = hypertyURL;
   }
 
   /**
@@ -643,12 +646,11 @@ var HypertyDiscovery = (function () {
         activeDomain = domain;
       }
 
-      var activediscoveryURL = 'hyperty://' + _this.domain + '/hypertyDiscovery';
       var identityURL = 'user://' + email.substring(email.indexOf('@') + 1, email.length) + '/' + email.substring(0, email.indexOf('@'));
 
       // message to query domain registry, asking for a user hyperty.
       var message = {
-        type: 'READ', from: activediscoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: identityURL }
+        type: 'READ', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: identityURL }
       };
 
       console.log('Message: ', message, activeDomain, identityURL);
@@ -706,7 +708,7 @@ var HypertyDiscovery = (function () {
 exports['default'] = HypertyDiscovery;
 module.exports = exports['default'];
 
-},{}],6:[function(require,module,exports){
+},{"../utils/utils":14}],6:[function(require,module,exports){
 /**
 * Copyright 2016 PT Inovação e Sistemas SA
 * Copyright 2016 INESC-ID
@@ -760,15 +762,15 @@ var _utilsUtilsJs = require('../utils/utils.js');
 var DataObject = (function () {
   /* private
   _version: number
-    _owner: HypertyURL
+   _owner: HypertyURL
   _url: ObjectURL
   _schema: Schema
   _bus: MiniBus
   _status: on | paused
   _syncObj: SyncData
-    _children: { id: DataObjectChild }
+   _children: { id: DataObjectChild }
   _childrenListeners: [MsgListener]
-    ----event handlers----
+   ----event handlers----
   _onAddChildrenHandler: (event) => void
   */
 
@@ -1144,7 +1146,7 @@ var _SyncObject2 = _interopRequireDefault(_SyncObject);
 
 var DataObjectChild /* implements SyncStatus */ = (function () {
   /* private
-    ----event handlers----
+   ----event handlers----
   _onResponseHandler: (event) => void
   */
 
@@ -1323,7 +1325,7 @@ var DataObjectObserver = (function (_DataObject) {
 
   /* private
   _changeListener: MsgListener
-    ----event handlers----
+   ----event handlers----
   _filters: {<filter>: {type: <start, exact>, callback: <function>} }
   */
 
@@ -1517,7 +1519,7 @@ var DataObjectReporter = (function (_DataObject) {
 
   /* private
   _subscriptions: <hypertyUrl: { status: string } }>
-    ----event handlers----
+   ----event handlers----
   _onSubscriptionHandler: (event) => void
   _onResponseHandler: (event) => void
   */
@@ -1751,7 +1753,7 @@ var DataProvisional = (function () {
   /* private
   _childrenListeners: [MsgListener]
   _listener: MsgListener
-    _changes: []
+   _changes: []
   */
 
   function DataProvisional(owner, url, bus, children) {
@@ -1790,7 +1792,7 @@ var DataProvisional = (function () {
               console.log(msg);
             }
           });
-            _this._childrenListeners.push(listener);
+           _this._childrenListeners.push(listener);
         });
       }*/
     }
@@ -2236,11 +2238,11 @@ var Syncher = (function () {
   /* private
   _owner: URL
   _bus: MiniBus
-    _subURL: URL
-    _reporters: <url: DataObjectReporter>
+   _subURL: URL
+   _reporters: <url: DataObjectReporter>
   _observers: <url: DataObjectObserver>
   _provisionals: <url: DataProvisional>
-    ----event handlers----
+   ----event handlers----
   _onNotificationHandler: (event) => void
   */
 

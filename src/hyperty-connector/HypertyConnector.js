@@ -58,7 +58,7 @@ class HypertyConnector extends EventEmitter {
 
     _this._controllers = {};
 
-    _this.hypertyDiscovery = new HypertyDiscovery(_this._domain, bus);
+    _this.hypertyDiscovery = new HypertyDiscovery(hypertyURL, bus);
 
     let syncher = new Syncher(hypertyURL, bus, configuration);
     syncher.onNotification(function(event) {

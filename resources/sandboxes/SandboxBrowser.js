@@ -1,5 +1,5 @@
 import MiniBus from 'runtime-core/dist/minibus';
-import {Sandbox, SandboxRegistry} from 'runtime-core/dist/sandbox';
+import {Sandbox, SandboxType, SandboxRegistry} from 'runtime-core/dist/sandbox';
 
 // Mockup code for testing
 class SandboxBrowser extends Sandbox {
@@ -7,6 +7,7 @@ class SandboxBrowser extends Sandbox {
   constructor() {
     super();
     let _this = this;
+    _this.type = SandboxType.NORMAL;
     console.log('AppSandboxBrowser');
 
     //simulate sandbox frontier

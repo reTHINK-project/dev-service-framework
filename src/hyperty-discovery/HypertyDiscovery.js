@@ -21,6 +21,8 @@
 * limitations under the License.
 **/
 
+import {divideURL} from '../utils/utils';
+
 /**
 * Core HypertyDiscovery interface
 * Class to allow applications to search for hyperties using the message bus
@@ -33,12 +35,12 @@ class HypertyDiscovery {
   * @param  {MessageBus}          msgbus                msgbus
   * @param  {RuntimeURL}          runtimeURL            runtimeURL
   */
-  constructor(domain, msgBus) {
+  constructor(hypertyURL, msgBus) {
     let _this = this;
     _this.messageBus = msgBus;
 
-    _this.domain = domain;
-    _this.discoveryURL = 'hyperty://' + domain + '/hypertyDiscovery';
+    _this.domain = divideURL(hypertyURL).domain;
+    _this.discoveryURL = hypertyURL;
   }
 
   /**
@@ -58,12 +60,11 @@ class HypertyDiscovery {
       activeDomain = domain;
     }
 
-    let activediscoveryURL = 'hyperty://' + _this.domain + '/hypertyDiscovery';
     let identityURL = 'user://' + email.substring(email.indexOf('@') + 1, email.length) + '/' + email.substring(0, email.indexOf('@'));
 
     // message to query domain registry, asking for a user hyperty.
     let message = {
-      type: 'READ', from: activediscoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: identityURL}
+      type: 'READ', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: identityURL}
     };
 
     console.log('Message: ', message, activeDomain, identityURL);
