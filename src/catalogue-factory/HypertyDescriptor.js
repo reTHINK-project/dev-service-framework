@@ -28,8 +28,8 @@ import CatalogueDataObject from './CatalogueDataObject';
 
 class HypertyDescriptor extends CatalogueDataObject {
 
-    constructor(guid, catalogueType, objectName, description, language, sourcePackageURL, hypertyType, dataObjects) {
-        super(guid, catalogueType, objectName, description, language, sourcePackageURL);
+    constructor(guid, catalogueType, version, objectName, description, language, sourcePackageURL, hypertyType, dataObjects) {
+        super(guid, catalogueType, version, objectName, description, language, sourcePackageURL);
 
         this._configuration = {};
         this._constraints = {};

@@ -29,9 +29,9 @@ import CatalogueDataObject from './CatalogueDataObject';
 
 class HypertyRuntimeDescriptor extends CatalogueDataObject {
 
-    constructor(guid, catalogueType, objectName, description, language, sourcePackageURL, runtimeType,
+    constructor(guid, catalogueType, version, objectName, description, language, sourcePackageURL, runtimeType,
                 hypertyCapabilities, protocolCapabilities) {
-        super(guid, catalogueType, objectName, description, language, sourcePackageURL);
+        super(guid, catalogueType, version, objectName, description, language, sourcePackageURL);
 
         this._runtimeType = runtimeType;
 
