@@ -21,9 +21,8 @@ function deployObserver() {
   let hypertyHolder = $('.hyperties');
   hypertyHolder.removeClass('hide');
 
-  console.log(runtimeLoader);
 
-  let hypertyObserver = 'hyperty-catalogue://' + domain + '/.well-known/hyperty/HelloWorldObserver';
+  let hypertyObserver = 'hyperty-catalogue://' + runtime.domain + '/.well-known/hyperty/HelloWorldObserver';
 
   // Load First Hyperty
   runtimeLoader.requireHyperty(hypertyObserver).then(hypertyOberverDeployed).catch(function(reason) {

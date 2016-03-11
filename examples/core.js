@@ -53,7 +53,6 @@ function documentReady() {
 
 function runtimeInstalled() {
 
-console.log(runtimeLoader);
 
 // put here the options to select observer or reporter
 let selection = $('.selection-panel');
