@@ -16,12 +16,12 @@ import 'array.observe';*/
 
 "use strict";
 
-function deployReporter() {
+function deployReporter(runtimeLoader) {
 
   let hypertyHolder = $('.hyperties');
   hypertyHolder.removeClass('hide');
 
-  console.log(runtimeLoader);
+  let domain = 'localhost';
 
   let hyperty = 'hyperty-catalogue://' + domain + '/.well-known/hyperty/HelloWorldReporter';
 
