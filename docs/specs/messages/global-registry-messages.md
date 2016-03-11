@@ -12,8 +12,8 @@ for example.
 "id" : 1,
 "type" : "READ",
 "from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/graph-connector",
-"to" : "global://registry/",
-"body" : { "guid" : <guid> }
+"to" : "global://registry",
+"body" : { "resource" : <guid> }
 ```
 
 Response from Global Registry:
@@ -23,10 +23,9 @@ Response from Global Registry:
 "type" : "response",
 "from" : "global://registry/",
 "to" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/graph-connector",
-"body" : { "message" : "request was performed successfully",
-"responseCode" : 200,
-"data" : <jwt>,
-"errorCode" : 0 }
+"body" : { "description" : "request was performed successfully",
+"code" : 200,
+"value" : <jwt> }
 ```
 
 
@@ -39,10 +38,10 @@ Sending a Global Registry Record, a JWT (JSON Web Token), to the Global Registry
 
 ```
 "id" : 1,
-"type" : "CREATE",
+"type" : "create",
 "from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/graph-connector",
-"to" : "global://registry/",
-"body" : { "guid" : <guid>, "jwt" : <jwt> }
+"to" : "global://registry",
+"body" : { "resource" : <guid>, "value" : <jwt> }
 ```
 
 Response from Global Registry:
@@ -50,9 +49,8 @@ Response from Global Registry:
 ```
 "id" : 1,
 "type" : "response",
-"from" : "global://registry/",
+"from" : "global://registry",
 "to" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/graph-connector",
-"body" : { "message" : "request was performed successfully",
-"responseCode" : 200,
-"errorCode" : 0 }
+"body" : { "description" : "request was performed successfully",
+"code" : 200 }
 ```
