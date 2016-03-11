@@ -26,18 +26,16 @@ function deployObserver(runtimeLoader) {
   let hypertyObserver = 'hyperty-catalogue://' + runtime.domain + '/.well-known/hyperty/HelloWorldObserver';
 
   // Load First Hyperty
-  runtimeLoader.requireHyperty(hypertyObserver).then(hypertyDeployed).catch(function(reason) {
+  runtimeLoader.requireHyperty(hypertyObserver).then(hypertyObserverDeployed).catch(function(reason) {
     errorMessage(reason);
   });
 
 }
 
 
-function hypertyDeployed(result) {
+function hypertyObserverDeployed(result) {
 
   let hypertyObserver;
-
-  console.log('**************** hyperty was deplooyed ******************');
 
   hypertyObserver = result.instance;
 
@@ -59,34 +57,31 @@ function hypertyDeployed(result) {
     $('.chat-section').append(html);
   });*/
 
-  console.log(hypertyObserver);
+  console.log('**************** hypertyObserver deployed  ');
 
-  let hypertyPanel = $('.hyperty-panel');
+/*  let hypertyPanel = $('.hyperty-panel');
 
-  hypertyPanel.append(hypertyObserver.runtimeHypertyURL);
+  hypertyPanel.append(hypertyObserver.runtimeHypertyURL);*/
 
-  hypertyObserver.addEventListener('hello', function(msg) {
-    processHello(msg);
+
+
+  hypertyObserver.addEventListener('hello', function(event) {
+
+    let chatSection = $('.chat-section');
+
+    let hi = `<li class="collection-item avatar">
+      <p>` + event + `</p>
+    </li>`;
+
+    chatSection.append(hi);
+
   });
 
-}
-
-function processHello(hello) {
-
-  let chatSection = $('.chat-section');
-
-  let hi = `<li class="collection-item avatar">
-    <p>` + hello + `</p>
-  </li>`;
-
-  chatSection.append(hi);
+  console.log('Observer Waiting for Hello!!');
 
 }
 
-function hypertyReporterDeployed(result) {
 
-  let hypertyReporter;
-}
 
 Handlebars.getTemplate = function(name) {
 

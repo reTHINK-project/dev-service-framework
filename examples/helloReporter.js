@@ -58,9 +58,9 @@ function hypertyDeployed(result) {
 
   console.log(hyperty);
 
-  let hypertyPanel = $('.hyperty-panel');
+/*  let hypertyPanel = $('.hyperty-panel');
 
-  hypertyPanel.append(hypertyObserver.runtimeHypertyURL);
+  hypertyPanel.append(hypertyObserver.runtimeHypertyURL);*/
 
   let hello = $('.hello-panel');
 
@@ -68,7 +68,7 @@ function hypertyDeployed(result) {
 
   hello.append(sayHello);
 
-  $('.say-hello').on('input', sayHello);
+  $('.say-hello').on('submit', sayHello);
 }
 
 
