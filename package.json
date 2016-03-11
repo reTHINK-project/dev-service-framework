@@ -103,6 +103,7 @@
   "dependencies": {
     "ortc-over-rtc": "^0.1.0",
     "webrtc-adapter-test": "^0.2.5",
-    "webrtc-shim": "^0.1.2"
+    "webrtc-shim": "^0.1.2",
+    "universal-localstorage": "^1.0.2"
   }
 }
