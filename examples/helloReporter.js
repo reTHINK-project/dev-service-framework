@@ -2,60 +2,28 @@
 /* global Handlebars */
 /* global Materialize */
 
-import config from '../../../system.config.json!json';
-import {ready, errorMessage} from '../../support';
+//import config from '../system.config.json!json';
 
 // polyfills
+/*
+import {ready, errorMessage} from '/examples/support';
+
 import 'babel-polyfill';
 import 'indexeddbshim';
 import 'mutationobserver-shim';
 import 'object.observe';
-import 'array.observe';
+import 'array.observe';*/
 
-import InstallerFactory from '../../../resources/factories/InstallerFactory';
-import RuntimeLoader from '../../../dist/RuntimeLoader';
+"use strict";
 
-// reTHINK modules
-// import RuntimeUA from 'runtime-core/dist/runtimeUA';
-
-// import SandboxFactory from '../resources/sandboxes/SandboxFactory';
-// let sandboxFactory = new SandboxFactory();
-let avatar = 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg';
-
-// You can change this at your own domain
-let domain = config.domain;
-
-// Hack because the GraphConnector jsrsasign module;
-window.KJUR = {};
-
-// Check if the document is ready
-if (document.readyState === 'complete') {
-  documentReady();
-} else {
-  window.addEventListener('onload', documentReady, false);
-  document.addEventListener('DOMContentLoaded', documentReady, false);
-}
-
-var runtimeLoader;
-
-function documentReady() {
-
-  ready();
+function deployReporter() {
 
   let hypertyHolder = $('.hyperties');
   hypertyHolder.removeClass('hide');
 
-  let installerFactory = new InstallerFactory();
-  let runtimeURL = 'hyperty-catalogue://' + domain + '/.well-known/runtime/RuntimeUA';
-  runtimeLoader = new RuntimeLoader(installerFactory, runtimeURL);
-  runtimeLoader.install().then(runtimeInstalled).catch(errorMessage);
-}
-
-function runtimeInstalled() {
-
   console.log(runtimeLoader);
 
-  let hyperty = 'hyperty-catalogue://' + domain + '/.well-known/hyperty/HelloWorldObserver';
+  let hyperty = 'hyperty-catalogue://' + domain + '/.well-known/hyperty/HelloWorldReporter';
 
   // Load First Hyperty
   runtimeLoader.requireHyperty(hyperty).then(hypertyDeployed).catch(function(reason) {
@@ -64,17 +32,19 @@ function runtimeInstalled() {
 
 }
 
-let hypertyReporter;
 
 function hypertyDeployed(result) {
 
-  hypertyReporter = result.instance;
+  let hyperty;
 
-  let loginPanel = $('.login-panel');
-  let cardAction = loginPanel.find('.card-action');
+  hyperty = result.instance;
+
+
+  let hypertyPanel = $('.hyperty-panel');
+  let cardAction = hypertyPanel.find('.card-action');
   let hypertyInfo = '<span class="white-text"><p><b>hypertyURL:</b> ' + result.runtimeHypertyURL + '</br><b>status:</b> ' + result.status + '</p></span>';
 
-  loginPanel.attr('data-url', result.runtimeHypertyURL);
+  hypertyPanel.attr('data-url', result.runtimeHypertyURL);
   cardAction.append(hypertyInfo);
 
   let messageChat = $('.chat');
@@ -83,221 +53,39 @@ function hypertyDeployed(result) {
   let chatSection = $('.chat-section');
   chatSection.removeClass('hide');
 
-  // Create Chat section
-  let createRoomModal = $('.create-chat');
-  let participantsForm = createRoomModal.find('.participants-form');
-  let createRoomBtn = createRoomModal.find('.btn-create');
-
-  createRoomBtn.on('click', function(event) {
-    event.preventDefault();
-
-    let participants = [];
-    participantsForm.find('.input-email').each(function() {
-      participants.push($(this).val());
-    });
-
-    // Prepare the chat
-    let name = createRoomModal.find('.input-name').val();
-
-    console.log(name, participants);
-
-    hypertyReporter.hello(observer).then(function(chatGroup) {
-
-      prepareChat(chatGroup);
-
-    }).catch(function(reason) {
-      console.error(reason);
-    });
-  });
-
-  // Join Chat Modal
-  let joinModal = $('.join-chat');
-  let joinBtn = joinModal.find('.btn-join');
-  joinBtn.on('click', function(event) {
-
-    event.preventDefault();
-
-    let resource = joinModal.find('.input-name').val();
-
-    hypertyChat.join(resource).then(function(chatGroup) {
-      prepareChat(chatGroup);
-    }).catch(function(reason) {
-      console.error(reason);
-    });
-
-  });
-
-  // Add actions
-  Handlebars.getTemplate('chat-actions').then(function(template) {
-
-    let html = template();
-    $('.chat-section').append(html);
-
-    let createBtn = $('.create-room-btn');
-    let joinBtn = $('.join-room-btn');
-
-    createBtn.on('click', createRoom);
-    joinBtn.on('click', joinRoom);
-  });
-
-}
-
-function createRoom(event) {
-  event.preventDefault();
-
-  let createRoomModal = $('.create-chat');
-  createRoomModal.openModal();
-
-}
-
-function joinRoom(event) {
-  event.preventDefault();
-
-  let joinModal = $('.join-chat');
-  joinModal.openModal();
-
-}
-
-function prepareChat(chatGroup) {
-
   Handlebars.getTemplate('chat-section').then(function(html) {
     $('.chat-section').append(html);
-
-    chatManagerReady(chatGroup);
-
-    console.log('Chat Group Controller: ', chatGroup);
-
-    chatGroup.addEventListener('have:new:notification', function(event) {
-      console.log('have:new:notification: ', event);
-      Materialize.toast('Have new notification', 3000, 'rounded');
-    });
-
-    chatGroup.addEventListener('new:message:received', function(message) {
-      console.info('new message received: ', message);
-      processMessage(message);
-    });
-
-    chatGroup.addEventListener('participant:added', function(participant) {
-      console.info('new participant', participant);
-      addParticipant(participant);
-    });
-
   });
+
+  console.log(hyperty);
+
+  let hello = $('.hello-panel');
+
+  let sayHello = '<form action="sayHello"> Say hello to Hyperty: <input type="text" name="toHyperty"><br><input type="submit" value="Say Hello"></form>'
+
+  hello.append(sayHello);
+}
+
+function sayHello(toHyperty) {
+
+  this.hyperty.hello(toHyperty);
+
+  $('.hello-panel').hide();
+
+  let bye = $('.bye-panel');
+
+  let sayBye = '<button onclick="sayBye()">Say Bye</button>';
+
+  hello.append(sayBye);
 
 }
 
-function chatManagerReady(chatGroup) {
+function sayBye() {
 
-  let chatSection = $('.chat-section');
-  let addParticipantBtn = chatSection.find('.add-participant-btn');
-
-  let addParticipantModal = $('.add-participant');
-  let btnAdd = addParticipantModal.find('.btn-add');
-  let btnCancel = addParticipantModal.find('.btn-cancel');
-
-  let messageForm = chatSection.find('.message-form');
-  let textArea = messageForm.find('.materialize-textarea');
-
-  Handlebars.getTemplate('chat-header').then(function(template) {
-    let name = chatGroup.dataObject.data.communication.id;
-    let resource = chatGroup.dataObject._url;
-
-    let html = template({name: name, resource: resource});
-    $('.chat-header').append(html);
-  });
-
-  let roomsSections = $('.rooms');
-  let collection = roomsSections.find('.collection');
-  let item = '<li class="collection-item active">' + chatGroup.dataObject.data.communication.id + '</li>';
-  collection.append(item);
-
-  let badge = collection.find('.collection-header .badge');
-  let items = collection.find('.collection-item').length;
-  badge.html(items);
-
-  textArea.on('keyup', function(event) {
-
-    if (event.keyCode === 13 && !event.shiftKey) {
-      messageForm.submit();
-    }
-
-  });
-
-  messageForm.on('submit', function(event) {
-    event.preventDefault();
-
-    let object = $(this).serializeObject();
-    let message = object.message;
-    chatGroup.send(message).then(function(result) {
-      console.log('message sent', result);
-      messageForm[0].reset();
-    }).catch(function(reason) {
-      console.error('message error', reason);
-    });
-
-  });
-
-  btnAdd.on('click', function(event) {
-    event.preventDefault();
-
-    let emailValue = addParticipantModal.find('.input-name').val();
-    chatGroup.addParticipant(emailValue).then(function(result) {
-      console.log('hyperty', result);
-    }).catch(function(reason) {
-      console.error(reason);
-    });
-
-  });
-
-  btnCancel.on('click', function(event) {
-    event.preventDefault();
-  });
-
-  addParticipantBtn.on('click', function(event) {
-    event.preventDefault();
-    addParticipantModal.openModal();
-  });
+  this.hyperty.bye();
 
 }
 
-function processMessage(message) {
-
-  let chatSection = $('.chat-section');
-  let messagesList = chatSection.find('.messages .collection');
-
-  let list = `<li class="collection-item avatar">
-    <img src="` + avatar + `" alt="" class="circle">
-    <span class="title">` + message.from + `</span>
-    <p>` + message.value.chatMessage.replace(/\n/g, '<br>') + `</p>
-  </li>`;
-
-  messagesList.append(list);
-}
-
-function addParticipant(participant) {
-
-  let section = $('.conversations');
-  let collection = section.find('.participant-list');
-  let collectionItem = '<li class="chip" data-name="' + participant.hypertyResource + '"><img src="' + avatar + '" alt="Contact Person">' + participant.hypertyResource + '<i class="material-icons close">close</i></li>';
-
-  collection.removeClass('center-align');
-  collection.append(collectionItem);
-
-  let closeBtn = collection.find('.close');
-  closeBtn.on('click', function(e) {
-    e.preventDefault();
-
-    let item = $(e.currentTarget).parent().attr('data-name');
-    removeParticipant(item);
-  });
-}
-
-function removeParticipant(item) {
-  let section = $('.conversations');
-  let collection = section.find('.participant-list');
-  let element = collection.find('li[data-name="' + item + '"]');
-  element.remove();
-}
 
 Handlebars.getTemplate = function(name) {
 
@@ -323,4 +111,4 @@ Handlebars.getTemplate = function(name) {
 
   });
 
-};
+}

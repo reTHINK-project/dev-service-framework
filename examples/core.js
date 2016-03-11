@@ -53,11 +53,13 @@ function documentReady() {
 
 function runtimeInstalled() {
 
+console.log(runtimeLoader);
+
 // put here the options to select observer or reporter
 let selection = $('.selection-panel');
 
-let helloReporter = '<button onclick="deployReporter(runtimeLoader)">Hello World Reporter</button>';
-let helloObserver = '<button onclick="deployObserver(runtimeLoader)">Hello World Observer</button>';
+let helloReporter = '<button onclick="deployReporter()">Hello World Reporter</button>';
+let helloObserver = '<button onclick="deployObserver()">Hello World Observer</button>';
 
 selection.append(helloReporter);
 selection.append(helloObserver);

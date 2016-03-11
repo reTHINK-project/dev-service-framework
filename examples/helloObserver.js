@@ -16,7 +16,7 @@ import 'array.observe';*/
 
 "use strict";
 
-function deployObserver(runtimeLoader) {
+function deployObserver() {
 
   let hypertyHolder = $('.hyperties');
   hypertyHolder.removeClass('hide');
@@ -69,9 +69,11 @@ function processHello(hello) {
 
   let chatSection = $('.chat-section');
 
-  let list = `<li class="collection-item avatar">
+  let hi = `<li class="collection-item avatar">
     <p>` + hello + `</p>
   </li>`;
+
+  chatSection.append(hi);
 
 }
 
