@@ -16,30 +16,33 @@ import 'array.observe';*/
 
 "use strict";
 
-function deployObserver() {
+function deployObserver(runtimeLoader) {
 
   let hypertyHolder = $('.hyperties');
   hypertyHolder.removeClass('hide');
 
+  console.log(runtimeLoader);
 
   let hypertyObserver = 'hyperty-catalogue://' + runtime.domain + '/.well-known/hyperty/HelloWorldObserver';
 
   // Load First Hyperty
-  runtimeLoader.requireHyperty(hypertyObserver).then(hypertyOberverDeployed).catch(function(reason) {
+  runtimeLoader.requireHyperty(hypertyObserver).then(hypertyDeployed).catch(function(reason) {
     errorMessage(reason);
   });
 
 }
 
 
-function hypertyObserverDeployed(result) {
+function hypertyDeployed(result) {
 
   let hypertyObserver;
+
+  console.log('**************** hyperty was deplooyed ******************');
 
   hypertyObserver = result.instance;
 
 
-  let hypertyPanel = $('.hyperty-panel');
+/*  let hypertyPanel = $('.hyperty-panel');
   let cardAction = hypertyPanel.find('.card-action');
   let hypertyInfo = '<span class="white-text"><p><b>hypertyURL:</b> ' + result.runtimeHypertyURL + '</br><b>status:</b> ' + result.status + '</p></span>';
 
@@ -54,9 +57,13 @@ function hypertyObserverDeployed(result) {
 
   Handlebars.getTemplate('chat-section').then(function(html) {
     $('.chat-section').append(html);
-  });
+  });*/
 
   console.log(hypertyObserver);
+
+  let hypertyPanel = $('.hyperty-panel');
+
+  hypertyPanel.append(hypertyObserver.runtimeHypertyURL);
 
   hypertyObserver.addEventListener('hello', function(msg) {
     processHello(msg);

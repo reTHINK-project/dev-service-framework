@@ -16,14 +16,13 @@ import 'array.observe';*/
 
 "use strict";
 
-function deployReporter() {
+function deployReporter(runtimeLoader) {
 
   let hypertyHolder = $('.hyperties');
   hypertyHolder.removeClass('hide');
 
-  console.log(runtimeLoader);
 
-  let hyperty = 'hyperty-catalogue://' + domain + '/.well-known/hyperty/HelloWorldReporter';
+  let hyperty = 'hyperty-catalogue://' + runtime.domain + '/.well-known/hyperty/HelloWorldReporter';
 
   // Load First Hyperty
   runtimeLoader.requireHyperty(hyperty).then(hypertyDeployed).catch(function(reason) {
@@ -39,7 +38,7 @@ function hypertyDeployed(result) {
 
   hyperty = result.instance;
 
-
+/*
   let hypertyPanel = $('.hyperty-panel');
   let cardAction = hypertyPanel.find('.card-action');
   let hypertyInfo = '<span class="white-text"><p><b>hypertyURL:</b> ' + result.runtimeHypertyURL + '</br><b>status:</b> ' + result.status + '</p></span>';
@@ -55,16 +54,23 @@ function hypertyDeployed(result) {
 
   Handlebars.getTemplate('chat-section').then(function(html) {
     $('.chat-section').append(html);
-  });
+  });*/
 
   console.log(hyperty);
 
+  let hypertyPanel = $('.hyperty-panel');
+
+  hypertyPanel.append(hypertyObserver.runtimeHypertyURL);
+
   let hello = $('.hello-panel');
 
-  let sayHello = '<form action="sayHello"> Say hello to Hyperty: <input type="text" name="toHyperty"><br><input type="submit" value="Say Hello"></form>'
+  let sayHello = '<form class="say-hello"> Say hello to Hyperty: <input type="text" name="toHyperty"><br><input type="submit" value="Say Hello"></form>'
 
   hello.append(sayHello);
+
+  $('.say-hello').on('input', sayHello);
 }
+
 
 function sayHello(toHyperty) {
 
