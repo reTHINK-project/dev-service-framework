@@ -57,7 +57,7 @@ function hypertyObserverDeployed(result) {
     $('.chat-section').append(html);
   });*/
 
-  console.log('**************** hypertyObserver deployed  ');
+  console.log(hypertyObserver);
 
 /*  let hypertyPanel = $('.hyperty-panel');
 

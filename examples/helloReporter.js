@@ -6,7 +6,6 @@
 
 // polyfills
 /*
-import {ready, errorMessage} from '/examples/support';
 
 import 'babel-polyfill';
 import 'indexeddbshim';
@@ -15,6 +14,7 @@ import 'object.observe';
 import 'array.observe';*/
 
 "use strict";
+
 
 function deployReporter(runtimeLoader) {
 
@@ -26,7 +26,7 @@ function deployReporter(runtimeLoader) {
 
   // Load First Hyperty
   runtimeLoader.requireHyperty(hyperty).then(hypertyDeployed).catch(function(reason) {
-    errorMessage(reason);
+    console.error(reason);
   });
 
 }

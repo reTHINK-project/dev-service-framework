@@ -1,8 +1,8 @@
 /* jshint undef: true */
 
-import Syncher from '../../../src/syncher/Syncher';
-import {divideURL} from '../../../src/utils/utils';
-import EventEmitter from '../../../src/utils/EventEmitter';
+import Syncher from '../../src/syncher/Syncher';
+import {divideURL} from '../../src/utils/utils';
+import EventEmitter from '../../src/utils/EventEmitter';
 
 /**
 * Hello World Observer
@@ -21,6 +21,7 @@ class HelloWorldObserver extends EventEmitter {
     if (!bus) throw new Error('The MiniBus is a needed parameter');
     if (!configuration) throw new Error('The configuration is a needed parameter');
 
+    super();
 
     let _this = this;
     _this._domain = divideURL(hypertyURL).domain;
@@ -52,7 +53,7 @@ class HelloWorldObserver extends EventEmitter {
 
         dataObjectObserver.onChange('*', function(event) {
           // Hello World Object was changed
-          console.info('message received: ',event);
+          console.info('message received:',event);
           this.trigger('hello', event.data);
 
         });

@@ -1,7 +1,7 @@
 /* jshint undef: true */
 
-import Syncher from '../../../src/syncher/Syncher';
-import {divideURL} from '../../../src/utils/utils';
+import Syncher from '../../src/syncher/Syncher';
+import {divideURL} from '../../src/utils/utils';
 import hello from './hello';
 
 /**
