@@ -25,14 +25,13 @@ class HelloWorldReporter {
     let _this = this;
     _this._domain = divideURL(hypertyURL).domain;
 
-    _this._objectDescURL = 'hyperty-catalogue://' + _this._domain + '/.well-known/dataschemas/HelloWorldDataSchema';
+    _this._objectDescURL = 'hyperty-catalogue://' + _this._domain + '/.well-known/dataschemas/FakeDataSchema';
 
     let syncher = new Syncher(hypertyURL, bus, configuration);
-    syncher.onNotification(function(event) {
-      console.info('-------- Hello World Reporter received event --------- \n');
-    });
 
     _this._syncher = syncher;
+
+
   }
 
   /**
@@ -46,12 +45,17 @@ class HelloWorldReporter {
 
     return new Promise(function(resolve, reject) {
 
-      let _dataObjectReporter;
 
       syncher.create(_this._objectDescURL, [hypertyURL], hello).then(function(dataObjectReporter) {
         console.info('1. Return Create Data Object Reporter', dataObjectReporter);
 
-        _dataObjectReporter = dataObjectReporter;
+      _this.dataObjectReporter = dataObjectReporter;
+
+          dataObjectReporter.onSubscription(function(event) {
+          console.info('-------- Hello World Reporter received event --------- \n');
+
+          event.accept();
+        });
 
         return;
       })
@@ -69,8 +73,11 @@ class HelloWorldReporter {
   */
 
   bye() {
+    let _this = this;
 
-    _dataObjectReporter.data.hello = "Bye!!";
+    console.log('bye:', _this.dataObjectReporter );
+
+    _this.dataObjectReporter.data.hello = "Bye!!";
   }
 
 

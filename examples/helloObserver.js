@@ -67,6 +67,8 @@ function hypertyObserverDeployed(result) {
 
   hypertyObserver.addEventListener('hello', function(event) {
 
+    console.log('event received:', event);
+
     let chatSection = $('.chat-section');
 
     let hi = `<li class="collection-item avatar">

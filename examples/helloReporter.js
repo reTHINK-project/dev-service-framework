@@ -15,6 +15,7 @@ import 'array.observe';*/
 
 "use strict";
 
+var hyperty;
 
 function deployReporter(runtimeLoader) {
 
@@ -22,10 +23,10 @@ function deployReporter(runtimeLoader) {
   hypertyHolder.removeClass('hide');
 
 
-  let hyperty = 'hyperty-catalogue://' + runtime.domain + '/.well-known/hyperty/HelloWorldReporter';
+  let hypertyUrl = 'hyperty-catalogue://' + runtime.domain + '/.well-known/hyperty/HelloWorldReporter';
 
   // Load First Hyperty
-  runtimeLoader.requireHyperty(hyperty).then(hypertyDeployed).catch(function(reason) {
+  runtimeLoader.requireHyperty(hypertyUrl).then(hypertyDeployed).catch(function(reason) {
     console.error(reason);
   });
 
@@ -34,7 +35,6 @@ function deployReporter(runtimeLoader) {
 
 function hypertyDeployed(result) {
 
-  let hyperty;
 
   hyperty = result.instance;
 
@@ -64,31 +64,41 @@ function hypertyDeployed(result) {
 
   let hello = $('.hello-panel');
 
-  let sayHello = '<form class="say-hello"> Say hello to Hyperty: <input type="text" name="toHyperty"><br><input type="submit" value="Say Hello"></form>'
+  let sayHelloTo = '<form class="say-hello"> Say hello to Hyperty: <input class="to-hyperty-input" type="text" name="toHyperty"><br><input type="submit" value="Say Hello"></form>'
 
-  hello.append(sayHello);
+  hello.append(sayHelloTo);
 
   $('.say-hello').on('submit', sayHello);
 }
 
 
-function sayHello(toHyperty) {
+function sayHello(event) {
 
-  this.hyperty.hello(toHyperty);
+event.preventDefault();
+
+let toHypertyForm = $(event.currentTarget);
+
+let toHyperty = toHypertyForm.find('.to-hyperty-input').val();
+
+console.log(toHyperty);
+
+  hyperty.hello(toHyperty);
 
   $('.hello-panel').hide();
 
   let bye = $('.bye-panel');
 
-  let sayBye = '<button onclick="sayBye()">Say Bye</button>';
+  let sayByeTo = '<button class="say-bye">Say Bye</button>';
 
-  hello.append(sayBye);
+  bye.append(sayByeTo);
+
+  $('.bye-panel').on('click', sayBye);
 
 }
 
 function sayBye() {
 
-  this.hyperty.bye();
+  hyperty.bye();
 
 }
 

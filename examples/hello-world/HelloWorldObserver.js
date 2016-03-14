@@ -26,7 +26,7 @@ class HelloWorldObserver extends EventEmitter {
     let _this = this;
     _this._domain = divideURL(hypertyURL).domain;
 
-    _this._objectDescURL = 'hyperty-catalogue://' + _this._domain + '/.well-known/dataschemas/HelloWorldDataSchema';
+    _this._objectDescURL = 'hyperty-catalogue://' + _this._domain + '/.well-known/dataschemas/FakeDataSchema';
 
     let domain = divideURL(hypertyURL).domain;
 
@@ -45,8 +45,12 @@ class HelloWorldObserver extends EventEmitter {
       // Acknowledge reporter about the Invitation was received
       event.ack();
 
+
+
       // Subscribe Hello World Object
-      syncher.subscribe(_this._objectDescURL, event.url).then(function(dataObjectObserver) {
+      _this._syncher.subscribe(_this._objectDescURL, event.url).then(function(dataObjectObserver) {
+
+        _this.trigger('hello', dataObjectObserver.data);
 
         // Hello World Object was subscribed
         console.info( dataObjectObserver);
@@ -54,7 +58,7 @@ class HelloWorldObserver extends EventEmitter {
         dataObjectObserver.onChange('*', function(event) {
           // Hello World Object was changed
           console.info('message received:',event);
-          this.trigger('hello', event.data);
+          _this.trigger('hello', event.data);
 
         });
 
