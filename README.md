@@ -55,6 +55,15 @@ This section provides guidelines on how to contribute to reTHINK Service Framewo
 -	[Development guidelines for new Message Nodes](docs/manuals/development-of-protostubs-and-msg-nodes.md); -
 
 #### <a id="how-to-install"></a>How to install this repository like a NPM Module;
+##### Requirements:
+The service example is a deployed in a node "live-server" with a lot of dependencies. Then you can connect index.html using one of the two google accounts.  
+openidtest10@gmail.com / testOpenID10  
+openidtest20@gmail.com / testOpenID20  
+To use these accounts for authentication, one has to configure in the Google could platform the callback url of the service deployed (accessible throught Internet). URL must begin with ___msg-node.___  (e.g. msg-node.powercommunication.rethink.orange-labs.fr).   
+
+
+Installation of __node.js 5.4__ or more is necessary  
+Installation of jspm is necessary  
 
 How to include this repository in other software parts, like [dev-runtime-browser](https://github.com/reTHINK-project/dev-runtime-browser), [dev-runtime-node](https://github.com/reTHINK-project/dev-runtime-node) or [dev-runtime-core](https://github.com/reTHINK-project/dev-runtime-core);
 
