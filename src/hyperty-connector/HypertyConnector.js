@@ -58,7 +58,8 @@ class HypertyConnector extends EventEmitter {
 
     _this._controllers = {};
 
-    _this.hypertyDiscovery = new HypertyDiscovery(_this._domain, bus);
+    let domain = divideURL(hypertyURL).domain;
+    _this.hypertyDiscovery = new HypertyDiscovery(domain, bus);
 
     let syncher = new Syncher(hypertyURL, bus, configuration);
     syncher.onNotification(function(event) {
@@ -76,6 +77,7 @@ class HypertyConnector extends EventEmitter {
     event.ack();
     console.info('------------------------ END ---------------------- \n');
 
+    console.log(_this._controllers[event.from]);
     if (_this._controllers[event.from]) {
       _this._autoSubscribe(event);
     } else {
@@ -84,34 +86,23 @@ class HypertyConnector extends EventEmitter {
 
   }
 
-  _autoSubscribe(event) {
-    let _this = this;
-    let syncher = _this._syncher;
-
-    console.info('---------------- Syncher Auto Subscribe ---------------- \n');
-    console.info('Subscribe URL Object ', event, syncher);
-    syncher.subscribe(_this._objectDescURL, event.url).then(function(dataObjectObserver) {
-      console.info('1. Return Subscribe Data Object Observer', dataObjectObserver);
-      console.log(_this._controllers);
-      _this._controllers[event.from].dataObjectObserver = dataObjectObserver;
-
-    }).catch(function(reason) {
-      console.error(reason);
-    });
-  }
-
   _autoAccept(event) {
     let _this = this;
     let syncher = _this._syncher;
 
-    console.info('----------- Syncher Subscribe (Auto Accept) ------------- \n');
+    console.info('---------------- Syncher Subscribe ---------------- \n');
     console.info('Subscribe URL Object ', event, syncher);
+
     syncher.subscribe(_this._objectDescURL, event.url).then(function(dataObjectObserver) {
       console.info('1. Return Subscribe Data Object Observer', dataObjectObserver);
 
-      let connectionController = new ConnectionController(syncher, _this._domain, _this._configuration);
+      let connectionController = new ConnectionController(syncher, _this._domain);
+
+      // TODO: remove this remotePeerInformation;
       connectionController.remotePeerInformation = event;
       connectionController.dataObjectObserver = dataObjectObserver;
+
+      console.info('2. Data Object Observer data: ', JSON.stringify(dataObjectObserver.data));
 
       _this.trigger('connector:connected', connectionController);
       _this.trigger('have:notification', event);
@@ -122,29 +113,53 @@ class HypertyConnector extends EventEmitter {
     });
   }
 
+  _autoSubscribe(event) {
+    let _this = this;
+    let syncher = _this._syncher;
+
+    console.info('---------------- Syncher Subscribe ---------------- \n');
+    console.info('Subscribe URL Object ', event, syncher);
+    syncher.subscribe(_this._objectDescURL, event.url).then(function(dataObjectObserver) {
+      console.info('1. Return Subscribe Data Object Observer', dataObjectObserver);
+
+      _this._controllers[event.from].dataObjectObserver = dataObjectObserver;
+
+    }).catch(function(reason) {
+      console.error(reason);
+    });
+
+  }
+
   /**
   * Establish connection with other client identifier
   * @param  {HypertyURL} HypertyURL - Define the identifier of the other component
   * @param  {Object} options - Object with options to improve the connect
   */
-  connect(hypertyURL, stream) {
-    // TODO: Pass argument options as a stream, because is specific of implementation;
+  connect(hypertyURL, options) {
     // TODO: CHange the hypertyURL for a list of URLS
     let _this = this;
     let syncher = _this._syncher;
 
+    options = options || {video: true, audio: true};
+
     return new Promise(function(resolve, reject) {
 
       let connectionController;
+      let _dataObjectReporter;
+
       console.info('------------------------ Syncher Create ---------------------- \n');
-      syncher.create(_this._objectDescURL, [hypertyURL], {})
-      .then(function(dataObjectReporter) {
+      syncher.create(_this._objectDescURL, [hypertyURL], {}).then(function(dataObjectReporter) {
         console.info('1. Return Create Data Object Reporter', dataObjectReporter);
 
-        connectionController = new ConnectionController(syncher, _this._domain, _this._configuration);
-        connectionController.stream = stream;
-        connectionController.dataObjectReporter = dataObjectReporter;
+        _dataObjectReporter = dataObjectReporter;
 
+        connectionController = new ConnectionController(syncher, _this._domain);
+        return connectionController.getUserMedia(options);
+      })
+      .then(function(mediaConstraints) {
+        console.info('2. Return the media constraints from controller: ', mediaConstraints);
+
+        connectionController.dataObjectReporter = _dataObjectReporter;
         _this._controllers[hypertyURL] = connectionController;
 
         resolve(connectionController);
@@ -157,6 +172,77 @@ class HypertyConnector extends EventEmitter {
 
     });
   }
+
+  // /**
+  // * Accept the incoming call
+  // * @method accept
+  // * @return {Promise}
+  // */
+  // accept() {
+  //   let _this = this;
+  //
+  //   return new Promise(function(resolve, reject) {
+  //
+  //     let objectURL = _this.notificationEvent.url;
+  //
+  //     // step 6 - https://github.com/reTHINK-project/scenario-service-implementation/tree/master/docs/hyperties/connector#notification-about-incoming-connection-request
+  //     // after waiting for an answer, we can now subscribe the objectURL
+  //     _this._syncher.subscribe(objectURL).then(function(connectionDataObject) {
+  //       console.info('Return Subscribe Connection Data Object', connectionDataObject);
+  //
+  //       // step 7 and 10 - https://github.com/reTHINK-project/scenario-service-implementation/tree/master/docs/hyperties/connector#notification-about-incoming-connection-request
+  //       _this.connectionController.dataObjectObserver = connectionDataObject;
+  //       resolve(_this.connectionController);
+  //
+  //       let resources = connectionDataObject.data.resources;
+  //       return _this.connectionController.getUserMedia(resources);
+  //     })
+  //     .then(function(commResources) {
+  //       console.info('Get webRTC common resources', commResources);
+  //     })
+  //     .catch(function(reason) {
+  //       console.error(reason);
+  //       reject(reason);
+  //     });
+  //   });
+  // }
+  //
+  // /**
+  // * Connection is closed by local peer and disconnected;
+  // * @method disconnect
+  // * @return {Promise}
+  // */
+  // disconnect() {
+  //
+  //   let _this = this;
+  //
+  //   return new Promise(function(resolve, reject) {
+  //
+  //     _this.connectionController.disconnect()
+  //     .then(function(disconnected) {
+  //
+  //       console.info('disconnected: ', disconnected);
+  //
+  //       resolve(disconnected);
+  //     })
+  //     .catch(function(reason) {
+  //       reject(reason);
+  //     });
+  //
+  //   });
+  //
+  // }
+  //
+  // _autoConnect(hypertyURL) {
+  //   let _this = this;
+  //
+  //   _this._syncher.create({}, [hypertyURL], {}).then(function(connectionDataObject) {
+  //     console.info('Return Create Connection Data Object', connectionDataObject);
+  //     _this.connectionController.connectionDataObjectReporter = connectionDataObject;
+  //   }).catch(function(reason) {
+  //     console.error(reason);
+  //   });
+  // }
 
 }
 

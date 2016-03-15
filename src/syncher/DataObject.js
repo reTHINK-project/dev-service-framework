@@ -42,7 +42,6 @@ class DataObject {
   _syncObj: SyncData
 
   _children: { id: DataObjectChild }
-  _childrenListeners: [MsgListener]
 
   ----event handlers----
   _onAddChildrenHandler: (event) => void
@@ -52,34 +51,27 @@ class DataObject {
    * @ignore
    * Should not be used directly by Hyperties. It's called by the Syncher create or subscribe method's
    */
-  constructor(syncher, url, schema, initialStatus, initialData, childrens) {
+  constructor(owner, url, schema, bus, initialStatus, initialData, children) {
     let _this = this;
-
-    _this._syncher = syncher;
-    _this._url = url;
-    _this._schema = schema;
-    _this._status = initialStatus;
-    _this._syncObj = new SyncObject(initialData);
-    _this._childrens = childrens;
 
     _this._version = 0;
+
+    _this._owner = owner;
+    _this._url = url;
+    _this._schema = schema;
+    _this._bus = bus;
+    _this._status = initialStatus;
+    _this._syncObj = new SyncObject(initialData);
+
     _this._childId = 0;
-    _this._childrenObjects = {};
-    _this._childrenListeners = [];
+    _this._children = { };
 
-    _this._owner = syncher._owner;
-    _this._bus = syncher._bus;
-  }
+    let childBaseURL = url + '/children/';
 
-  _allocateListeners() {
-    let _this = this;
-
-    let childBaseURL = _this._url + '/children/';
-    if (_this._childrens) {
-      _this._childrens.forEach((child) => {
+    if (children) {
+      children.forEach((child) => {
         let childURL = childBaseURL + child;
-        let listener = _this._bus.addListener(childURL, (msg) => {
-          console.log('DataObject-Children-RCV: ', msg);
+        bus.addListener(childURL, (msg) => {
           //ignore msg sent by himself
           if (msg.from !== this._owner) {
             switch (msg.type) {
@@ -89,22 +81,8 @@ class DataObject {
             }
           }
         });
-
-        _this._childrenListeners.push(listener);
       });
     }
-  }
-
-  _releaseListeners() {
-    let _this = this;
-
-    _this._childrenListeners.forEach((listener) => {
-      listener.remove();
-    });
-
-    Object.keys(_this._childrenObjects).forEach((key) => {
-      _this._childrenObjects[key]._releaseListeners();
-    });
   }
 
   /**
@@ -135,7 +113,7 @@ class DataObject {
    * All created children's since the subscription, doesn't contain all children's since reporter creation.
    * @type {Object<ChildId, DataObjectChild>}
    */
-  get children() { return this._childrenObjects; }
+  get children() { return this._children; }
 
   /**
    * @ignore
@@ -162,6 +140,13 @@ class DataObject {
   }
 
   /**
+   * @ignore
+   */
+  release() {
+    //TODO: remove all listeners for this object
+  }
+
+  /**
    * Create and add a children to the subscription group.
    * @param {String} resource - Resource name, one of the items in the schema.properties.scheme of the parent object.
    * @param {JSON} initialData - Initial data of the child
@@ -185,12 +170,12 @@ class DataObject {
       let msgId = _this._bus.postMessage(requestMsg);
 
       console.log('create-reporter-child( ' + _this._owner + ' ): ', requestMsg);
-      let newChild = new DataObjectChild(_this, _this._owner, msgChildId, msgId, initialData);
+      let newChild = new DataObjectChild(_this._owner, msgChildId, msgId, _this._bus, initialData);
       newChild.onChange((event) => {
         _this._onChange(event, { path: msgChildPath, childId: msgChildId });
       });
 
-      _this._childrenObjects[msgChildId] = newChild;
+      _this._children[msgChildId] = newChild;
 
       resolve(newChild);
     });
@@ -209,8 +194,8 @@ class DataObject {
     let msgChildId = msg.body.resource;
 
     console.log('create-observer-child( ' + _this._owner + ' ): ', msg);
-    let newChild = new DataObjectChild(_this, msg.from, msgChildId, 0, msg.body.value);
-    _this._childrenObjects[msgChildId] = newChild;
+    let newChild = new DataObjectChild(msg.from, msgChildId, 0, _this._bus, msg.body.value);
+    _this._children[msgChildId] = newChild;
 
     setTimeout(() => {
       _this._bus.postMessage({
@@ -228,7 +213,6 @@ class DataObject {
     };
 
     if (_this._onAddChildrenHandler) {
-      console.log('ADD-CHILDREN-EVENT: ', event);
       _this._onAddChildrenHandler(event);
     }
   }
@@ -260,7 +244,7 @@ class DataObject {
       //childInfo must have (path, childId)
       if (childInfo) {
         changeMsg.to = childInfo.path;
-        changeMsg.body.resource = childInfo.childId;
+        changeMsg.body.childId = childInfo.childId;
       }
 
       _this._bus.postMessage(changeMsg);
@@ -309,8 +293,8 @@ class DataObject {
     let _this = this;
     console.log('Change children: ', _this._owner, msg);
 
-    let childId = msg.body.resource;
-    let children = _this._childrenObjects[childId];
+    let childId = msg.body.childId;
+    let children = _this._children[childId];
 
     if (children) {
       _this._changeObject(children._syncObj, msg);

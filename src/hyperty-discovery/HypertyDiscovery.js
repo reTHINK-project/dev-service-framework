@@ -38,47 +38,35 @@ class HypertyDiscovery {
     _this.messageBus = msgBus;
 
     _this.domain = domain;
-    _this.discoveryURL = 'hyperty://' + domain + '/hypertyDiscovery';
+    _this.discoveryURL = 'hyperty://' + domain + '/hypertyDisovery';
   }
 
   /**
   * function to request about users registered in domain registry, and
   * return the hyperty instance if found.
   * @param  {email}              email
-  * @param  {domain}            domain (Optional)
   * @return {Promise}          Promise
   */
-  discoverHypertyPerUser(email, domain) {
+  discoverHypertyPerUser(email) {
     let _this = this;
-    let activeDomain;
-
-    if (!domain) {
-      activeDomain = _this.domain;
-    } else {
-      activeDomain = domain;
-    }
-
-    let activediscoveryURL = 'hyperty://' + _this.domain + '/hypertyDiscovery';
     let identityURL = 'user://' + email.substring(email.indexOf('@') + 1, email.length) + '/' + email.substring(0, email.indexOf('@'));
 
     // message to query domain registry, asking for a user hyperty.
     let message = {
-      type: 'READ', from: activediscoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: identityURL}
+      type: 'READ', from: _this.discoveryURL, to: 'domain://registry.' + _this.domain + '/', body: { resource: identityURL}
     };
 
-    console.log('Message: ', message, activeDomain, identityURL);
-
-    //console.log('message READ', message);
     return new Promise(function(resolve, reject) {
 
       _this.messageBus.postMessage(message, (reply) => {
-        console.log('message reply', reply);
+        //console.log('MESSAGE', reply);
 
         let hyperty;
         let mostRecent;
         let lastHyperty;
         let value = reply.body.value;
 
+        //console.log('valueParsed', valueParsed);
         for (hyperty in value) {
           if (value[hyperty].lastModified !== undefined) {
             if (mostRecent === undefined) {
@@ -92,10 +80,8 @@ class HypertyDiscovery {
               }
             }
           }
+
         }
-
-        console.log('Last Hyperty: ', lastHyperty, mostRecent);
-
         let hypertyURL = lastHyperty;
 
         if (hypertyURL === undefined) {
@@ -108,7 +94,7 @@ class HypertyDiscovery {
           hypertyURL: hypertyURL
         };
 
-        console.log('===> hypertyDiscovery messageBundle: ', idPackage);
+        console.log('===> RegisterHyperty messageBundle: ', idPackage);
         resolve(idPackage);
       });
     });

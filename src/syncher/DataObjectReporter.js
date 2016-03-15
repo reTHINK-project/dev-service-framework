@@ -41,56 +41,22 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
    * @ignore
    * Should not be used directly by Hyperties. It's called by the Syncher.create method
    */
-  constructor(syncher, url, schema, initialStatus, initialData, childrens) {
-    super(syncher, url, schema, initialStatus, initialData, childrens);
+  constructor(owner, url, schema, bus, initialStatus, initialData, children) {
+    super(owner, url, schema, bus, initialStatus, initialData, children);
     let _this = this;
 
-    _this._subscriptions = {};
+    bus.addListener(url, (msg) => {
+      if (msg.type === 'response') {
+        _this._onResponse(msg);
+      }
+    });
 
     _this._syncObj.observe((event) => {
       console.log('DataObjectReporter-' + url + '-SEND: ', event);
       _this._onChange(event);
     });
 
-    _this._allocateListeners();
-  }
-
-  _allocateListeners() {
-    super._allocateListeners();
-    let _this = this;
-
-    _this._responseListener = _this._bus.addListener(_this._url, (msg) => {
-      if (msg.type === 'response') {
-        _this._onResponse(msg);
-      }
-    });
-  }
-
-  _releaseListeners() {
-    super._releaseListeners();
-    let _this = this;
-
-    _this._responseListener.remove();
-  }
-
-  /**
-   * Release and delete object data
-   */
-  delete() {
-    let _this = this;
-
-    let deleteMsg = {
-      type: 'delete', from: _this._owner, to: _this._syncher._subURL,
-      body: { resource: _this._url }
-    };
-
-    _this._bus.postMessage(deleteMsg, (reply) => {
-      console.log('DataObjectReporter-DELETE: ', reply);
-      if (reply.body.code === 200) {
-        _this._releaseListeners();
-        delete _this._syncher._reporters[_this._url];
-      }
-    });
+    _this._subscriptions = {};
   }
 
   /**
