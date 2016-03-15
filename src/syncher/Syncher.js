@@ -68,6 +68,7 @@ class Syncher {
      switch (msg.type) {
        case 'forward': _this._onForward(msg); break;
        case 'create': _this._onRemoteCreate(msg); break;
+       case 'delete': _this._onRemoteDelete(msg); break;
      }
    });
  }
@@ -113,7 +114,7 @@ class Syncher {
          let objURL = reply.body.resource;
 
          //reporter creation accepted
-         let newObj = new DataObjectReporter(_this._owner, objURL, schema, _this._bus, 'on', initialData, reply.body.childrenResources);
+         let newObj = new DataObjectReporter(_this, objURL, schema, 'on', initialData, reply.body.childrenResources);
          _this._reporters[objURL] = newObj;
 
          resolve(newObj);
@@ -146,13 +147,14 @@ class Syncher {
        console.log('subscribe-response: ', reply);
        let newProvisional = _this._provisionals[objURL];
        delete _this._provisionals[objURL];
-       if (newProvisional) newProvisional.release();
+       if (newProvisional) newProvisional._releaseListeners();
 
        if (reply.body.code < 200) {
          newProvisional = new DataProvisional(_this._owner, objURL, _this._bus, reply.body.childrenResources);
          _this._provisionals[objURL] = newProvisional;
        } else if (reply.body.code === 200) {
-         let newObj = new DataObjectObserver(_this._owner, objURL, schema, _this._bus, 'on', reply.body.value, newProvisional.children, reply.body.version);
+         let newObj = new DataObjectObserver(_this, objURL, schema, 'on', reply.body.value, newProvisional.children, reply.body.version);
+         _this._observers[objURL] = newObj;
 
          resolve(newObj);
          newProvisional.apply(newObj);
@@ -210,6 +212,50 @@ class Syncher {
    if (_this._onNotificationHandler) {
      console.log('NOTIFICATION-EVENT: ', event);
      _this._onNotificationHandler(event);
+   }
+ }
+
+ _onRemoteDelete(msg) {
+   let _this = this;
+
+   //remove "/subscription" from the URL
+   let resource = msg.body.resource;
+
+   let object = _this._observers[resource];
+   if (object) {
+     let event = {
+       type: msg.type,
+       url: resource,
+       identity: msg.body.idToken,
+
+       ack: (type) => {
+         let lType = 200;
+         if (type) {
+           lType = type;
+         }
+
+         //TODO: any other different options for the release process, like accept but nor release local?
+         if (lType === 200) {
+           object.delete();
+         }
+
+         //send ack response message
+         _this._bus.postMessage({
+           id: msg.id, type: 'response', from: msg.to, to: msg.from,
+           body: { code: lType, source: _this._owner }
+         });
+       }
+     };
+
+     if (_this._onNotificationHandler) {
+       console.log('NOTIFICATION-EVENT: ', event);
+       _this._onNotificationHandler(event);
+     }
+   } else {
+     _this._bus.postMessage({
+       id: msg.id, type: 'response', from: msg.to, to: msg.from,
+       body: { code: 404, source: _this._owner }
+     });
    }
  }
 

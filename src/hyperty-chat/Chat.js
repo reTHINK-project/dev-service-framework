@@ -60,7 +60,7 @@ class ChatGroup extends EventEmitter {
       _this.trigger('participant:added', participant);
     });
 
-    dataObjectReporter.onAddChildren(function(children){
+    dataObjectReporter.onAddChildren(function(children) {
       _this._processChildren(children);
     });
 
@@ -83,7 +83,7 @@ class ChatGroup extends EventEmitter {
       _this.processPartipants(dataObjectObserver);
     });
 
-    dataObjectObserver.onAddChildren(function(children){
+    dataObjectObserver.onAddChildren(function(children) {
       _this._processChildren(children);
     });
 
@@ -106,7 +106,7 @@ class ChatGroup extends EventEmitter {
     console.log('Process Participants: ', participants);
 
     participants.forEach(function(participant) {
-      if (dataObject._owner !== participant.hypertyResource){
+      if (dataObject._owner !== participant.hypertyResource) {
         console.log('Each Participant will be trigger: ', participant);
         _this.trigger('participant:added', participant);
       }
@@ -191,7 +191,6 @@ class ChatGroup extends EventEmitter {
     let syncher = _this._syncher;
 
     return new Promise(function(resolve, reject) {
-
 
     });
 

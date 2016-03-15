@@ -46,8 +46,8 @@ So you have decided for the Hyperty Concept and now ask yourself where to start.
 1) Install the Service Framework
 
 ```
-npm install git+git@github.com:reTHINK-project/dev-service-framework.git --save
-jspm install service-framework=github:reTHINK-project/dev-service-framework.git
+npm install
+jspm install 
 ```
 
 
