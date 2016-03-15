@@ -42,23 +42,32 @@ class HelloWorldObserver extends EventEmitter {
 
       let _this = this;
 
+      console.info( 'Event Received: ', event);
+
+      _this.trigger('invitation', event.identity);
+
       // Acknowledge reporter about the Invitation was received
       event.ack();
 
-
-
       // Subscribe Hello World Object
-      _this._syncher.subscribe(_this._objectDescURL, event.url).then(function(dataObjectObserver) {
-
-        _this.trigger('hello', dataObjectObserver.data);
+      _this._syncher.subscribe(_this._objectDescURL, event.url).then(function(helloObjtObserver) {
 
         // Hello World Object was subscribed
-        console.info( dataObjectObserver);
+        console.info( helloObjtObserver);
 
-        dataObjectObserver.onChange('*', function(event) {
+        // lets notify the App the subscription was accepted with the mnost updated version of Hello World Object
+
+        _this.trigger('hello', helloObjtObserver.data);
+
+        // lets now observe any changes done in Hello World Object
+
+        helloObjtObserver.onChange('*', function(event) {
+
           // Hello World Object was changed
           console.info('message received:',event);
-          _this.trigger('hello', dataObjectObserver.data);
+
+          // lets notify the App about the change
+          _this.trigger('hello', helloObjtObserver.data);
 
         });
 

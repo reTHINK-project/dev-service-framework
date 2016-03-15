@@ -35,9 +35,24 @@ function hypertyObserverDeployed(result) {
 
   hypertyPanel.append(hi);
 
+  hypertyObserver.addEventListener('invitation', function(identity) {
+
+    JSON.stringify(identity);
+
+    console.log('Hello event received from:', identity);
+
+    let invitationPanel = $('.invitation-panel');
+
+    let invitation = `<p> Invitation received from:\n ` + identity.name + '</p>';
+
+    invitationPanel.append(invitation);
+
+  });
+
+
   hypertyObserver.addEventListener('hello', function(event) {
 
-    console.log('event received:', event);
+    console.log('Hello event received:', event);
 
     let msgPanel = $('.msg-panel');
 

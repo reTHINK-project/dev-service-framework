@@ -46,18 +46,20 @@ class HelloWorldReporter {
     return new Promise(function(resolve, reject) {
 
 
-      syncher.create(_this._objectDescURL, [hypertyURL], hello).then(function(dataObjectReporter) {
-        console.info('1. Return Create Data Object Reporter', dataObjectReporter);
+      syncher.create(_this._objectDescURL, [hypertyURL], hello).then(function(helloObjtReporter) {
+        console.info('1. Return Created Hello World Data Object Reporter', helloObjtReporter);
 
-      _this.dataObjectReporter = dataObjectReporter;
+      _this.helloObjtReporter = helloObjtReporter;
 
-          dataObjectReporter.onSubscription(function(event) {
-          console.info('-------- Hello World Reporter received event --------- \n');
+          helloObjtReporter.onSubscription(function(event) {
+          console.info('-------- Hello World Reporter received subscription request --------- \n');
+
+          // All subscription requested are accepted
 
           event.accept();
         });
 
-        resolve(dataObjectReporter);
+        resolve(helloObjtReporter);
 
       })
       .catch(function(reason) {
@@ -76,9 +78,9 @@ class HelloWorldReporter {
   bye() {
     let _this = this;
 
-    console.log('bye:', _this.dataObjectReporter );
+    console.log('bye:', _this.helloObjtReporter );
 
-    _this.dataObjectReporter.data.hello = "Bye!!";
+    _this.helloObjtReporter.data.hello = "Bye!!";
   }
 
 

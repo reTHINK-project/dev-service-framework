@@ -14,47 +14,101 @@ reTHINK provides a Javascript framework to build and deliver Real Time Communica
 * Trustful:
 
 
-
-The current repository provides the Hyperty Service Framework, comprised by a set of libs to develop, and test new Hyperties. Check below a quick guideline on how to use the Hyperty Service Framework. In order to setup your own reTHINK Framework, you should install the following components (docker images available):
-
--	the [Hyperty Catalogue](https://github.com/reTHINK-project/dev-catalogue)
--	the [Hyperty Domain Registry](https://github.com/reTHINK-project/dev-registry-domain)
--	the [Vertx Message Node](https://github.com/reTHINK-project/dev-msg-node-vertx). Other Message Nodes will be available including for [Matrix](https://matrix.org/) and for [NodeJS](https://nodejs.org/en/).
-
 Very soon we will provide a live public reTHINK environment, to let you publish and try your Hyperties or Apps without the need to install anything. Demos with Apps and Hyperty examples are provided below.
 
-### Getting Started
+### Quick Start
 
+Just a few couple of lines are required for the reTHINK Hello World. First you need the Hello World Reporter, and its `hello()` function that is used to create the Hello Data Object (`helloObjtReporter` which descriptor is at `_objectDescURL`) and invite an Hello World Observer (`hypertyURL`):
 
-*to be moved to the tutorial?*
+```
+  return new Promise(function(resolve, reject) {
 
-**Requirements**
+    syncher.create(_this._objectDescURL, [hypertyURL], hello).then(function(helloObjtReporter) {
 
-npm, jspm and gulp is globaly available in your environment.
+        helloObjtReporter.onSubscription(function(event) {
 
-*after your json-schema is ready run:*
+        // All subscription requested are accepted
 
-`gulp ?`
+        event.accept();
+      });
 
-*after your hyperty is ready to be tested run:*
+      resolve(dataObjectReporter);
+
+    })
+    .catch(function(reason) {
+      console.error(reason);
+      reject(reason);
+    });
+
+  });
+}
+```
+
+The Hello World Observer is invited (`event.url` contains the Hello Data Object URL) to subscribe the Hello Data Object (helloObjtObserver):
+
+```
+ syncher.subscribe(_this._objectDescURL, event.url).then(function(helloObjtObserver) {
+
+  // lets notify the App the subscription was accepted with the most updated version of Hello World Object
+
+  _this.trigger('hello', helloObjtObserver.data);
+
+...
+
+```
+
+Any change done in the Hello Object by the Reporter:
+
+```
+helloObjtReporter.data.hello = "Bye!!";
+
+```
+
+.. will be received by the Observer:
+
+```
+...
+// lets now observe any changes done in Hello World Object
+
+helloObjtObserver.onChange('*', function(event) {
+
+  // lets notify the App about the change
+  _this.trigger('hello', helloObjtObserver.data);
+
+});
+
+}).catch(function(reason) {
+console.error(reason);
+});
+```
+
+You may find all the HelloWorld source code [here](/examples).
+
+In order to execute the HelloWorld Hyperties, ensure you have npm, jspm and gulp globaly available in your environment.
+
+The provisioning of Hyperties in the Catalogue is done by a gulp task (at this point you have to make a change in the file to trigger the provisioning process):
 
 `gulp watch-hyperty --dest=resources`
 
+The DataSchema of the HelloWorld Data Object is already provisioned but if you want to do it yourself run:
+
+`gulp encode`
+
+and select "HelloWorldDataSchema"
+
+Change your hosts file to point to your `localhost` the name `hybroker.rethink.ptinovacao.pt`. This will allow you to use the back-end (Messaging Node and Domain Registry) provided by PT Inovação. But you are free to [deploy your own back-end](). Then start the Local Catalogue server and Web Application Server:
+
 `npm start`
 
-*The first command enables to Automatically update the local Catalogue with changes we do in the hyperty. The second command starts a local HTTPS server to work as Application Server and catalogue server. In case you have problems starting the HTTPS server pls ensure there is no other service using HTTPS port 443. If the problem persists, execute:*
+In case you have problems starting the HTTPS server pls ensure there is no other service using HTTPS port 443 (eg Skype). If the problem persists, execute:
 
 `http-server --cors -S -p 443 -C rethink-certificate.cert -K rethink-certificate.key`
 
-Different development manuals are available, including:
+Now, open two windows with your favorite browser at `https://localhost/examples/`. In one select "Hello World Reporter" and in the other one select "Hello World Observer". Authorise the usage of your Google Identity (currently that's the only supported IDP). The HypertyURL  of deployed Hyperties will be displayed in each window. Copy the Observer HypertyURL and paste in the Reporter Window "Invite Hyperte:". Click say hello. You should see "Hello World!!" in the Observer Window together with your Identity Name. Click "Bye" in the Reporter Window. You should see "Byes!!" in the Observer window.
 
--	[Hyperty Development manual](docs/manuals/development-of-hyperties.md)
--	[Application Development manual](docs/manuals/development-of-apps.md)
--	[Message Nodes and Protostubs Development manual](docs/manuals/development-of-protostubs-and-msg-nodes.md)
+Did you like it? Do you want to learn more about reTHINK and Hyperties? Have a look at the [tutorials](docs/manuals).
 
-You may find, Hyperty WebRTC and Group Chat examples [here](/example)
-
-*A summary of Hyperty examples will be provided here very soon*
+You may find more complex Hyperty WebRTC and Group Chat examples [here](/example).
 
 ### How to contribute
 
