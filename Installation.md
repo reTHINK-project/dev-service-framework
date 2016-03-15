@@ -31,10 +31,3 @@ If you choose a Protostub configuration you have to provide the msg-node URL.
 --> Change the messagning node URL (don't put the prefix _msg-node._ )   
 `npm install -g live-server `   
 `npm start & `  
-
-
-
-
-
-
-

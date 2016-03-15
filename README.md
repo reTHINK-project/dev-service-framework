@@ -9,25 +9,21 @@ reTHINK Service Framework
 
 reTHINK provides a Javascript framework to build and deliver Real Time Communication Microservices in end-user devices (browsers and standalone mobile apps) and in Network edge servers (NodeJS):
 
-* Hyperty:
-* Protocol on-the-fly:
-* Trustful:
-
-
-Very soon we will provide a live public reTHINK environment, to let you publish and try your Hyperties or Apps without the need to install anything. Demos with Apps and Hyperty examples are provided below.
+* **Hyperty** is a Javascript Microservice that communicates through P2P Data Synchronisation with mimimum usage of back-end services;
+* **Protocol on-the-fly** is used by Hyperties to support seamless interoperability without federation or standardisation of network protocols;
+* Hyperties are **Trustful**. Hyperties are decoupled from the User Identity, which can be securely asserted by existing IDPs (Identity Provider), when communicating with other Hyperties.
 
 ### Quick Start
 
-Just a few couple of lines are required for the reTHINK Hello World. First you need the Hello World Reporter, and its `hello()` function that is used to create the Hello Data Object (`helloObjtReporter` which descriptor is at `_objectDescURL`) and invite an Hello World Observer (`hypertyURL`):
+Just a few couple of lines are required for the reTHINK Hello World. First you need the Hello World Reporter, and its `hello()` function that is used to create the Hello Data Object and invite an Hello World Observer (`hypertyURL`):
 
 ```
-  return new Promise(function(resolve, reject) {
 
     syncher.create(_this._objectDescURL, [hypertyURL], hello).then(function(helloObjtReporter) {
 
         helloObjtReporter.onSubscription(function(event) {
 
-        // All subscription requested are accepted
+        // All subscription requests are accepted
 
         event.accept();
       });
@@ -44,14 +40,10 @@ Just a few couple of lines are required for the reTHINK Hello World. First you n
 }
 ```
 
-The Hello World Observer is invited (`event.url` contains the Hello Data Object URL) to subscribe the Hello Data Object (helloObjtObserver):
+The Hello World Observer is invited to subscribe the Hello Data Object (helloObjtObserver):
 
 ```
  syncher.subscribe(_this._objectDescURL, event.url).then(function(helloObjtObserver) {
-
-  // lets notify the App the subscription was accepted with the most updated version of Hello World Object
-
-  _this.trigger('hello', helloObjtObserver.data);
 
 ...
 
@@ -68,35 +60,31 @@ helloObjtReporter.data.hello = "Bye!!";
 
 ```
 ...
-// lets now observe any changes done in Hello World Object
 
 helloObjtObserver.onChange('*', function(event) {
 
-  // lets notify the App about the change
-  _this.trigger('hello', helloObjtObserver.data);
+  // Object was changed, let's do something
+  console.log('Hello was changed: ', helloObjtObserver.data);
 
 });
 
-}).catch(function(reason) {
-console.error(reason);
-});
 ```
 
 You may find all the HelloWorld source code [here](/examples).
 
 In order to execute the HelloWorld Hyperties, ensure you have npm, jspm and gulp globaly available in your environment.
 
-The provisioning of Hyperties in the Catalogue is done by a gulp task (at this point you have to make a change in the file to trigger the provisioning process):
+The provisioning of Hyperties in the Catalogue is done by a gulp task (at this stage you have to make a change in the file to trigger the provisioning process):
 
 `gulp watch-hyperty --dest=resources`
 
-The DataSchema of the HelloWorld Data Object is already provisioned but if you want to do it yourself run:
+The DataSchema of the HelloWorld Data Object is already provisioned, but if you want to do it yourself, run:
 
 `gulp encode`
 
 and select "HelloWorldDataSchema"
 
-Change your hosts file to point to your `localhost` the name `hybroker.rethink.ptinovacao.pt`. This will allow you to use the back-end (Messaging Node and Domain Registry) provided by PT Inovação. But you are free to [deploy your own back-end](). Then start the Local Catalogue server and Web Application Server:
+To avoid the installation of reTHINK back-end (Messaging Node and Domain Registry), you can change your hosts file to point to your `localhost` the DNS name of an existing reTHINK domain like `hybroker.rethink.ptinovacao.pt`. But you are free to [deploy your own back-end](Installation.md). Then start the Local Catalogue server and Web Application Server:
 
 `npm start`
 
@@ -106,7 +94,7 @@ In case you have problems starting the HTTPS server pls ensure there is no other
 
 Now, open two windows with your favorite browser at `https://localhost/examples/`. In one select "Hello World Reporter" and in the other one select "Hello World Observer". Authorise the usage of your Google Identity (currently that's the only supported IDP). The HypertyURL  of deployed Hyperties will be displayed in each window. Copy the Observer HypertyURL and paste in the Reporter Window "Invite Hyperte:". Click say hello. You should see "Hello World!!" in the Observer Window together with your Identity Name. Click "Bye" in the Reporter Window. You should see "Byes!!" in the Observer window.
 
-Did you like it? Do you want to learn more about reTHINK and Hyperties? Have a look at the [tutorials](docs/manuals).
+Did you like it? Do you want to learn more about reTHINK and Hyperties? Have a look at [tutorials](docs/manuals).
 
 You may find more complex Hyperty WebRTC and Group Chat examples [here](/example).
 
@@ -124,15 +112,6 @@ This section provides guidelines on how to contribute to reTHINK Service Framewo
 -	[Development guidelines for new Message Nodes](docs/manuals/development-of-protostubs-and-msg-nodes.md); -
 
 #### <a id="how-to-install"></a>How to install this repository like a NPM Module;
-##### Requirements:
-The service example is a deployed in a node "live-server" with a lot of dependencies. Then you can connect index.html using one of the two google accounts.  
-openidtest10@gmail.com / testOpenID10  
-openidtest20@gmail.com / testOpenID20  
-To use these accounts for authentication, one has to configure in the Google could platform the callback url of the service deployed (accessible throught Internet). URL must begin with ___msg-node.___  (e.g. msg-node.powercommunication.rethink.orange-labs.fr).   
-
-
-Installation of __node.js 5.4__ or more is necessary  
-Installation of jspm is necessary  
 
 How to include this repository in other software parts, like [dev-runtime-browser](https://github.com/reTHINK-project/dev-runtime-browser), [dev-runtime-node](https://github.com/reTHINK-project/dev-runtime-node) or [dev-runtime-core](https://github.com/reTHINK-project/dev-runtime-core);
 
@@ -146,9 +125,7 @@ or
 npm install
 ```
 
-**New Way**
-
-To import the dev-service-framework modules now you need to do:
+To import the dev-service-framework modules:
 ```javascript
 
 // This is the default class exported;
@@ -166,6 +143,9 @@ import {Syncher, DataObjectReporter, DataObjectObserver} from 'service-framework
 ```
 
 **Old Way**
+
+Another way to import classes from the Service Framework that will be only supported until the runtime-core and other repositories are update to the **"new way"**:
+
 ```javascript
 import {Syncher, MessageFactory} from 'service-framework';
 
@@ -174,10 +154,11 @@ console.log('MessageFactory: ', MessageFactory);
 
 ```
 
-At this moment, both methods are supported, but the **"old way"** only will be supported until the runtime-core and other repositories update to the **"new way"**;
+If you have problems with the `npm install` service framework module, you should check [Github Help](https://help.github.com/articles/generating-ssh-keys/). and select the operation system you are using.
 
-if you have problems with the `npm install` service framework module, you may need following the steps present on [Github Help](https://help.github.com/articles/generating-ssh-keys/). and select operation system you are using.
 #### Setup Environment
+
+*overlap with previous section?*
 
 On the first time you are cloning this repository, you need to run the command `npm run init-setup`;
 
@@ -215,6 +196,8 @@ All IDE's and Text Editors can handle these tools.
 
 #### <a id="Tasks">Tasks</a>
 
+The following Gulp tasks are available:
+
  - [Documentation](#documentation)
  - [License](#license)
  - [Dist](#dist)
@@ -224,9 +207,12 @@ All IDE's and Text Editors can handle these tools.
  - [Build Hyperties](#build-hyperties)
  - [Watch](#watch)
 
+ **NOTE** This is work in progress and some tasks need to be optimized or removed;
+
+
 ##### <a id="documentation">Documentation</a>
 
-To generates api documentation you can run
+This task is used to generates API documentation:
 
 ```
 gulp doc
@@ -234,17 +220,16 @@ gulp doc
 
 ###### <a id="license">License</a>
 
-Append to all files in src folder the license text;
+This tasks is used to append to all files in src folder, the copyright notice:
 
-Run the command:`
+```
 gulp license
-`
+```
 
 ###### <a id="dist">Dist</a>
 
-To distribute the runtime-core, you can make a distribution file.
+This task creates the distribution file:
 
-Run the command:
 
 ```shell
 gulp dis
@@ -252,6 +237,7 @@ gulp dis
 
 ###### <a id="build">Build</a>
 
+*I guess this one is not useful in this repo. remove?*
 To distribute the runtime-core, but with the source code maps, and to detect where is some error.
 
 Run the command:
@@ -262,77 +248,69 @@ gulp build
 
 ###### <a id="encode">Encode</a>
 
-In this repository, we have some tasks which can help you. If you need change some resource file, like an Hyperty or ProtoStub, and load it to the Hyperties.json or ProtoStubs.json, run the following command, and answer to the questions;
+This task is used to provision different types of resources in the Local Catalogue including in Hyperties, ProtoStubs, IdP Proxies and Object DataSchemas, which are encoded in the "descriptors" dir at Hyperties.json, ProtoStubs.json, IDPProxies.json and DataSchemas.json, respectively. During the process, task also converts from ES6 to ES5 and encode it in a base64 format;
+
 
 ```shell
 gulp encode
 ```
 
-you need to answer this questions: File to be converted? > resources/VertxProtoStub.js
-
-Configuration file like an object or url to ProtoStub have on configuration: > something like:
+When this tasks is executed, the user will have to select the file to be encoded. Next, the Configuration file is requested. A configuration file example, is:
 ```json
 {
   "url": "wss://msg-node.localhost:9090/ws"
 }
 ```
-or an empty object
+If there is no configuration file, you should type:
 ```json
 {}
 ```
 
-This will be a default file to be loaded? (yes/no) > yes or no
-
-// TODO: optimize this to read if it is an hyperty or protocol stub;
+The final question is whether this is a default file? (yes/no) > yes or no
 
 ###### <a id="watch-hyperty">Watch Hyperty</a>
 
-If you need change some resource file, like an Hyperty, you need run this task first. This task will be covert ES6 to ES5 and encode the Hyperty file changes in a base64 file and add it to the descriptor folder in the respective place;
+This task continuously monitors, changes performed in Hyperties' source code files located at "examples" dir, to automate the provisioning of Hyperties in the Catalogue (see `gulp encode` above).
 
-in your command line run:
 ```shell
 gulp watch-hyperty --dest=resources
 ```
 
 ###### <a id="build-hyperties">Build Hyperties</a>
 
-At this moment, the hyperties are placed on src folder, but will be moved for examples folder;
+*is this needed?*
+If you need change some resource file, you need run this task first. This task will be covert ES6 to ES5 and encode the Hyperty file changes in a base64 file and add it to the descriptor folder in the respective place;
 
-If you need change some resource file, like an Hyperty, you need run this task first. This task will be covert ES6 to ES5 and encode the Hyperty file changes in a base64 file and add it to the descriptor folder in the respective place;
-
-in your command line run:
 ```shell
 gulp build-hyperties --dest=resources
 ```
 
 ###### <a id="watch-rethink">Watch Rethink</a>
 
+*I didn't understand this one*
 if you need watch all changes in other rethink repository and copy the distribution file to dev-service-framework and encode it, you can use this task;
 
 ```
 gulp watch-rethink
 ```
 
-**NOTE** This is a work in progress. This task can be optimized;
-
-
 ###### <a id="watch">Watch</a>
 
-if you need watch all changes on src folder and convert them to a dist file, run:
+This tasks convert all the files from ES6 to ES5 and update the distribution file;
 
 ```
 gulp watch
 ```
 
-This will convert all the files from ES6 to ES5 and update the distribution file;
-
 #### Unit Testing
 
 Unit testing can be launched manually with **karma start**.
 
-~~It's advisable to use [expect.js](https://github.com/Automattic/expect.js) instead of assert.~~
+~~It's advisable to use [expect.js](https://github.com/Automattic/expect.js) instead of assert ().~~
 
-After investigate and testing the [expect.js](https://github.com/Automattic/expect.js) it don't support some features for ES6, because this tool hasn't activity at some time, that is why, it is recomended use the [chaijs](http://chaijs.com/) it is more versatile and have expect.js (but updated) and others tools that can be useful;
+*Ths text below has to be updated:*
+
+After investigate and testing the  because this tool hasn't activity at some time, that is why, it is recomended use the [chaijs](http://chaijs.com/) it is more versatile and have expect.js (but updated) and others tools that can be useful;
 
 The address data factory can be tested independently by calling
 
@@ -340,28 +318,3 @@ The address data factory can be tested independently by calling
 cd <base folder>/test
 mocha addressFactoryTest.js
 ```
-
-#### <a id="example">Example</a>
-
-*to be moved to My First reTHINK Applications?*
-
-**NOTE:** While this example folder isn't moved, you need to do the following:
-
- - On linux, run with `sudo`,
- - On Windows, execute the terminal with administration permissions;
-
-Install and run http-server:
-```shell
-npm install -g http-server
-# or
-npm install
-
-# after installed
-npm start;
-```
-
-This repository have a folder with an working example of Hyperty Connector and we can send message and make a WebRTC call between remote hyperties through the vertx;
-
-To run the demo on example folder: - this example have a dependecy from [dev-msg-node-vertx](https://github.com/reTHINK-project/dev-msg-node-vertx/tree/dev-0.2#unit-testing) and [dev-registry-domain](https://github.com/reTHINK-project/dev-registry-domain#dev-registry-domain) for communication between hyperties in two distinct browsers or tabs. **At this moment you need run locally [dev-msg-node-vertx](https://github.com/reTHINK-project/dev-msg-node-vertx/tree/dev-0.2#unit-testing) and [dev-registry-domain](https://github.com/reTHINK-project/dev-registry-domain#dev-registry-domain)** - you need, in the root folder, run command: `npm start` - in your browser, access to https://127.0.0.1:8080/example
-
-This example works over https protocol, but since we are running in the 127.0.0.1, this address is considered secure and the webRTC will works well;
