@@ -54,7 +54,7 @@ This section provides guidelines on how to contribute to reTHINK Service Framewo
 How to include this repository in other software parts, like [dev-runtime-browser](https://github.com/reTHINK-project/dev-runtime-browser), [dev-runtime-node](https://github.com/reTHINK-project/dev-runtime-node) or [dev-runtime-core](https://github.com/reTHINK-project/dev-runtime-core);
 
 ```
-jspm install service-framework=github:github:reTHINK-project/dev-service-framework
+jspm install service-framework=github:reTHINK-project/dev-service-framework
 ```
 
 or
