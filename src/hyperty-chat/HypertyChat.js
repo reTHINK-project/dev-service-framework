@@ -53,6 +53,7 @@ class HypertyChat extends EventEmitter {
 
     _this._hypertyURL = hypertyURL;
     _this._syncher = syncher;
+    _this._domain = domain;
     _this._hypertyDiscovery = hypertyDiscovery;
 
     syncher.onNotification(function(event) {
