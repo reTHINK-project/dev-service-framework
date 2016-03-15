@@ -47,7 +47,7 @@ class HypertyChat extends EventEmitter {
     let syncher = new Syncher(hypertyURL, bus, configuration);
 
     let domain = divideURL(hypertyURL).domain;
-    let hypertyDiscovery = new HypertyDiscovery(domain, bus);
+    let hypertyDiscovery = new HypertyDiscovery(hypertyURL, bus);
 
     _this._objectDescURL = 'hyperty-catalogue://' + domain + '/.well-known/dataschemas/FakeDataSchema';
 
@@ -98,6 +98,8 @@ class HypertyChat extends EventEmitter {
 
       console.info('----------------------- Mapping Particpants -------------------- \n');
       _this._mappingUser(participants).then(function(hyperties) {
+        console.info(`Have ${hyperties.length} participants;`);
+
         console.info('------------------------ Syncher Create ---------------------- \n');
         return syncher.create(_this._objectDescURL, hyperties, {communication: communication});
       })
@@ -144,24 +146,33 @@ class HypertyChat extends EventEmitter {
     let _this = this;
 
     return new Promise(function(resolve, reject) {
-      let promiseList = [];
 
-      userList.forEach(function(email) {
-        if (email.length) {
-          promiseList.push(_this._hypertyDiscovery.discoverHypertyPerUser(email));
+      let hyperties = [];
+      let count = 0;
+
+      let resultUsers = function() {
+        if (count === userList.length) {
+          console.info('Have ' + hyperties.length + 'users found;');
+          resolve(hyperties);
         }
-      });
+      };
 
-      Promise.all(promiseList).then(function(values) {
-        let hyperties = [];
+      let activeUsers = function(user) {
+        count++;
+        hyperties.push(user.hypertyURL);
+        resultUsers();
+      };
 
-        values.forEach(function(value) {
-          hyperties.push(value.hypertyURL);
-        });
+      let inactiveUsers = function() {
+        count++;
+        resultUsers();
+      };
 
-        resolve(hyperties);
-      }).catch(function(reason) {
-        reject(reason);
+      userList.forEach(function(user) {
+        console.log(user);
+        if (user.email.length) {
+          return _this._hypertyDiscovery.discoverHypertyPerUser(user.email, user.domain).then(activeUsers).catch(inactiveUsers);
+        }
       });
 
     });

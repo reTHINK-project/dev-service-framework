@@ -204,15 +204,15 @@ class RuntimeCatalogue {
          } else {
 
            let idpproxy = _this._factory.createProtoStubDescriptorObject(
-               result.cguid,
-               result.version,
-               result.objectName,
-               result.description,
-               result.language,
-               result.sourcePackageURL,
-               result.messageSchemas,
-               result.configuration,
-               result.constraints
+             result.cguid,
+             result.version,
+             result.objectName,
+             result.description,
+             result.language,
+             result.sourcePackageURL,
+             result.messageSchemas,
+             JSON.stringify(result.configuration),
+             result.constraints
            );
 
            // optional fields
@@ -221,11 +221,11 @@ class RuntimeCatalogue {
            // parse and attach the sourcePackage
            let sourcePackage = result.sourcePackage;
            if (sourcePackage) {
-             sourcePackage = _this._createSourcePackage(_this, sourcePackage);
+             sourcePackage = _this._createSourcePackage(_this._factory, sourcePackage);
              idpproxy.sourcePackage = sourcePackage;
            }
 
-           return idpproxy;
+           resolve(idpproxy);
 
          }
        });
@@ -407,7 +407,8 @@ class RuntimeCatalogue {
 
   }
 
-  _createSourcePackage(factory, sp) {
+  _createSourcePackage(_this, sp) {
+
     // console.log("creating sourcePackage. factory:", factory, ", raw package:", sp);
     try {
       sp = JSON.parse(sp);
@@ -421,7 +422,7 @@ class RuntimeCatalogue {
       sp.encoding = 'UTF-8';
     }
 
-    let sourcePackage = factory.createSourcePackage(sp.sourceCodeClassname, sp.sourceCode);
+    let sourcePackage = _this.createSourcePackage(sp.sourceCodeClassname, sp.sourceCode);
 
     if (sp.hasOwnProperty('encoding'))
     sourcePackage.encoding = sp.encoding;

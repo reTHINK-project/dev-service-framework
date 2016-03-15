@@ -229,6 +229,17 @@ in your command line run:
 gulp build-hyperties --dest=resources
 ```
 
+###### <a id="watch-rethink">Watch Rethink</a>
+
+if you need watch all changes in other rethink repository and copy the distribution file to dev-service-framework and encode it, you can use this task;
+
+```
+gulp watch-rethink
+```
+
+**NOTE** This is a work in progress. This task can be optimized;
+
+
 ###### <a id="watch">Watch</a>
 
 if you need watch all changes on src folder and convert them to a dist file, run:

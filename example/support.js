@@ -67,4 +67,24 @@ export function serialize() {
     return o;
   };
 
+  $.fn.serializeObjectArray = function()
+  {
+    let o = {};
+    let a = this.serializeArray();
+    $.each(a, function() {
+      if (o[this.name] !== undefined) {
+        if (!o[this.name].push) {
+          o[this.name] = [o[this.name]];
+        }
+
+        o[this.name].push(this.value || '');
+      } else {
+        if (!o[this.name]) o[this.name] = [];
+        o[this.name].push(this.value || '');
+      }
+    });
+
+    return o;
+  };
+
 }

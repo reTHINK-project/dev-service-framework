@@ -343,7 +343,7 @@ var HypertyChat = (function (_EventEmitter) {
     var syncher = new _syncherSyncher2['default'](hypertyURL, bus, configuration);
 
     var domain = (0, _utilsUtils.divideURL)(hypertyURL).domain;
-    var hypertyDiscovery = new _hypertyDiscoveryHypertyDiscovery2['default'](domain, bus);
+    var hypertyDiscovery = new _hypertyDiscoveryHypertyDiscovery2['default'](hypertyURL, bus);
 
     _this._objectDescURL = 'hyperty-catalogue://' + domain + '/.well-known/dataschemas/FakeDataSchema';
 
@@ -396,6 +396,8 @@ var HypertyChat = (function (_EventEmitter) {
 
         console.info('----------------------- Mapping Particpants -------------------- \n');
         _this._mappingUser(participants).then(function (hyperties) {
+          console.info('Have ' + hyperties.length + ' participants;');
+
           console.info('------------------------ Syncher Create ---------------------- \n');
           return syncher.create(_this._objectDescURL, hyperties, { communication: _communication2['default'] });
         }).then(function (dataObjectReporter) {
@@ -439,24 +441,33 @@ var HypertyChat = (function (_EventEmitter) {
       var _this = this;
 
       return new Promise(function (resolve, reject) {
-        var promiseList = [];
 
-        userList.forEach(function (email) {
-          if (email.length) {
-            promiseList.push(_this._hypertyDiscovery.discoverHypertyPerUser(email));
+        var hyperties = [];
+        var count = 0;
+
+        var resultUsers = function resultUsers() {
+          if (count === userList.length) {
+            console.info('Have ' + hyperties.length + 'users found;');
+            resolve(hyperties);
           }
-        });
+        };
 
-        Promise.all(promiseList).then(function (values) {
-          var hyperties = [];
+        var activeUsers = function activeUsers(user) {
+          count++;
+          hyperties.push(user.hypertyURL);
+          resultUsers();
+        };
 
-          values.forEach(function (value) {
-            hyperties.push(value.hypertyURL);
-          });
+        var inactiveUsers = function inactiveUsers() {
+          count++;
+          resultUsers();
+        };
 
-          resolve(hyperties);
-        })['catch'](function (reason) {
-          reject(reason);
+        userList.forEach(function (user) {
+          console.log(user);
+          if (user.email.length) {
+            return _this._hypertyDiscovery.discoverHypertyPerUser(user.email, user.domain).then(activeUsers)['catch'](inactiveUsers);
+          }
         });
       });
     }
@@ -622,7 +633,7 @@ var HypertyDiscovery = (function () {
     var _this = this;
     _this.messageBus = msgBus;
 
-    _this.domain = (0, _utilsUtils.divideURL)(hypertyURL).domain;;
+    _this.domain = (0, _utilsUtils.divideURL)(hypertyURL).domain;
     _this.discoveryURL = hypertyURL;
   }
 

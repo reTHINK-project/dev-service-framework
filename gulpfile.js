@@ -151,6 +151,81 @@ gulp.task('build', function() {
 
 });
 
+gulp.task('watch-rethink', function(done) {
+
+  var sep = path.sep;
+  var parentDir = fs.readdirSync(__dirname + '/..');
+  var currentDirs = function getDirectories() {
+    return fs.readdirSync(__dirname).filter(function(file) {
+      return fs.statSync(file).isDirectory();
+    });
+  };
+
+  gulp.src('./', {buffer:false})
+    .pipe(prompt.prompt([{
+      type: 'list',
+      name: 'repository',
+      message: 'Repository from where you copy a distribution file:',
+      choices: parentDir
+    },
+    {
+      type: 'list',
+      name: 'destination',
+      message: 'Folder in dev-service-framework where you will put the file:',
+      choices: currentDirs
+    },
+    {
+      type: 'list',
+      name: 'watch',
+      message: 'Watch changes:',
+      choices: ['yes', 'no']
+    }], function(res) {
+
+      var watchDir = __dirname + '/..' + sep + res.repository + sep + 'dist';
+      var files = fs.readdirSync(watchDir);
+      var destDir = res.destination;
+
+      gulp.src(watchDir + '/../', {buffer:false})
+        .pipe(prompt.prompt([{
+          type: 'list',
+          name: 'file',
+          message: 'File to be copied',
+          choices: files
+        }], function(fileResponse) {
+
+          var fileObject;
+          var watch = true;
+          if (res.watch === 'no') watch = false;
+
+          if (watch) {
+            gulp.watch([watchDir + '/*.js'], function(event) {
+              fileObject = path.parse(event.path);
+              return copy(event.path, __dirname + sep + destDir + sep + fileObject.base, done);
+            });
+          } else {
+            fileObject = path.parse(__dirname + sep +  '..' + sep +  res.repository + sep +  'dist' + sep + fileResponse.file);
+            return copy(fileObject.dir + sep +  fileObject.base, __dirname + sep + destDir + sep + fileObject.base, done);
+          }
+
+        }
+      ));
+
+    }));
+});
+
+function copy(file, to, done) {
+  console.log('Copying\nfrom ', file, '\nto ', to);
+
+  var fileObject = path.parse(to);
+  fs.createReadStream(file).pipe(fs.createWriteStream(to));
+  gulp.src([to])
+  .pipe(resource(fileObject.dir + '/' + fileObject.base, {}, false))
+  .on('end', function() {
+    console.log('File copied and encoded');
+    done();
+  });
+}
+
 gulp.task('build-hyperties', function() {
 
   var destination = argv.dest;
@@ -346,9 +421,11 @@ function resource(file, configuration, isDefault) {
     descriptorName = 'DataSchemas';
   } else if (filename.indexOf('runtime') !== -1 || filename.indexOf('Runtime') !== -1) {
     descriptorName = 'Runtimes';
+  } else if (filename.indexOf('ProxyStub') !== -1) {
+    descriptorName = 'IDPProxys';
   }
 
-  console.log('DATA:', descriptorName, filename, extension);
+  console.log('DATA:', filename, descriptorName, configuration, isDefault, extension);
 
   if (extension === '.js') {
     return gulp.src(['resources/' + filename + '.js'])
@@ -380,7 +457,10 @@ gulp.task('encode', function(done) {
   });
 
   function isFile(file) {
-    if (file.indexOf('Hyperty') !== -1 || file.indexOf('ProtoStub') !== -1 || file.indexOf('DataSchema') !== -1 || (file.indexOf('runtime') !== -1 || file.indexOf('Runtime') !== -1)) {
+    if (file.indexOf('Hyperty') !== -1 || file.indexOf('ProtoStub') !== -1 ||
+    file.indexOf('DataSchema') !== -1 ||
+    file.indexOf('ProxyStub') !== -1 ||
+    (file.indexOf('runtime') !== -1 || file.indexOf('Runtime') !== -1)) {
       return fs.statSync('resources/' + file).isFile();
     }
   }

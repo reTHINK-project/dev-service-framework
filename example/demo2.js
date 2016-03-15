@@ -87,19 +87,55 @@ function hypertyDeployed(result) {
   let createRoomModal = $('.create-chat');
   let participantsForm = createRoomModal.find('.participants-form');
   let createRoomBtn = createRoomModal.find('.btn-create');
+  let addParticipantBtn = createRoomModal.find('.btn-add');
+
+  let countParticipants = 0;
+
+  addParticipantBtn.on('click', function(event) {
+
+    event.preventDefault();
+
+    countParticipants++;
+
+    let participantEl = '<div class="row">' +
+      '<div class="input-field col s8">' +
+      '  <input class="input-email" name="email" id="email-' + countParticipants + '" required aria-required="true" type="text">' +
+      '  <label for="email-' + countParticipants + '">Participant Email</label>' +
+      '</div>' +
+      '<div class="input-field col s4">' +
+      '  <input class="input-domain" name="domain" id="domain-' + countParticipants + '" type="text">' +
+      '  <label for="domain-' + countParticipants + '">Participant domain</label>' +
+      '</div>' +
+    '</div>';
+
+    let participants = createRoomModal.find('.participants-form');
+    participants.append(participantEl);
+
+  });
 
   createRoomBtn.on('click', function(event) {
     event.preventDefault();
 
     let participants = [];
-    participantsForm.find('.input-email').each(function() {
+    /* participantsForm.find('.input-email').each(function() {
       participants.push($(this).val());
-    });
+    });*/
+    let serializedObject = $(participantsForm).serializeObjectArray();
 
     // Prepare the chat
     let name = createRoomModal.find('.input-name').val();
 
-    console.log(name, participants);
+    console.log(serializedObject);
+
+    if (serializedObject.hasOwnProperty('email')) {
+
+      serializedObject.email.forEach(function(value, index) {
+        participants.push({email: value, domain: serializedObject.domain[index]});
+      });
+
+    }
+
+    console.log('Participants: ', participants);
 
     hypertyChat.create(name, participants).then(function(chatGroup) {
 

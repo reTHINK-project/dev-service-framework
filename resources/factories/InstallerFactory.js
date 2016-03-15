@@ -24,6 +24,8 @@ class InstallerFactory extends Core  {
       let catalogue = new RuntimeCatalogue(runtimeFactory);
       let domain = config.domain;
 
+      window.catalogue = catalogue;
+
       catalogue.getRuntimeDescriptor(runtimeURL)
       .then(function(descriptor) {
 
