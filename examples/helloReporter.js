@@ -1,17 +1,4 @@
-// jshint browser:true, jquery: true
-/* global Handlebars */
-/* global Materialize */
 
-//import config from '../system.config.json!json';
-
-// polyfills
-/*
-
-import 'babel-polyfill';
-import 'indexeddbshim';
-import 'mutationobserver-shim';
-import 'object.observe';
-import 'array.observe';*/
 
 "use strict";
 
@@ -38,24 +25,6 @@ function hypertyDeployed(result) {
 
   hyperty = result.instance;
 
-/*
-  let hypertyPanel = $('.hyperty-panel');
-  let cardAction = hypertyPanel.find('.card-action');
-  let hypertyInfo = '<span class="white-text"><p><b>hypertyURL:</b> ' + result.runtimeHypertyURL + '</br><b>status:</b> ' + result.status + '</p></span>';
-
-  hypertyPanel.attr('data-url', result.runtimeHypertyURL);
-  cardAction.append(hypertyInfo);
-
-  let messageChat = $('.chat');
-  messageChat.removeClass('hide');
-
-  let chatSection = $('.chat-section');
-  chatSection.removeClass('hide');
-
-  Handlebars.getTemplate('chat-section').then(function(html) {
-    $('.chat-section').append(html);
-  });*/
-
   console.log(hyperty);
 
   $('.selection-panel').hide();
@@ -66,9 +35,6 @@ function hypertyDeployed(result) {
 
   hypertyPanel.append(hi);
 
-/*  let hypertyPanel = $('.hyperty-panel');
-
-  hypertyPanel.append(hypertyObserver.runtimeHypertyURL);*/
 
   let hello = $('.hello-panel');
 

@@ -26,7 +26,7 @@ class HelloWorldObserver extends EventEmitter {
     let _this = this;
     _this._domain = divideURL(hypertyURL).domain;
 
-    _this._objectDescURL = 'hyperty-catalogue://' + _this._domain + '/.well-known/dataschemas/FakeDataSchema';
+    _this._objectDescURL = 'hyperty-catalogue://' + _this._domain + '/.well-known/dataschemas/HelloWorldDataSchema';
 
     let domain = divideURL(hypertyURL).domain;
 
