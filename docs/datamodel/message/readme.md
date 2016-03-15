@@ -30,6 +30,9 @@ Optionally, message bodies can contain JWT tokens for Access Control or for Iden
 
 The "MessageBody.via" attribute contains a list of all Protostub addresses (Protostub) that the message has been passed through. It is used to prevent infinite cycles in the Hyperty Messaging Framework.
 
+The `MessageBody.source` contains the original creator of the message. Useful e.g. to identify the real source of the response to a one-to-many message delivery ie multiple responses coming from different sources.
+
+
 #### CreateMessageBody
 
 ##### value
@@ -60,9 +63,6 @@ Description of response code compliant with HTTP response codes (RFC7231).
 
 Contains a data value in JSON format. Applicable to Responses to READ MessageType.
 
-##### Source
-
-Contains the original creator of the response. Useful to identify the real source of the response to a one-to-many message delivery ie multiple responses coming coming from different sources.
 
 #### ReadMessageBody
 
@@ -111,6 +111,15 @@ Contains forwarded message.
 #### ExecuteMessageBody
 
 Contains the name of method to be invoked and an array and an Array of objects to be passed as parameters to the defined method. This is compliant with [JSON-RPC Spec](http://www.jsonrpc.org/specification).
+
+
+#### SubscribeMessageBody
+
+Optional attribute `subscribe` is a list of URLs to be subscribed to.
+
+#### UnsubscribeMessageBody
+
+Optional attribute `unsubscribe` is a list of URLs to be unsubscribed from.
 
 ### Procedures
 

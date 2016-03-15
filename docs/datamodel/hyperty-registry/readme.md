@@ -6,9 +6,9 @@ Registry Data Model
 Registry Data Model includes all Objects to be handled by the Registry functionality including:
 
 -	Data about Hyperty Instances running in Device runtime
+-	Data about (data) objects instances handled by Hyperty Instances e.g. communication data objects. This data can be used to manage and keep logs about objects instances handled by Hyperty Instances eg communication / call sessions.
 -	Data about connected devices with instances of the runtime where Hyperty instances are running
 -	Optionaly, data about instances of protocol stubs used to connect to the Hyperty Messaging Service domain. This data can be used to manage and keep logs about sessions where the user is logged in into the domain.
--	Optionaly, data about (data) objects instances handled by Hyperty Instances e.g. communication data objects. This data can be used to manage and keep logs about objects instances handled by Hyperty Instances eg communication / call sessions.
 
 Each of these objects share a common set of data:
 
@@ -17,6 +17,7 @@ Each of these objects share a common set of data:
 -	descriptor: a link to the Catalogue from where the descriptor of the instance can be retrieved
 -	the starting date and the last time the Instance was modified. The dates format must be compliant with [ISO8601](https://en.wikipedia.org/wiki/ISO_8601)
 -	status: the instance status (Created, Live or Dead)
+- expires: period of time in seconds about how long a registry entry is "alive" without receiving an update message.
 -	stubs: the protocol stubs descriptor (including the deployable protocol stub package) that can be used to reach the registered Object including Hyperty Instance, Hyperty Runtime and Data Objects. The protocol stub can be used to reach the Object instance through a Message Node or directly connect to the Object Instance runtime (full P2P connection)
 -	stubsConfiguration: configuration data required when deploying stubs used for P2P connections.
 
@@ -33,6 +34,8 @@ The Hyperty Instance object contains:
 -	the Hyperty Descriptor URL ([HypertyURL](../address/readme.md#hyperty-address)) that can be used to consult hyperty metadata
 
 -	the User URL or User GUID URL ([HypertyURL](../address/readme.md#user-url-type)) which identifies the user that is associated with the Hyperty Instance.
+
+- the Objects URL Schemes supported by the Hyperty.
 
 -	the Context URL for the user associated to the Hyperty Instance, which may include Presence information.
 

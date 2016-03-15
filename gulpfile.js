@@ -315,10 +315,13 @@ gulp.task('watch-hyperty', function(cb) {
 
   var destination = argv.dest;
 
-  gulp.watch(['src/hyperty-connector/*.js', 'src/hyperty-chat/*.js'], function(event) {
+  gulp.watch(['src/hyperty-connector/*.js', 'src/hyperty-chat/*.js', 'examples/**/*.js'], function(event) {
+
+    console.log(event.path);
 
     var pathSplit = event.path.split(path.sep); // on windows is backslash;
     var dir = pathSplit[pathSplit.length - 2];
+    var file = pathSplit[pathSplit.length - 1];
 
     switch (dir) {
       case 'hyperty-chat':
@@ -326,6 +329,10 @@ gulp.task('watch-hyperty', function(cb) {
 
       case 'hyperty-connector':
         return compile(__dirname + '/src/' + dir + '/HypertyConnector.js', destination, cb);
+
+      default:
+        return compile(event.path, destination, cb);
+
     }
 
   });

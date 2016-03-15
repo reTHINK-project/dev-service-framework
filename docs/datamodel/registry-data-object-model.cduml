@@ -9,8 +9,9 @@ package RegistryDataObject <<Rect>> {
 		startingTime : RethinkCore.RethinkType.Date
 		lastModified : RethinkCore.RethinkType.Date
 		status : RegistryDataObjectStatus
-		stubs : URL.HypertyCatalogueURL
-		stubsConfiguration : RethinkCore.CatalogueDataObject.ProtoStubDescriptor.ProtostubConfiguration
+		expires : integer
+		stubs ?: URL.HypertyCatalogueURL
+		stubsConfiguration ?: RethinkCore.CatalogueDataObject.ProtoStubDescriptor.ProtostubConfiguration
 	}
 
 	enum RegistryDataObjectStatus {
