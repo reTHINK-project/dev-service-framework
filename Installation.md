@@ -26,10 +26,10 @@ To avoid a mess on the host, use a docker node container.
 `gulp encode `  --> Only one file can be encoded (what is it for?)
 If you choose a Protostub configuration you have to provide the msg-node URL.  
 
-`apt-get install vim ` 
-`vi system.config.json ` 
+`apt-get install vim `   
+`vi system.config.json `   
 --> Change the messagning node URL (don't put the prefix _msg-node._ )   
-`npm install -g live-server `  
+`npm install -g live-server `   
 `npm start & `  
 
 
