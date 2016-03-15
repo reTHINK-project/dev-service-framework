@@ -72,7 +72,7 @@ function hypertyDeployed(result) {
 
   let hello = $('.hello-panel');
 
-  let sayHelloTo = '<form class="say-hello"> Say hello to Hyperty: <input class="to-hyperty-input" type="text" name="toHyperty"><br><input type="submit" value="Say Hello"></form>'
+  let sayHelloTo = '<form class="say-hello"> Hyperty URL: <input class="to-hyperty-input" type="text" name="toHyperty"><br><input type="submit" value="Say Hello"></form>'
 
   hello.append(sayHelloTo);
 
@@ -90,17 +90,27 @@ let toHyperty = toHypertyForm.find('.to-hyperty-input').val();
 
 console.log(toHyperty);
 
-  hyperty.hello(toHyperty);
+  hyperty.hello(toHyperty).then(function(helloObject) {
 
-  $('.hello-panel').hide();
+    console.log('helloUrl: ', helloObject);
 
-  let bye = $('.bye-panel');
+    $('.hello-panel').hide();
 
-  let sayByeTo = '<button class="say-bye">Say Bye</button>';
+    var helloUrl = '<p>Hello URL: '+ helloObject.url + '</p>';
 
-  bye.append(sayByeTo);
+    let bye = $('.bye-panel');
 
-  $('.bye-panel').on('click', sayBye);
+    let sayByeTo = '<button class="say-bye">Say Bye</button>';
+
+    bye.append(helloUrl);
+
+    bye.append(sayByeTo);
+
+    $('.bye-panel').on('click', sayBye);
+  }).catch(function(reason) {
+    console.error(reason);
+    reject(reason);
+  });
 
 }
 

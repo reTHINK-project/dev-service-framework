@@ -57,7 +57,8 @@ class HelloWorldReporter {
           event.accept();
         });
 
-        return;
+        resolve(dataObjectReporter);
+
       })
       .catch(function(reason) {
         console.error(reason);
