@@ -41,9 +41,7 @@ function hypertyObserverDeployed(result) {
 
     let msgPanel = $('.msg-panel');
 
-    let msg = `<li class="collection-item avatar">
-      <p>Received: ` + event.hello + `</p>
-    </li>`;
+    let msg = `<p>  ` + event.hello + `</p>`;
 
     msgPanel.append(msg);
 
