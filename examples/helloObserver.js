@@ -63,19 +63,25 @@ function hypertyObserverDeployed(result) {
 
   hypertyPanel.append(hypertyObserver.runtimeHypertyURL);*/
 
+  $('.selection-panel').hide();
 
+  let hypertyPanel = $('.hyperty-panel');
+
+  let hi = '<p>Hyperty Observer URL: ' + result.runtimeHypertyURL + '</p>';
+
+  hypertyPanel.append(hi);
 
   hypertyObserver.addEventListener('hello', function(event) {
 
     console.log('event received:', event);
 
-    let chatSection = $('.chat-section');
+    let msgPanel = $('.msg-panel');
 
-    let hi = `<li class="collection-item avatar">
-      <p>` + event + `</p>
+    let msg = `<li class="collection-item avatar">
+      <p>Received: ` + event.hello + `</p>
     </li>`;
 
-    chatSection.append(hi);
+    msgPanel.append(msg);
 
   });
 

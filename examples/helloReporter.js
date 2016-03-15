@@ -58,6 +58,14 @@ function hypertyDeployed(result) {
 
   console.log(hyperty);
 
+  $('.selection-panel').hide();
+
+  let hypertyPanel = $('.hyperty-panel');
+
+  let hi = '<p>Hyperty Reporter URL: ' + result.runtimeHypertyURL + '</p>';
+
+  hypertyPanel.append(hi);
+
 /*  let hypertyPanel = $('.hyperty-panel');
 
   hypertyPanel.append(hypertyObserver.runtimeHypertyURL);*/
