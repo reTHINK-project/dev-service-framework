@@ -2,14 +2,14 @@ reTHINK Service Framework
 -------------------------
 
 -	[Overview](#rethink-framework-overview)
--	[Getting Started](#getting-started)
+-	[Getting Started](#quick-start)
 -	[Contribute to reTHINK](#how-to-contribute)
 
 ### ReThink Framework Overview
 
 reTHINK provides a Javascript framework to build and deliver Real Time Communication Microservices in end-user devices (browsers and standalone mobile apps) and in Network edge servers (NodeJS):
 
-* **Hyperty** is a Javascript Microservice that communicates through P2P Data Synchronisation with mimimum usage of back-end services;
+* **Hyperty** is a the so called Javascript Microservice that communicates through P2P Data Synchronisation with mimimum usage of back-end services; A Hyperty must be deployed in a runtime (as mentioned in an end-user device or Network edge server).
 * **Protocol on-the-fly** is used by Hyperties to support seamless interoperability without federation or standardisation of network protocols;
 * Hyperties are **Trustful**. Hyperties are decoupled from the User Identity, which can be securely asserted by existing IDPs (Identity Provider), when communicating with other Hyperties.
 
