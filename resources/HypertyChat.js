@@ -774,15 +774,15 @@ var _utilsUtilsJs = require('../utils/utils.js');
 var DataObject = (function () {
   /* private
   _version: number
-   _owner: HypertyURL
+    _owner: HypertyURL
   _url: ObjectURL
   _schema: Schema
   _bus: MiniBus
   _status: on | paused
   _syncObj: SyncData
-   _children: { id: DataObjectChild }
+    _children: { id: DataObjectChild }
   _childrenListeners: [MsgListener]
-   ----event handlers----
+    ----event handlers----
   _onAddChildrenHandler: (event) => void
   */
 
@@ -917,7 +917,7 @@ var DataObject = (function () {
         var msgId = _this._bus.postMessage(requestMsg);
 
         console.log('create-reporter-child( ' + _this._owner + ' ): ', requestMsg);
-        var newChild = new _DataObjectChild2['default'](_this, _this._owner, msgChildId, msgId, initialData);
+        var newChild = new _DataObjectChild2['default'](_this, msgChildId, initialData, _this._owner, msgId);
         newChild.onChange(function (event) {
           _this._onChange(event, { path: msgChildPath, childId: msgChildId });
         });
@@ -944,7 +944,7 @@ var DataObject = (function () {
       var msgChildId = msg.body.resource;
 
       console.log('create-observer-child( ' + _this._owner + ' ): ', msg);
-      var newChild = new _DataObjectChild2['default'](_this, msg.from, msgChildId, 0, msg.body.value);
+      var newChild = new _DataObjectChild2['default'](_this, msgChildId, msg.body.value);
       _this._childrenObjects[msgChildId] = newChild;
 
       setTimeout(function () {
@@ -1099,7 +1099,7 @@ var DataObject = (function () {
      * @type {Object<ChildId, DataObjectChild>}
      */
   }, {
-    key: 'children',
+    key: 'childrens',
     get: function get() {
       return this._childrenObjects;
     }
@@ -1158,7 +1158,7 @@ var _SyncObject2 = _interopRequireDefault(_SyncObject);
 
 var DataObjectChild /* implements SyncStatus */ = (function () {
   /* private
-   ----event handlers----
+    ----event handlers----
   _onResponseHandler: (event) => void
   */
 
@@ -1167,15 +1167,16 @@ var DataObjectChild /* implements SyncStatus */ = (function () {
    * Should not be used directly by Hyperties. It's called by the DataObject.addChildren
    */
 
-  function DataObjectChild(parent, owner, childId, msgId, initialData) {
+  function DataObjectChild(parent, childId, initialData, owner, msgId) {
     _classCallCheck(this, DataObjectChild);
 
     var _this = this;
 
     _this._parent = parent;
-    _this._owner = owner;
     _this._childId = childId;
+    _this._owner = owner;
     _this._msgId = msgId;
+
     _this._syncObj = new _SyncObject2['default'](initialData);
 
     _this._bus = parent._bus;
@@ -1187,19 +1188,24 @@ var DataObjectChild /* implements SyncStatus */ = (function () {
     value: function _allocateListeners() {
       var _this = this;
 
-      _this._listener = _this._bus.addListener(_this._owner, function (msg) {
-        if (msg.type === 'response' && msg.id === _this._msgId) {
-          console.log('DataObjectChild.onResponse:', msg);
-          _this._onResponse(msg);
-        }
-      });
+      //this is only needed for children reporters
+      if (_this._owner) {
+        _this._listener = _this._bus.addListener(_this._owner, function (msg) {
+          if (msg.type === 'response' && msg.id === _this._msgId) {
+            console.log('DataObjectChild.onResponse:', msg);
+            _this._onResponse(msg);
+          }
+        });
+      }
     }
   }, {
     key: '_releaseListeners',
     value: function _releaseListeners() {
       var _this = this;
 
-      _this._listener.remove();
+      if (_this._listener) {
+        _this._listener.remove();
+      }
     }
 
     /**
@@ -1325,6 +1331,10 @@ var _DataObject2 = require('./DataObject');
 
 var _DataObject3 = _interopRequireDefault(_DataObject2);
 
+var _DataObjectChild = require('./DataObjectChild');
+
+var _DataObjectChild2 = _interopRequireDefault(_DataObjectChild);
+
 var FilterType = { ANY: 'any', START: 'start', EXACT: 'exact' };
 
 /**
@@ -1337,7 +1347,7 @@ var DataObjectObserver = (function (_DataObject) {
 
   /* private
   _changeListener: MsgListener
-   ----event handlers----
+    ----event handlers----
   _filters: {<filter>: {type: <start, exact>, callback: <function>} }
   */
 
@@ -1349,7 +1359,7 @@ var DataObjectObserver = (function (_DataObject) {
   function DataObjectObserver(syncher, url, schema, initialStatus, initialData, childrens, initialVersion) {
     _classCallCheck(this, DataObjectObserver);
 
-    _get(Object.getPrototypeOf(DataObjectObserver.prototype), 'constructor', this).call(this, syncher, url, schema, initialStatus, initialData, childrens);
+    _get(Object.getPrototypeOf(DataObjectObserver.prototype), 'constructor', this).call(this, syncher, url, schema, initialStatus, initialData.data, childrens);
     var _this = this;
 
     _this._version = initialVersion;
@@ -1357,6 +1367,12 @@ var DataObjectObserver = (function (_DataObject) {
 
     _this._syncObj.observe(function (event) {
       _this._onFilter(event);
+    });
+
+    //setup childrens data from subscription
+    Object.keys(initialData.childrens).forEach(function (childId) {
+      var childData = initialData.childrens[childId];
+      _this._childrenObjects[childId] = new _DataObjectChild2['default'](_this, childId, childData);
     });
 
     _this._allocateListeners();
@@ -1475,7 +1491,7 @@ var DataObjectObserver = (function (_DataObject) {
 exports['default'] = DataObjectObserver;
 module.exports = exports['default'];
 
-},{"./DataObject":6}],9:[function(require,module,exports){
+},{"./DataObject":6,"./DataObjectChild":7}],9:[function(require,module,exports){
 /**
 * Copyright 2016 PT Inovação e Sistemas SA
 * Copyright 2016 INESC-ID
@@ -1531,7 +1547,7 @@ var DataObjectReporter = (function (_DataObject) {
 
   /* private
   _subscriptions: <hypertyUrl: { status: string } }>
-   ----event handlers----
+    ----event handlers----
   _onSubscriptionHandler: (event) => void
   _onResponseHandler: (event) => void
   */
@@ -1652,10 +1668,17 @@ var DataObjectReporter = (function (_DataObject) {
           var sub = { url: hypertyUrl, status: 'on' };
           _this._subscriptions[hypertyUrl] = sub;
 
+          //process and send childrens data
+          var childrenValues = {};
+          Object.keys(_this._childrenObjects).forEach(function (childId) {
+            var childData = _this._childrenObjects[childId].data;
+            childrenValues[childId] = (0, _utilsUtilsJs.deepClone)(childData);
+          });
+
           //send ok response message
           _this._bus.postMessage({
             id: msg.id, type: 'response', from: msg.to, to: msg.from,
-            body: { code: 200, schema: _this._schema, version: _this._version, value: (0, _utilsUtilsJs.deepClone)(_this.data) }
+            body: { code: 200, schema: _this._schema, version: _this._version, value: { data: (0, _utilsUtilsJs.deepClone)(_this.data), childrens: childrenValues } }
           });
 
           return sub;
@@ -1765,7 +1788,7 @@ var DataProvisional = (function () {
   /* private
   _childrenListeners: [MsgListener]
   _listener: MsgListener
-   _changes: []
+    _changes: []
   */
 
   function DataProvisional(owner, url, bus, children) {
@@ -1804,7 +1827,7 @@ var DataProvisional = (function () {
               console.log(msg);
             }
           });
-           _this._childrenListeners.push(listener);
+            _this._childrenListeners.push(listener);
         });
       }*/
     }
@@ -2250,11 +2273,11 @@ var Syncher = (function () {
   /* private
   _owner: URL
   _bus: MiniBus
-   _subURL: URL
-   _reporters: <url: DataObjectReporter>
+    _subURL: URL
+    _reporters: <url: DataObjectReporter>
   _observers: <url: DataObjectObserver>
   _provisionals: <url: DataProvisional>
-   ----event handlers----
+    ----event handlers----
   _onNotificationHandler: (event) => void
   */
 
