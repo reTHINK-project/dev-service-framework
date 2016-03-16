@@ -14,20 +14,28 @@ Installation of jspm is necessary
 
 To avoid a mess on the host, use a docker node container.
 
-`docker run -d --name service-framework -it node:5.4 `  
-`apt-get update `  
-`npm install -g jspm `  
-`mkdir /usr/src/app `  
-`cd /usr/src/app `  
-`jspm install service-framework=github:reTHINK-project/dev-service-framework `  
-`cd /usr/src/app/jspm_packages/github/reTHINK-project/dev-service-framework@0.1.2 `  
-`npm run init-setup `  
-`npm install `  
-`gulp encode `  --> Only one file can be encoded (what is it for?)
+```
+docker run -d --name service-framework -it node:5.4 `  
+apt-get update   
+npm install -g jspm   
+mkdir /usr/src/app   
+cd /usr/src/app   
+jspm install service-framework=github:reTHINK-project/dev-service-framework   
+cd /usr/src/app/jspm_packages/github/reTHINK-project/dev-service-framework@0.1.2   
+npm run init-setup  
+npm install   
+gulp encode  
+```
+--> Only one file can be encoded (what is it for?)
 If you choose a Protostub configuration you have to provide the msg-node URL.  
 
-`apt-get install vim `   
-`vi system.config.json `   
+```
+apt-get install vim    
+vi system.config.json  
+```
 --> Change the messagning node URL (don't put the prefix _msg-node._ )   
-`npm install -g live-server `   
-`npm start & `  
+```
+npm install -g live-server    
+npm start &   
+```
+
