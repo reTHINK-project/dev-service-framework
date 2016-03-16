@@ -135,7 +135,7 @@ class DataObject {
    * All created children's since the subscription, doesn't contain all children's since reporter creation.
    * @type {Object<ChildId, DataObjectChild>}
    */
-  get children() { return this._childrenObjects; }
+  get childrens() { return this._childrenObjects; }
 
   /**
    * @ignore
@@ -185,7 +185,7 @@ class DataObject {
       let msgId = _this._bus.postMessage(requestMsg);
 
       console.log('create-reporter-child( ' + _this._owner + ' ): ', requestMsg);
-      let newChild = new DataObjectChild(_this, _this._owner, msgChildId, msgId, initialData);
+      let newChild = new DataObjectChild(_this, msgChildId, initialData, _this._owner, msgId);
       newChild.onChange((event) => {
         _this._onChange(event, { path: msgChildPath, childId: msgChildId });
       });
@@ -209,7 +209,7 @@ class DataObject {
     let msgChildId = msg.body.resource;
 
     console.log('create-observer-child( ' + _this._owner + ' ): ', msg);
-    let newChild = new DataObjectChild(_this, msg.from, msgChildId, 0, msg.body.value);
+    let newChild = new DataObjectChild(_this, msgChildId, msg.body.value);
     _this._childrenObjects[msgChildId] = newChild;
 
     setTimeout(() => {

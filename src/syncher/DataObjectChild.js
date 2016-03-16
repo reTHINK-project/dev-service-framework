@@ -38,13 +38,14 @@ class DataObjectChild /* implements SyncStatus */ {
    * @ignore
    * Should not be used directly by Hyperties. It's called by the DataObject.addChildren
    */
-  constructor(parent, owner, childId, msgId, initialData) {
+  constructor(parent, childId, initialData, owner, msgId) {
     let _this = this;
 
     _this._parent = parent;
-    _this._owner = owner;
     _this._childId = childId;
+    _this._owner = owner;
     _this._msgId = msgId;
+
     _this._syncObj = new SyncObject(initialData);
 
     _this._bus = parent._bus;
@@ -54,18 +55,23 @@ class DataObjectChild /* implements SyncStatus */ {
   _allocateListeners() {
     let _this = this;
 
-    _this._listener = _this._bus.addListener(_this._owner, (msg) => {
-      if (msg.type === 'response' && msg.id === _this._msgId) {
-        console.log('DataObjectChild.onResponse:', msg);
-        _this._onResponse(msg);
-      }
-    });
+    //this is only needed for children reporters
+    if (_this._owner) {
+      _this._listener = _this._bus.addListener(_this._owner, (msg) => {
+        if (msg.type === 'response' && msg.id === _this._msgId) {
+          console.log('DataObjectChild.onResponse:', msg);
+          _this._onResponse(msg);
+        }
+      });
+    }
   }
 
   _releaseListeners() {
     let _this = this;
 
-    _this._listener.remove();
+    if (_this._listener) {
+      _this._listener.remove();
+    }
   }
 
   /**
