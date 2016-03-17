@@ -98,12 +98,9 @@ class HypertyChat extends EventEmitter {
       communication.participants.push(participant);
 
       console.info('----------------------- Mapping Particpants -------------------- \n');
-      _this._mappingUser(participants).then(function(hyperties) {
-        console.info(`Have ${hyperties.length} participants;`);
-
-        console.info('------------------------ Syncher Create ---------------------- \n');
-        return syncher.create(_this._objectDescURL, hyperties, {communication: communication});
-      })
+      _this._mappingUser(participants)
+      .then((hyperties) => _this.createSyncher(hyperties))
+      .catch((hyperties) => _this.createSyncher(hyperties))
       .then(function(dataObjectReporter) {
         console.info('3. Return Create Data Object Reporter', dataObjectReporter);
 
@@ -118,6 +115,16 @@ class HypertyChat extends EventEmitter {
 
     });
 
+  }
+
+  createSyncher(hyperties) {
+    let _this = this;
+    let syncher = _this._syncher;
+
+    console.info(`Have ${hyperties.length} participants;`);
+
+    console.info('------------------------ Syncher Create ---------------------- \n');
+    return syncher.create(_this._objectDescURL, hyperties, {communication: communication});
   }
 
   join(resource) {
@@ -150,6 +157,8 @@ class HypertyChat extends EventEmitter {
 
       let hyperties = [];
       let count = 0;
+
+      if (userList.length === 0) reject(hyperties);
 
       let resultUsers = function() {
         if (count === userList.length) {
