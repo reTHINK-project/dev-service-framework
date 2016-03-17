@@ -49,6 +49,8 @@ class ConnectionController extends EventEmitter {
 
     _this._objectDescURL = 'hyperty-catalogue://' + domain + '/.well-known/dataschemas/FakeDataSchema';
 
+
+    console.info(configuration);
     console.info(configuration);
 
     _this.mediaConstraints = configuration.mediaConstraints;

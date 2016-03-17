@@ -22,6 +22,7 @@
 **/
 
 import DataObject from './DataObject';
+import DataObjectChild from './DataObjectChild';
 
 let FilterType = {ANY: 'any', START: 'start', EXACT: 'exact'};
 
@@ -42,7 +43,7 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
    * Should not be used directly by Hyperties. It's called by the Syncher.subscribe method
    */
   constructor(syncher, url, schema, initialStatus, initialData, childrens, initialVersion) {
-    super(syncher, url, schema, initialStatus, initialData, childrens);
+    super(syncher, url, schema, initialStatus, initialData.data, childrens);
     let _this = this;
 
     _this._version = initialVersion;
@@ -50,6 +51,12 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
 
     _this._syncObj.observe((event) => {
       _this._onFilter(event);
+    });
+
+    //setup childrens data from subscription
+    Object.keys(initialData.childrens).forEach((childId) => {
+      let childData = initialData.childrens[childId];
+      _this._childrenObjects[childId] = new DataObjectChild(_this, childId, childData);
     });
 
     _this._allocateListeners();

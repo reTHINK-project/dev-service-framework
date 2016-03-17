@@ -24,7 +24,7 @@ System.config({
     "core-js": "npm:core-js@1.2.6",
     "indexeddbshim": "npm:indexeddbshim@2.2.1",
     "json": "github:systemjs/plugin-json@0.1.0",
-    "jsrsasign": "npm:jsrsasign@5.0.5",
+    "jsrsasign": "npm:jsrsasign@5.0.7",
     "karma-browserify": "npm:karma-browserify@4.3.0",
     "mutationobserver-shim": "npm:mutationobserver-shim@0.3.1",
     "object.observe": "npm:object.observe@0.2.6",
@@ -1006,11 +1006,6 @@ System.config({
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "http": "github:jspm/nodelibs-http@1.7.1",
-      "process": "github:jspm/nodelibs-process@0.1.2"
-    },
-    "npm:jsrsasign@5.0.5": {
-      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:jsrsasign@5.0.7": {
