@@ -229,7 +229,7 @@ function copy(file, to, done) {
 gulp.task('build-hyperties', function() {
 
   var destination = argv.dest;
-  if (!destination) destination = __dirname + '/resources';
+  if (!destination) destination = __dirname + path.sep + 'resources';
 
   return gulp.src([
     'src/hyperty-connector/HypertyConnector.js',
@@ -252,6 +252,9 @@ function buildHyperties(destination) {
 
     var fileObject = path.parse(file.path);
 
+    console.log('----------------- Building hyperty -----------------------');
+    console.log(fileObject.base);
+
     return browserify({
       entries: [file.path],
       standalone: 'activate',
@@ -266,7 +269,7 @@ function buildHyperties(destination) {
     .pipe(buffer())
     .pipe(resource(file.path, {}, false))
     .on('end', function() {
-      console.log('File converted');
+      console.log('----------------- Hyperty Builded -----------------------\n');
       cb();
     });
 

@@ -397,10 +397,9 @@ var HypertyChat = (function (_EventEmitter) {
 
         console.info('----------------------- Mapping Particpants -------------------- \n');
         _this._mappingUser(participants).then(function (hyperties) {
-          console.info('Have ' + hyperties.length + ' participants;');
-
-          console.info('------------------------ Syncher Create ---------------------- \n');
-          return syncher.create(_this._objectDescURL, hyperties, { communication: _communication2['default'] });
+          return _this.createSyncher(hyperties);
+        })['catch'](function (hyperties) {
+          return _this.createSyncher(hyperties);
         }).then(function (dataObjectReporter) {
           console.info('3. Return Create Data Object Reporter', dataObjectReporter);
 
@@ -412,6 +411,17 @@ var HypertyChat = (function (_EventEmitter) {
           reject(reason);
         });
       });
+    }
+  }, {
+    key: 'createSyncher',
+    value: function createSyncher(hyperties) {
+      var _this = this;
+      var syncher = _this._syncher;
+
+      console.info('Have ' + hyperties.length + ' participants;');
+
+      console.info('------------------------ Syncher Create ---------------------- \n');
+      return syncher.create(_this._objectDescURL, hyperties, { communication: _communication2['default'] });
     }
   }, {
     key: 'join',
@@ -445,6 +455,8 @@ var HypertyChat = (function (_EventEmitter) {
 
         var hyperties = [];
         var count = 0;
+
+        if (userList.length === 0) reject(hyperties);
 
         var resultUsers = function resultUsers() {
           if (count === userList.length) {
@@ -774,15 +786,15 @@ var _utilsUtilsJs = require('../utils/utils.js');
 var DataObject = (function () {
   /* private
   _version: number
-    _owner: HypertyURL
+   _owner: HypertyURL
   _url: ObjectURL
   _schema: Schema
   _bus: MiniBus
   _status: on | paused
   _syncObj: SyncData
-    _children: { id: DataObjectChild }
+   _children: { id: DataObjectChild }
   _childrenListeners: [MsgListener]
-    ----event handlers----
+   ----event handlers----
   _onAddChildrenHandler: (event) => void
   */
 
@@ -1158,7 +1170,7 @@ var _SyncObject2 = _interopRequireDefault(_SyncObject);
 
 var DataObjectChild /* implements SyncStatus */ = (function () {
   /* private
-    ----event handlers----
+   ----event handlers----
   _onResponseHandler: (event) => void
   */
 
@@ -1347,7 +1359,7 @@ var DataObjectObserver = (function (_DataObject) {
 
   /* private
   _changeListener: MsgListener
-    ----event handlers----
+   ----event handlers----
   _filters: {<filter>: {type: <start, exact>, callback: <function>} }
   */
 
@@ -1547,7 +1559,7 @@ var DataObjectReporter = (function (_DataObject) {
 
   /* private
   _subscriptions: <hypertyUrl: { status: string } }>
-    ----event handlers----
+   ----event handlers----
   _onSubscriptionHandler: (event) => void
   _onResponseHandler: (event) => void
   */
@@ -1788,7 +1800,7 @@ var DataProvisional = (function () {
   /* private
   _childrenListeners: [MsgListener]
   _listener: MsgListener
-    _changes: []
+   _changes: []
   */
 
   function DataProvisional(owner, url, bus, children) {
@@ -1827,7 +1839,7 @@ var DataProvisional = (function () {
               console.log(msg);
             }
           });
-            _this._childrenListeners.push(listener);
+           _this._childrenListeners.push(listener);
         });
       }*/
     }
@@ -2273,11 +2285,11 @@ var Syncher = (function () {
   /* private
   _owner: URL
   _bus: MiniBus
-    _subURL: URL
-    _reporters: <url: DataObjectReporter>
+   _subURL: URL
+   _reporters: <url: DataObjectReporter>
   _observers: <url: DataObjectObserver>
   _provisionals: <url: DataProvisional>
-    ----event handlers----
+   ----event handlers----
   _onNotificationHandler: (event) => void
   */
 
