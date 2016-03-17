@@ -241,17 +241,51 @@ Message sent by Observer Runtime Sync Manager to Data Object Subscription Handle
 
 #### Synchronisation Management by Message Node
 
+##### Reporter Data Sync Routing Path setup request at Reporter Message Node for a new Data Object
+
+Message sent by Reporter Runtime Sync Manager to Reporter Message Node to request the setup of the Data Sync Routing Path for a new Data Object.
+
+```
+"id" : "1",
+"type" : "subscribe",
+"from" : "hyperty-runtime://<reporter-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
+"to" : "domain://msg-node.<reporter-sp-domain>/sm",
+"body" : { "subscribe" : ["<ObjectURL>","<ObjectURL>/subscription", "<ObjectURL>/children/<resource-children-name1>", "<ObjectURL>/children/<resource-children-name2>",.. ], "source" : "hyperty-runtime://<reporter-sp-domain>/<hyperty-reporter-runtime-instance-identifier>" }
+```
+
+With this message the setup of the routing path is:
+
+1- who is subscribing: `body.source` or `from` in case there is no `body.source`
+2- what to subscribe: `body.subscribe` ie a list of URLs to be subscribed to
+
+###### Response
+
+200OK Response Message sent back by Message Node to Observer Runtime Sync Manager.
+
+```
+"id" : "1",
+"type" : "response",
+"from" : "domain://msg-node.<reporter-sp-domain>/sm",
+"to" : "hyperty-runtime://<reporter-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
+"body" : { "code" : "2XX" }
+```
+
 ##### Data Sync Routing Path setup request at Observer Message Node
 
-Message sent by Observer Runtime Sync Manager to Message Node to request the setup of the Data Sync Routing Path.
+Message sent by Observer Runtime Sync Manager to Observer Message Node to request the setup of the Data Sync Routing Path.
 
 ```
 "id" : "1",
 "type" : "subscribe",
 "from" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
 "to" : "domain://msg-node.<observer-sp-domain>/sm",
-"body" : { "resource" : "<ObjectURL>", "childrenResources" : [{"<resource-children-name>"}], "schema" : "hyperty-catalogue://<sp-domain>/dataObjectSchema/<schema-identifier>" }
+"body" : { "subscribe" : ["<ObjectURL>/changes", "<ObjectURL>/children/<resource-children-name1>", "<ObjectURL>/children/<resource-children-name2>",.. ], "source" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>" }
 ```
+
+With this message the setup of the routing path is:
+
+1- who is subscribing: `body.source` or `from` in case there is no `body.source`
+2- what to subscribe: `body.subscribe` ie a list of URLs to be subscribed to
 
 ###### Response
 
@@ -265,16 +299,70 @@ Message sent by Observer Runtime Sync Manager to Message Node to request the set
 "body" : { "code" : "2XX" }
 ```
 
+##### Data Sync Routing Path setup request at Reporter Message Node
+
+Message sent by Observer Runtime Sync Manager to Reporter Message Node to request the setup of the Data Sync Routing Path.
+
+```
+"id" : "1",
+"type" : "subscribe",
+"from" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
+"to" : "domain://msg-node.<reporter-sp-domain>/sm",
+"body" : { "subscribe" : ["<ObjectURL>/changes", "<ObjectURL>/children/<resource-children-name1>", "<ObjectURL>/children/<resource-children-name2>",.. ], "source" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>" }
+```
+
+With this message the setup of the routing path is:
+
+1- who is subscribing: `body.source` or `from` in case there is no `body.source`
+2- what to subscribe: `body.subscribe` ie a list of URLs to be subscribed to
+
+###### Response
+
+200OK Response Message sent back by Message Node to Observer Runtime Sync Manager.
+
+```
+"id" : "1",
+"type" : "response",
+"from" : "domain://msg-node.<reporter-sp-domain>/sm",
+"to" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
+"body" : { "code" : "2XX" }
+```
+
 ##### Request to remove Data Sync Routing Path at Observer Message Node
 
-Message sent by Observer Runtime Sync Manager to Message Node to request the removal of the Data Sync Routing Path.
+Message sent by Observer Runtime Sync Manager to Observer Message Node to request the removal of the Data Sync Routing Path.
 
 ```
 "id" : "9",
 "type" : "unsubscribe",
 "from" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
 "to" : "domain://msg-node.<observer-sp-domain>/sm",
-"body" : { "resource" : "<ObjectURL>" , "childrenResources" : [{"<resource-children-name>"}] }
+"body" : { "unsubscribe" : ["<ObjectURL>/changes", "<ObjectURL>/children/<resource-children-name1>", "<ObjectURL>/children/<resource-children-name2>",.. ], }
+```
+
+###### Response
+
+200OK Response Message sent back by Message Node to Observer Runtime Sync Manager.
+
+```
+"id" : "9",
+"type" : "response",
+"from" : "domain://msg-node.<observer-sp-domain>/sm",
+"to" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
+"body" : { "code" : "2XX" }
+```
+
+
+##### Request to remove Data Sync Routing Path at Reporter Message Node
+
+Message sent by Observer Runtime Sync Manager to Reporter Message Node to request the removal of the Data Sync Routing Path.
+
+```
+"id" : "9",
+"type" : "unsubscribe",
+"from" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
+"to" : "domain://msg-node.<reporter-sp-domain>/sm",
+"body" : { "unsubscribe" : ["<ObjectURL>/changes", "<ObjectURL>/children/<resource-children-name1>", "<ObjectURL>/children/<resource-children-name2>",.. ], }
 ```
 
 ###### Response
