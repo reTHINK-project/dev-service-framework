@@ -64,11 +64,14 @@ class Syncher {
    _this._provisionals = {};
 
    bus.addListener(owner, (msg) => {
-     console.log('Syncher-RCV: ', msg);
-     switch (msg.type) {
-       case 'forward': _this._onForward(msg); break;
-       case 'create': _this._onRemoteCreate(msg); break;
-       case 'delete': _this._onRemoteDelete(msg); break;
+     //ignore msg sent by himself
+     if (msg.from !== owner) {
+       console.log('Syncher-RCV: ', msg);
+       switch (msg.type) {
+         case 'forward': _this._onForward(msg); break;
+         case 'create': _this._onRemoteCreate(msg); break;
+         case 'delete': _this._onRemoteDelete(msg); break;
+       }
      }
    });
  }
