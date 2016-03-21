@@ -200,11 +200,25 @@ gulp.task('watch-rethink', function(done) {
           if (watch) {
             gulp.watch([watchDir + '/*.js'], function(event) {
               fileObject = path.parse(event.path);
-              return copy(event.path, __dirname + sep + destDir + sep + fileObject.base, done);
+
+              gulp.src([fileObject.dir + sep + fileObject.base])
+              .pipe(gulp.dest(__dirname + sep + destDir + sep))
+              .on('end', function() {
+                resource(__dirname + sep + destDir + sep + fileObject.base, {}, false);
+                console.log('Copied and encoded');
+              });
+
             });
           } else {
             fileObject = path.parse(__dirname + sep +  '..' + sep +  res.repository + sep +  'dist' + sep + fileResponse.file);
-            return copy(fileObject.dir + sep +  fileObject.base, __dirname + sep + destDir + sep + fileObject.base, done);
+
+            console.log(fileObject);
+
+            return gulp.src([fileObject.dir + sep + fileObject.base])
+            .pipe(gulp.dest(__dirname + sep + destDir + sep))
+            .on('end', function() {
+              resource(__dirname + sep + destDir + sep + fileObject.base, {}, false);
+            });
           }
 
         }
@@ -212,19 +226,6 @@ gulp.task('watch-rethink', function(done) {
 
     }));
 });
-
-function copy(file, to, done) {
-  console.log('Copying\nfrom ', file, '\nto ', to);
-
-  var fileObject = path.parse(to);
-  fs.createReadStream(file).pipe(fs.createWriteStream(to));
-  gulp.src([to])
-  .pipe(resource(fileObject.dir + '/' + fileObject.base, {}, false))
-  .on('end', function() {
-    console.log('File copied and encoded');
-    done();
-  });
-}
 
 gulp.task('build-hyperties', function() {
 
@@ -445,7 +446,7 @@ function encode(filename, descriptorName, configuration, isDefault) {
     json[value].accessControlPolicy = 'somePolicy';
 
     var newDescriptor = new Buffer(JSON.stringify(json, null, 2));
-    console.log(value);
+    console.log('file encoded: ', value);
     cb(null, newDescriptor);
 
   });
@@ -471,7 +472,7 @@ function resource(file, configuration, isDefault) {
   }
 
   var defaultPath = 'resources/';
-  if (fileObject.dir.indexOf('tmp')) {
+  if (fileObject.dir.indexOf('tmp') !== -1) {
     defaultPath = 'resources/tmp/';
   }
 
