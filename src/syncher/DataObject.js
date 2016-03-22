@@ -242,7 +242,7 @@ class DataObject {
     if (_this._status === 'on') {
       let changeMsg = {
         type: 'update', from: _this._url, to: _this._url + '/changes',
-        body: { version: _this._version, attribute: event.field }
+        body: { version: _this._version, source: _this._owner, attribute: event.field }
       };
 
       if (event.oType === ObjectType.OBJECT) {
