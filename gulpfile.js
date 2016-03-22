@@ -277,6 +277,37 @@ function buildHyperties(destination) {
 
 }
 
+gulp.task('compile', function() {
+
+  var file = __dirname + path.sep + argv.file;
+  var tmp = __dirname + path.sep + 'resources' + path.sep + 'tmp';
+
+  if (!file) {
+    this.emit('end');
+  }
+
+  var fileObject = path.parse(file);
+  console.log(fileObject);
+
+  return browserify({
+    entries: [fileObject.dir + path.sep + fileObject.base],
+    standalone: 'activate',
+    debug: false
+  }).transform(babel, {global: false, compact: false})
+  .bundle()
+  .on('error', function(err) {
+    console.error(err);
+  })
+  .pipe(source(fileObject.base))
+  .pipe(gulp.dest(tmp))
+  .pipe(buffer())
+  .pipe(resource(tmp + path.sep + fileObject.base, {}, false))
+  .on('end', function() {
+    console.log('File converted');
+  });
+
+});
+
 /**
 * Compile on specific file from ES6 to ES5
 * @param  {string} 'compile' task name
@@ -398,6 +429,10 @@ function encode(filename, descriptorName, configuration, isDefault) {
       json[value].protocolCapabilities = {http: true };
     }
 
+    if (descriptorName === 'ProtoStubs') {
+      json[value].constraints = '';
+    }
+
     json[value].sourcePackageURL = '/sourcePackage';
     json[value].sourcePackage.sourceCode = encoded;
     json[value].sourcePackage.sourceCodeClassname = filename;
@@ -435,11 +470,16 @@ function resource(file, configuration, isDefault) {
     descriptorName = 'IDPProxys';
   }
 
-  console.log('DATA:', filename, descriptorName, configuration, isDefault, extension);
+  var defaultPath = 'resources/';
+  if (fileObject.dir.indexOf('tmp') !== -1) {
+    defaultPath = 'resources/tmp/';
+  }
+
+  console.log('DATA:', defaultPath, filename, descriptorName, configuration, isDefault, extension);
 
   if (extension === '.js') {
-    return gulp.src(['resources/' + filename + '.js'])
-    .pipe(gulp.dest('resources/'))
+    return gulp.src([defaultPath + filename + '.js'])
+    .pipe(gulp.dest(defaultPath))
     .pipe(buffer())
     .pipe(encode(filename, descriptorName, configuration, isDefault))
     .pipe(source(descriptorName + '.json'))

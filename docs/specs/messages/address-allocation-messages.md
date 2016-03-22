@@ -20,7 +20,7 @@ Message sent by the Hyperty Runtime Registry function to Message Node Address Al
 "type" : "CREATE",
 "from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/registry/allocation",
 "to" : "domain://msg-node.<sp-domain>/<type>-address-allocation",
-"body" : { "scheme" : <scheme>, "childrenResources" : [{"<resource-children-name>"}], "value" : {"number" : <integer> ,  "allocationKey" : "<key>"} }
+"body" : { "scheme" : <scheme>, "value" : {"number" : <integer> ,  "allocationKey" : "<key>"} }
 ```
 
 **Response Message returning the requested addresses allocation**
