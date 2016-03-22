@@ -471,7 +471,7 @@ function resource(file, configuration, isDefault) {
   }
 
   var defaultPath = 'resources/';
-  if (fileObject.dir.indexOf('tmp')) {
+  if (fileObject.dir.indexOf('tmp') !== -1) {
     defaultPath = 'resources/tmp/';
   }
 
