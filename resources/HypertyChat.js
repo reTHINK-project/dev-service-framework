@@ -786,15 +786,15 @@ var _utilsUtilsJs = require('../utils/utils.js');
 var DataObject = (function () {
   /* private
   _version: number
-   _owner: HypertyURL
+    _owner: HypertyURL
   _url: ObjectURL
   _schema: Schema
   _bus: MiniBus
   _status: on | paused
   _syncObj: SyncData
-   _children: { id: DataObjectChild }
+    _children: { id: DataObjectChild }
   _childrenListeners: [MsgListener]
-   ----event handlers----
+    ----event handlers----
   _onAddChildrenHandler: (event) => void
   */
 
@@ -836,9 +836,9 @@ var DataObject = (function () {
         _this._childrens.forEach(function (child) {
           var childURL = childBaseURL + child;
           var listener = _this._bus.addListener(childURL, function (msg) {
-            console.log('DataObject-Children-RCV: ', msg);
             //ignore msg sent by himself
             if (msg.from !== _this2._owner) {
+              console.log('DataObject-Children-RCV: ', msg);
               switch (msg.type) {
                 case 'create':
                   _this._onChildrenCreate(msg);break;
@@ -991,7 +991,7 @@ var DataObject = (function () {
       if (_this._status === 'on') {
         var changeMsg = {
           type: 'update', from: _this._url, to: _this._url + '/changes',
-          body: { version: _this._version, attribute: event.field }
+          body: { version: _this._version, source: _this._owner, attribute: event.field }
         };
 
         if (event.oType === _SyncObject.ObjectType.OBJECT) {
@@ -1170,7 +1170,7 @@ var _SyncObject2 = _interopRequireDefault(_SyncObject);
 
 var DataObjectChild /* implements SyncStatus */ = (function () {
   /* private
-   ----event handlers----
+    ----event handlers----
   _onResponseHandler: (event) => void
   */
 
@@ -1359,7 +1359,7 @@ var DataObjectObserver = (function (_DataObject) {
 
   /* private
   _changeListener: MsgListener
-   ----event handlers----
+    ----event handlers----
   _filters: {<filter>: {type: <start, exact>, callback: <function>} }
   */
 
@@ -1559,7 +1559,7 @@ var DataObjectReporter = (function (_DataObject) {
 
   /* private
   _subscriptions: <hypertyUrl: { status: string } }>
-   ----event handlers----
+    ----event handlers----
   _onSubscriptionHandler: (event) => void
   _onResponseHandler: (event) => void
   */
@@ -1800,7 +1800,7 @@ var DataProvisional = (function () {
   /* private
   _childrenListeners: [MsgListener]
   _listener: MsgListener
-   _changes: []
+    _changes: []
   */
 
   function DataProvisional(owner, url, bus, children) {
@@ -1839,7 +1839,7 @@ var DataProvisional = (function () {
               console.log(msg);
             }
           });
-           _this._childrenListeners.push(listener);
+            _this._childrenListeners.push(listener);
         });
       }*/
     }
@@ -2285,11 +2285,11 @@ var Syncher = (function () {
   /* private
   _owner: URL
   _bus: MiniBus
-   _subURL: URL
-   _reporters: <url: DataObjectReporter>
+    _subURL: URL
+    _reporters: <url: DataObjectReporter>
   _observers: <url: DataObjectObserver>
   _provisionals: <url: DataProvisional>
-   ----event handlers----
+    ----event handlers----
   _onNotificationHandler: (event) => void
   */
 
@@ -2315,14 +2315,17 @@ var Syncher = (function () {
     _this._provisionals = {};
 
     bus.addListener(owner, function (msg) {
-      console.log('Syncher-RCV: ', msg);
-      switch (msg.type) {
-        case 'forward':
-          _this._onForward(msg);break;
-        case 'create':
-          _this._onRemoteCreate(msg);break;
-        case 'delete':
-          _this._onRemoteDelete(msg);break;
+      //ignore msg sent by himself
+      if (msg.from !== owner) {
+        console.log('Syncher-RCV: ', msg);
+        switch (msg.type) {
+          case 'forward':
+            _this._onForward(msg);break;
+          case 'create':
+            _this._onRemoteCreate(msg);break;
+          case 'delete':
+            _this._onRemoteDelete(msg);break;
+        }
       }
     });
   }
