@@ -3,7 +3,7 @@ let openIDConfiguration;
 let googleInfo = {
   clientSecret:          'Xx4rKucb5ZYTaXlcZX9HLfZW',
   clientID:              '808329566012-tqr8qoh111942gd2kg007t0s8f277roi.apps.googleusercontent.com',
-  redirectURI:           location.origin,
+  redirectURI:           location.href,
   issuer:                'https://accounts.google.com',
   tokenEndpoint:         'https://www.googleapis.com/oauth2/v4/token?',
   jwksUri:               'https://www.googleapis.com/oauth2/v3/certs?',
