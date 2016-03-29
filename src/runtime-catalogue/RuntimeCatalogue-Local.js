@@ -250,54 +250,91 @@ class RuntimeCatalogue {
       let domain = dividedURL.domain;
       let protoStub = dividedURL.identity;
 
+      let originDividedURL = divideURL(_this.runtimeURL);
+      let originDomain = originDividedURL.domain;
+
       if (!domain) {
         domain = stubURL;
       }
 
-      if (!protoStub) {
+      if (domain === originDomain || !protoStub) {
         protoStub = 'default';
       } else {
         protoStub = protoStub.substring(protoStub.lastIndexOf('/') + 1);
       }
 
       _this.httpRequest.get(type + '://' + domain + '/resources/descriptors/ProtoStubs.json').then(function(descriptor) {
-        _this.ProtoStubs = JSON.parse(descriptor);
 
-        let result = _this.ProtoStubs[protoStub];
+        return descriptor;
+      }).catch(function(reason) {
 
-        if (result.error) {
-          // TODO handle error properly
-          reject(result);
-        } else {
-          console.log('creating stub descriptor based on: ', result);
+        protoStub = domain;
+        domain = originDomain;
 
-          // create the descriptor
-          let stub = _this._factory.createProtoStubDescriptorObject(
-            result.cguid,
-            result.version,
-            result.objectName,
-            result.description,
-            result.language,
-            result.sourcePackageURL,
-            result.messageSchemas,
-            JSON.stringify(result.configuration),
-            result.constraints
-          );
+        console.log('Get an specific protostub for domain', domain, ' specific for: ', protoStub);
 
-          // parse and attach sourcePackage
-          let sourcePackage = result.sourcePackage;
+        // reject(reason);
+        return _this.httpRequest.get(type + '://' + domain + '/resources/descriptors/ProtoStubs.json');
+      })
+      .then(function(descriptor) {
 
-          if (sourcePackage) {
-            sourcePackage = _this._createSourcePackage(_this._factory, sourcePackage);
-            stub.sourcePackage = sourcePackage;
-          }
-
-          resolve(stub);
-        }
-
+        _this.processStubDescriptor(descriptor, protoStub).then(function(result) {
+          resolve(result);
+        }).catch(function(reason) {
+          reject(reason);
+        });
+      })
+      .catch(function(reason) {
+        reject(reason);
       });
+
     });
 
+  }
+
+  processStubDescriptor(descriptor, protoStub) {
+
+    let _this = this;
+
+    return new Promise(function(resolve, reject) {
+      try {
+        _this.ProtoStubs = JSON.parse(descriptor);
+      } catch (e) {
+        console.log('Already parsed');
+      }
+
+      let result = _this.ProtoStubs[protoStub];
+
+      if (result.error) {
+        // TODO handle error properly
+        reject(result);
+      } else {
+        console.log('creating stub descriptor based on: ', result);
+
+        // create the descriptor
+        let stub = _this._factory.createProtoStubDescriptorObject(
+          result.cguid,
+          result.version,
+          result.objectName,
+          result.description,
+          result.language,
+          result.sourcePackageURL,
+          result.messageSchemas,
+          JSON.stringify(result.configuration),
+          result.constraints
+        );
+
+        // parse and attach sourcePackage
+        let sourcePackage = result.sourcePackage;
+
+        if (sourcePackage) {
+          sourcePackage = _this._createSourcePackage(_this._factory, sourcePackage);
+          stub.sourcePackage = sourcePackage;
+        }
+
+        resolve(stub);
+      }
+    });
   }
 
   /**
