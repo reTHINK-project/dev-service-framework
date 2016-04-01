@@ -314,7 +314,10 @@ class RuntimeCatalogue {
     getSourcePackageFromURL(sourcePackageURL) {
         let _this = this;
 
-        //console.log("getting sourcePackage from:", sourcePackageURL);
+        console.log("getting sourcePackage from:", sourcePackageURL);
+        console.warn("-------------------------------------------------------------------------------------------");
+        console.warn("ATTENTION: This function may fail if the sourceCode of the the sourcePackage is very large!");
+        console.warn("-------------------------------------------------------------------------------------------");
 
         return new Promise(function (resolve, reject) {
             _this.httpRequest.get(sourcePackageURL).then(function (result) {
