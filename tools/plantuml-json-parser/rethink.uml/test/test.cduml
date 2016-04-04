@@ -1,0 +1,18 @@
+@startuml "test.png"
+
+class Identity {
+	profile?: string
+	geoLocation: string
+	securityToken: string
+	other: string
+}
+
+package xpto {
+	Person --> Identity
+	
+	class Person {
+		name: string
+	}
+}
+
+@enduml
