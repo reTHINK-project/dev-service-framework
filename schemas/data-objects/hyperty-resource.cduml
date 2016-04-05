@@ -1,0 +1,29 @@
+@startuml "../../docs/datamodel/data-objects/communication/Hyperty-Resource-Data-Object-Model.png"
+
+package HypertyResource <<Rect>> {
+
+	enum ResourceType {
+		CHAT
+		AUDIO
+		VIDEO
+		AV
+		SCREEN
+		FILE
+		MIDI
+	}
+
+	enum ResourceDirection {
+		IN
+		OUT
+		INOUT
+	}
+
+	class HypertyResource {
+	}
+
+	HypertyResource ..> ResourceType
+	HypertyResource ..> ResourceDirection
+	Identity.Identity ..> HypertyResource: author
+}
+
+@enduml

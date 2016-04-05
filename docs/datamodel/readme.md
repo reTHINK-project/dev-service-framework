@@ -3,26 +3,30 @@ reTHINK Data Model
 
 ![reTHINK Data Model](Rethink-Core.png)
 
-### [Hyperty Domain](Hyperty-Domain/readme.md)
+## Core Data Model
 
-### [User Identity](user-identity/readme.md)
+### [Hyperty Domain](core/Hyperty-Domain/readme.md)
 
-### [Hyperty Catalogue Model](hyperty-catalogue/readme.md)
+### [User Identity](core/user-identity/readme.md)
 
-### [User Hyperty Account](user-hyperty-account/readme.md)
+### [Hyperty Catalogue Model](core/hyperty-catalogue/readme.md)
 
-### [Hyperty Registry Model](hyperty-registry/readme.md)
+### [User Hyperty Account](core/user-hyperty-account/readme.md)
 
-### [Graph Connector Data Model](graph-connector/readme.md)
+### [Hyperty Registry Model](core/hyperty-registry/readme.md)
 
-### [Communication](communication/readme.md)
+### [Graph Connector Data Model](core/graph-connector/readme.md)
 
-### [Context](context/readme.md)
+### [Addresses](core/address/readme.md)
 
-### [Addresses](address/readme.md)
+### [Message](core/message/readme.md)
 
-### [Message](message/readme.md)
+## Hyperty Data Object Models
 
-### [Data Synchronisation Communication Model ](data-synch/readme.md)
+### [Hyperty Data Object Abstract Model ](data-objects/data-synch/readme.md)
 
-### [Data Model JSON Schema](json-schema)
+### [Communication](data-objects/communication/readme.md)
+
+### [Connection](data-objects/connection/readme.md)
+
+### [Context](data-objects/context/readme.md)

@@ -1,0 +1,115 @@
+@startuml "../../docs/datamodel/core/message/Message-Data-Model.png"
+
+package Message <<Rect>> {
+
+	class Message {
+		id : string
+		from : URL.URL
+		to : URL.URLList
+		type : MessageType
+		body ?: MessageBody
+	}
+
+	class MessageBody {
+		resource ?: URL.URL
+		childrenResources ?: URL.URLList
+		schema ?: URL.HypertyCatalogueURL
+		idToken ?: RethinkCore.Identity.JWT
+		accessToken ?: RethinkCore.Identity.JWT
+		identity ?: RethinkCore.Identity.Identity
+		assertedIdentity ?: boolean
+		via ?: URL.URLList
+		source ?: URL.URL
+	}
+
+	class CreateMessageBody {
+		policy ?: URL.URL
+		authorise ?: URL.URLList
+		value : string
+	}
+
+	class UpdateMessageBody {
+		value : string
+		attribute ?: string
+		attributeType ?: string
+		operation ?: string
+	}
+
+	class ResponseCode {
+	}
+
+	class ResponseMessageBody {
+		code : ResponseCode
+		description?: string
+		value ?: string
+	}
+	note bottom : to be compliant with RFC7231
+
+	class DeleteMessageBody {
+		attribute? : string
+	}
+
+	class ReadMessageBody {
+		attribute ?: string
+		criteriaSyntax ?: string
+		criteria ?: string
+	}
+
+	class SubscribeMessageBody {
+		subscribe ?: URL.URL[]
+	}
+
+	class UnsubscribeMessageBody {
+		unsubscribe ?: URL.URL[]
+	}
+
+	class FowardMessageBody {
+		message ?: Message.Message
+	}
+
+	class ExecuteMessageBody {
+		method : string
+		params ?: array
+	}
+
+	class MessageType {
+			create
+			update
+			delete
+			read
+			subscribe
+			unsubscribe
+			response
+			forward
+			execute
+	}
+
+	class AttributeType {
+	  	OBJECT
+	  	ARRAY
+	}
+
+	class UpdateOperation {
+	  	ADD
+	  	REMOVE
+	}
+
+	Message --> MessageType
+	Message *-- "1" MessageBody
+
+	CreateMessageBody -up-|> MessageBody
+	UpdateMessageBody -up-|> MessageBody
+	ResponseMessageBody -up-|> MessageBody
+	SubscribeMessageBody -up-|> MessageBody
+	UnsubscribeMessageBody -up-|> MessageBody
+	DeleteMessageBody -down-|> MessageBody
+	ReadMessageBody -down-|> MessageBody
+	FowardMessageBody -down-|> MessageBody
+	ExecuteMessageBody -down-|> MessageBody
+
+	ResponseMessageBody --> ResponseCode
+	UpdateMessageBody --> UpdateOperation
+	UpdateMessageBody --> AttributeType
+}
+
+@enduml

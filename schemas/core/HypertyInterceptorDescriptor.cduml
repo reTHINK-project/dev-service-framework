@@ -1,0 +1,36 @@
+@startuml "../../docs/datamodel/core/hyperty-catalogue/Hyperty-Interceptor-Descriptor-Data-Object-Model.png"
+
+
+package CatalogueDataObject <<Rect>> {
+
+package HypertyInterceptorDescriptor <<Rect>> {
+
+
+	class HypertyInterceptorDescriptor {
+		configuration ?: HypertyInterceptorConfiguration
+		policies ?: HypertyPolicyList
+	}
+
+	class HypertyInterceptorConfiguration {
+	}
+
+
+	class HypertyPolicyList {
+	}
+
+	class HypertyPolicy {
+	}
+
+
+	HypertyInterceptorDescriptor .up.|> CatalogueDataObject.CatalogueDataObject
+
+	HypertyInterceptorDescriptor *.. "0..1" HypertyPolicyList
+	HypertyInterceptorDescriptor *.. "0..1" HypertyInterceptorConfiguration
+
+	HypertyPolicyList *.. HypertyPolicy
+
+
+}
+
+}
+@enduml
