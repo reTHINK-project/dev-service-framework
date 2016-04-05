@@ -35,98 +35,132 @@ PlantUML has many open rules that can conflict or add complexity to the JSON Sch
 * enum values are converted to lowercase
 * Relations have no meaning in the generation process, except for the hierarchy. Hierarchy is converted to an array of references with "anyOf".
 * Special types like "URL" if marked with ```<<(T,orchid)>>``` are converted to string type instead of references.
+* There should be a class with the same name as the package, so it can link as the root definition.
 
 One simple example of a plantuml class diagram and associated generated json-schema related to the Communication Model used in reTHINK:
 
 ```javascript
-@startuml "Communication-Data-Object-Model.png"
-
-package Communication <<Rect>> {
-
-	enum CommunicationStatus {
+@startuml "Connection.png"
+package Connection <<Rect>> {
+	
+	class Connection {
+		from: Client
+		to: Client
+		status: Status
+	}
+	
+	class Client {
+		url: URL
+	}
+	
+	class PersonClient {
+		email: string
+		name: string
+		birthday?: string
+	}
+	
+	class MachineClient {
+		ip: string
+		dns: string[]
+	}
+	
+	class URL <<(T,orchid)>> {
+		scheme: string
+		domain: string
+		endpoint: string
+	}
+	
+	enum Status {
 		OPEN
-		PENDING
 		CLOSED
-		PAUSED
-		FAILED
 	}
-
-	enum ParticipantStatus {
-	}
-
-	class Communication {
-		id
-		host 
-		owner 
-		startingTime
-		lastModified
-		duration
-	}
-
-	class Participant {
-	}
-
-	class CommunicationQuality {
-	}
-
-	class HypertyResource {
-	}
-
-	Communication .. CommunicationStatus
-	Communication *.. Participant
-	Communication *.. CommunicationQuality
-	Communication *.. Message.Message
-	Participant .. ParticipantStatus
-	Participant ..> HypertyResource
-	Participant ..> Identity.Identity
-
-	HypertyResource ..> Connection.Connection : transportedBy 
-
+	
+	PersonClient --|> Client
+	MachineClient --|> Client
+	
+	Connection --> Status
 }
 @enduml
 ```
 
-For the Communication class it generates the JSON Schema:
+For the Connection package it generates the JSON Schema:
 ```javascript
 {
 	"$schema": "http://json-schema.org/draft-04/schema#",
 
-	"id": "Communication",
+	"id": "Connection",
 	"type": "object",
-	"required": ["id", "host", "owner", "startingTime", "lastModified", "duration"],
+	"required": ["from", "to", "status"],
 	"properties": {
-		"id": {
-			"type": "null"
+		"from": {
+			"$ref": "#/Client"
 		},
-		"host": {
-			"type": "null"
+		"to": {
+			"$ref": "#/Client"
 		},
-		"owner": {
-			"type": "null"
-		},
-		"startingTime": {
-			"type": "null"
-		},
-		"lastModified": {
-			"type": "null"
-		},
-		"duration": {
-			"type": "null"
+		"status": {
+			"enum": [
+				"open",
+				"closed"
+			]
 		}
 	}, 
-	"Participant": {
+	"Client": {
 		"type": "object",
+		"required": ["url"],
+		"anyOf": [
+			{ "$ref": "#/PersonClient" },
+			{ "$ref": "#/MachineClient" }
+		],
 		"properties": {
+			"url": {
+				"type": "string"
+			}
 		}
 	}, 
-	"CommunicationQuality": {
+	"PersonClient": {
 		"type": "object",
+		"required": ["email", "name"],
 		"properties": {
+			"email": {
+				"type": "string"
+			},
+			"name": {
+				"type": "string"
+			},
+			"birthday": {
+				"type": "string"
+			}
 		}
 	}, 
-	"HypertyResource": {
+	"MachineClient": {
 		"type": "object",
+		"required": ["ip", "dns"],
 		"properties": {
+			"ip": {
+				"type": "string"
+			},
+			"dns": {
+				"type": "array",
+				"items": {
+					"type": "string"
+				}
+			}
+		}
+	}, 
+	"URL": {
+		"type": "object",
+		"required": ["scheme", "domain", "endpoint"],
+		"properties": {
+			"scheme": {
+				"type": "string"
+			},
+			"domain": {
+				"type": "string"
+			},
+			"endpoint": {
+				"type": "string"
+			}
 		}
 	}
 }
