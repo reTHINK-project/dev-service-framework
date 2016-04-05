@@ -1598,9 +1598,9 @@ var DataObject = (function () {
         _this._childrens.forEach(function (child) {
           var childURL = childBaseURL + child;
           var listener = _this._bus.addListener(childURL, function (msg) {
-            console.log('DataObject-Children-RCV: ', msg);
             //ignore msg sent by himself
             if (msg.from !== _this2._owner) {
+              console.log('DataObject-Children-RCV: ', msg);
               switch (msg.type) {
                 case 'create':
                   _this._onChildrenCreate(msg);break;
@@ -1753,7 +1753,7 @@ var DataObject = (function () {
       if (_this._status === 'on') {
         var changeMsg = {
           type: 'update', from: _this._url, to: _this._url + '/changes',
-          body: { version: _this._version, attribute: event.field }
+          body: { version: _this._version, source: _this._owner, attribute: event.field }
         };
 
         if (event.oType === _SyncObject.ObjectType.OBJECT) {
@@ -3077,14 +3077,17 @@ var Syncher = (function () {
     _this._provisionals = {};
 
     bus.addListener(owner, function (msg) {
-      console.log('Syncher-RCV: ', msg);
-      switch (msg.type) {
-        case 'forward':
-          _this._onForward(msg);break;
-        case 'create':
-          _this._onRemoteCreate(msg);break;
-        case 'delete':
-          _this._onRemoteDelete(msg);break;
+      //ignore msg sent by himself
+      if (msg.from !== owner) {
+        console.log('Syncher-RCV: ', msg);
+        switch (msg.type) {
+          case 'forward':
+            _this._onForward(msg);break;
+          case 'create':
+            _this._onRemoteCreate(msg);break;
+          case 'delete':
+            _this._onRemoteDelete(msg);break;
+        }
       }
     });
   }

@@ -37,6 +37,7 @@ The API to handle the Synchronisation of Hyperty Data Objects is extremely simpl
     console.info('Hello Data Object was created: ', dataObjectReporter);
 
     dataObjectReporter.data.hello = "Bye!!";
+    }
 ```
 
 On the Hyperty Observer side, Data Objects are also created with the Syncher API and the emerging [Object.observer() Javascript method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/observe) is used to receive the stream of data changes coming from the Reporter Hyperty.

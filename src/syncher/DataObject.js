@@ -79,9 +79,9 @@ class DataObject {
       _this._childrens.forEach((child) => {
         let childURL = childBaseURL + child;
         let listener = _this._bus.addListener(childURL, (msg) => {
-          console.log('DataObject-Children-RCV: ', msg);
           //ignore msg sent by himself
           if (msg.from !== this._owner) {
+            console.log('DataObject-Children-RCV: ', msg);
             switch (msg.type) {
               case 'create': _this._onChildrenCreate(msg); break;
               case 'delete': console.log(msg); break;
@@ -242,7 +242,7 @@ class DataObject {
     if (_this._status === 'on') {
       let changeMsg = {
         type: 'update', from: _this._url, to: _this._url + '/changes',
-        body: { version: _this._version, attribute: event.field }
+        body: { version: _this._version, source: _this._owner, attribute: event.field }
       };
 
       if (event.oType === ObjectType.OBJECT) {
