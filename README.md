@@ -202,6 +202,7 @@ The following Gulp tasks are available:
  - [License](#license)
  - [Dist](#dist)
  - [Build](#build)
+ - [compile](#compile)
  - [Encode](#encode)
  - [Watch Hyperty](#watch-hyperty)
  - [Build Hyperties](#build-hyperties)
@@ -246,9 +247,19 @@ Run the command:
 gulp build
 ```
 
+###### <a id="compile">Compile</a>
+
+This task converts from ES6 to ES5 and encode it in a base64 format;
+
+*to be completed*
+
+```shell
+gulp compile --file=<file>
+```
+
 ###### <a id="encode">Encode</a>
 
-This task is used to provision different types of resources in the Local Catalogue including in Hyperties, ProtoStubs, IdP Proxies and Object DataSchemas, which are encoded in the "descriptors" dir at Hyperties.json, ProtoStubs.json, IDPProxies.json and DataSchemas.json, respectively. During the process, task also converts from ES6 to ES5 and encode it in a base64 format;
+This task is used to provision different types of resources in the Local Catalogue including in Hyperties, ProtoStubs, IdP Proxies and Object DataSchemas, which are encoded in the "descriptors" dir at Hyperties.json, ProtoStubs.json, IDPProxies.json and DataSchemas.json, respectively.
 
 
 ```shell
