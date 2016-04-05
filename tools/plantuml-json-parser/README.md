@@ -25,16 +25,22 @@ Just run the command "java -jar puml-parse.jar" and it will parse and generate J
 PlantUML has many open rules that can conflict or add complexity to the JSON Schema generation. To avoid this, we should follow some additional constraints added to the PlantUML parser. You should consider this as a subset of Class Diagram PlantUML.
 
 * Supported entities are: package, relation, class, enum, note
-* When defining relations like "X --> Y" do not use the inverse alternative "Y <-- X".
-* Define class properties like "\<name\> [?] : [type]", the symbol "?" signals a non mandatory property. Available types are null, string, number, integer, boolean or any other class/enum, defaults to null. Constant properties are supported with "\<name\> = \<value\>".
-* Notes are available only in a restricted format like "note \<top | bottom | left | right\> of <\entity\> [text] end note" for an attached note to an entity (class or enum). Or not attached alternative like "note as \<id\> [text] end note". Some inline notes are supported like: "note \<top | bottom | left | right\>: [text]" or "note "[text]" as \<note name\>".
+* When defining relations like ```X --> Y``` do not use the inverse alternative ```Y <-- X```.
+* Define class properties like ```<name> [?] : [type]```, the symbol "?" signals a non mandatory property. Available types are null, string, number, integer, boolean or any other class/enum, defaults to null. Constant properties are supported with ```<name> = <value>```.
+* Arrays of native types are supported like ```property: string[]```
+* Notes are available only in a restricted format like ```note <top | bottom | left | right> of <entity> [text] end note``` for an attached note to an entity (class or enum). Or not attached alternative like ```note as <id> [text] end note```. Some inline notes are supported like: ```note <top | bottom | left | right>: [text]``` or ```note [text] as \<note name\>```.
 * Relations with notes are also supported.
 
-#### Example
+##### JSON Schema Generation Rules
+* enum values are converted to lowercase
+* Relations have no meaning in the generation process, except for the hierarchy. Hierarchy is converted to an array of references with "anyOf".
+* Special types like "URL" if marked with ```<<(T,orchid)>>``` are converted to string type instead of references.
 
 One simple example of a plantuml class diagram and associated generated json-schema related to the Communication Model used in reTHINK:
 
 ```javascript
+@startuml "Communication-Data-Object-Model.png"
+
 package Communication <<Rect>> {
 
 	enum CommunicationStatus {
@@ -45,7 +51,8 @@ package Communication <<Rect>> {
 		FAILED
 	}
 
-	enum ParticipantStatus {}
+	enum ParticipantStatus {
+	}
 
 	class Communication {
 		id
@@ -56,29 +63,37 @@ package Communication <<Rect>> {
 		duration
 	}
 
-	class Participant {}
-	class CommunicationQuality {}
-	class HypertyResource {}
+	class Participant {
+	}
+
+	class CommunicationQuality {
+	}
+
+	class HypertyResource {
+	}
 
 	Communication .. CommunicationStatus
 	Communication *.. Participant
 	Communication *.. CommunicationQuality
 	Communication *.. Message.Message
-	
-	... //other non presented data
+	Participant .. ParticipantStatus
+	Participant ..> HypertyResource
+	Participant ..> Identity.Identity
 
-	HypertyResource ..> Connection.Connection : transportedBy
+	HypertyResource ..> Connection.Connection : transportedBy 
+
 }
+@enduml
 ```
 
 For the Communication class it generates the JSON Schema:
 ```javascript
 {
 	"$schema": "http://json-schema.org/draft-04/schema#",
+
 	"id": "Communication",
 	"type": "object",
-	"required": ["id", "host", "owner", "startingTime", "lastModified", "duration", "communicationStatus"],
-	"additionalProperties": false,
+	"required": ["id", "host", "owner", "startingTime", "lastModified", "duration"],
 	"properties": {
 		"id": {
 			"type": "null"
@@ -98,33 +113,20 @@ For the Communication class it generates the JSON Schema:
 		"duration": {
 			"type": "null"
 		}
-		,
-		"communicationStatus": {
-			"enum": [
-				"OPEN",
-				"PENDING",
-				"CLOSED",
-				"PAUSED",
-				"FAILED"
-			]
-		},
-		"participantArray": {
-			"type": "array",
-			"items": {
-				"$ref": "../Communication/Participant.json"
-			}
-		},
-		"communicationQualityArray": {
-			"type": "array",
-			"items": {
-				"$ref": "../Communication/CommunicationQuality.json"
-			}
-		},
-		"messageArray": {
-			"type": "array",
-			"items": {
-				"$ref": "../Message/Message.json"
-			}
+	}, 
+	"Participant": {
+		"type": "object",
+		"properties": {
+		}
+	}, 
+	"CommunicationQuality": {
+		"type": "object",
+		"properties": {
+		}
+	}, 
+	"HypertyResource": {
+		"type": "object",
+		"properties": {
 		}
 	}
 }
