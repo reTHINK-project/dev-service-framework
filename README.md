@@ -77,7 +77,9 @@ if you have some trouble with the environment, you can open an issue;
 
 Address data factory is based on https://github.com/jsdom/whatwg-url, which transforms the source file with some minor changes. In this project, I have added a rule to perform that changes. Just do:
 
+```
 npm run-script build
+```
 
 ##### Javascript Environment
 
