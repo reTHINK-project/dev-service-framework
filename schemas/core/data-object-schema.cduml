@@ -8,28 +8,40 @@ package DataObjectSchema <<Rect>> {
 	class DataObjectSchema {
 	}
 
+
 	DataObjectSchema .up.|> CatalogueDataObject.CatalogueDataObject
 
 	class MessageDataObjectSchema {
 	}
 
 	class HypertyDataObjectSchema {
+	scheme : HypertyDataScheme
 	accessControlPolicy : string
 	}
+
+	class HypertyDataScheme {
+	 COMMUNICATION = "comm"
+	 CONNECTION = "connection"
+	 CONTEXT = "ctxt"
+	 	}
 
 	class AccessControlPolicy {
 	}
 
 	class CommunicationDataObjectSchema {
+	scheme = "comm"
 	}
 
 	class ConnectionDataObjectSchema {
+	scheme = "connection"
 	}
 
 	class IdentityDataObjectSchema {
+	scheme = "identity"
 	}
 
 	class ContextDataObjectSchema {
+	scheme = "ctxt"
 	}
 
 	MessageDataObjectSchema .up.|> DataObjectSchema

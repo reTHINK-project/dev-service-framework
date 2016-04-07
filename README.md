@@ -15,9 +15,13 @@ reTHINK provides a Javascript framework to build and deliver Real Time Communica
 
 ### Quick Start
 
-Just a few couple of lines are required for the reTHINK Hello World. First you need the Hello World Reporter, and its `hello()` function that is used to create the Hello Data Object and invite an Hello World Observer (`hypertyURL`):
+Just a few couple of lines are required for the reTHINK Hello World.
 
 ```
+// This is the Hello World Reporter who owns and reports changes done in the Hello Data Object.
+
+// The `hello()` function is used to create the Hello Data Object
+// and invite an Hello World Observer (`hypertyURL`):
 
     syncher.create(_this._objectDescURL, [hypertyURL], hello).then(function(helloObjtReporter) {
 
@@ -38,28 +42,22 @@ Just a few couple of lines are required for the reTHINK Hello World. First you n
 
   });
 }
-```
 
-The Hello World Observer is invited to subscribe the Hello Data Object (helloObjtObserver):
+// This is the "Bye()" function that changes the Hello Object.
 
-```
- syncher.subscribe(_this._objectDescURL, event.url).then(function(helloObjtObserver) {
-
-...
-
-```
-
-Any change done in the Hello Object by the Reporter:
-
-```
 helloObjtReporter.data.hello = "Bye!!";
 
+// This change  will be received by the Observer:
 ```
 
-.. will be received by the Observer:
+The Hello World Observer is the Hyperty that observes changes on the Hello Data Object performed by the Reporter:
 
 ```
-...
+// This is the Hello World Observer who subscribes the Hello Data Object to be synched with it.
+
+ syncher.subscribe(_this._objectDescURL, event.url).then(function(helloObjtObserver) {
+
+// Any change done in the Hello Object by the Reporter will be received by the Observer:
 
 helloObjtObserver.onChange('*', function(event) {
 

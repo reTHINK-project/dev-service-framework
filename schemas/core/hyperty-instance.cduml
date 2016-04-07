@@ -10,7 +10,7 @@ package HypertyInstance <<Rect>> {
 		url : URL.HypertyURL
 		user : URL.UserURL
 		guid : URL.UserGUIDURL
-		objects : string[]
+		type : RethinkObject.CatalogueDataObject.HypertyDescriptor.HypertyType[]
 		runtime : URL.HypertyRuntimeURL
 		context : URL.ContextURL
 	}

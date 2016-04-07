@@ -7,11 +7,8 @@ package HypertyRuntimeDescriptor <<Rect>> {
 
 package HypertyDescriptor <<Rect>> {
 
-	class HypertyType {
-		COMMUNICATOR
-		IDENTITY
-		CONTEXT
-	}
+
+
 
 	class HypertyDescriptor {
 		dataObjects : URL.HypertyCatalogueURLList
@@ -21,6 +18,21 @@ package HypertyDescriptor <<Rect>> {
 		constraints : CatalogueDataObject.HypertyRuntimeDescriptor.RuntimeHypertyCapabilities
 		policies ?: URL.HypertyCatalogueURL
 	}
+
+	class HypertyType {
+		dataSchemes : RethinkObject.CatalogueDataObject.DataObjectSchema.HypertyDataScheme[]
+		resourceTypes : HypertyResourceType[]
+	}
+
+		class HypertyResourceType {
+			CHAT = "chat"
+			AUDIO = "AUDIO"
+			VIDEO = "VIDEO"
+			AV = "AV"
+			SCREEN = "SCREEN"
+			FILE = "FILE"
+			MIDI = "MIDI"
+		}
 
 	class HypertyConfiguration {
 
