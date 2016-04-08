@@ -4,16 +4,18 @@
 package RegistryDataObject <<Rect>> {
 
 	package HypertyInstance <<Rect>> {
-	
+
 		class HypertyInstance {
 			url : URL.HypertyURL
 			user : URL.UserURL
 			guid : URL.UserGUIDURL
-			objects : string[]
+			dataSchemes : RethinkObject.Core.CatalogueDataObject.DataObjectSchema.HypertyDataObjectSchema[]
+			resources : RethinkObject.Core.CatalogueDataObject.HypertyDescriptor.HypertyResourceType[]
 			runtime : URL.HypertyRuntimeURL
 			context : URL.ContextURL
+
 		}
-	
+
 	}
 
 	HypertyInstance .up.|> RegistryDataObject.RegistryDataObject
