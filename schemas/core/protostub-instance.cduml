@@ -9,7 +9,7 @@ package RegistryDataObject <<Rect>> {
 		}
 	
 		ProtoStubInstance .up.|> RegistryDataObject.RegistryDataObject
-		ProtoStubInstance ..> CatalogueDataObject.ProtoStubDescriptor.ProtoStubDescriptor : instance of
+		ProtoStubInstance ..> RethinkCore.CatalogueDataObject.ProtoStubDescriptor.ProtoStubDescriptor : instance of
 		ProtoStubInstance ..> RegistryDataObject.HypertyRuntimeInstance.HypertyRuntimeInstance : executing at
 	}
 }

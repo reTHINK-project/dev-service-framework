@@ -1,24 +1,23 @@
 @startuml "../../docs/datamodel/core/hyperty-catalogue/Protostub-Descriptor-Data-Object-Model.png"
 
-package CatalogueDataObject <<Rect>> {
+package RethinkCore <<Rect>> {
 
-package ProtoStubDescriptor <<Rect>> {
-
-	class ProtoStubDescriptor {
-		messageSchema : URL.HypertyCatalogueURL
-		configuration : ProtostubConfiguration
-		constraints : CatalogueDataObject.HypertyRuntimeDescriptor.RuntimeProtocolCapabilities
-	}
-
-	class ProtostubConfiguration {
-	}
-
-	ProtoStubDescriptor .up.|> CatalogueDataObject.CatalogueDataObject
-
-	ProtoStubDescriptor *.. ProtostubConfiguration
-
-
-}
-
+	package CatalogueDataObject <<Rect>> {
+	
+		package ProtoStubDescriptor <<Rect>> {
+		
+			class ProtoStubDescriptor {
+				messageSchema : URL.HypertyCatalogueURL
+				configuration : ProtostubConfiguration
+				constraints : RethinkCore.CatalogueDataObject.HypertyRuntimeDescriptor.RuntimeProtocolCapabilities
+			}
+		
+			class ProtostubConfiguration {
+			}
+		
+			ProtoStubDescriptor .up.|> RethinkCore.CatalogueDataObject.CatalogueDataObject
+			ProtoStubDescriptor *.. ProtostubConfiguration
+		}
+	}	
 }
 @enduml

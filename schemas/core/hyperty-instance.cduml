@@ -1,6 +1,5 @@
 @startuml "../../docs/datamodel/core/hyperty-registry/Hyperty-Instance-Data-Object-Model.png"
 
-
 package RegistryDataObject <<Rect>> {
 
 	package HypertyInstance <<Rect>> {
@@ -9,11 +8,10 @@ package RegistryDataObject <<Rect>> {
 			url : URL.HypertyURL
 			user : URL.UserURL
 			guid : URL.UserGUIDURL
-			dataSchemes : RethinkObject.Core.CatalogueDataObject.DataObjectSchema.HypertyDataObjectSchema[]
-			resources : RethinkObject.Core.CatalogueDataObject.HypertyDescriptor.HypertyResourceType[]
+			dataSchemes : RethinkCore.CatalogueDataObject.DataObjectSchema.HypertyDataObjectSchema[]
+			resources : RethinkCore.CatalogueDataObject.HypertyDescriptor.HypertyResourceType[]
 			runtime : URL.HypertyRuntimeURL
 			context : URL.ContextURL
-
 		}
 
 	}

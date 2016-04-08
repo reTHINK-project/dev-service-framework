@@ -1,11 +1,5 @@
 @startuml "../../docs/datamodel/core/hyperty-registry/Hyperty-Data-Object-Instance-Model.png"
 
-package CatalogueDataObject <<Rect>> {
-
-	package DataObjectSchema <<Rect>> {
-	}
-}
-
 package RegistryDataObject <<Rect>> {
 
 	package HypertyDataObjectInstance <<Rect>> {
@@ -34,7 +28,7 @@ package RegistryDataObject <<Rect>> {
 
 	HypertyDataObjectInstance .up.|> RegistryDataObject.RegistryDataObject
 	HypertyDataObjectInstance ..> RegistryDataObject.HypertyInstance.HypertyInstance : owned by
-	HypertyDataObjectInstance ..> CatalogueDataObject.DataObjectSchema.DataObjectSchema : described by
+	HypertyDataObjectInstance ..> RethinkCore.CatalogueDataObject.DataObjectSchema.DataObjectSchema : described by
 }
 
 @enduml

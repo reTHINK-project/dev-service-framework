@@ -1,41 +1,44 @@
 @startuml "../../docs/datamodel/core/hyperty-catalogue/Hyperty-Descriptor-Data-Object-Model.png"
 
-package CatalogueDataObject <<Rect>> {
+package RethinkCore <<Rect>> {
 
-	package HypertyRuntimeDescriptor <<Rect>> {
-	}
-
-	package HypertyDescriptor <<Rect>> {
-
-		class HypertyResourceType {
-			CHAT
-			AUDIO
-			VIDEO
-			AV
-			SCREEN
-			FILE
-			MIDI
+	package CatalogueDataObject <<Rect>> {
+	
+		package HypertyRuntimeDescriptor <<Rect>> {
+		}
+	
+		package HypertyDescriptor <<Rect>> {
+	
+			class HypertyResourceType {
+				CHAT
+				AUDIO
+				VIDEO
+				AV
+				SCREEN
+				FILE
+				MIDI
+				}
+	
+	
+			class HypertyDescriptor {
+				dataObjectUrls : URL.HypertyCatalogueURLList
+				hypertyType : HypertyResourceType[]
+				messageSchemaUrl : URL.HypertyCatalogueURL
+				configuration ?: HypertyConfiguration
+				constraints : RethinkCore.CatalogueDataObject.HypertyRuntimeDescriptor.RuntimeHypertyCapabilities
+				policiesUrl ?: URL.HypertyCatalogueURL
 			}
-
-
-		class HypertyDescriptor {
-			dataObjectUrls : URL.HypertyCatalogueURLList
-			hypertyType : HypertyResourceType[]
-			messageSchemaUrl : URL.HypertyCatalogueURL
-			configuration ?: HypertyConfiguration
-			constraints : CatalogueDataObject.HypertyRuntimeDescriptor.RuntimeHypertyCapabilities
-			policiesUrl ?: URL.HypertyCatalogueURL
+	
+			class HypertyConfiguration {
+			}
+	
+			HypertyDescriptor .up.|> RethinkCore.CatalogueDataObject.CatalogueDataObject
+	
+			HypertyDescriptor .. HypertyResourceType
+			HypertyDescriptor *.. "0..1" RethinkCore.CatalogueDataObject.HypertyRuntimeDescriptor.RuntimeHypertyCapabilities
+			HypertyDescriptor *.. "0..1" HypertyConfiguration
+	
 		}
-
-		class HypertyConfiguration {
-		}
-
-		HypertyDescriptor .up.|> CatalogueDataObject.CatalogueDataObject
-
-		HypertyDescriptor .. HypertyType
-		HypertyDescriptor *.. "0..1" CatalogueDataObject.HypertyRuntimeDescriptor.RuntimeHypertyCapabilities
-		HypertyDescriptor *.. "0..1" HypertyConfiguration
-
 	}
 }
 @enduml
