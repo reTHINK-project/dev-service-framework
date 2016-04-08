@@ -8,36 +8,30 @@ package CatalogueDataObject <<Rect>> {
 
 package RegistryDataObject <<Rect>> {
 
-package HypertyDataObjectInstance <<Rect>> {
-
-	class HypertyDataObjectInstance {
-		owner : URL.HypertyURL
+	package HypertyDataObjectInstance <<Rect>> {
+	
+		class HypertyDataObjectInstance {
+			owner : URL.HypertyURL
 		}
-
-	class HypertyCommunicationDataObjectInstance {
-		url : URL.CommunicationURL
+	
+		class HypertyCommunicationDataObjectInstance {
+			url : URL.CommunicationURL
 		}
-
-	class HypertyContextDataObjectInstance {
-		url : URL.ContextURL
+	
+		class HypertyContextDataObjectInstance {
+			url : URL.ContextURL
 		}
-		}
+		
+		HypertyContextDataObjectInstance .up.|> HypertyDataObjectInstance
+		HypertyCommunicationDataObjectInstance .up.|> HypertyDataObjectInstance
+	}
 
-		package HypertyInstance <<Rect>> {
-		}
-
+	package HypertyInstance <<Rect>> {
+	}
 
 	HypertyDataObjectInstance .up.|> RegistryDataObject.RegistryDataObject
-
-	HypertyContextDataObjectInstance .up.|> HypertyDataObjectInstance
-
-	HypertyCommunicationDataObjectInstance .up.|> HypertyDataObjectInstance
-
-	HypertyDataObjectInstance ..> HypertyInstance.HypertyInstance : owned by
-
-	HypertyDataObjectInstance ..> DataObjectSchema.DataObjectSchema : described by
-
+	HypertyDataObjectInstance ..> RegistryDataObject.HypertyInstance.HypertyInstance : owned by
+	HypertyDataObjectInstance ..> CatalogueDataObject.DataObjectSchema.DataObjectSchema : described by
 }
-
 
 @enduml

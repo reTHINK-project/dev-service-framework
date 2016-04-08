@@ -29,11 +29,11 @@ package Context <<Rect>> {
 	class ContextValue {
 		name : string
 		units : ContextUnit
-		value : RethinkType.Basic
-		sum ?
-		time ?: RethinkType.Date
-		updateTime ?: RethinkType.Date
-		expires ?: RethinkType.Date
+		value : RethinkCore.RethinkType.Basic
+		sum
+		time ?: RethinkCore.RethinkType.Date
+		updateTime ?: RethinkCore.RethinkType.Date
+		expires ?: RethinkCore.RethinkType.Date
 		address ?: URL.HypertyRuntimeURL
 	}
 
@@ -48,12 +48,12 @@ package Context <<Rect>> {
 	Context --> ContextType
 	Context --> ContextUnit
 	ContextValue --> ContextUnit
-	ContextValue --> RethinkType.Basic
+	ContextValue --> RethinkCore.RethinkType.Basic
 
 	ContextValueList *-- ContextValue
 
-	ContextValue --|> RethinkType.ListElement
-	ContextValueList --|> RethinkType.List
+	ContextValue --|> RethinkCore.RethinkType.ListElement
+	ContextValueList --|> RethinkCore.RethinkType.List
 
 	RawContextValue -up-|> ContextValue
 	ProcessedContextValue -up-|> ContextValue

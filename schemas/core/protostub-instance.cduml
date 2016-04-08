@@ -2,18 +2,15 @@
 
 package RegistryDataObject <<Rect>> {
 
-package ProtoStubInstance <<Rect>> {
-
-	class ProtoStubInstance {
-		runtime : URL.HypertyRuntimeURL
+	package ProtoStubInstance <<Rect>> {
+	
+		class ProtoStubInstance {
+			runtime : URL.HypertyRuntimeURL
+		}
+	
+		ProtoStubInstance .up.|> RegistryDataObject.RegistryDataObject
+		ProtoStubInstance ..> CatalogueDataObject.ProtoStubDescriptor.ProtoStubDescriptor : instance of
+		ProtoStubInstance ..> RegistryDataObject.HypertyRuntimeInstance.HypertyRuntimeInstance : executing at
 	}
-
-	ProtoStubInstance .up.|> RegistryDataObject.RegistryDataObject
-
-	ProtoStubInstance ..> ProtoStubDescriptor.ProtoStubDescriptor : instance of
-	ProtoStubInstance ..> HypertyRuntimeInstance.HypertyRuntimeInstance : executing at
-
-}
-
 }
 @enduml

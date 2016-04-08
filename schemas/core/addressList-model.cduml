@@ -52,8 +52,8 @@ package URL <<Rect>> {
 	DomainURLList *-down- URL.DomainURL
 	ContextURLList *-up- URL.ContextURL
 
-	URL.URL --|> RethinkType.ListElement
-	URLList --|> RethinkType.List
+	URL.URL --|> RethinkCore.RethinkType.ListElement
+	URLList --|> RethinkCore.RethinkType.List
 
 	URLList *-right- URL.URL
 }

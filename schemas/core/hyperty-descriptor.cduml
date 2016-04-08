@@ -2,49 +2,35 @@
 
 package CatalogueDataObject <<Rect>> {
 
-package HypertyRuntimeDescriptor <<Rect>> {
-}
-
-package HypertyDescriptor <<Rect>> {
-
-
-
-
-	class HypertyDescriptor {
-		dataObjects : URL.HypertyCatalogueURLList
-		hypertyType : HypertyType
-		messageSchema : URL.HypertyCatalogueURL
-		configuration ?: HypertyConfiguration
-		constraints : CatalogueDataObject.HypertyRuntimeDescriptor.RuntimeHypertyCapabilities
-		policies ?: URL.HypertyCatalogueURL
+	package HypertyRuntimeDescriptor <<Rect>> {
 	}
-
-	class HypertyType {
-		dataSchemes : RethinkObject.CatalogueDataObject.DataObjectSchema.HypertyDataScheme[]
-		resourceTypes : HypertyResourceType[]
-	}
-
-		class HypertyResourceType {
-			CHAT = "chat"
-			AUDIO = "AUDIO"
-			VIDEO = "VIDEO"
-			AV = "AV"
-			SCREEN = "SCREEN"
-			FILE = "FILE"
-			MIDI = "MIDI"
+	
+	package HypertyDescriptor <<Rect>> {
+	
+		class HypertyType {
+			COMMUNICATOR
+			IDENTITY
+			CONTEXT
 		}
-
-	class HypertyConfiguration {
+	
+		class HypertyDescriptor {
+			dataObjects : URL.HypertyCatalogueURLList
+			hypertyType : HypertyType
+			messageSchema : URL.HypertyCatalogueURL
+			configuration ?: HypertyConfiguration
+			constraints : CatalogueDataObject.HypertyRuntimeDescriptor.RuntimeHypertyCapabilities
+			policies ?: URL.HypertyCatalogueURL
+		}
+	
+		class HypertyConfiguration {
+		}
+	
+		HypertyDescriptor .up.|> CatalogueDataObject.CatalogueDataObject
+	
+		HypertyDescriptor .. HypertyType
+		HypertyDescriptor *.. "0..1" CatalogueDataObject.HypertyRuntimeDescriptor.RuntimeHypertyCapabilities
+		HypertyDescriptor *.. "0..1" HypertyConfiguration
 
 	}
-
-
-	HypertyDescriptor .up.|> CatalogueDataObject.CatalogueDataObject
-
-	HypertyDescriptor .. HypertyType
-	HypertyDescriptor *.. "0..1" HypertyRuntimeDescriptor.RuntimeHypertyCapabilities
-	HypertyDescriptor *.. "0..1" HypertyConfiguration
-
-}
 }
 @enduml

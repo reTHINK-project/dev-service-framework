@@ -2,17 +2,23 @@
 
 package HypertyResource <<Rect>> {
 
+	enum ResourceType {
+		CHAT
+		AUDIO
+		VIDEO
+		AV
+		SCREEN
+		FILE
+		MIDI
+	}
 
-	class ResourceDirection {
+	enum ResourceDirection {
 		IN
 		OUT
 		INOUT
 	}
 
 	class HypertyResource {
-	 type : RethinkObject.CatalogueDataObject.HypertyDescriptor.HypertyResourceType
-	 direction : ResourceDirection
-
 	}
 
 	HypertyResource ..> ResourceType

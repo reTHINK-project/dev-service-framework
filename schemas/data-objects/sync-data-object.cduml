@@ -1,28 +1,27 @@
 @startuml "../../docs/datamodel/data-objects/data-synch/SyncDataObject.png"
-	package SyncDataObject {
 
+package SyncDataObject {
 
-		class SyncObject {
-			reporter : URL.HypertyURL
-			schema : URL.HypertyCatalogueURL
-		}
+	class SyncObject {
+		reporter : URL.HypertyURL
+		schema : URL.HypertyCatalogueURL
+	}
 
-		class SyncObjectParent {
-		}
+	class SyncObjectParent {
+	}
 
-		class SyncObjectChildren {
+	class SyncObjectChildren {
 		children : URL.URLList
-		}
+	}
 
-		class SyncObjectChild {
-		}
+	class SyncObjectChild {
+	}
 
 	SyncObjectParent .up.|> SyncObject
-
 	SyncObjectChild .up.|> SyncObject
 
-	SyncObjectChildren "1-*".up.*"1" SyncObjectParent
+	SyncObjectParent *.down. "1..*" SyncObjectChildren
+	SyncObjectChildren .down.> "1..*" SyncObjectChild : ChildId
+}
 
-	SyncObjectChild "1-*"<.up."1" SyncObjectChildren : ChildId
-	}
 @enduml

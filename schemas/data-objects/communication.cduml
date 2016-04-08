@@ -40,7 +40,6 @@ package Communication <<Rect>> {
 	Participant ..> Identity.Identity
 
 	HypertyResource ..> Connection.Connection : transportedBy
-
 }
 
 @enduml

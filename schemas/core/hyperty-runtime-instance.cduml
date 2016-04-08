@@ -2,15 +2,14 @@
 
 package RegistryDataObject <<Rect>> {
 
-package HypertyRuntimeInstance <<Rect>> {
+	package HypertyRuntimeInstance <<Rect>> {
 
-	class HypertyRuntimeInstance {
-		url : URL.HypertyRuntimeURL
-		domains : URL.URLList
-	}
-
-	HypertyRuntimeInstance .up.|> RegistryDataObject.RegistryDataObject
-
+		class HypertyRuntimeInstance {
+			url : URL.HypertyRuntimeURL
+			domains : URL.URLList
+		}
+	
+		HypertyRuntimeInstance .up.|> RegistryDataObject.RegistryDataObject
 	}
 }
 @enduml

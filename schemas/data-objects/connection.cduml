@@ -1,8 +1,5 @@
 @startuml "../../docs/datamodel/data-objects/connection/Connection-Data-Object-Model.png"
 
-class SyncData {
-}
-
 package Connection <<Rect>> {
 
 	class Connection {
@@ -49,9 +46,7 @@ package Connection <<Rect>> {
 	Connection -up-|> RethinkCore.SyncData
 	Peer -up-|> RethinkCore.SyncData
 
-
 	Connection *--> "1" OwnerPeer
-
 	Connection ..> "1" Peer
 
 	Peer *--> "1" IceCandidates
@@ -64,7 +59,5 @@ package Connection <<Rect>> {
 
 	IceCandidates -down-> RTCIceConnectionState
 	IceCandidates *--> IceCandidate
-
 }
-
 @enduml
