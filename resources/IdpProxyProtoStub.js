@@ -166,7 +166,7 @@ let IdpProxy = {
 
         let requestUrl = i.authorisationEndpoint + 'scope=' + i.scope + '&client_id=' + i.clientID + '&redirect_uri=' + i.redirectURI + '&response_type=' + i.type + '&state=' + i.state + '&access_type=' + i.accessType;
 
-        reject(requestUrl);
+        reject({name: 'IdPLoginError', loginUrl: requestUrl});
 
       //  }
 
@@ -227,12 +227,8 @@ class IdpProxyProtoStub {
    _this.config = config;
 
    _this.messageBus.addListener('*', function(msg) {
-     if (msg.to == 'domain://google.com') {
-       /*let newValue = IdpProxy.generateAssertion();
-       let message = {id: msg.id, type: 'response', to: msg.from, from: msg.to,
-                      body: {code: 200, value: newValue, bus: bus, runtimeProtoStubURL: runtimeProtoStubURL}};
+     if (msg.to === 'domain://google.com') {
 
-       _this.messageBus.postMessage(message);*/
        _this.requestToIdp(msg);
      }
    });
@@ -246,70 +242,32 @@ class IdpProxyProtoStub {
   requestToIdp(msg) {
     let _this = this;
     let params = msg.body.params;
+
     switch (msg.body.method) {
       case 'login':
-        _this.login(params).then(function(value) { _this.replyMessage(msg, value);});
+        IdpProxy.getIdentityAssertion(params).then(
+          function(value) { _this.replyMessage(msg, value);},
+
+          function(error) { _this.replyMessage(msg, error);}
+        );
         break;
       case 'generateAssertion':
-        _this.generate(params).then(function(value) { _this.replyMessage(msg, value);});
+        IdpProxy.generateAssertion(params.contents, params.origin, params.usernameHint).then(
+          function(value) { _this.replyMessage(msg, value);},
+
+          function(error) { _this.replyMessage(msg, error);}
+        );
         break;
       case 'validateAssertion':
-        _this.validate(params).then(function(value) { _this.replyMessage(msg, value);});
+        IdpProxy.validateAssertion(params.assertion, params.origin).then(
+          function(value) { _this.replyMessage(msg, value);},
+
+          function(error) { _this.replyMessage(msg, error);}
+        );
         break;
       default:
         break;
     }
-  }
-
-  /**
-  * function that makes a request for an identity assertion to the web worker running the idpProxy
-  *
-  * @param  {params}  parameters received in the message. In this case contains the content, origin and usernamehint
-  * @return {Promise} returns a promise with an identity assertion generate by the idpProxy
-  */
-  generate(params) {
-    let _this = this;
-
-    return new Promise(function(resolve,reject) {
-      IdpProxy.generateAssertion(params.contents, params.origin, params.usernameHint).then(function(result) {
-        resolve(result);
-      });
-    });
-  }
-
-  /**
-  * function that makes a request to validate an identity assertion to the web worker running the idpProxy
-  *
-  * @param  {params}  parameters received in the message. In this case contains the identity assertion and origin
-  * @return {Promise} returns a promise with the identity assertion validation result, received by the idpProxy
-  */
-  validate(params) {
-    let _this = this;
-
-    return new Promise(function(resolve,reject) {
-      IdpProxy.validateAssertion(params.assertion, params.origin).then(function(result) {
-        resolve(result);
-      });
-    });
-  }
-
-  /**
-  * function that makes a request for a user identity to the web worker running the idpProxy
-  *
-  * @param  {params}  parameters received in the message. In this case contains the login scope
-  * @return {Promise} returns a promise an URL so the Identity Module can use to obtain an identity
-  */
-  login(params) {
-    let _this = this;
-
-    return new Promise(function(resolve,reject) {
-      IdpProxy.getIdentityAssertion(params).then(function(result) {
-        resolve(result);
-      }, function(result) {
-
-        resolve(result);
-      });
-    });
   }
 
   /**
