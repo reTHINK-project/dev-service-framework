@@ -179,13 +179,6 @@ class MtproxyProtoStub {
     let params = msg.body.params;
 
     switch (msg.body.method) {
-      case 'login':
-        idp.getIdentityAssertion(params).then(
-          function(value) { _this.replyMessage(msg, value);},
-
-          function(error) { _this.replyMessage(msg, error);}
-        );
-        break;
       case 'generateAssertion':
         idp.generateAssertion(params.contents, params.origin, params.usernameHint).then(
           function(value) { _this.replyMessage(msg, value);},

@@ -93,7 +93,7 @@ var idp = {
       getProxyID()
       .then(ID => {
         var _url = SOURCEURL+AUTHPATH+'?scope=' + FULLSCOPE + '&client_id=' + ID +
-                     '&redirect_uri=' + location.origin + '&response_type=' + TYPE +
+                     '&redirect_uri=' + SOURCEURL + DONEPATH + '&response_type=' + TYPE +
                      '&nonce=' + 'N-'+Math.random() + '&rtcsdp='+btoa(contents)
         var myInit = { method: 'GET',
                      //headers: myHeaders,
@@ -220,13 +220,6 @@ class RethinkOidcProtoStub {
     let params = msg.body.params;
 
     switch (msg.body.method) {
-      case 'login':
-        idp.getIdentityAssertion(params).then(
-          function(value) { _this.replyMessage(msg, value);},
-
-          function(error) { _this.replyMessage(msg, error);}
-        );
-        break;
       case 'generateAssertion':
         idp.generateAssertion(params.contents, params.origin, params.usernameHint).then(
           function(value) { _this.replyMessage(msg, value);},
