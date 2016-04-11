@@ -44,9 +44,9 @@ export class MessageBody{
             this.idToken = idToken;
        // if(accessToken)
             this.accessToken = accessToken;
-       // if(resource )
+       // if(resource)
             this.resource = resource;
-        //if(schema )
+        //if(schema)
             this.schema = schema;
         //if(assertedIdentity)
             this.assertedIdentity = assertedIdentity;
@@ -73,7 +73,7 @@ export class CreateMessageBody extends MessageBody {
     constructor(value, policy, idToken, accessToken, resource, schema, assertedIdentity){
         if(!value)
             throw new Error("The value parameter is null");
-        super(idToken,accessToken, resource, schema, assertedIdentity, schema, assertedIdentity);
+        super(idToken, accessToken, resource, schema, assertedIdentity, schema, assertedIdentity);
 
         this.value = value;
         if(policy)
@@ -122,20 +122,24 @@ export class DeleteMessageBody extends MessageBody {
      *
      * @param {Identity.JWT} idToken -
      * @param {Identity.JWT} accessToken
-     * @param {URL.URL} resource - URL of the object
+     * @param {URL.URLList} resource - One or more URLs of objects to be deleted 
      * @param {URL.HypertyCatalogueURL} schema - URL of the Data object schema stored in the Catalogue
      * @param {Identity.Identity} assertedIdentity - AssertedIdentity is compliant with User Identity Data Model
      * @param {String} attribute - Identifies the attribute in the Object to be deleted (optional)
      */
-    constructor(idToken, accessToken, resource, schema, assertedIdentity,attribute ){
-
-        super(idToken,accessToken ,resource, schema, assertedIdentity );
+    constructor(idToken, accessToken, resource, schema, assertedIdentity, attribute){
+	
+        if (typeof resource === 'array' || resource instanceof Array) {
+            super(idToken, accessToken , null, schema, assertedIdentity);
+            this.childrenResources = resource;
+        } else {
+            super(idToken, accessToken ,resource, schema, assertedIdentity);
+        }
 
         if(attribute){
             this.attribute = attribute;
         }
     }
-
 }
 
 /**
