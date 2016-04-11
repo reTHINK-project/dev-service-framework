@@ -32277,8 +32277,6 @@ var PolicyEngine = function () {
     key: 'authorise',
     value: function authorise(message) {
       var _this = this;
-      console.log('-------------- POLICY ENGINE --------------');
-      console.log(message);
       return new Promise(function (resolve, reject) {
 
         //TODO turn it later into a policy

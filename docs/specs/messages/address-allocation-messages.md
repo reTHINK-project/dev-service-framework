@@ -72,7 +72,7 @@ Message sent by the Hyperty Runtime Registry function to Message Node Address Al
 "type" : "DELETE",
 "from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/registry/allocation",
 "to" : "domain://msg-node.<sp-domain>/<type>-address-allocation",
-"body" : { "childrenResources" : {"["<scheme>://<sp-domain>/<identifier>", ...]} }
+"body" : { "childrenResources" : ["<scheme>://<sp-domain>/<identifier>", ...] }
 ```
 
 **Response to Message requesting address deallocation for one specific set of addresses**
