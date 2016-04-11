@@ -86,11 +86,11 @@ public class ClassDiagramSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case ClassDiagramPackage.ENTITY_AND_NOTE:
+      case ClassDiagramPackage.NODE:
       {
-        EntityAndNote entityAndNote = (EntityAndNote)theEObject;
-        T result = caseEntityAndNote(entityAndNote);
-        if (result == null) result = caseElement(entityAndNote);
+        Node node = (Node)theEObject;
+        T result = caseNode(node);
+        if (result == null) result = caseElement(node);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -98,7 +98,7 @@ public class ClassDiagramSwitch<T> extends Switch<T>
       {
         Entity entity = (Entity)theEObject;
         T result = caseEntity(entity);
-        if (result == null) result = caseEntityAndNote(entity);
+        if (result == null) result = caseNode(entity);
         if (result == null) result = caseElement(entity);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -107,6 +107,7 @@ public class ClassDiagramSwitch<T> extends Switch<T>
       {
         CPackage cPackage = (CPackage)theEObject;
         T result = caseCPackage(cPackage);
+        if (result == null) result = caseNode(cPackage);
         if (result == null) result = caseElement(cPackage);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -138,7 +139,7 @@ public class ClassDiagramSwitch<T> extends Switch<T>
         Enumer enumer = (Enumer)theEObject;
         T result = caseEnumer(enumer);
         if (result == null) result = caseEntity(enumer);
-        if (result == null) result = caseEntityAndNote(enumer);
+        if (result == null) result = caseNode(enumer);
         if (result == null) result = caseElement(enumer);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -148,7 +149,7 @@ public class ClassDiagramSwitch<T> extends Switch<T>
         Clazz clazz = (Clazz)theEObject;
         T result = caseClazz(clazz);
         if (result == null) result = caseEntity(clazz);
-        if (result == null) result = caseEntityAndNote(clazz);
+        if (result == null) result = caseNode(clazz);
         if (result == null) result = caseElement(clazz);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -171,7 +172,7 @@ public class ClassDiagramSwitch<T> extends Switch<T>
       {
         Note note = (Note)theEObject;
         T result = caseNote(note);
-        if (result == null) result = caseEntityAndNote(note);
+        if (result == null) result = caseNode(note);
         if (result == null) result = caseElement(note);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -220,17 +221,17 @@ public class ClassDiagramSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Entity And Note</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Node</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Entity And Note</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Node</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseEntityAndNote(EntityAndNote object)
+  public T caseNode(Node object)
   {
     return null;
   }

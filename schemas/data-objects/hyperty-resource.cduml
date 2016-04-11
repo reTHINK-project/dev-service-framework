@@ -1,6 +1,9 @@
 @startuml "../../docs/datamodel/data-objects/communication/Hyperty-Resource-Data-Object-Model.png"
 
 package HypertyResource <<Rect>> {
+	
+	class HypertyResource {
+	}
 
 	enum ResourceType {
 		CHAT
@@ -16,9 +19,6 @@ package HypertyResource <<Rect>> {
 		IN
 		OUT
 		INOUT
-	}
-
-	class HypertyResource {
 	}
 
 	HypertyResource ..> ResourceType

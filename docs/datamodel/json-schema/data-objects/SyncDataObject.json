@@ -1,0 +1,43 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+
+	"SyncObject": {
+		"type": "object",
+		"required": ["reporter", "schema"],
+		"anyOf": [
+			{ "$ref": "#/SyncObjectParent" },
+			{ "$ref": "#/SyncObjectChild" }
+		]
+		,
+		"properties": {
+			"reporter": {
+				"type": "string"
+			},
+			"schema": {
+				"type": "string"
+			}
+		}
+	}, 
+	"SyncObjectParent": {
+		"type": "object",
+		"properties": {
+		}
+	}, 
+	"SyncObjectChildren": {
+		"type": "object",
+		"required": ["children"],
+		"properties": {
+			"children": {
+				"type": "array",
+				"items": {
+					"type": "string"
+				}
+			}
+		}
+	}, 
+	"SyncObjectChild": {
+		"type": "object",
+		"properties": {
+		}
+	}
+}

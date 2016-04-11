@@ -2,6 +2,15 @@
 
 package Communication <<Rect>> {
 
+	class Communication {
+		id
+		host
+		owner
+		startingTime
+		lastModified
+		duration
+	}
+
 	enum CommunicationStatus {
 		OPEN
 		PENDING
@@ -11,15 +20,6 @@ package Communication <<Rect>> {
 	}
 
 	enum ParticipantStatus {
-	}
-
-	class Communication {
-		id
-		host
-		owner
-		startingTime
-		lastModified
-		duration
 	}
 
 	class Participant {

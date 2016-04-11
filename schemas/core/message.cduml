@@ -5,26 +5,26 @@ package Message <<Rect>> {
 	class Message {
 		id : string
 		from : URL.URL
-		to : URL.URLList
+		to : URL.URL[]
 		type : MessageType
 		body ?: MessageBody
 	}
 
 	class MessageBody {
 		resource ?: URL.URL
-		childrenResources ?: URL.URLList
+		childrenResources ?: URL.URL[]
 		schema ?: URL.HypertyCatalogueURL
-		//idToken ?: RethinkCore.Identity.JWT
-		//accessToken ?: RethinkCore.Identity.JWT
-		//identity ?: RethinkCore.Identity.Identity
+		idToken ?: Identity.JWT
+		accessToken ?: Identity.JWT
+		identity ?: Identity.Identity
 		assertedIdentity ?: boolean
-		via ?: URL.URLList
+		via ?: URL.URL[]
 		source ?: URL.URL
 	}
 
 	class CreateMessageBody {
 		policy ?: URL.URL
-		authorise ?: URL.URLList
+		authorise ?: URL.URL[]
 		value : string
 	}
 

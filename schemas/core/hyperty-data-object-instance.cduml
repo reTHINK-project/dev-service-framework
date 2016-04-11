@@ -21,12 +21,13 @@ package RegistryDataObject <<Rect>> {
 
 		HypertyContextDataObjectInstance .up.|> HypertyDataObjectInstance
 		HypertyCommunicationDataObjectInstance .up.|> HypertyDataObjectInstance
+		
+		HypertyDataObjectInstance .up.|> RegistryDataObject.RegistryDataObject
 	}
 
 	package HypertyInstance <<Rect>> {
 	}
 
-	HypertyDataObjectInstance .up.|> RegistryDataObject.RegistryDataObject
 	HypertyDataObjectInstance ..> RegistryDataObject.HypertyInstance.HypertyInstance : owned by
 	HypertyDataObjectInstance ..> RethinkCore.CatalogueDataObject.DataObjectSchema.DataObjectSchema : described by
 }

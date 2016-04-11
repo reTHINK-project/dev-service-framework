@@ -13,6 +13,6 @@ package rethink.uml.classDiagram;
  * @model
  * @generated
  */
-public interface Entity extends EntityAndNote
+public interface Entity extends Node
 {
 } // Entity

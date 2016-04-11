@@ -1,0 +1,98 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+
+	"id": "Context",
+	"type": "object",
+	"required": ["id", "type", "value"],
+	"properties": {
+		"id": {
+			"type": "string"
+		},
+		"type": {
+			"$ref": "#/ContextType"
+		},
+		"description": {
+			"type": "string"
+		},
+		"time": {
+			"$ref": "RethinkCore.RethinkType.json#/Date"
+		},
+		"units": {
+			"$ref": "#/ContextUnit"
+		},
+		"version": {
+			"type": "integer"
+		},
+		"value": {
+			"$ref": "#/ContextValueList"
+		},
+		"tag": {
+			"type": "string"
+		}
+	}, 
+	"ContextType": {
+		"type": "object",
+		"properties": {
+		}
+	}, 
+	"ContextUnit": {
+		"type": "object",
+		"properties": {
+		}
+	}, 
+	"ContextValueList": {
+		"type": "object",
+		"properties": {
+		}
+	}, 
+	"ContextValue": {
+		"type": "object",
+		"required": ["name", "units", "value", "sum"],
+		"anyOf": [
+			{ "$ref": "#/RawContextValue" },
+			{ "$ref": "#/ProcessedContextValue" }
+		]
+		,
+		"properties": {
+			"name": {
+				"type": "string"
+			},
+			"units": {
+				"$ref": "#/ContextUnit"
+			},
+			"value": {
+				"enum": [
+					"string",
+					"boolean",
+					"float",
+					"double"
+				]
+			},
+			"sum": {
+				"type": "null"
+			},
+			"time": {
+				"$ref": "RethinkCore.RethinkType.json#/Date"
+			},
+			"updateTime": {
+				"$ref": "RethinkCore.RethinkType.json#/Date"
+			},
+			"expires": {
+				"$ref": "RethinkCore.RethinkType.json#/Date"
+			},
+			"address": {
+				"type": "string"
+			}
+		}
+	}, 
+	"RawContextValue": {
+		"type": "object",
+		"properties": {
+		}
+	}, 
+	"ProcessedContextValue": {
+		"type": "object",
+		"properties": {
+		}
+	}
+}

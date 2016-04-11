@@ -11,7 +11,7 @@ package SyncDataObject {
 	}
 
 	class SyncObjectChildren {
-		children : URL.URLList
+		children : URL.URL[]
 	}
 
 	class SyncObjectChild {

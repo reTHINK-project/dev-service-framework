@@ -123,14 +123,14 @@ public interface ClassDiagramPackage extends EPackage
   int ELEMENT_FEATURE_COUNT = 1;
 
   /**
-   * The meta object id for the '{@link rethink.uml.classDiagram.impl.EntityAndNoteImpl <em>Entity And Note</em>}' class.
+   * The meta object id for the '{@link rethink.uml.classDiagram.impl.NodeImpl <em>Node</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see rethink.uml.classDiagram.impl.EntityAndNoteImpl
-   * @see rethink.uml.classDiagram.impl.ClassDiagramPackageImpl#getEntityAndNote()
+   * @see rethink.uml.classDiagram.impl.NodeImpl
+   * @see rethink.uml.classDiagram.impl.ClassDiagramPackageImpl#getNode()
    * @generated
    */
-  int ENTITY_AND_NOTE = 2;
+  int NODE = 2;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -139,16 +139,16 @@ public interface ClassDiagramPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ENTITY_AND_NOTE__NAME = ELEMENT__NAME;
+  int NODE__NAME = ELEMENT__NAME;
 
   /**
-   * The number of structural features of the '<em>Entity And Note</em>' class.
+   * The number of structural features of the '<em>Node</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ENTITY_AND_NOTE_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 0;
+  int NODE_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link rethink.uml.classDiagram.impl.EntityImpl <em>Entity</em>}' class.
@@ -167,7 +167,7 @@ public interface ClassDiagramPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ENTITY__NAME = ENTITY_AND_NOTE__NAME;
+  int ENTITY__NAME = NODE__NAME;
 
   /**
    * The number of structural features of the '<em>Entity</em>' class.
@@ -176,7 +176,7 @@ public interface ClassDiagramPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ENTITY_FEATURE_COUNT = ENTITY_AND_NOTE_FEATURE_COUNT + 0;
+  int ENTITY_FEATURE_COUNT = NODE_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link rethink.uml.classDiagram.impl.CPackageImpl <em>CPackage</em>}' class.
@@ -195,7 +195,7 @@ public interface ClassDiagramPackage extends EPackage
    * @generated
    * @ordered
    */
-  int CPACKAGE__NAME = ELEMENT__NAME;
+  int CPACKAGE__NAME = NODE__NAME;
 
   /**
    * The feature id for the '<em><b>Style</b></em>' attribute.
@@ -204,7 +204,7 @@ public interface ClassDiagramPackage extends EPackage
    * @generated
    * @ordered
    */
-  int CPACKAGE__STYLE = ELEMENT_FEATURE_COUNT + 0;
+  int CPACKAGE__STYLE = NODE_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Elements</b></em>' containment reference list.
@@ -213,7 +213,7 @@ public interface ClassDiagramPackage extends EPackage
    * @generated
    * @ordered
    */
-  int CPACKAGE__ELEMENTS = ELEMENT_FEATURE_COUNT + 1;
+  int CPACKAGE__ELEMENTS = NODE_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>CPackage</em>' class.
@@ -222,7 +222,7 @@ public interface ClassDiagramPackage extends EPackage
    * @generated
    * @ordered
    */
-  int CPACKAGE_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 2;
+  int CPACKAGE_FEATURE_COUNT = NODE_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link rethink.uml.classDiagram.impl.RelationImpl <em>Relation</em>}' class.
@@ -501,22 +501,13 @@ public interface ClassDiagramPackage extends EPackage
   int PROPERTY__TYPE = 2;
 
   /**
-   * The feature id for the '<em><b>Entity</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PROPERTY__ENTITY = 3;
-
-  /**
    * The feature id for the '<em><b>Entity List</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PROPERTY__ENTITY_LIST = 4;
+  int PROPERTY__ENTITY_LIST = 3;
 
   /**
    * The feature id for the '<em><b>Constant</b></em>' attribute.
@@ -525,7 +516,7 @@ public interface ClassDiagramPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PROPERTY__CONSTANT = 5;
+  int PROPERTY__CONSTANT = 4;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -534,7 +525,7 @@ public interface ClassDiagramPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PROPERTY__VALUE = 6;
+  int PROPERTY__VALUE = 5;
 
   /**
    * The number of structural features of the '<em>Property</em>' class.
@@ -543,7 +534,7 @@ public interface ClassDiagramPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PROPERTY_FEATURE_COUNT = 7;
+  int PROPERTY_FEATURE_COUNT = 6;
 
   /**
    * The meta object id for the '{@link rethink.uml.classDiagram.impl.EntityListImpl <em>Entity List</em>}' class.
@@ -590,7 +581,7 @@ public interface ClassDiagramPackage extends EPackage
    * @generated
    * @ordered
    */
-  int NOTE__NAME = ENTITY_AND_NOTE__NAME;
+  int NOTE__NAME = NODE__NAME;
 
   /**
    * The feature id for the '<em><b>Position</b></em>' attribute.
@@ -599,7 +590,7 @@ public interface ClassDiagramPackage extends EPackage
    * @generated
    * @ordered
    */
-  int NOTE__POSITION = ENTITY_AND_NOTE_FEATURE_COUNT + 0;
+  int NOTE__POSITION = NODE_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -608,7 +599,7 @@ public interface ClassDiagramPackage extends EPackage
    * @generated
    * @ordered
    */
-  int NOTE__VALUE = ENTITY_AND_NOTE_FEATURE_COUNT + 1;
+  int NOTE__VALUE = NODE_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Of</b></em>' reference.
@@ -617,7 +608,7 @@ public interface ClassDiagramPackage extends EPackage
    * @generated
    * @ordered
    */
-  int NOTE__OF = ENTITY_AND_NOTE_FEATURE_COUNT + 2;
+  int NOTE__OF = NODE_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>Note</em>' class.
@@ -626,7 +617,7 @@ public interface ClassDiagramPackage extends EPackage
    * @generated
    * @ordered
    */
-  int NOTE_FEATURE_COUNT = ENTITY_AND_NOTE_FEATURE_COUNT + 3;
+  int NOTE_FEATURE_COUNT = NODE_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link rethink.uml.classDiagram.impl.DataTypeImpl <em>Data Type</em>}' class.
@@ -648,13 +639,22 @@ public interface ClassDiagramPackage extends EPackage
   int DATA_TYPE__NATIVE = 0;
 
   /**
+   * The feature id for the '<em><b>Entity</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DATA_TYPE__ENTITY = 1;
+
+  /**
    * The feature id for the '<em><b>Is Array</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int DATA_TYPE__IS_ARRAY = 1;
+  int DATA_TYPE__IS_ARRAY = 2;
 
   /**
    * The number of structural features of the '<em>Data Type</em>' class.
@@ -663,7 +663,7 @@ public interface ClassDiagramPackage extends EPackage
    * @generated
    * @ordered
    */
-  int DATA_TYPE_FEATURE_COUNT = 2;
+  int DATA_TYPE_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link rethink.uml.classDiagram.PackageStyle <em>Package Style</em>}' enum.
@@ -760,14 +760,14 @@ public interface ClassDiagramPackage extends EPackage
   EAttribute getElement_Name();
 
   /**
-   * Returns the meta object for class '{@link rethink.uml.classDiagram.EntityAndNote <em>Entity And Note</em>}'.
+   * Returns the meta object for class '{@link rethink.uml.classDiagram.Node <em>Node</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Entity And Note</em>'.
-   * @see rethink.uml.classDiagram.EntityAndNote
+   * @return the meta object for class '<em>Node</em>'.
+   * @see rethink.uml.classDiagram.Node
    * @generated
    */
-  EClass getEntityAndNote();
+  EClass getNode();
 
   /**
    * Returns the meta object for class '{@link rethink.uml.classDiagram.Entity <em>Entity</em>}'.
@@ -1048,17 +1048,6 @@ public interface ClassDiagramPackage extends EPackage
   EReference getProperty_Type();
 
   /**
-   * Returns the meta object for the reference '{@link rethink.uml.classDiagram.Property#getEntity <em>Entity</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Entity</em>'.
-   * @see rethink.uml.classDiagram.Property#getEntity()
-   * @see #getProperty()
-   * @generated
-   */
-  EReference getProperty_Entity();
-
-  /**
    * Returns the meta object for the containment reference '{@link rethink.uml.classDiagram.Property#getEntityList <em>Entity List</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1175,6 +1164,17 @@ public interface ClassDiagramPackage extends EPackage
    * @generated
    */
   EAttribute getDataType_Native();
+
+  /**
+   * Returns the meta object for the reference '{@link rethink.uml.classDiagram.DataType#getEntity <em>Entity</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Entity</em>'.
+   * @see rethink.uml.classDiagram.DataType#getEntity()
+   * @see #getDataType()
+   * @generated
+   */
+  EReference getDataType_Entity();
 
   /**
    * Returns the meta object for the attribute '{@link rethink.uml.classDiagram.DataType#isIsArray <em>Is Array</em>}'.
@@ -1295,14 +1295,14 @@ public interface ClassDiagramPackage extends EPackage
     EAttribute ELEMENT__NAME = eINSTANCE.getElement_Name();
 
     /**
-     * The meta object literal for the '{@link rethink.uml.classDiagram.impl.EntityAndNoteImpl <em>Entity And Note</em>}' class.
+     * The meta object literal for the '{@link rethink.uml.classDiagram.impl.NodeImpl <em>Node</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see rethink.uml.classDiagram.impl.EntityAndNoteImpl
-     * @see rethink.uml.classDiagram.impl.ClassDiagramPackageImpl#getEntityAndNote()
+     * @see rethink.uml.classDiagram.impl.NodeImpl
+     * @see rethink.uml.classDiagram.impl.ClassDiagramPackageImpl#getNode()
      * @generated
      */
-    EClass ENTITY_AND_NOTE = eINSTANCE.getEntityAndNote();
+    EClass NODE = eINSTANCE.getNode();
 
     /**
      * The meta object literal for the '{@link rethink.uml.classDiagram.impl.EntityImpl <em>Entity</em>}' class.
@@ -1529,14 +1529,6 @@ public interface ClassDiagramPackage extends EPackage
     EReference PROPERTY__TYPE = eINSTANCE.getProperty_Type();
 
     /**
-     * The meta object literal for the '<em><b>Entity</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference PROPERTY__ENTITY = eINSTANCE.getProperty_Entity();
-
-    /**
      * The meta object literal for the '<em><b>Entity List</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1629,6 +1621,14 @@ public interface ClassDiagramPackage extends EPackage
      * @generated
      */
     EAttribute DATA_TYPE__NATIVE = eINSTANCE.getDataType_Native();
+
+    /**
+     * The meta object literal for the '<em><b>Entity</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference DATA_TYPE__ENTITY = eINSTANCE.getDataType_Entity();
 
     /**
      * The meta object literal for the '<em><b>Is Array</b></em>' attribute feature.

@@ -32,12 +32,12 @@ public interface Relation extends Element
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Left Ref</em>' reference.
-   * @see #setLeftRef(EntityAndNote)
+   * @see #setLeftRef(Node)
    * @see rethink.uml.classDiagram.ClassDiagramPackage#getRelation_LeftRef()
    * @model
    * @generated
    */
-  EntityAndNote getLeftRef();
+  Node getLeftRef();
 
   /**
    * Sets the value of the '{@link rethink.uml.classDiagram.Relation#getLeftRef <em>Left Ref</em>}' reference.
@@ -47,7 +47,7 @@ public interface Relation extends Element
    * @see #getLeftRef()
    * @generated
    */
-  void setLeftRef(EntityAndNote value);
+  void setLeftRef(Node value);
 
   /**
    * Returns the value of the '<em><b>Rel Type</b></em>' containment reference.
@@ -84,12 +84,12 @@ public interface Relation extends Element
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Right Ref</em>' reference.
-   * @see #setRightRef(EntityAndNote)
+   * @see #setRightRef(Node)
    * @see rethink.uml.classDiagram.ClassDiagramPackage#getRelation_RightRef()
    * @model
    * @generated
    */
-  EntityAndNote getRightRef();
+  Node getRightRef();
 
   /**
    * Sets the value of the '{@link rethink.uml.classDiagram.Relation#getRightRef <em>Right Ref</em>}' reference.
@@ -99,6 +99,6 @@ public interface Relation extends Element
    * @see #getRightRef()
    * @generated
    */
-  void setRightRef(EntityAndNote value);
+  void setRightRef(Node value);
 
 } // Relation

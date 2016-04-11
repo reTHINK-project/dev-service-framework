@@ -93,7 +93,7 @@ public class ClassDiagramSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	/**
 	 * Constraint:
-	 *     (native=NativeType isArray?='[]'?)
+	 *     ((native=NativeType | entity=[Entity|QualifiedName]) isArray?='[]'?)
 	 */
 	protected void sequence_DataType(EObject context, DataType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -138,7 +138,7 @@ public class ClassDiagramSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	/**
 	 * Constraint:
-	 *     (name=ID ((optional?='?'? (type=DataType | entity=[Entity|QualifiedName] | entityList=EntityList)?) | (constant?='=' value=Text)))
+	 *     (name=ID ((optional?='?'? (type=DataType | entityList=EntityList)?) | (constant?='=' value=Text)))
 	 */
 	protected void sequence_Property(EObject context, Property semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -165,7 +165,7 @@ public class ClassDiagramSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	/**
 	 * Constraint:
-	 *     (leftRef=[EntityAndNote|QualifiedName] relType=RelationParse rightRef=[EntityAndNote|QualifiedName] name=Text?)
+	 *     (leftRef=[Node|QualifiedName] relType=RelationParse rightRef=[Node|QualifiedName] name=Text?)
 	 */
 	protected void sequence_Relation(EObject context, Relation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -6,7 +6,6 @@ package RethinkCore <<Rect>> {
 	
 		package HypertyInterceptorDescriptor <<Rect>> {
 		
-		
 			class HypertyInterceptorDescriptor {
 				configuration ?: HypertyInterceptorConfiguration
 				policies ?: HypertyPolicyList
@@ -29,8 +28,6 @@ package RethinkCore <<Rect>> {
 			HypertyInterceptorDescriptor *.. "0..1" HypertyInterceptorConfiguration
 		
 			HypertyPolicyList *.. HypertyPolicy
-		
-		
 		}
 	
 	}

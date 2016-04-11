@@ -8,7 +8,7 @@ package Connection <<Rect>> {
 		peer : URL.ConnectionURL
 	}
 
-  class OwnerPeer {
+  	class OwnerPeer {
 	}
 
 	class Peer {

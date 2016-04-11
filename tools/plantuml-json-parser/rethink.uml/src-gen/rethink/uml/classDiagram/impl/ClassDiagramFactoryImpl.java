@@ -67,7 +67,7 @@ public class ClassDiagramFactoryImpl extends EFactoryImpl implements ClassDiagra
     {
       case ClassDiagramPackage.DOMAIN_MODEL: return createDomainModel();
       case ClassDiagramPackage.ELEMENT: return createElement();
-      case ClassDiagramPackage.ENTITY_AND_NOTE: return createEntityAndNote();
+      case ClassDiagramPackage.NODE: return createNode();
       case ClassDiagramPackage.ENTITY: return createEntity();
       case ClassDiagramPackage.CPACKAGE: return createCPackage();
       case ClassDiagramPackage.RELATION: return createRelation();
@@ -157,10 +157,10 @@ public class ClassDiagramFactoryImpl extends EFactoryImpl implements ClassDiagra
    * <!-- end-user-doc -->
    * @generated
    */
-  public EntityAndNote createEntityAndNote()
+  public Node createNode()
   {
-    EntityAndNoteImpl entityAndNote = new EntityAndNoteImpl();
-    return entityAndNote;
+    NodeImpl node = new NodeImpl();
+    return node;
   }
 
   /**

@@ -16,7 +16,7 @@ import rethink.uml.classDiagram.Entity;
  *
  * @generated
  */
-public class EntityImpl extends EntityAndNoteImpl implements Entity
+public class EntityImpl extends NodeImpl implements Entity
 {
   /**
    * <!-- begin-user-doc -->

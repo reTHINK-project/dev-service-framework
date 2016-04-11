@@ -21,7 +21,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface CPackage extends Element
+public interface CPackage extends Node
 {
   /**
    * Returns the value of the '<em><b>Style</b></em>' attribute.

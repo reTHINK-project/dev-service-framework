@@ -41,13 +41,13 @@ public interface ClassDiagramFactory extends EFactory
   Element createElement();
 
   /**
-   * Returns a new object of class '<em>Entity And Note</em>'.
+   * Returns a new object of class '<em>Node</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Entity And Note</em>'.
+   * @return a new object of class '<em>Node</em>'.
    * @generated
    */
-  EntityAndNote createEntityAndNote();
+  Node createNode();
 
   /**
    * Returns a new object of class '<em>Entity</em>'.

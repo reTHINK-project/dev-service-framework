@@ -14,9 +14,8 @@ package RegistryDataObject <<Rect>> {
 			context : URL.ContextURL
 		}
 
+		HypertyInstance .up.|> RegistryDataObject.RegistryDataObject
 	}
-
-	HypertyInstance .up.|> RegistryDataObject.RegistryDataObject
 }
 
 @enduml

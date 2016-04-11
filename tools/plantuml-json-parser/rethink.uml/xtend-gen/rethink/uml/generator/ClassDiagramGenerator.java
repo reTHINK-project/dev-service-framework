@@ -22,16 +22,15 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 import rethink.uml.classDiagram.CPackage;
 import rethink.uml.classDiagram.Clazz;
-import rethink.uml.classDiagram.CompType;
 import rethink.uml.classDiagram.DataType;
+import rethink.uml.classDiagram.Element;
 import rethink.uml.classDiagram.Entity;
-import rethink.uml.classDiagram.EntityAndNote;
 import rethink.uml.classDiagram.EntityList;
 import rethink.uml.classDiagram.Enumer;
 import rethink.uml.classDiagram.NativeType;
+import rethink.uml.classDiagram.Node;
 import rethink.uml.classDiagram.Property;
 import rethink.uml.classDiagram.Relation;
 import rethink.uml.classDiagram.RelationParse;
@@ -53,11 +52,18 @@ public class ClassDiagramGenerator implements IGenerator {
     Iterator<CPackage> _filter = Iterators.<CPackage>filter(_allContents, CPackage.class);
     Iterable<CPackage> _iterable = IteratorExtensions.<CPackage>toIterable(_filter);
     for (final CPackage pack : _iterable) {
-      QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(pack);
-      String _string = _fullyQualifiedName.toString();
-      String _plus = (_string + ".json");
-      String _compile = this.compile(resource, pack);
-      fsa.generateFile(_plus, _compile);
+      EList<Element> _elements = pack.getElements();
+      final Function1<Element, Boolean> _function = (Element it) -> {
+        return Boolean.valueOf((it instanceof Entity));
+      };
+      boolean _exists = IterableExtensions.<Element>exists(_elements, _function);
+      if (_exists) {
+        QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(pack);
+        String _string = _fullyQualifiedName.toString();
+        String _plus = (_string + ".json");
+        String _compile = this.compile(resource, pack);
+        fsa.generateFile(_plus, _compile);
+      }
     }
   }
   
@@ -70,14 +76,14 @@ public class ClassDiagramGenerator implements IGenerator {
       {
         TreeIterator<EObject> _allContents = resource.getAllContents();
         Iterator<Relation> _filter_1 = Iterators.<Relation>filter(_allContents, Relation.class);
-        final Function1<Relation, EntityAndNote> _function = (Relation it) -> {
+        final Function1<Relation, Entity> _function = (Relation it) -> {
           boolean _and = false;
           boolean _and_1 = false;
-          EntityAndNote _leftRef = it.getLeftRef();
+          Node _leftRef = it.getLeftRef();
           if (!(_leftRef instanceof Clazz)) {
             _and_1 = false;
           } else {
-            EntityAndNote _rightRef = it.getRightRef();
+            Node _rightRef = it.getRightRef();
             boolean _equals = Objects.equal(_rightRef, clazz);
             _and_1 = _equals;
           }
@@ -90,13 +96,14 @@ public class ClassDiagramGenerator implements IGenerator {
             _and = _equals_1;
           }
           if (_and) {
-            return it.getLeftRef();
+            Node _leftRef_1 = it.getLeftRef();
+            return ((Entity) _leftRef_1);
           }
           return null;
         };
-        Iterator<EntityAndNote> _map = IteratorExtensions.<Relation, EntityAndNote>map(_filter_1, _function);
-        Iterator<EntityAndNote> _filterNull = IteratorExtensions.<EntityAndNote>filterNull(_map);
-        final List<EntityAndNote> invHierarchy = IteratorExtensions.<EntityAndNote>toList(_filterNull);
+        Iterator<Entity> _map = IteratorExtensions.<Relation, Entity>map(_filter_1, _function);
+        Iterator<Entity> _filterNull = IteratorExtensions.<Entity>filterNull(_map);
+        final List<Entity> invHierarchy = IteratorExtensions.<Entity>toList(_filterNull);
         final String cClass = this.compileClass(pack, clazz, invHierarchy);
         StringConcatenation _builder = new StringConcatenation();
         {
@@ -152,7 +159,7 @@ public class ClassDiagramGenerator implements IGenerator {
     return _builder.toString();
   }
   
-  public String compileClass(final CPackage pack, final Clazz clazz, final List<EntityAndNote> invHierarchy) {
+  public String compileClass(final CPackage pack, final Clazz clazz, final List<Entity> invHierarchy) {
     EList<Property> _properties = clazz.getProperties();
     final Function1<Property, Boolean> _function = (Property it) -> {
       boolean _isOptional = it.isOptional();
@@ -193,36 +200,20 @@ public class ClassDiagramGenerator implements IGenerator {
       boolean _isEmpty_1 = invHierarchy.isEmpty();
       boolean _not_1 = (!_isEmpty_1);
       if (_not_1) {
-        _builder.append("\"anyOf\": [");
-        _builder.newLine();
-        {
-          boolean _hasElements_1 = false;
-          for(final EntityAndNote ref : invHierarchy) {
-            if (!_hasElements_1) {
-              _hasElements_1 = true;
-            } else {
-              _builder.appendImmediate(",", "\t");
-            }
-            _builder.append("\t");
-            _builder.append("{ ");
-            String _processRef = this.processRef(ref, pack);
-            _builder.append(_processRef, "\t");
-            _builder.append(" }");
-            _builder.newLineIfNotEmpty();
-          }
-        }
-        _builder.append("],");
-        _builder.newLine();
+        CharSequence _processRefList = this.processRefList(invHierarchy, pack);
+        _builder.append(_processRefList, "");
+        _builder.append(",");
+        _builder.newLineIfNotEmpty();
       }
     }
     _builder.append("\"properties\": {");
     _builder.newLine();
     {
       EList<Property> _properties_1 = clazz.getProperties();
-      boolean _hasElements_2 = false;
+      boolean _hasElements_1 = false;
       for(final Property prop_1 : _properties_1) {
-        if (!_hasElements_2) {
-          _hasElements_2 = true;
+        if (!_hasElements_1) {
+          _hasElements_1 = true;
         } else {
           _builder.appendImmediate(",", "\t");
         }
@@ -243,43 +234,28 @@ public class ClassDiagramGenerator implements IGenerator {
             _builder.newLineIfNotEmpty();
           } else {
             {
-              boolean _and = false;
-              Entity _entity = prop_1.getEntity();
-              boolean _equals = Objects.equal(_entity, null);
-              if (!_equals) {
-                _and = false;
-              } else {
-                EntityList _entityList = prop_1.getEntityList();
-                boolean _equals_1 = Objects.equal(_entityList, null);
-                _and = _equals_1;
-              }
-              if (_and) {
+              EntityList _entityList = prop_1.getEntityList();
+              boolean _equals = Objects.equal(_entityList, null);
+              if (_equals) {
                 _builder.append("\t");
                 _builder.append("\t");
                 DataType _type = prop_1.getType();
-                CharSequence _processDataType = this.processDataType(_type);
+                CharSequence _processDataType = this.processDataType(_type, pack);
                 _builder.append(_processDataType, "\t\t");
                 _builder.newLineIfNotEmpty();
               } else {
-                {
-                  Entity _entity_1 = prop_1.getEntity();
-                  boolean _notEquals = (!Objects.equal(_entity_1, null));
-                  if (_notEquals) {
-                    _builder.append("\t");
-                    _builder.append("\t");
-                    Entity _entity_2 = prop_1.getEntity();
-                    String _processRef_1 = this.processRef(_entity_2, pack);
-                    _builder.append(_processRef_1, "\t\t");
-                    _builder.newLineIfNotEmpty();
-                  } else {
-                    _builder.append("\t");
-                    _builder.append("\t");
-                    EntityList _entityList_1 = prop_1.getEntityList();
-                    CharSequence _processRefList = this.processRefList(_entityList_1, pack);
-                    _builder.append(_processRefList, "\t\t");
-                    _builder.newLineIfNotEmpty();
-                  }
-                }
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\"type\": \"object\",");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                EntityList _entityList_1 = prop_1.getEntityList();
+                EList<Entity> _refs = _entityList_1.getRefs();
+                List<Entity> _list = IterableExtensions.<Entity>toList(_refs);
+                CharSequence _processRefList_1 = this.processRefList(_list, pack);
+                _builder.append(_processRefList_1, "\t\t");
+                _builder.newLineIfNotEmpty();
               }
             }
           }
@@ -294,90 +270,38 @@ public class ClassDiagramGenerator implements IGenerator {
     return _builder.toString();
   }
   
-  public String relationName(final Relation rel, final boolean isInv) {
-    if (isInv) {
-      StringConcatenation _builder = new StringConcatenation();
-      EntityAndNote _leftRef = rel.getLeftRef();
-      String _name = _leftRef.getName();
-      String _firstLower = StringExtensions.toFirstLower(_name);
-      _builder.append(_firstLower, "");
-      _builder.append("Inv");
-      return _builder.toString();
-    } else {
-      StringConcatenation _builder_1 = new StringConcatenation();
-      EntityAndNote _rightRef = rel.getRightRef();
-      String _name_1 = _rightRef.getName();
-      String _firstLower_1 = StringExtensions.toFirstLower(_name_1);
-      _builder_1.append(_firstLower_1, "");
-      {
-        RelationParse _relType = rel.getRelType();
-        CompType _comp = _relType.getComp();
-        boolean _notEquals = (!Objects.equal(_comp, CompType.NONE));
-        if (_notEquals) {
-          _builder_1.append("Array");
-        }
-      }
-      return _builder_1.toString();
-    }
-  }
-  
-  public String processRelation(final CPackage pack, final EntityAndNote ref, final CompType type, final String multi) {
-    int selector = 0;
-    boolean _or = false;
-    boolean _and = false;
-    boolean _notEquals = (!Objects.equal(multi, null));
-    if (!_notEquals) {
-      _and = false;
-    } else {
-      boolean _contains = multi.contains("*");
-      _and = _contains;
-    }
-    if (_and) {
-      _or = true;
-    } else {
-      boolean _and_1 = false;
-      boolean _equals = Objects.equal(multi, null);
-      if (!_equals) {
-        _and_1 = false;
-      } else {
-        boolean _notEquals_1 = (!Objects.equal(type, CompType.NONE));
-        _and_1 = _notEquals_1;
-      }
-      _or = _and_1;
-    }
-    if (_or) {
-      selector = 1;
-    }
-    switch (selector) {
-      case 0:
-        return this.processRef(ref, pack);
-      case 1:
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("\"type\": \"array\",");
-        _builder.newLine();
-        _builder.append("\"items\": {");
-        _builder.newLine();
-        _builder.append("\t");
-        String _processRef = this.processRef(ref, pack);
-        _builder.append(_processRef, "\t");
-        _builder.newLineIfNotEmpty();
-        _builder.append("}");
-        _builder.newLine();
-        return _builder.toString();
-    }
-    return null;
-  }
-  
-  public CharSequence processRefList(final EntityList eList, final CPackage pack) {
+  /**
+   * def relationName(Relation rel, boolean isInv) {
+   * if(isInv)
+   * return '''«rel.leftRef.name.toFirstLower»Inv'''
+   * else
+   * return '''«rel.rightRef.name.toFirstLower»«IF rel.relType.comp != CompType.NONE»Array«ENDIF»'''
+   * }
+   * 
+   * def processRelation(CPackage pack, EntityAndNote ref, CompType type, String multi) {
+   * var selector = 0
+   * if(multi != null && multi.contains("*") || multi == null && type != CompType.NONE) {
+   * selector = 1
+   * }
+   * 
+   * switch(selector) {
+   * case 0: return ref.processRef(pack)
+   * case 1: return '''
+   * "type": "array",
+   * "items": {
+   * «ref.processRef(pack)»
+   * }
+   * '''
+   * }
+   * }
+   */
+  public CharSequence processRefList(final List<Entity> list, final CPackage pack) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("\"type\": \"object\",");
-    _builder.newLine();
     _builder.append("\"anyOf\": [");
     _builder.newLine();
     {
-      EList<Entity> _refs = eList.getRefs();
       boolean _hasElements = false;
-      for(final Entity ref : _refs) {
+      for(final Entity ref : list) {
         if (!_hasElements) {
           _hasElements = true;
         } else {
@@ -396,7 +320,7 @@ public class ClassDiagramGenerator implements IGenerator {
     return _builder;
   }
   
-  public String processRef(final EntityAndNote ref, final CPackage pack) {
+  public String processRef(final Entity ref, final CPackage pack) {
     if ((ref instanceof Enumer)) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("\"enum\": [");
@@ -441,11 +365,11 @@ public class ClassDiagramGenerator implements IGenerator {
           } else {
             StringConcatenation _builder_2 = new StringConcatenation();
             _builder_2.append("\"$ref\": \"");
-            String _name_1 = refPack.getName();
-            _builder_2.append(_name_1, "");
+            QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(refPack);
+            _builder_2.append(_fullyQualifiedName, "");
             _builder_2.append(".json#/");
-            String _name_2 = ((Clazz)ref).getName();
-            _builder_2.append(_name_2, "");
+            String _name_1 = ((Clazz)ref).getName();
+            _builder_2.append(_name_1, "");
             _builder_2.append("\"");
             return _builder_2.toString();
           }
@@ -455,7 +379,7 @@ public class ClassDiagramGenerator implements IGenerator {
     return null;
   }
   
-  public CharSequence processDataType(final DataType type) {
+  public CharSequence processDataType(final DataType type, final CPackage pack) {
     CharSequence _xblockexpression = null;
     {
       boolean _equals = Objects.equal(type, null);
@@ -471,24 +395,35 @@ public class ClassDiagramGenerator implements IGenerator {
         _builder.append("\"items\": {");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("\"type\": \"");
-        NativeType _native = type.getNative();
-        _builder.append(_native, "\t");
-        _builder.append("\"");
+        String _processSimpleType = this.processSimpleType(type, pack);
+        _builder.append(_processSimpleType, "\t");
         _builder.newLineIfNotEmpty();
         _builder.append("}");
         _builder.newLine();
         _xifexpression = _builder;
       } else {
-        StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("\"type\": \"");
-        NativeType _native_1 = type.getNative();
-        _builder_1.append(_native_1, "");
-        _builder_1.append("\"");
-        return _builder_1.toString();
+        return this.processSimpleType(type, pack);
       }
       _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
+  }
+  
+  public String processSimpleType(final DataType type, final CPackage pack) {
+    Entity _entity = type.getEntity();
+    boolean _equals = Objects.equal(_entity, null);
+    if (_equals) {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("\"type\": \"");
+      NativeType _native = type.getNative();
+      String _name = _native.getName();
+      String _lowerCase = _name.toLowerCase();
+      _builder.append(_lowerCase, "");
+      _builder.append("\"");
+      return _builder.toString();
+    } else {
+      Entity _entity_1 = type.getEntity();
+      return this.processRef(_entity_1, pack);
+    }
   }
 }

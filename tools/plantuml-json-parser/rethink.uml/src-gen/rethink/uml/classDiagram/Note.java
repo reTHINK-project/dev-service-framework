@@ -21,7 +21,7 @@ package rethink.uml.classDiagram;
  * @model
  * @generated
  */
-public interface Note extends EntityAndNote
+public interface Note extends Node
 {
   /**
    * Returns the value of the '<em><b>Position</b></em>' attribute.

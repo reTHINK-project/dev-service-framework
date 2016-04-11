@@ -9,11 +9,11 @@ DomainModel: '@startuml' {DomainModel} (file=STRING)? END_LINE
 '@enduml';
 
 Element:
-	Relation | CPackage | EntityAndNote
+	Relation | Node
 ;
 
-EntityAndNote:
-	Entity | Note
+Node:
+	CPackage | Entity | Note
 ;
 
 Entity:
@@ -31,7 +31,7 @@ enum PackageStyle:
 
 //BEGIN: relation rules
 Relation:
-	leftRef=[EntityAndNote | QualifiedName] relType=RelationParse rightRef=[EntityAndNote | QualifiedName] (':' name=Text)? END_LINE
+	leftRef=[Node | QualifiedName] relType=RelationParse rightRef=[Node | QualifiedName] (':' name=Text)? END_LINE
 ;
 
 RelationParse hidden():
@@ -62,7 +62,7 @@ Clazz: 'class' name=ID ('<<' stereotype=Text '>>')? ('{' END_LINE?
 
 Property:
 	name=ID ( 
-		(optional?='?'? (':' (type=DataType | entity=[Entity | QualifiedName] | entityList=EntityList ) )?) |
+		(optional?='?'? (':' (type=DataType | entityList=EntityList) )? ) |
 		(constant?='=' value=Text)
 	) END_LINE
 ;
@@ -84,7 +84,7 @@ enum NotePosition:
 //END: note rules
 
 DataType:
-	native=NativeType (isArray?='[]')?
+	(native=NativeType | entity=[Entity | QualifiedName]) (isArray?='[]')?
 ;
 
 enum NativeType:

@@ -5,12 +5,14 @@ package rethink.uml.classDiagram.impl;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import rethink.uml.classDiagram.ClassDiagramPackage;
 import rethink.uml.classDiagram.DataType;
+import rethink.uml.classDiagram.Entity;
 import rethink.uml.classDiagram.NativeType;
 
 /**
@@ -21,6 +23,7 @@ import rethink.uml.classDiagram.NativeType;
  * The following features are implemented:
  * <ul>
  *   <li>{@link rethink.uml.classDiagram.impl.DataTypeImpl#getNative <em>Native</em>}</li>
+ *   <li>{@link rethink.uml.classDiagram.impl.DataTypeImpl#getEntity <em>Entity</em>}</li>
  *   <li>{@link rethink.uml.classDiagram.impl.DataTypeImpl#isIsArray <em>Is Array</em>}</li>
  * </ul>
  * </p>
@@ -48,6 +51,16 @@ public class DataTypeImpl extends MinimalEObjectImpl.Container implements DataTy
    * @ordered
    */
   protected NativeType native_ = NATIVE_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getEntity() <em>Entity</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getEntity()
+   * @generated
+   * @ordered
+   */
+  protected Entity entity;
 
   /**
    * The default value of the '{@link #isIsArray() <em>Is Array</em>}' attribute.
@@ -118,6 +131,49 @@ public class DataTypeImpl extends MinimalEObjectImpl.Container implements DataTy
    * <!-- end-user-doc -->
    * @generated
    */
+  public Entity getEntity()
+  {
+    if (entity != null && entity.eIsProxy())
+    {
+      InternalEObject oldEntity = (InternalEObject)entity;
+      entity = (Entity)eResolveProxy(oldEntity);
+      if (entity != oldEntity)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassDiagramPackage.DATA_TYPE__ENTITY, oldEntity, entity));
+      }
+    }
+    return entity;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Entity basicGetEntity()
+  {
+    return entity;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setEntity(Entity newEntity)
+  {
+    Entity oldEntity = entity;
+    entity = newEntity;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ClassDiagramPackage.DATA_TYPE__ENTITY, oldEntity, entity));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public boolean isIsArray()
   {
     return isArray;
@@ -148,6 +204,9 @@ public class DataTypeImpl extends MinimalEObjectImpl.Container implements DataTy
     {
       case ClassDiagramPackage.DATA_TYPE__NATIVE:
         return getNative();
+      case ClassDiagramPackage.DATA_TYPE__ENTITY:
+        if (resolve) return getEntity();
+        return basicGetEntity();
       case ClassDiagramPackage.DATA_TYPE__IS_ARRAY:
         return isIsArray();
     }
@@ -166,6 +225,9 @@ public class DataTypeImpl extends MinimalEObjectImpl.Container implements DataTy
     {
       case ClassDiagramPackage.DATA_TYPE__NATIVE:
         setNative((NativeType)newValue);
+        return;
+      case ClassDiagramPackage.DATA_TYPE__ENTITY:
+        setEntity((Entity)newValue);
         return;
       case ClassDiagramPackage.DATA_TYPE__IS_ARRAY:
         setIsArray((Boolean)newValue);
@@ -187,6 +249,9 @@ public class DataTypeImpl extends MinimalEObjectImpl.Container implements DataTy
       case ClassDiagramPackage.DATA_TYPE__NATIVE:
         setNative(NATIVE_EDEFAULT);
         return;
+      case ClassDiagramPackage.DATA_TYPE__ENTITY:
+        setEntity((Entity)null);
+        return;
       case ClassDiagramPackage.DATA_TYPE__IS_ARRAY:
         setIsArray(IS_ARRAY_EDEFAULT);
         return;
@@ -206,6 +271,8 @@ public class DataTypeImpl extends MinimalEObjectImpl.Container implements DataTy
     {
       case ClassDiagramPackage.DATA_TYPE__NATIVE:
         return native_ != NATIVE_EDEFAULT;
+      case ClassDiagramPackage.DATA_TYPE__ENTITY:
+        return entity != null;
       case ClassDiagramPackage.DATA_TYPE__IS_ARRAY:
         return isArray != IS_ARRAY_EDEFAULT;
     }

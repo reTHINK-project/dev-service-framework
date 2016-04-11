@@ -6,7 +6,7 @@ package RegistryDataObject <<Rect>> {
 
 		class HypertyRuntimeInstance {
 			url : URL.HypertyRuntimeURL
-			domains : URL.URLList
+			domains : URL.URL[]
 		}
 	
 		HypertyRuntimeInstance .up.|> RegistryDataObject.RegistryDataObject

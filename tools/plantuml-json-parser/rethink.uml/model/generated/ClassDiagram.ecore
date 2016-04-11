@@ -9,9 +9,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="Element">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EntityAndNote" eSuperTypes="#//Element"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Entity" eSuperTypes="#//EntityAndNote"/>
-  <eClassifiers xsi:type="ecore:EClass" name="CPackage" eSuperTypes="#//Element">
+  <eClassifiers xsi:type="ecore:EClass" name="Node" eSuperTypes="#//Element"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Entity" eSuperTypes="#//Node"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CPackage" eSuperTypes="#//Node">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="style" eType="#//PackageStyle"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
         eType="#//Element" containment="true"/>
@@ -25,10 +25,10 @@
     <eLiterals name="Database" value="5" literal="Database"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Relation" eSuperTypes="#//Element">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="leftRef" eType="#//EntityAndNote"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftRef" eType="#//Node"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="relType" eType="#//RelationParse"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="rightRef" eType="#//EntityAndNote"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightRef" eType="#//Node"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RelationParse">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="comp" eType="#//CompType"/>
@@ -61,7 +61,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="optional" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//DataType"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="entity" eType="#//Entity"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="entityList" eType="#//EntityList"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="constant" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -71,7 +70,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="refs" unique="false" upperBound="-1"
         eType="#//Entity"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Note" eSuperTypes="#//EntityAndNote">
+  <eClassifiers xsi:type="ecore:EClass" name="Note" eSuperTypes="#//Node">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="position" eType="#//NotePosition"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="of" eType="#//Entity"/>
@@ -84,6 +83,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataType">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="native" eType="#//NativeType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entity" eType="#//Entity"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isArray" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="NativeType">

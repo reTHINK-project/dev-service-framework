@@ -85,9 +85,9 @@ public class ClassDiagramAdapterFactory extends AdapterFactoryImpl
         return createElementAdapter();
       }
       @Override
-      public Adapter caseEntityAndNote(EntityAndNote object)
+      public Adapter caseNode(Node object)
       {
-        return createEntityAndNoteAdapter();
+        return createNodeAdapter();
       }
       @Override
       public Adapter caseEntity(Entity object)
@@ -197,16 +197,16 @@ public class ClassDiagramAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link rethink.uml.classDiagram.EntityAndNote <em>Entity And Note</em>}'.
+   * Creates a new adapter for an object of class '{@link rethink.uml.classDiagram.Node <em>Node</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see rethink.uml.classDiagram.EntityAndNote
+   * @see rethink.uml.classDiagram.Node
    * @generated
    */
-  public Adapter createEntityAndNoteAdapter()
+  public Adapter createNodeAdapter()
   {
     return null;
   }

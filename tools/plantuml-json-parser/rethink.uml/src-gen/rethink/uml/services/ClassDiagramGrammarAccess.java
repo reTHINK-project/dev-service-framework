@@ -65,44 +65,44 @@ public class ClassDiagramGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Element");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cRelationParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cCPackageParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cEntityAndNoteParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cNodeParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Element:
-		//	Relation | CPackage | EntityAndNote;
+		//	Relation | Node;
 		@Override public ParserRule getRule() { return rule; }
 
-		//Relation | CPackage | EntityAndNote
+		//Relation | Node
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Relation
 		public RuleCall getRelationParserRuleCall_0() { return cRelationParserRuleCall_0; }
 
-		//CPackage
-		public RuleCall getCPackageParserRuleCall_1() { return cCPackageParserRuleCall_1; }
-
-		//EntityAndNote
-		public RuleCall getEntityAndNoteParserRuleCall_2() { return cEntityAndNoteParserRuleCall_2; }
+		//Node
+		public RuleCall getNodeParserRuleCall_1() { return cNodeParserRuleCall_1; }
 	}
 
-	public class EntityAndNoteElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EntityAndNote");
+	public class NodeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Node");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cEntityParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cNoteParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cCPackageParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cEntityParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cNoteParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
-		//EntityAndNote:
-		//	Entity | Note;
+		//Node:
+		//	CPackage | Entity | Note;
 		@Override public ParserRule getRule() { return rule; }
 
-		//Entity | Note
+		//CPackage | Entity | Note
 		public Alternatives getAlternatives() { return cAlternatives; }
 
+		//CPackage
+		public RuleCall getCPackageParserRuleCall_0() { return cCPackageParserRuleCall_0; }
+
 		//Entity
-		public RuleCall getEntityParserRuleCall_0() { return cEntityParserRuleCall_0; }
+		public RuleCall getEntityParserRuleCall_1() { return cEntityParserRuleCall_1; }
 
 		//Note
-		public RuleCall getNoteParserRuleCall_1() { return cNoteParserRuleCall_1; }
+		public RuleCall getNoteParserRuleCall_2() { return cNoteParserRuleCall_2; }
 	}
 
 	public class EntityElements extends AbstractParserRuleElementFinder {
@@ -197,13 +197,13 @@ public class ClassDiagramGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Relation");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cLeftRefAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final CrossReference cLeftRefEntityAndNoteCrossReference_0_0 = (CrossReference)cLeftRefAssignment_0.eContents().get(0);
-		private final RuleCall cLeftRefEntityAndNoteQualifiedNameParserRuleCall_0_0_1 = (RuleCall)cLeftRefEntityAndNoteCrossReference_0_0.eContents().get(1);
+		private final CrossReference cLeftRefNodeCrossReference_0_0 = (CrossReference)cLeftRefAssignment_0.eContents().get(0);
+		private final RuleCall cLeftRefNodeQualifiedNameParserRuleCall_0_0_1 = (RuleCall)cLeftRefNodeCrossReference_0_0.eContents().get(1);
 		private final Assignment cRelTypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cRelTypeRelationParseParserRuleCall_1_0 = (RuleCall)cRelTypeAssignment_1.eContents().get(0);
 		private final Assignment cRightRefAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final CrossReference cRightRefEntityAndNoteCrossReference_2_0 = (CrossReference)cRightRefAssignment_2.eContents().get(0);
-		private final RuleCall cRightRefEntityAndNoteQualifiedNameParserRuleCall_2_0_1 = (RuleCall)cRightRefEntityAndNoteCrossReference_2_0.eContents().get(1);
+		private final CrossReference cRightRefNodeCrossReference_2_0 = (CrossReference)cRightRefAssignment_2.eContents().get(0);
+		private final RuleCall cRightRefNodeQualifiedNameParserRuleCall_2_0_1 = (RuleCall)cRightRefNodeCrossReference_2_0.eContents().get(1);
 		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
 		private final Keyword cColonKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
 		private final Assignment cNameAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
@@ -212,22 +212,20 @@ public class ClassDiagramGrammarAccess extends AbstractGrammarElementFinder {
 		
 		////BEGIN: relation rules
 		//Relation:
-		//	leftRef=[EntityAndNote|QualifiedName] relType=RelationParse rightRef=[EntityAndNote|QualifiedName] (":" name=Text)?
-		//	END_LINE;
+		//	leftRef=[Node|QualifiedName] relType=RelationParse rightRef=[Node|QualifiedName] (":" name=Text)? END_LINE;
 		@Override public ParserRule getRule() { return rule; }
 
-		//leftRef=[EntityAndNote|QualifiedName] relType=RelationParse rightRef=[EntityAndNote|QualifiedName] (":" name=Text)?
-		//END_LINE
+		//leftRef=[Node|QualifiedName] relType=RelationParse rightRef=[Node|QualifiedName] (":" name=Text)? END_LINE
 		public Group getGroup() { return cGroup; }
 
-		//leftRef=[EntityAndNote|QualifiedName]
+		//leftRef=[Node|QualifiedName]
 		public Assignment getLeftRefAssignment_0() { return cLeftRefAssignment_0; }
 
-		//[EntityAndNote|QualifiedName]
-		public CrossReference getLeftRefEntityAndNoteCrossReference_0_0() { return cLeftRefEntityAndNoteCrossReference_0_0; }
+		//[Node|QualifiedName]
+		public CrossReference getLeftRefNodeCrossReference_0_0() { return cLeftRefNodeCrossReference_0_0; }
 
 		//QualifiedName
-		public RuleCall getLeftRefEntityAndNoteQualifiedNameParserRuleCall_0_0_1() { return cLeftRefEntityAndNoteQualifiedNameParserRuleCall_0_0_1; }
+		public RuleCall getLeftRefNodeQualifiedNameParserRuleCall_0_0_1() { return cLeftRefNodeQualifiedNameParserRuleCall_0_0_1; }
 
 		//relType=RelationParse
 		public Assignment getRelTypeAssignment_1() { return cRelTypeAssignment_1; }
@@ -235,14 +233,14 @@ public class ClassDiagramGrammarAccess extends AbstractGrammarElementFinder {
 		//RelationParse
 		public RuleCall getRelTypeRelationParseParserRuleCall_1_0() { return cRelTypeRelationParseParserRuleCall_1_0; }
 
-		//rightRef=[EntityAndNote|QualifiedName]
+		//rightRef=[Node|QualifiedName]
 		public Assignment getRightRefAssignment_2() { return cRightRefAssignment_2; }
 
-		//[EntityAndNote|QualifiedName]
-		public CrossReference getRightRefEntityAndNoteCrossReference_2_0() { return cRightRefEntityAndNoteCrossReference_2_0; }
+		//[Node|QualifiedName]
+		public CrossReference getRightRefNodeCrossReference_2_0() { return cRightRefNodeCrossReference_2_0; }
 
 		//QualifiedName
-		public RuleCall getRightRefEntityAndNoteQualifiedNameParserRuleCall_2_0_1() { return cRightRefEntityAndNoteQualifiedNameParserRuleCall_2_0_1; }
+		public RuleCall getRightRefNodeQualifiedNameParserRuleCall_2_0_1() { return cRightRefNodeQualifiedNameParserRuleCall_2_0_1; }
 
 		//(":" name=Text)?
 		public Group getGroup_3() { return cGroup_3; }
@@ -610,11 +608,8 @@ public class ClassDiagramGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives_1_0_1_1 = (Alternatives)cGroup_1_0_1.eContents().get(1);
 		private final Assignment cTypeAssignment_1_0_1_1_0 = (Assignment)cAlternatives_1_0_1_1.eContents().get(0);
 		private final RuleCall cTypeDataTypeParserRuleCall_1_0_1_1_0_0 = (RuleCall)cTypeAssignment_1_0_1_1_0.eContents().get(0);
-		private final Assignment cEntityAssignment_1_0_1_1_1 = (Assignment)cAlternatives_1_0_1_1.eContents().get(1);
-		private final CrossReference cEntityEntityCrossReference_1_0_1_1_1_0 = (CrossReference)cEntityAssignment_1_0_1_1_1.eContents().get(0);
-		private final RuleCall cEntityEntityQualifiedNameParserRuleCall_1_0_1_1_1_0_1 = (RuleCall)cEntityEntityCrossReference_1_0_1_1_1_0.eContents().get(1);
-		private final Assignment cEntityListAssignment_1_0_1_1_2 = (Assignment)cAlternatives_1_0_1_1.eContents().get(2);
-		private final RuleCall cEntityListEntityListParserRuleCall_1_0_1_1_2_0 = (RuleCall)cEntityListAssignment_1_0_1_1_2.eContents().get(0);
+		private final Assignment cEntityListAssignment_1_0_1_1_1 = (Assignment)cAlternatives_1_0_1_1.eContents().get(1);
+		private final RuleCall cEntityListEntityListParserRuleCall_1_0_1_1_1_0 = (RuleCall)cEntityListAssignment_1_0_1_1_1.eContents().get(0);
 		private final Group cGroup_1_1 = (Group)cAlternatives_1.eContents().get(1);
 		private final Assignment cConstantAssignment_1_1_0 = (Assignment)cGroup_1_1.eContents().get(0);
 		private final Keyword cConstantEqualsSignKeyword_1_1_0_0 = (Keyword)cConstantAssignment_1_1_0.eContents().get(0);
@@ -623,12 +618,10 @@ public class ClassDiagramGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cEND_LINETerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
 		//Property:
-		//	name=ID (optional?="?"? (":" (type=DataType | entity=[Entity|QualifiedName] | entityList=EntityList))? |
-		//	constant?="=" value=Text) END_LINE;
+		//	name=ID (optional?="?"? (":" (type=DataType | entityList=EntityList))? | constant?="=" value=Text) END_LINE;
 		@Override public ParserRule getRule() { return rule; }
 
-		//name=ID (optional?="?"? (":" (type=DataType | entity=[Entity|QualifiedName] | entityList=EntityList))? | constant?="="
-		//value=Text) END_LINE
+		//name=ID (optional?="?"? (":" (type=DataType | entityList=EntityList))? | constant?="=" value=Text) END_LINE
 		public Group getGroup() { return cGroup; }
 
 		//name=ID
@@ -637,10 +630,10 @@ public class ClassDiagramGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
 
-		//optional?="?"? (":" (type=DataType | entity=[Entity|QualifiedName] | entityList=EntityList))? | constant?="=" value=Text
+		//optional?="?"? (":" (type=DataType | entityList=EntityList))? | constant?="=" value=Text
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//optional?="?"? (":" (type=DataType | entity=[Entity|QualifiedName] | entityList=EntityList))?
+		//optional?="?"? (":" (type=DataType | entityList=EntityList))?
 		public Group getGroup_1_0() { return cGroup_1_0; }
 
 		//optional?="?"?
@@ -649,13 +642,13 @@ public class ClassDiagramGrammarAccess extends AbstractGrammarElementFinder {
 		//"?"
 		public Keyword getOptionalQuestionMarkKeyword_1_0_0_0() { return cOptionalQuestionMarkKeyword_1_0_0_0; }
 
-		//(":" (type=DataType | entity=[Entity|QualifiedName] | entityList=EntityList))?
+		//(":" (type=DataType | entityList=EntityList))?
 		public Group getGroup_1_0_1() { return cGroup_1_0_1; }
 
 		//":"
 		public Keyword getColonKeyword_1_0_1_0() { return cColonKeyword_1_0_1_0; }
 
-		//type=DataType | entity=[Entity|QualifiedName] | entityList=EntityList
+		//type=DataType | entityList=EntityList
 		public Alternatives getAlternatives_1_0_1_1() { return cAlternatives_1_0_1_1; }
 
 		//type=DataType
@@ -664,20 +657,11 @@ public class ClassDiagramGrammarAccess extends AbstractGrammarElementFinder {
 		//DataType
 		public RuleCall getTypeDataTypeParserRuleCall_1_0_1_1_0_0() { return cTypeDataTypeParserRuleCall_1_0_1_1_0_0; }
 
-		//entity=[Entity|QualifiedName]
-		public Assignment getEntityAssignment_1_0_1_1_1() { return cEntityAssignment_1_0_1_1_1; }
-
-		//[Entity|QualifiedName]
-		public CrossReference getEntityEntityCrossReference_1_0_1_1_1_0() { return cEntityEntityCrossReference_1_0_1_1_1_0; }
-
-		//QualifiedName
-		public RuleCall getEntityEntityQualifiedNameParserRuleCall_1_0_1_1_1_0_1() { return cEntityEntityQualifiedNameParserRuleCall_1_0_1_1_1_0_1; }
-
 		//entityList=EntityList
-		public Assignment getEntityListAssignment_1_0_1_1_2() { return cEntityListAssignment_1_0_1_1_2; }
+		public Assignment getEntityListAssignment_1_0_1_1_1() { return cEntityListAssignment_1_0_1_1_1; }
 
 		//EntityList
-		public RuleCall getEntityListEntityListParserRuleCall_1_0_1_1_2_0() { return cEntityListEntityListParserRuleCall_1_0_1_1_2_0; }
+		public RuleCall getEntityListEntityListParserRuleCall_1_0_1_1_1_0() { return cEntityListEntityListParserRuleCall_1_0_1_1_1_0; }
 
 		//constant?="=" value=Text
 		public Group getGroup_1_1() { return cGroup_1_1; }
@@ -898,24 +882,40 @@ public class ClassDiagramGrammarAccess extends AbstractGrammarElementFinder {
 	public class DataTypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DataType");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cNativeAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cNativeNativeTypeEnumRuleCall_0_0 = (RuleCall)cNativeAssignment_0.eContents().get(0);
+		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
+		private final Assignment cNativeAssignment_0_0 = (Assignment)cAlternatives_0.eContents().get(0);
+		private final RuleCall cNativeNativeTypeEnumRuleCall_0_0_0 = (RuleCall)cNativeAssignment_0_0.eContents().get(0);
+		private final Assignment cEntityAssignment_0_1 = (Assignment)cAlternatives_0.eContents().get(1);
+		private final CrossReference cEntityEntityCrossReference_0_1_0 = (CrossReference)cEntityAssignment_0_1.eContents().get(0);
+		private final RuleCall cEntityEntityQualifiedNameParserRuleCall_0_1_0_1 = (RuleCall)cEntityEntityCrossReference_0_1_0.eContents().get(1);
 		private final Assignment cIsArrayAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final Keyword cIsArrayLeftSquareBracketRightSquareBracketKeyword_1_0 = (Keyword)cIsArrayAssignment_1.eContents().get(0);
 		
 		////END: note rules
 		//DataType:
-		//	native=NativeType isArray?="[]"?;
+		//	(native=NativeType | entity=[Entity|QualifiedName]) isArray?="[]"?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//native=NativeType isArray?="[]"?
+		//(native=NativeType | entity=[Entity|QualifiedName]) isArray?="[]"?
 		public Group getGroup() { return cGroup; }
 
+		//native=NativeType | entity=[Entity|QualifiedName]
+		public Alternatives getAlternatives_0() { return cAlternatives_0; }
+
 		//native=NativeType
-		public Assignment getNativeAssignment_0() { return cNativeAssignment_0; }
+		public Assignment getNativeAssignment_0_0() { return cNativeAssignment_0_0; }
 
 		//NativeType
-		public RuleCall getNativeNativeTypeEnumRuleCall_0_0() { return cNativeNativeTypeEnumRuleCall_0_0; }
+		public RuleCall getNativeNativeTypeEnumRuleCall_0_0_0() { return cNativeNativeTypeEnumRuleCall_0_0_0; }
+
+		//entity=[Entity|QualifiedName]
+		public Assignment getEntityAssignment_0_1() { return cEntityAssignment_0_1; }
+
+		//[Entity|QualifiedName]
+		public CrossReference getEntityEntityCrossReference_0_1_0() { return cEntityEntityCrossReference_0_1_0; }
+
+		//QualifiedName
+		public RuleCall getEntityEntityQualifiedNameParserRuleCall_0_1_0_1() { return cEntityEntityQualifiedNameParserRuleCall_0_1_0_1; }
 
 		//isArray?="[]"?
 		public Assignment getIsArrayAssignment_1() { return cIsArrayAssignment_1; }
@@ -1241,7 +1241,7 @@ public class ClassDiagramGrammarAccess extends AbstractGrammarElementFinder {
 	
 	private final DomainModelElements pDomainModel;
 	private final ElementElements pElement;
-	private final EntityAndNoteElements pEntityAndNote;
+	private final NodeElements pNode;
 	private final EntityElements pEntity;
 	private final CPackageElements pCPackage;
 	private final PackageStyleElements unknownRulePackageStyle;
@@ -1277,7 +1277,7 @@ public class ClassDiagramGrammarAccess extends AbstractGrammarElementFinder {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.pDomainModel = new DomainModelElements();
 		this.pElement = new ElementElements();
-		this.pEntityAndNote = new EntityAndNoteElements();
+		this.pNode = new NodeElements();
 		this.pEntity = new EntityElements();
 		this.pCPackage = new CPackageElements();
 		this.unknownRulePackageStyle = new PackageStyleElements();
@@ -1341,7 +1341,7 @@ public class ClassDiagramGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Element:
-	//	Relation | CPackage | EntityAndNote;
+	//	Relation | Node;
 	public ElementElements getElementAccess() {
 		return pElement;
 	}
@@ -1350,14 +1350,14 @@ public class ClassDiagramGrammarAccess extends AbstractGrammarElementFinder {
 		return getElementAccess().getRule();
 	}
 
-	//EntityAndNote:
-	//	Entity | Note;
-	public EntityAndNoteElements getEntityAndNoteAccess() {
-		return pEntityAndNote;
+	//Node:
+	//	CPackage | Entity | Note;
+	public NodeElements getNodeAccess() {
+		return pNode;
 	}
 	
-	public ParserRule getEntityAndNoteRule() {
-		return getEntityAndNoteAccess().getRule();
+	public ParserRule getNodeRule() {
+		return getNodeAccess().getRule();
 	}
 
 	//Entity:
@@ -1392,8 +1392,7 @@ public class ClassDiagramGrammarAccess extends AbstractGrammarElementFinder {
 
 	////BEGIN: relation rules
 	//Relation:
-	//	leftRef=[EntityAndNote|QualifiedName] relType=RelationParse rightRef=[EntityAndNote|QualifiedName] (":" name=Text)?
-	//	END_LINE;
+	//	leftRef=[Node|QualifiedName] relType=RelationParse rightRef=[Node|QualifiedName] (":" name=Text)? END_LINE;
 	public RelationElements getRelationAccess() {
 		return pRelation;
 	}
@@ -1476,8 +1475,7 @@ public class ClassDiagramGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Property:
-	//	name=ID (optional?="?"? (":" (type=DataType | entity=[Entity|QualifiedName] | entityList=EntityList))? |
-	//	constant?="=" value=Text) END_LINE;
+	//	name=ID (optional?="?"? (":" (type=DataType | entityList=EntityList))? | constant?="=" value=Text) END_LINE;
 	public PropertyElements getPropertyAccess() {
 		return pProperty;
 	}
@@ -1521,7 +1519,7 @@ public class ClassDiagramGrammarAccess extends AbstractGrammarElementFinder {
 
 	////END: note rules
 	//DataType:
-	//	native=NativeType isArray?="[]"?;
+	//	(native=NativeType | entity=[Entity|QualifiedName]) isArray?="[]"?;
 	public DataTypeElements getDataTypeAccess() {
 		return pDataType;
 	}

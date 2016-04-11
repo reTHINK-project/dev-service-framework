@@ -10,14 +10,11 @@ import com.google.inject.Inject
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import rethink.uml.classDiagram.Clazz
 import rethink.uml.classDiagram.Relation
-import rethink.uml.classDiagram.CompType
 import rethink.uml.classDiagram.Enumer
 import java.util.List
-import rethink.uml.classDiagram.EntityAndNote
 import rethink.uml.classDiagram.Entity
 import rethink.uml.classDiagram.CPackage
 import java.util.LinkedList
-import rethink.uml.classDiagram.EntityList
 import rethink.uml.classDiagram.DataType
 
 /**
@@ -32,7 +29,10 @@ class ClassDiagramGenerator implements IGenerator {
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
       	for(pack: resource.allContents.filter(CPackage).toIterable) {
       		//fsa.generateFile(pack.fullyQualifiedName.toString("/") + ".json", compile(resource, pack))
-      		fsa.generateFile(pack.fullyQualifiedName.toString + ".json", compile(resource, pack))
+      		
+      		if(pack.elements.exists[it instanceof Entity]) {
+      			fsa.generateFile(pack.fullyQualifiedName.toString + ".json", compile(resource, pack))	
+      		}
       	}
 	}
 	
@@ -64,7 +64,7 @@ class ClassDiagramGenerator implements IGenerator {
 			
 			val invHierarchy = resource.allContents.filter(Relation).map[
 				if(leftRef instanceof Clazz && rightRef == clazz && relType.ext == true)
-					return leftRef
+					return leftRef as Entity
 				
 				return null
 			].filterNull.toList
@@ -94,7 +94,7 @@ class ClassDiagramGenerator implements IGenerator {
       	'''
 	}
 	
-	def compileClass(CPackage pack, Clazz clazz, List<EntityAndNote> invHierarchy) {
+	def compileClass(CPackage pack, Clazz clazz, List<Entity> invHierarchy) {
 		//required properties...
 		val required = clazz.properties.filter[!optional].map[name].toList
 		
@@ -118,11 +118,7 @@ class ClassDiagramGenerator implements IGenerator {
 				"required": [«FOR prop:required SEPARATOR ", "»"«prop»"«ENDFOR»],
 			«ENDIF»
 			«IF !invHierarchy.empty»
-				"anyOf": [
-					«FOR ref: invHierarchy SEPARATOR ','»	
-						{ «ref.processRef(pack)» }
-					«ENDFOR»
-				],
+				«invHierarchy.processRefList(pack)»,
 			«ENDIF»
 			"properties": {
 				«FOR prop:clazz.properties SEPARATOR ','»
@@ -130,14 +126,11 @@ class ClassDiagramGenerator implements IGenerator {
 						«IF prop.constant»
 							"constant": «prop.value»
 						«ELSE»
-							«IF prop.entity == null && prop.entityList == null»
-								«prop.type.processDataType»
+							«IF prop.entityList == null»
+								«prop.type.processDataType(pack)»
 							«ELSE»
-								«IF prop.entity != null»
-									«prop.entity.processRef(pack)»
-								«ELSE»
-									«prop.entityList.processRefList(pack)»
-								«ENDIF»
+								"type": "object",
+								«prop.entityList.refs.toList.processRefList(pack)»
 							«ENDIF»
 						«ENDIF»
 					}
@@ -164,6 +157,7 @@ class ClassDiagramGenerator implements IGenerator {
 				*/
 	}
 	
+	/*
 	def relationName(Relation rel, boolean isInv) {
 		if(isInv)
 			return '''«rel.leftRef.name.toFirstLower»Inv'''
@@ -187,17 +181,17 @@ class ClassDiagramGenerator implements IGenerator {
 			'''
 		}
 	}
+	*/
 	
-	def processRefList(EntityList eList, CPackage pack) '''
-		"type": "object",
+	def processRefList(List<Entity> list, CPackage pack) '''
 		"anyOf": [
-			«FOR ref: eList.refs SEPARATOR ','»	
+			«FOR ref: list SEPARATOR ','»	
 				{ «ref.processRef(pack)» }
 			«ENDFOR»
 		]
 	'''
 	
-	def processRef(EntityAndNote ref, CPackage pack) {
+	def processRef(Entity ref, CPackage pack) {
 		if(ref instanceof Enumer) {
 			return '''
 				"enum": [
@@ -214,25 +208,32 @@ class ClassDiagramGenerator implements IGenerator {
 				if(refPack == pack) {
 					return '''"$ref": "#/«ref.name»"'''
 				} else {
-					return '''"$ref": "«refPack.name».json#/«ref.name»"'''
+					return '''"$ref": "«refPack.fullyQualifiedName».json#/«ref.name»"'''
 				}
 			}
 		}
 	}
 	
-	def processDataType(DataType type) {
+	def processDataType(DataType type, CPackage pack) {
 		if(type == null) return '"type": "null"'
 		
 		if(type.isArray) {
 			'''
 				"type": "array",
 				"items": {
-					"type": "«type.native»"
+					«type.processSimpleType(pack)»
 				}
 			'''
 		} else {
-			return '''"type": "«type.native»"'''
+			return type.processSimpleType(pack)
 		}
 	}
-
+	
+	def processSimpleType(DataType type, CPackage pack) {
+		if(type.entity == null) {
+			return '''"type": "«type.native.getName.toLowerCase»"'''
+		} else {
+			return type.entity.processRef(pack)
+		}
+	}
 }

@@ -1,0 +1,19 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+
+	"Date": {
+		"type": "object",
+		"properties": {
+		}
+	}, 
+	"List": {
+		"type": "object",
+		"properties": {
+		}
+	}, 
+	"ListElement": {
+		"type": "object",
+		"properties": {
+		}
+	}
+}

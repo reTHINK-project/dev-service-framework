@@ -69,10 +69,7 @@ package URL <<Rect>> {
 	DomainURL -up-|> URL
 	ContextURL --|> URL
 
-	URL.URLList *-- URL
-
 	URL --|> RethinkCore.RethinkType.ListElement
-	URL.URLList --|> RethinkCore.RethinkType.List
 
 	HypertyCatalogueURLList ..|> RethinkCore.RethinkType.List
 	HypertyCatalogueURLList *.up.> HypertyCatalogueURL

@@ -1,0 +1,62 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+
+	"id": "HypertyDescriptor",
+	"type": "object",
+	"required": ["dataObjectUrls", "hypertyType", "messageSchemaUrl", "constraints"],
+	"properties": {
+		"dataObjectUrls": {
+			"type": "string"
+		},
+		"hypertyType": {
+			"type": "array",
+			"items": {
+				"$ref": "#/HypertyResourceType"
+			}
+		},
+		"messageSchemaUrl": {
+			"type": "string"
+		},
+		"configuration": {
+			"$ref": "#/HypertyConfiguration"
+		},
+		"constraints": {
+			"$ref": "RethinkCore.CatalogueDataObject.HypertyRuntimeDescriptor.json#/RuntimeHypertyCapabilities"
+		},
+		"policiesUrl": {
+			"type": "string"
+		}
+	}, 
+	"HypertyResourceType": {
+		"type": "object",
+		"required": ["CHAT", "AUDIO", "VIDEO", "AV", "SCREEN", "FILE", "MIDI"],
+		"properties": {
+			"CHAT": {
+				"type": "null"
+			},
+			"AUDIO": {
+				"type": "null"
+			},
+			"VIDEO": {
+				"type": "null"
+			},
+			"AV": {
+				"type": "null"
+			},
+			"SCREEN": {
+				"type": "null"
+			},
+			"FILE": {
+				"type": "null"
+			},
+			"MIDI": {
+				"type": "null"
+			}
+		}
+	}, 
+	"HypertyConfiguration": {
+		"type": "object",
+		"properties": {
+		}
+	}
+}

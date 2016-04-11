@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import rethink.uml.classDiagram.ClassDiagramPackage;
-import rethink.uml.classDiagram.EntityAndNote;
+import rethink.uml.classDiagram.Node;
 import rethink.uml.classDiagram.Relation;
 import rethink.uml.classDiagram.RelationParse;
 
@@ -40,7 +40,7 @@ public class RelationImpl extends ElementImpl implements Relation
    * @generated
    * @ordered
    */
-  protected EntityAndNote leftRef;
+  protected Node leftRef;
 
   /**
    * The cached value of the '{@link #getRelType() <em>Rel Type</em>}' containment reference.
@@ -60,7 +60,7 @@ public class RelationImpl extends ElementImpl implements Relation
    * @generated
    * @ordered
    */
-  protected EntityAndNote rightRef;
+  protected Node rightRef;
 
   /**
    * <!-- begin-user-doc -->
@@ -88,12 +88,12 @@ public class RelationImpl extends ElementImpl implements Relation
    * <!-- end-user-doc -->
    * @generated
    */
-  public EntityAndNote getLeftRef()
+  public Node getLeftRef()
   {
     if (leftRef != null && leftRef.eIsProxy())
     {
       InternalEObject oldLeftRef = (InternalEObject)leftRef;
-      leftRef = (EntityAndNote)eResolveProxy(oldLeftRef);
+      leftRef = (Node)eResolveProxy(oldLeftRef);
       if (leftRef != oldLeftRef)
       {
         if (eNotificationRequired())
@@ -108,7 +108,7 @@ public class RelationImpl extends ElementImpl implements Relation
    * <!-- end-user-doc -->
    * @generated
    */
-  public EntityAndNote basicGetLeftRef()
+  public Node basicGetLeftRef()
   {
     return leftRef;
   }
@@ -118,9 +118,9 @@ public class RelationImpl extends ElementImpl implements Relation
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setLeftRef(EntityAndNote newLeftRef)
+  public void setLeftRef(Node newLeftRef)
   {
-    EntityAndNote oldLeftRef = leftRef;
+    Node oldLeftRef = leftRef;
     leftRef = newLeftRef;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, ClassDiagramPackage.RELATION__LEFT_REF, oldLeftRef, leftRef));
@@ -179,12 +179,12 @@ public class RelationImpl extends ElementImpl implements Relation
    * <!-- end-user-doc -->
    * @generated
    */
-  public EntityAndNote getRightRef()
+  public Node getRightRef()
   {
     if (rightRef != null && rightRef.eIsProxy())
     {
       InternalEObject oldRightRef = (InternalEObject)rightRef;
-      rightRef = (EntityAndNote)eResolveProxy(oldRightRef);
+      rightRef = (Node)eResolveProxy(oldRightRef);
       if (rightRef != oldRightRef)
       {
         if (eNotificationRequired())
@@ -199,7 +199,7 @@ public class RelationImpl extends ElementImpl implements Relation
    * <!-- end-user-doc -->
    * @generated
    */
-  public EntityAndNote basicGetRightRef()
+  public Node basicGetRightRef()
   {
     return rightRef;
   }
@@ -209,9 +209,9 @@ public class RelationImpl extends ElementImpl implements Relation
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setRightRef(EntityAndNote newRightRef)
+  public void setRightRef(Node newRightRef)
   {
-    EntityAndNote oldRightRef = rightRef;
+    Node oldRightRef = rightRef;
     rightRef = newRightRef;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, ClassDiagramPackage.RELATION__RIGHT_REF, oldRightRef, rightRef));
@@ -266,13 +266,13 @@ public class RelationImpl extends ElementImpl implements Relation
     switch (featureID)
     {
       case ClassDiagramPackage.RELATION__LEFT_REF:
-        setLeftRef((EntityAndNote)newValue);
+        setLeftRef((Node)newValue);
         return;
       case ClassDiagramPackage.RELATION__REL_TYPE:
         setRelType((RelationParse)newValue);
         return;
       case ClassDiagramPackage.RELATION__RIGHT_REF:
-        setRightRef((EntityAndNote)newValue);
+        setRightRef((Node)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -289,13 +289,13 @@ public class RelationImpl extends ElementImpl implements Relation
     switch (featureID)
     {
       case ClassDiagramPackage.RELATION__LEFT_REF:
-        setLeftRef((EntityAndNote)null);
+        setLeftRef((Node)null);
         return;
       case ClassDiagramPackage.RELATION__REL_TYPE:
         setRelType((RelationParse)null);
         return;
       case ClassDiagramPackage.RELATION__RIGHT_REF:
-        setRightRef((EntityAndNote)null);
+        setRightRef((Node)null);
         return;
     }
     super.eUnset(featureID);

@@ -3,6 +3,12 @@
  */
 package rethink.uml.validation;
 
+import org.eclipse.xtext.validation.Check;
+import rethink.uml.classDiagram.ClassDiagramPackage;
+import rethink.uml.classDiagram.Clazz;
+import rethink.uml.classDiagram.Node;
+import rethink.uml.classDiagram.Relation;
+import rethink.uml.classDiagram.RelationParse;
 import rethink.uml.validation.AbstractClassDiagramValidator;
 
 /**
@@ -12,4 +18,38 @@ import rethink.uml.validation.AbstractClassDiagramValidator;
  */
 @SuppressWarnings("all")
 public class ClassDiagramValidator extends AbstractClassDiagramValidator {
+  @Check
+  public void checkInvalidaRelation(final Relation rel) {
+    RelationParse _relType = rel.getRelType();
+    boolean _isExt = _relType.isExt();
+    if (_isExt) {
+      boolean _or = false;
+      boolean _and = false;
+      Node _leftRef = rel.getLeftRef();
+      if (!(_leftRef instanceof Clazz)) {
+        _and = false;
+      } else {
+        Node _rightRef = rel.getRightRef();
+        boolean _not = (!(_rightRef instanceof Clazz));
+        _and = _not;
+      }
+      if (_and) {
+        _or = true;
+      } else {
+        boolean _and_1 = false;
+        Node _rightRef_1 = rel.getRightRef();
+        if (!(_rightRef_1 instanceof Clazz)) {
+          _and_1 = false;
+        } else {
+          Node _leftRef_1 = rel.getLeftRef();
+          boolean _not_1 = (!(_leftRef_1 instanceof Clazz));
+          _and_1 = _not_1;
+        }
+        _or = _and_1;
+      }
+      if (_or) {
+        this.error("Invalid extend relation between a class and other element", ClassDiagramPackage.Literals.RELATION__REL_TYPE);
+      }
+    }
+  }
 }

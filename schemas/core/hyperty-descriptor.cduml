@@ -9,6 +9,15 @@ package RethinkCore <<Rect>> {
 	
 		package HypertyDescriptor <<Rect>> {
 	
+			class HypertyDescriptor {
+				dataObjectUrls : URL.HypertyCatalogueURLList
+				hypertyType : HypertyResourceType[]
+				messageSchemaUrl : URL.HypertyCatalogueURL
+				configuration ?: HypertyConfiguration
+				constraints : RethinkCore.CatalogueDataObject.HypertyRuntimeDescriptor.RuntimeHypertyCapabilities
+				policiesUrl ?: URL.HypertyCatalogueURL
+			}
+	
 			class HypertyResourceType {
 				CHAT
 				AUDIO
@@ -17,16 +26,6 @@ package RethinkCore <<Rect>> {
 				SCREEN
 				FILE
 				MIDI
-				}
-	
-	
-			class HypertyDescriptor {
-				dataObjectUrls : URL.HypertyCatalogueURLList
-				hypertyType : HypertyResourceType[]
-				messageSchemaUrl : URL.HypertyCatalogueURL
-				configuration ?: HypertyConfiguration
-				constraints : RethinkCore.CatalogueDataObject.HypertyRuntimeDescriptor.RuntimeHypertyCapabilities
-				policiesUrl ?: URL.HypertyCatalogueURL
 			}
 	
 			class HypertyConfiguration {

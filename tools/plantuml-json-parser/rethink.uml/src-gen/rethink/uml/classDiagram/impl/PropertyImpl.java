@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import rethink.uml.classDiagram.ClassDiagramPackage;
 import rethink.uml.classDiagram.DataType;
-import rethink.uml.classDiagram.Entity;
 import rethink.uml.classDiagram.EntityList;
 import rethink.uml.classDiagram.Property;
 
@@ -27,7 +26,6 @@ import rethink.uml.classDiagram.Property;
  *   <li>{@link rethink.uml.classDiagram.impl.PropertyImpl#getName <em>Name</em>}</li>
  *   <li>{@link rethink.uml.classDiagram.impl.PropertyImpl#isOptional <em>Optional</em>}</li>
  *   <li>{@link rethink.uml.classDiagram.impl.PropertyImpl#getType <em>Type</em>}</li>
- *   <li>{@link rethink.uml.classDiagram.impl.PropertyImpl#getEntity <em>Entity</em>}</li>
  *   <li>{@link rethink.uml.classDiagram.impl.PropertyImpl#getEntityList <em>Entity List</em>}</li>
  *   <li>{@link rethink.uml.classDiagram.impl.PropertyImpl#isConstant <em>Constant</em>}</li>
  *   <li>{@link rethink.uml.classDiagram.impl.PropertyImpl#getValue <em>Value</em>}</li>
@@ -87,16 +85,6 @@ public class PropertyImpl extends MinimalEObjectImpl.Container implements Proper
    * @ordered
    */
   protected DataType type;
-
-  /**
-   * The cached value of the '{@link #getEntity() <em>Entity</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getEntity()
-   * @generated
-   * @ordered
-   */
-  protected Entity entity;
 
   /**
    * The cached value of the '{@link #getEntityList() <em>Entity List</em>}' containment reference.
@@ -268,49 +256,6 @@ public class PropertyImpl extends MinimalEObjectImpl.Container implements Proper
    * <!-- end-user-doc -->
    * @generated
    */
-  public Entity getEntity()
-  {
-    if (entity != null && entity.eIsProxy())
-    {
-      InternalEObject oldEntity = (InternalEObject)entity;
-      entity = (Entity)eResolveProxy(oldEntity);
-      if (entity != oldEntity)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassDiagramPackage.PROPERTY__ENTITY, oldEntity, entity));
-      }
-    }
-    return entity;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Entity basicGetEntity()
-  {
-    return entity;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setEntity(Entity newEntity)
-  {
-    Entity oldEntity = entity;
-    entity = newEntity;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ClassDiagramPackage.PROPERTY__ENTITY, oldEntity, entity));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EntityList getEntityList()
   {
     return entityList;
@@ -434,9 +379,6 @@ public class PropertyImpl extends MinimalEObjectImpl.Container implements Proper
         return isOptional();
       case ClassDiagramPackage.PROPERTY__TYPE:
         return getType();
-      case ClassDiagramPackage.PROPERTY__ENTITY:
-        if (resolve) return getEntity();
-        return basicGetEntity();
       case ClassDiagramPackage.PROPERTY__ENTITY_LIST:
         return getEntityList();
       case ClassDiagramPackage.PROPERTY__CONSTANT:
@@ -465,9 +407,6 @@ public class PropertyImpl extends MinimalEObjectImpl.Container implements Proper
         return;
       case ClassDiagramPackage.PROPERTY__TYPE:
         setType((DataType)newValue);
-        return;
-      case ClassDiagramPackage.PROPERTY__ENTITY:
-        setEntity((Entity)newValue);
         return;
       case ClassDiagramPackage.PROPERTY__ENTITY_LIST:
         setEntityList((EntityList)newValue);
@@ -501,9 +440,6 @@ public class PropertyImpl extends MinimalEObjectImpl.Container implements Proper
       case ClassDiagramPackage.PROPERTY__TYPE:
         setType((DataType)null);
         return;
-      case ClassDiagramPackage.PROPERTY__ENTITY:
-        setEntity((Entity)null);
-        return;
       case ClassDiagramPackage.PROPERTY__ENTITY_LIST:
         setEntityList((EntityList)null);
         return;
@@ -533,8 +469,6 @@ public class PropertyImpl extends MinimalEObjectImpl.Container implements Proper
         return optional != OPTIONAL_EDEFAULT;
       case ClassDiagramPackage.PROPERTY__TYPE:
         return type != null;
-      case ClassDiagramPackage.PROPERTY__ENTITY:
-        return entity != null;
       case ClassDiagramPackage.PROPERTY__ENTITY_LIST:
         return entityList != null;
       case ClassDiagramPackage.PROPERTY__CONSTANT:

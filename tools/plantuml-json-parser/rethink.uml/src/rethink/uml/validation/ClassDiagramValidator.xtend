@@ -3,7 +3,10 @@
  */
 package rethink.uml.validation
 
-//import org.eclipse.xtext.validation.Check
+import org.eclipse.xtext.validation.Check
+import rethink.uml.classDiagram.Relation
+import rethink.uml.classDiagram.ClassDiagramPackage
+import rethink.uml.classDiagram.Clazz
 
 /**
  * This class contains custom validation rules. 
@@ -12,14 +15,11 @@ package rethink.uml.validation
  */
 class ClassDiagramValidator extends AbstractClassDiagramValidator {
 
-//  public static val INVALID_NAME = 'invalidName'
-//
-//	@Check
-//	def checkGreetingStartsWithCapital(Greeting greeting) {
-//		if (!Character.isUpperCase(greeting.name.charAt(0))) {
-//			warning('Name should start with a capital', 
-//					MyDslPackage.Literals.GREETING__NAME,
-//					INVALID_NAME)
-//		}
-//	}
+	@Check
+	def checkInvalidaRelation(Relation rel) {
+		if(rel.relType.ext) {
+			if (rel.leftRef instanceof Clazz && !(rel.rightRef instanceof Clazz) || rel.rightRef instanceof Clazz && !(rel.leftRef instanceof Clazz))
+				error('Invalid extend relation between a class and other element', ClassDiagramPackage.Literals.RELATION__REL_TYPE)
+		}
+	}
 }

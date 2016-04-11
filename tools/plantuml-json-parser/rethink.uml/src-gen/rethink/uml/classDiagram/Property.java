@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link rethink.uml.classDiagram.Property#getName <em>Name</em>}</li>
  *   <li>{@link rethink.uml.classDiagram.Property#isOptional <em>Optional</em>}</li>
  *   <li>{@link rethink.uml.classDiagram.Property#getType <em>Type</em>}</li>
- *   <li>{@link rethink.uml.classDiagram.Property#getEntity <em>Entity</em>}</li>
  *   <li>{@link rethink.uml.classDiagram.Property#getEntityList <em>Entity List</em>}</li>
  *   <li>{@link rethink.uml.classDiagram.Property#isConstant <em>Constant</em>}</li>
  *   <li>{@link rethink.uml.classDiagram.Property#getValue <em>Value</em>}</li>
@@ -105,32 +104,6 @@ public interface Property extends EObject
    * @generated
    */
   void setType(DataType value);
-
-  /**
-   * Returns the value of the '<em><b>Entity</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Entity</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Entity</em>' reference.
-   * @see #setEntity(Entity)
-   * @see rethink.uml.classDiagram.ClassDiagramPackage#getProperty_Entity()
-   * @model
-   * @generated
-   */
-  Entity getEntity();
-
-  /**
-   * Sets the value of the '{@link rethink.uml.classDiagram.Property#getEntity <em>Entity</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Entity</em>' reference.
-   * @see #getEntity()
-   * @generated
-   */
-  void setEntity(Entity value);
 
   /**
    * Returns the value of the '<em><b>Entity List</b></em>' containment reference.

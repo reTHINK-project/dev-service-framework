@@ -38,7 +38,7 @@ public class ClassDiagramParser extends AbstractContentAssistParser {
 				private static final long serialVersionUID = 1L;
 				{
 					put(grammarAccess.getElementAccess().getAlternatives(), "rule__Element__Alternatives");
-					put(grammarAccess.getEntityAndNoteAccess().getAlternatives(), "rule__EntityAndNote__Alternatives");
+					put(grammarAccess.getNodeAccess().getAlternatives(), "rule__Node__Alternatives");
 					put(grammarAccess.getEntityAccess().getAlternatives(), "rule__Entity__Alternatives");
 					put(grammarAccess.getRelationParseAccess().getAlternatives(), "rule__RelationParse__Alternatives");
 					put(grammarAccess.getRelationParseAccess().getAlternatives_1_1(), "rule__RelationParse__Alternatives_1_1");
@@ -49,6 +49,7 @@ public class ClassDiagramParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPropertyAccess().getAlternatives_1_0_1_1(), "rule__Property__Alternatives_1_0_1_1");
 					put(grammarAccess.getNoteAccess().getAlternatives_1(), "rule__Note__Alternatives_1");
 					put(grammarAccess.getNoteAccess().getAlternatives_1_0(), "rule__Note__Alternatives_1_0");
+					put(grammarAccess.getDataTypeAccess().getAlternatives_0(), "rule__DataType__Alternatives_0");
 					put(grammarAccess.getTextAccess().getAlternatives(), "rule__Text__Alternatives");
 					put(grammarAccess.getPackageStyleAccess().getAlternatives(), "rule__PackageStyle__Alternatives");
 					put(grammarAccess.getCompTypeAccess().getAlternatives(), "rule__CompType__Alternatives");
@@ -109,8 +110,7 @@ public class ClassDiagramParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPropertyAccess().getNameAssignment_0(), "rule__Property__NameAssignment_0");
 					put(grammarAccess.getPropertyAccess().getOptionalAssignment_1_0_0(), "rule__Property__OptionalAssignment_1_0_0");
 					put(grammarAccess.getPropertyAccess().getTypeAssignment_1_0_1_1_0(), "rule__Property__TypeAssignment_1_0_1_1_0");
-					put(grammarAccess.getPropertyAccess().getEntityAssignment_1_0_1_1_1(), "rule__Property__EntityAssignment_1_0_1_1_1");
-					put(grammarAccess.getPropertyAccess().getEntityListAssignment_1_0_1_1_2(), "rule__Property__EntityListAssignment_1_0_1_1_2");
+					put(grammarAccess.getPropertyAccess().getEntityListAssignment_1_0_1_1_1(), "rule__Property__EntityListAssignment_1_0_1_1_1");
 					put(grammarAccess.getPropertyAccess().getConstantAssignment_1_1_0(), "rule__Property__ConstantAssignment_1_1_0");
 					put(grammarAccess.getPropertyAccess().getValueAssignment_1_1_1(), "rule__Property__ValueAssignment_1_1_1");
 					put(grammarAccess.getEntityListAccess().getRefsAssignment_1(), "rule__EntityList__RefsAssignment_1");
@@ -121,7 +121,8 @@ public class ClassDiagramParser extends AbstractContentAssistParser {
 					put(grammarAccess.getNoteAccess().getValueAssignment_1_0_1_3(), "rule__Note__ValueAssignment_1_0_1_3");
 					put(grammarAccess.getNoteAccess().getNameAssignment_1_1_1(), "rule__Note__NameAssignment_1_1_1");
 					put(grammarAccess.getNoteAccess().getValueAssignment_1_1_3(), "rule__Note__ValueAssignment_1_1_3");
-					put(grammarAccess.getDataTypeAccess().getNativeAssignment_0(), "rule__DataType__NativeAssignment_0");
+					put(grammarAccess.getDataTypeAccess().getNativeAssignment_0_0(), "rule__DataType__NativeAssignment_0_0");
+					put(grammarAccess.getDataTypeAccess().getEntityAssignment_0_1(), "rule__DataType__EntityAssignment_0_1");
 					put(grammarAccess.getDataTypeAccess().getIsArrayAssignment_1(), "rule__DataType__IsArrayAssignment_1");
 				}
 			};

@@ -19,10 +19,10 @@ import rethink.uml.classDiagram.DataType;
 import rethink.uml.classDiagram.DomainModel;
 import rethink.uml.classDiagram.Element;
 import rethink.uml.classDiagram.Entity;
-import rethink.uml.classDiagram.EntityAndNote;
 import rethink.uml.classDiagram.EntityList;
 import rethink.uml.classDiagram.Enumer;
 import rethink.uml.classDiagram.NativeType;
+import rethink.uml.classDiagram.Node;
 import rethink.uml.classDiagram.Note;
 import rethink.uml.classDiagram.NotePosition;
 import rethink.uml.classDiagram.PackageStyle;
@@ -58,7 +58,7 @@ public class ClassDiagramPackageImpl extends EPackageImpl implements ClassDiagra
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass entityAndNoteEClass = null;
+  private EClass nodeEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -283,9 +283,9 @@ public class ClassDiagramPackageImpl extends EPackageImpl implements ClassDiagra
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getEntityAndNote()
+  public EClass getNode()
   {
-    return entityAndNoteEClass;
+    return nodeEClass;
   }
 
   /**
@@ -553,7 +553,7 @@ public class ClassDiagramPackageImpl extends EPackageImpl implements ClassDiagra
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getProperty_Entity()
+  public EReference getProperty_EntityList()
   {
     return (EReference)propertyEClass.getEStructuralFeatures().get(3);
   }
@@ -563,19 +563,9 @@ public class ClassDiagramPackageImpl extends EPackageImpl implements ClassDiagra
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getProperty_EntityList()
-  {
-    return (EReference)propertyEClass.getEStructuralFeatures().get(4);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EAttribute getProperty_Constant()
   {
-    return (EAttribute)propertyEClass.getEStructuralFeatures().get(5);
+    return (EAttribute)propertyEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -585,7 +575,7 @@ public class ClassDiagramPackageImpl extends EPackageImpl implements ClassDiagra
    */
   public EAttribute getProperty_Value()
   {
-    return (EAttribute)propertyEClass.getEStructuralFeatures().get(6);
+    return (EAttribute)propertyEClass.getEStructuralFeatures().get(5);
   }
 
   /**
@@ -673,9 +663,19 @@ public class ClassDiagramPackageImpl extends EPackageImpl implements ClassDiagra
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getDataType_Entity()
+  {
+    return (EReference)dataTypeEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EAttribute getDataType_IsArray()
   {
-    return (EAttribute)dataTypeEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)dataTypeEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -755,7 +755,7 @@ public class ClassDiagramPackageImpl extends EPackageImpl implements ClassDiagra
     elementEClass = createEClass(ELEMENT);
     createEAttribute(elementEClass, ELEMENT__NAME);
 
-    entityAndNoteEClass = createEClass(ENTITY_AND_NOTE);
+    nodeEClass = createEClass(NODE);
 
     entityEClass = createEClass(ENTITY);
 
@@ -790,7 +790,6 @@ public class ClassDiagramPackageImpl extends EPackageImpl implements ClassDiagra
     createEAttribute(propertyEClass, PROPERTY__NAME);
     createEAttribute(propertyEClass, PROPERTY__OPTIONAL);
     createEReference(propertyEClass, PROPERTY__TYPE);
-    createEReference(propertyEClass, PROPERTY__ENTITY);
     createEReference(propertyEClass, PROPERTY__ENTITY_LIST);
     createEAttribute(propertyEClass, PROPERTY__CONSTANT);
     createEAttribute(propertyEClass, PROPERTY__VALUE);
@@ -805,6 +804,7 @@ public class ClassDiagramPackageImpl extends EPackageImpl implements ClassDiagra
 
     dataTypeEClass = createEClass(DATA_TYPE);
     createEAttribute(dataTypeEClass, DATA_TYPE__NATIVE);
+    createEReference(dataTypeEClass, DATA_TYPE__ENTITY);
     createEAttribute(dataTypeEClass, DATA_TYPE__IS_ARRAY);
 
     // Create enums
@@ -843,13 +843,13 @@ public class ClassDiagramPackageImpl extends EPackageImpl implements ClassDiagra
     // Set bounds for type parameters
 
     // Add supertypes to classes
-    entityAndNoteEClass.getESuperTypes().add(this.getElement());
-    entityEClass.getESuperTypes().add(this.getEntityAndNote());
-    cPackageEClass.getESuperTypes().add(this.getElement());
+    nodeEClass.getESuperTypes().add(this.getElement());
+    entityEClass.getESuperTypes().add(this.getNode());
+    cPackageEClass.getESuperTypes().add(this.getNode());
     relationEClass.getESuperTypes().add(this.getElement());
     enumerEClass.getESuperTypes().add(this.getEntity());
     clazzEClass.getESuperTypes().add(this.getEntity());
-    noteEClass.getESuperTypes().add(this.getEntityAndNote());
+    noteEClass.getESuperTypes().add(this.getNode());
 
     // Initialize classes and features; add operations and parameters
     initEClass(domainModelEClass, DomainModel.class, "DomainModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -859,7 +859,7 @@ public class ClassDiagramPackageImpl extends EPackageImpl implements ClassDiagra
     initEClass(elementEClass, Element.class, "Element", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(entityAndNoteEClass, EntityAndNote.class, "EntityAndNote", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEClass(nodeEClass, Node.class, "Node", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(entityEClass, Entity.class, "Entity", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -868,9 +868,9 @@ public class ClassDiagramPackageImpl extends EPackageImpl implements ClassDiagra
     initEReference(getCPackage_Elements(), this.getElement(), null, "elements", null, 0, -1, CPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(relationEClass, Relation.class, "Relation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getRelation_LeftRef(), this.getEntityAndNote(), null, "leftRef", null, 0, 1, Relation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRelation_LeftRef(), this.getNode(), null, "leftRef", null, 0, 1, Relation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRelation_RelType(), this.getRelationParse(), null, "relType", null, 0, 1, Relation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getRelation_RightRef(), this.getEntityAndNote(), null, "rightRef", null, 0, 1, Relation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRelation_RightRef(), this.getNode(), null, "rightRef", null, 0, 1, Relation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(relationParseEClass, RelationParse.class, "RelationParse", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getRelationParse_Comp(), this.getCompType(), "comp", null, 0, 1, RelationParse.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -894,7 +894,6 @@ public class ClassDiagramPackageImpl extends EPackageImpl implements ClassDiagra
     initEAttribute(getProperty_Name(), ecorePackage.getEString(), "name", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getProperty_Optional(), ecorePackage.getEBoolean(), "optional", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getProperty_Type(), this.getDataType(), null, "type", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getProperty_Entity(), this.getEntity(), null, "entity", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getProperty_EntityList(), this.getEntityList(), null, "entityList", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getProperty_Constant(), ecorePackage.getEBoolean(), "constant", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getProperty_Value(), ecorePackage.getEString(), "value", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -909,6 +908,7 @@ public class ClassDiagramPackageImpl extends EPackageImpl implements ClassDiagra
 
     initEClass(dataTypeEClass, DataType.class, "DataType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getDataType_Native(), this.getNativeType(), "native", null, 0, 1, DataType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getDataType_Entity(), this.getEntity(), null, "entity", null, 0, 1, DataType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getDataType_IsArray(), ecorePackage.getEBoolean(), "isArray", null, 0, 1, DataType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals

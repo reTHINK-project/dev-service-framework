@@ -29,7 +29,7 @@ import rethink.uml.classDiagram.NotePosition;
  *
  * @generated
  */
-public class NoteImpl extends EntityAndNoteImpl implements Note
+public class NoteImpl extends NodeImpl implements Note
 {
   /**
    * The default value of the '{@link #getPosition() <em>Position</em>}' attribute.

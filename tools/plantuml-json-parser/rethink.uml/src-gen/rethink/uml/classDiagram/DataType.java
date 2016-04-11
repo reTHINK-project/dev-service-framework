@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link rethink.uml.classDiagram.DataType#getNative <em>Native</em>}</li>
+ *   <li>{@link rethink.uml.classDiagram.DataType#getEntity <em>Entity</em>}</li>
  *   <li>{@link rethink.uml.classDiagram.DataType#isIsArray <em>Is Array</em>}</li>
  * </ul>
  * </p>
@@ -51,6 +52,32 @@ public interface DataType extends EObject
    * @generated
    */
   void setNative(NativeType value);
+
+  /**
+   * Returns the value of the '<em><b>Entity</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Entity</em>' reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Entity</em>' reference.
+   * @see #setEntity(Entity)
+   * @see rethink.uml.classDiagram.ClassDiagramPackage#getDataType_Entity()
+   * @model
+   * @generated
+   */
+  Entity getEntity();
+
+  /**
+   * Sets the value of the '{@link rethink.uml.classDiagram.DataType#getEntity <em>Entity</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Entity</em>' reference.
+   * @see #getEntity()
+   * @generated
+   */
+  void setEntity(Entity value);
 
   /**
    * Returns the value of the '<em><b>Is Array</b></em>' attribute.

@@ -36,7 +36,7 @@ import rethink.uml.classDiagram.PackageStyle;
  *
  * @generated
  */
-public class CPackageImpl extends ElementImpl implements CPackage
+public class CPackageImpl extends NodeImpl implements CPackage
 {
   /**
    * The default value of the '{@link #getStyle() <em>Style</em>}' attribute.
