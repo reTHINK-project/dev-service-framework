@@ -24,7 +24,7 @@
 import RethinkObject from '../reTHINKObject/RethinkObject.js';
 import Message from './Message.js';
 import {MessageBody, CreateMessageBody, DeleteMessageBody, UpdateMessageBody, ReadMessageBody, ResponseMessageBody,
-    ForwardMessageBody} from './MessageBody.js';
+    ForwardMessageBody, ExecuteMessageBody} from './MessageBody.js';
 import {MessageType} from './Message.js';
 
 /**
@@ -172,7 +172,7 @@ class MessageFactory extends RethinkObject {
         return message;
     }
 
-    /**
+            /**
      * Creates a Message of type UNSUBSCRIBE
      * @param {URL.URL} from - the sender of this message
      * @param {URL.URLList} to- One or more URLs of Message recipients. According to the URL scheme it may be handled in
@@ -188,6 +188,25 @@ class MessageFactory extends RethinkObject {
         let message  = new Message(id, from, to, MessageType.UNSUBSCRIBE, messageBody);
         return message;
     }
+
+    /**
+     * Creates a Message of type EXECUTE
+     * @param {URL.URL} from - the sender of this message
+     * @param {URL.URLList} to- One or more URLs of Message recipients. According to the URL scheme it may be handled in
+     * different ways
+     * @param {string} method -
+     * @param {Array} params -
+     */
+    createExecuteMessageRequest(from, to,method, params){
+        if(!from || !to || !method )
+            throw  new Error("from, to and the method to execute MUST be specified");
+
+        let id = this.myGenerator.next().value;
+        let messageBody = new ExecuteMessageBody(null, null, null, null, null, method, params)
+        let executeMessage = new Message(id , from, to, MessageType.EXECUTE, messageBody);
+        return executeMessage;
+    }
+
 
     /**
      * Creates the response to the Message
@@ -241,7 +260,7 @@ class MessageFactory extends RethinkObject {
 export class IdGenerator {
     *idMaker(){
         let index = 1;
-        while(index < 100000)
+        while(index < 1000000)
             yield index++;
     }
 }

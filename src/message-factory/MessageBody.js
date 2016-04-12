@@ -40,18 +40,26 @@ export class MessageBody{
      */
 	constructor(idToken, accessToken, resource, schema, assertedIdentity){
 
-        //if(idToken)
-            this.idToken = idToken;
-       // if(accessToken)
-            this.accessToken = accessToken;
-       // if(resource )
-            this.resource = resource;
-        //if(schema )
-            this.schema = schema;
-        //if(assertedIdentity)
-            this.assertedIdentity = assertedIdentity;
+        this.idToken = idToken;
+        this.accessToken = accessToken;
+        this.resource = resource;
+        this.schema = schema;
+        this.assertedIdentity = assertedIdentity;
 	}
 
+    /**
+     * Adds a via URL to the given message body. The "MessageBody.via" attribute contains a list of all Protostub
+     * addresses (Protostub) that the message has been passed through. It is used to prevent infinite cycles in the
+     * Hyperty Messaging Framework.
+     * @param {Identity.JWT} token - identity token to include in the message
+     * @return {MessageBody} - the updated message body
+     */
+    addVia(viaURL){
+        if(!viaURL )
+            throw  new Error("via URL to be added, must be provided");
+        this.via = viaURL;
+        return this;
+    }
 
 }
 
@@ -210,6 +218,33 @@ export class ResponseMessageBody extends MessageBody {
             this.value = value;
 
     }
+}
+
+/**
+ * Class representation of the ExecuteMessageBoday data Object. Contains the name of method to be invoked and an array
+ * and an Array of objects to be passed as parameters to the defined method. This is compliant with JSON-RPC Spec.
+ */
+export class ExecuteMessageBody extends MessageBody {
+
+    /**
+     * Constructor to create the object
+     *
+     * @param {Identity.JWT} idToken -
+     * @param {Identity.JWT} accessToken
+     * @param {URL.URL} resource - URL of the object
+     * @param {URL.HypertyCatalogueURL} schema - URL of the Data object schema stored in the Catalogue
+     * @param {Identity.Identity} assertedIdentity - AssertedIdentity is compliant with User Identity Data Model
+     * @param {Message} message - Message to be forwarded
+     */
+    constructor(idToken, accessToken, resource, schema, assertedIdentity, method, params){
+
+
+        super(idToken,accessToken ,resource, schema, assertedIdentity );
+
+        this.method = method;
+        this.params = params;
+    }
+
 }
 
 export function Enum(a){
