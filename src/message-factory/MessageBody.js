@@ -1,25 +1,25 @@
 /**
-* Copyright 2016 PT Inovação e Sistemas SA
-* Copyright 2016 INESC-ID
-* Copyright 2016 QUOBIS NETWORKS SL
-* Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
-* Copyright 2016 ORANGE SA
-* Copyright 2016 Deutsche Telekom AG
-* Copyright 2016 Apizee
-* Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*   http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-**/
+ * Copyright 2016 PT Inovação e Sistemas SA
+ * Copyright 2016 INESC-ID
+ * Copyright 2016 QUOBIS NETWORKS SL
+ * Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
+ * Copyright 2016 ORANGE SA
+ * Copyright 2016 Deutsche Telekom AG
+ * Copyright 2016 Apizee
+ * Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **/
 
 /**
  * @author alice.cheambe[at]fokus.fraunhofer.de
@@ -38,14 +38,14 @@ export class MessageBody{
      * @param {Identity.Identity} assertedIdentity - AssertedIdentity is compliant with User Identity Data Model
      *
      */
-	constructor(idToken, accessToken, resource, schema, assertedIdentity){
+    constructor(idToken, accessToken, resource, schema, assertedIdentity){
 
         this.idToken = idToken;
         this.accessToken = accessToken;
         this.resource = resource;
         this.schema = schema;
         this.assertedIdentity = assertedIdentity;
-	}
+    }
 
     /**
      * Adds a via URL to the given message body. The "MessageBody.via" attribute contains a list of all Protostub
@@ -130,14 +130,19 @@ export class DeleteMessageBody extends MessageBody {
      *
      * @param {Identity.JWT} idToken -
      * @param {Identity.JWT} accessToken
-     * @param {URL.URL} resource - URL of the object
+     * @param {URL.URLList} resource - One or more URLs of objects to be deleted
      * @param {URL.HypertyCatalogueURL} schema - URL of the Data object schema stored in the Catalogue
      * @param {Identity.Identity} assertedIdentity - AssertedIdentity is compliant with User Identity Data Model
      * @param {String} attribute - Identifies the attribute in the Object to be deleted (optional)
      */
     constructor(idToken, accessToken, resource, schema, assertedIdentity,attribute ){
 
-        super(idToken,accessToken ,resource, schema, assertedIdentity );
+        if (typeof resource === Array || resource instanceof Array) {
+            super(idToken, accessToken , null, schema, assertedIdentity);
+            this.childrenResources = resource;
+        } else {
+            super(idToken, accessToken ,resource, schema, assertedIdentity);
+        }
 
         if(attribute){
             this.attribute = attribute;
