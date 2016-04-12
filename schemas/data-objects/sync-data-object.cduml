@@ -3,15 +3,19 @@
 package SyncDataObject {
 
 	class SyncObject {
+		url : URL.URL
 		reporter : URL.HypertyURL
 		schema : URL.HypertyCatalogueURL
+		name : string
+		description ?: string
+		tags ?: string[]
 	}
 
 	class SyncObjectParent {
 	}
 
 	class SyncObjectChildren {
-		children : URL.URL[]
+		children : URL.URLList
 	}
 
 	class SyncObjectChild {
