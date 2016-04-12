@@ -162,7 +162,7 @@ export class UpdateMessageBody extends MessageBody {
      * @param {URL.URL} resource - URL of the object
      * @param {URL.HypertyCatalogueURL} schema - URL of the Data object schema stored in the Catalogue
      * @param {Identity.Identity} assertedIdentity - AssertedIdentity is compliant with User Identity Data Model
-     * @param {String} attribute - Identifies the attribute in the Object to be deleted (optional)
+     * @param {String} attribute - Identifies the attribute in the Object to be updated (optional)
      * @param {String} value - Contains the updated value object in JSON format.
      */
     constructor(idToken, accessToken, resource, schema, assertedIdentity, attribute, value){
@@ -170,6 +170,17 @@ export class UpdateMessageBody extends MessageBody {
         super(idToken,accessToken ,resource, schema, assertedIdentity );
         this.attribute = attribute;
         this.value = value;
+    }
+
+    addAttributeType(attributeType){
+        if(attributeType)
+            this.attributeType = attributeType;
+    }
+
+    addOperation(operation)
+    {
+        if(operation)
+            this.operation = operation;
     }
 }
 
@@ -356,6 +367,17 @@ export const REASON_PHRASE = Enum({
     503: 'Service Unavailable',
     504: 'Gateway Time-out',
     505: 'HTTP Version Not Supported'
+});
+
+
+export const ATTRIBUTE_TYPE = Enum({
+    OBJECT: 'OBJECT',
+    ARRAY: 'ARRAY'
+});
+
+export const UPDATE_OPERATION = Enum({
+    ADD: 'ADD',
+    REMOVE: 'REMOVE'
 });
 
 export default MessageBody;
