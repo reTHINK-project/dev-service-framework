@@ -12,10 +12,14 @@ package SyncDataObject {
 	}
 
 	class SyncObjectParent {
+		children : string[]
 	}
 
-	class SyncObjectChildren {
-		children : URL.URLList
+	class SyncObjectChildren <<Children>> {
+		parent : string
+		listener : string
+		type : SyncObjectChild
+		childrenUrls ?: URL.URL[]
 	}
 
 	class SyncObjectChild {
@@ -24,7 +28,7 @@ package SyncDataObject {
 	SyncObjectParent .up.|> SyncObject
 	SyncObjectChild .up.|> SyncObject
 
-	SyncObjectParent *.down. "1..*" SyncObjectChildren
+	SyncObjectParent .down.> "1..*" SyncObjectChildren
 	SyncObjectChildren .down.> "1..*" SyncObjectChild : ChildId
 }
 
