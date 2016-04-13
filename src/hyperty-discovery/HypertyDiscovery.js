@@ -44,6 +44,44 @@ class HypertyDiscovery {
   }
 
   /**
+  * function to request about dataObject registered in domain registry, and
+  * return the dataObject instance  url, if found.
+  * @param  {String}              name  dataObject Name
+  * @param  {String}            domain (Optional)
+  * @return {Promise}          Promise
+  */
+  discoverDataObjectPerName(name, domain) {
+    let _this = this;
+    let activeDomain;
+
+    if (!domain) {
+      activeDomain = _this.domain;
+    } else {
+      activeDomain = domain;
+    }
+
+    let msg = {
+      type: 'read', from: _this.registryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: 'dataObject://' + name}
+    };
+
+    return new Promise(function(resolve, reject) {
+
+      _this.messageBus.postMessage(msg, (reply) => {
+
+        let dataObjectUrl = reply.body.value.url;
+
+        if (dataObjectUrl) {
+          resolve(dataObjectUrl);
+        } else {
+          reject('DataObject name does not exist');
+        }
+      });
+
+    });
+
+  }
+
+  /**
   * function to request about users registered in domain registry, and
   * return the hyperty instance if found.
   * @param  {email}              email
@@ -64,7 +102,7 @@ class HypertyDiscovery {
 
     // message to query domain registry, asking for a user hyperty.
     let message = {
-      type: 'READ', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: identityURL}
+      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: identityURL}
     };
 
     console.log('Message: ', message, activeDomain, identityURL);
