@@ -3,12 +3,13 @@
 package Communication <<Rect>> {
 
 	class Communication {
-		id
-		host
-		owner
-		startingTime
-		lastModified
-		duration
+		startingTime : RethinkCore.RethinkType.Date
+		lastModified : RethinkCore.RethinkType.Date
+		duration ?: RethinkCore.RethinkType.Date
+		status : CommunicationStatus
+		participants ?: Participant[]
+		qos ?: CommunicationQuality
+		resources ?: HypertyResource.HypertyResource[]
 	}
 
 	enum CommunicationStatus {
@@ -23,20 +24,19 @@ package Communication <<Rect>> {
 	}
 
 	class Participant {
+		status ?: ParticipantStatus
 	}
 
 	class CommunicationQuality {
 	}
 
-	class HypertyResource {
-	}
-
+	Communication -up-|> SyncDataObject.DataSync
 	Communication .. CommunicationStatus
 	Communication *.. Participant
 	Communication *.. CommunicationQuality
 	Communication *.. Message.Message
 	Participant .. ParticipantStatus
-	Participant ..> HypertyResource
+	Participant ..> HypertyResource.HypertyResource
 	Participant ..> Identity.Identity
 
 	HypertyResource ..> Connection.Connection : transportedBy

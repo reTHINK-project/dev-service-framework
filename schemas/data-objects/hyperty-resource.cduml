@@ -1,19 +1,12 @@
 @startuml "../../docs/datamodel/data-objects/communication/Hyperty-Resource-Data-Object-Model.png"
 
 package HypertyResource <<Rect>> {
-	
+
 	class HypertyResource {
+		type : RethinkCore.CatalogueDataObject.HypertyDescriptor.HypertyResourceType
+		direction ?: ResourceDirection
 	}
 
-	enum ResourceType {
-		CHAT
-		AUDIO
-		VIDEO
-		AV
-		SCREEN
-		FILE
-		MIDI
-	}
 
 	enum ResourceDirection {
 		IN
@@ -21,6 +14,7 @@ package HypertyResource <<Rect>> {
 		INOUT
 	}
 
+	HypertyResource -up-|> SyncDataObject.DataSyncChild
 	HypertyResource ..> ResourceType
 	HypertyResource ..> ResourceDirection
 	Identity.Identity ..> HypertyResource: author
