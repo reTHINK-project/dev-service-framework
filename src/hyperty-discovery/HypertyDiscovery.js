@@ -61,7 +61,7 @@ class HypertyDiscovery {
     }
 
     let msg = {
-      type: 'read', from: _this.registryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: 'dataObject://' + name}
+      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: 'dataObject://' + name}
     };
 
     return new Promise(function(resolve, reject) {
