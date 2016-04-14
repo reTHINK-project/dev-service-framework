@@ -88,7 +88,7 @@ DataType:
 ;
 
 enum NativeType:
-	string | number | integer | boolean
+	string | number | integer | boolean | date | object
 ;
 
 QualifiedName: ID ('.' ID)*;
@@ -96,9 +96,9 @@ QualifiedName: ID ('.' ID)*;
 Text: (
 	ID | STRING | ANY_OTHER | 
 	"up" | "down" | "top" | "bottom" | "left" | "right" | 
-	"null" | "string" | "number" | "integer" | "boolean" | 
+	"null" | "string" | "number" | "integer" | "boolean" | "date" | "object" | 
 	"package" | "class" | "enum" | 
-	"note" | "as" | "of" | ":" | "?"
+	"note" | "as" | "of" | ":" | "?" | "[" | "]"
 )+;
 
 terminal ID: ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;

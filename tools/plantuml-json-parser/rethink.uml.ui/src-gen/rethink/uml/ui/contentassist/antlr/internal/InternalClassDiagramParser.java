@@ -22,7 +22,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalClassDiagramParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_ANY_OTHER", "RULE_END_LINE", "RULE_WS", "RULE_MULTI", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "'up'", "'down'", "'left'", "'right'", "'top'", "'bottom'", "'null'", "'string'", "'number'", "'integer'", "'boolean'", "'package'", "'class'", "'enum'", "'note'", "'as'", "'of'", "':'", "'?'", "'Node'", "'Rect'", "'Folder'", "'Frame'", "'Cloud'", "'Database'", "'none'", "'*'", "'o'", "'@startuml'", "'@enduml'", "'{'", "'}'", "'<<'", "'>>'", "'-'", "'.'", "'['", "']'", "'|'", "'end note'", "'>'", "'|>'", "'='", "'[]'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_ANY_OTHER", "RULE_END_LINE", "RULE_WS", "RULE_MULTI", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "'up'", "'down'", "'left'", "'right'", "'top'", "'bottom'", "'null'", "'string'", "'number'", "'integer'", "'boolean'", "'date'", "'object'", "'package'", "'class'", "'enum'", "'note'", "'as'", "'of'", "':'", "'?'", "'['", "']'", "'Node'", "'Rect'", "'Folder'", "'Frame'", "'Cloud'", "'Database'", "'none'", "'*'", "'o'", "'@startuml'", "'@enduml'", "'{'", "'}'", "'<<'", "'>>'", "'-'", "'.'", "'|'", "'end note'", "'>'", "'|>'", "'='", "'[]'"
     };
     public static final int T__50=50;
     public static final int T__19=19;
@@ -33,7 +33,9 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
     public static final int T__18=18;
     public static final int T__55=55;
     public static final int T__12=12;
+    public static final int T__56=56;
     public static final int T__13=13;
+    public static final int T__57=57;
     public static final int T__14=14;
     public static final int T__51=51;
     public static final int T__52=52;
@@ -1512,7 +1514,7 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
                 int alt1=2;
                 int LA1_0 = input.LA(1);
 
-                if ( ((LA1_0>=RULE_ID && LA1_0<=RULE_ANY_OTHER)||(LA1_0>=12 && LA1_0<=30)) ) {
+                if ( ((LA1_0>=RULE_ID && LA1_0<=RULE_ANY_OTHER)||(LA1_0>=12 && LA1_0<=34)) ) {
                     alt1=1;
                 }
 
@@ -1762,7 +1764,7 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
             if ( (LA2_0==RULE_ID) ) {
                 alt2=1;
             }
-            else if ( ((LA2_0>=23 && LA2_0<=26)) ) {
+            else if ( ((LA2_0>=25 && LA2_0<=28)) ) {
                 alt2=2;
             }
             else {
@@ -1837,18 +1839,18 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
             // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:689:1: ( ( ruleCPackage ) | ( ruleEntity ) | ( ruleNote ) )
             int alt3=3;
             switch ( input.LA(1) ) {
-            case 23:
+            case 25:
                 {
                 alt3=1;
                 }
                 break;
-            case 24:
-            case 25:
+            case 26:
+            case 27:
                 {
                 alt3=2;
                 }
                 break;
-            case 26:
+            case 28:
                 {
                 alt3=3;
                 }
@@ -1946,10 +1948,10 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
             int alt4=2;
             int LA4_0 = input.LA(1);
 
-            if ( (LA4_0==25) ) {
+            if ( (LA4_0==27) ) {
                 alt4=1;
             }
-            else if ( (LA4_0==24) ) {
+            else if ( (LA4_0==26) ) {
                 alt4=2;
             }
             else {
@@ -2025,10 +2027,10 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
             int alt5=2;
             int LA5_0 = input.LA(1);
 
-            if ( ((LA5_0>=37 && LA5_0<=39)) ) {
+            if ( ((LA5_0>=41 && LA5_0<=43)) ) {
                 alt5=1;
             }
-            else if ( ((LA5_0>=46 && LA5_0<=47)) ) {
+            else if ( ((LA5_0>=50 && LA5_0<=51)) ) {
                 alt5=2;
             }
             else {
@@ -2116,10 +2118,10 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
             int alt6=2;
             int LA6_0 = input.LA(1);
 
-            if ( (LA6_0==52) ) {
+            if ( (LA6_0==54) ) {
                 alt6=1;
             }
-            else if ( (LA6_0==53) ) {
+            else if ( (LA6_0==55) ) {
                 alt6=2;
             }
             else {
@@ -2207,10 +2209,10 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
             int alt7=2;
             int LA7_0 = input.LA(1);
 
-            if ( (LA7_0==46) ) {
+            if ( (LA7_0==50) ) {
                 alt7=1;
             }
-            else if ( (LA7_0==47) ) {
+            else if ( (LA7_0==51) ) {
                 alt7=2;
             }
             else {
@@ -2528,10 +2530,10 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
             int alt10=2;
             int LA10_0 = input.LA(1);
 
-            if ( (LA10_0==RULE_END_LINE||(LA10_0>=29 && LA10_0<=30)) ) {
+            if ( (LA10_0==RULE_END_LINE||(LA10_0>=31 && LA10_0<=32)) ) {
                 alt10=1;
             }
-            else if ( (LA10_0==54) ) {
+            else if ( (LA10_0==56) ) {
                 alt10=2;
             }
             else {
@@ -2619,10 +2621,10 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
             int alt11=2;
             int LA11_0 = input.LA(1);
 
-            if ( (LA11_0==RULE_ID||(LA11_0>=19 && LA11_0<=22)) ) {
+            if ( (LA11_0==RULE_ID||(LA11_0>=19 && LA11_0<=24)) ) {
                 alt11=1;
             }
-            else if ( (LA11_0==48) ) {
+            else if ( (LA11_0==33) ) {
                 alt11=2;
             }
             else {
@@ -2710,10 +2712,10 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
             int alt12=2;
             int LA12_0 = input.LA(1);
 
-            if ( ((LA12_0>=14 && LA12_0<=17)||LA12_0==28) ) {
+            if ( ((LA12_0>=14 && LA12_0<=17)||LA12_0==30) ) {
                 alt12=1;
             }
-            else if ( (LA12_0==27) ) {
+            else if ( (LA12_0==29) ) {
                 alt12=2;
             }
             else {
@@ -2804,7 +2806,7 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
             if ( ((LA13_0>=14 && LA13_0<=17)) ) {
                 alt13=1;
             }
-            else if ( (LA13_0==28) ) {
+            else if ( (LA13_0==30) ) {
                 alt13=2;
             }
             else {
@@ -2892,7 +2894,7 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
             int alt14=2;
             int LA14_0 = input.LA(1);
 
-            if ( ((LA14_0>=19 && LA14_0<=22)) ) {
+            if ( ((LA14_0>=19 && LA14_0<=24)) ) {
                 alt14=1;
             }
             else if ( (LA14_0==RULE_ID) ) {
@@ -2973,14 +2975,14 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Text__Alternatives"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:995:1: rule__Text__Alternatives : ( ( RULE_ID ) | ( RULE_STRING ) | ( RULE_ANY_OTHER ) | ( 'up' ) | ( 'down' ) | ( 'top' ) | ( 'bottom' ) | ( 'left' ) | ( 'right' ) | ( 'null' ) | ( 'string' ) | ( 'number' ) | ( 'integer' ) | ( 'boolean' ) | ( 'package' ) | ( 'class' ) | ( 'enum' ) | ( 'note' ) | ( 'as' ) | ( 'of' ) | ( ':' ) | ( '?' ) );
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:995:1: rule__Text__Alternatives : ( ( RULE_ID ) | ( RULE_STRING ) | ( RULE_ANY_OTHER ) | ( 'up' ) | ( 'down' ) | ( 'top' ) | ( 'bottom' ) | ( 'left' ) | ( 'right' ) | ( 'null' ) | ( 'string' ) | ( 'number' ) | ( 'integer' ) | ( 'boolean' ) | ( 'date' ) | ( 'object' ) | ( 'package' ) | ( 'class' ) | ( 'enum' ) | ( 'note' ) | ( 'as' ) | ( 'of' ) | ( ':' ) | ( '?' ) | ( '[' ) | ( ']' ) );
     public final void rule__Text__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:999:1: ( ( RULE_ID ) | ( RULE_STRING ) | ( RULE_ANY_OTHER ) | ( 'up' ) | ( 'down' ) | ( 'top' ) | ( 'bottom' ) | ( 'left' ) | ( 'right' ) | ( 'null' ) | ( 'string' ) | ( 'number' ) | ( 'integer' ) | ( 'boolean' ) | ( 'package' ) | ( 'class' ) | ( 'enum' ) | ( 'note' ) | ( 'as' ) | ( 'of' ) | ( ':' ) | ( '?' ) )
-            int alt15=22;
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:999:1: ( ( RULE_ID ) | ( RULE_STRING ) | ( RULE_ANY_OTHER ) | ( 'up' ) | ( 'down' ) | ( 'top' ) | ( 'bottom' ) | ( 'left' ) | ( 'right' ) | ( 'null' ) | ( 'string' ) | ( 'number' ) | ( 'integer' ) | ( 'boolean' ) | ( 'date' ) | ( 'object' ) | ( 'package' ) | ( 'class' ) | ( 'enum' ) | ( 'note' ) | ( 'as' ) | ( 'of' ) | ( ':' ) | ( '?' ) | ( '[' ) | ( ']' ) )
+            int alt15=26;
             switch ( input.LA(1) ) {
             case RULE_ID:
                 {
@@ -3090,6 +3092,26 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
             case 30:
                 {
                 alt15=22;
+                }
+                break;
+            case 31:
+                {
+                alt15=23;
+                }
+                break;
+            case 32:
+                {
+                alt15=24;
+                }
+                break;
+            case 33:
+                {
+                alt15=25;
+                }
+                break;
+            case 34:
+                {
+                alt15=26;
                 }
                 break;
             default:
@@ -3311,14 +3333,14 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 15 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1106:6: ( 'package' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1106:6: ( 'date' )
                     {
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1106:6: ( 'package' )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1107:1: 'package'
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1106:6: ( 'date' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1107:1: 'date'
                     {
-                     before(grammarAccess.getTextAccess().getPackageKeyword_14()); 
+                     before(grammarAccess.getTextAccess().getDateKeyword_14()); 
                     match(input,23,FOLLOW_23_in_rule__Text__Alternatives2363); 
-                     after(grammarAccess.getTextAccess().getPackageKeyword_14()); 
+                     after(grammarAccess.getTextAccess().getDateKeyword_14()); 
 
                     }
 
@@ -3326,14 +3348,14 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 16 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1114:6: ( 'class' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1114:6: ( 'object' )
                     {
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1114:6: ( 'class' )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1115:1: 'class'
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1114:6: ( 'object' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1115:1: 'object'
                     {
-                     before(grammarAccess.getTextAccess().getClassKeyword_15()); 
+                     before(grammarAccess.getTextAccess().getObjectKeyword_15()); 
                     match(input,24,FOLLOW_24_in_rule__Text__Alternatives2383); 
-                     after(grammarAccess.getTextAccess().getClassKeyword_15()); 
+                     after(grammarAccess.getTextAccess().getObjectKeyword_15()); 
 
                     }
 
@@ -3341,14 +3363,14 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 17 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1122:6: ( 'enum' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1122:6: ( 'package' )
                     {
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1122:6: ( 'enum' )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1123:1: 'enum'
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1122:6: ( 'package' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1123:1: 'package'
                     {
-                     before(grammarAccess.getTextAccess().getEnumKeyword_16()); 
+                     before(grammarAccess.getTextAccess().getPackageKeyword_16()); 
                     match(input,25,FOLLOW_25_in_rule__Text__Alternatives2403); 
-                     after(grammarAccess.getTextAccess().getEnumKeyword_16()); 
+                     after(grammarAccess.getTextAccess().getPackageKeyword_16()); 
 
                     }
 
@@ -3356,14 +3378,14 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 18 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1130:6: ( 'note' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1130:6: ( 'class' )
                     {
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1130:6: ( 'note' )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1131:1: 'note'
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1130:6: ( 'class' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1131:1: 'class'
                     {
-                     before(grammarAccess.getTextAccess().getNoteKeyword_17()); 
+                     before(grammarAccess.getTextAccess().getClassKeyword_17()); 
                     match(input,26,FOLLOW_26_in_rule__Text__Alternatives2423); 
-                     after(grammarAccess.getTextAccess().getNoteKeyword_17()); 
+                     after(grammarAccess.getTextAccess().getClassKeyword_17()); 
 
                     }
 
@@ -3371,14 +3393,14 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 19 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1138:6: ( 'as' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1138:6: ( 'enum' )
                     {
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1138:6: ( 'as' )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1139:1: 'as'
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1138:6: ( 'enum' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1139:1: 'enum'
                     {
-                     before(grammarAccess.getTextAccess().getAsKeyword_18()); 
+                     before(grammarAccess.getTextAccess().getEnumKeyword_18()); 
                     match(input,27,FOLLOW_27_in_rule__Text__Alternatives2443); 
-                     after(grammarAccess.getTextAccess().getAsKeyword_18()); 
+                     after(grammarAccess.getTextAccess().getEnumKeyword_18()); 
 
                     }
 
@@ -3386,14 +3408,14 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 20 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1146:6: ( 'of' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1146:6: ( 'note' )
                     {
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1146:6: ( 'of' )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1147:1: 'of'
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1146:6: ( 'note' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1147:1: 'note'
                     {
-                     before(grammarAccess.getTextAccess().getOfKeyword_19()); 
+                     before(grammarAccess.getTextAccess().getNoteKeyword_19()); 
                     match(input,28,FOLLOW_28_in_rule__Text__Alternatives2463); 
-                     after(grammarAccess.getTextAccess().getOfKeyword_19()); 
+                     after(grammarAccess.getTextAccess().getNoteKeyword_19()); 
 
                     }
 
@@ -3401,14 +3423,14 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 21 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1154:6: ( ':' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1154:6: ( 'as' )
                     {
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1154:6: ( ':' )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1155:1: ':'
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1154:6: ( 'as' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1155:1: 'as'
                     {
-                     before(grammarAccess.getTextAccess().getColonKeyword_20()); 
+                     before(grammarAccess.getTextAccess().getAsKeyword_20()); 
                     match(input,29,FOLLOW_29_in_rule__Text__Alternatives2483); 
-                     after(grammarAccess.getTextAccess().getColonKeyword_20()); 
+                     after(grammarAccess.getTextAccess().getAsKeyword_20()); 
 
                     }
 
@@ -3416,14 +3438,74 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 22 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1162:6: ( '?' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1162:6: ( 'of' )
                     {
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1162:6: ( '?' )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1163:1: '?'
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1162:6: ( 'of' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1163:1: 'of'
                     {
-                     before(grammarAccess.getTextAccess().getQuestionMarkKeyword_21()); 
+                     before(grammarAccess.getTextAccess().getOfKeyword_21()); 
                     match(input,30,FOLLOW_30_in_rule__Text__Alternatives2503); 
-                     after(grammarAccess.getTextAccess().getQuestionMarkKeyword_21()); 
+                     after(grammarAccess.getTextAccess().getOfKeyword_21()); 
+
+                    }
+
+
+                    }
+                    break;
+                case 23 :
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1170:6: ( ':' )
+                    {
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1170:6: ( ':' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1171:1: ':'
+                    {
+                     before(grammarAccess.getTextAccess().getColonKeyword_22()); 
+                    match(input,31,FOLLOW_31_in_rule__Text__Alternatives2523); 
+                     after(grammarAccess.getTextAccess().getColonKeyword_22()); 
+
+                    }
+
+
+                    }
+                    break;
+                case 24 :
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1178:6: ( '?' )
+                    {
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1178:6: ( '?' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1179:1: '?'
+                    {
+                     before(grammarAccess.getTextAccess().getQuestionMarkKeyword_23()); 
+                    match(input,32,FOLLOW_32_in_rule__Text__Alternatives2543); 
+                     after(grammarAccess.getTextAccess().getQuestionMarkKeyword_23()); 
+
+                    }
+
+
+                    }
+                    break;
+                case 25 :
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1186:6: ( '[' )
+                    {
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1186:6: ( '[' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1187:1: '['
+                    {
+                     before(grammarAccess.getTextAccess().getLeftSquareBracketKeyword_24()); 
+                    match(input,33,FOLLOW_33_in_rule__Text__Alternatives2563); 
+                     after(grammarAccess.getTextAccess().getLeftSquareBracketKeyword_24()); 
+
+                    }
+
+
+                    }
+                    break;
+                case 26 :
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1194:6: ( ']' )
+                    {
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1194:6: ( ']' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1195:1: ']'
+                    {
+                     before(grammarAccess.getTextAccess().getRightSquareBracketKeyword_25()); 
+                    match(input,34,FOLLOW_34_in_rule__Text__Alternatives2583); 
+                     after(grammarAccess.getTextAccess().getRightSquareBracketKeyword_25()); 
 
                     }
 
@@ -3448,41 +3530,41 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__PackageStyle__Alternatives"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1175:1: rule__PackageStyle__Alternatives : ( ( ( 'Node' ) ) | ( ( 'Rect' ) ) | ( ( 'Folder' ) ) | ( ( 'Frame' ) ) | ( ( 'Cloud' ) ) | ( ( 'Database' ) ) );
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1207:1: rule__PackageStyle__Alternatives : ( ( ( 'Node' ) ) | ( ( 'Rect' ) ) | ( ( 'Folder' ) ) | ( ( 'Frame' ) ) | ( ( 'Cloud' ) ) | ( ( 'Database' ) ) );
     public final void rule__PackageStyle__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1179:1: ( ( ( 'Node' ) ) | ( ( 'Rect' ) ) | ( ( 'Folder' ) ) | ( ( 'Frame' ) ) | ( ( 'Cloud' ) ) | ( ( 'Database' ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1211:1: ( ( ( 'Node' ) ) | ( ( 'Rect' ) ) | ( ( 'Folder' ) ) | ( ( 'Frame' ) ) | ( ( 'Cloud' ) ) | ( ( 'Database' ) ) )
             int alt16=6;
             switch ( input.LA(1) ) {
-            case 31:
+            case 35:
                 {
                 alt16=1;
                 }
                 break;
-            case 32:
+            case 36:
                 {
                 alt16=2;
                 }
                 break;
-            case 33:
+            case 37:
                 {
                 alt16=3;
                 }
                 break;
-            case 34:
+            case 38:
                 {
                 alt16=4;
                 }
                 break;
-            case 35:
+            case 39:
                 {
                 alt16=5;
                 }
                 break;
-            case 36:
+            case 40:
                 {
                 alt16=6;
                 }
@@ -3496,16 +3578,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
             switch (alt16) {
                 case 1 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1180:1: ( ( 'Node' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1212:1: ( ( 'Node' ) )
                     {
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1180:1: ( ( 'Node' ) )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1181:1: ( 'Node' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1212:1: ( ( 'Node' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1213:1: ( 'Node' )
                     {
                      before(grammarAccess.getPackageStyleAccess().getNodeEnumLiteralDeclaration_0()); 
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1182:1: ( 'Node' )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1182:3: 'Node'
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1214:1: ( 'Node' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1214:3: 'Node'
                     {
-                    match(input,31,FOLLOW_31_in_rule__PackageStyle__Alternatives2538); 
+                    match(input,35,FOLLOW_35_in_rule__PackageStyle__Alternatives2618); 
 
                     }
 
@@ -3517,16 +3599,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 2 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1187:6: ( ( 'Rect' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1219:6: ( ( 'Rect' ) )
                     {
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1187:6: ( ( 'Rect' ) )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1188:1: ( 'Rect' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1219:6: ( ( 'Rect' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1220:1: ( 'Rect' )
                     {
                      before(grammarAccess.getPackageStyleAccess().getRectEnumLiteralDeclaration_1()); 
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1189:1: ( 'Rect' )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1189:3: 'Rect'
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1221:1: ( 'Rect' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1221:3: 'Rect'
                     {
-                    match(input,32,FOLLOW_32_in_rule__PackageStyle__Alternatives2559); 
+                    match(input,36,FOLLOW_36_in_rule__PackageStyle__Alternatives2639); 
 
                     }
 
@@ -3538,16 +3620,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 3 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1194:6: ( ( 'Folder' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1226:6: ( ( 'Folder' ) )
                     {
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1194:6: ( ( 'Folder' ) )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1195:1: ( 'Folder' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1226:6: ( ( 'Folder' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1227:1: ( 'Folder' )
                     {
                      before(grammarAccess.getPackageStyleAccess().getFolderEnumLiteralDeclaration_2()); 
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1196:1: ( 'Folder' )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1196:3: 'Folder'
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1228:1: ( 'Folder' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1228:3: 'Folder'
                     {
-                    match(input,33,FOLLOW_33_in_rule__PackageStyle__Alternatives2580); 
+                    match(input,37,FOLLOW_37_in_rule__PackageStyle__Alternatives2660); 
 
                     }
 
@@ -3559,16 +3641,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 4 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1201:6: ( ( 'Frame' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1233:6: ( ( 'Frame' ) )
                     {
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1201:6: ( ( 'Frame' ) )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1202:1: ( 'Frame' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1233:6: ( ( 'Frame' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1234:1: ( 'Frame' )
                     {
                      before(grammarAccess.getPackageStyleAccess().getFrameEnumLiteralDeclaration_3()); 
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1203:1: ( 'Frame' )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1203:3: 'Frame'
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1235:1: ( 'Frame' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1235:3: 'Frame'
                     {
-                    match(input,34,FOLLOW_34_in_rule__PackageStyle__Alternatives2601); 
+                    match(input,38,FOLLOW_38_in_rule__PackageStyle__Alternatives2681); 
 
                     }
 
@@ -3580,16 +3662,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 5 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1208:6: ( ( 'Cloud' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1240:6: ( ( 'Cloud' ) )
                     {
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1208:6: ( ( 'Cloud' ) )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1209:1: ( 'Cloud' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1240:6: ( ( 'Cloud' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1241:1: ( 'Cloud' )
                     {
                      before(grammarAccess.getPackageStyleAccess().getCloudEnumLiteralDeclaration_4()); 
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1210:1: ( 'Cloud' )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1210:3: 'Cloud'
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1242:1: ( 'Cloud' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1242:3: 'Cloud'
                     {
-                    match(input,35,FOLLOW_35_in_rule__PackageStyle__Alternatives2622); 
+                    match(input,39,FOLLOW_39_in_rule__PackageStyle__Alternatives2702); 
 
                     }
 
@@ -3601,16 +3683,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 6 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1215:6: ( ( 'Database' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1247:6: ( ( 'Database' ) )
                     {
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1215:6: ( ( 'Database' ) )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1216:1: ( 'Database' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1247:6: ( ( 'Database' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1248:1: ( 'Database' )
                     {
                      before(grammarAccess.getPackageStyleAccess().getDatabaseEnumLiteralDeclaration_5()); 
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1217:1: ( 'Database' )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1217:3: 'Database'
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1249:1: ( 'Database' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1249:3: 'Database'
                     {
-                    match(input,36,FOLLOW_36_in_rule__PackageStyle__Alternatives2643); 
+                    match(input,40,FOLLOW_40_in_rule__PackageStyle__Alternatives2723); 
 
                     }
 
@@ -3639,26 +3721,26 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CompType__Alternatives"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1227:1: rule__CompType__Alternatives : ( ( ( 'none' ) ) | ( ( '*' ) ) | ( ( 'o' ) ) );
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1259:1: rule__CompType__Alternatives : ( ( ( 'none' ) ) | ( ( '*' ) ) | ( ( 'o' ) ) );
     public final void rule__CompType__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1231:1: ( ( ( 'none' ) ) | ( ( '*' ) ) | ( ( 'o' ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1263:1: ( ( ( 'none' ) ) | ( ( '*' ) ) | ( ( 'o' ) ) )
             int alt17=3;
             switch ( input.LA(1) ) {
-            case 37:
+            case 41:
                 {
                 alt17=1;
                 }
                 break;
-            case 38:
+            case 42:
                 {
                 alt17=2;
                 }
                 break;
-            case 39:
+            case 43:
                 {
                 alt17=3;
                 }
@@ -3672,16 +3754,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
             switch (alt17) {
                 case 1 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1232:1: ( ( 'none' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1264:1: ( ( 'none' ) )
                     {
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1232:1: ( ( 'none' ) )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1233:1: ( 'none' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1264:1: ( ( 'none' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1265:1: ( 'none' )
                     {
                      before(grammarAccess.getCompTypeAccess().getNoneEnumLiteralDeclaration_0()); 
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1234:1: ( 'none' )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1234:3: 'none'
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1266:1: ( 'none' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1266:3: 'none'
                     {
-                    match(input,37,FOLLOW_37_in_rule__CompType__Alternatives2679); 
+                    match(input,41,FOLLOW_41_in_rule__CompType__Alternatives2759); 
 
                     }
 
@@ -3693,16 +3775,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 2 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1239:6: ( ( '*' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1271:6: ( ( '*' ) )
                     {
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1239:6: ( ( '*' ) )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1240:1: ( '*' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1271:6: ( ( '*' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1272:1: ( '*' )
                     {
                      before(grammarAccess.getCompTypeAccess().getCompEnumLiteralDeclaration_1()); 
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1241:1: ( '*' )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1241:3: '*'
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1273:1: ( '*' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1273:3: '*'
                     {
-                    match(input,38,FOLLOW_38_in_rule__CompType__Alternatives2700); 
+                    match(input,42,FOLLOW_42_in_rule__CompType__Alternatives2780); 
 
                     }
 
@@ -3714,16 +3796,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 3 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1246:6: ( ( 'o' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1278:6: ( ( 'o' ) )
                     {
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1246:6: ( ( 'o' ) )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1247:1: ( 'o' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1278:6: ( ( 'o' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1279:1: ( 'o' )
                     {
                      before(grammarAccess.getCompTypeAccess().getAgreEnumLiteralDeclaration_2()); 
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1248:1: ( 'o' )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1248:3: 'o'
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1280:1: ( 'o' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1280:3: 'o'
                     {
-                    match(input,39,FOLLOW_39_in_rule__CompType__Alternatives2721); 
+                    match(input,43,FOLLOW_43_in_rule__CompType__Alternatives2801); 
 
                     }
 
@@ -3752,13 +3834,13 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__NotePosition__Alternatives"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1258:1: rule__NotePosition__Alternatives : ( ( ( 'top' ) ) | ( ( 'bottom' ) ) | ( ( 'left' ) ) | ( ( 'right' ) ) );
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1290:1: rule__NotePosition__Alternatives : ( ( ( 'top' ) ) | ( ( 'bottom' ) ) | ( ( 'left' ) ) | ( ( 'right' ) ) );
     public final void rule__NotePosition__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1262:1: ( ( ( 'top' ) ) | ( ( 'bottom' ) ) | ( ( 'left' ) ) | ( ( 'right' ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1294:1: ( ( ( 'top' ) ) | ( ( 'bottom' ) ) | ( ( 'left' ) ) | ( ( 'right' ) ) )
             int alt18=4;
             switch ( input.LA(1) ) {
             case 16:
@@ -3790,16 +3872,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
             switch (alt18) {
                 case 1 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1263:1: ( ( 'top' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1295:1: ( ( 'top' ) )
                     {
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1263:1: ( ( 'top' ) )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1264:1: ( 'top' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1295:1: ( ( 'top' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1296:1: ( 'top' )
                     {
                      before(grammarAccess.getNotePositionAccess().getTopEnumLiteralDeclaration_0()); 
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1265:1: ( 'top' )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1265:3: 'top'
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1297:1: ( 'top' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1297:3: 'top'
                     {
-                    match(input,16,FOLLOW_16_in_rule__NotePosition__Alternatives2757); 
+                    match(input,16,FOLLOW_16_in_rule__NotePosition__Alternatives2837); 
 
                     }
 
@@ -3811,16 +3893,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 2 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1270:6: ( ( 'bottom' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1302:6: ( ( 'bottom' ) )
                     {
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1270:6: ( ( 'bottom' ) )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1271:1: ( 'bottom' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1302:6: ( ( 'bottom' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1303:1: ( 'bottom' )
                     {
                      before(grammarAccess.getNotePositionAccess().getBottomEnumLiteralDeclaration_1()); 
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1272:1: ( 'bottom' )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1272:3: 'bottom'
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1304:1: ( 'bottom' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1304:3: 'bottom'
                     {
-                    match(input,17,FOLLOW_17_in_rule__NotePosition__Alternatives2778); 
+                    match(input,17,FOLLOW_17_in_rule__NotePosition__Alternatives2858); 
 
                     }
 
@@ -3832,16 +3914,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 3 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1277:6: ( ( 'left' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1309:6: ( ( 'left' ) )
                     {
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1277:6: ( ( 'left' ) )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1278:1: ( 'left' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1309:6: ( ( 'left' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1310:1: ( 'left' )
                     {
                      before(grammarAccess.getNotePositionAccess().getLeftEnumLiteralDeclaration_2()); 
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1279:1: ( 'left' )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1279:3: 'left'
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1311:1: ( 'left' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1311:3: 'left'
                     {
-                    match(input,14,FOLLOW_14_in_rule__NotePosition__Alternatives2799); 
+                    match(input,14,FOLLOW_14_in_rule__NotePosition__Alternatives2879); 
 
                     }
 
@@ -3853,16 +3935,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 4 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1284:6: ( ( 'right' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1316:6: ( ( 'right' ) )
                     {
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1284:6: ( ( 'right' ) )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1285:1: ( 'right' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1316:6: ( ( 'right' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1317:1: ( 'right' )
                     {
                      before(grammarAccess.getNotePositionAccess().getRightEnumLiteralDeclaration_3()); 
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1286:1: ( 'right' )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1286:3: 'right'
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1318:1: ( 'right' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1318:3: 'right'
                     {
-                    match(input,15,FOLLOW_15_in_rule__NotePosition__Alternatives2820); 
+                    match(input,15,FOLLOW_15_in_rule__NotePosition__Alternatives2900); 
 
                     }
 
@@ -3891,14 +3973,14 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__NativeType__Alternatives"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1296:1: rule__NativeType__Alternatives : ( ( ( 'string' ) ) | ( ( 'number' ) ) | ( ( 'integer' ) ) | ( ( 'boolean' ) ) );
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1328:1: rule__NativeType__Alternatives : ( ( ( 'string' ) ) | ( ( 'number' ) ) | ( ( 'integer' ) ) | ( ( 'boolean' ) ) | ( ( 'date' ) ) | ( ( 'object' ) ) );
     public final void rule__NativeType__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1300:1: ( ( ( 'string' ) ) | ( ( 'number' ) ) | ( ( 'integer' ) ) | ( ( 'boolean' ) ) )
-            int alt19=4;
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1332:1: ( ( ( 'string' ) ) | ( ( 'number' ) ) | ( ( 'integer' ) ) | ( ( 'boolean' ) ) | ( ( 'date' ) ) | ( ( 'object' ) ) )
+            int alt19=6;
             switch ( input.LA(1) ) {
             case 19:
                 {
@@ -3920,6 +4002,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
                 alt19=4;
                 }
                 break;
+            case 23:
+                {
+                alt19=5;
+                }
+                break;
+            case 24:
+                {
+                alt19=6;
+                }
+                break;
             default:
                 NoViableAltException nvae =
                     new NoViableAltException("", 19, 0, input);
@@ -3929,16 +4021,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
             switch (alt19) {
                 case 1 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1301:1: ( ( 'string' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1333:1: ( ( 'string' ) )
                     {
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1301:1: ( ( 'string' ) )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1302:1: ( 'string' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1333:1: ( ( 'string' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1334:1: ( 'string' )
                     {
                      before(grammarAccess.getNativeTypeAccess().getStringEnumLiteralDeclaration_0()); 
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1303:1: ( 'string' )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1303:3: 'string'
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1335:1: ( 'string' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1335:3: 'string'
                     {
-                    match(input,19,FOLLOW_19_in_rule__NativeType__Alternatives2856); 
+                    match(input,19,FOLLOW_19_in_rule__NativeType__Alternatives2936); 
 
                     }
 
@@ -3950,16 +4042,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 2 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1308:6: ( ( 'number' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1340:6: ( ( 'number' ) )
                     {
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1308:6: ( ( 'number' ) )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1309:1: ( 'number' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1340:6: ( ( 'number' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1341:1: ( 'number' )
                     {
                      before(grammarAccess.getNativeTypeAccess().getNumberEnumLiteralDeclaration_1()); 
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1310:1: ( 'number' )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1310:3: 'number'
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1342:1: ( 'number' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1342:3: 'number'
                     {
-                    match(input,20,FOLLOW_20_in_rule__NativeType__Alternatives2877); 
+                    match(input,20,FOLLOW_20_in_rule__NativeType__Alternatives2957); 
 
                     }
 
@@ -3971,16 +4063,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 3 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1315:6: ( ( 'integer' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1347:6: ( ( 'integer' ) )
                     {
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1315:6: ( ( 'integer' ) )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1316:1: ( 'integer' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1347:6: ( ( 'integer' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1348:1: ( 'integer' )
                     {
                      before(grammarAccess.getNativeTypeAccess().getIntegerEnumLiteralDeclaration_2()); 
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1317:1: ( 'integer' )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1317:3: 'integer'
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1349:1: ( 'integer' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1349:3: 'integer'
                     {
-                    match(input,21,FOLLOW_21_in_rule__NativeType__Alternatives2898); 
+                    match(input,21,FOLLOW_21_in_rule__NativeType__Alternatives2978); 
 
                     }
 
@@ -3992,20 +4084,62 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 4 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1322:6: ( ( 'boolean' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1354:6: ( ( 'boolean' ) )
                     {
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1322:6: ( ( 'boolean' ) )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1323:1: ( 'boolean' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1354:6: ( ( 'boolean' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1355:1: ( 'boolean' )
                     {
                      before(grammarAccess.getNativeTypeAccess().getBooleanEnumLiteralDeclaration_3()); 
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1324:1: ( 'boolean' )
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1324:3: 'boolean'
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1356:1: ( 'boolean' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1356:3: 'boolean'
                     {
-                    match(input,22,FOLLOW_22_in_rule__NativeType__Alternatives2919); 
+                    match(input,22,FOLLOW_22_in_rule__NativeType__Alternatives2999); 
 
                     }
 
                      after(grammarAccess.getNativeTypeAccess().getBooleanEnumLiteralDeclaration_3()); 
+
+                    }
+
+
+                    }
+                    break;
+                case 5 :
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1361:6: ( ( 'date' ) )
+                    {
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1361:6: ( ( 'date' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1362:1: ( 'date' )
+                    {
+                     before(grammarAccess.getNativeTypeAccess().getDateEnumLiteralDeclaration_4()); 
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1363:1: ( 'date' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1363:3: 'date'
+                    {
+                    match(input,23,FOLLOW_23_in_rule__NativeType__Alternatives3020); 
+
+                    }
+
+                     after(grammarAccess.getNativeTypeAccess().getDateEnumLiteralDeclaration_4()); 
+
+                    }
+
+
+                    }
+                    break;
+                case 6 :
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1368:6: ( ( 'object' ) )
+                    {
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1368:6: ( ( 'object' ) )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1369:1: ( 'object' )
+                    {
+                     before(grammarAccess.getNativeTypeAccess().getObjectEnumLiteralDeclaration_5()); 
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1370:1: ( 'object' )
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1370:3: 'object'
+                    {
+                    match(input,24,FOLLOW_24_in_rule__NativeType__Alternatives3041); 
+
+                    }
+
+                     after(grammarAccess.getNativeTypeAccess().getObjectEnumLiteralDeclaration_5()); 
 
                     }
 
@@ -4030,21 +4164,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__DomainModel__Group__0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1336:1: rule__DomainModel__Group__0 : rule__DomainModel__Group__0__Impl rule__DomainModel__Group__1 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1382:1: rule__DomainModel__Group__0 : rule__DomainModel__Group__0__Impl rule__DomainModel__Group__1 ;
     public final void rule__DomainModel__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1340:1: ( rule__DomainModel__Group__0__Impl rule__DomainModel__Group__1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1341:2: rule__DomainModel__Group__0__Impl rule__DomainModel__Group__1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1386:1: ( rule__DomainModel__Group__0__Impl rule__DomainModel__Group__1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1387:2: rule__DomainModel__Group__0__Impl rule__DomainModel__Group__1
             {
-            pushFollow(FOLLOW_rule__DomainModel__Group__0__Impl_in_rule__DomainModel__Group__02952);
+            pushFollow(FOLLOW_rule__DomainModel__Group__0__Impl_in_rule__DomainModel__Group__03074);
             rule__DomainModel__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__DomainModel__Group__1_in_rule__DomainModel__Group__02955);
+            pushFollow(FOLLOW_rule__DomainModel__Group__1_in_rule__DomainModel__Group__03077);
             rule__DomainModel__Group__1();
 
             state._fsp--;
@@ -4068,20 +4202,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__DomainModel__Group__0__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1348:1: rule__DomainModel__Group__0__Impl : ( '@startuml' ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1394:1: rule__DomainModel__Group__0__Impl : ( '@startuml' ) ;
     public final void rule__DomainModel__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1352:1: ( ( '@startuml' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1353:1: ( '@startuml' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1398:1: ( ( '@startuml' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1399:1: ( '@startuml' )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1353:1: ( '@startuml' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1354:1: '@startuml'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1399:1: ( '@startuml' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1400:1: '@startuml'
             {
              before(grammarAccess.getDomainModelAccess().getStartumlKeyword_0()); 
-            match(input,40,FOLLOW_40_in_rule__DomainModel__Group__0__Impl2983); 
+            match(input,44,FOLLOW_44_in_rule__DomainModel__Group__0__Impl3105); 
              after(grammarAccess.getDomainModelAccess().getStartumlKeyword_0()); 
 
             }
@@ -4105,21 +4239,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__DomainModel__Group__1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1367:1: rule__DomainModel__Group__1 : rule__DomainModel__Group__1__Impl rule__DomainModel__Group__2 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1413:1: rule__DomainModel__Group__1 : rule__DomainModel__Group__1__Impl rule__DomainModel__Group__2 ;
     public final void rule__DomainModel__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1371:1: ( rule__DomainModel__Group__1__Impl rule__DomainModel__Group__2 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1372:2: rule__DomainModel__Group__1__Impl rule__DomainModel__Group__2
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1417:1: ( rule__DomainModel__Group__1__Impl rule__DomainModel__Group__2 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1418:2: rule__DomainModel__Group__1__Impl rule__DomainModel__Group__2
             {
-            pushFollow(FOLLOW_rule__DomainModel__Group__1__Impl_in_rule__DomainModel__Group__13014);
+            pushFollow(FOLLOW_rule__DomainModel__Group__1__Impl_in_rule__DomainModel__Group__13136);
             rule__DomainModel__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__DomainModel__Group__2_in_rule__DomainModel__Group__13017);
+            pushFollow(FOLLOW_rule__DomainModel__Group__2_in_rule__DomainModel__Group__13139);
             rule__DomainModel__Group__2();
 
             state._fsp--;
@@ -4143,21 +4277,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__DomainModel__Group__1__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1379:1: rule__DomainModel__Group__1__Impl : ( () ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1425:1: rule__DomainModel__Group__1__Impl : ( () ) ;
     public final void rule__DomainModel__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1383:1: ( ( () ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1384:1: ( () )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1429:1: ( ( () ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1430:1: ( () )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1384:1: ( () )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1385:1: ()
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1430:1: ( () )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1431:1: ()
             {
              before(grammarAccess.getDomainModelAccess().getDomainModelAction_1()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1386:1: ()
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1388:1: 
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1432:1: ()
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1434:1: 
             {
             }
 
@@ -4180,21 +4314,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__DomainModel__Group__2"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1398:1: rule__DomainModel__Group__2 : rule__DomainModel__Group__2__Impl rule__DomainModel__Group__3 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1444:1: rule__DomainModel__Group__2 : rule__DomainModel__Group__2__Impl rule__DomainModel__Group__3 ;
     public final void rule__DomainModel__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1402:1: ( rule__DomainModel__Group__2__Impl rule__DomainModel__Group__3 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1403:2: rule__DomainModel__Group__2__Impl rule__DomainModel__Group__3
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1448:1: ( rule__DomainModel__Group__2__Impl rule__DomainModel__Group__3 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1449:2: rule__DomainModel__Group__2__Impl rule__DomainModel__Group__3
             {
-            pushFollow(FOLLOW_rule__DomainModel__Group__2__Impl_in_rule__DomainModel__Group__23075);
+            pushFollow(FOLLOW_rule__DomainModel__Group__2__Impl_in_rule__DomainModel__Group__23197);
             rule__DomainModel__Group__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__DomainModel__Group__3_in_rule__DomainModel__Group__23078);
+            pushFollow(FOLLOW_rule__DomainModel__Group__3_in_rule__DomainModel__Group__23200);
             rule__DomainModel__Group__3();
 
             state._fsp--;
@@ -4218,20 +4352,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__DomainModel__Group__2__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1410:1: rule__DomainModel__Group__2__Impl : ( ( rule__DomainModel__FileAssignment_2 )? ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1456:1: rule__DomainModel__Group__2__Impl : ( ( rule__DomainModel__FileAssignment_2 )? ) ;
     public final void rule__DomainModel__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1414:1: ( ( ( rule__DomainModel__FileAssignment_2 )? ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1415:1: ( ( rule__DomainModel__FileAssignment_2 )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1460:1: ( ( ( rule__DomainModel__FileAssignment_2 )? ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1461:1: ( ( rule__DomainModel__FileAssignment_2 )? )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1415:1: ( ( rule__DomainModel__FileAssignment_2 )? )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1416:1: ( rule__DomainModel__FileAssignment_2 )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1461:1: ( ( rule__DomainModel__FileAssignment_2 )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1462:1: ( rule__DomainModel__FileAssignment_2 )?
             {
              before(grammarAccess.getDomainModelAccess().getFileAssignment_2()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1417:1: ( rule__DomainModel__FileAssignment_2 )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1463:1: ( rule__DomainModel__FileAssignment_2 )?
             int alt20=2;
             int LA20_0 = input.LA(1);
 
@@ -4240,9 +4374,9 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
             }
             switch (alt20) {
                 case 1 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1417:2: rule__DomainModel__FileAssignment_2
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1463:2: rule__DomainModel__FileAssignment_2
                     {
-                    pushFollow(FOLLOW_rule__DomainModel__FileAssignment_2_in_rule__DomainModel__Group__2__Impl3105);
+                    pushFollow(FOLLOW_rule__DomainModel__FileAssignment_2_in_rule__DomainModel__Group__2__Impl3227);
                     rule__DomainModel__FileAssignment_2();
 
                     state._fsp--;
@@ -4276,21 +4410,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__DomainModel__Group__3"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1427:1: rule__DomainModel__Group__3 : rule__DomainModel__Group__3__Impl rule__DomainModel__Group__4 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1473:1: rule__DomainModel__Group__3 : rule__DomainModel__Group__3__Impl rule__DomainModel__Group__4 ;
     public final void rule__DomainModel__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1431:1: ( rule__DomainModel__Group__3__Impl rule__DomainModel__Group__4 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1432:2: rule__DomainModel__Group__3__Impl rule__DomainModel__Group__4
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1477:1: ( rule__DomainModel__Group__3__Impl rule__DomainModel__Group__4 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1478:2: rule__DomainModel__Group__3__Impl rule__DomainModel__Group__4
             {
-            pushFollow(FOLLOW_rule__DomainModel__Group__3__Impl_in_rule__DomainModel__Group__33136);
+            pushFollow(FOLLOW_rule__DomainModel__Group__3__Impl_in_rule__DomainModel__Group__33258);
             rule__DomainModel__Group__3__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__DomainModel__Group__4_in_rule__DomainModel__Group__33139);
+            pushFollow(FOLLOW_rule__DomainModel__Group__4_in_rule__DomainModel__Group__33261);
             rule__DomainModel__Group__4();
 
             state._fsp--;
@@ -4314,20 +4448,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__DomainModel__Group__3__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1439:1: rule__DomainModel__Group__3__Impl : ( RULE_END_LINE ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1485:1: rule__DomainModel__Group__3__Impl : ( RULE_END_LINE ) ;
     public final void rule__DomainModel__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1443:1: ( ( RULE_END_LINE ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1444:1: ( RULE_END_LINE )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1489:1: ( ( RULE_END_LINE ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1490:1: ( RULE_END_LINE )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1444:1: ( RULE_END_LINE )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1445:1: RULE_END_LINE
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1490:1: ( RULE_END_LINE )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1491:1: RULE_END_LINE
             {
              before(grammarAccess.getDomainModelAccess().getEND_LINETerminalRuleCall_3()); 
-            match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__DomainModel__Group__3__Impl3166); 
+            match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__DomainModel__Group__3__Impl3288); 
              after(grammarAccess.getDomainModelAccess().getEND_LINETerminalRuleCall_3()); 
 
             }
@@ -4351,21 +4485,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__DomainModel__Group__4"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1456:1: rule__DomainModel__Group__4 : rule__DomainModel__Group__4__Impl rule__DomainModel__Group__5 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1502:1: rule__DomainModel__Group__4 : rule__DomainModel__Group__4__Impl rule__DomainModel__Group__5 ;
     public final void rule__DomainModel__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1460:1: ( rule__DomainModel__Group__4__Impl rule__DomainModel__Group__5 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1461:2: rule__DomainModel__Group__4__Impl rule__DomainModel__Group__5
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1506:1: ( rule__DomainModel__Group__4__Impl rule__DomainModel__Group__5 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1507:2: rule__DomainModel__Group__4__Impl rule__DomainModel__Group__5
             {
-            pushFollow(FOLLOW_rule__DomainModel__Group__4__Impl_in_rule__DomainModel__Group__43195);
+            pushFollow(FOLLOW_rule__DomainModel__Group__4__Impl_in_rule__DomainModel__Group__43317);
             rule__DomainModel__Group__4__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__DomainModel__Group__5_in_rule__DomainModel__Group__43198);
+            pushFollow(FOLLOW_rule__DomainModel__Group__5_in_rule__DomainModel__Group__43320);
             rule__DomainModel__Group__5();
 
             state._fsp--;
@@ -4389,26 +4523,26 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__DomainModel__Group__4__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1468:1: rule__DomainModel__Group__4__Impl : ( ( ( rule__DomainModel__PackagesAssignment_4 ) ) ( ( rule__DomainModel__PackagesAssignment_4 )* ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1514:1: rule__DomainModel__Group__4__Impl : ( ( ( rule__DomainModel__PackagesAssignment_4 ) ) ( ( rule__DomainModel__PackagesAssignment_4 )* ) ) ;
     public final void rule__DomainModel__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1472:1: ( ( ( ( rule__DomainModel__PackagesAssignment_4 ) ) ( ( rule__DomainModel__PackagesAssignment_4 )* ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1473:1: ( ( ( rule__DomainModel__PackagesAssignment_4 ) ) ( ( rule__DomainModel__PackagesAssignment_4 )* ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1518:1: ( ( ( ( rule__DomainModel__PackagesAssignment_4 ) ) ( ( rule__DomainModel__PackagesAssignment_4 )* ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1519:1: ( ( ( rule__DomainModel__PackagesAssignment_4 ) ) ( ( rule__DomainModel__PackagesAssignment_4 )* ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1473:1: ( ( ( rule__DomainModel__PackagesAssignment_4 ) ) ( ( rule__DomainModel__PackagesAssignment_4 )* ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1474:1: ( ( rule__DomainModel__PackagesAssignment_4 ) ) ( ( rule__DomainModel__PackagesAssignment_4 )* )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1519:1: ( ( ( rule__DomainModel__PackagesAssignment_4 ) ) ( ( rule__DomainModel__PackagesAssignment_4 )* ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1520:1: ( ( rule__DomainModel__PackagesAssignment_4 ) ) ( ( rule__DomainModel__PackagesAssignment_4 )* )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1474:1: ( ( rule__DomainModel__PackagesAssignment_4 ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1475:1: ( rule__DomainModel__PackagesAssignment_4 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1520:1: ( ( rule__DomainModel__PackagesAssignment_4 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1521:1: ( rule__DomainModel__PackagesAssignment_4 )
             {
              before(grammarAccess.getDomainModelAccess().getPackagesAssignment_4()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1476:1: ( rule__DomainModel__PackagesAssignment_4 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1476:2: rule__DomainModel__PackagesAssignment_4
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1522:1: ( rule__DomainModel__PackagesAssignment_4 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1522:2: rule__DomainModel__PackagesAssignment_4
             {
-            pushFollow(FOLLOW_rule__DomainModel__PackagesAssignment_4_in_rule__DomainModel__Group__4__Impl3227);
+            pushFollow(FOLLOW_rule__DomainModel__PackagesAssignment_4_in_rule__DomainModel__Group__4__Impl3349);
             rule__DomainModel__PackagesAssignment_4();
 
             state._fsp--;
@@ -4420,26 +4554,26 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
             }
 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1479:1: ( ( rule__DomainModel__PackagesAssignment_4 )* )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1480:1: ( rule__DomainModel__PackagesAssignment_4 )*
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1525:1: ( ( rule__DomainModel__PackagesAssignment_4 )* )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1526:1: ( rule__DomainModel__PackagesAssignment_4 )*
             {
              before(grammarAccess.getDomainModelAccess().getPackagesAssignment_4()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1481:1: ( rule__DomainModel__PackagesAssignment_4 )*
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1527:1: ( rule__DomainModel__PackagesAssignment_4 )*
             loop21:
             do {
                 int alt21=2;
                 int LA21_0 = input.LA(1);
 
-                if ( (LA21_0==23) ) {
+                if ( (LA21_0==25) ) {
                     alt21=1;
                 }
 
 
                 switch (alt21) {
             	case 1 :
-            	    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1481:2: rule__DomainModel__PackagesAssignment_4
+            	    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1527:2: rule__DomainModel__PackagesAssignment_4
             	    {
-            	    pushFollow(FOLLOW_rule__DomainModel__PackagesAssignment_4_in_rule__DomainModel__Group__4__Impl3239);
+            	    pushFollow(FOLLOW_rule__DomainModel__PackagesAssignment_4_in_rule__DomainModel__Group__4__Impl3361);
             	    rule__DomainModel__PackagesAssignment_4();
 
             	    state._fsp--;
@@ -4479,16 +4613,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__DomainModel__Group__5"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1492:1: rule__DomainModel__Group__5 : rule__DomainModel__Group__5__Impl ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1538:1: rule__DomainModel__Group__5 : rule__DomainModel__Group__5__Impl ;
     public final void rule__DomainModel__Group__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1496:1: ( rule__DomainModel__Group__5__Impl )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1497:2: rule__DomainModel__Group__5__Impl
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1542:1: ( rule__DomainModel__Group__5__Impl )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1543:2: rule__DomainModel__Group__5__Impl
             {
-            pushFollow(FOLLOW_rule__DomainModel__Group__5__Impl_in_rule__DomainModel__Group__53272);
+            pushFollow(FOLLOW_rule__DomainModel__Group__5__Impl_in_rule__DomainModel__Group__53394);
             rule__DomainModel__Group__5__Impl();
 
             state._fsp--;
@@ -4512,20 +4646,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__DomainModel__Group__5__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1503:1: rule__DomainModel__Group__5__Impl : ( '@enduml' ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1549:1: rule__DomainModel__Group__5__Impl : ( '@enduml' ) ;
     public final void rule__DomainModel__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1507:1: ( ( '@enduml' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1508:1: ( '@enduml' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1553:1: ( ( '@enduml' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1554:1: ( '@enduml' )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1508:1: ( '@enduml' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1509:1: '@enduml'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1554:1: ( '@enduml' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1555:1: '@enduml'
             {
              before(grammarAccess.getDomainModelAccess().getEndumlKeyword_5()); 
-            match(input,41,FOLLOW_41_in_rule__DomainModel__Group__5__Impl3300); 
+            match(input,45,FOLLOW_45_in_rule__DomainModel__Group__5__Impl3422); 
              after(grammarAccess.getDomainModelAccess().getEndumlKeyword_5()); 
 
             }
@@ -4549,21 +4683,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CPackage__Group__0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1534:1: rule__CPackage__Group__0 : rule__CPackage__Group__0__Impl rule__CPackage__Group__1 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1580:1: rule__CPackage__Group__0 : rule__CPackage__Group__0__Impl rule__CPackage__Group__1 ;
     public final void rule__CPackage__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1538:1: ( rule__CPackage__Group__0__Impl rule__CPackage__Group__1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1539:2: rule__CPackage__Group__0__Impl rule__CPackage__Group__1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1584:1: ( rule__CPackage__Group__0__Impl rule__CPackage__Group__1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1585:2: rule__CPackage__Group__0__Impl rule__CPackage__Group__1
             {
-            pushFollow(FOLLOW_rule__CPackage__Group__0__Impl_in_rule__CPackage__Group__03343);
+            pushFollow(FOLLOW_rule__CPackage__Group__0__Impl_in_rule__CPackage__Group__03465);
             rule__CPackage__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__CPackage__Group__1_in_rule__CPackage__Group__03346);
+            pushFollow(FOLLOW_rule__CPackage__Group__1_in_rule__CPackage__Group__03468);
             rule__CPackage__Group__1();
 
             state._fsp--;
@@ -4587,20 +4721,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CPackage__Group__0__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1546:1: rule__CPackage__Group__0__Impl : ( 'package' ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1592:1: rule__CPackage__Group__0__Impl : ( 'package' ) ;
     public final void rule__CPackage__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1550:1: ( ( 'package' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1551:1: ( 'package' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1596:1: ( ( 'package' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1597:1: ( 'package' )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1551:1: ( 'package' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1552:1: 'package'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1597:1: ( 'package' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1598:1: 'package'
             {
              before(grammarAccess.getCPackageAccess().getPackageKeyword_0()); 
-            match(input,23,FOLLOW_23_in_rule__CPackage__Group__0__Impl3374); 
+            match(input,25,FOLLOW_25_in_rule__CPackage__Group__0__Impl3496); 
              after(grammarAccess.getCPackageAccess().getPackageKeyword_0()); 
 
             }
@@ -4624,21 +4758,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CPackage__Group__1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1565:1: rule__CPackage__Group__1 : rule__CPackage__Group__1__Impl rule__CPackage__Group__2 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1611:1: rule__CPackage__Group__1 : rule__CPackage__Group__1__Impl rule__CPackage__Group__2 ;
     public final void rule__CPackage__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1569:1: ( rule__CPackage__Group__1__Impl rule__CPackage__Group__2 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1570:2: rule__CPackage__Group__1__Impl rule__CPackage__Group__2
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1615:1: ( rule__CPackage__Group__1__Impl rule__CPackage__Group__2 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1616:2: rule__CPackage__Group__1__Impl rule__CPackage__Group__2
             {
-            pushFollow(FOLLOW_rule__CPackage__Group__1__Impl_in_rule__CPackage__Group__13405);
+            pushFollow(FOLLOW_rule__CPackage__Group__1__Impl_in_rule__CPackage__Group__13527);
             rule__CPackage__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__CPackage__Group__2_in_rule__CPackage__Group__13408);
+            pushFollow(FOLLOW_rule__CPackage__Group__2_in_rule__CPackage__Group__13530);
             rule__CPackage__Group__2();
 
             state._fsp--;
@@ -4662,23 +4796,23 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CPackage__Group__1__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1577:1: rule__CPackage__Group__1__Impl : ( ( rule__CPackage__NameAssignment_1 ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1623:1: rule__CPackage__Group__1__Impl : ( ( rule__CPackage__NameAssignment_1 ) ) ;
     public final void rule__CPackage__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1581:1: ( ( ( rule__CPackage__NameAssignment_1 ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1582:1: ( ( rule__CPackage__NameAssignment_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1627:1: ( ( ( rule__CPackage__NameAssignment_1 ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1628:1: ( ( rule__CPackage__NameAssignment_1 ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1582:1: ( ( rule__CPackage__NameAssignment_1 ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1583:1: ( rule__CPackage__NameAssignment_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1628:1: ( ( rule__CPackage__NameAssignment_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1629:1: ( rule__CPackage__NameAssignment_1 )
             {
              before(grammarAccess.getCPackageAccess().getNameAssignment_1()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1584:1: ( rule__CPackage__NameAssignment_1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1584:2: rule__CPackage__NameAssignment_1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1630:1: ( rule__CPackage__NameAssignment_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1630:2: rule__CPackage__NameAssignment_1
             {
-            pushFollow(FOLLOW_rule__CPackage__NameAssignment_1_in_rule__CPackage__Group__1__Impl3435);
+            pushFollow(FOLLOW_rule__CPackage__NameAssignment_1_in_rule__CPackage__Group__1__Impl3557);
             rule__CPackage__NameAssignment_1();
 
             state._fsp--;
@@ -4709,21 +4843,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CPackage__Group__2"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1594:1: rule__CPackage__Group__2 : rule__CPackage__Group__2__Impl rule__CPackage__Group__3 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1640:1: rule__CPackage__Group__2 : rule__CPackage__Group__2__Impl rule__CPackage__Group__3 ;
     public final void rule__CPackage__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1598:1: ( rule__CPackage__Group__2__Impl rule__CPackage__Group__3 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1599:2: rule__CPackage__Group__2__Impl rule__CPackage__Group__3
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1644:1: ( rule__CPackage__Group__2__Impl rule__CPackage__Group__3 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1645:2: rule__CPackage__Group__2__Impl rule__CPackage__Group__3
             {
-            pushFollow(FOLLOW_rule__CPackage__Group__2__Impl_in_rule__CPackage__Group__23465);
+            pushFollow(FOLLOW_rule__CPackage__Group__2__Impl_in_rule__CPackage__Group__23587);
             rule__CPackage__Group__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__CPackage__Group__3_in_rule__CPackage__Group__23468);
+            pushFollow(FOLLOW_rule__CPackage__Group__3_in_rule__CPackage__Group__23590);
             rule__CPackage__Group__3();
 
             state._fsp--;
@@ -4747,31 +4881,31 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CPackage__Group__2__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1606:1: rule__CPackage__Group__2__Impl : ( ( rule__CPackage__Group_2__0 )? ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1652:1: rule__CPackage__Group__2__Impl : ( ( rule__CPackage__Group_2__0 )? ) ;
     public final void rule__CPackage__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1610:1: ( ( ( rule__CPackage__Group_2__0 )? ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1611:1: ( ( rule__CPackage__Group_2__0 )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1656:1: ( ( ( rule__CPackage__Group_2__0 )? ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1657:1: ( ( rule__CPackage__Group_2__0 )? )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1611:1: ( ( rule__CPackage__Group_2__0 )? )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1612:1: ( rule__CPackage__Group_2__0 )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1657:1: ( ( rule__CPackage__Group_2__0 )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1658:1: ( rule__CPackage__Group_2__0 )?
             {
              before(grammarAccess.getCPackageAccess().getGroup_2()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1613:1: ( rule__CPackage__Group_2__0 )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1659:1: ( rule__CPackage__Group_2__0 )?
             int alt22=2;
             int LA22_0 = input.LA(1);
 
-            if ( (LA22_0==44) ) {
+            if ( (LA22_0==48) ) {
                 alt22=1;
             }
             switch (alt22) {
                 case 1 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1613:2: rule__CPackage__Group_2__0
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1659:2: rule__CPackage__Group_2__0
                     {
-                    pushFollow(FOLLOW_rule__CPackage__Group_2__0_in_rule__CPackage__Group__2__Impl3495);
+                    pushFollow(FOLLOW_rule__CPackage__Group_2__0_in_rule__CPackage__Group__2__Impl3617);
                     rule__CPackage__Group_2__0();
 
                     state._fsp--;
@@ -4805,21 +4939,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CPackage__Group__3"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1623:1: rule__CPackage__Group__3 : rule__CPackage__Group__3__Impl rule__CPackage__Group__4 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1669:1: rule__CPackage__Group__3 : rule__CPackage__Group__3__Impl rule__CPackage__Group__4 ;
     public final void rule__CPackage__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1627:1: ( rule__CPackage__Group__3__Impl rule__CPackage__Group__4 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1628:2: rule__CPackage__Group__3__Impl rule__CPackage__Group__4
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1673:1: ( rule__CPackage__Group__3__Impl rule__CPackage__Group__4 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1674:2: rule__CPackage__Group__3__Impl rule__CPackage__Group__4
             {
-            pushFollow(FOLLOW_rule__CPackage__Group__3__Impl_in_rule__CPackage__Group__33526);
+            pushFollow(FOLLOW_rule__CPackage__Group__3__Impl_in_rule__CPackage__Group__33648);
             rule__CPackage__Group__3__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__CPackage__Group__4_in_rule__CPackage__Group__33529);
+            pushFollow(FOLLOW_rule__CPackage__Group__4_in_rule__CPackage__Group__33651);
             rule__CPackage__Group__4();
 
             state._fsp--;
@@ -4843,20 +4977,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CPackage__Group__3__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1635:1: rule__CPackage__Group__3__Impl : ( '{' ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1681:1: rule__CPackage__Group__3__Impl : ( '{' ) ;
     public final void rule__CPackage__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1639:1: ( ( '{' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1640:1: ( '{' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1685:1: ( ( '{' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1686:1: ( '{' )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1640:1: ( '{' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1641:1: '{'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1686:1: ( '{' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1687:1: '{'
             {
              before(grammarAccess.getCPackageAccess().getLeftCurlyBracketKeyword_3()); 
-            match(input,42,FOLLOW_42_in_rule__CPackage__Group__3__Impl3557); 
+            match(input,46,FOLLOW_46_in_rule__CPackage__Group__3__Impl3679); 
              after(grammarAccess.getCPackageAccess().getLeftCurlyBracketKeyword_3()); 
 
             }
@@ -4880,21 +5014,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CPackage__Group__4"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1654:1: rule__CPackage__Group__4 : rule__CPackage__Group__4__Impl rule__CPackage__Group__5 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1700:1: rule__CPackage__Group__4 : rule__CPackage__Group__4__Impl rule__CPackage__Group__5 ;
     public final void rule__CPackage__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1658:1: ( rule__CPackage__Group__4__Impl rule__CPackage__Group__5 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1659:2: rule__CPackage__Group__4__Impl rule__CPackage__Group__5
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1704:1: ( rule__CPackage__Group__4__Impl rule__CPackage__Group__5 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1705:2: rule__CPackage__Group__4__Impl rule__CPackage__Group__5
             {
-            pushFollow(FOLLOW_rule__CPackage__Group__4__Impl_in_rule__CPackage__Group__43588);
+            pushFollow(FOLLOW_rule__CPackage__Group__4__Impl_in_rule__CPackage__Group__43710);
             rule__CPackage__Group__4__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__CPackage__Group__5_in_rule__CPackage__Group__43591);
+            pushFollow(FOLLOW_rule__CPackage__Group__5_in_rule__CPackage__Group__43713);
             rule__CPackage__Group__5();
 
             state._fsp--;
@@ -4918,20 +5052,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CPackage__Group__4__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1666:1: rule__CPackage__Group__4__Impl : ( RULE_END_LINE ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1712:1: rule__CPackage__Group__4__Impl : ( RULE_END_LINE ) ;
     public final void rule__CPackage__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1670:1: ( ( RULE_END_LINE ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1671:1: ( RULE_END_LINE )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1716:1: ( ( RULE_END_LINE ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1717:1: ( RULE_END_LINE )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1671:1: ( RULE_END_LINE )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1672:1: RULE_END_LINE
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1717:1: ( RULE_END_LINE )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1718:1: RULE_END_LINE
             {
              before(grammarAccess.getCPackageAccess().getEND_LINETerminalRuleCall_4()); 
-            match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__CPackage__Group__4__Impl3618); 
+            match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__CPackage__Group__4__Impl3740); 
              after(grammarAccess.getCPackageAccess().getEND_LINETerminalRuleCall_4()); 
 
             }
@@ -4955,21 +5089,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CPackage__Group__5"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1683:1: rule__CPackage__Group__5 : rule__CPackage__Group__5__Impl rule__CPackage__Group__6 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1729:1: rule__CPackage__Group__5 : rule__CPackage__Group__5__Impl rule__CPackage__Group__6 ;
     public final void rule__CPackage__Group__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1687:1: ( rule__CPackage__Group__5__Impl rule__CPackage__Group__6 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1688:2: rule__CPackage__Group__5__Impl rule__CPackage__Group__6
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1733:1: ( rule__CPackage__Group__5__Impl rule__CPackage__Group__6 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1734:2: rule__CPackage__Group__5__Impl rule__CPackage__Group__6
             {
-            pushFollow(FOLLOW_rule__CPackage__Group__5__Impl_in_rule__CPackage__Group__53647);
+            pushFollow(FOLLOW_rule__CPackage__Group__5__Impl_in_rule__CPackage__Group__53769);
             rule__CPackage__Group__5__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__CPackage__Group__6_in_rule__CPackage__Group__53650);
+            pushFollow(FOLLOW_rule__CPackage__Group__6_in_rule__CPackage__Group__53772);
             rule__CPackage__Group__6();
 
             state._fsp--;
@@ -4993,35 +5127,35 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CPackage__Group__5__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1695:1: rule__CPackage__Group__5__Impl : ( ( rule__CPackage__ElementsAssignment_5 )* ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1741:1: rule__CPackage__Group__5__Impl : ( ( rule__CPackage__ElementsAssignment_5 )* ) ;
     public final void rule__CPackage__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1699:1: ( ( ( rule__CPackage__ElementsAssignment_5 )* ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1700:1: ( ( rule__CPackage__ElementsAssignment_5 )* )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1745:1: ( ( ( rule__CPackage__ElementsAssignment_5 )* ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1746:1: ( ( rule__CPackage__ElementsAssignment_5 )* )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1700:1: ( ( rule__CPackage__ElementsAssignment_5 )* )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1701:1: ( rule__CPackage__ElementsAssignment_5 )*
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1746:1: ( ( rule__CPackage__ElementsAssignment_5 )* )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1747:1: ( rule__CPackage__ElementsAssignment_5 )*
             {
              before(grammarAccess.getCPackageAccess().getElementsAssignment_5()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1702:1: ( rule__CPackage__ElementsAssignment_5 )*
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1748:1: ( rule__CPackage__ElementsAssignment_5 )*
             loop23:
             do {
                 int alt23=2;
                 int LA23_0 = input.LA(1);
 
-                if ( (LA23_0==RULE_ID||(LA23_0>=23 && LA23_0<=26)) ) {
+                if ( (LA23_0==RULE_ID||(LA23_0>=25 && LA23_0<=28)) ) {
                     alt23=1;
                 }
 
 
                 switch (alt23) {
             	case 1 :
-            	    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1702:2: rule__CPackage__ElementsAssignment_5
+            	    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1748:2: rule__CPackage__ElementsAssignment_5
             	    {
-            	    pushFollow(FOLLOW_rule__CPackage__ElementsAssignment_5_in_rule__CPackage__Group__5__Impl3677);
+            	    pushFollow(FOLLOW_rule__CPackage__ElementsAssignment_5_in_rule__CPackage__Group__5__Impl3799);
             	    rule__CPackage__ElementsAssignment_5();
 
             	    state._fsp--;
@@ -5058,21 +5192,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CPackage__Group__6"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1712:1: rule__CPackage__Group__6 : rule__CPackage__Group__6__Impl rule__CPackage__Group__7 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1758:1: rule__CPackage__Group__6 : rule__CPackage__Group__6__Impl rule__CPackage__Group__7 ;
     public final void rule__CPackage__Group__6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1716:1: ( rule__CPackage__Group__6__Impl rule__CPackage__Group__7 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1717:2: rule__CPackage__Group__6__Impl rule__CPackage__Group__7
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1762:1: ( rule__CPackage__Group__6__Impl rule__CPackage__Group__7 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1763:2: rule__CPackage__Group__6__Impl rule__CPackage__Group__7
             {
-            pushFollow(FOLLOW_rule__CPackage__Group__6__Impl_in_rule__CPackage__Group__63708);
+            pushFollow(FOLLOW_rule__CPackage__Group__6__Impl_in_rule__CPackage__Group__63830);
             rule__CPackage__Group__6__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__CPackage__Group__7_in_rule__CPackage__Group__63711);
+            pushFollow(FOLLOW_rule__CPackage__Group__7_in_rule__CPackage__Group__63833);
             rule__CPackage__Group__7();
 
             state._fsp--;
@@ -5096,20 +5230,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CPackage__Group__6__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1724:1: rule__CPackage__Group__6__Impl : ( '}' ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1770:1: rule__CPackage__Group__6__Impl : ( '}' ) ;
     public final void rule__CPackage__Group__6__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1728:1: ( ( '}' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1729:1: ( '}' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1774:1: ( ( '}' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1775:1: ( '}' )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1729:1: ( '}' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1730:1: '}'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1775:1: ( '}' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1776:1: '}'
             {
              before(grammarAccess.getCPackageAccess().getRightCurlyBracketKeyword_6()); 
-            match(input,43,FOLLOW_43_in_rule__CPackage__Group__6__Impl3739); 
+            match(input,47,FOLLOW_47_in_rule__CPackage__Group__6__Impl3861); 
              after(grammarAccess.getCPackageAccess().getRightCurlyBracketKeyword_6()); 
 
             }
@@ -5133,16 +5267,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CPackage__Group__7"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1743:1: rule__CPackage__Group__7 : rule__CPackage__Group__7__Impl ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1789:1: rule__CPackage__Group__7 : rule__CPackage__Group__7__Impl ;
     public final void rule__CPackage__Group__7() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1747:1: ( rule__CPackage__Group__7__Impl )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1748:2: rule__CPackage__Group__7__Impl
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1793:1: ( rule__CPackage__Group__7__Impl )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1794:2: rule__CPackage__Group__7__Impl
             {
-            pushFollow(FOLLOW_rule__CPackage__Group__7__Impl_in_rule__CPackage__Group__73770);
+            pushFollow(FOLLOW_rule__CPackage__Group__7__Impl_in_rule__CPackage__Group__73892);
             rule__CPackage__Group__7__Impl();
 
             state._fsp--;
@@ -5166,20 +5300,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CPackage__Group__7__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1754:1: rule__CPackage__Group__7__Impl : ( RULE_END_LINE ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1800:1: rule__CPackage__Group__7__Impl : ( RULE_END_LINE ) ;
     public final void rule__CPackage__Group__7__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1758:1: ( ( RULE_END_LINE ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1759:1: ( RULE_END_LINE )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1804:1: ( ( RULE_END_LINE ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1805:1: ( RULE_END_LINE )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1759:1: ( RULE_END_LINE )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1760:1: RULE_END_LINE
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1805:1: ( RULE_END_LINE )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1806:1: RULE_END_LINE
             {
              before(grammarAccess.getCPackageAccess().getEND_LINETerminalRuleCall_7()); 
-            match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__CPackage__Group__7__Impl3797); 
+            match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__CPackage__Group__7__Impl3919); 
              after(grammarAccess.getCPackageAccess().getEND_LINETerminalRuleCall_7()); 
 
             }
@@ -5203,21 +5337,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CPackage__Group_2__0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1787:1: rule__CPackage__Group_2__0 : rule__CPackage__Group_2__0__Impl rule__CPackage__Group_2__1 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1833:1: rule__CPackage__Group_2__0 : rule__CPackage__Group_2__0__Impl rule__CPackage__Group_2__1 ;
     public final void rule__CPackage__Group_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1791:1: ( rule__CPackage__Group_2__0__Impl rule__CPackage__Group_2__1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1792:2: rule__CPackage__Group_2__0__Impl rule__CPackage__Group_2__1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1837:1: ( rule__CPackage__Group_2__0__Impl rule__CPackage__Group_2__1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1838:2: rule__CPackage__Group_2__0__Impl rule__CPackage__Group_2__1
             {
-            pushFollow(FOLLOW_rule__CPackage__Group_2__0__Impl_in_rule__CPackage__Group_2__03842);
+            pushFollow(FOLLOW_rule__CPackage__Group_2__0__Impl_in_rule__CPackage__Group_2__03964);
             rule__CPackage__Group_2__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__CPackage__Group_2__1_in_rule__CPackage__Group_2__03845);
+            pushFollow(FOLLOW_rule__CPackage__Group_2__1_in_rule__CPackage__Group_2__03967);
             rule__CPackage__Group_2__1();
 
             state._fsp--;
@@ -5241,20 +5375,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CPackage__Group_2__0__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1799:1: rule__CPackage__Group_2__0__Impl : ( '<<' ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1845:1: rule__CPackage__Group_2__0__Impl : ( '<<' ) ;
     public final void rule__CPackage__Group_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1803:1: ( ( '<<' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1804:1: ( '<<' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1849:1: ( ( '<<' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1850:1: ( '<<' )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1804:1: ( '<<' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1805:1: '<<'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1850:1: ( '<<' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1851:1: '<<'
             {
              before(grammarAccess.getCPackageAccess().getLessThanSignLessThanSignKeyword_2_0()); 
-            match(input,44,FOLLOW_44_in_rule__CPackage__Group_2__0__Impl3873); 
+            match(input,48,FOLLOW_48_in_rule__CPackage__Group_2__0__Impl3995); 
              after(grammarAccess.getCPackageAccess().getLessThanSignLessThanSignKeyword_2_0()); 
 
             }
@@ -5278,21 +5412,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CPackage__Group_2__1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1818:1: rule__CPackage__Group_2__1 : rule__CPackage__Group_2__1__Impl rule__CPackage__Group_2__2 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1864:1: rule__CPackage__Group_2__1 : rule__CPackage__Group_2__1__Impl rule__CPackage__Group_2__2 ;
     public final void rule__CPackage__Group_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1822:1: ( rule__CPackage__Group_2__1__Impl rule__CPackage__Group_2__2 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1823:2: rule__CPackage__Group_2__1__Impl rule__CPackage__Group_2__2
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1868:1: ( rule__CPackage__Group_2__1__Impl rule__CPackage__Group_2__2 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1869:2: rule__CPackage__Group_2__1__Impl rule__CPackage__Group_2__2
             {
-            pushFollow(FOLLOW_rule__CPackage__Group_2__1__Impl_in_rule__CPackage__Group_2__13904);
+            pushFollow(FOLLOW_rule__CPackage__Group_2__1__Impl_in_rule__CPackage__Group_2__14026);
             rule__CPackage__Group_2__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__CPackage__Group_2__2_in_rule__CPackage__Group_2__13907);
+            pushFollow(FOLLOW_rule__CPackage__Group_2__2_in_rule__CPackage__Group_2__14029);
             rule__CPackage__Group_2__2();
 
             state._fsp--;
@@ -5316,23 +5450,23 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CPackage__Group_2__1__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1830:1: rule__CPackage__Group_2__1__Impl : ( ( rule__CPackage__StyleAssignment_2_1 ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1876:1: rule__CPackage__Group_2__1__Impl : ( ( rule__CPackage__StyleAssignment_2_1 ) ) ;
     public final void rule__CPackage__Group_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1834:1: ( ( ( rule__CPackage__StyleAssignment_2_1 ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1835:1: ( ( rule__CPackage__StyleAssignment_2_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1880:1: ( ( ( rule__CPackage__StyleAssignment_2_1 ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1881:1: ( ( rule__CPackage__StyleAssignment_2_1 ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1835:1: ( ( rule__CPackage__StyleAssignment_2_1 ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1836:1: ( rule__CPackage__StyleAssignment_2_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1881:1: ( ( rule__CPackage__StyleAssignment_2_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1882:1: ( rule__CPackage__StyleAssignment_2_1 )
             {
              before(grammarAccess.getCPackageAccess().getStyleAssignment_2_1()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1837:1: ( rule__CPackage__StyleAssignment_2_1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1837:2: rule__CPackage__StyleAssignment_2_1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1883:1: ( rule__CPackage__StyleAssignment_2_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1883:2: rule__CPackage__StyleAssignment_2_1
             {
-            pushFollow(FOLLOW_rule__CPackage__StyleAssignment_2_1_in_rule__CPackage__Group_2__1__Impl3934);
+            pushFollow(FOLLOW_rule__CPackage__StyleAssignment_2_1_in_rule__CPackage__Group_2__1__Impl4056);
             rule__CPackage__StyleAssignment_2_1();
 
             state._fsp--;
@@ -5363,16 +5497,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CPackage__Group_2__2"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1847:1: rule__CPackage__Group_2__2 : rule__CPackage__Group_2__2__Impl ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1893:1: rule__CPackage__Group_2__2 : rule__CPackage__Group_2__2__Impl ;
     public final void rule__CPackage__Group_2__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1851:1: ( rule__CPackage__Group_2__2__Impl )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1852:2: rule__CPackage__Group_2__2__Impl
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1897:1: ( rule__CPackage__Group_2__2__Impl )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1898:2: rule__CPackage__Group_2__2__Impl
             {
-            pushFollow(FOLLOW_rule__CPackage__Group_2__2__Impl_in_rule__CPackage__Group_2__23964);
+            pushFollow(FOLLOW_rule__CPackage__Group_2__2__Impl_in_rule__CPackage__Group_2__24086);
             rule__CPackage__Group_2__2__Impl();
 
             state._fsp--;
@@ -5396,20 +5530,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CPackage__Group_2__2__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1858:1: rule__CPackage__Group_2__2__Impl : ( '>>' ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1904:1: rule__CPackage__Group_2__2__Impl : ( '>>' ) ;
     public final void rule__CPackage__Group_2__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1862:1: ( ( '>>' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1863:1: ( '>>' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1908:1: ( ( '>>' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1909:1: ( '>>' )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1863:1: ( '>>' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1864:1: '>>'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1909:1: ( '>>' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1910:1: '>>'
             {
              before(grammarAccess.getCPackageAccess().getGreaterThanSignGreaterThanSignKeyword_2_2()); 
-            match(input,45,FOLLOW_45_in_rule__CPackage__Group_2__2__Impl3992); 
+            match(input,49,FOLLOW_49_in_rule__CPackage__Group_2__2__Impl4114); 
              after(grammarAccess.getCPackageAccess().getGreaterThanSignGreaterThanSignKeyword_2_2()); 
 
             }
@@ -5433,21 +5567,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Relation__Group__0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1883:1: rule__Relation__Group__0 : rule__Relation__Group__0__Impl rule__Relation__Group__1 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1929:1: rule__Relation__Group__0 : rule__Relation__Group__0__Impl rule__Relation__Group__1 ;
     public final void rule__Relation__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1887:1: ( rule__Relation__Group__0__Impl rule__Relation__Group__1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1888:2: rule__Relation__Group__0__Impl rule__Relation__Group__1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1933:1: ( rule__Relation__Group__0__Impl rule__Relation__Group__1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1934:2: rule__Relation__Group__0__Impl rule__Relation__Group__1
             {
-            pushFollow(FOLLOW_rule__Relation__Group__0__Impl_in_rule__Relation__Group__04029);
+            pushFollow(FOLLOW_rule__Relation__Group__0__Impl_in_rule__Relation__Group__04151);
             rule__Relation__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Relation__Group__1_in_rule__Relation__Group__04032);
+            pushFollow(FOLLOW_rule__Relation__Group__1_in_rule__Relation__Group__04154);
             rule__Relation__Group__1();
 
             state._fsp--;
@@ -5471,23 +5605,23 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Relation__Group__0__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1895:1: rule__Relation__Group__0__Impl : ( ( rule__Relation__LeftRefAssignment_0 ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1941:1: rule__Relation__Group__0__Impl : ( ( rule__Relation__LeftRefAssignment_0 ) ) ;
     public final void rule__Relation__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1899:1: ( ( ( rule__Relation__LeftRefAssignment_0 ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1900:1: ( ( rule__Relation__LeftRefAssignment_0 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1945:1: ( ( ( rule__Relation__LeftRefAssignment_0 ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1946:1: ( ( rule__Relation__LeftRefAssignment_0 ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1900:1: ( ( rule__Relation__LeftRefAssignment_0 ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1901:1: ( rule__Relation__LeftRefAssignment_0 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1946:1: ( ( rule__Relation__LeftRefAssignment_0 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1947:1: ( rule__Relation__LeftRefAssignment_0 )
             {
              before(grammarAccess.getRelationAccess().getLeftRefAssignment_0()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1902:1: ( rule__Relation__LeftRefAssignment_0 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1902:2: rule__Relation__LeftRefAssignment_0
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1948:1: ( rule__Relation__LeftRefAssignment_0 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1948:2: rule__Relation__LeftRefAssignment_0
             {
-            pushFollow(FOLLOW_rule__Relation__LeftRefAssignment_0_in_rule__Relation__Group__0__Impl4059);
+            pushFollow(FOLLOW_rule__Relation__LeftRefAssignment_0_in_rule__Relation__Group__0__Impl4181);
             rule__Relation__LeftRefAssignment_0();
 
             state._fsp--;
@@ -5518,21 +5652,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Relation__Group__1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1912:1: rule__Relation__Group__1 : rule__Relation__Group__1__Impl rule__Relation__Group__2 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1958:1: rule__Relation__Group__1 : rule__Relation__Group__1__Impl rule__Relation__Group__2 ;
     public final void rule__Relation__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1916:1: ( rule__Relation__Group__1__Impl rule__Relation__Group__2 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1917:2: rule__Relation__Group__1__Impl rule__Relation__Group__2
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1962:1: ( rule__Relation__Group__1__Impl rule__Relation__Group__2 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1963:2: rule__Relation__Group__1__Impl rule__Relation__Group__2
             {
-            pushFollow(FOLLOW_rule__Relation__Group__1__Impl_in_rule__Relation__Group__14089);
+            pushFollow(FOLLOW_rule__Relation__Group__1__Impl_in_rule__Relation__Group__14211);
             rule__Relation__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Relation__Group__2_in_rule__Relation__Group__14092);
+            pushFollow(FOLLOW_rule__Relation__Group__2_in_rule__Relation__Group__14214);
             rule__Relation__Group__2();
 
             state._fsp--;
@@ -5556,23 +5690,23 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Relation__Group__1__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1924:1: rule__Relation__Group__1__Impl : ( ( rule__Relation__RelTypeAssignment_1 ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1970:1: rule__Relation__Group__1__Impl : ( ( rule__Relation__RelTypeAssignment_1 ) ) ;
     public final void rule__Relation__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1928:1: ( ( ( rule__Relation__RelTypeAssignment_1 ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1929:1: ( ( rule__Relation__RelTypeAssignment_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1974:1: ( ( ( rule__Relation__RelTypeAssignment_1 ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1975:1: ( ( rule__Relation__RelTypeAssignment_1 ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1929:1: ( ( rule__Relation__RelTypeAssignment_1 ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1930:1: ( rule__Relation__RelTypeAssignment_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1975:1: ( ( rule__Relation__RelTypeAssignment_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1976:1: ( rule__Relation__RelTypeAssignment_1 )
             {
              before(grammarAccess.getRelationAccess().getRelTypeAssignment_1()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1931:1: ( rule__Relation__RelTypeAssignment_1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1931:2: rule__Relation__RelTypeAssignment_1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1977:1: ( rule__Relation__RelTypeAssignment_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1977:2: rule__Relation__RelTypeAssignment_1
             {
-            pushFollow(FOLLOW_rule__Relation__RelTypeAssignment_1_in_rule__Relation__Group__1__Impl4119);
+            pushFollow(FOLLOW_rule__Relation__RelTypeAssignment_1_in_rule__Relation__Group__1__Impl4241);
             rule__Relation__RelTypeAssignment_1();
 
             state._fsp--;
@@ -5603,21 +5737,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Relation__Group__2"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1941:1: rule__Relation__Group__2 : rule__Relation__Group__2__Impl rule__Relation__Group__3 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1987:1: rule__Relation__Group__2 : rule__Relation__Group__2__Impl rule__Relation__Group__3 ;
     public final void rule__Relation__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1945:1: ( rule__Relation__Group__2__Impl rule__Relation__Group__3 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1946:2: rule__Relation__Group__2__Impl rule__Relation__Group__3
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1991:1: ( rule__Relation__Group__2__Impl rule__Relation__Group__3 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1992:2: rule__Relation__Group__2__Impl rule__Relation__Group__3
             {
-            pushFollow(FOLLOW_rule__Relation__Group__2__Impl_in_rule__Relation__Group__24149);
+            pushFollow(FOLLOW_rule__Relation__Group__2__Impl_in_rule__Relation__Group__24271);
             rule__Relation__Group__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Relation__Group__3_in_rule__Relation__Group__24152);
+            pushFollow(FOLLOW_rule__Relation__Group__3_in_rule__Relation__Group__24274);
             rule__Relation__Group__3();
 
             state._fsp--;
@@ -5641,23 +5775,23 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Relation__Group__2__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1953:1: rule__Relation__Group__2__Impl : ( ( rule__Relation__RightRefAssignment_2 ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1999:1: rule__Relation__Group__2__Impl : ( ( rule__Relation__RightRefAssignment_2 ) ) ;
     public final void rule__Relation__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1957:1: ( ( ( rule__Relation__RightRefAssignment_2 ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1958:1: ( ( rule__Relation__RightRefAssignment_2 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2003:1: ( ( ( rule__Relation__RightRefAssignment_2 ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2004:1: ( ( rule__Relation__RightRefAssignment_2 ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1958:1: ( ( rule__Relation__RightRefAssignment_2 ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1959:1: ( rule__Relation__RightRefAssignment_2 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2004:1: ( ( rule__Relation__RightRefAssignment_2 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2005:1: ( rule__Relation__RightRefAssignment_2 )
             {
              before(grammarAccess.getRelationAccess().getRightRefAssignment_2()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1960:1: ( rule__Relation__RightRefAssignment_2 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1960:2: rule__Relation__RightRefAssignment_2
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2006:1: ( rule__Relation__RightRefAssignment_2 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2006:2: rule__Relation__RightRefAssignment_2
             {
-            pushFollow(FOLLOW_rule__Relation__RightRefAssignment_2_in_rule__Relation__Group__2__Impl4179);
+            pushFollow(FOLLOW_rule__Relation__RightRefAssignment_2_in_rule__Relation__Group__2__Impl4301);
             rule__Relation__RightRefAssignment_2();
 
             state._fsp--;
@@ -5688,21 +5822,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Relation__Group__3"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1970:1: rule__Relation__Group__3 : rule__Relation__Group__3__Impl rule__Relation__Group__4 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2016:1: rule__Relation__Group__3 : rule__Relation__Group__3__Impl rule__Relation__Group__4 ;
     public final void rule__Relation__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1974:1: ( rule__Relation__Group__3__Impl rule__Relation__Group__4 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1975:2: rule__Relation__Group__3__Impl rule__Relation__Group__4
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2020:1: ( rule__Relation__Group__3__Impl rule__Relation__Group__4 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2021:2: rule__Relation__Group__3__Impl rule__Relation__Group__4
             {
-            pushFollow(FOLLOW_rule__Relation__Group__3__Impl_in_rule__Relation__Group__34209);
+            pushFollow(FOLLOW_rule__Relation__Group__3__Impl_in_rule__Relation__Group__34331);
             rule__Relation__Group__3__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Relation__Group__4_in_rule__Relation__Group__34212);
+            pushFollow(FOLLOW_rule__Relation__Group__4_in_rule__Relation__Group__34334);
             rule__Relation__Group__4();
 
             state._fsp--;
@@ -5726,31 +5860,31 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Relation__Group__3__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1982:1: rule__Relation__Group__3__Impl : ( ( rule__Relation__Group_3__0 )? ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2028:1: rule__Relation__Group__3__Impl : ( ( rule__Relation__Group_3__0 )? ) ;
     public final void rule__Relation__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1986:1: ( ( ( rule__Relation__Group_3__0 )? ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1987:1: ( ( rule__Relation__Group_3__0 )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2032:1: ( ( ( rule__Relation__Group_3__0 )? ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2033:1: ( ( rule__Relation__Group_3__0 )? )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1987:1: ( ( rule__Relation__Group_3__0 )? )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1988:1: ( rule__Relation__Group_3__0 )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2033:1: ( ( rule__Relation__Group_3__0 )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2034:1: ( rule__Relation__Group_3__0 )?
             {
              before(grammarAccess.getRelationAccess().getGroup_3()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1989:1: ( rule__Relation__Group_3__0 )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2035:1: ( rule__Relation__Group_3__0 )?
             int alt24=2;
             int LA24_0 = input.LA(1);
 
-            if ( (LA24_0==29) ) {
+            if ( (LA24_0==31) ) {
                 alt24=1;
             }
             switch (alt24) {
                 case 1 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1989:2: rule__Relation__Group_3__0
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2035:2: rule__Relation__Group_3__0
                     {
-                    pushFollow(FOLLOW_rule__Relation__Group_3__0_in_rule__Relation__Group__3__Impl4239);
+                    pushFollow(FOLLOW_rule__Relation__Group_3__0_in_rule__Relation__Group__3__Impl4361);
                     rule__Relation__Group_3__0();
 
                     state._fsp--;
@@ -5784,16 +5918,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Relation__Group__4"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:1999:1: rule__Relation__Group__4 : rule__Relation__Group__4__Impl ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2045:1: rule__Relation__Group__4 : rule__Relation__Group__4__Impl ;
     public final void rule__Relation__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2003:1: ( rule__Relation__Group__4__Impl )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2004:2: rule__Relation__Group__4__Impl
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2049:1: ( rule__Relation__Group__4__Impl )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2050:2: rule__Relation__Group__4__Impl
             {
-            pushFollow(FOLLOW_rule__Relation__Group__4__Impl_in_rule__Relation__Group__44270);
+            pushFollow(FOLLOW_rule__Relation__Group__4__Impl_in_rule__Relation__Group__44392);
             rule__Relation__Group__4__Impl();
 
             state._fsp--;
@@ -5817,20 +5951,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Relation__Group__4__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2010:1: rule__Relation__Group__4__Impl : ( RULE_END_LINE ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2056:1: rule__Relation__Group__4__Impl : ( RULE_END_LINE ) ;
     public final void rule__Relation__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2014:1: ( ( RULE_END_LINE ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2015:1: ( RULE_END_LINE )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2060:1: ( ( RULE_END_LINE ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2061:1: ( RULE_END_LINE )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2015:1: ( RULE_END_LINE )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2016:1: RULE_END_LINE
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2061:1: ( RULE_END_LINE )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2062:1: RULE_END_LINE
             {
              before(grammarAccess.getRelationAccess().getEND_LINETerminalRuleCall_4()); 
-            match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__Relation__Group__4__Impl4297); 
+            match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__Relation__Group__4__Impl4419); 
              after(grammarAccess.getRelationAccess().getEND_LINETerminalRuleCall_4()); 
 
             }
@@ -5854,21 +5988,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Relation__Group_3__0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2037:1: rule__Relation__Group_3__0 : rule__Relation__Group_3__0__Impl rule__Relation__Group_3__1 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2083:1: rule__Relation__Group_3__0 : rule__Relation__Group_3__0__Impl rule__Relation__Group_3__1 ;
     public final void rule__Relation__Group_3__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2041:1: ( rule__Relation__Group_3__0__Impl rule__Relation__Group_3__1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2042:2: rule__Relation__Group_3__0__Impl rule__Relation__Group_3__1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2087:1: ( rule__Relation__Group_3__0__Impl rule__Relation__Group_3__1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2088:2: rule__Relation__Group_3__0__Impl rule__Relation__Group_3__1
             {
-            pushFollow(FOLLOW_rule__Relation__Group_3__0__Impl_in_rule__Relation__Group_3__04336);
+            pushFollow(FOLLOW_rule__Relation__Group_3__0__Impl_in_rule__Relation__Group_3__04458);
             rule__Relation__Group_3__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Relation__Group_3__1_in_rule__Relation__Group_3__04339);
+            pushFollow(FOLLOW_rule__Relation__Group_3__1_in_rule__Relation__Group_3__04461);
             rule__Relation__Group_3__1();
 
             state._fsp--;
@@ -5892,20 +6026,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Relation__Group_3__0__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2049:1: rule__Relation__Group_3__0__Impl : ( ':' ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2095:1: rule__Relation__Group_3__0__Impl : ( ':' ) ;
     public final void rule__Relation__Group_3__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2053:1: ( ( ':' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2054:1: ( ':' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2099:1: ( ( ':' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2100:1: ( ':' )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2054:1: ( ':' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2055:1: ':'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2100:1: ( ':' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2101:1: ':'
             {
              before(grammarAccess.getRelationAccess().getColonKeyword_3_0()); 
-            match(input,29,FOLLOW_29_in_rule__Relation__Group_3__0__Impl4367); 
+            match(input,31,FOLLOW_31_in_rule__Relation__Group_3__0__Impl4489); 
              after(grammarAccess.getRelationAccess().getColonKeyword_3_0()); 
 
             }
@@ -5929,16 +6063,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Relation__Group_3__1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2068:1: rule__Relation__Group_3__1 : rule__Relation__Group_3__1__Impl ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2114:1: rule__Relation__Group_3__1 : rule__Relation__Group_3__1__Impl ;
     public final void rule__Relation__Group_3__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2072:1: ( rule__Relation__Group_3__1__Impl )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2073:2: rule__Relation__Group_3__1__Impl
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2118:1: ( rule__Relation__Group_3__1__Impl )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2119:2: rule__Relation__Group_3__1__Impl
             {
-            pushFollow(FOLLOW_rule__Relation__Group_3__1__Impl_in_rule__Relation__Group_3__14398);
+            pushFollow(FOLLOW_rule__Relation__Group_3__1__Impl_in_rule__Relation__Group_3__14520);
             rule__Relation__Group_3__1__Impl();
 
             state._fsp--;
@@ -5962,23 +6096,23 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Relation__Group_3__1__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2079:1: rule__Relation__Group_3__1__Impl : ( ( rule__Relation__NameAssignment_3_1 ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2125:1: rule__Relation__Group_3__1__Impl : ( ( rule__Relation__NameAssignment_3_1 ) ) ;
     public final void rule__Relation__Group_3__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2083:1: ( ( ( rule__Relation__NameAssignment_3_1 ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2084:1: ( ( rule__Relation__NameAssignment_3_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2129:1: ( ( ( rule__Relation__NameAssignment_3_1 ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2130:1: ( ( rule__Relation__NameAssignment_3_1 ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2084:1: ( ( rule__Relation__NameAssignment_3_1 ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2085:1: ( rule__Relation__NameAssignment_3_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2130:1: ( ( rule__Relation__NameAssignment_3_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2131:1: ( rule__Relation__NameAssignment_3_1 )
             {
              before(grammarAccess.getRelationAccess().getNameAssignment_3_1()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2086:1: ( rule__Relation__NameAssignment_3_1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2086:2: rule__Relation__NameAssignment_3_1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2132:1: ( rule__Relation__NameAssignment_3_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2132:2: rule__Relation__NameAssignment_3_1
             {
-            pushFollow(FOLLOW_rule__Relation__NameAssignment_3_1_in_rule__Relation__Group_3__1__Impl4425);
+            pushFollow(FOLLOW_rule__Relation__NameAssignment_3_1_in_rule__Relation__Group_3__1__Impl4547);
             rule__Relation__NameAssignment_3_1();
 
             state._fsp--;
@@ -6009,21 +6143,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__RelationParse__Group_0__0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2100:1: rule__RelationParse__Group_0__0 : rule__RelationParse__Group_0__0__Impl rule__RelationParse__Group_0__1 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2146:1: rule__RelationParse__Group_0__0 : rule__RelationParse__Group_0__0__Impl rule__RelationParse__Group_0__1 ;
     public final void rule__RelationParse__Group_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2104:1: ( rule__RelationParse__Group_0__0__Impl rule__RelationParse__Group_0__1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2105:2: rule__RelationParse__Group_0__0__Impl rule__RelationParse__Group_0__1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2150:1: ( rule__RelationParse__Group_0__0__Impl rule__RelationParse__Group_0__1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2151:2: rule__RelationParse__Group_0__0__Impl rule__RelationParse__Group_0__1
             {
-            pushFollow(FOLLOW_rule__RelationParse__Group_0__0__Impl_in_rule__RelationParse__Group_0__04459);
+            pushFollow(FOLLOW_rule__RelationParse__Group_0__0__Impl_in_rule__RelationParse__Group_0__04581);
             rule__RelationParse__Group_0__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__RelationParse__Group_0__1_in_rule__RelationParse__Group_0__04462);
+            pushFollow(FOLLOW_rule__RelationParse__Group_0__1_in_rule__RelationParse__Group_0__04584);
             rule__RelationParse__Group_0__1();
 
             state._fsp--;
@@ -6047,23 +6181,23 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__RelationParse__Group_0__0__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2112:1: rule__RelationParse__Group_0__0__Impl : ( ( rule__RelationParse__CompAssignment_0_0 ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2158:1: rule__RelationParse__Group_0__0__Impl : ( ( rule__RelationParse__CompAssignment_0_0 ) ) ;
     public final void rule__RelationParse__Group_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2116:1: ( ( ( rule__RelationParse__CompAssignment_0_0 ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2117:1: ( ( rule__RelationParse__CompAssignment_0_0 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2162:1: ( ( ( rule__RelationParse__CompAssignment_0_0 ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2163:1: ( ( rule__RelationParse__CompAssignment_0_0 ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2117:1: ( ( rule__RelationParse__CompAssignment_0_0 ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2118:1: ( rule__RelationParse__CompAssignment_0_0 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2163:1: ( ( rule__RelationParse__CompAssignment_0_0 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2164:1: ( rule__RelationParse__CompAssignment_0_0 )
             {
              before(grammarAccess.getRelationParseAccess().getCompAssignment_0_0()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2119:1: ( rule__RelationParse__CompAssignment_0_0 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2119:2: rule__RelationParse__CompAssignment_0_0
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2165:1: ( rule__RelationParse__CompAssignment_0_0 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2165:2: rule__RelationParse__CompAssignment_0_0
             {
-            pushFollow(FOLLOW_rule__RelationParse__CompAssignment_0_0_in_rule__RelationParse__Group_0__0__Impl4489);
+            pushFollow(FOLLOW_rule__RelationParse__CompAssignment_0_0_in_rule__RelationParse__Group_0__0__Impl4611);
             rule__RelationParse__CompAssignment_0_0();
 
             state._fsp--;
@@ -6094,21 +6228,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__RelationParse__Group_0__1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2129:1: rule__RelationParse__Group_0__1 : rule__RelationParse__Group_0__1__Impl rule__RelationParse__Group_0__2 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2175:1: rule__RelationParse__Group_0__1 : rule__RelationParse__Group_0__1__Impl rule__RelationParse__Group_0__2 ;
     public final void rule__RelationParse__Group_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2133:1: ( rule__RelationParse__Group_0__1__Impl rule__RelationParse__Group_0__2 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2134:2: rule__RelationParse__Group_0__1__Impl rule__RelationParse__Group_0__2
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2179:1: ( rule__RelationParse__Group_0__1__Impl rule__RelationParse__Group_0__2 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2180:2: rule__RelationParse__Group_0__1__Impl rule__RelationParse__Group_0__2
             {
-            pushFollow(FOLLOW_rule__RelationParse__Group_0__1__Impl_in_rule__RelationParse__Group_0__14519);
+            pushFollow(FOLLOW_rule__RelationParse__Group_0__1__Impl_in_rule__RelationParse__Group_0__14641);
             rule__RelationParse__Group_0__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__RelationParse__Group_0__2_in_rule__RelationParse__Group_0__14522);
+            pushFollow(FOLLOW_rule__RelationParse__Group_0__2_in_rule__RelationParse__Group_0__14644);
             rule__RelationParse__Group_0__2();
 
             state._fsp--;
@@ -6132,23 +6266,23 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__RelationParse__Group_0__1__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2141:1: rule__RelationParse__Group_0__1__Impl : ( ( rule__RelationParse__TypeAssignment_0_1 ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2187:1: rule__RelationParse__Group_0__1__Impl : ( ( rule__RelationParse__TypeAssignment_0_1 ) ) ;
     public final void rule__RelationParse__Group_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2145:1: ( ( ( rule__RelationParse__TypeAssignment_0_1 ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2146:1: ( ( rule__RelationParse__TypeAssignment_0_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2191:1: ( ( ( rule__RelationParse__TypeAssignment_0_1 ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2192:1: ( ( rule__RelationParse__TypeAssignment_0_1 ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2146:1: ( ( rule__RelationParse__TypeAssignment_0_1 ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2147:1: ( rule__RelationParse__TypeAssignment_0_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2192:1: ( ( rule__RelationParse__TypeAssignment_0_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2193:1: ( rule__RelationParse__TypeAssignment_0_1 )
             {
              before(grammarAccess.getRelationParseAccess().getTypeAssignment_0_1()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2148:1: ( rule__RelationParse__TypeAssignment_0_1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2148:2: rule__RelationParse__TypeAssignment_0_1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2194:1: ( rule__RelationParse__TypeAssignment_0_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2194:2: rule__RelationParse__TypeAssignment_0_1
             {
-            pushFollow(FOLLOW_rule__RelationParse__TypeAssignment_0_1_in_rule__RelationParse__Group_0__1__Impl4549);
+            pushFollow(FOLLOW_rule__RelationParse__TypeAssignment_0_1_in_rule__RelationParse__Group_0__1__Impl4671);
             rule__RelationParse__TypeAssignment_0_1();
 
             state._fsp--;
@@ -6179,21 +6313,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__RelationParse__Group_0__2"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2158:1: rule__RelationParse__Group_0__2 : rule__RelationParse__Group_0__2__Impl rule__RelationParse__Group_0__3 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2204:1: rule__RelationParse__Group_0__2 : rule__RelationParse__Group_0__2__Impl rule__RelationParse__Group_0__3 ;
     public final void rule__RelationParse__Group_0__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2162:1: ( rule__RelationParse__Group_0__2__Impl rule__RelationParse__Group_0__3 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2163:2: rule__RelationParse__Group_0__2__Impl rule__RelationParse__Group_0__3
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2208:1: ( rule__RelationParse__Group_0__2__Impl rule__RelationParse__Group_0__3 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2209:2: rule__RelationParse__Group_0__2__Impl rule__RelationParse__Group_0__3
             {
-            pushFollow(FOLLOW_rule__RelationParse__Group_0__2__Impl_in_rule__RelationParse__Group_0__24579);
+            pushFollow(FOLLOW_rule__RelationParse__Group_0__2__Impl_in_rule__RelationParse__Group_0__24701);
             rule__RelationParse__Group_0__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__RelationParse__Group_0__3_in_rule__RelationParse__Group_0__24582);
+            pushFollow(FOLLOW_rule__RelationParse__Group_0__3_in_rule__RelationParse__Group_0__24704);
             rule__RelationParse__Group_0__3();
 
             state._fsp--;
@@ -6217,31 +6351,31 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__RelationParse__Group_0__2__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2170:1: rule__RelationParse__Group_0__2__Impl : ( ( rule__RelationParse__DirectAssignment_0_2 )? ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2216:1: rule__RelationParse__Group_0__2__Impl : ( ( rule__RelationParse__DirectAssignment_0_2 )? ) ;
     public final void rule__RelationParse__Group_0__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2174:1: ( ( ( rule__RelationParse__DirectAssignment_0_2 )? ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2175:1: ( ( rule__RelationParse__DirectAssignment_0_2 )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2220:1: ( ( ( rule__RelationParse__DirectAssignment_0_2 )? ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2221:1: ( ( rule__RelationParse__DirectAssignment_0_2 )? )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2175:1: ( ( rule__RelationParse__DirectAssignment_0_2 )? )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2176:1: ( rule__RelationParse__DirectAssignment_0_2 )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2221:1: ( ( rule__RelationParse__DirectAssignment_0_2 )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2222:1: ( rule__RelationParse__DirectAssignment_0_2 )?
             {
              before(grammarAccess.getRelationParseAccess().getDirectAssignment_0_2()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2177:1: ( rule__RelationParse__DirectAssignment_0_2 )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2223:1: ( rule__RelationParse__DirectAssignment_0_2 )?
             int alt25=2;
             int LA25_0 = input.LA(1);
 
-            if ( (LA25_0==52) ) {
+            if ( (LA25_0==54) ) {
                 alt25=1;
             }
             switch (alt25) {
                 case 1 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2177:2: rule__RelationParse__DirectAssignment_0_2
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2223:2: rule__RelationParse__DirectAssignment_0_2
                     {
-                    pushFollow(FOLLOW_rule__RelationParse__DirectAssignment_0_2_in_rule__RelationParse__Group_0__2__Impl4609);
+                    pushFollow(FOLLOW_rule__RelationParse__DirectAssignment_0_2_in_rule__RelationParse__Group_0__2__Impl4731);
                     rule__RelationParse__DirectAssignment_0_2();
 
                     state._fsp--;
@@ -6275,21 +6409,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__RelationParse__Group_0__3"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2187:1: rule__RelationParse__Group_0__3 : rule__RelationParse__Group_0__3__Impl rule__RelationParse__Group_0__4 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2233:1: rule__RelationParse__Group_0__3 : rule__RelationParse__Group_0__3__Impl rule__RelationParse__Group_0__4 ;
     public final void rule__RelationParse__Group_0__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2191:1: ( rule__RelationParse__Group_0__3__Impl rule__RelationParse__Group_0__4 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2192:2: rule__RelationParse__Group_0__3__Impl rule__RelationParse__Group_0__4
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2237:1: ( rule__RelationParse__Group_0__3__Impl rule__RelationParse__Group_0__4 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2238:2: rule__RelationParse__Group_0__3__Impl rule__RelationParse__Group_0__4
             {
-            pushFollow(FOLLOW_rule__RelationParse__Group_0__3__Impl_in_rule__RelationParse__Group_0__34640);
+            pushFollow(FOLLOW_rule__RelationParse__Group_0__3__Impl_in_rule__RelationParse__Group_0__34762);
             rule__RelationParse__Group_0__3__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__RelationParse__Group_0__4_in_rule__RelationParse__Group_0__34643);
+            pushFollow(FOLLOW_rule__RelationParse__Group_0__4_in_rule__RelationParse__Group_0__34765);
             rule__RelationParse__Group_0__4();
 
             state._fsp--;
@@ -6313,20 +6447,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__RelationParse__Group_0__3__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2199:1: rule__RelationParse__Group_0__3__Impl : ( RULE_WS ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2245:1: rule__RelationParse__Group_0__3__Impl : ( RULE_WS ) ;
     public final void rule__RelationParse__Group_0__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2203:1: ( ( RULE_WS ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2204:1: ( RULE_WS )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2249:1: ( ( RULE_WS ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2250:1: ( RULE_WS )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2204:1: ( RULE_WS )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2205:1: RULE_WS
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2250:1: ( RULE_WS )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2251:1: RULE_WS
             {
              before(grammarAccess.getRelationParseAccess().getWSTerminalRuleCall_0_3()); 
-            match(input,RULE_WS,FOLLOW_RULE_WS_in_rule__RelationParse__Group_0__3__Impl4670); 
+            match(input,RULE_WS,FOLLOW_RULE_WS_in_rule__RelationParse__Group_0__3__Impl4792); 
              after(grammarAccess.getRelationParseAccess().getWSTerminalRuleCall_0_3()); 
 
             }
@@ -6350,16 +6484,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__RelationParse__Group_0__4"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2216:1: rule__RelationParse__Group_0__4 : rule__RelationParse__Group_0__4__Impl ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2262:1: rule__RelationParse__Group_0__4 : rule__RelationParse__Group_0__4__Impl ;
     public final void rule__RelationParse__Group_0__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2220:1: ( rule__RelationParse__Group_0__4__Impl )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2221:2: rule__RelationParse__Group_0__4__Impl
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2266:1: ( rule__RelationParse__Group_0__4__Impl )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2267:2: rule__RelationParse__Group_0__4__Impl
             {
-            pushFollow(FOLLOW_rule__RelationParse__Group_0__4__Impl_in_rule__RelationParse__Group_0__44699);
+            pushFollow(FOLLOW_rule__RelationParse__Group_0__4__Impl_in_rule__RelationParse__Group_0__44821);
             rule__RelationParse__Group_0__4__Impl();
 
             state._fsp--;
@@ -6383,20 +6517,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__RelationParse__Group_0__4__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2227:1: rule__RelationParse__Group_0__4__Impl : ( ( rule__RelationParse__MultiAssignment_0_4 )? ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2273:1: rule__RelationParse__Group_0__4__Impl : ( ( rule__RelationParse__MultiAssignment_0_4 )? ) ;
     public final void rule__RelationParse__Group_0__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2231:1: ( ( ( rule__RelationParse__MultiAssignment_0_4 )? ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2232:1: ( ( rule__RelationParse__MultiAssignment_0_4 )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2277:1: ( ( ( rule__RelationParse__MultiAssignment_0_4 )? ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2278:1: ( ( rule__RelationParse__MultiAssignment_0_4 )? )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2232:1: ( ( rule__RelationParse__MultiAssignment_0_4 )? )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2233:1: ( rule__RelationParse__MultiAssignment_0_4 )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2278:1: ( ( rule__RelationParse__MultiAssignment_0_4 )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2279:1: ( rule__RelationParse__MultiAssignment_0_4 )?
             {
              before(grammarAccess.getRelationParseAccess().getMultiAssignment_0_4()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2234:1: ( rule__RelationParse__MultiAssignment_0_4 )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2280:1: ( rule__RelationParse__MultiAssignment_0_4 )?
             int alt26=2;
             int LA26_0 = input.LA(1);
 
@@ -6405,9 +6539,9 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
             }
             switch (alt26) {
                 case 1 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2234:2: rule__RelationParse__MultiAssignment_0_4
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2280:2: rule__RelationParse__MultiAssignment_0_4
                     {
-                    pushFollow(FOLLOW_rule__RelationParse__MultiAssignment_0_4_in_rule__RelationParse__Group_0__4__Impl4726);
+                    pushFollow(FOLLOW_rule__RelationParse__MultiAssignment_0_4_in_rule__RelationParse__Group_0__4__Impl4848);
                     rule__RelationParse__MultiAssignment_0_4();
 
                     state._fsp--;
@@ -6441,21 +6575,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__RelationParse__Group_1__0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2254:1: rule__RelationParse__Group_1__0 : rule__RelationParse__Group_1__0__Impl rule__RelationParse__Group_1__1 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2300:1: rule__RelationParse__Group_1__0 : rule__RelationParse__Group_1__0__Impl rule__RelationParse__Group_1__1 ;
     public final void rule__RelationParse__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2258:1: ( rule__RelationParse__Group_1__0__Impl rule__RelationParse__Group_1__1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2259:2: rule__RelationParse__Group_1__0__Impl rule__RelationParse__Group_1__1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2304:1: ( rule__RelationParse__Group_1__0__Impl rule__RelationParse__Group_1__1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2305:2: rule__RelationParse__Group_1__0__Impl rule__RelationParse__Group_1__1
             {
-            pushFollow(FOLLOW_rule__RelationParse__Group_1__0__Impl_in_rule__RelationParse__Group_1__04767);
+            pushFollow(FOLLOW_rule__RelationParse__Group_1__0__Impl_in_rule__RelationParse__Group_1__04889);
             rule__RelationParse__Group_1__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__RelationParse__Group_1__1_in_rule__RelationParse__Group_1__04770);
+            pushFollow(FOLLOW_rule__RelationParse__Group_1__1_in_rule__RelationParse__Group_1__04892);
             rule__RelationParse__Group_1__1();
 
             state._fsp--;
@@ -6479,23 +6613,23 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__RelationParse__Group_1__0__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2266:1: rule__RelationParse__Group_1__0__Impl : ( ( rule__RelationParse__TypeAssignment_1_0 ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2312:1: rule__RelationParse__Group_1__0__Impl : ( ( rule__RelationParse__TypeAssignment_1_0 ) ) ;
     public final void rule__RelationParse__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2270:1: ( ( ( rule__RelationParse__TypeAssignment_1_0 ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2271:1: ( ( rule__RelationParse__TypeAssignment_1_0 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2316:1: ( ( ( rule__RelationParse__TypeAssignment_1_0 ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2317:1: ( ( rule__RelationParse__TypeAssignment_1_0 ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2271:1: ( ( rule__RelationParse__TypeAssignment_1_0 ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2272:1: ( rule__RelationParse__TypeAssignment_1_0 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2317:1: ( ( rule__RelationParse__TypeAssignment_1_0 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2318:1: ( rule__RelationParse__TypeAssignment_1_0 )
             {
              before(grammarAccess.getRelationParseAccess().getTypeAssignment_1_0()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2273:1: ( rule__RelationParse__TypeAssignment_1_0 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2273:2: rule__RelationParse__TypeAssignment_1_0
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2319:1: ( rule__RelationParse__TypeAssignment_1_0 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2319:2: rule__RelationParse__TypeAssignment_1_0
             {
-            pushFollow(FOLLOW_rule__RelationParse__TypeAssignment_1_0_in_rule__RelationParse__Group_1__0__Impl4797);
+            pushFollow(FOLLOW_rule__RelationParse__TypeAssignment_1_0_in_rule__RelationParse__Group_1__0__Impl4919);
             rule__RelationParse__TypeAssignment_1_0();
 
             state._fsp--;
@@ -6526,21 +6660,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__RelationParse__Group_1__1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2283:1: rule__RelationParse__Group_1__1 : rule__RelationParse__Group_1__1__Impl rule__RelationParse__Group_1__2 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2329:1: rule__RelationParse__Group_1__1 : rule__RelationParse__Group_1__1__Impl rule__RelationParse__Group_1__2 ;
     public final void rule__RelationParse__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2287:1: ( rule__RelationParse__Group_1__1__Impl rule__RelationParse__Group_1__2 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2288:2: rule__RelationParse__Group_1__1__Impl rule__RelationParse__Group_1__2
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2333:1: ( rule__RelationParse__Group_1__1__Impl rule__RelationParse__Group_1__2 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2334:2: rule__RelationParse__Group_1__1__Impl rule__RelationParse__Group_1__2
             {
-            pushFollow(FOLLOW_rule__RelationParse__Group_1__1__Impl_in_rule__RelationParse__Group_1__14827);
+            pushFollow(FOLLOW_rule__RelationParse__Group_1__1__Impl_in_rule__RelationParse__Group_1__14949);
             rule__RelationParse__Group_1__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__RelationParse__Group_1__2_in_rule__RelationParse__Group_1__14830);
+            pushFollow(FOLLOW_rule__RelationParse__Group_1__2_in_rule__RelationParse__Group_1__14952);
             rule__RelationParse__Group_1__2();
 
             state._fsp--;
@@ -6564,31 +6698,31 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__RelationParse__Group_1__1__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2295:1: rule__RelationParse__Group_1__1__Impl : ( ( rule__RelationParse__Alternatives_1_1 )? ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2341:1: rule__RelationParse__Group_1__1__Impl : ( ( rule__RelationParse__Alternatives_1_1 )? ) ;
     public final void rule__RelationParse__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2299:1: ( ( ( rule__RelationParse__Alternatives_1_1 )? ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2300:1: ( ( rule__RelationParse__Alternatives_1_1 )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2345:1: ( ( ( rule__RelationParse__Alternatives_1_1 )? ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2346:1: ( ( rule__RelationParse__Alternatives_1_1 )? )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2300:1: ( ( rule__RelationParse__Alternatives_1_1 )? )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2301:1: ( rule__RelationParse__Alternatives_1_1 )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2346:1: ( ( rule__RelationParse__Alternatives_1_1 )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2347:1: ( rule__RelationParse__Alternatives_1_1 )?
             {
              before(grammarAccess.getRelationParseAccess().getAlternatives_1_1()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2302:1: ( rule__RelationParse__Alternatives_1_1 )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2348:1: ( rule__RelationParse__Alternatives_1_1 )?
             int alt27=2;
             int LA27_0 = input.LA(1);
 
-            if ( ((LA27_0>=52 && LA27_0<=53)) ) {
+            if ( ((LA27_0>=54 && LA27_0<=55)) ) {
                 alt27=1;
             }
             switch (alt27) {
                 case 1 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2302:2: rule__RelationParse__Alternatives_1_1
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2348:2: rule__RelationParse__Alternatives_1_1
                     {
-                    pushFollow(FOLLOW_rule__RelationParse__Alternatives_1_1_in_rule__RelationParse__Group_1__1__Impl4857);
+                    pushFollow(FOLLOW_rule__RelationParse__Alternatives_1_1_in_rule__RelationParse__Group_1__1__Impl4979);
                     rule__RelationParse__Alternatives_1_1();
 
                     state._fsp--;
@@ -6622,21 +6756,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__RelationParse__Group_1__2"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2312:1: rule__RelationParse__Group_1__2 : rule__RelationParse__Group_1__2__Impl rule__RelationParse__Group_1__3 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2358:1: rule__RelationParse__Group_1__2 : rule__RelationParse__Group_1__2__Impl rule__RelationParse__Group_1__3 ;
     public final void rule__RelationParse__Group_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2316:1: ( rule__RelationParse__Group_1__2__Impl rule__RelationParse__Group_1__3 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2317:2: rule__RelationParse__Group_1__2__Impl rule__RelationParse__Group_1__3
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2362:1: ( rule__RelationParse__Group_1__2__Impl rule__RelationParse__Group_1__3 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2363:2: rule__RelationParse__Group_1__2__Impl rule__RelationParse__Group_1__3
             {
-            pushFollow(FOLLOW_rule__RelationParse__Group_1__2__Impl_in_rule__RelationParse__Group_1__24888);
+            pushFollow(FOLLOW_rule__RelationParse__Group_1__2__Impl_in_rule__RelationParse__Group_1__25010);
             rule__RelationParse__Group_1__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__RelationParse__Group_1__3_in_rule__RelationParse__Group_1__24891);
+            pushFollow(FOLLOW_rule__RelationParse__Group_1__3_in_rule__RelationParse__Group_1__25013);
             rule__RelationParse__Group_1__3();
 
             state._fsp--;
@@ -6660,20 +6794,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__RelationParse__Group_1__2__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2324:1: rule__RelationParse__Group_1__2__Impl : ( RULE_WS ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2370:1: rule__RelationParse__Group_1__2__Impl : ( RULE_WS ) ;
     public final void rule__RelationParse__Group_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2328:1: ( ( RULE_WS ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2329:1: ( RULE_WS )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2374:1: ( ( RULE_WS ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2375:1: ( RULE_WS )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2329:1: ( RULE_WS )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2330:1: RULE_WS
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2375:1: ( RULE_WS )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2376:1: RULE_WS
             {
              before(grammarAccess.getRelationParseAccess().getWSTerminalRuleCall_1_2()); 
-            match(input,RULE_WS,FOLLOW_RULE_WS_in_rule__RelationParse__Group_1__2__Impl4918); 
+            match(input,RULE_WS,FOLLOW_RULE_WS_in_rule__RelationParse__Group_1__2__Impl5040); 
              after(grammarAccess.getRelationParseAccess().getWSTerminalRuleCall_1_2()); 
 
             }
@@ -6697,16 +6831,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__RelationParse__Group_1__3"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2341:1: rule__RelationParse__Group_1__3 : rule__RelationParse__Group_1__3__Impl ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2387:1: rule__RelationParse__Group_1__3 : rule__RelationParse__Group_1__3__Impl ;
     public final void rule__RelationParse__Group_1__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2345:1: ( rule__RelationParse__Group_1__3__Impl )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2346:2: rule__RelationParse__Group_1__3__Impl
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2391:1: ( rule__RelationParse__Group_1__3__Impl )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2392:2: rule__RelationParse__Group_1__3__Impl
             {
-            pushFollow(FOLLOW_rule__RelationParse__Group_1__3__Impl_in_rule__RelationParse__Group_1__34947);
+            pushFollow(FOLLOW_rule__RelationParse__Group_1__3__Impl_in_rule__RelationParse__Group_1__35069);
             rule__RelationParse__Group_1__3__Impl();
 
             state._fsp--;
@@ -6730,20 +6864,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__RelationParse__Group_1__3__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2352:1: rule__RelationParse__Group_1__3__Impl : ( ( rule__RelationParse__MultiAssignment_1_3 )? ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2398:1: rule__RelationParse__Group_1__3__Impl : ( ( rule__RelationParse__MultiAssignment_1_3 )? ) ;
     public final void rule__RelationParse__Group_1__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2356:1: ( ( ( rule__RelationParse__MultiAssignment_1_3 )? ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2357:1: ( ( rule__RelationParse__MultiAssignment_1_3 )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2402:1: ( ( ( rule__RelationParse__MultiAssignment_1_3 )? ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2403:1: ( ( rule__RelationParse__MultiAssignment_1_3 )? )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2357:1: ( ( rule__RelationParse__MultiAssignment_1_3 )? )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2358:1: ( rule__RelationParse__MultiAssignment_1_3 )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2403:1: ( ( rule__RelationParse__MultiAssignment_1_3 )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2404:1: ( rule__RelationParse__MultiAssignment_1_3 )?
             {
              before(grammarAccess.getRelationParseAccess().getMultiAssignment_1_3()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2359:1: ( rule__RelationParse__MultiAssignment_1_3 )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2405:1: ( rule__RelationParse__MultiAssignment_1_3 )?
             int alt28=2;
             int LA28_0 = input.LA(1);
 
@@ -6752,9 +6886,9 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
             }
             switch (alt28) {
                 case 1 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2359:2: rule__RelationParse__MultiAssignment_1_3
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2405:2: rule__RelationParse__MultiAssignment_1_3
                     {
-                    pushFollow(FOLLOW_rule__RelationParse__MultiAssignment_1_3_in_rule__RelationParse__Group_1__3__Impl4974);
+                    pushFollow(FOLLOW_rule__RelationParse__MultiAssignment_1_3_in_rule__RelationParse__Group_1__3__Impl5096);
                     rule__RelationParse__MultiAssignment_1_3();
 
                     state._fsp--;
@@ -6788,21 +6922,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__StrongRel__Group__0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2377:1: rule__StrongRel__Group__0 : rule__StrongRel__Group__0__Impl rule__StrongRel__Group__1 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2423:1: rule__StrongRel__Group__0 : rule__StrongRel__Group__0__Impl rule__StrongRel__Group__1 ;
     public final void rule__StrongRel__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2381:1: ( rule__StrongRel__Group__0__Impl rule__StrongRel__Group__1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2382:2: rule__StrongRel__Group__0__Impl rule__StrongRel__Group__1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2427:1: ( rule__StrongRel__Group__0__Impl rule__StrongRel__Group__1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2428:2: rule__StrongRel__Group__0__Impl rule__StrongRel__Group__1
             {
-            pushFollow(FOLLOW_rule__StrongRel__Group__0__Impl_in_rule__StrongRel__Group__05013);
+            pushFollow(FOLLOW_rule__StrongRel__Group__0__Impl_in_rule__StrongRel__Group__05135);
             rule__StrongRel__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__StrongRel__Group__1_in_rule__StrongRel__Group__05016);
+            pushFollow(FOLLOW_rule__StrongRel__Group__1_in_rule__StrongRel__Group__05138);
             rule__StrongRel__Group__1();
 
             state._fsp--;
@@ -6826,20 +6960,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__StrongRel__Group__0__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2389:1: rule__StrongRel__Group__0__Impl : ( '-' ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2435:1: rule__StrongRel__Group__0__Impl : ( '-' ) ;
     public final void rule__StrongRel__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2393:1: ( ( '-' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2394:1: ( '-' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2439:1: ( ( '-' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2440:1: ( '-' )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2394:1: ( '-' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2395:1: '-'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2440:1: ( '-' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2441:1: '-'
             {
              before(grammarAccess.getStrongRelAccess().getHyphenMinusKeyword_0()); 
-            match(input,46,FOLLOW_46_in_rule__StrongRel__Group__0__Impl5044); 
+            match(input,50,FOLLOW_50_in_rule__StrongRel__Group__0__Impl5166); 
              after(grammarAccess.getStrongRelAccess().getHyphenMinusKeyword_0()); 
 
             }
@@ -6863,21 +6997,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__StrongRel__Group__1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2408:1: rule__StrongRel__Group__1 : rule__StrongRel__Group__1__Impl rule__StrongRel__Group__2 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2454:1: rule__StrongRel__Group__1 : rule__StrongRel__Group__1__Impl rule__StrongRel__Group__2 ;
     public final void rule__StrongRel__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2412:1: ( rule__StrongRel__Group__1__Impl rule__StrongRel__Group__2 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2413:2: rule__StrongRel__Group__1__Impl rule__StrongRel__Group__2
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2458:1: ( rule__StrongRel__Group__1__Impl rule__StrongRel__Group__2 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2459:2: rule__StrongRel__Group__1__Impl rule__StrongRel__Group__2
             {
-            pushFollow(FOLLOW_rule__StrongRel__Group__1__Impl_in_rule__StrongRel__Group__15075);
+            pushFollow(FOLLOW_rule__StrongRel__Group__1__Impl_in_rule__StrongRel__Group__15197);
             rule__StrongRel__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__StrongRel__Group__2_in_rule__StrongRel__Group__15078);
+            pushFollow(FOLLOW_rule__StrongRel__Group__2_in_rule__StrongRel__Group__15200);
             rule__StrongRel__Group__2();
 
             state._fsp--;
@@ -6901,20 +7035,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__StrongRel__Group__1__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2420:1: rule__StrongRel__Group__1__Impl : ( ( rule__StrongRel__Alternatives_1 )? ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2466:1: rule__StrongRel__Group__1__Impl : ( ( rule__StrongRel__Alternatives_1 )? ) ;
     public final void rule__StrongRel__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2424:1: ( ( ( rule__StrongRel__Alternatives_1 )? ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2425:1: ( ( rule__StrongRel__Alternatives_1 )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2470:1: ( ( ( rule__StrongRel__Alternatives_1 )? ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2471:1: ( ( rule__StrongRel__Alternatives_1 )? )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2425:1: ( ( rule__StrongRel__Alternatives_1 )? )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2426:1: ( rule__StrongRel__Alternatives_1 )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2471:1: ( ( rule__StrongRel__Alternatives_1 )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2472:1: ( rule__StrongRel__Alternatives_1 )?
             {
              before(grammarAccess.getStrongRelAccess().getAlternatives_1()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2427:1: ( rule__StrongRel__Alternatives_1 )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2473:1: ( rule__StrongRel__Alternatives_1 )?
             int alt29=2;
             int LA29_0 = input.LA(1);
 
@@ -6923,9 +7057,9 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
             }
             switch (alt29) {
                 case 1 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2427:2: rule__StrongRel__Alternatives_1
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2473:2: rule__StrongRel__Alternatives_1
                     {
-                    pushFollow(FOLLOW_rule__StrongRel__Alternatives_1_in_rule__StrongRel__Group__1__Impl5105);
+                    pushFollow(FOLLOW_rule__StrongRel__Alternatives_1_in_rule__StrongRel__Group__1__Impl5227);
                     rule__StrongRel__Alternatives_1();
 
                     state._fsp--;
@@ -6959,16 +7093,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__StrongRel__Group__2"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2437:1: rule__StrongRel__Group__2 : rule__StrongRel__Group__2__Impl ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2483:1: rule__StrongRel__Group__2 : rule__StrongRel__Group__2__Impl ;
     public final void rule__StrongRel__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2441:1: ( rule__StrongRel__Group__2__Impl )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2442:2: rule__StrongRel__Group__2__Impl
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2487:1: ( rule__StrongRel__Group__2__Impl )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2488:2: rule__StrongRel__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__StrongRel__Group__2__Impl_in_rule__StrongRel__Group__25136);
+            pushFollow(FOLLOW_rule__StrongRel__Group__2__Impl_in_rule__StrongRel__Group__25258);
             rule__StrongRel__Group__2__Impl();
 
             state._fsp--;
@@ -6992,26 +7126,26 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__StrongRel__Group__2__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2448:1: rule__StrongRel__Group__2__Impl : ( ( ( '-' ) ) ( ( '-' )* ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2494:1: rule__StrongRel__Group__2__Impl : ( ( ( '-' ) ) ( ( '-' )* ) ) ;
     public final void rule__StrongRel__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2452:1: ( ( ( ( '-' ) ) ( ( '-' )* ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2453:1: ( ( ( '-' ) ) ( ( '-' )* ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2498:1: ( ( ( ( '-' ) ) ( ( '-' )* ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2499:1: ( ( ( '-' ) ) ( ( '-' )* ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2453:1: ( ( ( '-' ) ) ( ( '-' )* ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2454:1: ( ( '-' ) ) ( ( '-' )* )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2499:1: ( ( ( '-' ) ) ( ( '-' )* ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2500:1: ( ( '-' ) ) ( ( '-' )* )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2454:1: ( ( '-' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2455:1: ( '-' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2500:1: ( ( '-' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2501:1: ( '-' )
             {
              before(grammarAccess.getStrongRelAccess().getHyphenMinusKeyword_2()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2456:1: ( '-' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2457:2: '-'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2502:1: ( '-' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2503:2: '-'
             {
-            match(input,46,FOLLOW_46_in_rule__StrongRel__Group__2__Impl5167); 
+            match(input,50,FOLLOW_50_in_rule__StrongRel__Group__2__Impl5289); 
 
             }
 
@@ -7019,26 +7153,26 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
             }
 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2461:1: ( ( '-' )* )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2462:1: ( '-' )*
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2507:1: ( ( '-' )* )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2508:1: ( '-' )*
             {
              before(grammarAccess.getStrongRelAccess().getHyphenMinusKeyword_2()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2463:1: ( '-' )*
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2509:1: ( '-' )*
             loop30:
             do {
                 int alt30=2;
                 int LA30_0 = input.LA(1);
 
-                if ( (LA30_0==46) ) {
+                if ( (LA30_0==50) ) {
                     alt30=1;
                 }
 
 
                 switch (alt30) {
             	case 1 :
-            	    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2464:2: '-'
+            	    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2510:2: '-'
             	    {
-            	    match(input,46,FOLLOW_46_in_rule__StrongRel__Group__2__Impl5183); 
+            	    match(input,50,FOLLOW_50_in_rule__StrongRel__Group__2__Impl5305); 
 
             	    }
             	    break;
@@ -7074,21 +7208,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__WeakRel__Group__0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2482:1: rule__WeakRel__Group__0 : rule__WeakRel__Group__0__Impl rule__WeakRel__Group__1 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2528:1: rule__WeakRel__Group__0 : rule__WeakRel__Group__0__Impl rule__WeakRel__Group__1 ;
     public final void rule__WeakRel__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2486:1: ( rule__WeakRel__Group__0__Impl rule__WeakRel__Group__1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2487:2: rule__WeakRel__Group__0__Impl rule__WeakRel__Group__1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2532:1: ( rule__WeakRel__Group__0__Impl rule__WeakRel__Group__1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2533:2: rule__WeakRel__Group__0__Impl rule__WeakRel__Group__1
             {
-            pushFollow(FOLLOW_rule__WeakRel__Group__0__Impl_in_rule__WeakRel__Group__05224);
+            pushFollow(FOLLOW_rule__WeakRel__Group__0__Impl_in_rule__WeakRel__Group__05346);
             rule__WeakRel__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__WeakRel__Group__1_in_rule__WeakRel__Group__05227);
+            pushFollow(FOLLOW_rule__WeakRel__Group__1_in_rule__WeakRel__Group__05349);
             rule__WeakRel__Group__1();
 
             state._fsp--;
@@ -7112,20 +7246,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__WeakRel__Group__0__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2494:1: rule__WeakRel__Group__0__Impl : ( '.' ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2540:1: rule__WeakRel__Group__0__Impl : ( '.' ) ;
     public final void rule__WeakRel__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2498:1: ( ( '.' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2499:1: ( '.' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2544:1: ( ( '.' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2545:1: ( '.' )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2499:1: ( '.' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2500:1: '.'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2545:1: ( '.' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2546:1: '.'
             {
              before(grammarAccess.getWeakRelAccess().getFullStopKeyword_0()); 
-            match(input,47,FOLLOW_47_in_rule__WeakRel__Group__0__Impl5255); 
+            match(input,51,FOLLOW_51_in_rule__WeakRel__Group__0__Impl5377); 
              after(grammarAccess.getWeakRelAccess().getFullStopKeyword_0()); 
 
             }
@@ -7149,21 +7283,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__WeakRel__Group__1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2513:1: rule__WeakRel__Group__1 : rule__WeakRel__Group__1__Impl rule__WeakRel__Group__2 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2559:1: rule__WeakRel__Group__1 : rule__WeakRel__Group__1__Impl rule__WeakRel__Group__2 ;
     public final void rule__WeakRel__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2517:1: ( rule__WeakRel__Group__1__Impl rule__WeakRel__Group__2 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2518:2: rule__WeakRel__Group__1__Impl rule__WeakRel__Group__2
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2563:1: ( rule__WeakRel__Group__1__Impl rule__WeakRel__Group__2 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2564:2: rule__WeakRel__Group__1__Impl rule__WeakRel__Group__2
             {
-            pushFollow(FOLLOW_rule__WeakRel__Group__1__Impl_in_rule__WeakRel__Group__15286);
+            pushFollow(FOLLOW_rule__WeakRel__Group__1__Impl_in_rule__WeakRel__Group__15408);
             rule__WeakRel__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__WeakRel__Group__2_in_rule__WeakRel__Group__15289);
+            pushFollow(FOLLOW_rule__WeakRel__Group__2_in_rule__WeakRel__Group__15411);
             rule__WeakRel__Group__2();
 
             state._fsp--;
@@ -7187,20 +7321,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__WeakRel__Group__1__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2525:1: rule__WeakRel__Group__1__Impl : ( ( rule__WeakRel__Alternatives_1 )? ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2571:1: rule__WeakRel__Group__1__Impl : ( ( rule__WeakRel__Alternatives_1 )? ) ;
     public final void rule__WeakRel__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2529:1: ( ( ( rule__WeakRel__Alternatives_1 )? ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2530:1: ( ( rule__WeakRel__Alternatives_1 )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2575:1: ( ( ( rule__WeakRel__Alternatives_1 )? ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2576:1: ( ( rule__WeakRel__Alternatives_1 )? )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2530:1: ( ( rule__WeakRel__Alternatives_1 )? )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2531:1: ( rule__WeakRel__Alternatives_1 )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2576:1: ( ( rule__WeakRel__Alternatives_1 )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2577:1: ( rule__WeakRel__Alternatives_1 )?
             {
              before(grammarAccess.getWeakRelAccess().getAlternatives_1()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2532:1: ( rule__WeakRel__Alternatives_1 )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2578:1: ( rule__WeakRel__Alternatives_1 )?
             int alt31=2;
             int LA31_0 = input.LA(1);
 
@@ -7209,9 +7343,9 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
             }
             switch (alt31) {
                 case 1 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2532:2: rule__WeakRel__Alternatives_1
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2578:2: rule__WeakRel__Alternatives_1
                     {
-                    pushFollow(FOLLOW_rule__WeakRel__Alternatives_1_in_rule__WeakRel__Group__1__Impl5316);
+                    pushFollow(FOLLOW_rule__WeakRel__Alternatives_1_in_rule__WeakRel__Group__1__Impl5438);
                     rule__WeakRel__Alternatives_1();
 
                     state._fsp--;
@@ -7245,16 +7379,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__WeakRel__Group__2"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2542:1: rule__WeakRel__Group__2 : rule__WeakRel__Group__2__Impl ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2588:1: rule__WeakRel__Group__2 : rule__WeakRel__Group__2__Impl ;
     public final void rule__WeakRel__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2546:1: ( rule__WeakRel__Group__2__Impl )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2547:2: rule__WeakRel__Group__2__Impl
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2592:1: ( rule__WeakRel__Group__2__Impl )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2593:2: rule__WeakRel__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__WeakRel__Group__2__Impl_in_rule__WeakRel__Group__25347);
+            pushFollow(FOLLOW_rule__WeakRel__Group__2__Impl_in_rule__WeakRel__Group__25469);
             rule__WeakRel__Group__2__Impl();
 
             state._fsp--;
@@ -7278,26 +7412,26 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__WeakRel__Group__2__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2553:1: rule__WeakRel__Group__2__Impl : ( ( ( '.' ) ) ( ( '.' )* ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2599:1: rule__WeakRel__Group__2__Impl : ( ( ( '.' ) ) ( ( '.' )* ) ) ;
     public final void rule__WeakRel__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2557:1: ( ( ( ( '.' ) ) ( ( '.' )* ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2558:1: ( ( ( '.' ) ) ( ( '.' )* ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2603:1: ( ( ( ( '.' ) ) ( ( '.' )* ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2604:1: ( ( ( '.' ) ) ( ( '.' )* ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2558:1: ( ( ( '.' ) ) ( ( '.' )* ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2559:1: ( ( '.' ) ) ( ( '.' )* )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2604:1: ( ( ( '.' ) ) ( ( '.' )* ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2605:1: ( ( '.' ) ) ( ( '.' )* )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2559:1: ( ( '.' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2560:1: ( '.' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2605:1: ( ( '.' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2606:1: ( '.' )
             {
              before(grammarAccess.getWeakRelAccess().getFullStopKeyword_2()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2561:1: ( '.' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2562:2: '.'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2607:1: ( '.' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2608:2: '.'
             {
-            match(input,47,FOLLOW_47_in_rule__WeakRel__Group__2__Impl5378); 
+            match(input,51,FOLLOW_51_in_rule__WeakRel__Group__2__Impl5500); 
 
             }
 
@@ -7305,26 +7439,26 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
             }
 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2566:1: ( ( '.' )* )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2567:1: ( '.' )*
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2612:1: ( ( '.' )* )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2613:1: ( '.' )*
             {
              before(grammarAccess.getWeakRelAccess().getFullStopKeyword_2()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2568:1: ( '.' )*
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2614:1: ( '.' )*
             loop32:
             do {
                 int alt32=2;
                 int LA32_0 = input.LA(1);
 
-                if ( (LA32_0==47) ) {
+                if ( (LA32_0==51) ) {
                     alt32=1;
                 }
 
 
                 switch (alt32) {
             	case 1 :
-            	    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2569:2: '.'
+            	    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2615:2: '.'
             	    {
-            	    match(input,47,FOLLOW_47_in_rule__WeakRel__Group__2__Impl5394); 
+            	    match(input,51,FOLLOW_51_in_rule__WeakRel__Group__2__Impl5516); 
 
             	    }
             	    break;
@@ -7360,21 +7494,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Enumer__Group__0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2587:1: rule__Enumer__Group__0 : rule__Enumer__Group__0__Impl rule__Enumer__Group__1 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2633:1: rule__Enumer__Group__0 : rule__Enumer__Group__0__Impl rule__Enumer__Group__1 ;
     public final void rule__Enumer__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2591:1: ( rule__Enumer__Group__0__Impl rule__Enumer__Group__1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2592:2: rule__Enumer__Group__0__Impl rule__Enumer__Group__1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2637:1: ( rule__Enumer__Group__0__Impl rule__Enumer__Group__1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2638:2: rule__Enumer__Group__0__Impl rule__Enumer__Group__1
             {
-            pushFollow(FOLLOW_rule__Enumer__Group__0__Impl_in_rule__Enumer__Group__05435);
+            pushFollow(FOLLOW_rule__Enumer__Group__0__Impl_in_rule__Enumer__Group__05557);
             rule__Enumer__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Enumer__Group__1_in_rule__Enumer__Group__05438);
+            pushFollow(FOLLOW_rule__Enumer__Group__1_in_rule__Enumer__Group__05560);
             rule__Enumer__Group__1();
 
             state._fsp--;
@@ -7398,20 +7532,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Enumer__Group__0__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2599:1: rule__Enumer__Group__0__Impl : ( 'enum' ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2645:1: rule__Enumer__Group__0__Impl : ( 'enum' ) ;
     public final void rule__Enumer__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2603:1: ( ( 'enum' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2604:1: ( 'enum' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2649:1: ( ( 'enum' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2650:1: ( 'enum' )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2604:1: ( 'enum' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2605:1: 'enum'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2650:1: ( 'enum' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2651:1: 'enum'
             {
              before(grammarAccess.getEnumerAccess().getEnumKeyword_0()); 
-            match(input,25,FOLLOW_25_in_rule__Enumer__Group__0__Impl5466); 
+            match(input,27,FOLLOW_27_in_rule__Enumer__Group__0__Impl5588); 
              after(grammarAccess.getEnumerAccess().getEnumKeyword_0()); 
 
             }
@@ -7435,21 +7569,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Enumer__Group__1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2618:1: rule__Enumer__Group__1 : rule__Enumer__Group__1__Impl rule__Enumer__Group__2 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2664:1: rule__Enumer__Group__1 : rule__Enumer__Group__1__Impl rule__Enumer__Group__2 ;
     public final void rule__Enumer__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2622:1: ( rule__Enumer__Group__1__Impl rule__Enumer__Group__2 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2623:2: rule__Enumer__Group__1__Impl rule__Enumer__Group__2
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2668:1: ( rule__Enumer__Group__1__Impl rule__Enumer__Group__2 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2669:2: rule__Enumer__Group__1__Impl rule__Enumer__Group__2
             {
-            pushFollow(FOLLOW_rule__Enumer__Group__1__Impl_in_rule__Enumer__Group__15497);
+            pushFollow(FOLLOW_rule__Enumer__Group__1__Impl_in_rule__Enumer__Group__15619);
             rule__Enumer__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Enumer__Group__2_in_rule__Enumer__Group__15500);
+            pushFollow(FOLLOW_rule__Enumer__Group__2_in_rule__Enumer__Group__15622);
             rule__Enumer__Group__2();
 
             state._fsp--;
@@ -7473,23 +7607,23 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Enumer__Group__1__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2630:1: rule__Enumer__Group__1__Impl : ( ( rule__Enumer__NameAssignment_1 ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2676:1: rule__Enumer__Group__1__Impl : ( ( rule__Enumer__NameAssignment_1 ) ) ;
     public final void rule__Enumer__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2634:1: ( ( ( rule__Enumer__NameAssignment_1 ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2635:1: ( ( rule__Enumer__NameAssignment_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2680:1: ( ( ( rule__Enumer__NameAssignment_1 ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2681:1: ( ( rule__Enumer__NameAssignment_1 ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2635:1: ( ( rule__Enumer__NameAssignment_1 ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2636:1: ( rule__Enumer__NameAssignment_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2681:1: ( ( rule__Enumer__NameAssignment_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2682:1: ( rule__Enumer__NameAssignment_1 )
             {
              before(grammarAccess.getEnumerAccess().getNameAssignment_1()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2637:1: ( rule__Enumer__NameAssignment_1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2637:2: rule__Enumer__NameAssignment_1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2683:1: ( rule__Enumer__NameAssignment_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2683:2: rule__Enumer__NameAssignment_1
             {
-            pushFollow(FOLLOW_rule__Enumer__NameAssignment_1_in_rule__Enumer__Group__1__Impl5527);
+            pushFollow(FOLLOW_rule__Enumer__NameAssignment_1_in_rule__Enumer__Group__1__Impl5649);
             rule__Enumer__NameAssignment_1();
 
             state._fsp--;
@@ -7520,21 +7654,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Enumer__Group__2"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2647:1: rule__Enumer__Group__2 : rule__Enumer__Group__2__Impl rule__Enumer__Group__3 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2693:1: rule__Enumer__Group__2 : rule__Enumer__Group__2__Impl rule__Enumer__Group__3 ;
     public final void rule__Enumer__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2651:1: ( rule__Enumer__Group__2__Impl rule__Enumer__Group__3 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2652:2: rule__Enumer__Group__2__Impl rule__Enumer__Group__3
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2697:1: ( rule__Enumer__Group__2__Impl rule__Enumer__Group__3 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2698:2: rule__Enumer__Group__2__Impl rule__Enumer__Group__3
             {
-            pushFollow(FOLLOW_rule__Enumer__Group__2__Impl_in_rule__Enumer__Group__25557);
+            pushFollow(FOLLOW_rule__Enumer__Group__2__Impl_in_rule__Enumer__Group__25679);
             rule__Enumer__Group__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Enumer__Group__3_in_rule__Enumer__Group__25560);
+            pushFollow(FOLLOW_rule__Enumer__Group__3_in_rule__Enumer__Group__25682);
             rule__Enumer__Group__3();
 
             state._fsp--;
@@ -7558,20 +7692,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Enumer__Group__2__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2659:1: rule__Enumer__Group__2__Impl : ( '{' ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2705:1: rule__Enumer__Group__2__Impl : ( '{' ) ;
     public final void rule__Enumer__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2663:1: ( ( '{' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2664:1: ( '{' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2709:1: ( ( '{' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2710:1: ( '{' )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2664:1: ( '{' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2665:1: '{'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2710:1: ( '{' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2711:1: '{'
             {
              before(grammarAccess.getEnumerAccess().getLeftCurlyBracketKeyword_2()); 
-            match(input,42,FOLLOW_42_in_rule__Enumer__Group__2__Impl5588); 
+            match(input,46,FOLLOW_46_in_rule__Enumer__Group__2__Impl5710); 
              after(grammarAccess.getEnumerAccess().getLeftCurlyBracketKeyword_2()); 
 
             }
@@ -7595,21 +7729,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Enumer__Group__3"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2678:1: rule__Enumer__Group__3 : rule__Enumer__Group__3__Impl rule__Enumer__Group__4 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2724:1: rule__Enumer__Group__3 : rule__Enumer__Group__3__Impl rule__Enumer__Group__4 ;
     public final void rule__Enumer__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2682:1: ( rule__Enumer__Group__3__Impl rule__Enumer__Group__4 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2683:2: rule__Enumer__Group__3__Impl rule__Enumer__Group__4
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2728:1: ( rule__Enumer__Group__3__Impl rule__Enumer__Group__4 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2729:2: rule__Enumer__Group__3__Impl rule__Enumer__Group__4
             {
-            pushFollow(FOLLOW_rule__Enumer__Group__3__Impl_in_rule__Enumer__Group__35619);
+            pushFollow(FOLLOW_rule__Enumer__Group__3__Impl_in_rule__Enumer__Group__35741);
             rule__Enumer__Group__3__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Enumer__Group__4_in_rule__Enumer__Group__35622);
+            pushFollow(FOLLOW_rule__Enumer__Group__4_in_rule__Enumer__Group__35744);
             rule__Enumer__Group__4();
 
             state._fsp--;
@@ -7633,20 +7767,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Enumer__Group__3__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2690:1: rule__Enumer__Group__3__Impl : ( ( RULE_END_LINE )? ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2736:1: rule__Enumer__Group__3__Impl : ( ( RULE_END_LINE )? ) ;
     public final void rule__Enumer__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2694:1: ( ( ( RULE_END_LINE )? ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2695:1: ( ( RULE_END_LINE )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2740:1: ( ( ( RULE_END_LINE )? ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2741:1: ( ( RULE_END_LINE )? )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2695:1: ( ( RULE_END_LINE )? )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2696:1: ( RULE_END_LINE )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2741:1: ( ( RULE_END_LINE )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2742:1: ( RULE_END_LINE )?
             {
              before(grammarAccess.getEnumerAccess().getEND_LINETerminalRuleCall_3()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2697:1: ( RULE_END_LINE )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2743:1: ( RULE_END_LINE )?
             int alt33=2;
             int LA33_0 = input.LA(1);
 
@@ -7655,9 +7789,9 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
             }
             switch (alt33) {
                 case 1 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2697:3: RULE_END_LINE
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2743:3: RULE_END_LINE
                     {
-                    match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__Enumer__Group__3__Impl5650); 
+                    match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__Enumer__Group__3__Impl5772); 
 
                     }
                     break;
@@ -7687,21 +7821,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Enumer__Group__4"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2707:1: rule__Enumer__Group__4 : rule__Enumer__Group__4__Impl rule__Enumer__Group__5 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2753:1: rule__Enumer__Group__4 : rule__Enumer__Group__4__Impl rule__Enumer__Group__5 ;
     public final void rule__Enumer__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2711:1: ( rule__Enumer__Group__4__Impl rule__Enumer__Group__5 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2712:2: rule__Enumer__Group__4__Impl rule__Enumer__Group__5
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2757:1: ( rule__Enumer__Group__4__Impl rule__Enumer__Group__5 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2758:2: rule__Enumer__Group__4__Impl rule__Enumer__Group__5
             {
-            pushFollow(FOLLOW_rule__Enumer__Group__4__Impl_in_rule__Enumer__Group__45681);
+            pushFollow(FOLLOW_rule__Enumer__Group__4__Impl_in_rule__Enumer__Group__45803);
             rule__Enumer__Group__4__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Enumer__Group__5_in_rule__Enumer__Group__45684);
+            pushFollow(FOLLOW_rule__Enumer__Group__5_in_rule__Enumer__Group__45806);
             rule__Enumer__Group__5();
 
             state._fsp--;
@@ -7725,20 +7859,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Enumer__Group__4__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2719:1: rule__Enumer__Group__4__Impl : ( ( rule__Enumer__Group_4__0 )* ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2765:1: rule__Enumer__Group__4__Impl : ( ( rule__Enumer__Group_4__0 )* ) ;
     public final void rule__Enumer__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2723:1: ( ( ( rule__Enumer__Group_4__0 )* ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2724:1: ( ( rule__Enumer__Group_4__0 )* )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2769:1: ( ( ( rule__Enumer__Group_4__0 )* ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2770:1: ( ( rule__Enumer__Group_4__0 )* )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2724:1: ( ( rule__Enumer__Group_4__0 )* )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2725:1: ( rule__Enumer__Group_4__0 )*
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2770:1: ( ( rule__Enumer__Group_4__0 )* )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2771:1: ( rule__Enumer__Group_4__0 )*
             {
              before(grammarAccess.getEnumerAccess().getGroup_4()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2726:1: ( rule__Enumer__Group_4__0 )*
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2772:1: ( rule__Enumer__Group_4__0 )*
             loop34:
             do {
                 int alt34=2;
@@ -7751,9 +7885,9 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
                 switch (alt34) {
             	case 1 :
-            	    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2726:2: rule__Enumer__Group_4__0
+            	    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2772:2: rule__Enumer__Group_4__0
             	    {
-            	    pushFollow(FOLLOW_rule__Enumer__Group_4__0_in_rule__Enumer__Group__4__Impl5711);
+            	    pushFollow(FOLLOW_rule__Enumer__Group_4__0_in_rule__Enumer__Group__4__Impl5833);
             	    rule__Enumer__Group_4__0();
 
             	    state._fsp--;
@@ -7790,21 +7924,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Enumer__Group__5"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2736:1: rule__Enumer__Group__5 : rule__Enumer__Group__5__Impl rule__Enumer__Group__6 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2782:1: rule__Enumer__Group__5 : rule__Enumer__Group__5__Impl rule__Enumer__Group__6 ;
     public final void rule__Enumer__Group__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2740:1: ( rule__Enumer__Group__5__Impl rule__Enumer__Group__6 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2741:2: rule__Enumer__Group__5__Impl rule__Enumer__Group__6
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2786:1: ( rule__Enumer__Group__5__Impl rule__Enumer__Group__6 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2787:2: rule__Enumer__Group__5__Impl rule__Enumer__Group__6
             {
-            pushFollow(FOLLOW_rule__Enumer__Group__5__Impl_in_rule__Enumer__Group__55742);
+            pushFollow(FOLLOW_rule__Enumer__Group__5__Impl_in_rule__Enumer__Group__55864);
             rule__Enumer__Group__5__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Enumer__Group__6_in_rule__Enumer__Group__55745);
+            pushFollow(FOLLOW_rule__Enumer__Group__6_in_rule__Enumer__Group__55867);
             rule__Enumer__Group__6();
 
             state._fsp--;
@@ -7828,20 +7962,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Enumer__Group__5__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2748:1: rule__Enumer__Group__5__Impl : ( '}' ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2794:1: rule__Enumer__Group__5__Impl : ( '}' ) ;
     public final void rule__Enumer__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2752:1: ( ( '}' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2753:1: ( '}' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2798:1: ( ( '}' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2799:1: ( '}' )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2753:1: ( '}' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2754:1: '}'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2799:1: ( '}' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2800:1: '}'
             {
              before(grammarAccess.getEnumerAccess().getRightCurlyBracketKeyword_5()); 
-            match(input,43,FOLLOW_43_in_rule__Enumer__Group__5__Impl5773); 
+            match(input,47,FOLLOW_47_in_rule__Enumer__Group__5__Impl5895); 
              after(grammarAccess.getEnumerAccess().getRightCurlyBracketKeyword_5()); 
 
             }
@@ -7865,16 +7999,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Enumer__Group__6"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2767:1: rule__Enumer__Group__6 : rule__Enumer__Group__6__Impl ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2813:1: rule__Enumer__Group__6 : rule__Enumer__Group__6__Impl ;
     public final void rule__Enumer__Group__6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2771:1: ( rule__Enumer__Group__6__Impl )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2772:2: rule__Enumer__Group__6__Impl
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2817:1: ( rule__Enumer__Group__6__Impl )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2818:2: rule__Enumer__Group__6__Impl
             {
-            pushFollow(FOLLOW_rule__Enumer__Group__6__Impl_in_rule__Enumer__Group__65804);
+            pushFollow(FOLLOW_rule__Enumer__Group__6__Impl_in_rule__Enumer__Group__65926);
             rule__Enumer__Group__6__Impl();
 
             state._fsp--;
@@ -7898,20 +8032,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Enumer__Group__6__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2778:1: rule__Enumer__Group__6__Impl : ( RULE_END_LINE ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2824:1: rule__Enumer__Group__6__Impl : ( RULE_END_LINE ) ;
     public final void rule__Enumer__Group__6__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2782:1: ( ( RULE_END_LINE ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2783:1: ( RULE_END_LINE )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2828:1: ( ( RULE_END_LINE ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2829:1: ( RULE_END_LINE )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2783:1: ( RULE_END_LINE )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2784:1: RULE_END_LINE
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2829:1: ( RULE_END_LINE )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2830:1: RULE_END_LINE
             {
              before(grammarAccess.getEnumerAccess().getEND_LINETerminalRuleCall_6()); 
-            match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__Enumer__Group__6__Impl5831); 
+            match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__Enumer__Group__6__Impl5953); 
              after(grammarAccess.getEnumerAccess().getEND_LINETerminalRuleCall_6()); 
 
             }
@@ -7935,21 +8069,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Enumer__Group_4__0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2809:1: rule__Enumer__Group_4__0 : rule__Enumer__Group_4__0__Impl rule__Enumer__Group_4__1 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2855:1: rule__Enumer__Group_4__0 : rule__Enumer__Group_4__0__Impl rule__Enumer__Group_4__1 ;
     public final void rule__Enumer__Group_4__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2813:1: ( rule__Enumer__Group_4__0__Impl rule__Enumer__Group_4__1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2814:2: rule__Enumer__Group_4__0__Impl rule__Enumer__Group_4__1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2859:1: ( rule__Enumer__Group_4__0__Impl rule__Enumer__Group_4__1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2860:2: rule__Enumer__Group_4__0__Impl rule__Enumer__Group_4__1
             {
-            pushFollow(FOLLOW_rule__Enumer__Group_4__0__Impl_in_rule__Enumer__Group_4__05874);
+            pushFollow(FOLLOW_rule__Enumer__Group_4__0__Impl_in_rule__Enumer__Group_4__05996);
             rule__Enumer__Group_4__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Enumer__Group_4__1_in_rule__Enumer__Group_4__05877);
+            pushFollow(FOLLOW_rule__Enumer__Group_4__1_in_rule__Enumer__Group_4__05999);
             rule__Enumer__Group_4__1();
 
             state._fsp--;
@@ -7973,23 +8107,23 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Enumer__Group_4__0__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2821:1: rule__Enumer__Group_4__0__Impl : ( ( rule__Enumer__TypesAssignment_4_0 ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2867:1: rule__Enumer__Group_4__0__Impl : ( ( rule__Enumer__TypesAssignment_4_0 ) ) ;
     public final void rule__Enumer__Group_4__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2825:1: ( ( ( rule__Enumer__TypesAssignment_4_0 ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2826:1: ( ( rule__Enumer__TypesAssignment_4_0 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2871:1: ( ( ( rule__Enumer__TypesAssignment_4_0 ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2872:1: ( ( rule__Enumer__TypesAssignment_4_0 ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2826:1: ( ( rule__Enumer__TypesAssignment_4_0 ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2827:1: ( rule__Enumer__TypesAssignment_4_0 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2872:1: ( ( rule__Enumer__TypesAssignment_4_0 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2873:1: ( rule__Enumer__TypesAssignment_4_0 )
             {
              before(grammarAccess.getEnumerAccess().getTypesAssignment_4_0()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2828:1: ( rule__Enumer__TypesAssignment_4_0 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2828:2: rule__Enumer__TypesAssignment_4_0
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2874:1: ( rule__Enumer__TypesAssignment_4_0 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2874:2: rule__Enumer__TypesAssignment_4_0
             {
-            pushFollow(FOLLOW_rule__Enumer__TypesAssignment_4_0_in_rule__Enumer__Group_4__0__Impl5904);
+            pushFollow(FOLLOW_rule__Enumer__TypesAssignment_4_0_in_rule__Enumer__Group_4__0__Impl6026);
             rule__Enumer__TypesAssignment_4_0();
 
             state._fsp--;
@@ -8020,16 +8154,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Enumer__Group_4__1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2838:1: rule__Enumer__Group_4__1 : rule__Enumer__Group_4__1__Impl ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2884:1: rule__Enumer__Group_4__1 : rule__Enumer__Group_4__1__Impl ;
     public final void rule__Enumer__Group_4__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2842:1: ( rule__Enumer__Group_4__1__Impl )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2843:2: rule__Enumer__Group_4__1__Impl
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2888:1: ( rule__Enumer__Group_4__1__Impl )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2889:2: rule__Enumer__Group_4__1__Impl
             {
-            pushFollow(FOLLOW_rule__Enumer__Group_4__1__Impl_in_rule__Enumer__Group_4__15934);
+            pushFollow(FOLLOW_rule__Enumer__Group_4__1__Impl_in_rule__Enumer__Group_4__16056);
             rule__Enumer__Group_4__1__Impl();
 
             state._fsp--;
@@ -8053,20 +8187,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Enumer__Group_4__1__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2849:1: rule__Enumer__Group_4__1__Impl : ( ( RULE_END_LINE )? ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2895:1: rule__Enumer__Group_4__1__Impl : ( ( RULE_END_LINE )? ) ;
     public final void rule__Enumer__Group_4__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2853:1: ( ( ( RULE_END_LINE )? ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2854:1: ( ( RULE_END_LINE )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2899:1: ( ( ( RULE_END_LINE )? ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2900:1: ( ( RULE_END_LINE )? )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2854:1: ( ( RULE_END_LINE )? )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2855:1: ( RULE_END_LINE )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2900:1: ( ( RULE_END_LINE )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2901:1: ( RULE_END_LINE )?
             {
              before(grammarAccess.getEnumerAccess().getEND_LINETerminalRuleCall_4_1()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2856:1: ( RULE_END_LINE )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2902:1: ( RULE_END_LINE )?
             int alt35=2;
             int LA35_0 = input.LA(1);
 
@@ -8075,9 +8209,9 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
             }
             switch (alt35) {
                 case 1 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2856:3: RULE_END_LINE
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2902:3: RULE_END_LINE
                     {
-                    match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__Enumer__Group_4__1__Impl5962); 
+                    match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__Enumer__Group_4__1__Impl6084); 
 
                     }
                     break;
@@ -8107,21 +8241,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Clazz__Group__0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2870:1: rule__Clazz__Group__0 : rule__Clazz__Group__0__Impl rule__Clazz__Group__1 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2916:1: rule__Clazz__Group__0 : rule__Clazz__Group__0__Impl rule__Clazz__Group__1 ;
     public final void rule__Clazz__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2874:1: ( rule__Clazz__Group__0__Impl rule__Clazz__Group__1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2875:2: rule__Clazz__Group__0__Impl rule__Clazz__Group__1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2920:1: ( rule__Clazz__Group__0__Impl rule__Clazz__Group__1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2921:2: rule__Clazz__Group__0__Impl rule__Clazz__Group__1
             {
-            pushFollow(FOLLOW_rule__Clazz__Group__0__Impl_in_rule__Clazz__Group__05997);
+            pushFollow(FOLLOW_rule__Clazz__Group__0__Impl_in_rule__Clazz__Group__06119);
             rule__Clazz__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Clazz__Group__1_in_rule__Clazz__Group__06000);
+            pushFollow(FOLLOW_rule__Clazz__Group__1_in_rule__Clazz__Group__06122);
             rule__Clazz__Group__1();
 
             state._fsp--;
@@ -8145,20 +8279,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Clazz__Group__0__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2882:1: rule__Clazz__Group__0__Impl : ( 'class' ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2928:1: rule__Clazz__Group__0__Impl : ( 'class' ) ;
     public final void rule__Clazz__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2886:1: ( ( 'class' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2887:1: ( 'class' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2932:1: ( ( 'class' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2933:1: ( 'class' )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2887:1: ( 'class' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2888:1: 'class'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2933:1: ( 'class' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2934:1: 'class'
             {
              before(grammarAccess.getClazzAccess().getClassKeyword_0()); 
-            match(input,24,FOLLOW_24_in_rule__Clazz__Group__0__Impl6028); 
+            match(input,26,FOLLOW_26_in_rule__Clazz__Group__0__Impl6150); 
              after(grammarAccess.getClazzAccess().getClassKeyword_0()); 
 
             }
@@ -8182,21 +8316,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Clazz__Group__1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2901:1: rule__Clazz__Group__1 : rule__Clazz__Group__1__Impl rule__Clazz__Group__2 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2947:1: rule__Clazz__Group__1 : rule__Clazz__Group__1__Impl rule__Clazz__Group__2 ;
     public final void rule__Clazz__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2905:1: ( rule__Clazz__Group__1__Impl rule__Clazz__Group__2 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2906:2: rule__Clazz__Group__1__Impl rule__Clazz__Group__2
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2951:1: ( rule__Clazz__Group__1__Impl rule__Clazz__Group__2 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2952:2: rule__Clazz__Group__1__Impl rule__Clazz__Group__2
             {
-            pushFollow(FOLLOW_rule__Clazz__Group__1__Impl_in_rule__Clazz__Group__16059);
+            pushFollow(FOLLOW_rule__Clazz__Group__1__Impl_in_rule__Clazz__Group__16181);
             rule__Clazz__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Clazz__Group__2_in_rule__Clazz__Group__16062);
+            pushFollow(FOLLOW_rule__Clazz__Group__2_in_rule__Clazz__Group__16184);
             rule__Clazz__Group__2();
 
             state._fsp--;
@@ -8220,23 +8354,23 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Clazz__Group__1__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2913:1: rule__Clazz__Group__1__Impl : ( ( rule__Clazz__NameAssignment_1 ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2959:1: rule__Clazz__Group__1__Impl : ( ( rule__Clazz__NameAssignment_1 ) ) ;
     public final void rule__Clazz__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2917:1: ( ( ( rule__Clazz__NameAssignment_1 ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2918:1: ( ( rule__Clazz__NameAssignment_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2963:1: ( ( ( rule__Clazz__NameAssignment_1 ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2964:1: ( ( rule__Clazz__NameAssignment_1 ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2918:1: ( ( rule__Clazz__NameAssignment_1 ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2919:1: ( rule__Clazz__NameAssignment_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2964:1: ( ( rule__Clazz__NameAssignment_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2965:1: ( rule__Clazz__NameAssignment_1 )
             {
              before(grammarAccess.getClazzAccess().getNameAssignment_1()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2920:1: ( rule__Clazz__NameAssignment_1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2920:2: rule__Clazz__NameAssignment_1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2966:1: ( rule__Clazz__NameAssignment_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2966:2: rule__Clazz__NameAssignment_1
             {
-            pushFollow(FOLLOW_rule__Clazz__NameAssignment_1_in_rule__Clazz__Group__1__Impl6089);
+            pushFollow(FOLLOW_rule__Clazz__NameAssignment_1_in_rule__Clazz__Group__1__Impl6211);
             rule__Clazz__NameAssignment_1();
 
             state._fsp--;
@@ -8267,21 +8401,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Clazz__Group__2"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2930:1: rule__Clazz__Group__2 : rule__Clazz__Group__2__Impl rule__Clazz__Group__3 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2976:1: rule__Clazz__Group__2 : rule__Clazz__Group__2__Impl rule__Clazz__Group__3 ;
     public final void rule__Clazz__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2934:1: ( rule__Clazz__Group__2__Impl rule__Clazz__Group__3 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2935:2: rule__Clazz__Group__2__Impl rule__Clazz__Group__3
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2980:1: ( rule__Clazz__Group__2__Impl rule__Clazz__Group__3 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2981:2: rule__Clazz__Group__2__Impl rule__Clazz__Group__3
             {
-            pushFollow(FOLLOW_rule__Clazz__Group__2__Impl_in_rule__Clazz__Group__26119);
+            pushFollow(FOLLOW_rule__Clazz__Group__2__Impl_in_rule__Clazz__Group__26241);
             rule__Clazz__Group__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Clazz__Group__3_in_rule__Clazz__Group__26122);
+            pushFollow(FOLLOW_rule__Clazz__Group__3_in_rule__Clazz__Group__26244);
             rule__Clazz__Group__3();
 
             state._fsp--;
@@ -8305,31 +8439,31 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Clazz__Group__2__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2942:1: rule__Clazz__Group__2__Impl : ( ( rule__Clazz__Group_2__0 )? ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2988:1: rule__Clazz__Group__2__Impl : ( ( rule__Clazz__Group_2__0 )? ) ;
     public final void rule__Clazz__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2946:1: ( ( ( rule__Clazz__Group_2__0 )? ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2947:1: ( ( rule__Clazz__Group_2__0 )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2992:1: ( ( ( rule__Clazz__Group_2__0 )? ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2993:1: ( ( rule__Clazz__Group_2__0 )? )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2947:1: ( ( rule__Clazz__Group_2__0 )? )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2948:1: ( rule__Clazz__Group_2__0 )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2993:1: ( ( rule__Clazz__Group_2__0 )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2994:1: ( rule__Clazz__Group_2__0 )?
             {
              before(grammarAccess.getClazzAccess().getGroup_2()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2949:1: ( rule__Clazz__Group_2__0 )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2995:1: ( rule__Clazz__Group_2__0 )?
             int alt36=2;
             int LA36_0 = input.LA(1);
 
-            if ( (LA36_0==44) ) {
+            if ( (LA36_0==48) ) {
                 alt36=1;
             }
             switch (alt36) {
                 case 1 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2949:2: rule__Clazz__Group_2__0
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2995:2: rule__Clazz__Group_2__0
                     {
-                    pushFollow(FOLLOW_rule__Clazz__Group_2__0_in_rule__Clazz__Group__2__Impl6149);
+                    pushFollow(FOLLOW_rule__Clazz__Group_2__0_in_rule__Clazz__Group__2__Impl6271);
                     rule__Clazz__Group_2__0();
 
                     state._fsp--;
@@ -8363,21 +8497,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Clazz__Group__3"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2959:1: rule__Clazz__Group__3 : rule__Clazz__Group__3__Impl rule__Clazz__Group__4 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3005:1: rule__Clazz__Group__3 : rule__Clazz__Group__3__Impl rule__Clazz__Group__4 ;
     public final void rule__Clazz__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2963:1: ( rule__Clazz__Group__3__Impl rule__Clazz__Group__4 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2964:2: rule__Clazz__Group__3__Impl rule__Clazz__Group__4
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3009:1: ( rule__Clazz__Group__3__Impl rule__Clazz__Group__4 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3010:2: rule__Clazz__Group__3__Impl rule__Clazz__Group__4
             {
-            pushFollow(FOLLOW_rule__Clazz__Group__3__Impl_in_rule__Clazz__Group__36180);
+            pushFollow(FOLLOW_rule__Clazz__Group__3__Impl_in_rule__Clazz__Group__36302);
             rule__Clazz__Group__3__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Clazz__Group__4_in_rule__Clazz__Group__36183);
+            pushFollow(FOLLOW_rule__Clazz__Group__4_in_rule__Clazz__Group__36305);
             rule__Clazz__Group__4();
 
             state._fsp--;
@@ -8401,31 +8535,31 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Clazz__Group__3__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2971:1: rule__Clazz__Group__3__Impl : ( ( rule__Clazz__Group_3__0 )? ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3017:1: rule__Clazz__Group__3__Impl : ( ( rule__Clazz__Group_3__0 )? ) ;
     public final void rule__Clazz__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2975:1: ( ( ( rule__Clazz__Group_3__0 )? ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2976:1: ( ( rule__Clazz__Group_3__0 )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3021:1: ( ( ( rule__Clazz__Group_3__0 )? ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3022:1: ( ( rule__Clazz__Group_3__0 )? )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2976:1: ( ( rule__Clazz__Group_3__0 )? )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2977:1: ( rule__Clazz__Group_3__0 )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3022:1: ( ( rule__Clazz__Group_3__0 )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3023:1: ( rule__Clazz__Group_3__0 )?
             {
              before(grammarAccess.getClazzAccess().getGroup_3()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2978:1: ( rule__Clazz__Group_3__0 )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3024:1: ( rule__Clazz__Group_3__0 )?
             int alt37=2;
             int LA37_0 = input.LA(1);
 
-            if ( (LA37_0==42) ) {
+            if ( (LA37_0==46) ) {
                 alt37=1;
             }
             switch (alt37) {
                 case 1 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2978:2: rule__Clazz__Group_3__0
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3024:2: rule__Clazz__Group_3__0
                     {
-                    pushFollow(FOLLOW_rule__Clazz__Group_3__0_in_rule__Clazz__Group__3__Impl6210);
+                    pushFollow(FOLLOW_rule__Clazz__Group_3__0_in_rule__Clazz__Group__3__Impl6332);
                     rule__Clazz__Group_3__0();
 
                     state._fsp--;
@@ -8459,16 +8593,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Clazz__Group__4"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2988:1: rule__Clazz__Group__4 : rule__Clazz__Group__4__Impl ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3034:1: rule__Clazz__Group__4 : rule__Clazz__Group__4__Impl ;
     public final void rule__Clazz__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2992:1: ( rule__Clazz__Group__4__Impl )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2993:2: rule__Clazz__Group__4__Impl
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3038:1: ( rule__Clazz__Group__4__Impl )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3039:2: rule__Clazz__Group__4__Impl
             {
-            pushFollow(FOLLOW_rule__Clazz__Group__4__Impl_in_rule__Clazz__Group__46241);
+            pushFollow(FOLLOW_rule__Clazz__Group__4__Impl_in_rule__Clazz__Group__46363);
             rule__Clazz__Group__4__Impl();
 
             state._fsp--;
@@ -8492,20 +8626,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Clazz__Group__4__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:2999:1: rule__Clazz__Group__4__Impl : ( RULE_END_LINE ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3045:1: rule__Clazz__Group__4__Impl : ( RULE_END_LINE ) ;
     public final void rule__Clazz__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3003:1: ( ( RULE_END_LINE ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3004:1: ( RULE_END_LINE )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3049:1: ( ( RULE_END_LINE ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3050:1: ( RULE_END_LINE )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3004:1: ( RULE_END_LINE )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3005:1: RULE_END_LINE
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3050:1: ( RULE_END_LINE )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3051:1: RULE_END_LINE
             {
              before(grammarAccess.getClazzAccess().getEND_LINETerminalRuleCall_4()); 
-            match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__Clazz__Group__4__Impl6268); 
+            match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__Clazz__Group__4__Impl6390); 
              after(grammarAccess.getClazzAccess().getEND_LINETerminalRuleCall_4()); 
 
             }
@@ -8529,21 +8663,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Clazz__Group_2__0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3026:1: rule__Clazz__Group_2__0 : rule__Clazz__Group_2__0__Impl rule__Clazz__Group_2__1 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3072:1: rule__Clazz__Group_2__0 : rule__Clazz__Group_2__0__Impl rule__Clazz__Group_2__1 ;
     public final void rule__Clazz__Group_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3030:1: ( rule__Clazz__Group_2__0__Impl rule__Clazz__Group_2__1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3031:2: rule__Clazz__Group_2__0__Impl rule__Clazz__Group_2__1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3076:1: ( rule__Clazz__Group_2__0__Impl rule__Clazz__Group_2__1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3077:2: rule__Clazz__Group_2__0__Impl rule__Clazz__Group_2__1
             {
-            pushFollow(FOLLOW_rule__Clazz__Group_2__0__Impl_in_rule__Clazz__Group_2__06307);
+            pushFollow(FOLLOW_rule__Clazz__Group_2__0__Impl_in_rule__Clazz__Group_2__06429);
             rule__Clazz__Group_2__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Clazz__Group_2__1_in_rule__Clazz__Group_2__06310);
+            pushFollow(FOLLOW_rule__Clazz__Group_2__1_in_rule__Clazz__Group_2__06432);
             rule__Clazz__Group_2__1();
 
             state._fsp--;
@@ -8567,20 +8701,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Clazz__Group_2__0__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3038:1: rule__Clazz__Group_2__0__Impl : ( '<<' ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3084:1: rule__Clazz__Group_2__0__Impl : ( '<<' ) ;
     public final void rule__Clazz__Group_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3042:1: ( ( '<<' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3043:1: ( '<<' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3088:1: ( ( '<<' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3089:1: ( '<<' )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3043:1: ( '<<' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3044:1: '<<'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3089:1: ( '<<' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3090:1: '<<'
             {
              before(grammarAccess.getClazzAccess().getLessThanSignLessThanSignKeyword_2_0()); 
-            match(input,44,FOLLOW_44_in_rule__Clazz__Group_2__0__Impl6338); 
+            match(input,48,FOLLOW_48_in_rule__Clazz__Group_2__0__Impl6460); 
              after(grammarAccess.getClazzAccess().getLessThanSignLessThanSignKeyword_2_0()); 
 
             }
@@ -8604,21 +8738,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Clazz__Group_2__1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3057:1: rule__Clazz__Group_2__1 : rule__Clazz__Group_2__1__Impl rule__Clazz__Group_2__2 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3103:1: rule__Clazz__Group_2__1 : rule__Clazz__Group_2__1__Impl rule__Clazz__Group_2__2 ;
     public final void rule__Clazz__Group_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3061:1: ( rule__Clazz__Group_2__1__Impl rule__Clazz__Group_2__2 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3062:2: rule__Clazz__Group_2__1__Impl rule__Clazz__Group_2__2
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3107:1: ( rule__Clazz__Group_2__1__Impl rule__Clazz__Group_2__2 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3108:2: rule__Clazz__Group_2__1__Impl rule__Clazz__Group_2__2
             {
-            pushFollow(FOLLOW_rule__Clazz__Group_2__1__Impl_in_rule__Clazz__Group_2__16369);
+            pushFollow(FOLLOW_rule__Clazz__Group_2__1__Impl_in_rule__Clazz__Group_2__16491);
             rule__Clazz__Group_2__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Clazz__Group_2__2_in_rule__Clazz__Group_2__16372);
+            pushFollow(FOLLOW_rule__Clazz__Group_2__2_in_rule__Clazz__Group_2__16494);
             rule__Clazz__Group_2__2();
 
             state._fsp--;
@@ -8642,23 +8776,23 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Clazz__Group_2__1__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3069:1: rule__Clazz__Group_2__1__Impl : ( ( rule__Clazz__StereotypeAssignment_2_1 ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3115:1: rule__Clazz__Group_2__1__Impl : ( ( rule__Clazz__StereotypeAssignment_2_1 ) ) ;
     public final void rule__Clazz__Group_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3073:1: ( ( ( rule__Clazz__StereotypeAssignment_2_1 ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3074:1: ( ( rule__Clazz__StereotypeAssignment_2_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3119:1: ( ( ( rule__Clazz__StereotypeAssignment_2_1 ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3120:1: ( ( rule__Clazz__StereotypeAssignment_2_1 ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3074:1: ( ( rule__Clazz__StereotypeAssignment_2_1 ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3075:1: ( rule__Clazz__StereotypeAssignment_2_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3120:1: ( ( rule__Clazz__StereotypeAssignment_2_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3121:1: ( rule__Clazz__StereotypeAssignment_2_1 )
             {
              before(grammarAccess.getClazzAccess().getStereotypeAssignment_2_1()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3076:1: ( rule__Clazz__StereotypeAssignment_2_1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3076:2: rule__Clazz__StereotypeAssignment_2_1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3122:1: ( rule__Clazz__StereotypeAssignment_2_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3122:2: rule__Clazz__StereotypeAssignment_2_1
             {
-            pushFollow(FOLLOW_rule__Clazz__StereotypeAssignment_2_1_in_rule__Clazz__Group_2__1__Impl6399);
+            pushFollow(FOLLOW_rule__Clazz__StereotypeAssignment_2_1_in_rule__Clazz__Group_2__1__Impl6521);
             rule__Clazz__StereotypeAssignment_2_1();
 
             state._fsp--;
@@ -8689,16 +8823,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Clazz__Group_2__2"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3086:1: rule__Clazz__Group_2__2 : rule__Clazz__Group_2__2__Impl ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3132:1: rule__Clazz__Group_2__2 : rule__Clazz__Group_2__2__Impl ;
     public final void rule__Clazz__Group_2__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3090:1: ( rule__Clazz__Group_2__2__Impl )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3091:2: rule__Clazz__Group_2__2__Impl
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3136:1: ( rule__Clazz__Group_2__2__Impl )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3137:2: rule__Clazz__Group_2__2__Impl
             {
-            pushFollow(FOLLOW_rule__Clazz__Group_2__2__Impl_in_rule__Clazz__Group_2__26429);
+            pushFollow(FOLLOW_rule__Clazz__Group_2__2__Impl_in_rule__Clazz__Group_2__26551);
             rule__Clazz__Group_2__2__Impl();
 
             state._fsp--;
@@ -8722,20 +8856,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Clazz__Group_2__2__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3097:1: rule__Clazz__Group_2__2__Impl : ( '>>' ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3143:1: rule__Clazz__Group_2__2__Impl : ( '>>' ) ;
     public final void rule__Clazz__Group_2__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3101:1: ( ( '>>' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3102:1: ( '>>' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3147:1: ( ( '>>' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3148:1: ( '>>' )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3102:1: ( '>>' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3103:1: '>>'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3148:1: ( '>>' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3149:1: '>>'
             {
              before(grammarAccess.getClazzAccess().getGreaterThanSignGreaterThanSignKeyword_2_2()); 
-            match(input,45,FOLLOW_45_in_rule__Clazz__Group_2__2__Impl6457); 
+            match(input,49,FOLLOW_49_in_rule__Clazz__Group_2__2__Impl6579); 
              after(grammarAccess.getClazzAccess().getGreaterThanSignGreaterThanSignKeyword_2_2()); 
 
             }
@@ -8759,21 +8893,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Clazz__Group_3__0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3122:1: rule__Clazz__Group_3__0 : rule__Clazz__Group_3__0__Impl rule__Clazz__Group_3__1 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3168:1: rule__Clazz__Group_3__0 : rule__Clazz__Group_3__0__Impl rule__Clazz__Group_3__1 ;
     public final void rule__Clazz__Group_3__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3126:1: ( rule__Clazz__Group_3__0__Impl rule__Clazz__Group_3__1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3127:2: rule__Clazz__Group_3__0__Impl rule__Clazz__Group_3__1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3172:1: ( rule__Clazz__Group_3__0__Impl rule__Clazz__Group_3__1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3173:2: rule__Clazz__Group_3__0__Impl rule__Clazz__Group_3__1
             {
-            pushFollow(FOLLOW_rule__Clazz__Group_3__0__Impl_in_rule__Clazz__Group_3__06494);
+            pushFollow(FOLLOW_rule__Clazz__Group_3__0__Impl_in_rule__Clazz__Group_3__06616);
             rule__Clazz__Group_3__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Clazz__Group_3__1_in_rule__Clazz__Group_3__06497);
+            pushFollow(FOLLOW_rule__Clazz__Group_3__1_in_rule__Clazz__Group_3__06619);
             rule__Clazz__Group_3__1();
 
             state._fsp--;
@@ -8797,20 +8931,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Clazz__Group_3__0__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3134:1: rule__Clazz__Group_3__0__Impl : ( '{' ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3180:1: rule__Clazz__Group_3__0__Impl : ( '{' ) ;
     public final void rule__Clazz__Group_3__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3138:1: ( ( '{' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3139:1: ( '{' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3184:1: ( ( '{' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3185:1: ( '{' )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3139:1: ( '{' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3140:1: '{'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3185:1: ( '{' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3186:1: '{'
             {
              before(grammarAccess.getClazzAccess().getLeftCurlyBracketKeyword_3_0()); 
-            match(input,42,FOLLOW_42_in_rule__Clazz__Group_3__0__Impl6525); 
+            match(input,46,FOLLOW_46_in_rule__Clazz__Group_3__0__Impl6647); 
              after(grammarAccess.getClazzAccess().getLeftCurlyBracketKeyword_3_0()); 
 
             }
@@ -8834,21 +8968,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Clazz__Group_3__1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3153:1: rule__Clazz__Group_3__1 : rule__Clazz__Group_3__1__Impl rule__Clazz__Group_3__2 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3199:1: rule__Clazz__Group_3__1 : rule__Clazz__Group_3__1__Impl rule__Clazz__Group_3__2 ;
     public final void rule__Clazz__Group_3__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3157:1: ( rule__Clazz__Group_3__1__Impl rule__Clazz__Group_3__2 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3158:2: rule__Clazz__Group_3__1__Impl rule__Clazz__Group_3__2
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3203:1: ( rule__Clazz__Group_3__1__Impl rule__Clazz__Group_3__2 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3204:2: rule__Clazz__Group_3__1__Impl rule__Clazz__Group_3__2
             {
-            pushFollow(FOLLOW_rule__Clazz__Group_3__1__Impl_in_rule__Clazz__Group_3__16556);
+            pushFollow(FOLLOW_rule__Clazz__Group_3__1__Impl_in_rule__Clazz__Group_3__16678);
             rule__Clazz__Group_3__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Clazz__Group_3__2_in_rule__Clazz__Group_3__16559);
+            pushFollow(FOLLOW_rule__Clazz__Group_3__2_in_rule__Clazz__Group_3__16681);
             rule__Clazz__Group_3__2();
 
             state._fsp--;
@@ -8872,20 +9006,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Clazz__Group_3__1__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3165:1: rule__Clazz__Group_3__1__Impl : ( ( RULE_END_LINE )? ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3211:1: rule__Clazz__Group_3__1__Impl : ( ( RULE_END_LINE )? ) ;
     public final void rule__Clazz__Group_3__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3169:1: ( ( ( RULE_END_LINE )? ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3170:1: ( ( RULE_END_LINE )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3215:1: ( ( ( RULE_END_LINE )? ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3216:1: ( ( RULE_END_LINE )? )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3170:1: ( ( RULE_END_LINE )? )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3171:1: ( RULE_END_LINE )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3216:1: ( ( RULE_END_LINE )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3217:1: ( RULE_END_LINE )?
             {
              before(grammarAccess.getClazzAccess().getEND_LINETerminalRuleCall_3_1()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3172:1: ( RULE_END_LINE )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3218:1: ( RULE_END_LINE )?
             int alt38=2;
             int LA38_0 = input.LA(1);
 
@@ -8894,9 +9028,9 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
             }
             switch (alt38) {
                 case 1 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3172:3: RULE_END_LINE
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3218:3: RULE_END_LINE
                     {
-                    match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__Clazz__Group_3__1__Impl6587); 
+                    match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__Clazz__Group_3__1__Impl6709); 
 
                     }
                     break;
@@ -8926,21 +9060,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Clazz__Group_3__2"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3182:1: rule__Clazz__Group_3__2 : rule__Clazz__Group_3__2__Impl rule__Clazz__Group_3__3 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3228:1: rule__Clazz__Group_3__2 : rule__Clazz__Group_3__2__Impl rule__Clazz__Group_3__3 ;
     public final void rule__Clazz__Group_3__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3186:1: ( rule__Clazz__Group_3__2__Impl rule__Clazz__Group_3__3 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3187:2: rule__Clazz__Group_3__2__Impl rule__Clazz__Group_3__3
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3232:1: ( rule__Clazz__Group_3__2__Impl rule__Clazz__Group_3__3 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3233:2: rule__Clazz__Group_3__2__Impl rule__Clazz__Group_3__3
             {
-            pushFollow(FOLLOW_rule__Clazz__Group_3__2__Impl_in_rule__Clazz__Group_3__26618);
+            pushFollow(FOLLOW_rule__Clazz__Group_3__2__Impl_in_rule__Clazz__Group_3__26740);
             rule__Clazz__Group_3__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Clazz__Group_3__3_in_rule__Clazz__Group_3__26621);
+            pushFollow(FOLLOW_rule__Clazz__Group_3__3_in_rule__Clazz__Group_3__26743);
             rule__Clazz__Group_3__3();
 
             state._fsp--;
@@ -8964,20 +9098,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Clazz__Group_3__2__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3194:1: rule__Clazz__Group_3__2__Impl : ( ( rule__Clazz__PropertiesAssignment_3_2 )* ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3240:1: rule__Clazz__Group_3__2__Impl : ( ( rule__Clazz__PropertiesAssignment_3_2 )* ) ;
     public final void rule__Clazz__Group_3__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3198:1: ( ( ( rule__Clazz__PropertiesAssignment_3_2 )* ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3199:1: ( ( rule__Clazz__PropertiesAssignment_3_2 )* )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3244:1: ( ( ( rule__Clazz__PropertiesAssignment_3_2 )* ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3245:1: ( ( rule__Clazz__PropertiesAssignment_3_2 )* )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3199:1: ( ( rule__Clazz__PropertiesAssignment_3_2 )* )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3200:1: ( rule__Clazz__PropertiesAssignment_3_2 )*
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3245:1: ( ( rule__Clazz__PropertiesAssignment_3_2 )* )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3246:1: ( rule__Clazz__PropertiesAssignment_3_2 )*
             {
              before(grammarAccess.getClazzAccess().getPropertiesAssignment_3_2()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3201:1: ( rule__Clazz__PropertiesAssignment_3_2 )*
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3247:1: ( rule__Clazz__PropertiesAssignment_3_2 )*
             loop39:
             do {
                 int alt39=2;
@@ -8990,9 +9124,9 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
                 switch (alt39) {
             	case 1 :
-            	    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3201:2: rule__Clazz__PropertiesAssignment_3_2
+            	    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3247:2: rule__Clazz__PropertiesAssignment_3_2
             	    {
-            	    pushFollow(FOLLOW_rule__Clazz__PropertiesAssignment_3_2_in_rule__Clazz__Group_3__2__Impl6648);
+            	    pushFollow(FOLLOW_rule__Clazz__PropertiesAssignment_3_2_in_rule__Clazz__Group_3__2__Impl6770);
             	    rule__Clazz__PropertiesAssignment_3_2();
 
             	    state._fsp--;
@@ -9029,16 +9163,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Clazz__Group_3__3"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3211:1: rule__Clazz__Group_3__3 : rule__Clazz__Group_3__3__Impl ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3257:1: rule__Clazz__Group_3__3 : rule__Clazz__Group_3__3__Impl ;
     public final void rule__Clazz__Group_3__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3215:1: ( rule__Clazz__Group_3__3__Impl )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3216:2: rule__Clazz__Group_3__3__Impl
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3261:1: ( rule__Clazz__Group_3__3__Impl )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3262:2: rule__Clazz__Group_3__3__Impl
             {
-            pushFollow(FOLLOW_rule__Clazz__Group_3__3__Impl_in_rule__Clazz__Group_3__36679);
+            pushFollow(FOLLOW_rule__Clazz__Group_3__3__Impl_in_rule__Clazz__Group_3__36801);
             rule__Clazz__Group_3__3__Impl();
 
             state._fsp--;
@@ -9062,20 +9196,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Clazz__Group_3__3__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3222:1: rule__Clazz__Group_3__3__Impl : ( '}' ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3268:1: rule__Clazz__Group_3__3__Impl : ( '}' ) ;
     public final void rule__Clazz__Group_3__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3226:1: ( ( '}' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3227:1: ( '}' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3272:1: ( ( '}' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3273:1: ( '}' )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3227:1: ( '}' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3228:1: '}'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3273:1: ( '}' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3274:1: '}'
             {
              before(grammarAccess.getClazzAccess().getRightCurlyBracketKeyword_3_3()); 
-            match(input,43,FOLLOW_43_in_rule__Clazz__Group_3__3__Impl6707); 
+            match(input,47,FOLLOW_47_in_rule__Clazz__Group_3__3__Impl6829); 
              after(grammarAccess.getClazzAccess().getRightCurlyBracketKeyword_3_3()); 
 
             }
@@ -9099,21 +9233,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Property__Group__0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3249:1: rule__Property__Group__0 : rule__Property__Group__0__Impl rule__Property__Group__1 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3295:1: rule__Property__Group__0 : rule__Property__Group__0__Impl rule__Property__Group__1 ;
     public final void rule__Property__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3253:1: ( rule__Property__Group__0__Impl rule__Property__Group__1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3254:2: rule__Property__Group__0__Impl rule__Property__Group__1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3299:1: ( rule__Property__Group__0__Impl rule__Property__Group__1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3300:2: rule__Property__Group__0__Impl rule__Property__Group__1
             {
-            pushFollow(FOLLOW_rule__Property__Group__0__Impl_in_rule__Property__Group__06746);
+            pushFollow(FOLLOW_rule__Property__Group__0__Impl_in_rule__Property__Group__06868);
             rule__Property__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Property__Group__1_in_rule__Property__Group__06749);
+            pushFollow(FOLLOW_rule__Property__Group__1_in_rule__Property__Group__06871);
             rule__Property__Group__1();
 
             state._fsp--;
@@ -9137,23 +9271,23 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Property__Group__0__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3261:1: rule__Property__Group__0__Impl : ( ( rule__Property__NameAssignment_0 ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3307:1: rule__Property__Group__0__Impl : ( ( rule__Property__NameAssignment_0 ) ) ;
     public final void rule__Property__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3265:1: ( ( ( rule__Property__NameAssignment_0 ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3266:1: ( ( rule__Property__NameAssignment_0 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3311:1: ( ( ( rule__Property__NameAssignment_0 ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3312:1: ( ( rule__Property__NameAssignment_0 ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3266:1: ( ( rule__Property__NameAssignment_0 ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3267:1: ( rule__Property__NameAssignment_0 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3312:1: ( ( rule__Property__NameAssignment_0 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3313:1: ( rule__Property__NameAssignment_0 )
             {
              before(grammarAccess.getPropertyAccess().getNameAssignment_0()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3268:1: ( rule__Property__NameAssignment_0 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3268:2: rule__Property__NameAssignment_0
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3314:1: ( rule__Property__NameAssignment_0 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3314:2: rule__Property__NameAssignment_0
             {
-            pushFollow(FOLLOW_rule__Property__NameAssignment_0_in_rule__Property__Group__0__Impl6776);
+            pushFollow(FOLLOW_rule__Property__NameAssignment_0_in_rule__Property__Group__0__Impl6898);
             rule__Property__NameAssignment_0();
 
             state._fsp--;
@@ -9184,21 +9318,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Property__Group__1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3278:1: rule__Property__Group__1 : rule__Property__Group__1__Impl rule__Property__Group__2 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3324:1: rule__Property__Group__1 : rule__Property__Group__1__Impl rule__Property__Group__2 ;
     public final void rule__Property__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3282:1: ( rule__Property__Group__1__Impl rule__Property__Group__2 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3283:2: rule__Property__Group__1__Impl rule__Property__Group__2
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3328:1: ( rule__Property__Group__1__Impl rule__Property__Group__2 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3329:2: rule__Property__Group__1__Impl rule__Property__Group__2
             {
-            pushFollow(FOLLOW_rule__Property__Group__1__Impl_in_rule__Property__Group__16806);
+            pushFollow(FOLLOW_rule__Property__Group__1__Impl_in_rule__Property__Group__16928);
             rule__Property__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Property__Group__2_in_rule__Property__Group__16809);
+            pushFollow(FOLLOW_rule__Property__Group__2_in_rule__Property__Group__16931);
             rule__Property__Group__2();
 
             state._fsp--;
@@ -9222,23 +9356,23 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Property__Group__1__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3290:1: rule__Property__Group__1__Impl : ( ( rule__Property__Alternatives_1 ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3336:1: rule__Property__Group__1__Impl : ( ( rule__Property__Alternatives_1 ) ) ;
     public final void rule__Property__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3294:1: ( ( ( rule__Property__Alternatives_1 ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3295:1: ( ( rule__Property__Alternatives_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3340:1: ( ( ( rule__Property__Alternatives_1 ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3341:1: ( ( rule__Property__Alternatives_1 ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3295:1: ( ( rule__Property__Alternatives_1 ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3296:1: ( rule__Property__Alternatives_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3341:1: ( ( rule__Property__Alternatives_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3342:1: ( rule__Property__Alternatives_1 )
             {
              before(grammarAccess.getPropertyAccess().getAlternatives_1()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3297:1: ( rule__Property__Alternatives_1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3297:2: rule__Property__Alternatives_1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3343:1: ( rule__Property__Alternatives_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3343:2: rule__Property__Alternatives_1
             {
-            pushFollow(FOLLOW_rule__Property__Alternatives_1_in_rule__Property__Group__1__Impl6836);
+            pushFollow(FOLLOW_rule__Property__Alternatives_1_in_rule__Property__Group__1__Impl6958);
             rule__Property__Alternatives_1();
 
             state._fsp--;
@@ -9269,16 +9403,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Property__Group__2"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3307:1: rule__Property__Group__2 : rule__Property__Group__2__Impl ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3353:1: rule__Property__Group__2 : rule__Property__Group__2__Impl ;
     public final void rule__Property__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3311:1: ( rule__Property__Group__2__Impl )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3312:2: rule__Property__Group__2__Impl
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3357:1: ( rule__Property__Group__2__Impl )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3358:2: rule__Property__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__Property__Group__2__Impl_in_rule__Property__Group__26866);
+            pushFollow(FOLLOW_rule__Property__Group__2__Impl_in_rule__Property__Group__26988);
             rule__Property__Group__2__Impl();
 
             state._fsp--;
@@ -9302,20 +9436,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Property__Group__2__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3318:1: rule__Property__Group__2__Impl : ( RULE_END_LINE ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3364:1: rule__Property__Group__2__Impl : ( RULE_END_LINE ) ;
     public final void rule__Property__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3322:1: ( ( RULE_END_LINE ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3323:1: ( RULE_END_LINE )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3368:1: ( ( RULE_END_LINE ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3369:1: ( RULE_END_LINE )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3323:1: ( RULE_END_LINE )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3324:1: RULE_END_LINE
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3369:1: ( RULE_END_LINE )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3370:1: RULE_END_LINE
             {
              before(grammarAccess.getPropertyAccess().getEND_LINETerminalRuleCall_2()); 
-            match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__Property__Group__2__Impl6893); 
+            match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__Property__Group__2__Impl7015); 
              after(grammarAccess.getPropertyAccess().getEND_LINETerminalRuleCall_2()); 
 
             }
@@ -9339,21 +9473,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Property__Group_1_0__0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3341:1: rule__Property__Group_1_0__0 : rule__Property__Group_1_0__0__Impl rule__Property__Group_1_0__1 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3387:1: rule__Property__Group_1_0__0 : rule__Property__Group_1_0__0__Impl rule__Property__Group_1_0__1 ;
     public final void rule__Property__Group_1_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3345:1: ( rule__Property__Group_1_0__0__Impl rule__Property__Group_1_0__1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3346:2: rule__Property__Group_1_0__0__Impl rule__Property__Group_1_0__1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3391:1: ( rule__Property__Group_1_0__0__Impl rule__Property__Group_1_0__1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3392:2: rule__Property__Group_1_0__0__Impl rule__Property__Group_1_0__1
             {
-            pushFollow(FOLLOW_rule__Property__Group_1_0__0__Impl_in_rule__Property__Group_1_0__06928);
+            pushFollow(FOLLOW_rule__Property__Group_1_0__0__Impl_in_rule__Property__Group_1_0__07050);
             rule__Property__Group_1_0__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Property__Group_1_0__1_in_rule__Property__Group_1_0__06931);
+            pushFollow(FOLLOW_rule__Property__Group_1_0__1_in_rule__Property__Group_1_0__07053);
             rule__Property__Group_1_0__1();
 
             state._fsp--;
@@ -9377,31 +9511,31 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Property__Group_1_0__0__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3353:1: rule__Property__Group_1_0__0__Impl : ( ( rule__Property__OptionalAssignment_1_0_0 )? ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3399:1: rule__Property__Group_1_0__0__Impl : ( ( rule__Property__OptionalAssignment_1_0_0 )? ) ;
     public final void rule__Property__Group_1_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3357:1: ( ( ( rule__Property__OptionalAssignment_1_0_0 )? ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3358:1: ( ( rule__Property__OptionalAssignment_1_0_0 )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3403:1: ( ( ( rule__Property__OptionalAssignment_1_0_0 )? ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3404:1: ( ( rule__Property__OptionalAssignment_1_0_0 )? )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3358:1: ( ( rule__Property__OptionalAssignment_1_0_0 )? )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3359:1: ( rule__Property__OptionalAssignment_1_0_0 )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3404:1: ( ( rule__Property__OptionalAssignment_1_0_0 )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3405:1: ( rule__Property__OptionalAssignment_1_0_0 )?
             {
              before(grammarAccess.getPropertyAccess().getOptionalAssignment_1_0_0()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3360:1: ( rule__Property__OptionalAssignment_1_0_0 )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3406:1: ( rule__Property__OptionalAssignment_1_0_0 )?
             int alt40=2;
             int LA40_0 = input.LA(1);
 
-            if ( (LA40_0==30) ) {
+            if ( (LA40_0==32) ) {
                 alt40=1;
             }
             switch (alt40) {
                 case 1 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3360:2: rule__Property__OptionalAssignment_1_0_0
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3406:2: rule__Property__OptionalAssignment_1_0_0
                     {
-                    pushFollow(FOLLOW_rule__Property__OptionalAssignment_1_0_0_in_rule__Property__Group_1_0__0__Impl6958);
+                    pushFollow(FOLLOW_rule__Property__OptionalAssignment_1_0_0_in_rule__Property__Group_1_0__0__Impl7080);
                     rule__Property__OptionalAssignment_1_0_0();
 
                     state._fsp--;
@@ -9435,16 +9569,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Property__Group_1_0__1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3370:1: rule__Property__Group_1_0__1 : rule__Property__Group_1_0__1__Impl ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3416:1: rule__Property__Group_1_0__1 : rule__Property__Group_1_0__1__Impl ;
     public final void rule__Property__Group_1_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3374:1: ( rule__Property__Group_1_0__1__Impl )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3375:2: rule__Property__Group_1_0__1__Impl
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3420:1: ( rule__Property__Group_1_0__1__Impl )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3421:2: rule__Property__Group_1_0__1__Impl
             {
-            pushFollow(FOLLOW_rule__Property__Group_1_0__1__Impl_in_rule__Property__Group_1_0__16989);
+            pushFollow(FOLLOW_rule__Property__Group_1_0__1__Impl_in_rule__Property__Group_1_0__17111);
             rule__Property__Group_1_0__1__Impl();
 
             state._fsp--;
@@ -9468,31 +9602,31 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Property__Group_1_0__1__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3381:1: rule__Property__Group_1_0__1__Impl : ( ( rule__Property__Group_1_0_1__0 )? ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3427:1: rule__Property__Group_1_0__1__Impl : ( ( rule__Property__Group_1_0_1__0 )? ) ;
     public final void rule__Property__Group_1_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3385:1: ( ( ( rule__Property__Group_1_0_1__0 )? ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3386:1: ( ( rule__Property__Group_1_0_1__0 )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3431:1: ( ( ( rule__Property__Group_1_0_1__0 )? ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3432:1: ( ( rule__Property__Group_1_0_1__0 )? )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3386:1: ( ( rule__Property__Group_1_0_1__0 )? )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3387:1: ( rule__Property__Group_1_0_1__0 )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3432:1: ( ( rule__Property__Group_1_0_1__0 )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3433:1: ( rule__Property__Group_1_0_1__0 )?
             {
              before(grammarAccess.getPropertyAccess().getGroup_1_0_1()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3388:1: ( rule__Property__Group_1_0_1__0 )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3434:1: ( rule__Property__Group_1_0_1__0 )?
             int alt41=2;
             int LA41_0 = input.LA(1);
 
-            if ( (LA41_0==29) ) {
+            if ( (LA41_0==31) ) {
                 alt41=1;
             }
             switch (alt41) {
                 case 1 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3388:2: rule__Property__Group_1_0_1__0
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3434:2: rule__Property__Group_1_0_1__0
                     {
-                    pushFollow(FOLLOW_rule__Property__Group_1_0_1__0_in_rule__Property__Group_1_0__1__Impl7016);
+                    pushFollow(FOLLOW_rule__Property__Group_1_0_1__0_in_rule__Property__Group_1_0__1__Impl7138);
                     rule__Property__Group_1_0_1__0();
 
                     state._fsp--;
@@ -9526,21 +9660,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Property__Group_1_0_1__0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3402:1: rule__Property__Group_1_0_1__0 : rule__Property__Group_1_0_1__0__Impl rule__Property__Group_1_0_1__1 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3448:1: rule__Property__Group_1_0_1__0 : rule__Property__Group_1_0_1__0__Impl rule__Property__Group_1_0_1__1 ;
     public final void rule__Property__Group_1_0_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3406:1: ( rule__Property__Group_1_0_1__0__Impl rule__Property__Group_1_0_1__1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3407:2: rule__Property__Group_1_0_1__0__Impl rule__Property__Group_1_0_1__1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3452:1: ( rule__Property__Group_1_0_1__0__Impl rule__Property__Group_1_0_1__1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3453:2: rule__Property__Group_1_0_1__0__Impl rule__Property__Group_1_0_1__1
             {
-            pushFollow(FOLLOW_rule__Property__Group_1_0_1__0__Impl_in_rule__Property__Group_1_0_1__07051);
+            pushFollow(FOLLOW_rule__Property__Group_1_0_1__0__Impl_in_rule__Property__Group_1_0_1__07173);
             rule__Property__Group_1_0_1__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Property__Group_1_0_1__1_in_rule__Property__Group_1_0_1__07054);
+            pushFollow(FOLLOW_rule__Property__Group_1_0_1__1_in_rule__Property__Group_1_0_1__07176);
             rule__Property__Group_1_0_1__1();
 
             state._fsp--;
@@ -9564,20 +9698,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Property__Group_1_0_1__0__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3414:1: rule__Property__Group_1_0_1__0__Impl : ( ':' ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3460:1: rule__Property__Group_1_0_1__0__Impl : ( ':' ) ;
     public final void rule__Property__Group_1_0_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3418:1: ( ( ':' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3419:1: ( ':' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3464:1: ( ( ':' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3465:1: ( ':' )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3419:1: ( ':' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3420:1: ':'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3465:1: ( ':' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3466:1: ':'
             {
              before(grammarAccess.getPropertyAccess().getColonKeyword_1_0_1_0()); 
-            match(input,29,FOLLOW_29_in_rule__Property__Group_1_0_1__0__Impl7082); 
+            match(input,31,FOLLOW_31_in_rule__Property__Group_1_0_1__0__Impl7204); 
              after(grammarAccess.getPropertyAccess().getColonKeyword_1_0_1_0()); 
 
             }
@@ -9601,16 +9735,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Property__Group_1_0_1__1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3433:1: rule__Property__Group_1_0_1__1 : rule__Property__Group_1_0_1__1__Impl ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3479:1: rule__Property__Group_1_0_1__1 : rule__Property__Group_1_0_1__1__Impl ;
     public final void rule__Property__Group_1_0_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3437:1: ( rule__Property__Group_1_0_1__1__Impl )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3438:2: rule__Property__Group_1_0_1__1__Impl
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3483:1: ( rule__Property__Group_1_0_1__1__Impl )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3484:2: rule__Property__Group_1_0_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__Property__Group_1_0_1__1__Impl_in_rule__Property__Group_1_0_1__17113);
+            pushFollow(FOLLOW_rule__Property__Group_1_0_1__1__Impl_in_rule__Property__Group_1_0_1__17235);
             rule__Property__Group_1_0_1__1__Impl();
 
             state._fsp--;
@@ -9634,23 +9768,23 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Property__Group_1_0_1__1__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3444:1: rule__Property__Group_1_0_1__1__Impl : ( ( rule__Property__Alternatives_1_0_1_1 ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3490:1: rule__Property__Group_1_0_1__1__Impl : ( ( rule__Property__Alternatives_1_0_1_1 ) ) ;
     public final void rule__Property__Group_1_0_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3448:1: ( ( ( rule__Property__Alternatives_1_0_1_1 ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3449:1: ( ( rule__Property__Alternatives_1_0_1_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3494:1: ( ( ( rule__Property__Alternatives_1_0_1_1 ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3495:1: ( ( rule__Property__Alternatives_1_0_1_1 ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3449:1: ( ( rule__Property__Alternatives_1_0_1_1 ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3450:1: ( rule__Property__Alternatives_1_0_1_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3495:1: ( ( rule__Property__Alternatives_1_0_1_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3496:1: ( rule__Property__Alternatives_1_0_1_1 )
             {
              before(grammarAccess.getPropertyAccess().getAlternatives_1_0_1_1()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3451:1: ( rule__Property__Alternatives_1_0_1_1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3451:2: rule__Property__Alternatives_1_0_1_1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3497:1: ( rule__Property__Alternatives_1_0_1_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3497:2: rule__Property__Alternatives_1_0_1_1
             {
-            pushFollow(FOLLOW_rule__Property__Alternatives_1_0_1_1_in_rule__Property__Group_1_0_1__1__Impl7140);
+            pushFollow(FOLLOW_rule__Property__Alternatives_1_0_1_1_in_rule__Property__Group_1_0_1__1__Impl7262);
             rule__Property__Alternatives_1_0_1_1();
 
             state._fsp--;
@@ -9681,21 +9815,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Property__Group_1_1__0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3465:1: rule__Property__Group_1_1__0 : rule__Property__Group_1_1__0__Impl rule__Property__Group_1_1__1 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3511:1: rule__Property__Group_1_1__0 : rule__Property__Group_1_1__0__Impl rule__Property__Group_1_1__1 ;
     public final void rule__Property__Group_1_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3469:1: ( rule__Property__Group_1_1__0__Impl rule__Property__Group_1_1__1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3470:2: rule__Property__Group_1_1__0__Impl rule__Property__Group_1_1__1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3515:1: ( rule__Property__Group_1_1__0__Impl rule__Property__Group_1_1__1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3516:2: rule__Property__Group_1_1__0__Impl rule__Property__Group_1_1__1
             {
-            pushFollow(FOLLOW_rule__Property__Group_1_1__0__Impl_in_rule__Property__Group_1_1__07174);
+            pushFollow(FOLLOW_rule__Property__Group_1_1__0__Impl_in_rule__Property__Group_1_1__07296);
             rule__Property__Group_1_1__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Property__Group_1_1__1_in_rule__Property__Group_1_1__07177);
+            pushFollow(FOLLOW_rule__Property__Group_1_1__1_in_rule__Property__Group_1_1__07299);
             rule__Property__Group_1_1__1();
 
             state._fsp--;
@@ -9719,23 +9853,23 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Property__Group_1_1__0__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3477:1: rule__Property__Group_1_1__0__Impl : ( ( rule__Property__ConstantAssignment_1_1_0 ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3523:1: rule__Property__Group_1_1__0__Impl : ( ( rule__Property__ConstantAssignment_1_1_0 ) ) ;
     public final void rule__Property__Group_1_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3481:1: ( ( ( rule__Property__ConstantAssignment_1_1_0 ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3482:1: ( ( rule__Property__ConstantAssignment_1_1_0 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3527:1: ( ( ( rule__Property__ConstantAssignment_1_1_0 ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3528:1: ( ( rule__Property__ConstantAssignment_1_1_0 ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3482:1: ( ( rule__Property__ConstantAssignment_1_1_0 ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3483:1: ( rule__Property__ConstantAssignment_1_1_0 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3528:1: ( ( rule__Property__ConstantAssignment_1_1_0 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3529:1: ( rule__Property__ConstantAssignment_1_1_0 )
             {
              before(grammarAccess.getPropertyAccess().getConstantAssignment_1_1_0()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3484:1: ( rule__Property__ConstantAssignment_1_1_0 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3484:2: rule__Property__ConstantAssignment_1_1_0
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3530:1: ( rule__Property__ConstantAssignment_1_1_0 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3530:2: rule__Property__ConstantAssignment_1_1_0
             {
-            pushFollow(FOLLOW_rule__Property__ConstantAssignment_1_1_0_in_rule__Property__Group_1_1__0__Impl7204);
+            pushFollow(FOLLOW_rule__Property__ConstantAssignment_1_1_0_in_rule__Property__Group_1_1__0__Impl7326);
             rule__Property__ConstantAssignment_1_1_0();
 
             state._fsp--;
@@ -9766,16 +9900,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Property__Group_1_1__1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3494:1: rule__Property__Group_1_1__1 : rule__Property__Group_1_1__1__Impl ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3540:1: rule__Property__Group_1_1__1 : rule__Property__Group_1_1__1__Impl ;
     public final void rule__Property__Group_1_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3498:1: ( rule__Property__Group_1_1__1__Impl )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3499:2: rule__Property__Group_1_1__1__Impl
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3544:1: ( rule__Property__Group_1_1__1__Impl )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3545:2: rule__Property__Group_1_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__Property__Group_1_1__1__Impl_in_rule__Property__Group_1_1__17234);
+            pushFollow(FOLLOW_rule__Property__Group_1_1__1__Impl_in_rule__Property__Group_1_1__17356);
             rule__Property__Group_1_1__1__Impl();
 
             state._fsp--;
@@ -9799,23 +9933,23 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Property__Group_1_1__1__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3505:1: rule__Property__Group_1_1__1__Impl : ( ( rule__Property__ValueAssignment_1_1_1 ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3551:1: rule__Property__Group_1_1__1__Impl : ( ( rule__Property__ValueAssignment_1_1_1 ) ) ;
     public final void rule__Property__Group_1_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3509:1: ( ( ( rule__Property__ValueAssignment_1_1_1 ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3510:1: ( ( rule__Property__ValueAssignment_1_1_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3555:1: ( ( ( rule__Property__ValueAssignment_1_1_1 ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3556:1: ( ( rule__Property__ValueAssignment_1_1_1 ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3510:1: ( ( rule__Property__ValueAssignment_1_1_1 ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3511:1: ( rule__Property__ValueAssignment_1_1_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3556:1: ( ( rule__Property__ValueAssignment_1_1_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3557:1: ( rule__Property__ValueAssignment_1_1_1 )
             {
              before(grammarAccess.getPropertyAccess().getValueAssignment_1_1_1()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3512:1: ( rule__Property__ValueAssignment_1_1_1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3512:2: rule__Property__ValueAssignment_1_1_1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3558:1: ( rule__Property__ValueAssignment_1_1_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3558:2: rule__Property__ValueAssignment_1_1_1
             {
-            pushFollow(FOLLOW_rule__Property__ValueAssignment_1_1_1_in_rule__Property__Group_1_1__1__Impl7261);
+            pushFollow(FOLLOW_rule__Property__ValueAssignment_1_1_1_in_rule__Property__Group_1_1__1__Impl7383);
             rule__Property__ValueAssignment_1_1_1();
 
             state._fsp--;
@@ -9846,21 +9980,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__EntityList__Group__0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3526:1: rule__EntityList__Group__0 : rule__EntityList__Group__0__Impl rule__EntityList__Group__1 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3572:1: rule__EntityList__Group__0 : rule__EntityList__Group__0__Impl rule__EntityList__Group__1 ;
     public final void rule__EntityList__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3530:1: ( rule__EntityList__Group__0__Impl rule__EntityList__Group__1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3531:2: rule__EntityList__Group__0__Impl rule__EntityList__Group__1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3576:1: ( rule__EntityList__Group__0__Impl rule__EntityList__Group__1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3577:2: rule__EntityList__Group__0__Impl rule__EntityList__Group__1
             {
-            pushFollow(FOLLOW_rule__EntityList__Group__0__Impl_in_rule__EntityList__Group__07295);
+            pushFollow(FOLLOW_rule__EntityList__Group__0__Impl_in_rule__EntityList__Group__07417);
             rule__EntityList__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__EntityList__Group__1_in_rule__EntityList__Group__07298);
+            pushFollow(FOLLOW_rule__EntityList__Group__1_in_rule__EntityList__Group__07420);
             rule__EntityList__Group__1();
 
             state._fsp--;
@@ -9884,20 +10018,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__EntityList__Group__0__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3538:1: rule__EntityList__Group__0__Impl : ( '[' ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3584:1: rule__EntityList__Group__0__Impl : ( '[' ) ;
     public final void rule__EntityList__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3542:1: ( ( '[' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3543:1: ( '[' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3588:1: ( ( '[' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3589:1: ( '[' )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3543:1: ( '[' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3544:1: '['
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3589:1: ( '[' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3590:1: '['
             {
              before(grammarAccess.getEntityListAccess().getLeftSquareBracketKeyword_0()); 
-            match(input,48,FOLLOW_48_in_rule__EntityList__Group__0__Impl7326); 
+            match(input,33,FOLLOW_33_in_rule__EntityList__Group__0__Impl7448); 
              after(grammarAccess.getEntityListAccess().getLeftSquareBracketKeyword_0()); 
 
             }
@@ -9921,21 +10055,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__EntityList__Group__1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3557:1: rule__EntityList__Group__1 : rule__EntityList__Group__1__Impl rule__EntityList__Group__2 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3603:1: rule__EntityList__Group__1 : rule__EntityList__Group__1__Impl rule__EntityList__Group__2 ;
     public final void rule__EntityList__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3561:1: ( rule__EntityList__Group__1__Impl rule__EntityList__Group__2 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3562:2: rule__EntityList__Group__1__Impl rule__EntityList__Group__2
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3607:1: ( rule__EntityList__Group__1__Impl rule__EntityList__Group__2 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3608:2: rule__EntityList__Group__1__Impl rule__EntityList__Group__2
             {
-            pushFollow(FOLLOW_rule__EntityList__Group__1__Impl_in_rule__EntityList__Group__17357);
+            pushFollow(FOLLOW_rule__EntityList__Group__1__Impl_in_rule__EntityList__Group__17479);
             rule__EntityList__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__EntityList__Group__2_in_rule__EntityList__Group__17360);
+            pushFollow(FOLLOW_rule__EntityList__Group__2_in_rule__EntityList__Group__17482);
             rule__EntityList__Group__2();
 
             state._fsp--;
@@ -9959,23 +10093,23 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__EntityList__Group__1__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3569:1: rule__EntityList__Group__1__Impl : ( ( rule__EntityList__RefsAssignment_1 ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3615:1: rule__EntityList__Group__1__Impl : ( ( rule__EntityList__RefsAssignment_1 ) ) ;
     public final void rule__EntityList__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3573:1: ( ( ( rule__EntityList__RefsAssignment_1 ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3574:1: ( ( rule__EntityList__RefsAssignment_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3619:1: ( ( ( rule__EntityList__RefsAssignment_1 ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3620:1: ( ( rule__EntityList__RefsAssignment_1 ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3574:1: ( ( rule__EntityList__RefsAssignment_1 ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3575:1: ( rule__EntityList__RefsAssignment_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3620:1: ( ( rule__EntityList__RefsAssignment_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3621:1: ( rule__EntityList__RefsAssignment_1 )
             {
              before(grammarAccess.getEntityListAccess().getRefsAssignment_1()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3576:1: ( rule__EntityList__RefsAssignment_1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3576:2: rule__EntityList__RefsAssignment_1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3622:1: ( rule__EntityList__RefsAssignment_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3622:2: rule__EntityList__RefsAssignment_1
             {
-            pushFollow(FOLLOW_rule__EntityList__RefsAssignment_1_in_rule__EntityList__Group__1__Impl7387);
+            pushFollow(FOLLOW_rule__EntityList__RefsAssignment_1_in_rule__EntityList__Group__1__Impl7509);
             rule__EntityList__RefsAssignment_1();
 
             state._fsp--;
@@ -10006,21 +10140,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__EntityList__Group__2"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3586:1: rule__EntityList__Group__2 : rule__EntityList__Group__2__Impl rule__EntityList__Group__3 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3632:1: rule__EntityList__Group__2 : rule__EntityList__Group__2__Impl rule__EntityList__Group__3 ;
     public final void rule__EntityList__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3590:1: ( rule__EntityList__Group__2__Impl rule__EntityList__Group__3 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3591:2: rule__EntityList__Group__2__Impl rule__EntityList__Group__3
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3636:1: ( rule__EntityList__Group__2__Impl rule__EntityList__Group__3 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3637:2: rule__EntityList__Group__2__Impl rule__EntityList__Group__3
             {
-            pushFollow(FOLLOW_rule__EntityList__Group__2__Impl_in_rule__EntityList__Group__27417);
+            pushFollow(FOLLOW_rule__EntityList__Group__2__Impl_in_rule__EntityList__Group__27539);
             rule__EntityList__Group__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__EntityList__Group__3_in_rule__EntityList__Group__27420);
+            pushFollow(FOLLOW_rule__EntityList__Group__3_in_rule__EntityList__Group__27542);
             rule__EntityList__Group__3();
 
             state._fsp--;
@@ -10044,35 +10178,35 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__EntityList__Group__2__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3598:1: rule__EntityList__Group__2__Impl : ( ( rule__EntityList__Group_2__0 )* ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3644:1: rule__EntityList__Group__2__Impl : ( ( rule__EntityList__Group_2__0 )* ) ;
     public final void rule__EntityList__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3602:1: ( ( ( rule__EntityList__Group_2__0 )* ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3603:1: ( ( rule__EntityList__Group_2__0 )* )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3648:1: ( ( ( rule__EntityList__Group_2__0 )* ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3649:1: ( ( rule__EntityList__Group_2__0 )* )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3603:1: ( ( rule__EntityList__Group_2__0 )* )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3604:1: ( rule__EntityList__Group_2__0 )*
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3649:1: ( ( rule__EntityList__Group_2__0 )* )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3650:1: ( rule__EntityList__Group_2__0 )*
             {
              before(grammarAccess.getEntityListAccess().getGroup_2()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3605:1: ( rule__EntityList__Group_2__0 )*
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3651:1: ( rule__EntityList__Group_2__0 )*
             loop42:
             do {
                 int alt42=2;
                 int LA42_0 = input.LA(1);
 
-                if ( (LA42_0==50) ) {
+                if ( (LA42_0==52) ) {
                     alt42=1;
                 }
 
 
                 switch (alt42) {
             	case 1 :
-            	    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3605:2: rule__EntityList__Group_2__0
+            	    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3651:2: rule__EntityList__Group_2__0
             	    {
-            	    pushFollow(FOLLOW_rule__EntityList__Group_2__0_in_rule__EntityList__Group__2__Impl7447);
+            	    pushFollow(FOLLOW_rule__EntityList__Group_2__0_in_rule__EntityList__Group__2__Impl7569);
             	    rule__EntityList__Group_2__0();
 
             	    state._fsp--;
@@ -10109,16 +10243,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__EntityList__Group__3"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3615:1: rule__EntityList__Group__3 : rule__EntityList__Group__3__Impl ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3661:1: rule__EntityList__Group__3 : rule__EntityList__Group__3__Impl ;
     public final void rule__EntityList__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3619:1: ( rule__EntityList__Group__3__Impl )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3620:2: rule__EntityList__Group__3__Impl
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3665:1: ( rule__EntityList__Group__3__Impl )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3666:2: rule__EntityList__Group__3__Impl
             {
-            pushFollow(FOLLOW_rule__EntityList__Group__3__Impl_in_rule__EntityList__Group__37478);
+            pushFollow(FOLLOW_rule__EntityList__Group__3__Impl_in_rule__EntityList__Group__37600);
             rule__EntityList__Group__3__Impl();
 
             state._fsp--;
@@ -10142,20 +10276,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__EntityList__Group__3__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3626:1: rule__EntityList__Group__3__Impl : ( ']' ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3672:1: rule__EntityList__Group__3__Impl : ( ']' ) ;
     public final void rule__EntityList__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3630:1: ( ( ']' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3631:1: ( ']' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3676:1: ( ( ']' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3677:1: ( ']' )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3631:1: ( ']' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3632:1: ']'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3677:1: ( ']' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3678:1: ']'
             {
              before(grammarAccess.getEntityListAccess().getRightSquareBracketKeyword_3()); 
-            match(input,49,FOLLOW_49_in_rule__EntityList__Group__3__Impl7506); 
+            match(input,34,FOLLOW_34_in_rule__EntityList__Group__3__Impl7628); 
              after(grammarAccess.getEntityListAccess().getRightSquareBracketKeyword_3()); 
 
             }
@@ -10179,21 +10313,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__EntityList__Group_2__0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3653:1: rule__EntityList__Group_2__0 : rule__EntityList__Group_2__0__Impl rule__EntityList__Group_2__1 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3699:1: rule__EntityList__Group_2__0 : rule__EntityList__Group_2__0__Impl rule__EntityList__Group_2__1 ;
     public final void rule__EntityList__Group_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3657:1: ( rule__EntityList__Group_2__0__Impl rule__EntityList__Group_2__1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3658:2: rule__EntityList__Group_2__0__Impl rule__EntityList__Group_2__1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3703:1: ( rule__EntityList__Group_2__0__Impl rule__EntityList__Group_2__1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3704:2: rule__EntityList__Group_2__0__Impl rule__EntityList__Group_2__1
             {
-            pushFollow(FOLLOW_rule__EntityList__Group_2__0__Impl_in_rule__EntityList__Group_2__07545);
+            pushFollow(FOLLOW_rule__EntityList__Group_2__0__Impl_in_rule__EntityList__Group_2__07667);
             rule__EntityList__Group_2__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__EntityList__Group_2__1_in_rule__EntityList__Group_2__07548);
+            pushFollow(FOLLOW_rule__EntityList__Group_2__1_in_rule__EntityList__Group_2__07670);
             rule__EntityList__Group_2__1();
 
             state._fsp--;
@@ -10217,20 +10351,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__EntityList__Group_2__0__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3665:1: rule__EntityList__Group_2__0__Impl : ( '|' ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3711:1: rule__EntityList__Group_2__0__Impl : ( '|' ) ;
     public final void rule__EntityList__Group_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3669:1: ( ( '|' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3670:1: ( '|' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3715:1: ( ( '|' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3716:1: ( '|' )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3670:1: ( '|' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3671:1: '|'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3716:1: ( '|' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3717:1: '|'
             {
              before(grammarAccess.getEntityListAccess().getVerticalLineKeyword_2_0()); 
-            match(input,50,FOLLOW_50_in_rule__EntityList__Group_2__0__Impl7576); 
+            match(input,52,FOLLOW_52_in_rule__EntityList__Group_2__0__Impl7698); 
              after(grammarAccess.getEntityListAccess().getVerticalLineKeyword_2_0()); 
 
             }
@@ -10254,16 +10388,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__EntityList__Group_2__1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3684:1: rule__EntityList__Group_2__1 : rule__EntityList__Group_2__1__Impl ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3730:1: rule__EntityList__Group_2__1 : rule__EntityList__Group_2__1__Impl ;
     public final void rule__EntityList__Group_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3688:1: ( rule__EntityList__Group_2__1__Impl )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3689:2: rule__EntityList__Group_2__1__Impl
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3734:1: ( rule__EntityList__Group_2__1__Impl )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3735:2: rule__EntityList__Group_2__1__Impl
             {
-            pushFollow(FOLLOW_rule__EntityList__Group_2__1__Impl_in_rule__EntityList__Group_2__17607);
+            pushFollow(FOLLOW_rule__EntityList__Group_2__1__Impl_in_rule__EntityList__Group_2__17729);
             rule__EntityList__Group_2__1__Impl();
 
             state._fsp--;
@@ -10287,23 +10421,23 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__EntityList__Group_2__1__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3695:1: rule__EntityList__Group_2__1__Impl : ( ( rule__EntityList__RefsAssignment_2_1 ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3741:1: rule__EntityList__Group_2__1__Impl : ( ( rule__EntityList__RefsAssignment_2_1 ) ) ;
     public final void rule__EntityList__Group_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3699:1: ( ( ( rule__EntityList__RefsAssignment_2_1 ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3700:1: ( ( rule__EntityList__RefsAssignment_2_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3745:1: ( ( ( rule__EntityList__RefsAssignment_2_1 ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3746:1: ( ( rule__EntityList__RefsAssignment_2_1 ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3700:1: ( ( rule__EntityList__RefsAssignment_2_1 ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3701:1: ( rule__EntityList__RefsAssignment_2_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3746:1: ( ( rule__EntityList__RefsAssignment_2_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3747:1: ( rule__EntityList__RefsAssignment_2_1 )
             {
              before(grammarAccess.getEntityListAccess().getRefsAssignment_2_1()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3702:1: ( rule__EntityList__RefsAssignment_2_1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3702:2: rule__EntityList__RefsAssignment_2_1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3748:1: ( rule__EntityList__RefsAssignment_2_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3748:2: rule__EntityList__RefsAssignment_2_1
             {
-            pushFollow(FOLLOW_rule__EntityList__RefsAssignment_2_1_in_rule__EntityList__Group_2__1__Impl7634);
+            pushFollow(FOLLOW_rule__EntityList__RefsAssignment_2_1_in_rule__EntityList__Group_2__1__Impl7756);
             rule__EntityList__RefsAssignment_2_1();
 
             state._fsp--;
@@ -10334,21 +10468,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group__0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3716:1: rule__Note__Group__0 : rule__Note__Group__0__Impl rule__Note__Group__1 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3762:1: rule__Note__Group__0 : rule__Note__Group__0__Impl rule__Note__Group__1 ;
     public final void rule__Note__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3720:1: ( rule__Note__Group__0__Impl rule__Note__Group__1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3721:2: rule__Note__Group__0__Impl rule__Note__Group__1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3766:1: ( rule__Note__Group__0__Impl rule__Note__Group__1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3767:2: rule__Note__Group__0__Impl rule__Note__Group__1
             {
-            pushFollow(FOLLOW_rule__Note__Group__0__Impl_in_rule__Note__Group__07668);
+            pushFollow(FOLLOW_rule__Note__Group__0__Impl_in_rule__Note__Group__07790);
             rule__Note__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Note__Group__1_in_rule__Note__Group__07671);
+            pushFollow(FOLLOW_rule__Note__Group__1_in_rule__Note__Group__07793);
             rule__Note__Group__1();
 
             state._fsp--;
@@ -10372,20 +10506,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group__0__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3728:1: rule__Note__Group__0__Impl : ( 'note' ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3774:1: rule__Note__Group__0__Impl : ( 'note' ) ;
     public final void rule__Note__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3732:1: ( ( 'note' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3733:1: ( 'note' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3778:1: ( ( 'note' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3779:1: ( 'note' )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3733:1: ( 'note' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3734:1: 'note'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3779:1: ( 'note' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3780:1: 'note'
             {
              before(grammarAccess.getNoteAccess().getNoteKeyword_0()); 
-            match(input,26,FOLLOW_26_in_rule__Note__Group__0__Impl7699); 
+            match(input,28,FOLLOW_28_in_rule__Note__Group__0__Impl7821); 
              after(grammarAccess.getNoteAccess().getNoteKeyword_0()); 
 
             }
@@ -10409,16 +10543,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group__1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3747:1: rule__Note__Group__1 : rule__Note__Group__1__Impl ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3793:1: rule__Note__Group__1 : rule__Note__Group__1__Impl ;
     public final void rule__Note__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3751:1: ( rule__Note__Group__1__Impl )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3752:2: rule__Note__Group__1__Impl
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3797:1: ( rule__Note__Group__1__Impl )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3798:2: rule__Note__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__Note__Group__1__Impl_in_rule__Note__Group__17730);
+            pushFollow(FOLLOW_rule__Note__Group__1__Impl_in_rule__Note__Group__17852);
             rule__Note__Group__1__Impl();
 
             state._fsp--;
@@ -10442,23 +10576,23 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group__1__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3758:1: rule__Note__Group__1__Impl : ( ( rule__Note__Alternatives_1 ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3804:1: rule__Note__Group__1__Impl : ( ( rule__Note__Alternatives_1 ) ) ;
     public final void rule__Note__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3762:1: ( ( ( rule__Note__Alternatives_1 ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3763:1: ( ( rule__Note__Alternatives_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3808:1: ( ( ( rule__Note__Alternatives_1 ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3809:1: ( ( rule__Note__Alternatives_1 ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3763:1: ( ( rule__Note__Alternatives_1 ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3764:1: ( rule__Note__Alternatives_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3809:1: ( ( rule__Note__Alternatives_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3810:1: ( rule__Note__Alternatives_1 )
             {
              before(grammarAccess.getNoteAccess().getAlternatives_1()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3765:1: ( rule__Note__Alternatives_1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3765:2: rule__Note__Alternatives_1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3811:1: ( rule__Note__Alternatives_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3811:2: rule__Note__Alternatives_1
             {
-            pushFollow(FOLLOW_rule__Note__Alternatives_1_in_rule__Note__Group__1__Impl7757);
+            pushFollow(FOLLOW_rule__Note__Alternatives_1_in_rule__Note__Group__1__Impl7879);
             rule__Note__Alternatives_1();
 
             state._fsp--;
@@ -10489,21 +10623,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_0_0__0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3779:1: rule__Note__Group_1_0_0__0 : rule__Note__Group_1_0_0__0__Impl rule__Note__Group_1_0_0__1 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3825:1: rule__Note__Group_1_0_0__0 : rule__Note__Group_1_0_0__0__Impl rule__Note__Group_1_0_0__1 ;
     public final void rule__Note__Group_1_0_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3783:1: ( rule__Note__Group_1_0_0__0__Impl rule__Note__Group_1_0_0__1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3784:2: rule__Note__Group_1_0_0__0__Impl rule__Note__Group_1_0_0__1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3829:1: ( rule__Note__Group_1_0_0__0__Impl rule__Note__Group_1_0_0__1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3830:2: rule__Note__Group_1_0_0__0__Impl rule__Note__Group_1_0_0__1
             {
-            pushFollow(FOLLOW_rule__Note__Group_1_0_0__0__Impl_in_rule__Note__Group_1_0_0__07791);
+            pushFollow(FOLLOW_rule__Note__Group_1_0_0__0__Impl_in_rule__Note__Group_1_0_0__07913);
             rule__Note__Group_1_0_0__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Note__Group_1_0_0__1_in_rule__Note__Group_1_0_0__07794);
+            pushFollow(FOLLOW_rule__Note__Group_1_0_0__1_in_rule__Note__Group_1_0_0__07916);
             rule__Note__Group_1_0_0__1();
 
             state._fsp--;
@@ -10527,23 +10661,23 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_0_0__0__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3791:1: rule__Note__Group_1_0_0__0__Impl : ( ( rule__Note__PositionAssignment_1_0_0_0 ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3837:1: rule__Note__Group_1_0_0__0__Impl : ( ( rule__Note__PositionAssignment_1_0_0_0 ) ) ;
     public final void rule__Note__Group_1_0_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3795:1: ( ( ( rule__Note__PositionAssignment_1_0_0_0 ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3796:1: ( ( rule__Note__PositionAssignment_1_0_0_0 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3841:1: ( ( ( rule__Note__PositionAssignment_1_0_0_0 ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3842:1: ( ( rule__Note__PositionAssignment_1_0_0_0 ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3796:1: ( ( rule__Note__PositionAssignment_1_0_0_0 ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3797:1: ( rule__Note__PositionAssignment_1_0_0_0 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3842:1: ( ( rule__Note__PositionAssignment_1_0_0_0 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3843:1: ( rule__Note__PositionAssignment_1_0_0_0 )
             {
              before(grammarAccess.getNoteAccess().getPositionAssignment_1_0_0_0()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3798:1: ( rule__Note__PositionAssignment_1_0_0_0 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3798:2: rule__Note__PositionAssignment_1_0_0_0
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3844:1: ( rule__Note__PositionAssignment_1_0_0_0 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3844:2: rule__Note__PositionAssignment_1_0_0_0
             {
-            pushFollow(FOLLOW_rule__Note__PositionAssignment_1_0_0_0_in_rule__Note__Group_1_0_0__0__Impl7821);
+            pushFollow(FOLLOW_rule__Note__PositionAssignment_1_0_0_0_in_rule__Note__Group_1_0_0__0__Impl7943);
             rule__Note__PositionAssignment_1_0_0_0();
 
             state._fsp--;
@@ -10574,16 +10708,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_0_0__1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3808:1: rule__Note__Group_1_0_0__1 : rule__Note__Group_1_0_0__1__Impl ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3854:1: rule__Note__Group_1_0_0__1 : rule__Note__Group_1_0_0__1__Impl ;
     public final void rule__Note__Group_1_0_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3812:1: ( rule__Note__Group_1_0_0__1__Impl )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3813:2: rule__Note__Group_1_0_0__1__Impl
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3858:1: ( rule__Note__Group_1_0_0__1__Impl )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3859:2: rule__Note__Group_1_0_0__1__Impl
             {
-            pushFollow(FOLLOW_rule__Note__Group_1_0_0__1__Impl_in_rule__Note__Group_1_0_0__17851);
+            pushFollow(FOLLOW_rule__Note__Group_1_0_0__1__Impl_in_rule__Note__Group_1_0_0__17973);
             rule__Note__Group_1_0_0__1__Impl();
 
             state._fsp--;
@@ -10607,23 +10741,23 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_0_0__1__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3819:1: rule__Note__Group_1_0_0__1__Impl : ( ( rule__Note__Group_1_0_0_1__0 ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3865:1: rule__Note__Group_1_0_0__1__Impl : ( ( rule__Note__Group_1_0_0_1__0 ) ) ;
     public final void rule__Note__Group_1_0_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3823:1: ( ( ( rule__Note__Group_1_0_0_1__0 ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3824:1: ( ( rule__Note__Group_1_0_0_1__0 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3869:1: ( ( ( rule__Note__Group_1_0_0_1__0 ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3870:1: ( ( rule__Note__Group_1_0_0_1__0 ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3824:1: ( ( rule__Note__Group_1_0_0_1__0 ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3825:1: ( rule__Note__Group_1_0_0_1__0 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3870:1: ( ( rule__Note__Group_1_0_0_1__0 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3871:1: ( rule__Note__Group_1_0_0_1__0 )
             {
              before(grammarAccess.getNoteAccess().getGroup_1_0_0_1()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3826:1: ( rule__Note__Group_1_0_0_1__0 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3826:2: rule__Note__Group_1_0_0_1__0
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3872:1: ( rule__Note__Group_1_0_0_1__0 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3872:2: rule__Note__Group_1_0_0_1__0
             {
-            pushFollow(FOLLOW_rule__Note__Group_1_0_0_1__0_in_rule__Note__Group_1_0_0__1__Impl7878);
+            pushFollow(FOLLOW_rule__Note__Group_1_0_0_1__0_in_rule__Note__Group_1_0_0__1__Impl8000);
             rule__Note__Group_1_0_0_1__0();
 
             state._fsp--;
@@ -10654,21 +10788,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_0_0_1__0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3840:1: rule__Note__Group_1_0_0_1__0 : rule__Note__Group_1_0_0_1__0__Impl rule__Note__Group_1_0_0_1__1 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3886:1: rule__Note__Group_1_0_0_1__0 : rule__Note__Group_1_0_0_1__0__Impl rule__Note__Group_1_0_0_1__1 ;
     public final void rule__Note__Group_1_0_0_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3844:1: ( rule__Note__Group_1_0_0_1__0__Impl rule__Note__Group_1_0_0_1__1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3845:2: rule__Note__Group_1_0_0_1__0__Impl rule__Note__Group_1_0_0_1__1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3890:1: ( rule__Note__Group_1_0_0_1__0__Impl rule__Note__Group_1_0_0_1__1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3891:2: rule__Note__Group_1_0_0_1__0__Impl rule__Note__Group_1_0_0_1__1
             {
-            pushFollow(FOLLOW_rule__Note__Group_1_0_0_1__0__Impl_in_rule__Note__Group_1_0_0_1__07912);
+            pushFollow(FOLLOW_rule__Note__Group_1_0_0_1__0__Impl_in_rule__Note__Group_1_0_0_1__08034);
             rule__Note__Group_1_0_0_1__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Note__Group_1_0_0_1__1_in_rule__Note__Group_1_0_0_1__07915);
+            pushFollow(FOLLOW_rule__Note__Group_1_0_0_1__1_in_rule__Note__Group_1_0_0_1__08037);
             rule__Note__Group_1_0_0_1__1();
 
             state._fsp--;
@@ -10692,20 +10826,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_0_0_1__0__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3852:1: rule__Note__Group_1_0_0_1__0__Impl : ( ':' ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3898:1: rule__Note__Group_1_0_0_1__0__Impl : ( ':' ) ;
     public final void rule__Note__Group_1_0_0_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3856:1: ( ( ':' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3857:1: ( ':' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3902:1: ( ( ':' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3903:1: ( ':' )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3857:1: ( ':' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3858:1: ':'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3903:1: ( ':' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3904:1: ':'
             {
              before(grammarAccess.getNoteAccess().getColonKeyword_1_0_0_1_0()); 
-            match(input,29,FOLLOW_29_in_rule__Note__Group_1_0_0_1__0__Impl7943); 
+            match(input,31,FOLLOW_31_in_rule__Note__Group_1_0_0_1__0__Impl8065); 
              after(grammarAccess.getNoteAccess().getColonKeyword_1_0_0_1_0()); 
 
             }
@@ -10729,21 +10863,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_0_0_1__1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3871:1: rule__Note__Group_1_0_0_1__1 : rule__Note__Group_1_0_0_1__1__Impl rule__Note__Group_1_0_0_1__2 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3917:1: rule__Note__Group_1_0_0_1__1 : rule__Note__Group_1_0_0_1__1__Impl rule__Note__Group_1_0_0_1__2 ;
     public final void rule__Note__Group_1_0_0_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3875:1: ( rule__Note__Group_1_0_0_1__1__Impl rule__Note__Group_1_0_0_1__2 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3876:2: rule__Note__Group_1_0_0_1__1__Impl rule__Note__Group_1_0_0_1__2
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3921:1: ( rule__Note__Group_1_0_0_1__1__Impl rule__Note__Group_1_0_0_1__2 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3922:2: rule__Note__Group_1_0_0_1__1__Impl rule__Note__Group_1_0_0_1__2
             {
-            pushFollow(FOLLOW_rule__Note__Group_1_0_0_1__1__Impl_in_rule__Note__Group_1_0_0_1__17974);
+            pushFollow(FOLLOW_rule__Note__Group_1_0_0_1__1__Impl_in_rule__Note__Group_1_0_0_1__18096);
             rule__Note__Group_1_0_0_1__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Note__Group_1_0_0_1__2_in_rule__Note__Group_1_0_0_1__17977);
+            pushFollow(FOLLOW_rule__Note__Group_1_0_0_1__2_in_rule__Note__Group_1_0_0_1__18099);
             rule__Note__Group_1_0_0_1__2();
 
             state._fsp--;
@@ -10767,23 +10901,23 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_0_0_1__1__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3883:1: rule__Note__Group_1_0_0_1__1__Impl : ( ( rule__Note__ValueAssignment_1_0_0_1_1 ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3929:1: rule__Note__Group_1_0_0_1__1__Impl : ( ( rule__Note__ValueAssignment_1_0_0_1_1 ) ) ;
     public final void rule__Note__Group_1_0_0_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3887:1: ( ( ( rule__Note__ValueAssignment_1_0_0_1_1 ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3888:1: ( ( rule__Note__ValueAssignment_1_0_0_1_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3933:1: ( ( ( rule__Note__ValueAssignment_1_0_0_1_1 ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3934:1: ( ( rule__Note__ValueAssignment_1_0_0_1_1 ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3888:1: ( ( rule__Note__ValueAssignment_1_0_0_1_1 ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3889:1: ( rule__Note__ValueAssignment_1_0_0_1_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3934:1: ( ( rule__Note__ValueAssignment_1_0_0_1_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3935:1: ( rule__Note__ValueAssignment_1_0_0_1_1 )
             {
              before(grammarAccess.getNoteAccess().getValueAssignment_1_0_0_1_1()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3890:1: ( rule__Note__ValueAssignment_1_0_0_1_1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3890:2: rule__Note__ValueAssignment_1_0_0_1_1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3936:1: ( rule__Note__ValueAssignment_1_0_0_1_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3936:2: rule__Note__ValueAssignment_1_0_0_1_1
             {
-            pushFollow(FOLLOW_rule__Note__ValueAssignment_1_0_0_1_1_in_rule__Note__Group_1_0_0_1__1__Impl8004);
+            pushFollow(FOLLOW_rule__Note__ValueAssignment_1_0_0_1_1_in_rule__Note__Group_1_0_0_1__1__Impl8126);
             rule__Note__ValueAssignment_1_0_0_1_1();
 
             state._fsp--;
@@ -10814,16 +10948,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_0_0_1__2"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3900:1: rule__Note__Group_1_0_0_1__2 : rule__Note__Group_1_0_0_1__2__Impl ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3946:1: rule__Note__Group_1_0_0_1__2 : rule__Note__Group_1_0_0_1__2__Impl ;
     public final void rule__Note__Group_1_0_0_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3904:1: ( rule__Note__Group_1_0_0_1__2__Impl )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3905:2: rule__Note__Group_1_0_0_1__2__Impl
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3950:1: ( rule__Note__Group_1_0_0_1__2__Impl )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3951:2: rule__Note__Group_1_0_0_1__2__Impl
             {
-            pushFollow(FOLLOW_rule__Note__Group_1_0_0_1__2__Impl_in_rule__Note__Group_1_0_0_1__28034);
+            pushFollow(FOLLOW_rule__Note__Group_1_0_0_1__2__Impl_in_rule__Note__Group_1_0_0_1__28156);
             rule__Note__Group_1_0_0_1__2__Impl();
 
             state._fsp--;
@@ -10847,20 +10981,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_0_0_1__2__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3911:1: rule__Note__Group_1_0_0_1__2__Impl : ( RULE_END_LINE ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3957:1: rule__Note__Group_1_0_0_1__2__Impl : ( RULE_END_LINE ) ;
     public final void rule__Note__Group_1_0_0_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3915:1: ( ( RULE_END_LINE ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3916:1: ( RULE_END_LINE )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3961:1: ( ( RULE_END_LINE ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3962:1: ( RULE_END_LINE )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3916:1: ( RULE_END_LINE )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3917:1: RULE_END_LINE
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3962:1: ( RULE_END_LINE )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3963:1: RULE_END_LINE
             {
              before(grammarAccess.getNoteAccess().getEND_LINETerminalRuleCall_1_0_0_1_2()); 
-            match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__Note__Group_1_0_0_1__2__Impl8061); 
+            match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__Note__Group_1_0_0_1__2__Impl8183); 
              after(grammarAccess.getNoteAccess().getEND_LINETerminalRuleCall_1_0_0_1_2()); 
 
             }
@@ -10884,21 +11018,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_0_1__0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3934:1: rule__Note__Group_1_0_1__0 : rule__Note__Group_1_0_1__0__Impl rule__Note__Group_1_0_1__1 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3980:1: rule__Note__Group_1_0_1__0 : rule__Note__Group_1_0_1__0__Impl rule__Note__Group_1_0_1__1 ;
     public final void rule__Note__Group_1_0_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3938:1: ( rule__Note__Group_1_0_1__0__Impl rule__Note__Group_1_0_1__1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3939:2: rule__Note__Group_1_0_1__0__Impl rule__Note__Group_1_0_1__1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3984:1: ( rule__Note__Group_1_0_1__0__Impl rule__Note__Group_1_0_1__1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3985:2: rule__Note__Group_1_0_1__0__Impl rule__Note__Group_1_0_1__1
             {
-            pushFollow(FOLLOW_rule__Note__Group_1_0_1__0__Impl_in_rule__Note__Group_1_0_1__08096);
+            pushFollow(FOLLOW_rule__Note__Group_1_0_1__0__Impl_in_rule__Note__Group_1_0_1__08218);
             rule__Note__Group_1_0_1__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Note__Group_1_0_1__1_in_rule__Note__Group_1_0_1__08099);
+            pushFollow(FOLLOW_rule__Note__Group_1_0_1__1_in_rule__Note__Group_1_0_1__08221);
             rule__Note__Group_1_0_1__1();
 
             state._fsp--;
@@ -10922,20 +11056,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_0_1__0__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3946:1: rule__Note__Group_1_0_1__0__Impl : ( 'of' ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3992:1: rule__Note__Group_1_0_1__0__Impl : ( 'of' ) ;
     public final void rule__Note__Group_1_0_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3950:1: ( ( 'of' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3951:1: ( 'of' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3996:1: ( ( 'of' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3997:1: ( 'of' )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3951:1: ( 'of' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3952:1: 'of'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3997:1: ( 'of' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3998:1: 'of'
             {
              before(grammarAccess.getNoteAccess().getOfKeyword_1_0_1_0()); 
-            match(input,28,FOLLOW_28_in_rule__Note__Group_1_0_1__0__Impl8127); 
+            match(input,30,FOLLOW_30_in_rule__Note__Group_1_0_1__0__Impl8249); 
              after(grammarAccess.getNoteAccess().getOfKeyword_1_0_1_0()); 
 
             }
@@ -10959,21 +11093,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_0_1__1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3965:1: rule__Note__Group_1_0_1__1 : rule__Note__Group_1_0_1__1__Impl rule__Note__Group_1_0_1__2 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4011:1: rule__Note__Group_1_0_1__1 : rule__Note__Group_1_0_1__1__Impl rule__Note__Group_1_0_1__2 ;
     public final void rule__Note__Group_1_0_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3969:1: ( rule__Note__Group_1_0_1__1__Impl rule__Note__Group_1_0_1__2 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3970:2: rule__Note__Group_1_0_1__1__Impl rule__Note__Group_1_0_1__2
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4015:1: ( rule__Note__Group_1_0_1__1__Impl rule__Note__Group_1_0_1__2 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4016:2: rule__Note__Group_1_0_1__1__Impl rule__Note__Group_1_0_1__2
             {
-            pushFollow(FOLLOW_rule__Note__Group_1_0_1__1__Impl_in_rule__Note__Group_1_0_1__18158);
+            pushFollow(FOLLOW_rule__Note__Group_1_0_1__1__Impl_in_rule__Note__Group_1_0_1__18280);
             rule__Note__Group_1_0_1__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Note__Group_1_0_1__2_in_rule__Note__Group_1_0_1__18161);
+            pushFollow(FOLLOW_rule__Note__Group_1_0_1__2_in_rule__Note__Group_1_0_1__18283);
             rule__Note__Group_1_0_1__2();
 
             state._fsp--;
@@ -10997,23 +11131,23 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_0_1__1__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3977:1: rule__Note__Group_1_0_1__1__Impl : ( ( rule__Note__OfAssignment_1_0_1_1 ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4023:1: rule__Note__Group_1_0_1__1__Impl : ( ( rule__Note__OfAssignment_1_0_1_1 ) ) ;
     public final void rule__Note__Group_1_0_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3981:1: ( ( ( rule__Note__OfAssignment_1_0_1_1 ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3982:1: ( ( rule__Note__OfAssignment_1_0_1_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4027:1: ( ( ( rule__Note__OfAssignment_1_0_1_1 ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4028:1: ( ( rule__Note__OfAssignment_1_0_1_1 ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3982:1: ( ( rule__Note__OfAssignment_1_0_1_1 ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3983:1: ( rule__Note__OfAssignment_1_0_1_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4028:1: ( ( rule__Note__OfAssignment_1_0_1_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4029:1: ( rule__Note__OfAssignment_1_0_1_1 )
             {
              before(grammarAccess.getNoteAccess().getOfAssignment_1_0_1_1()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3984:1: ( rule__Note__OfAssignment_1_0_1_1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3984:2: rule__Note__OfAssignment_1_0_1_1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4030:1: ( rule__Note__OfAssignment_1_0_1_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4030:2: rule__Note__OfAssignment_1_0_1_1
             {
-            pushFollow(FOLLOW_rule__Note__OfAssignment_1_0_1_1_in_rule__Note__Group_1_0_1__1__Impl8188);
+            pushFollow(FOLLOW_rule__Note__OfAssignment_1_0_1_1_in_rule__Note__Group_1_0_1__1__Impl8310);
             rule__Note__OfAssignment_1_0_1_1();
 
             state._fsp--;
@@ -11044,21 +11178,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_0_1__2"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3994:1: rule__Note__Group_1_0_1__2 : rule__Note__Group_1_0_1__2__Impl rule__Note__Group_1_0_1__3 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4040:1: rule__Note__Group_1_0_1__2 : rule__Note__Group_1_0_1__2__Impl rule__Note__Group_1_0_1__3 ;
     public final void rule__Note__Group_1_0_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3998:1: ( rule__Note__Group_1_0_1__2__Impl rule__Note__Group_1_0_1__3 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:3999:2: rule__Note__Group_1_0_1__2__Impl rule__Note__Group_1_0_1__3
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4044:1: ( rule__Note__Group_1_0_1__2__Impl rule__Note__Group_1_0_1__3 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4045:2: rule__Note__Group_1_0_1__2__Impl rule__Note__Group_1_0_1__3
             {
-            pushFollow(FOLLOW_rule__Note__Group_1_0_1__2__Impl_in_rule__Note__Group_1_0_1__28218);
+            pushFollow(FOLLOW_rule__Note__Group_1_0_1__2__Impl_in_rule__Note__Group_1_0_1__28340);
             rule__Note__Group_1_0_1__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Note__Group_1_0_1__3_in_rule__Note__Group_1_0_1__28221);
+            pushFollow(FOLLOW_rule__Note__Group_1_0_1__3_in_rule__Note__Group_1_0_1__28343);
             rule__Note__Group_1_0_1__3();
 
             state._fsp--;
@@ -11082,20 +11216,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_0_1__2__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4006:1: rule__Note__Group_1_0_1__2__Impl : ( RULE_END_LINE ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4052:1: rule__Note__Group_1_0_1__2__Impl : ( RULE_END_LINE ) ;
     public final void rule__Note__Group_1_0_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4010:1: ( ( RULE_END_LINE ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4011:1: ( RULE_END_LINE )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4056:1: ( ( RULE_END_LINE ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4057:1: ( RULE_END_LINE )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4011:1: ( RULE_END_LINE )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4012:1: RULE_END_LINE
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4057:1: ( RULE_END_LINE )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4058:1: RULE_END_LINE
             {
              before(grammarAccess.getNoteAccess().getEND_LINETerminalRuleCall_1_0_1_2()); 
-            match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__Note__Group_1_0_1__2__Impl8248); 
+            match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__Note__Group_1_0_1__2__Impl8370); 
              after(grammarAccess.getNoteAccess().getEND_LINETerminalRuleCall_1_0_1_2()); 
 
             }
@@ -11119,21 +11253,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_0_1__3"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4023:1: rule__Note__Group_1_0_1__3 : rule__Note__Group_1_0_1__3__Impl rule__Note__Group_1_0_1__4 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4069:1: rule__Note__Group_1_0_1__3 : rule__Note__Group_1_0_1__3__Impl rule__Note__Group_1_0_1__4 ;
     public final void rule__Note__Group_1_0_1__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4027:1: ( rule__Note__Group_1_0_1__3__Impl rule__Note__Group_1_0_1__4 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4028:2: rule__Note__Group_1_0_1__3__Impl rule__Note__Group_1_0_1__4
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4073:1: ( rule__Note__Group_1_0_1__3__Impl rule__Note__Group_1_0_1__4 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4074:2: rule__Note__Group_1_0_1__3__Impl rule__Note__Group_1_0_1__4
             {
-            pushFollow(FOLLOW_rule__Note__Group_1_0_1__3__Impl_in_rule__Note__Group_1_0_1__38277);
+            pushFollow(FOLLOW_rule__Note__Group_1_0_1__3__Impl_in_rule__Note__Group_1_0_1__38399);
             rule__Note__Group_1_0_1__3__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Note__Group_1_0_1__4_in_rule__Note__Group_1_0_1__38280);
+            pushFollow(FOLLOW_rule__Note__Group_1_0_1__4_in_rule__Note__Group_1_0_1__38402);
             rule__Note__Group_1_0_1__4();
 
             state._fsp--;
@@ -11157,23 +11291,23 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_0_1__3__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4035:1: rule__Note__Group_1_0_1__3__Impl : ( ( rule__Note__ValueAssignment_1_0_1_3 ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4081:1: rule__Note__Group_1_0_1__3__Impl : ( ( rule__Note__ValueAssignment_1_0_1_3 ) ) ;
     public final void rule__Note__Group_1_0_1__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4039:1: ( ( ( rule__Note__ValueAssignment_1_0_1_3 ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4040:1: ( ( rule__Note__ValueAssignment_1_0_1_3 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4085:1: ( ( ( rule__Note__ValueAssignment_1_0_1_3 ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4086:1: ( ( rule__Note__ValueAssignment_1_0_1_3 ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4040:1: ( ( rule__Note__ValueAssignment_1_0_1_3 ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4041:1: ( rule__Note__ValueAssignment_1_0_1_3 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4086:1: ( ( rule__Note__ValueAssignment_1_0_1_3 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4087:1: ( rule__Note__ValueAssignment_1_0_1_3 )
             {
              before(grammarAccess.getNoteAccess().getValueAssignment_1_0_1_3()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4042:1: ( rule__Note__ValueAssignment_1_0_1_3 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4042:2: rule__Note__ValueAssignment_1_0_1_3
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4088:1: ( rule__Note__ValueAssignment_1_0_1_3 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4088:2: rule__Note__ValueAssignment_1_0_1_3
             {
-            pushFollow(FOLLOW_rule__Note__ValueAssignment_1_0_1_3_in_rule__Note__Group_1_0_1__3__Impl8307);
+            pushFollow(FOLLOW_rule__Note__ValueAssignment_1_0_1_3_in_rule__Note__Group_1_0_1__3__Impl8429);
             rule__Note__ValueAssignment_1_0_1_3();
 
             state._fsp--;
@@ -11204,21 +11338,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_0_1__4"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4052:1: rule__Note__Group_1_0_1__4 : rule__Note__Group_1_0_1__4__Impl rule__Note__Group_1_0_1__5 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4098:1: rule__Note__Group_1_0_1__4 : rule__Note__Group_1_0_1__4__Impl rule__Note__Group_1_0_1__5 ;
     public final void rule__Note__Group_1_0_1__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4056:1: ( rule__Note__Group_1_0_1__4__Impl rule__Note__Group_1_0_1__5 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4057:2: rule__Note__Group_1_0_1__4__Impl rule__Note__Group_1_0_1__5
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4102:1: ( rule__Note__Group_1_0_1__4__Impl rule__Note__Group_1_0_1__5 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4103:2: rule__Note__Group_1_0_1__4__Impl rule__Note__Group_1_0_1__5
             {
-            pushFollow(FOLLOW_rule__Note__Group_1_0_1__4__Impl_in_rule__Note__Group_1_0_1__48337);
+            pushFollow(FOLLOW_rule__Note__Group_1_0_1__4__Impl_in_rule__Note__Group_1_0_1__48459);
             rule__Note__Group_1_0_1__4__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Note__Group_1_0_1__5_in_rule__Note__Group_1_0_1__48340);
+            pushFollow(FOLLOW_rule__Note__Group_1_0_1__5_in_rule__Note__Group_1_0_1__48462);
             rule__Note__Group_1_0_1__5();
 
             state._fsp--;
@@ -11242,20 +11376,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_0_1__4__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4064:1: rule__Note__Group_1_0_1__4__Impl : ( RULE_END_LINE ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4110:1: rule__Note__Group_1_0_1__4__Impl : ( RULE_END_LINE ) ;
     public final void rule__Note__Group_1_0_1__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4068:1: ( ( RULE_END_LINE ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4069:1: ( RULE_END_LINE )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4114:1: ( ( RULE_END_LINE ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4115:1: ( RULE_END_LINE )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4069:1: ( RULE_END_LINE )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4070:1: RULE_END_LINE
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4115:1: ( RULE_END_LINE )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4116:1: RULE_END_LINE
             {
              before(grammarAccess.getNoteAccess().getEND_LINETerminalRuleCall_1_0_1_4()); 
-            match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__Note__Group_1_0_1__4__Impl8367); 
+            match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__Note__Group_1_0_1__4__Impl8489); 
              after(grammarAccess.getNoteAccess().getEND_LINETerminalRuleCall_1_0_1_4()); 
 
             }
@@ -11279,21 +11413,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_0_1__5"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4081:1: rule__Note__Group_1_0_1__5 : rule__Note__Group_1_0_1__5__Impl rule__Note__Group_1_0_1__6 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4127:1: rule__Note__Group_1_0_1__5 : rule__Note__Group_1_0_1__5__Impl rule__Note__Group_1_0_1__6 ;
     public final void rule__Note__Group_1_0_1__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4085:1: ( rule__Note__Group_1_0_1__5__Impl rule__Note__Group_1_0_1__6 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4086:2: rule__Note__Group_1_0_1__5__Impl rule__Note__Group_1_0_1__6
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4131:1: ( rule__Note__Group_1_0_1__5__Impl rule__Note__Group_1_0_1__6 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4132:2: rule__Note__Group_1_0_1__5__Impl rule__Note__Group_1_0_1__6
             {
-            pushFollow(FOLLOW_rule__Note__Group_1_0_1__5__Impl_in_rule__Note__Group_1_0_1__58396);
+            pushFollow(FOLLOW_rule__Note__Group_1_0_1__5__Impl_in_rule__Note__Group_1_0_1__58518);
             rule__Note__Group_1_0_1__5__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Note__Group_1_0_1__6_in_rule__Note__Group_1_0_1__58399);
+            pushFollow(FOLLOW_rule__Note__Group_1_0_1__6_in_rule__Note__Group_1_0_1__58521);
             rule__Note__Group_1_0_1__6();
 
             state._fsp--;
@@ -11317,20 +11451,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_0_1__5__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4093:1: rule__Note__Group_1_0_1__5__Impl : ( 'end note' ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4139:1: rule__Note__Group_1_0_1__5__Impl : ( 'end note' ) ;
     public final void rule__Note__Group_1_0_1__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4097:1: ( ( 'end note' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4098:1: ( 'end note' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4143:1: ( ( 'end note' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4144:1: ( 'end note' )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4098:1: ( 'end note' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4099:1: 'end note'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4144:1: ( 'end note' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4145:1: 'end note'
             {
              before(grammarAccess.getNoteAccess().getEndNoteKeyword_1_0_1_5()); 
-            match(input,51,FOLLOW_51_in_rule__Note__Group_1_0_1__5__Impl8427); 
+            match(input,53,FOLLOW_53_in_rule__Note__Group_1_0_1__5__Impl8549); 
              after(grammarAccess.getNoteAccess().getEndNoteKeyword_1_0_1_5()); 
 
             }
@@ -11354,16 +11488,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_0_1__6"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4112:1: rule__Note__Group_1_0_1__6 : rule__Note__Group_1_0_1__6__Impl ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4158:1: rule__Note__Group_1_0_1__6 : rule__Note__Group_1_0_1__6__Impl ;
     public final void rule__Note__Group_1_0_1__6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4116:1: ( rule__Note__Group_1_0_1__6__Impl )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4117:2: rule__Note__Group_1_0_1__6__Impl
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4162:1: ( rule__Note__Group_1_0_1__6__Impl )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4163:2: rule__Note__Group_1_0_1__6__Impl
             {
-            pushFollow(FOLLOW_rule__Note__Group_1_0_1__6__Impl_in_rule__Note__Group_1_0_1__68458);
+            pushFollow(FOLLOW_rule__Note__Group_1_0_1__6__Impl_in_rule__Note__Group_1_0_1__68580);
             rule__Note__Group_1_0_1__6__Impl();
 
             state._fsp--;
@@ -11387,20 +11521,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_0_1__6__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4123:1: rule__Note__Group_1_0_1__6__Impl : ( RULE_END_LINE ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4169:1: rule__Note__Group_1_0_1__6__Impl : ( RULE_END_LINE ) ;
     public final void rule__Note__Group_1_0_1__6__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4127:1: ( ( RULE_END_LINE ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4128:1: ( RULE_END_LINE )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4173:1: ( ( RULE_END_LINE ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4174:1: ( RULE_END_LINE )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4128:1: ( RULE_END_LINE )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4129:1: RULE_END_LINE
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4174:1: ( RULE_END_LINE )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4175:1: RULE_END_LINE
             {
              before(grammarAccess.getNoteAccess().getEND_LINETerminalRuleCall_1_0_1_6()); 
-            match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__Note__Group_1_0_1__6__Impl8485); 
+            match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__Note__Group_1_0_1__6__Impl8607); 
              after(grammarAccess.getNoteAccess().getEND_LINETerminalRuleCall_1_0_1_6()); 
 
             }
@@ -11424,21 +11558,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_1__0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4154:1: rule__Note__Group_1_1__0 : rule__Note__Group_1_1__0__Impl rule__Note__Group_1_1__1 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4200:1: rule__Note__Group_1_1__0 : rule__Note__Group_1_1__0__Impl rule__Note__Group_1_1__1 ;
     public final void rule__Note__Group_1_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4158:1: ( rule__Note__Group_1_1__0__Impl rule__Note__Group_1_1__1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4159:2: rule__Note__Group_1_1__0__Impl rule__Note__Group_1_1__1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4204:1: ( rule__Note__Group_1_1__0__Impl rule__Note__Group_1_1__1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4205:2: rule__Note__Group_1_1__0__Impl rule__Note__Group_1_1__1
             {
-            pushFollow(FOLLOW_rule__Note__Group_1_1__0__Impl_in_rule__Note__Group_1_1__08528);
+            pushFollow(FOLLOW_rule__Note__Group_1_1__0__Impl_in_rule__Note__Group_1_1__08650);
             rule__Note__Group_1_1__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Note__Group_1_1__1_in_rule__Note__Group_1_1__08531);
+            pushFollow(FOLLOW_rule__Note__Group_1_1__1_in_rule__Note__Group_1_1__08653);
             rule__Note__Group_1_1__1();
 
             state._fsp--;
@@ -11462,20 +11596,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_1__0__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4166:1: rule__Note__Group_1_1__0__Impl : ( 'as' ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4212:1: rule__Note__Group_1_1__0__Impl : ( 'as' ) ;
     public final void rule__Note__Group_1_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4170:1: ( ( 'as' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4171:1: ( 'as' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4216:1: ( ( 'as' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4217:1: ( 'as' )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4171:1: ( 'as' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4172:1: 'as'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4217:1: ( 'as' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4218:1: 'as'
             {
              before(grammarAccess.getNoteAccess().getAsKeyword_1_1_0()); 
-            match(input,27,FOLLOW_27_in_rule__Note__Group_1_1__0__Impl8559); 
+            match(input,29,FOLLOW_29_in_rule__Note__Group_1_1__0__Impl8681); 
              after(grammarAccess.getNoteAccess().getAsKeyword_1_1_0()); 
 
             }
@@ -11499,21 +11633,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_1__1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4185:1: rule__Note__Group_1_1__1 : rule__Note__Group_1_1__1__Impl rule__Note__Group_1_1__2 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4231:1: rule__Note__Group_1_1__1 : rule__Note__Group_1_1__1__Impl rule__Note__Group_1_1__2 ;
     public final void rule__Note__Group_1_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4189:1: ( rule__Note__Group_1_1__1__Impl rule__Note__Group_1_1__2 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4190:2: rule__Note__Group_1_1__1__Impl rule__Note__Group_1_1__2
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4235:1: ( rule__Note__Group_1_1__1__Impl rule__Note__Group_1_1__2 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4236:2: rule__Note__Group_1_1__1__Impl rule__Note__Group_1_1__2
             {
-            pushFollow(FOLLOW_rule__Note__Group_1_1__1__Impl_in_rule__Note__Group_1_1__18590);
+            pushFollow(FOLLOW_rule__Note__Group_1_1__1__Impl_in_rule__Note__Group_1_1__18712);
             rule__Note__Group_1_1__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Note__Group_1_1__2_in_rule__Note__Group_1_1__18593);
+            pushFollow(FOLLOW_rule__Note__Group_1_1__2_in_rule__Note__Group_1_1__18715);
             rule__Note__Group_1_1__2();
 
             state._fsp--;
@@ -11537,23 +11671,23 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_1__1__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4197:1: rule__Note__Group_1_1__1__Impl : ( ( rule__Note__NameAssignment_1_1_1 ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4243:1: rule__Note__Group_1_1__1__Impl : ( ( rule__Note__NameAssignment_1_1_1 ) ) ;
     public final void rule__Note__Group_1_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4201:1: ( ( ( rule__Note__NameAssignment_1_1_1 ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4202:1: ( ( rule__Note__NameAssignment_1_1_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4247:1: ( ( ( rule__Note__NameAssignment_1_1_1 ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4248:1: ( ( rule__Note__NameAssignment_1_1_1 ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4202:1: ( ( rule__Note__NameAssignment_1_1_1 ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4203:1: ( rule__Note__NameAssignment_1_1_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4248:1: ( ( rule__Note__NameAssignment_1_1_1 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4249:1: ( rule__Note__NameAssignment_1_1_1 )
             {
              before(grammarAccess.getNoteAccess().getNameAssignment_1_1_1()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4204:1: ( rule__Note__NameAssignment_1_1_1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4204:2: rule__Note__NameAssignment_1_1_1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4250:1: ( rule__Note__NameAssignment_1_1_1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4250:2: rule__Note__NameAssignment_1_1_1
             {
-            pushFollow(FOLLOW_rule__Note__NameAssignment_1_1_1_in_rule__Note__Group_1_1__1__Impl8620);
+            pushFollow(FOLLOW_rule__Note__NameAssignment_1_1_1_in_rule__Note__Group_1_1__1__Impl8742);
             rule__Note__NameAssignment_1_1_1();
 
             state._fsp--;
@@ -11584,21 +11718,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_1__2"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4214:1: rule__Note__Group_1_1__2 : rule__Note__Group_1_1__2__Impl rule__Note__Group_1_1__3 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4260:1: rule__Note__Group_1_1__2 : rule__Note__Group_1_1__2__Impl rule__Note__Group_1_1__3 ;
     public final void rule__Note__Group_1_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4218:1: ( rule__Note__Group_1_1__2__Impl rule__Note__Group_1_1__3 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4219:2: rule__Note__Group_1_1__2__Impl rule__Note__Group_1_1__3
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4264:1: ( rule__Note__Group_1_1__2__Impl rule__Note__Group_1_1__3 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4265:2: rule__Note__Group_1_1__2__Impl rule__Note__Group_1_1__3
             {
-            pushFollow(FOLLOW_rule__Note__Group_1_1__2__Impl_in_rule__Note__Group_1_1__28650);
+            pushFollow(FOLLOW_rule__Note__Group_1_1__2__Impl_in_rule__Note__Group_1_1__28772);
             rule__Note__Group_1_1__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Note__Group_1_1__3_in_rule__Note__Group_1_1__28653);
+            pushFollow(FOLLOW_rule__Note__Group_1_1__3_in_rule__Note__Group_1_1__28775);
             rule__Note__Group_1_1__3();
 
             state._fsp--;
@@ -11622,20 +11756,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_1__2__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4226:1: rule__Note__Group_1_1__2__Impl : ( RULE_END_LINE ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4272:1: rule__Note__Group_1_1__2__Impl : ( RULE_END_LINE ) ;
     public final void rule__Note__Group_1_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4230:1: ( ( RULE_END_LINE ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4231:1: ( RULE_END_LINE )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4276:1: ( ( RULE_END_LINE ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4277:1: ( RULE_END_LINE )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4231:1: ( RULE_END_LINE )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4232:1: RULE_END_LINE
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4277:1: ( RULE_END_LINE )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4278:1: RULE_END_LINE
             {
              before(grammarAccess.getNoteAccess().getEND_LINETerminalRuleCall_1_1_2()); 
-            match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__Note__Group_1_1__2__Impl8680); 
+            match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__Note__Group_1_1__2__Impl8802); 
              after(grammarAccess.getNoteAccess().getEND_LINETerminalRuleCall_1_1_2()); 
 
             }
@@ -11659,21 +11793,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_1__3"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4243:1: rule__Note__Group_1_1__3 : rule__Note__Group_1_1__3__Impl rule__Note__Group_1_1__4 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4289:1: rule__Note__Group_1_1__3 : rule__Note__Group_1_1__3__Impl rule__Note__Group_1_1__4 ;
     public final void rule__Note__Group_1_1__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4247:1: ( rule__Note__Group_1_1__3__Impl rule__Note__Group_1_1__4 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4248:2: rule__Note__Group_1_1__3__Impl rule__Note__Group_1_1__4
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4293:1: ( rule__Note__Group_1_1__3__Impl rule__Note__Group_1_1__4 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4294:2: rule__Note__Group_1_1__3__Impl rule__Note__Group_1_1__4
             {
-            pushFollow(FOLLOW_rule__Note__Group_1_1__3__Impl_in_rule__Note__Group_1_1__38709);
+            pushFollow(FOLLOW_rule__Note__Group_1_1__3__Impl_in_rule__Note__Group_1_1__38831);
             rule__Note__Group_1_1__3__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Note__Group_1_1__4_in_rule__Note__Group_1_1__38712);
+            pushFollow(FOLLOW_rule__Note__Group_1_1__4_in_rule__Note__Group_1_1__38834);
             rule__Note__Group_1_1__4();
 
             state._fsp--;
@@ -11697,23 +11831,23 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_1__3__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4255:1: rule__Note__Group_1_1__3__Impl : ( ( rule__Note__ValueAssignment_1_1_3 ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4301:1: rule__Note__Group_1_1__3__Impl : ( ( rule__Note__ValueAssignment_1_1_3 ) ) ;
     public final void rule__Note__Group_1_1__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4259:1: ( ( ( rule__Note__ValueAssignment_1_1_3 ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4260:1: ( ( rule__Note__ValueAssignment_1_1_3 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4305:1: ( ( ( rule__Note__ValueAssignment_1_1_3 ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4306:1: ( ( rule__Note__ValueAssignment_1_1_3 ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4260:1: ( ( rule__Note__ValueAssignment_1_1_3 ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4261:1: ( rule__Note__ValueAssignment_1_1_3 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4306:1: ( ( rule__Note__ValueAssignment_1_1_3 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4307:1: ( rule__Note__ValueAssignment_1_1_3 )
             {
              before(grammarAccess.getNoteAccess().getValueAssignment_1_1_3()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4262:1: ( rule__Note__ValueAssignment_1_1_3 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4262:2: rule__Note__ValueAssignment_1_1_3
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4308:1: ( rule__Note__ValueAssignment_1_1_3 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4308:2: rule__Note__ValueAssignment_1_1_3
             {
-            pushFollow(FOLLOW_rule__Note__ValueAssignment_1_1_3_in_rule__Note__Group_1_1__3__Impl8739);
+            pushFollow(FOLLOW_rule__Note__ValueAssignment_1_1_3_in_rule__Note__Group_1_1__3__Impl8861);
             rule__Note__ValueAssignment_1_1_3();
 
             state._fsp--;
@@ -11744,21 +11878,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_1__4"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4272:1: rule__Note__Group_1_1__4 : rule__Note__Group_1_1__4__Impl rule__Note__Group_1_1__5 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4318:1: rule__Note__Group_1_1__4 : rule__Note__Group_1_1__4__Impl rule__Note__Group_1_1__5 ;
     public final void rule__Note__Group_1_1__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4276:1: ( rule__Note__Group_1_1__4__Impl rule__Note__Group_1_1__5 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4277:2: rule__Note__Group_1_1__4__Impl rule__Note__Group_1_1__5
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4322:1: ( rule__Note__Group_1_1__4__Impl rule__Note__Group_1_1__5 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4323:2: rule__Note__Group_1_1__4__Impl rule__Note__Group_1_1__5
             {
-            pushFollow(FOLLOW_rule__Note__Group_1_1__4__Impl_in_rule__Note__Group_1_1__48769);
+            pushFollow(FOLLOW_rule__Note__Group_1_1__4__Impl_in_rule__Note__Group_1_1__48891);
             rule__Note__Group_1_1__4__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Note__Group_1_1__5_in_rule__Note__Group_1_1__48772);
+            pushFollow(FOLLOW_rule__Note__Group_1_1__5_in_rule__Note__Group_1_1__48894);
             rule__Note__Group_1_1__5();
 
             state._fsp--;
@@ -11782,20 +11916,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_1__4__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4284:1: rule__Note__Group_1_1__4__Impl : ( RULE_END_LINE ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4330:1: rule__Note__Group_1_1__4__Impl : ( RULE_END_LINE ) ;
     public final void rule__Note__Group_1_1__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4288:1: ( ( RULE_END_LINE ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4289:1: ( RULE_END_LINE )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4334:1: ( ( RULE_END_LINE ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4335:1: ( RULE_END_LINE )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4289:1: ( RULE_END_LINE )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4290:1: RULE_END_LINE
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4335:1: ( RULE_END_LINE )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4336:1: RULE_END_LINE
             {
              before(grammarAccess.getNoteAccess().getEND_LINETerminalRuleCall_1_1_4()); 
-            match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__Note__Group_1_1__4__Impl8799); 
+            match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__Note__Group_1_1__4__Impl8921); 
              after(grammarAccess.getNoteAccess().getEND_LINETerminalRuleCall_1_1_4()); 
 
             }
@@ -11819,21 +11953,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_1__5"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4301:1: rule__Note__Group_1_1__5 : rule__Note__Group_1_1__5__Impl rule__Note__Group_1_1__6 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4347:1: rule__Note__Group_1_1__5 : rule__Note__Group_1_1__5__Impl rule__Note__Group_1_1__6 ;
     public final void rule__Note__Group_1_1__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4305:1: ( rule__Note__Group_1_1__5__Impl rule__Note__Group_1_1__6 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4306:2: rule__Note__Group_1_1__5__Impl rule__Note__Group_1_1__6
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4351:1: ( rule__Note__Group_1_1__5__Impl rule__Note__Group_1_1__6 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4352:2: rule__Note__Group_1_1__5__Impl rule__Note__Group_1_1__6
             {
-            pushFollow(FOLLOW_rule__Note__Group_1_1__5__Impl_in_rule__Note__Group_1_1__58828);
+            pushFollow(FOLLOW_rule__Note__Group_1_1__5__Impl_in_rule__Note__Group_1_1__58950);
             rule__Note__Group_1_1__5__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Note__Group_1_1__6_in_rule__Note__Group_1_1__58831);
+            pushFollow(FOLLOW_rule__Note__Group_1_1__6_in_rule__Note__Group_1_1__58953);
             rule__Note__Group_1_1__6();
 
             state._fsp--;
@@ -11857,20 +11991,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_1__5__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4313:1: rule__Note__Group_1_1__5__Impl : ( 'end note' ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4359:1: rule__Note__Group_1_1__5__Impl : ( 'end note' ) ;
     public final void rule__Note__Group_1_1__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4317:1: ( ( 'end note' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4318:1: ( 'end note' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4363:1: ( ( 'end note' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4364:1: ( 'end note' )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4318:1: ( 'end note' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4319:1: 'end note'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4364:1: ( 'end note' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4365:1: 'end note'
             {
              before(grammarAccess.getNoteAccess().getEndNoteKeyword_1_1_5()); 
-            match(input,51,FOLLOW_51_in_rule__Note__Group_1_1__5__Impl8859); 
+            match(input,53,FOLLOW_53_in_rule__Note__Group_1_1__5__Impl8981); 
              after(grammarAccess.getNoteAccess().getEndNoteKeyword_1_1_5()); 
 
             }
@@ -11894,16 +12028,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_1__6"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4332:1: rule__Note__Group_1_1__6 : rule__Note__Group_1_1__6__Impl ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4378:1: rule__Note__Group_1_1__6 : rule__Note__Group_1_1__6__Impl ;
     public final void rule__Note__Group_1_1__6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4336:1: ( rule__Note__Group_1_1__6__Impl )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4337:2: rule__Note__Group_1_1__6__Impl
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4382:1: ( rule__Note__Group_1_1__6__Impl )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4383:2: rule__Note__Group_1_1__6__Impl
             {
-            pushFollow(FOLLOW_rule__Note__Group_1_1__6__Impl_in_rule__Note__Group_1_1__68890);
+            pushFollow(FOLLOW_rule__Note__Group_1_1__6__Impl_in_rule__Note__Group_1_1__69012);
             rule__Note__Group_1_1__6__Impl();
 
             state._fsp--;
@@ -11927,20 +12061,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__Group_1_1__6__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4343:1: rule__Note__Group_1_1__6__Impl : ( RULE_END_LINE ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4389:1: rule__Note__Group_1_1__6__Impl : ( RULE_END_LINE ) ;
     public final void rule__Note__Group_1_1__6__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4347:1: ( ( RULE_END_LINE ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4348:1: ( RULE_END_LINE )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4393:1: ( ( RULE_END_LINE ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4394:1: ( RULE_END_LINE )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4348:1: ( RULE_END_LINE )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4349:1: RULE_END_LINE
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4394:1: ( RULE_END_LINE )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4395:1: RULE_END_LINE
             {
              before(grammarAccess.getNoteAccess().getEND_LINETerminalRuleCall_1_1_6()); 
-            match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__Note__Group_1_1__6__Impl8917); 
+            match(input,RULE_END_LINE,FOLLOW_RULE_END_LINE_in_rule__Note__Group_1_1__6__Impl9039); 
              after(grammarAccess.getNoteAccess().getEND_LINETerminalRuleCall_1_1_6()); 
 
             }
@@ -11964,21 +12098,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__DataType__Group__0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4374:1: rule__DataType__Group__0 : rule__DataType__Group__0__Impl rule__DataType__Group__1 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4420:1: rule__DataType__Group__0 : rule__DataType__Group__0__Impl rule__DataType__Group__1 ;
     public final void rule__DataType__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4378:1: ( rule__DataType__Group__0__Impl rule__DataType__Group__1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4379:2: rule__DataType__Group__0__Impl rule__DataType__Group__1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4424:1: ( rule__DataType__Group__0__Impl rule__DataType__Group__1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4425:2: rule__DataType__Group__0__Impl rule__DataType__Group__1
             {
-            pushFollow(FOLLOW_rule__DataType__Group__0__Impl_in_rule__DataType__Group__08960);
+            pushFollow(FOLLOW_rule__DataType__Group__0__Impl_in_rule__DataType__Group__09082);
             rule__DataType__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__DataType__Group__1_in_rule__DataType__Group__08963);
+            pushFollow(FOLLOW_rule__DataType__Group__1_in_rule__DataType__Group__09085);
             rule__DataType__Group__1();
 
             state._fsp--;
@@ -12002,23 +12136,23 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__DataType__Group__0__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4386:1: rule__DataType__Group__0__Impl : ( ( rule__DataType__Alternatives_0 ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4432:1: rule__DataType__Group__0__Impl : ( ( rule__DataType__Alternatives_0 ) ) ;
     public final void rule__DataType__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4390:1: ( ( ( rule__DataType__Alternatives_0 ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4391:1: ( ( rule__DataType__Alternatives_0 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4436:1: ( ( ( rule__DataType__Alternatives_0 ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4437:1: ( ( rule__DataType__Alternatives_0 ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4391:1: ( ( rule__DataType__Alternatives_0 ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4392:1: ( rule__DataType__Alternatives_0 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4437:1: ( ( rule__DataType__Alternatives_0 ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4438:1: ( rule__DataType__Alternatives_0 )
             {
              before(grammarAccess.getDataTypeAccess().getAlternatives_0()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4393:1: ( rule__DataType__Alternatives_0 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4393:2: rule__DataType__Alternatives_0
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4439:1: ( rule__DataType__Alternatives_0 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4439:2: rule__DataType__Alternatives_0
             {
-            pushFollow(FOLLOW_rule__DataType__Alternatives_0_in_rule__DataType__Group__0__Impl8990);
+            pushFollow(FOLLOW_rule__DataType__Alternatives_0_in_rule__DataType__Group__0__Impl9112);
             rule__DataType__Alternatives_0();
 
             state._fsp--;
@@ -12049,16 +12183,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__DataType__Group__1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4403:1: rule__DataType__Group__1 : rule__DataType__Group__1__Impl ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4449:1: rule__DataType__Group__1 : rule__DataType__Group__1__Impl ;
     public final void rule__DataType__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4407:1: ( rule__DataType__Group__1__Impl )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4408:2: rule__DataType__Group__1__Impl
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4453:1: ( rule__DataType__Group__1__Impl )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4454:2: rule__DataType__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__DataType__Group__1__Impl_in_rule__DataType__Group__19020);
+            pushFollow(FOLLOW_rule__DataType__Group__1__Impl_in_rule__DataType__Group__19142);
             rule__DataType__Group__1__Impl();
 
             state._fsp--;
@@ -12082,31 +12216,31 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__DataType__Group__1__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4414:1: rule__DataType__Group__1__Impl : ( ( rule__DataType__IsArrayAssignment_1 )? ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4460:1: rule__DataType__Group__1__Impl : ( ( rule__DataType__IsArrayAssignment_1 )? ) ;
     public final void rule__DataType__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4418:1: ( ( ( rule__DataType__IsArrayAssignment_1 )? ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4419:1: ( ( rule__DataType__IsArrayAssignment_1 )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4464:1: ( ( ( rule__DataType__IsArrayAssignment_1 )? ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4465:1: ( ( rule__DataType__IsArrayAssignment_1 )? )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4419:1: ( ( rule__DataType__IsArrayAssignment_1 )? )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4420:1: ( rule__DataType__IsArrayAssignment_1 )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4465:1: ( ( rule__DataType__IsArrayAssignment_1 )? )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4466:1: ( rule__DataType__IsArrayAssignment_1 )?
             {
              before(grammarAccess.getDataTypeAccess().getIsArrayAssignment_1()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4421:1: ( rule__DataType__IsArrayAssignment_1 )?
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4467:1: ( rule__DataType__IsArrayAssignment_1 )?
             int alt43=2;
             int LA43_0 = input.LA(1);
 
-            if ( (LA43_0==55) ) {
+            if ( (LA43_0==57) ) {
                 alt43=1;
             }
             switch (alt43) {
                 case 1 :
-                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4421:2: rule__DataType__IsArrayAssignment_1
+                    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4467:2: rule__DataType__IsArrayAssignment_1
                     {
-                    pushFollow(FOLLOW_rule__DataType__IsArrayAssignment_1_in_rule__DataType__Group__1__Impl9047);
+                    pushFollow(FOLLOW_rule__DataType__IsArrayAssignment_1_in_rule__DataType__Group__1__Impl9169);
                     rule__DataType__IsArrayAssignment_1();
 
                     state._fsp--;
@@ -12140,21 +12274,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__QualifiedName__Group__0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4435:1: rule__QualifiedName__Group__0 : rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4481:1: rule__QualifiedName__Group__0 : rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 ;
     public final void rule__QualifiedName__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4439:1: ( rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4440:2: rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4485:1: ( rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4486:2: rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1
             {
-            pushFollow(FOLLOW_rule__QualifiedName__Group__0__Impl_in_rule__QualifiedName__Group__09082);
+            pushFollow(FOLLOW_rule__QualifiedName__Group__0__Impl_in_rule__QualifiedName__Group__09204);
             rule__QualifiedName__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__QualifiedName__Group__1_in_rule__QualifiedName__Group__09085);
+            pushFollow(FOLLOW_rule__QualifiedName__Group__1_in_rule__QualifiedName__Group__09207);
             rule__QualifiedName__Group__1();
 
             state._fsp--;
@@ -12178,20 +12312,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__QualifiedName__Group__0__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4447:1: rule__QualifiedName__Group__0__Impl : ( RULE_ID ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4493:1: rule__QualifiedName__Group__0__Impl : ( RULE_ID ) ;
     public final void rule__QualifiedName__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4451:1: ( ( RULE_ID ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4452:1: ( RULE_ID )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4497:1: ( ( RULE_ID ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4498:1: ( RULE_ID )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4452:1: ( RULE_ID )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4453:1: RULE_ID
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4498:1: ( RULE_ID )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4499:1: RULE_ID
             {
              before(grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__QualifiedName__Group__0__Impl9112); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__QualifiedName__Group__0__Impl9234); 
              after(grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_0()); 
 
             }
@@ -12215,16 +12349,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__QualifiedName__Group__1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4464:1: rule__QualifiedName__Group__1 : rule__QualifiedName__Group__1__Impl ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4510:1: rule__QualifiedName__Group__1 : rule__QualifiedName__Group__1__Impl ;
     public final void rule__QualifiedName__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4468:1: ( rule__QualifiedName__Group__1__Impl )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4469:2: rule__QualifiedName__Group__1__Impl
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4514:1: ( rule__QualifiedName__Group__1__Impl )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4515:2: rule__QualifiedName__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__QualifiedName__Group__1__Impl_in_rule__QualifiedName__Group__19141);
+            pushFollow(FOLLOW_rule__QualifiedName__Group__1__Impl_in_rule__QualifiedName__Group__19263);
             rule__QualifiedName__Group__1__Impl();
 
             state._fsp--;
@@ -12248,26 +12382,26 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__QualifiedName__Group__1__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4475:1: rule__QualifiedName__Group__1__Impl : ( ( rule__QualifiedName__Group_1__0 )* ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4521:1: rule__QualifiedName__Group__1__Impl : ( ( rule__QualifiedName__Group_1__0 )* ) ;
     public final void rule__QualifiedName__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4479:1: ( ( ( rule__QualifiedName__Group_1__0 )* ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4480:1: ( ( rule__QualifiedName__Group_1__0 )* )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4525:1: ( ( ( rule__QualifiedName__Group_1__0 )* ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4526:1: ( ( rule__QualifiedName__Group_1__0 )* )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4480:1: ( ( rule__QualifiedName__Group_1__0 )* )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4481:1: ( rule__QualifiedName__Group_1__0 )*
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4526:1: ( ( rule__QualifiedName__Group_1__0 )* )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4527:1: ( rule__QualifiedName__Group_1__0 )*
             {
              before(grammarAccess.getQualifiedNameAccess().getGroup_1()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4482:1: ( rule__QualifiedName__Group_1__0 )*
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4528:1: ( rule__QualifiedName__Group_1__0 )*
             loop44:
             do {
                 int alt44=2;
                 int LA44_0 = input.LA(1);
 
-                if ( (LA44_0==47) ) {
+                if ( (LA44_0==51) ) {
                     int LA44_2 = input.LA(2);
 
                     if ( (LA44_2==RULE_ID) ) {
@@ -12280,9 +12414,9 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
                 switch (alt44) {
             	case 1 :
-            	    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4482:2: rule__QualifiedName__Group_1__0
+            	    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4528:2: rule__QualifiedName__Group_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__QualifiedName__Group_1__0_in_rule__QualifiedName__Group__1__Impl9168);
+            	    pushFollow(FOLLOW_rule__QualifiedName__Group_1__0_in_rule__QualifiedName__Group__1__Impl9290);
             	    rule__QualifiedName__Group_1__0();
 
             	    state._fsp--;
@@ -12319,21 +12453,21 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4496:1: rule__QualifiedName__Group_1__0 : rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4542:1: rule__QualifiedName__Group_1__0 : rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 ;
     public final void rule__QualifiedName__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4500:1: ( rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4501:2: rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4546:1: ( rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4547:2: rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1
             {
-            pushFollow(FOLLOW_rule__QualifiedName__Group_1__0__Impl_in_rule__QualifiedName__Group_1__09203);
+            pushFollow(FOLLOW_rule__QualifiedName__Group_1__0__Impl_in_rule__QualifiedName__Group_1__09325);
             rule__QualifiedName__Group_1__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__QualifiedName__Group_1__1_in_rule__QualifiedName__Group_1__09206);
+            pushFollow(FOLLOW_rule__QualifiedName__Group_1__1_in_rule__QualifiedName__Group_1__09328);
             rule__QualifiedName__Group_1__1();
 
             state._fsp--;
@@ -12357,20 +12491,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__0__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4508:1: rule__QualifiedName__Group_1__0__Impl : ( '.' ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4554:1: rule__QualifiedName__Group_1__0__Impl : ( '.' ) ;
     public final void rule__QualifiedName__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4512:1: ( ( '.' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4513:1: ( '.' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4558:1: ( ( '.' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4559:1: ( '.' )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4513:1: ( '.' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4514:1: '.'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4559:1: ( '.' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4560:1: '.'
             {
              before(grammarAccess.getQualifiedNameAccess().getFullStopKeyword_1_0()); 
-            match(input,47,FOLLOW_47_in_rule__QualifiedName__Group_1__0__Impl9234); 
+            match(input,51,FOLLOW_51_in_rule__QualifiedName__Group_1__0__Impl9356); 
              after(grammarAccess.getQualifiedNameAccess().getFullStopKeyword_1_0()); 
 
             }
@@ -12394,16 +12528,16 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4527:1: rule__QualifiedName__Group_1__1 : rule__QualifiedName__Group_1__1__Impl ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4573:1: rule__QualifiedName__Group_1__1 : rule__QualifiedName__Group_1__1__Impl ;
     public final void rule__QualifiedName__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4531:1: ( rule__QualifiedName__Group_1__1__Impl )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4532:2: rule__QualifiedName__Group_1__1__Impl
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4577:1: ( rule__QualifiedName__Group_1__1__Impl )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4578:2: rule__QualifiedName__Group_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__QualifiedName__Group_1__1__Impl_in_rule__QualifiedName__Group_1__19265);
+            pushFollow(FOLLOW_rule__QualifiedName__Group_1__1__Impl_in_rule__QualifiedName__Group_1__19387);
             rule__QualifiedName__Group_1__1__Impl();
 
             state._fsp--;
@@ -12427,20 +12561,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__1__Impl"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4538:1: rule__QualifiedName__Group_1__1__Impl : ( RULE_ID ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4584:1: rule__QualifiedName__Group_1__1__Impl : ( RULE_ID ) ;
     public final void rule__QualifiedName__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4542:1: ( ( RULE_ID ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4543:1: ( RULE_ID )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4588:1: ( ( RULE_ID ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4589:1: ( RULE_ID )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4543:1: ( RULE_ID )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4544:1: RULE_ID
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4589:1: ( RULE_ID )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4590:1: RULE_ID
             {
              before(grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_1_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__QualifiedName__Group_1__1__Impl9292); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__QualifiedName__Group_1__1__Impl9414); 
              after(grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_1_1()); 
 
             }
@@ -12464,20 +12598,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__DomainModel__FileAssignment_2"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4560:1: rule__DomainModel__FileAssignment_2 : ( RULE_STRING ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4606:1: rule__DomainModel__FileAssignment_2 : ( RULE_STRING ) ;
     public final void rule__DomainModel__FileAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4564:1: ( ( RULE_STRING ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4565:1: ( RULE_STRING )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4610:1: ( ( RULE_STRING ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4611:1: ( RULE_STRING )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4565:1: ( RULE_STRING )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4566:1: RULE_STRING
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4611:1: ( RULE_STRING )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4612:1: RULE_STRING
             {
              before(grammarAccess.getDomainModelAccess().getFileSTRINGTerminalRuleCall_2_0()); 
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__DomainModel__FileAssignment_29330); 
+            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__DomainModel__FileAssignment_29452); 
              after(grammarAccess.getDomainModelAccess().getFileSTRINGTerminalRuleCall_2_0()); 
 
             }
@@ -12501,20 +12635,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__DomainModel__PackagesAssignment_4"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4575:1: rule__DomainModel__PackagesAssignment_4 : ( ruleCPackage ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4621:1: rule__DomainModel__PackagesAssignment_4 : ( ruleCPackage ) ;
     public final void rule__DomainModel__PackagesAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4579:1: ( ( ruleCPackage ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4580:1: ( ruleCPackage )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4625:1: ( ( ruleCPackage ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4626:1: ( ruleCPackage )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4580:1: ( ruleCPackage )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4581:1: ruleCPackage
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4626:1: ( ruleCPackage )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4627:1: ruleCPackage
             {
              before(grammarAccess.getDomainModelAccess().getPackagesCPackageParserRuleCall_4_0()); 
-            pushFollow(FOLLOW_ruleCPackage_in_rule__DomainModel__PackagesAssignment_49361);
+            pushFollow(FOLLOW_ruleCPackage_in_rule__DomainModel__PackagesAssignment_49483);
             ruleCPackage();
 
             state._fsp--;
@@ -12542,20 +12676,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CPackage__NameAssignment_1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4590:1: rule__CPackage__NameAssignment_1 : ( ruleQualifiedName ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4636:1: rule__CPackage__NameAssignment_1 : ( ruleQualifiedName ) ;
     public final void rule__CPackage__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4594:1: ( ( ruleQualifiedName ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4595:1: ( ruleQualifiedName )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4640:1: ( ( ruleQualifiedName ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4641:1: ( ruleQualifiedName )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4595:1: ( ruleQualifiedName )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4596:1: ruleQualifiedName
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4641:1: ( ruleQualifiedName )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4642:1: ruleQualifiedName
             {
              before(grammarAccess.getCPackageAccess().getNameQualifiedNameParserRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleQualifiedName_in_rule__CPackage__NameAssignment_19392);
+            pushFollow(FOLLOW_ruleQualifiedName_in_rule__CPackage__NameAssignment_19514);
             ruleQualifiedName();
 
             state._fsp--;
@@ -12583,20 +12717,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CPackage__StyleAssignment_2_1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4605:1: rule__CPackage__StyleAssignment_2_1 : ( rulePackageStyle ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4651:1: rule__CPackage__StyleAssignment_2_1 : ( rulePackageStyle ) ;
     public final void rule__CPackage__StyleAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4609:1: ( ( rulePackageStyle ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4610:1: ( rulePackageStyle )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4655:1: ( ( rulePackageStyle ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4656:1: ( rulePackageStyle )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4610:1: ( rulePackageStyle )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4611:1: rulePackageStyle
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4656:1: ( rulePackageStyle )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4657:1: rulePackageStyle
             {
              before(grammarAccess.getCPackageAccess().getStylePackageStyleEnumRuleCall_2_1_0()); 
-            pushFollow(FOLLOW_rulePackageStyle_in_rule__CPackage__StyleAssignment_2_19423);
+            pushFollow(FOLLOW_rulePackageStyle_in_rule__CPackage__StyleAssignment_2_19545);
             rulePackageStyle();
 
             state._fsp--;
@@ -12624,20 +12758,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CPackage__ElementsAssignment_5"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4620:1: rule__CPackage__ElementsAssignment_5 : ( ruleElement ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4666:1: rule__CPackage__ElementsAssignment_5 : ( ruleElement ) ;
     public final void rule__CPackage__ElementsAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4624:1: ( ( ruleElement ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4625:1: ( ruleElement )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4670:1: ( ( ruleElement ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4671:1: ( ruleElement )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4625:1: ( ruleElement )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4626:1: ruleElement
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4671:1: ( ruleElement )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4672:1: ruleElement
             {
              before(grammarAccess.getCPackageAccess().getElementsElementParserRuleCall_5_0()); 
-            pushFollow(FOLLOW_ruleElement_in_rule__CPackage__ElementsAssignment_59454);
+            pushFollow(FOLLOW_ruleElement_in_rule__CPackage__ElementsAssignment_59576);
             ruleElement();
 
             state._fsp--;
@@ -12665,24 +12799,24 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Relation__LeftRefAssignment_0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4635:1: rule__Relation__LeftRefAssignment_0 : ( ( ruleQualifiedName ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4681:1: rule__Relation__LeftRefAssignment_0 : ( ( ruleQualifiedName ) ) ;
     public final void rule__Relation__LeftRefAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4639:1: ( ( ( ruleQualifiedName ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4640:1: ( ( ruleQualifiedName ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4685:1: ( ( ( ruleQualifiedName ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4686:1: ( ( ruleQualifiedName ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4640:1: ( ( ruleQualifiedName ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4641:1: ( ruleQualifiedName )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4686:1: ( ( ruleQualifiedName ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4687:1: ( ruleQualifiedName )
             {
              before(grammarAccess.getRelationAccess().getLeftRefNodeCrossReference_0_0()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4642:1: ( ruleQualifiedName )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4643:1: ruleQualifiedName
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4688:1: ( ruleQualifiedName )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4689:1: ruleQualifiedName
             {
              before(grammarAccess.getRelationAccess().getLeftRefNodeQualifiedNameParserRuleCall_0_0_1()); 
-            pushFollow(FOLLOW_ruleQualifiedName_in_rule__Relation__LeftRefAssignment_09489);
+            pushFollow(FOLLOW_ruleQualifiedName_in_rule__Relation__LeftRefAssignment_09611);
             ruleQualifiedName();
 
             state._fsp--;
@@ -12714,20 +12848,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Relation__RelTypeAssignment_1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4654:1: rule__Relation__RelTypeAssignment_1 : ( ruleRelationParse ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4700:1: rule__Relation__RelTypeAssignment_1 : ( ruleRelationParse ) ;
     public final void rule__Relation__RelTypeAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4658:1: ( ( ruleRelationParse ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4659:1: ( ruleRelationParse )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4704:1: ( ( ruleRelationParse ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4705:1: ( ruleRelationParse )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4659:1: ( ruleRelationParse )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4660:1: ruleRelationParse
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4705:1: ( ruleRelationParse )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4706:1: ruleRelationParse
             {
              before(grammarAccess.getRelationAccess().getRelTypeRelationParseParserRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleRelationParse_in_rule__Relation__RelTypeAssignment_19524);
+            pushFollow(FOLLOW_ruleRelationParse_in_rule__Relation__RelTypeAssignment_19646);
             ruleRelationParse();
 
             state._fsp--;
@@ -12755,24 +12889,24 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Relation__RightRefAssignment_2"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4669:1: rule__Relation__RightRefAssignment_2 : ( ( ruleQualifiedName ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4715:1: rule__Relation__RightRefAssignment_2 : ( ( ruleQualifiedName ) ) ;
     public final void rule__Relation__RightRefAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4673:1: ( ( ( ruleQualifiedName ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4674:1: ( ( ruleQualifiedName ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4719:1: ( ( ( ruleQualifiedName ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4720:1: ( ( ruleQualifiedName ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4674:1: ( ( ruleQualifiedName ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4675:1: ( ruleQualifiedName )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4720:1: ( ( ruleQualifiedName ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4721:1: ( ruleQualifiedName )
             {
              before(grammarAccess.getRelationAccess().getRightRefNodeCrossReference_2_0()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4676:1: ( ruleQualifiedName )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4677:1: ruleQualifiedName
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4722:1: ( ruleQualifiedName )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4723:1: ruleQualifiedName
             {
              before(grammarAccess.getRelationAccess().getRightRefNodeQualifiedNameParserRuleCall_2_0_1()); 
-            pushFollow(FOLLOW_ruleQualifiedName_in_rule__Relation__RightRefAssignment_29559);
+            pushFollow(FOLLOW_ruleQualifiedName_in_rule__Relation__RightRefAssignment_29681);
             ruleQualifiedName();
 
             state._fsp--;
@@ -12804,20 +12938,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Relation__NameAssignment_3_1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4688:1: rule__Relation__NameAssignment_3_1 : ( ruleText ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4734:1: rule__Relation__NameAssignment_3_1 : ( ruleText ) ;
     public final void rule__Relation__NameAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4692:1: ( ( ruleText ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4693:1: ( ruleText )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4738:1: ( ( ruleText ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4739:1: ( ruleText )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4693:1: ( ruleText )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4694:1: ruleText
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4739:1: ( ruleText )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4740:1: ruleText
             {
              before(grammarAccess.getRelationAccess().getNameTextParserRuleCall_3_1_0()); 
-            pushFollow(FOLLOW_ruleText_in_rule__Relation__NameAssignment_3_19594);
+            pushFollow(FOLLOW_ruleText_in_rule__Relation__NameAssignment_3_19716);
             ruleText();
 
             state._fsp--;
@@ -12845,20 +12979,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__RelationParse__CompAssignment_0_0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4703:1: rule__RelationParse__CompAssignment_0_0 : ( ruleCompType ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4749:1: rule__RelationParse__CompAssignment_0_0 : ( ruleCompType ) ;
     public final void rule__RelationParse__CompAssignment_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4707:1: ( ( ruleCompType ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4708:1: ( ruleCompType )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4753:1: ( ( ruleCompType ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4754:1: ( ruleCompType )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4708:1: ( ruleCompType )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4709:1: ruleCompType
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4754:1: ( ruleCompType )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4755:1: ruleCompType
             {
              before(grammarAccess.getRelationParseAccess().getCompCompTypeEnumRuleCall_0_0_0()); 
-            pushFollow(FOLLOW_ruleCompType_in_rule__RelationParse__CompAssignment_0_09625);
+            pushFollow(FOLLOW_ruleCompType_in_rule__RelationParse__CompAssignment_0_09747);
             ruleCompType();
 
             state._fsp--;
@@ -12886,20 +13020,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__RelationParse__TypeAssignment_0_1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4718:1: rule__RelationParse__TypeAssignment_0_1 : ( ruleRelationType ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4764:1: rule__RelationParse__TypeAssignment_0_1 : ( ruleRelationType ) ;
     public final void rule__RelationParse__TypeAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4722:1: ( ( ruleRelationType ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4723:1: ( ruleRelationType )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4768:1: ( ( ruleRelationType ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4769:1: ( ruleRelationType )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4723:1: ( ruleRelationType )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4724:1: ruleRelationType
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4769:1: ( ruleRelationType )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4770:1: ruleRelationType
             {
              before(grammarAccess.getRelationParseAccess().getTypeRelationTypeParserRuleCall_0_1_0()); 
-            pushFollow(FOLLOW_ruleRelationType_in_rule__RelationParse__TypeAssignment_0_19656);
+            pushFollow(FOLLOW_ruleRelationType_in_rule__RelationParse__TypeAssignment_0_19778);
             ruleRelationType();
 
             state._fsp--;
@@ -12927,24 +13061,24 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__RelationParse__DirectAssignment_0_2"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4733:1: rule__RelationParse__DirectAssignment_0_2 : ( ( '>' ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4779:1: rule__RelationParse__DirectAssignment_0_2 : ( ( '>' ) ) ;
     public final void rule__RelationParse__DirectAssignment_0_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4737:1: ( ( ( '>' ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4738:1: ( ( '>' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4783:1: ( ( ( '>' ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4784:1: ( ( '>' ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4738:1: ( ( '>' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4739:1: ( '>' )
-            {
-             before(grammarAccess.getRelationParseAccess().getDirectGreaterThanSignKeyword_0_2_0()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4740:1: ( '>' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4741:1: '>'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4784:1: ( ( '>' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4785:1: ( '>' )
             {
              before(grammarAccess.getRelationParseAccess().getDirectGreaterThanSignKeyword_0_2_0()); 
-            match(input,52,FOLLOW_52_in_rule__RelationParse__DirectAssignment_0_29692); 
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4786:1: ( '>' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4787:1: '>'
+            {
+             before(grammarAccess.getRelationParseAccess().getDirectGreaterThanSignKeyword_0_2_0()); 
+            match(input,54,FOLLOW_54_in_rule__RelationParse__DirectAssignment_0_29814); 
              after(grammarAccess.getRelationParseAccess().getDirectGreaterThanSignKeyword_0_2_0()); 
 
             }
@@ -12972,20 +13106,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__RelationParse__MultiAssignment_0_4"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4756:1: rule__RelationParse__MultiAssignment_0_4 : ( RULE_MULTI ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4802:1: rule__RelationParse__MultiAssignment_0_4 : ( RULE_MULTI ) ;
     public final void rule__RelationParse__MultiAssignment_0_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4760:1: ( ( RULE_MULTI ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4761:1: ( RULE_MULTI )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4806:1: ( ( RULE_MULTI ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4807:1: ( RULE_MULTI )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4761:1: ( RULE_MULTI )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4762:1: RULE_MULTI
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4807:1: ( RULE_MULTI )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4808:1: RULE_MULTI
             {
              before(grammarAccess.getRelationParseAccess().getMultiMULTITerminalRuleCall_0_4_0()); 
-            match(input,RULE_MULTI,FOLLOW_RULE_MULTI_in_rule__RelationParse__MultiAssignment_0_49731); 
+            match(input,RULE_MULTI,FOLLOW_RULE_MULTI_in_rule__RelationParse__MultiAssignment_0_49853); 
              after(grammarAccess.getRelationParseAccess().getMultiMULTITerminalRuleCall_0_4_0()); 
 
             }
@@ -13009,20 +13143,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__RelationParse__TypeAssignment_1_0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4771:1: rule__RelationParse__TypeAssignment_1_0 : ( ruleRelationType ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4817:1: rule__RelationParse__TypeAssignment_1_0 : ( ruleRelationType ) ;
     public final void rule__RelationParse__TypeAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4775:1: ( ( ruleRelationType ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4776:1: ( ruleRelationType )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4821:1: ( ( ruleRelationType ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4822:1: ( ruleRelationType )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4776:1: ( ruleRelationType )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4777:1: ruleRelationType
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4822:1: ( ruleRelationType )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4823:1: ruleRelationType
             {
              before(grammarAccess.getRelationParseAccess().getTypeRelationTypeParserRuleCall_1_0_0()); 
-            pushFollow(FOLLOW_ruleRelationType_in_rule__RelationParse__TypeAssignment_1_09762);
+            pushFollow(FOLLOW_ruleRelationType_in_rule__RelationParse__TypeAssignment_1_09884);
             ruleRelationType();
 
             state._fsp--;
@@ -13050,24 +13184,24 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__RelationParse__DirectAssignment_1_1_0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4786:1: rule__RelationParse__DirectAssignment_1_1_0 : ( ( '>' ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4832:1: rule__RelationParse__DirectAssignment_1_1_0 : ( ( '>' ) ) ;
     public final void rule__RelationParse__DirectAssignment_1_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4790:1: ( ( ( '>' ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4791:1: ( ( '>' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4836:1: ( ( ( '>' ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4837:1: ( ( '>' ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4791:1: ( ( '>' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4792:1: ( '>' )
-            {
-             before(grammarAccess.getRelationParseAccess().getDirectGreaterThanSignKeyword_1_1_0_0()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4793:1: ( '>' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4794:1: '>'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4837:1: ( ( '>' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4838:1: ( '>' )
             {
              before(grammarAccess.getRelationParseAccess().getDirectGreaterThanSignKeyword_1_1_0_0()); 
-            match(input,52,FOLLOW_52_in_rule__RelationParse__DirectAssignment_1_1_09798); 
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4839:1: ( '>' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4840:1: '>'
+            {
+             before(grammarAccess.getRelationParseAccess().getDirectGreaterThanSignKeyword_1_1_0_0()); 
+            match(input,54,FOLLOW_54_in_rule__RelationParse__DirectAssignment_1_1_09920); 
              after(grammarAccess.getRelationParseAccess().getDirectGreaterThanSignKeyword_1_1_0_0()); 
 
             }
@@ -13095,24 +13229,24 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__RelationParse__ExtAssignment_1_1_1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4809:1: rule__RelationParse__ExtAssignment_1_1_1 : ( ( '|>' ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4855:1: rule__RelationParse__ExtAssignment_1_1_1 : ( ( '|>' ) ) ;
     public final void rule__RelationParse__ExtAssignment_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4813:1: ( ( ( '|>' ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4814:1: ( ( '|>' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4859:1: ( ( ( '|>' ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4860:1: ( ( '|>' ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4814:1: ( ( '|>' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4815:1: ( '|>' )
-            {
-             before(grammarAccess.getRelationParseAccess().getExtVerticalLineGreaterThanSignKeyword_1_1_1_0()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4816:1: ( '|>' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4817:1: '|>'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4860:1: ( ( '|>' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4861:1: ( '|>' )
             {
              before(grammarAccess.getRelationParseAccess().getExtVerticalLineGreaterThanSignKeyword_1_1_1_0()); 
-            match(input,53,FOLLOW_53_in_rule__RelationParse__ExtAssignment_1_1_19842); 
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4862:1: ( '|>' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4863:1: '|>'
+            {
+             before(grammarAccess.getRelationParseAccess().getExtVerticalLineGreaterThanSignKeyword_1_1_1_0()); 
+            match(input,55,FOLLOW_55_in_rule__RelationParse__ExtAssignment_1_1_19964); 
              after(grammarAccess.getRelationParseAccess().getExtVerticalLineGreaterThanSignKeyword_1_1_1_0()); 
 
             }
@@ -13140,20 +13274,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__RelationParse__MultiAssignment_1_3"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4832:1: rule__RelationParse__MultiAssignment_1_3 : ( RULE_MULTI ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4878:1: rule__RelationParse__MultiAssignment_1_3 : ( RULE_MULTI ) ;
     public final void rule__RelationParse__MultiAssignment_1_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4836:1: ( ( RULE_MULTI ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4837:1: ( RULE_MULTI )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4882:1: ( ( RULE_MULTI ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4883:1: ( RULE_MULTI )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4837:1: ( RULE_MULTI )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4838:1: RULE_MULTI
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4883:1: ( RULE_MULTI )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4884:1: RULE_MULTI
             {
              before(grammarAccess.getRelationParseAccess().getMultiMULTITerminalRuleCall_1_3_0()); 
-            match(input,RULE_MULTI,FOLLOW_RULE_MULTI_in_rule__RelationParse__MultiAssignment_1_39881); 
+            match(input,RULE_MULTI,FOLLOW_RULE_MULTI_in_rule__RelationParse__MultiAssignment_1_310003); 
              after(grammarAccess.getRelationParseAccess().getMultiMULTITerminalRuleCall_1_3_0()); 
 
             }
@@ -13177,20 +13311,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__RelationType__StrongAssignment_0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4847:1: rule__RelationType__StrongAssignment_0 : ( ruleStrongRel ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4893:1: rule__RelationType__StrongAssignment_0 : ( ruleStrongRel ) ;
     public final void rule__RelationType__StrongAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4851:1: ( ( ruleStrongRel ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4852:1: ( ruleStrongRel )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4897:1: ( ( ruleStrongRel ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4898:1: ( ruleStrongRel )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4852:1: ( ruleStrongRel )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4853:1: ruleStrongRel
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4898:1: ( ruleStrongRel )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4899:1: ruleStrongRel
             {
              before(grammarAccess.getRelationTypeAccess().getStrongStrongRelParserRuleCall_0_0()); 
-            pushFollow(FOLLOW_ruleStrongRel_in_rule__RelationType__StrongAssignment_09912);
+            pushFollow(FOLLOW_ruleStrongRel_in_rule__RelationType__StrongAssignment_010034);
             ruleStrongRel();
 
             state._fsp--;
@@ -13218,20 +13352,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__RelationType__WeakAssignment_1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4862:1: rule__RelationType__WeakAssignment_1 : ( ruleWeakRel ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4908:1: rule__RelationType__WeakAssignment_1 : ( ruleWeakRel ) ;
     public final void rule__RelationType__WeakAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4866:1: ( ( ruleWeakRel ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4867:1: ( ruleWeakRel )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4912:1: ( ( ruleWeakRel ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4913:1: ( ruleWeakRel )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4867:1: ( ruleWeakRel )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4868:1: ruleWeakRel
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4913:1: ( ruleWeakRel )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4914:1: ruleWeakRel
             {
              before(grammarAccess.getRelationTypeAccess().getWeakWeakRelParserRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleWeakRel_in_rule__RelationType__WeakAssignment_19943);
+            pushFollow(FOLLOW_ruleWeakRel_in_rule__RelationType__WeakAssignment_110065);
             ruleWeakRel();
 
             state._fsp--;
@@ -13259,20 +13393,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Enumer__NameAssignment_1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4877:1: rule__Enumer__NameAssignment_1 : ( RULE_ID ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4923:1: rule__Enumer__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__Enumer__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4881:1: ( ( RULE_ID ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4882:1: ( RULE_ID )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4927:1: ( ( RULE_ID ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4928:1: ( RULE_ID )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4882:1: ( RULE_ID )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4883:1: RULE_ID
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4928:1: ( RULE_ID )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4929:1: RULE_ID
             {
              before(grammarAccess.getEnumerAccess().getNameIDTerminalRuleCall_1_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Enumer__NameAssignment_19974); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Enumer__NameAssignment_110096); 
              after(grammarAccess.getEnumerAccess().getNameIDTerminalRuleCall_1_0()); 
 
             }
@@ -13296,20 +13430,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Enumer__TypesAssignment_4_0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4892:1: rule__Enumer__TypesAssignment_4_0 : ( RULE_ID ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4938:1: rule__Enumer__TypesAssignment_4_0 : ( RULE_ID ) ;
     public final void rule__Enumer__TypesAssignment_4_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4896:1: ( ( RULE_ID ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4897:1: ( RULE_ID )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4942:1: ( ( RULE_ID ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4943:1: ( RULE_ID )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4897:1: ( RULE_ID )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4898:1: RULE_ID
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4943:1: ( RULE_ID )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4944:1: RULE_ID
             {
              before(grammarAccess.getEnumerAccess().getTypesIDTerminalRuleCall_4_0_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Enumer__TypesAssignment_4_010005); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Enumer__TypesAssignment_4_010127); 
              after(grammarAccess.getEnumerAccess().getTypesIDTerminalRuleCall_4_0_0()); 
 
             }
@@ -13333,20 +13467,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Clazz__NameAssignment_1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4907:1: rule__Clazz__NameAssignment_1 : ( RULE_ID ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4953:1: rule__Clazz__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__Clazz__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4911:1: ( ( RULE_ID ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4912:1: ( RULE_ID )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4957:1: ( ( RULE_ID ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4958:1: ( RULE_ID )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4912:1: ( RULE_ID )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4913:1: RULE_ID
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4958:1: ( RULE_ID )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4959:1: RULE_ID
             {
              before(grammarAccess.getClazzAccess().getNameIDTerminalRuleCall_1_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Clazz__NameAssignment_110036); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Clazz__NameAssignment_110158); 
              after(grammarAccess.getClazzAccess().getNameIDTerminalRuleCall_1_0()); 
 
             }
@@ -13370,20 +13504,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Clazz__StereotypeAssignment_2_1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4922:1: rule__Clazz__StereotypeAssignment_2_1 : ( ruleText ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4968:1: rule__Clazz__StereotypeAssignment_2_1 : ( ruleText ) ;
     public final void rule__Clazz__StereotypeAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4926:1: ( ( ruleText ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4927:1: ( ruleText )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4972:1: ( ( ruleText ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4973:1: ( ruleText )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4927:1: ( ruleText )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4928:1: ruleText
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4973:1: ( ruleText )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4974:1: ruleText
             {
              before(grammarAccess.getClazzAccess().getStereotypeTextParserRuleCall_2_1_0()); 
-            pushFollow(FOLLOW_ruleText_in_rule__Clazz__StereotypeAssignment_2_110067);
+            pushFollow(FOLLOW_ruleText_in_rule__Clazz__StereotypeAssignment_2_110189);
             ruleText();
 
             state._fsp--;
@@ -13411,20 +13545,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Clazz__PropertiesAssignment_3_2"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4937:1: rule__Clazz__PropertiesAssignment_3_2 : ( ruleProperty ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4983:1: rule__Clazz__PropertiesAssignment_3_2 : ( ruleProperty ) ;
     public final void rule__Clazz__PropertiesAssignment_3_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4941:1: ( ( ruleProperty ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4942:1: ( ruleProperty )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4987:1: ( ( ruleProperty ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4988:1: ( ruleProperty )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4942:1: ( ruleProperty )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4943:1: ruleProperty
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4988:1: ( ruleProperty )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4989:1: ruleProperty
             {
              before(grammarAccess.getClazzAccess().getPropertiesPropertyParserRuleCall_3_2_0()); 
-            pushFollow(FOLLOW_ruleProperty_in_rule__Clazz__PropertiesAssignment_3_210098);
+            pushFollow(FOLLOW_ruleProperty_in_rule__Clazz__PropertiesAssignment_3_210220);
             ruleProperty();
 
             state._fsp--;
@@ -13452,20 +13586,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Property__NameAssignment_0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4952:1: rule__Property__NameAssignment_0 : ( RULE_ID ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4998:1: rule__Property__NameAssignment_0 : ( RULE_ID ) ;
     public final void rule__Property__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4956:1: ( ( RULE_ID ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4957:1: ( RULE_ID )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5002:1: ( ( RULE_ID ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5003:1: ( RULE_ID )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4957:1: ( RULE_ID )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4958:1: RULE_ID
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5003:1: ( RULE_ID )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5004:1: RULE_ID
             {
              before(grammarAccess.getPropertyAccess().getNameIDTerminalRuleCall_0_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Property__NameAssignment_010129); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Property__NameAssignment_010251); 
              after(grammarAccess.getPropertyAccess().getNameIDTerminalRuleCall_0_0()); 
 
             }
@@ -13489,24 +13623,24 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Property__OptionalAssignment_1_0_0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4967:1: rule__Property__OptionalAssignment_1_0_0 : ( ( '?' ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5013:1: rule__Property__OptionalAssignment_1_0_0 : ( ( '?' ) ) ;
     public final void rule__Property__OptionalAssignment_1_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4971:1: ( ( ( '?' ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4972:1: ( ( '?' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5017:1: ( ( ( '?' ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5018:1: ( ( '?' ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4972:1: ( ( '?' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4973:1: ( '?' )
-            {
-             before(grammarAccess.getPropertyAccess().getOptionalQuestionMarkKeyword_1_0_0_0()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4974:1: ( '?' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4975:1: '?'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5018:1: ( ( '?' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5019:1: ( '?' )
             {
              before(grammarAccess.getPropertyAccess().getOptionalQuestionMarkKeyword_1_0_0_0()); 
-            match(input,30,FOLLOW_30_in_rule__Property__OptionalAssignment_1_0_010165); 
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5020:1: ( '?' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5021:1: '?'
+            {
+             before(grammarAccess.getPropertyAccess().getOptionalQuestionMarkKeyword_1_0_0_0()); 
+            match(input,32,FOLLOW_32_in_rule__Property__OptionalAssignment_1_0_010287); 
              after(grammarAccess.getPropertyAccess().getOptionalQuestionMarkKeyword_1_0_0_0()); 
 
             }
@@ -13534,20 +13668,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Property__TypeAssignment_1_0_1_1_0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4990:1: rule__Property__TypeAssignment_1_0_1_1_0 : ( ruleDataType ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5036:1: rule__Property__TypeAssignment_1_0_1_1_0 : ( ruleDataType ) ;
     public final void rule__Property__TypeAssignment_1_0_1_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4994:1: ( ( ruleDataType ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4995:1: ( ruleDataType )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5040:1: ( ( ruleDataType ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5041:1: ( ruleDataType )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4995:1: ( ruleDataType )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:4996:1: ruleDataType
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5041:1: ( ruleDataType )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5042:1: ruleDataType
             {
              before(grammarAccess.getPropertyAccess().getTypeDataTypeParserRuleCall_1_0_1_1_0_0()); 
-            pushFollow(FOLLOW_ruleDataType_in_rule__Property__TypeAssignment_1_0_1_1_010204);
+            pushFollow(FOLLOW_ruleDataType_in_rule__Property__TypeAssignment_1_0_1_1_010326);
             ruleDataType();
 
             state._fsp--;
@@ -13575,20 +13709,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Property__EntityListAssignment_1_0_1_1_1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5005:1: rule__Property__EntityListAssignment_1_0_1_1_1 : ( ruleEntityList ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5051:1: rule__Property__EntityListAssignment_1_0_1_1_1 : ( ruleEntityList ) ;
     public final void rule__Property__EntityListAssignment_1_0_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5009:1: ( ( ruleEntityList ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5010:1: ( ruleEntityList )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5055:1: ( ( ruleEntityList ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5056:1: ( ruleEntityList )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5010:1: ( ruleEntityList )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5011:1: ruleEntityList
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5056:1: ( ruleEntityList )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5057:1: ruleEntityList
             {
              before(grammarAccess.getPropertyAccess().getEntityListEntityListParserRuleCall_1_0_1_1_1_0()); 
-            pushFollow(FOLLOW_ruleEntityList_in_rule__Property__EntityListAssignment_1_0_1_1_110235);
+            pushFollow(FOLLOW_ruleEntityList_in_rule__Property__EntityListAssignment_1_0_1_1_110357);
             ruleEntityList();
 
             state._fsp--;
@@ -13616,24 +13750,24 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Property__ConstantAssignment_1_1_0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5020:1: rule__Property__ConstantAssignment_1_1_0 : ( ( '=' ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5066:1: rule__Property__ConstantAssignment_1_1_0 : ( ( '=' ) ) ;
     public final void rule__Property__ConstantAssignment_1_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5024:1: ( ( ( '=' ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5025:1: ( ( '=' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5070:1: ( ( ( '=' ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5071:1: ( ( '=' ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5025:1: ( ( '=' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5026:1: ( '=' )
-            {
-             before(grammarAccess.getPropertyAccess().getConstantEqualsSignKeyword_1_1_0_0()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5027:1: ( '=' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5028:1: '='
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5071:1: ( ( '=' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5072:1: ( '=' )
             {
              before(grammarAccess.getPropertyAccess().getConstantEqualsSignKeyword_1_1_0_0()); 
-            match(input,54,FOLLOW_54_in_rule__Property__ConstantAssignment_1_1_010271); 
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5073:1: ( '=' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5074:1: '='
+            {
+             before(grammarAccess.getPropertyAccess().getConstantEqualsSignKeyword_1_1_0_0()); 
+            match(input,56,FOLLOW_56_in_rule__Property__ConstantAssignment_1_1_010393); 
              after(grammarAccess.getPropertyAccess().getConstantEqualsSignKeyword_1_1_0_0()); 
 
             }
@@ -13661,20 +13795,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Property__ValueAssignment_1_1_1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5043:1: rule__Property__ValueAssignment_1_1_1 : ( ruleText ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5089:1: rule__Property__ValueAssignment_1_1_1 : ( ruleText ) ;
     public final void rule__Property__ValueAssignment_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5047:1: ( ( ruleText ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5048:1: ( ruleText )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5093:1: ( ( ruleText ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5094:1: ( ruleText )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5048:1: ( ruleText )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5049:1: ruleText
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5094:1: ( ruleText )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5095:1: ruleText
             {
              before(grammarAccess.getPropertyAccess().getValueTextParserRuleCall_1_1_1_0()); 
-            pushFollow(FOLLOW_ruleText_in_rule__Property__ValueAssignment_1_1_110310);
+            pushFollow(FOLLOW_ruleText_in_rule__Property__ValueAssignment_1_1_110432);
             ruleText();
 
             state._fsp--;
@@ -13702,24 +13836,24 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__EntityList__RefsAssignment_1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5058:1: rule__EntityList__RefsAssignment_1 : ( ( ruleQualifiedName ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5104:1: rule__EntityList__RefsAssignment_1 : ( ( ruleQualifiedName ) ) ;
     public final void rule__EntityList__RefsAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5062:1: ( ( ( ruleQualifiedName ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5063:1: ( ( ruleQualifiedName ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5108:1: ( ( ( ruleQualifiedName ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5109:1: ( ( ruleQualifiedName ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5063:1: ( ( ruleQualifiedName ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5064:1: ( ruleQualifiedName )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5109:1: ( ( ruleQualifiedName ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5110:1: ( ruleQualifiedName )
             {
              before(grammarAccess.getEntityListAccess().getRefsEntityCrossReference_1_0()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5065:1: ( ruleQualifiedName )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5066:1: ruleQualifiedName
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5111:1: ( ruleQualifiedName )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5112:1: ruleQualifiedName
             {
              before(grammarAccess.getEntityListAccess().getRefsEntityQualifiedNameParserRuleCall_1_0_1()); 
-            pushFollow(FOLLOW_ruleQualifiedName_in_rule__EntityList__RefsAssignment_110345);
+            pushFollow(FOLLOW_ruleQualifiedName_in_rule__EntityList__RefsAssignment_110467);
             ruleQualifiedName();
 
             state._fsp--;
@@ -13751,24 +13885,24 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__EntityList__RefsAssignment_2_1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5077:1: rule__EntityList__RefsAssignment_2_1 : ( ( ruleQualifiedName ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5123:1: rule__EntityList__RefsAssignment_2_1 : ( ( ruleQualifiedName ) ) ;
     public final void rule__EntityList__RefsAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5081:1: ( ( ( ruleQualifiedName ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5082:1: ( ( ruleQualifiedName ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5127:1: ( ( ( ruleQualifiedName ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5128:1: ( ( ruleQualifiedName ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5082:1: ( ( ruleQualifiedName ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5083:1: ( ruleQualifiedName )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5128:1: ( ( ruleQualifiedName ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5129:1: ( ruleQualifiedName )
             {
              before(grammarAccess.getEntityListAccess().getRefsEntityCrossReference_2_1_0()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5084:1: ( ruleQualifiedName )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5085:1: ruleQualifiedName
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5130:1: ( ruleQualifiedName )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5131:1: ruleQualifiedName
             {
              before(grammarAccess.getEntityListAccess().getRefsEntityQualifiedNameParserRuleCall_2_1_0_1()); 
-            pushFollow(FOLLOW_ruleQualifiedName_in_rule__EntityList__RefsAssignment_2_110384);
+            pushFollow(FOLLOW_ruleQualifiedName_in_rule__EntityList__RefsAssignment_2_110506);
             ruleQualifiedName();
 
             state._fsp--;
@@ -13800,20 +13934,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__PositionAssignment_1_0_0_0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5096:1: rule__Note__PositionAssignment_1_0_0_0 : ( ruleNotePosition ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5142:1: rule__Note__PositionAssignment_1_0_0_0 : ( ruleNotePosition ) ;
     public final void rule__Note__PositionAssignment_1_0_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5100:1: ( ( ruleNotePosition ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5101:1: ( ruleNotePosition )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5146:1: ( ( ruleNotePosition ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5147:1: ( ruleNotePosition )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5101:1: ( ruleNotePosition )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5102:1: ruleNotePosition
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5147:1: ( ruleNotePosition )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5148:1: ruleNotePosition
             {
              before(grammarAccess.getNoteAccess().getPositionNotePositionEnumRuleCall_1_0_0_0_0()); 
-            pushFollow(FOLLOW_ruleNotePosition_in_rule__Note__PositionAssignment_1_0_0_010419);
+            pushFollow(FOLLOW_ruleNotePosition_in_rule__Note__PositionAssignment_1_0_0_010541);
             ruleNotePosition();
 
             state._fsp--;
@@ -13841,20 +13975,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__ValueAssignment_1_0_0_1_1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5111:1: rule__Note__ValueAssignment_1_0_0_1_1 : ( ruleText ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5157:1: rule__Note__ValueAssignment_1_0_0_1_1 : ( ruleText ) ;
     public final void rule__Note__ValueAssignment_1_0_0_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5115:1: ( ( ruleText ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5116:1: ( ruleText )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5161:1: ( ( ruleText ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5162:1: ( ruleText )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5116:1: ( ruleText )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5117:1: ruleText
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5162:1: ( ruleText )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5163:1: ruleText
             {
              before(grammarAccess.getNoteAccess().getValueTextParserRuleCall_1_0_0_1_1_0()); 
-            pushFollow(FOLLOW_ruleText_in_rule__Note__ValueAssignment_1_0_0_1_110450);
+            pushFollow(FOLLOW_ruleText_in_rule__Note__ValueAssignment_1_0_0_1_110572);
             ruleText();
 
             state._fsp--;
@@ -13882,24 +14016,24 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__OfAssignment_1_0_1_1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5126:1: rule__Note__OfAssignment_1_0_1_1 : ( ( RULE_ID ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5172:1: rule__Note__OfAssignment_1_0_1_1 : ( ( RULE_ID ) ) ;
     public final void rule__Note__OfAssignment_1_0_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5130:1: ( ( ( RULE_ID ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5131:1: ( ( RULE_ID ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5176:1: ( ( ( RULE_ID ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5177:1: ( ( RULE_ID ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5131:1: ( ( RULE_ID ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5132:1: ( RULE_ID )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5177:1: ( ( RULE_ID ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5178:1: ( RULE_ID )
             {
              before(grammarAccess.getNoteAccess().getOfEntityCrossReference_1_0_1_1_0()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5133:1: ( RULE_ID )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5134:1: RULE_ID
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5179:1: ( RULE_ID )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5180:1: RULE_ID
             {
              before(grammarAccess.getNoteAccess().getOfEntityIDTerminalRuleCall_1_0_1_1_0_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Note__OfAssignment_1_0_1_110485); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Note__OfAssignment_1_0_1_110607); 
              after(grammarAccess.getNoteAccess().getOfEntityIDTerminalRuleCall_1_0_1_1_0_1()); 
 
             }
@@ -13927,20 +14061,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__ValueAssignment_1_0_1_3"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5145:1: rule__Note__ValueAssignment_1_0_1_3 : ( ruleText ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5191:1: rule__Note__ValueAssignment_1_0_1_3 : ( ruleText ) ;
     public final void rule__Note__ValueAssignment_1_0_1_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5149:1: ( ( ruleText ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5150:1: ( ruleText )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5195:1: ( ( ruleText ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5196:1: ( ruleText )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5150:1: ( ruleText )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5151:1: ruleText
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5196:1: ( ruleText )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5197:1: ruleText
             {
              before(grammarAccess.getNoteAccess().getValueTextParserRuleCall_1_0_1_3_0()); 
-            pushFollow(FOLLOW_ruleText_in_rule__Note__ValueAssignment_1_0_1_310520);
+            pushFollow(FOLLOW_ruleText_in_rule__Note__ValueAssignment_1_0_1_310642);
             ruleText();
 
             state._fsp--;
@@ -13968,20 +14102,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__NameAssignment_1_1_1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5160:1: rule__Note__NameAssignment_1_1_1 : ( RULE_ID ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5206:1: rule__Note__NameAssignment_1_1_1 : ( RULE_ID ) ;
     public final void rule__Note__NameAssignment_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5164:1: ( ( RULE_ID ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5165:1: ( RULE_ID )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5210:1: ( ( RULE_ID ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5211:1: ( RULE_ID )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5165:1: ( RULE_ID )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5166:1: RULE_ID
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5211:1: ( RULE_ID )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5212:1: RULE_ID
             {
              before(grammarAccess.getNoteAccess().getNameIDTerminalRuleCall_1_1_1_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Note__NameAssignment_1_1_110551); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Note__NameAssignment_1_1_110673); 
              after(grammarAccess.getNoteAccess().getNameIDTerminalRuleCall_1_1_1_0()); 
 
             }
@@ -14005,20 +14139,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Note__ValueAssignment_1_1_3"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5175:1: rule__Note__ValueAssignment_1_1_3 : ( ruleText ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5221:1: rule__Note__ValueAssignment_1_1_3 : ( ruleText ) ;
     public final void rule__Note__ValueAssignment_1_1_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5179:1: ( ( ruleText ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5180:1: ( ruleText )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5225:1: ( ( ruleText ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5226:1: ( ruleText )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5180:1: ( ruleText )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5181:1: ruleText
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5226:1: ( ruleText )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5227:1: ruleText
             {
              before(grammarAccess.getNoteAccess().getValueTextParserRuleCall_1_1_3_0()); 
-            pushFollow(FOLLOW_ruleText_in_rule__Note__ValueAssignment_1_1_310582);
+            pushFollow(FOLLOW_ruleText_in_rule__Note__ValueAssignment_1_1_310704);
             ruleText();
 
             state._fsp--;
@@ -14046,20 +14180,20 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__DataType__NativeAssignment_0_0"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5190:1: rule__DataType__NativeAssignment_0_0 : ( ruleNativeType ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5236:1: rule__DataType__NativeAssignment_0_0 : ( ruleNativeType ) ;
     public final void rule__DataType__NativeAssignment_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5194:1: ( ( ruleNativeType ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5195:1: ( ruleNativeType )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5240:1: ( ( ruleNativeType ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5241:1: ( ruleNativeType )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5195:1: ( ruleNativeType )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5196:1: ruleNativeType
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5241:1: ( ruleNativeType )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5242:1: ruleNativeType
             {
              before(grammarAccess.getDataTypeAccess().getNativeNativeTypeEnumRuleCall_0_0_0()); 
-            pushFollow(FOLLOW_ruleNativeType_in_rule__DataType__NativeAssignment_0_010613);
+            pushFollow(FOLLOW_ruleNativeType_in_rule__DataType__NativeAssignment_0_010735);
             ruleNativeType();
 
             state._fsp--;
@@ -14087,24 +14221,24 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__DataType__EntityAssignment_0_1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5205:1: rule__DataType__EntityAssignment_0_1 : ( ( ruleQualifiedName ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5251:1: rule__DataType__EntityAssignment_0_1 : ( ( ruleQualifiedName ) ) ;
     public final void rule__DataType__EntityAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5209:1: ( ( ( ruleQualifiedName ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5210:1: ( ( ruleQualifiedName ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5255:1: ( ( ( ruleQualifiedName ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5256:1: ( ( ruleQualifiedName ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5210:1: ( ( ruleQualifiedName ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5211:1: ( ruleQualifiedName )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5256:1: ( ( ruleQualifiedName ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5257:1: ( ruleQualifiedName )
             {
              before(grammarAccess.getDataTypeAccess().getEntityEntityCrossReference_0_1_0()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5212:1: ( ruleQualifiedName )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5213:1: ruleQualifiedName
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5258:1: ( ruleQualifiedName )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5259:1: ruleQualifiedName
             {
              before(grammarAccess.getDataTypeAccess().getEntityEntityQualifiedNameParserRuleCall_0_1_0_1()); 
-            pushFollow(FOLLOW_ruleQualifiedName_in_rule__DataType__EntityAssignment_0_110648);
+            pushFollow(FOLLOW_ruleQualifiedName_in_rule__DataType__EntityAssignment_0_110770);
             ruleQualifiedName();
 
             state._fsp--;
@@ -14136,24 +14270,24 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__DataType__IsArrayAssignment_1"
-    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5224:1: rule__DataType__IsArrayAssignment_1 : ( ( '[]' ) ) ;
+    // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5270:1: rule__DataType__IsArrayAssignment_1 : ( ( '[]' ) ) ;
     public final void rule__DataType__IsArrayAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5228:1: ( ( ( '[]' ) ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5229:1: ( ( '[]' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5274:1: ( ( ( '[]' ) ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5275:1: ( ( '[]' ) )
             {
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5229:1: ( ( '[]' ) )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5230:1: ( '[]' )
-            {
-             before(grammarAccess.getDataTypeAccess().getIsArrayLeftSquareBracketRightSquareBracketKeyword_1_0()); 
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5231:1: ( '[]' )
-            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5232:1: '[]'
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5275:1: ( ( '[]' ) )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5276:1: ( '[]' )
             {
              before(grammarAccess.getDataTypeAccess().getIsArrayLeftSquareBracketRightSquareBracketKeyword_1_0()); 
-            match(input,55,FOLLOW_55_in_rule__DataType__IsArrayAssignment_110688); 
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5277:1: ( '[]' )
+            // ../rethink.uml.ui/src-gen/rethink/uml/ui/contentassist/antlr/internal/InternalClassDiagram.g:5278:1: '[]'
+            {
+             before(grammarAccess.getDataTypeAccess().getIsArrayLeftSquareBracketRightSquareBracketKeyword_1_0()); 
+            match(input,57,FOLLOW_57_in_rule__DataType__IsArrayAssignment_110810); 
              after(grammarAccess.getDataTypeAccess().getIsArrayLeftSquareBracketRightSquareBracketKeyword_1_0()); 
 
             }
@@ -14237,8 +14371,8 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
     public static final BitSet FOLLOW_rule__QualifiedName__Group__0_in_ruleQualifiedName1072 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleText_in_entryRuleText1099 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleText1106 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Text__Alternatives_in_ruleText1134 = new BitSet(new long[]{0x000000007FFFF072L});
-    public static final BitSet FOLLOW_rule__Text__Alternatives_in_ruleText1146 = new BitSet(new long[]{0x000000007FFFF072L});
+    public static final BitSet FOLLOW_rule__Text__Alternatives_in_ruleText1134 = new BitSet(new long[]{0x00000007FFFFF072L});
+    public static final BitSet FOLLOW_rule__Text__Alternatives_in_ruleText1146 = new BitSet(new long[]{0x00000007FFFFF072L});
     public static final BitSet FOLLOW_rule__PackageStyle__Alternatives_in_rulePackageStyle1186 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__CompType__Alternatives_in_ruleCompType1222 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__NotePosition__Alternatives_in_ruleNotePosition1258 = new BitSet(new long[]{0x0000000000000002L});
@@ -14296,343 +14430,349 @@ public class InternalClassDiagramParser extends AbstractInternalContentAssistPar
     public static final BitSet FOLLOW_28_in_rule__Text__Alternatives2463 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_29_in_rule__Text__Alternatives2483 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_30_in_rule__Text__Alternatives2503 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_31_in_rule__PackageStyle__Alternatives2538 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_32_in_rule__PackageStyle__Alternatives2559 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_33_in_rule__PackageStyle__Alternatives2580 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_34_in_rule__PackageStyle__Alternatives2601 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_35_in_rule__PackageStyle__Alternatives2622 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_36_in_rule__PackageStyle__Alternatives2643 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_37_in_rule__CompType__Alternatives2679 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_38_in_rule__CompType__Alternatives2700 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_39_in_rule__CompType__Alternatives2721 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_rule__NotePosition__Alternatives2757 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_rule__NotePosition__Alternatives2778 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_rule__NotePosition__Alternatives2799 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_rule__NotePosition__Alternatives2820 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_19_in_rule__NativeType__Alternatives2856 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_rule__NativeType__Alternatives2877 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_rule__NativeType__Alternatives2898 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_rule__NativeType__Alternatives2919 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DomainModel__Group__0__Impl_in_rule__DomainModel__Group__02952 = new BitSet(new long[]{0x00000000000000A0L});
-    public static final BitSet FOLLOW_rule__DomainModel__Group__1_in_rule__DomainModel__Group__02955 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_40_in_rule__DomainModel__Group__0__Impl2983 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DomainModel__Group__1__Impl_in_rule__DomainModel__Group__13014 = new BitSet(new long[]{0x00000000000000A0L});
-    public static final BitSet FOLLOW_rule__DomainModel__Group__2_in_rule__DomainModel__Group__13017 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DomainModel__Group__2__Impl_in_rule__DomainModel__Group__23075 = new BitSet(new long[]{0x00000000000000A0L});
-    public static final BitSet FOLLOW_rule__DomainModel__Group__3_in_rule__DomainModel__Group__23078 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DomainModel__FileAssignment_2_in_rule__DomainModel__Group__2__Impl3105 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DomainModel__Group__3__Impl_in_rule__DomainModel__Group__33136 = new BitSet(new long[]{0x0000000000800000L});
-    public static final BitSet FOLLOW_rule__DomainModel__Group__4_in_rule__DomainModel__Group__33139 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__DomainModel__Group__3__Impl3166 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DomainModel__Group__4__Impl_in_rule__DomainModel__Group__43195 = new BitSet(new long[]{0x0000020000000000L});
-    public static final BitSet FOLLOW_rule__DomainModel__Group__5_in_rule__DomainModel__Group__43198 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DomainModel__PackagesAssignment_4_in_rule__DomainModel__Group__4__Impl3227 = new BitSet(new long[]{0x0000000000800002L});
-    public static final BitSet FOLLOW_rule__DomainModel__PackagesAssignment_4_in_rule__DomainModel__Group__4__Impl3239 = new BitSet(new long[]{0x0000000000800002L});
-    public static final BitSet FOLLOW_rule__DomainModel__Group__5__Impl_in_rule__DomainModel__Group__53272 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_41_in_rule__DomainModel__Group__5__Impl3300 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__CPackage__Group__0__Impl_in_rule__CPackage__Group__03343 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__CPackage__Group__1_in_rule__CPackage__Group__03346 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_23_in_rule__CPackage__Group__0__Impl3374 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__CPackage__Group__1__Impl_in_rule__CPackage__Group__13405 = new BitSet(new long[]{0x0000140000000000L});
-    public static final BitSet FOLLOW_rule__CPackage__Group__2_in_rule__CPackage__Group__13408 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__CPackage__NameAssignment_1_in_rule__CPackage__Group__1__Impl3435 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__CPackage__Group__2__Impl_in_rule__CPackage__Group__23465 = new BitSet(new long[]{0x0000140000000000L});
-    public static final BitSet FOLLOW_rule__CPackage__Group__3_in_rule__CPackage__Group__23468 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__CPackage__Group_2__0_in_rule__CPackage__Group__2__Impl3495 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__CPackage__Group__3__Impl_in_rule__CPackage__Group__33526 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_rule__CPackage__Group__4_in_rule__CPackage__Group__33529 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_42_in_rule__CPackage__Group__3__Impl3557 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__CPackage__Group__4__Impl_in_rule__CPackage__Group__43588 = new BitSet(new long[]{0x0000080007800010L});
-    public static final BitSet FOLLOW_rule__CPackage__Group__5_in_rule__CPackage__Group__43591 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__CPackage__Group__4__Impl3618 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__CPackage__Group__5__Impl_in_rule__CPackage__Group__53647 = new BitSet(new long[]{0x0000080007800010L});
-    public static final BitSet FOLLOW_rule__CPackage__Group__6_in_rule__CPackage__Group__53650 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__CPackage__ElementsAssignment_5_in_rule__CPackage__Group__5__Impl3677 = new BitSet(new long[]{0x0000000007800012L});
-    public static final BitSet FOLLOW_rule__CPackage__Group__6__Impl_in_rule__CPackage__Group__63708 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_rule__CPackage__Group__7_in_rule__CPackage__Group__63711 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_43_in_rule__CPackage__Group__6__Impl3739 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__CPackage__Group__7__Impl_in_rule__CPackage__Group__73770 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__CPackage__Group__7__Impl3797 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__CPackage__Group_2__0__Impl_in_rule__CPackage__Group_2__03842 = new BitSet(new long[]{0x0000001F80000000L});
-    public static final BitSet FOLLOW_rule__CPackage__Group_2__1_in_rule__CPackage__Group_2__03845 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_44_in_rule__CPackage__Group_2__0__Impl3873 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__CPackage__Group_2__1__Impl_in_rule__CPackage__Group_2__13904 = new BitSet(new long[]{0x0000200000000000L});
-    public static final BitSet FOLLOW_rule__CPackage__Group_2__2_in_rule__CPackage__Group_2__13907 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__CPackage__StyleAssignment_2_1_in_rule__CPackage__Group_2__1__Impl3934 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__CPackage__Group_2__2__Impl_in_rule__CPackage__Group_2__23964 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_45_in_rule__CPackage__Group_2__2__Impl3992 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Relation__Group__0__Impl_in_rule__Relation__Group__04029 = new BitSet(new long[]{0x0000C0E000000000L});
-    public static final BitSet FOLLOW_rule__Relation__Group__1_in_rule__Relation__Group__04032 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Relation__LeftRefAssignment_0_in_rule__Relation__Group__0__Impl4059 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Relation__Group__1__Impl_in_rule__Relation__Group__14089 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__Relation__Group__2_in_rule__Relation__Group__14092 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Relation__RelTypeAssignment_1_in_rule__Relation__Group__1__Impl4119 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Relation__Group__2__Impl_in_rule__Relation__Group__24149 = new BitSet(new long[]{0x0000000020000080L});
-    public static final BitSet FOLLOW_rule__Relation__Group__3_in_rule__Relation__Group__24152 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Relation__RightRefAssignment_2_in_rule__Relation__Group__2__Impl4179 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Relation__Group__3__Impl_in_rule__Relation__Group__34209 = new BitSet(new long[]{0x0000000020000080L});
-    public static final BitSet FOLLOW_rule__Relation__Group__4_in_rule__Relation__Group__34212 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Relation__Group_3__0_in_rule__Relation__Group__3__Impl4239 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Relation__Group__4__Impl_in_rule__Relation__Group__44270 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__Relation__Group__4__Impl4297 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Relation__Group_3__0__Impl_in_rule__Relation__Group_3__04336 = new BitSet(new long[]{0x000000007FFFF070L});
-    public static final BitSet FOLLOW_rule__Relation__Group_3__1_in_rule__Relation__Group_3__04339 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_29_in_rule__Relation__Group_3__0__Impl4367 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Relation__Group_3__1__Impl_in_rule__Relation__Group_3__14398 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Relation__NameAssignment_3_1_in_rule__Relation__Group_3__1__Impl4425 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RelationParse__Group_0__0__Impl_in_rule__RelationParse__Group_0__04459 = new BitSet(new long[]{0x0000C0E000000000L});
-    public static final BitSet FOLLOW_rule__RelationParse__Group_0__1_in_rule__RelationParse__Group_0__04462 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RelationParse__CompAssignment_0_0_in_rule__RelationParse__Group_0__0__Impl4489 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RelationParse__Group_0__1__Impl_in_rule__RelationParse__Group_0__14519 = new BitSet(new long[]{0x0010000000000100L});
-    public static final BitSet FOLLOW_rule__RelationParse__Group_0__2_in_rule__RelationParse__Group_0__14522 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RelationParse__TypeAssignment_0_1_in_rule__RelationParse__Group_0__1__Impl4549 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RelationParse__Group_0__2__Impl_in_rule__RelationParse__Group_0__24579 = new BitSet(new long[]{0x0010000000000100L});
-    public static final BitSet FOLLOW_rule__RelationParse__Group_0__3_in_rule__RelationParse__Group_0__24582 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RelationParse__DirectAssignment_0_2_in_rule__RelationParse__Group_0__2__Impl4609 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RelationParse__Group_0__3__Impl_in_rule__RelationParse__Group_0__34640 = new BitSet(new long[]{0x0000000000000200L});
-    public static final BitSet FOLLOW_rule__RelationParse__Group_0__4_in_rule__RelationParse__Group_0__34643 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_WS_in_rule__RelationParse__Group_0__3__Impl4670 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RelationParse__Group_0__4__Impl_in_rule__RelationParse__Group_0__44699 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RelationParse__MultiAssignment_0_4_in_rule__RelationParse__Group_0__4__Impl4726 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RelationParse__Group_1__0__Impl_in_rule__RelationParse__Group_1__04767 = new BitSet(new long[]{0x0030000000000100L});
-    public static final BitSet FOLLOW_rule__RelationParse__Group_1__1_in_rule__RelationParse__Group_1__04770 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RelationParse__TypeAssignment_1_0_in_rule__RelationParse__Group_1__0__Impl4797 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RelationParse__Group_1__1__Impl_in_rule__RelationParse__Group_1__14827 = new BitSet(new long[]{0x0030000000000100L});
-    public static final BitSet FOLLOW_rule__RelationParse__Group_1__2_in_rule__RelationParse__Group_1__14830 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RelationParse__Alternatives_1_1_in_rule__RelationParse__Group_1__1__Impl4857 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RelationParse__Group_1__2__Impl_in_rule__RelationParse__Group_1__24888 = new BitSet(new long[]{0x0000000000000200L});
-    public static final BitSet FOLLOW_rule__RelationParse__Group_1__3_in_rule__RelationParse__Group_1__24891 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_WS_in_rule__RelationParse__Group_1__2__Impl4918 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RelationParse__Group_1__3__Impl_in_rule__RelationParse__Group_1__34947 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RelationParse__MultiAssignment_1_3_in_rule__RelationParse__Group_1__3__Impl4974 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__StrongRel__Group__0__Impl_in_rule__StrongRel__Group__05013 = new BitSet(new long[]{0x000040000000F000L});
-    public static final BitSet FOLLOW_rule__StrongRel__Group__1_in_rule__StrongRel__Group__05016 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_46_in_rule__StrongRel__Group__0__Impl5044 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__StrongRel__Group__1__Impl_in_rule__StrongRel__Group__15075 = new BitSet(new long[]{0x000040000000F000L});
-    public static final BitSet FOLLOW_rule__StrongRel__Group__2_in_rule__StrongRel__Group__15078 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__StrongRel__Alternatives_1_in_rule__StrongRel__Group__1__Impl5105 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__StrongRel__Group__2__Impl_in_rule__StrongRel__Group__25136 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_46_in_rule__StrongRel__Group__2__Impl5167 = new BitSet(new long[]{0x0000400000000002L});
-    public static final BitSet FOLLOW_46_in_rule__StrongRel__Group__2__Impl5183 = new BitSet(new long[]{0x0000400000000002L});
-    public static final BitSet FOLLOW_rule__WeakRel__Group__0__Impl_in_rule__WeakRel__Group__05224 = new BitSet(new long[]{0x000080000000F000L});
-    public static final BitSet FOLLOW_rule__WeakRel__Group__1_in_rule__WeakRel__Group__05227 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_47_in_rule__WeakRel__Group__0__Impl5255 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__WeakRel__Group__1__Impl_in_rule__WeakRel__Group__15286 = new BitSet(new long[]{0x000080000000F000L});
-    public static final BitSet FOLLOW_rule__WeakRel__Group__2_in_rule__WeakRel__Group__15289 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__WeakRel__Alternatives_1_in_rule__WeakRel__Group__1__Impl5316 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__WeakRel__Group__2__Impl_in_rule__WeakRel__Group__25347 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_47_in_rule__WeakRel__Group__2__Impl5378 = new BitSet(new long[]{0x0000800000000002L});
-    public static final BitSet FOLLOW_47_in_rule__WeakRel__Group__2__Impl5394 = new BitSet(new long[]{0x0000800000000002L});
-    public static final BitSet FOLLOW_rule__Enumer__Group__0__Impl_in_rule__Enumer__Group__05435 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__Enumer__Group__1_in_rule__Enumer__Group__05438 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_25_in_rule__Enumer__Group__0__Impl5466 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Enumer__Group__1__Impl_in_rule__Enumer__Group__15497 = new BitSet(new long[]{0x0000040000000000L});
-    public static final BitSet FOLLOW_rule__Enumer__Group__2_in_rule__Enumer__Group__15500 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Enumer__NameAssignment_1_in_rule__Enumer__Group__1__Impl5527 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Enumer__Group__2__Impl_in_rule__Enumer__Group__25557 = new BitSet(new long[]{0x0000080000000090L});
-    public static final BitSet FOLLOW_rule__Enumer__Group__3_in_rule__Enumer__Group__25560 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_42_in_rule__Enumer__Group__2__Impl5588 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Enumer__Group__3__Impl_in_rule__Enumer__Group__35619 = new BitSet(new long[]{0x0000080000000090L});
-    public static final BitSet FOLLOW_rule__Enumer__Group__4_in_rule__Enumer__Group__35622 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__Enumer__Group__3__Impl5650 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Enumer__Group__4__Impl_in_rule__Enumer__Group__45681 = new BitSet(new long[]{0x0000080000000090L});
-    public static final BitSet FOLLOW_rule__Enumer__Group__5_in_rule__Enumer__Group__45684 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Enumer__Group_4__0_in_rule__Enumer__Group__4__Impl5711 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_rule__Enumer__Group__5__Impl_in_rule__Enumer__Group__55742 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_rule__Enumer__Group__6_in_rule__Enumer__Group__55745 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_43_in_rule__Enumer__Group__5__Impl5773 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Enumer__Group__6__Impl_in_rule__Enumer__Group__65804 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__Enumer__Group__6__Impl5831 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Enumer__Group_4__0__Impl_in_rule__Enumer__Group_4__05874 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_rule__Enumer__Group_4__1_in_rule__Enumer__Group_4__05877 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Enumer__TypesAssignment_4_0_in_rule__Enumer__Group_4__0__Impl5904 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Enumer__Group_4__1__Impl_in_rule__Enumer__Group_4__15934 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__Enumer__Group_4__1__Impl5962 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Clazz__Group__0__Impl_in_rule__Clazz__Group__05997 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__Clazz__Group__1_in_rule__Clazz__Group__06000 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_24_in_rule__Clazz__Group__0__Impl6028 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Clazz__Group__1__Impl_in_rule__Clazz__Group__16059 = new BitSet(new long[]{0x0000140000000080L});
-    public static final BitSet FOLLOW_rule__Clazz__Group__2_in_rule__Clazz__Group__16062 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Clazz__NameAssignment_1_in_rule__Clazz__Group__1__Impl6089 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Clazz__Group__2__Impl_in_rule__Clazz__Group__26119 = new BitSet(new long[]{0x0000140000000080L});
-    public static final BitSet FOLLOW_rule__Clazz__Group__3_in_rule__Clazz__Group__26122 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Clazz__Group_2__0_in_rule__Clazz__Group__2__Impl6149 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Clazz__Group__3__Impl_in_rule__Clazz__Group__36180 = new BitSet(new long[]{0x0000140000000080L});
-    public static final BitSet FOLLOW_rule__Clazz__Group__4_in_rule__Clazz__Group__36183 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Clazz__Group_3__0_in_rule__Clazz__Group__3__Impl6210 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Clazz__Group__4__Impl_in_rule__Clazz__Group__46241 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__Clazz__Group__4__Impl6268 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Clazz__Group_2__0__Impl_in_rule__Clazz__Group_2__06307 = new BitSet(new long[]{0x000000007FFFF070L});
-    public static final BitSet FOLLOW_rule__Clazz__Group_2__1_in_rule__Clazz__Group_2__06310 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_44_in_rule__Clazz__Group_2__0__Impl6338 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Clazz__Group_2__1__Impl_in_rule__Clazz__Group_2__16369 = new BitSet(new long[]{0x0000200000000000L});
-    public static final BitSet FOLLOW_rule__Clazz__Group_2__2_in_rule__Clazz__Group_2__16372 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Clazz__StereotypeAssignment_2_1_in_rule__Clazz__Group_2__1__Impl6399 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Clazz__Group_2__2__Impl_in_rule__Clazz__Group_2__26429 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_45_in_rule__Clazz__Group_2__2__Impl6457 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Clazz__Group_3__0__Impl_in_rule__Clazz__Group_3__06494 = new BitSet(new long[]{0x0000080000000090L});
-    public static final BitSet FOLLOW_rule__Clazz__Group_3__1_in_rule__Clazz__Group_3__06497 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_42_in_rule__Clazz__Group_3__0__Impl6525 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Clazz__Group_3__1__Impl_in_rule__Clazz__Group_3__16556 = new BitSet(new long[]{0x0000080000000090L});
-    public static final BitSet FOLLOW_rule__Clazz__Group_3__2_in_rule__Clazz__Group_3__16559 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__Clazz__Group_3__1__Impl6587 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Clazz__Group_3__2__Impl_in_rule__Clazz__Group_3__26618 = new BitSet(new long[]{0x0000080000000090L});
-    public static final BitSet FOLLOW_rule__Clazz__Group_3__3_in_rule__Clazz__Group_3__26621 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Clazz__PropertiesAssignment_3_2_in_rule__Clazz__Group_3__2__Impl6648 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_rule__Clazz__Group_3__3__Impl_in_rule__Clazz__Group_3__36679 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_43_in_rule__Clazz__Group_3__3__Impl6707 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Property__Group__0__Impl_in_rule__Property__Group__06746 = new BitSet(new long[]{0x0040000060000000L});
-    public static final BitSet FOLLOW_rule__Property__Group__1_in_rule__Property__Group__06749 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Property__NameAssignment_0_in_rule__Property__Group__0__Impl6776 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Property__Group__1__Impl_in_rule__Property__Group__16806 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_rule__Property__Group__2_in_rule__Property__Group__16809 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Property__Alternatives_1_in_rule__Property__Group__1__Impl6836 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Property__Group__2__Impl_in_rule__Property__Group__26866 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__Property__Group__2__Impl6893 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Property__Group_1_0__0__Impl_in_rule__Property__Group_1_0__06928 = new BitSet(new long[]{0x0000000060000000L});
-    public static final BitSet FOLLOW_rule__Property__Group_1_0__1_in_rule__Property__Group_1_0__06931 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Property__OptionalAssignment_1_0_0_in_rule__Property__Group_1_0__0__Impl6958 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Property__Group_1_0__1__Impl_in_rule__Property__Group_1_0__16989 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Property__Group_1_0_1__0_in_rule__Property__Group_1_0__1__Impl7016 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Property__Group_1_0_1__0__Impl_in_rule__Property__Group_1_0_1__07051 = new BitSet(new long[]{0x0001000000780010L});
-    public static final BitSet FOLLOW_rule__Property__Group_1_0_1__1_in_rule__Property__Group_1_0_1__07054 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_29_in_rule__Property__Group_1_0_1__0__Impl7082 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Property__Group_1_0_1__1__Impl_in_rule__Property__Group_1_0_1__17113 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Property__Alternatives_1_0_1_1_in_rule__Property__Group_1_0_1__1__Impl7140 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Property__Group_1_1__0__Impl_in_rule__Property__Group_1_1__07174 = new BitSet(new long[]{0x000000007FFFF070L});
-    public static final BitSet FOLLOW_rule__Property__Group_1_1__1_in_rule__Property__Group_1_1__07177 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Property__ConstantAssignment_1_1_0_in_rule__Property__Group_1_1__0__Impl7204 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Property__Group_1_1__1__Impl_in_rule__Property__Group_1_1__17234 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Property__ValueAssignment_1_1_1_in_rule__Property__Group_1_1__1__Impl7261 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EntityList__Group__0__Impl_in_rule__EntityList__Group__07295 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__EntityList__Group__1_in_rule__EntityList__Group__07298 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_48_in_rule__EntityList__Group__0__Impl7326 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EntityList__Group__1__Impl_in_rule__EntityList__Group__17357 = new BitSet(new long[]{0x0006000000000000L});
-    public static final BitSet FOLLOW_rule__EntityList__Group__2_in_rule__EntityList__Group__17360 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EntityList__RefsAssignment_1_in_rule__EntityList__Group__1__Impl7387 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EntityList__Group__2__Impl_in_rule__EntityList__Group__27417 = new BitSet(new long[]{0x0006000000000000L});
-    public static final BitSet FOLLOW_rule__EntityList__Group__3_in_rule__EntityList__Group__27420 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EntityList__Group_2__0_in_rule__EntityList__Group__2__Impl7447 = new BitSet(new long[]{0x0004000000000002L});
-    public static final BitSet FOLLOW_rule__EntityList__Group__3__Impl_in_rule__EntityList__Group__37478 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_49_in_rule__EntityList__Group__3__Impl7506 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EntityList__Group_2__0__Impl_in_rule__EntityList__Group_2__07545 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__EntityList__Group_2__1_in_rule__EntityList__Group_2__07548 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_50_in_rule__EntityList__Group_2__0__Impl7576 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EntityList__Group_2__1__Impl_in_rule__EntityList__Group_2__17607 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EntityList__RefsAssignment_2_1_in_rule__EntityList__Group_2__1__Impl7634 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Note__Group__0__Impl_in_rule__Note__Group__07668 = new BitSet(new long[]{0x000000001803C000L});
-    public static final BitSet FOLLOW_rule__Note__Group__1_in_rule__Note__Group__07671 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_26_in_rule__Note__Group__0__Impl7699 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Note__Group__1__Impl_in_rule__Note__Group__17730 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Note__Alternatives_1_in_rule__Note__Group__1__Impl7757 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_0_0__0__Impl_in_rule__Note__Group_1_0_0__07791 = new BitSet(new long[]{0x0000000020000000L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_0_0__1_in_rule__Note__Group_1_0_0__07794 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Note__PositionAssignment_1_0_0_0_in_rule__Note__Group_1_0_0__0__Impl7821 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_0_0__1__Impl_in_rule__Note__Group_1_0_0__17851 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_0_0_1__0_in_rule__Note__Group_1_0_0__1__Impl7878 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_0_0_1__0__Impl_in_rule__Note__Group_1_0_0_1__07912 = new BitSet(new long[]{0x000000007FFFF070L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_0_0_1__1_in_rule__Note__Group_1_0_0_1__07915 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_29_in_rule__Note__Group_1_0_0_1__0__Impl7943 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_0_0_1__1__Impl_in_rule__Note__Group_1_0_0_1__17974 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_0_0_1__2_in_rule__Note__Group_1_0_0_1__17977 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Note__ValueAssignment_1_0_0_1_1_in_rule__Note__Group_1_0_0_1__1__Impl8004 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_0_0_1__2__Impl_in_rule__Note__Group_1_0_0_1__28034 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__Note__Group_1_0_0_1__2__Impl8061 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_0_1__0__Impl_in_rule__Note__Group_1_0_1__08096 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_0_1__1_in_rule__Note__Group_1_0_1__08099 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_rule__Note__Group_1_0_1__0__Impl8127 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_0_1__1__Impl_in_rule__Note__Group_1_0_1__18158 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_0_1__2_in_rule__Note__Group_1_0_1__18161 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Note__OfAssignment_1_0_1_1_in_rule__Note__Group_1_0_1__1__Impl8188 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_0_1__2__Impl_in_rule__Note__Group_1_0_1__28218 = new BitSet(new long[]{0x000000007FFFF070L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_0_1__3_in_rule__Note__Group_1_0_1__28221 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__Note__Group_1_0_1__2__Impl8248 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_0_1__3__Impl_in_rule__Note__Group_1_0_1__38277 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_0_1__4_in_rule__Note__Group_1_0_1__38280 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Note__ValueAssignment_1_0_1_3_in_rule__Note__Group_1_0_1__3__Impl8307 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_0_1__4__Impl_in_rule__Note__Group_1_0_1__48337 = new BitSet(new long[]{0x0008000000000000L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_0_1__5_in_rule__Note__Group_1_0_1__48340 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__Note__Group_1_0_1__4__Impl8367 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_0_1__5__Impl_in_rule__Note__Group_1_0_1__58396 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_0_1__6_in_rule__Note__Group_1_0_1__58399 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_51_in_rule__Note__Group_1_0_1__5__Impl8427 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_0_1__6__Impl_in_rule__Note__Group_1_0_1__68458 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__Note__Group_1_0_1__6__Impl8485 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_1__0__Impl_in_rule__Note__Group_1_1__08528 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_1__1_in_rule__Note__Group_1_1__08531 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_27_in_rule__Note__Group_1_1__0__Impl8559 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_1__1__Impl_in_rule__Note__Group_1_1__18590 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_1__2_in_rule__Note__Group_1_1__18593 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Note__NameAssignment_1_1_1_in_rule__Note__Group_1_1__1__Impl8620 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_1__2__Impl_in_rule__Note__Group_1_1__28650 = new BitSet(new long[]{0x000000007FFFF070L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_1__3_in_rule__Note__Group_1_1__28653 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__Note__Group_1_1__2__Impl8680 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_1__3__Impl_in_rule__Note__Group_1_1__38709 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_1__4_in_rule__Note__Group_1_1__38712 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Note__ValueAssignment_1_1_3_in_rule__Note__Group_1_1__3__Impl8739 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_1__4__Impl_in_rule__Note__Group_1_1__48769 = new BitSet(new long[]{0x0008000000000000L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_1__5_in_rule__Note__Group_1_1__48772 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__Note__Group_1_1__4__Impl8799 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_1__5__Impl_in_rule__Note__Group_1_1__58828 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_1__6_in_rule__Note__Group_1_1__58831 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_51_in_rule__Note__Group_1_1__5__Impl8859 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Note__Group_1_1__6__Impl_in_rule__Note__Group_1_1__68890 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__Note__Group_1_1__6__Impl8917 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DataType__Group__0__Impl_in_rule__DataType__Group__08960 = new BitSet(new long[]{0x0080000000000000L});
-    public static final BitSet FOLLOW_rule__DataType__Group__1_in_rule__DataType__Group__08963 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DataType__Alternatives_0_in_rule__DataType__Group__0__Impl8990 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DataType__Group__1__Impl_in_rule__DataType__Group__19020 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DataType__IsArrayAssignment_1_in_rule__DataType__Group__1__Impl9047 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group__0__Impl_in_rule__QualifiedName__Group__09082 = new BitSet(new long[]{0x0000800000000000L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group__1_in_rule__QualifiedName__Group__09085 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__QualifiedName__Group__0__Impl9112 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group__1__Impl_in_rule__QualifiedName__Group__19141 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__0_in_rule__QualifiedName__Group__1__Impl9168 = new BitSet(new long[]{0x0000800000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__0__Impl_in_rule__QualifiedName__Group_1__09203 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__1_in_rule__QualifiedName__Group_1__09206 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_47_in_rule__QualifiedName__Group_1__0__Impl9234 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__1__Impl_in_rule__QualifiedName__Group_1__19265 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__QualifiedName__Group_1__1__Impl9292 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__DomainModel__FileAssignment_29330 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCPackage_in_rule__DomainModel__PackagesAssignment_49361 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__CPackage__NameAssignment_19392 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePackageStyle_in_rule__CPackage__StyleAssignment_2_19423 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleElement_in_rule__CPackage__ElementsAssignment_59454 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__Relation__LeftRefAssignment_09489 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRelationParse_in_rule__Relation__RelTypeAssignment_19524 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__Relation__RightRefAssignment_29559 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleText_in_rule__Relation__NameAssignment_3_19594 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCompType_in_rule__RelationParse__CompAssignment_0_09625 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRelationType_in_rule__RelationParse__TypeAssignment_0_19656 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_52_in_rule__RelationParse__DirectAssignment_0_29692 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_MULTI_in_rule__RelationParse__MultiAssignment_0_49731 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRelationType_in_rule__RelationParse__TypeAssignment_1_09762 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_52_in_rule__RelationParse__DirectAssignment_1_1_09798 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_53_in_rule__RelationParse__ExtAssignment_1_1_19842 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_MULTI_in_rule__RelationParse__MultiAssignment_1_39881 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStrongRel_in_rule__RelationType__StrongAssignment_09912 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleWeakRel_in_rule__RelationType__WeakAssignment_19943 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Enumer__NameAssignment_19974 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Enumer__TypesAssignment_4_010005 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Clazz__NameAssignment_110036 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleText_in_rule__Clazz__StereotypeAssignment_2_110067 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleProperty_in_rule__Clazz__PropertiesAssignment_3_210098 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Property__NameAssignment_010129 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_30_in_rule__Property__OptionalAssignment_1_0_010165 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDataType_in_rule__Property__TypeAssignment_1_0_1_1_010204 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEntityList_in_rule__Property__EntityListAssignment_1_0_1_1_110235 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_54_in_rule__Property__ConstantAssignment_1_1_010271 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleText_in_rule__Property__ValueAssignment_1_1_110310 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__EntityList__RefsAssignment_110345 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__EntityList__RefsAssignment_2_110384 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNotePosition_in_rule__Note__PositionAssignment_1_0_0_010419 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleText_in_rule__Note__ValueAssignment_1_0_0_1_110450 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Note__OfAssignment_1_0_1_110485 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleText_in_rule__Note__ValueAssignment_1_0_1_310520 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Note__NameAssignment_1_1_110551 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleText_in_rule__Note__ValueAssignment_1_1_310582 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNativeType_in_rule__DataType__NativeAssignment_0_010613 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__DataType__EntityAssignment_0_110648 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_55_in_rule__DataType__IsArrayAssignment_110688 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_31_in_rule__Text__Alternatives2523 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_32_in_rule__Text__Alternatives2543 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_33_in_rule__Text__Alternatives2563 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_34_in_rule__Text__Alternatives2583 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_35_in_rule__PackageStyle__Alternatives2618 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_36_in_rule__PackageStyle__Alternatives2639 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_37_in_rule__PackageStyle__Alternatives2660 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_38_in_rule__PackageStyle__Alternatives2681 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_39_in_rule__PackageStyle__Alternatives2702 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_40_in_rule__PackageStyle__Alternatives2723 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_41_in_rule__CompType__Alternatives2759 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_42_in_rule__CompType__Alternatives2780 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_43_in_rule__CompType__Alternatives2801 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_16_in_rule__NotePosition__Alternatives2837 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_17_in_rule__NotePosition__Alternatives2858 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_rule__NotePosition__Alternatives2879 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_rule__NotePosition__Alternatives2900 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_19_in_rule__NativeType__Alternatives2936 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_20_in_rule__NativeType__Alternatives2957 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_21_in_rule__NativeType__Alternatives2978 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_22_in_rule__NativeType__Alternatives2999 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_23_in_rule__NativeType__Alternatives3020 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_24_in_rule__NativeType__Alternatives3041 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DomainModel__Group__0__Impl_in_rule__DomainModel__Group__03074 = new BitSet(new long[]{0x00000000000000A0L});
+    public static final BitSet FOLLOW_rule__DomainModel__Group__1_in_rule__DomainModel__Group__03077 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_44_in_rule__DomainModel__Group__0__Impl3105 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DomainModel__Group__1__Impl_in_rule__DomainModel__Group__13136 = new BitSet(new long[]{0x00000000000000A0L});
+    public static final BitSet FOLLOW_rule__DomainModel__Group__2_in_rule__DomainModel__Group__13139 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DomainModel__Group__2__Impl_in_rule__DomainModel__Group__23197 = new BitSet(new long[]{0x00000000000000A0L});
+    public static final BitSet FOLLOW_rule__DomainModel__Group__3_in_rule__DomainModel__Group__23200 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DomainModel__FileAssignment_2_in_rule__DomainModel__Group__2__Impl3227 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DomainModel__Group__3__Impl_in_rule__DomainModel__Group__33258 = new BitSet(new long[]{0x0000000002000000L});
+    public static final BitSet FOLLOW_rule__DomainModel__Group__4_in_rule__DomainModel__Group__33261 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__DomainModel__Group__3__Impl3288 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DomainModel__Group__4__Impl_in_rule__DomainModel__Group__43317 = new BitSet(new long[]{0x0000200000000000L});
+    public static final BitSet FOLLOW_rule__DomainModel__Group__5_in_rule__DomainModel__Group__43320 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DomainModel__PackagesAssignment_4_in_rule__DomainModel__Group__4__Impl3349 = new BitSet(new long[]{0x0000000002000002L});
+    public static final BitSet FOLLOW_rule__DomainModel__PackagesAssignment_4_in_rule__DomainModel__Group__4__Impl3361 = new BitSet(new long[]{0x0000000002000002L});
+    public static final BitSet FOLLOW_rule__DomainModel__Group__5__Impl_in_rule__DomainModel__Group__53394 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_45_in_rule__DomainModel__Group__5__Impl3422 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CPackage__Group__0__Impl_in_rule__CPackage__Group__03465 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__CPackage__Group__1_in_rule__CPackage__Group__03468 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_25_in_rule__CPackage__Group__0__Impl3496 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CPackage__Group__1__Impl_in_rule__CPackage__Group__13527 = new BitSet(new long[]{0x0001400000000000L});
+    public static final BitSet FOLLOW_rule__CPackage__Group__2_in_rule__CPackage__Group__13530 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CPackage__NameAssignment_1_in_rule__CPackage__Group__1__Impl3557 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CPackage__Group__2__Impl_in_rule__CPackage__Group__23587 = new BitSet(new long[]{0x0001400000000000L});
+    public static final BitSet FOLLOW_rule__CPackage__Group__3_in_rule__CPackage__Group__23590 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CPackage__Group_2__0_in_rule__CPackage__Group__2__Impl3617 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CPackage__Group__3__Impl_in_rule__CPackage__Group__33648 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_rule__CPackage__Group__4_in_rule__CPackage__Group__33651 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_46_in_rule__CPackage__Group__3__Impl3679 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CPackage__Group__4__Impl_in_rule__CPackage__Group__43710 = new BitSet(new long[]{0x000080001E000010L});
+    public static final BitSet FOLLOW_rule__CPackage__Group__5_in_rule__CPackage__Group__43713 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__CPackage__Group__4__Impl3740 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CPackage__Group__5__Impl_in_rule__CPackage__Group__53769 = new BitSet(new long[]{0x000080001E000010L});
+    public static final BitSet FOLLOW_rule__CPackage__Group__6_in_rule__CPackage__Group__53772 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CPackage__ElementsAssignment_5_in_rule__CPackage__Group__5__Impl3799 = new BitSet(new long[]{0x000000001E000012L});
+    public static final BitSet FOLLOW_rule__CPackage__Group__6__Impl_in_rule__CPackage__Group__63830 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_rule__CPackage__Group__7_in_rule__CPackage__Group__63833 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_47_in_rule__CPackage__Group__6__Impl3861 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CPackage__Group__7__Impl_in_rule__CPackage__Group__73892 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__CPackage__Group__7__Impl3919 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CPackage__Group_2__0__Impl_in_rule__CPackage__Group_2__03964 = new BitSet(new long[]{0x000001F800000000L});
+    public static final BitSet FOLLOW_rule__CPackage__Group_2__1_in_rule__CPackage__Group_2__03967 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_48_in_rule__CPackage__Group_2__0__Impl3995 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CPackage__Group_2__1__Impl_in_rule__CPackage__Group_2__14026 = new BitSet(new long[]{0x0002000000000000L});
+    public static final BitSet FOLLOW_rule__CPackage__Group_2__2_in_rule__CPackage__Group_2__14029 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CPackage__StyleAssignment_2_1_in_rule__CPackage__Group_2__1__Impl4056 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CPackage__Group_2__2__Impl_in_rule__CPackage__Group_2__24086 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_49_in_rule__CPackage__Group_2__2__Impl4114 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Relation__Group__0__Impl_in_rule__Relation__Group__04151 = new BitSet(new long[]{0x000C0E0000000000L});
+    public static final BitSet FOLLOW_rule__Relation__Group__1_in_rule__Relation__Group__04154 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Relation__LeftRefAssignment_0_in_rule__Relation__Group__0__Impl4181 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Relation__Group__1__Impl_in_rule__Relation__Group__14211 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__Relation__Group__2_in_rule__Relation__Group__14214 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Relation__RelTypeAssignment_1_in_rule__Relation__Group__1__Impl4241 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Relation__Group__2__Impl_in_rule__Relation__Group__24271 = new BitSet(new long[]{0x0000000080000080L});
+    public static final BitSet FOLLOW_rule__Relation__Group__3_in_rule__Relation__Group__24274 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Relation__RightRefAssignment_2_in_rule__Relation__Group__2__Impl4301 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Relation__Group__3__Impl_in_rule__Relation__Group__34331 = new BitSet(new long[]{0x0000000080000080L});
+    public static final BitSet FOLLOW_rule__Relation__Group__4_in_rule__Relation__Group__34334 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Relation__Group_3__0_in_rule__Relation__Group__3__Impl4361 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Relation__Group__4__Impl_in_rule__Relation__Group__44392 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__Relation__Group__4__Impl4419 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Relation__Group_3__0__Impl_in_rule__Relation__Group_3__04458 = new BitSet(new long[]{0x00000007FFFFF070L});
+    public static final BitSet FOLLOW_rule__Relation__Group_3__1_in_rule__Relation__Group_3__04461 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_31_in_rule__Relation__Group_3__0__Impl4489 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Relation__Group_3__1__Impl_in_rule__Relation__Group_3__14520 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Relation__NameAssignment_3_1_in_rule__Relation__Group_3__1__Impl4547 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RelationParse__Group_0__0__Impl_in_rule__RelationParse__Group_0__04581 = new BitSet(new long[]{0x000C0E0000000000L});
+    public static final BitSet FOLLOW_rule__RelationParse__Group_0__1_in_rule__RelationParse__Group_0__04584 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RelationParse__CompAssignment_0_0_in_rule__RelationParse__Group_0__0__Impl4611 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RelationParse__Group_0__1__Impl_in_rule__RelationParse__Group_0__14641 = new BitSet(new long[]{0x0040000000000100L});
+    public static final BitSet FOLLOW_rule__RelationParse__Group_0__2_in_rule__RelationParse__Group_0__14644 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RelationParse__TypeAssignment_0_1_in_rule__RelationParse__Group_0__1__Impl4671 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RelationParse__Group_0__2__Impl_in_rule__RelationParse__Group_0__24701 = new BitSet(new long[]{0x0040000000000100L});
+    public static final BitSet FOLLOW_rule__RelationParse__Group_0__3_in_rule__RelationParse__Group_0__24704 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RelationParse__DirectAssignment_0_2_in_rule__RelationParse__Group_0__2__Impl4731 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RelationParse__Group_0__3__Impl_in_rule__RelationParse__Group_0__34762 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_rule__RelationParse__Group_0__4_in_rule__RelationParse__Group_0__34765 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_WS_in_rule__RelationParse__Group_0__3__Impl4792 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RelationParse__Group_0__4__Impl_in_rule__RelationParse__Group_0__44821 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RelationParse__MultiAssignment_0_4_in_rule__RelationParse__Group_0__4__Impl4848 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RelationParse__Group_1__0__Impl_in_rule__RelationParse__Group_1__04889 = new BitSet(new long[]{0x00C0000000000100L});
+    public static final BitSet FOLLOW_rule__RelationParse__Group_1__1_in_rule__RelationParse__Group_1__04892 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RelationParse__TypeAssignment_1_0_in_rule__RelationParse__Group_1__0__Impl4919 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RelationParse__Group_1__1__Impl_in_rule__RelationParse__Group_1__14949 = new BitSet(new long[]{0x00C0000000000100L});
+    public static final BitSet FOLLOW_rule__RelationParse__Group_1__2_in_rule__RelationParse__Group_1__14952 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RelationParse__Alternatives_1_1_in_rule__RelationParse__Group_1__1__Impl4979 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RelationParse__Group_1__2__Impl_in_rule__RelationParse__Group_1__25010 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_rule__RelationParse__Group_1__3_in_rule__RelationParse__Group_1__25013 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_WS_in_rule__RelationParse__Group_1__2__Impl5040 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RelationParse__Group_1__3__Impl_in_rule__RelationParse__Group_1__35069 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RelationParse__MultiAssignment_1_3_in_rule__RelationParse__Group_1__3__Impl5096 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__StrongRel__Group__0__Impl_in_rule__StrongRel__Group__05135 = new BitSet(new long[]{0x000400000000F000L});
+    public static final BitSet FOLLOW_rule__StrongRel__Group__1_in_rule__StrongRel__Group__05138 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_50_in_rule__StrongRel__Group__0__Impl5166 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__StrongRel__Group__1__Impl_in_rule__StrongRel__Group__15197 = new BitSet(new long[]{0x000400000000F000L});
+    public static final BitSet FOLLOW_rule__StrongRel__Group__2_in_rule__StrongRel__Group__15200 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__StrongRel__Alternatives_1_in_rule__StrongRel__Group__1__Impl5227 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__StrongRel__Group__2__Impl_in_rule__StrongRel__Group__25258 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_50_in_rule__StrongRel__Group__2__Impl5289 = new BitSet(new long[]{0x0004000000000002L});
+    public static final BitSet FOLLOW_50_in_rule__StrongRel__Group__2__Impl5305 = new BitSet(new long[]{0x0004000000000002L});
+    public static final BitSet FOLLOW_rule__WeakRel__Group__0__Impl_in_rule__WeakRel__Group__05346 = new BitSet(new long[]{0x000800000000F000L});
+    public static final BitSet FOLLOW_rule__WeakRel__Group__1_in_rule__WeakRel__Group__05349 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_51_in_rule__WeakRel__Group__0__Impl5377 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__WeakRel__Group__1__Impl_in_rule__WeakRel__Group__15408 = new BitSet(new long[]{0x000800000000F000L});
+    public static final BitSet FOLLOW_rule__WeakRel__Group__2_in_rule__WeakRel__Group__15411 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__WeakRel__Alternatives_1_in_rule__WeakRel__Group__1__Impl5438 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__WeakRel__Group__2__Impl_in_rule__WeakRel__Group__25469 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_51_in_rule__WeakRel__Group__2__Impl5500 = new BitSet(new long[]{0x0008000000000002L});
+    public static final BitSet FOLLOW_51_in_rule__WeakRel__Group__2__Impl5516 = new BitSet(new long[]{0x0008000000000002L});
+    public static final BitSet FOLLOW_rule__Enumer__Group__0__Impl_in_rule__Enumer__Group__05557 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__Enumer__Group__1_in_rule__Enumer__Group__05560 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_27_in_rule__Enumer__Group__0__Impl5588 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Enumer__Group__1__Impl_in_rule__Enumer__Group__15619 = new BitSet(new long[]{0x0000400000000000L});
+    public static final BitSet FOLLOW_rule__Enumer__Group__2_in_rule__Enumer__Group__15622 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Enumer__NameAssignment_1_in_rule__Enumer__Group__1__Impl5649 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Enumer__Group__2__Impl_in_rule__Enumer__Group__25679 = new BitSet(new long[]{0x0000800000000090L});
+    public static final BitSet FOLLOW_rule__Enumer__Group__3_in_rule__Enumer__Group__25682 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_46_in_rule__Enumer__Group__2__Impl5710 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Enumer__Group__3__Impl_in_rule__Enumer__Group__35741 = new BitSet(new long[]{0x0000800000000090L});
+    public static final BitSet FOLLOW_rule__Enumer__Group__4_in_rule__Enumer__Group__35744 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__Enumer__Group__3__Impl5772 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Enumer__Group__4__Impl_in_rule__Enumer__Group__45803 = new BitSet(new long[]{0x0000800000000090L});
+    public static final BitSet FOLLOW_rule__Enumer__Group__5_in_rule__Enumer__Group__45806 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Enumer__Group_4__0_in_rule__Enumer__Group__4__Impl5833 = new BitSet(new long[]{0x0000000000000012L});
+    public static final BitSet FOLLOW_rule__Enumer__Group__5__Impl_in_rule__Enumer__Group__55864 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_rule__Enumer__Group__6_in_rule__Enumer__Group__55867 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_47_in_rule__Enumer__Group__5__Impl5895 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Enumer__Group__6__Impl_in_rule__Enumer__Group__65926 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__Enumer__Group__6__Impl5953 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Enumer__Group_4__0__Impl_in_rule__Enumer__Group_4__05996 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_rule__Enumer__Group_4__1_in_rule__Enumer__Group_4__05999 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Enumer__TypesAssignment_4_0_in_rule__Enumer__Group_4__0__Impl6026 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Enumer__Group_4__1__Impl_in_rule__Enumer__Group_4__16056 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__Enumer__Group_4__1__Impl6084 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Clazz__Group__0__Impl_in_rule__Clazz__Group__06119 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__Clazz__Group__1_in_rule__Clazz__Group__06122 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_26_in_rule__Clazz__Group__0__Impl6150 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Clazz__Group__1__Impl_in_rule__Clazz__Group__16181 = new BitSet(new long[]{0x0001400000000080L});
+    public static final BitSet FOLLOW_rule__Clazz__Group__2_in_rule__Clazz__Group__16184 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Clazz__NameAssignment_1_in_rule__Clazz__Group__1__Impl6211 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Clazz__Group__2__Impl_in_rule__Clazz__Group__26241 = new BitSet(new long[]{0x0001400000000080L});
+    public static final BitSet FOLLOW_rule__Clazz__Group__3_in_rule__Clazz__Group__26244 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Clazz__Group_2__0_in_rule__Clazz__Group__2__Impl6271 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Clazz__Group__3__Impl_in_rule__Clazz__Group__36302 = new BitSet(new long[]{0x0001400000000080L});
+    public static final BitSet FOLLOW_rule__Clazz__Group__4_in_rule__Clazz__Group__36305 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Clazz__Group_3__0_in_rule__Clazz__Group__3__Impl6332 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Clazz__Group__4__Impl_in_rule__Clazz__Group__46363 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__Clazz__Group__4__Impl6390 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Clazz__Group_2__0__Impl_in_rule__Clazz__Group_2__06429 = new BitSet(new long[]{0x00000007FFFFF070L});
+    public static final BitSet FOLLOW_rule__Clazz__Group_2__1_in_rule__Clazz__Group_2__06432 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_48_in_rule__Clazz__Group_2__0__Impl6460 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Clazz__Group_2__1__Impl_in_rule__Clazz__Group_2__16491 = new BitSet(new long[]{0x0002000000000000L});
+    public static final BitSet FOLLOW_rule__Clazz__Group_2__2_in_rule__Clazz__Group_2__16494 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Clazz__StereotypeAssignment_2_1_in_rule__Clazz__Group_2__1__Impl6521 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Clazz__Group_2__2__Impl_in_rule__Clazz__Group_2__26551 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_49_in_rule__Clazz__Group_2__2__Impl6579 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Clazz__Group_3__0__Impl_in_rule__Clazz__Group_3__06616 = new BitSet(new long[]{0x0000800000000090L});
+    public static final BitSet FOLLOW_rule__Clazz__Group_3__1_in_rule__Clazz__Group_3__06619 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_46_in_rule__Clazz__Group_3__0__Impl6647 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Clazz__Group_3__1__Impl_in_rule__Clazz__Group_3__16678 = new BitSet(new long[]{0x0000800000000090L});
+    public static final BitSet FOLLOW_rule__Clazz__Group_3__2_in_rule__Clazz__Group_3__16681 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__Clazz__Group_3__1__Impl6709 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Clazz__Group_3__2__Impl_in_rule__Clazz__Group_3__26740 = new BitSet(new long[]{0x0000800000000090L});
+    public static final BitSet FOLLOW_rule__Clazz__Group_3__3_in_rule__Clazz__Group_3__26743 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Clazz__PropertiesAssignment_3_2_in_rule__Clazz__Group_3__2__Impl6770 = new BitSet(new long[]{0x0000000000000012L});
+    public static final BitSet FOLLOW_rule__Clazz__Group_3__3__Impl_in_rule__Clazz__Group_3__36801 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_47_in_rule__Clazz__Group_3__3__Impl6829 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Property__Group__0__Impl_in_rule__Property__Group__06868 = new BitSet(new long[]{0x0100000180000000L});
+    public static final BitSet FOLLOW_rule__Property__Group__1_in_rule__Property__Group__06871 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Property__NameAssignment_0_in_rule__Property__Group__0__Impl6898 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Property__Group__1__Impl_in_rule__Property__Group__16928 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_rule__Property__Group__2_in_rule__Property__Group__16931 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Property__Alternatives_1_in_rule__Property__Group__1__Impl6958 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Property__Group__2__Impl_in_rule__Property__Group__26988 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__Property__Group__2__Impl7015 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Property__Group_1_0__0__Impl_in_rule__Property__Group_1_0__07050 = new BitSet(new long[]{0x0000000180000000L});
+    public static final BitSet FOLLOW_rule__Property__Group_1_0__1_in_rule__Property__Group_1_0__07053 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Property__OptionalAssignment_1_0_0_in_rule__Property__Group_1_0__0__Impl7080 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Property__Group_1_0__1__Impl_in_rule__Property__Group_1_0__17111 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Property__Group_1_0_1__0_in_rule__Property__Group_1_0__1__Impl7138 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Property__Group_1_0_1__0__Impl_in_rule__Property__Group_1_0_1__07173 = new BitSet(new long[]{0x0000000201F80010L});
+    public static final BitSet FOLLOW_rule__Property__Group_1_0_1__1_in_rule__Property__Group_1_0_1__07176 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_31_in_rule__Property__Group_1_0_1__0__Impl7204 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Property__Group_1_0_1__1__Impl_in_rule__Property__Group_1_0_1__17235 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Property__Alternatives_1_0_1_1_in_rule__Property__Group_1_0_1__1__Impl7262 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Property__Group_1_1__0__Impl_in_rule__Property__Group_1_1__07296 = new BitSet(new long[]{0x00000007FFFFF070L});
+    public static final BitSet FOLLOW_rule__Property__Group_1_1__1_in_rule__Property__Group_1_1__07299 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Property__ConstantAssignment_1_1_0_in_rule__Property__Group_1_1__0__Impl7326 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Property__Group_1_1__1__Impl_in_rule__Property__Group_1_1__17356 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Property__ValueAssignment_1_1_1_in_rule__Property__Group_1_1__1__Impl7383 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__EntityList__Group__0__Impl_in_rule__EntityList__Group__07417 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__EntityList__Group__1_in_rule__EntityList__Group__07420 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_33_in_rule__EntityList__Group__0__Impl7448 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__EntityList__Group__1__Impl_in_rule__EntityList__Group__17479 = new BitSet(new long[]{0x0010000400000000L});
+    public static final BitSet FOLLOW_rule__EntityList__Group__2_in_rule__EntityList__Group__17482 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__EntityList__RefsAssignment_1_in_rule__EntityList__Group__1__Impl7509 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__EntityList__Group__2__Impl_in_rule__EntityList__Group__27539 = new BitSet(new long[]{0x0010000400000000L});
+    public static final BitSet FOLLOW_rule__EntityList__Group__3_in_rule__EntityList__Group__27542 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__EntityList__Group_2__0_in_rule__EntityList__Group__2__Impl7569 = new BitSet(new long[]{0x0010000000000002L});
+    public static final BitSet FOLLOW_rule__EntityList__Group__3__Impl_in_rule__EntityList__Group__37600 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_34_in_rule__EntityList__Group__3__Impl7628 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__EntityList__Group_2__0__Impl_in_rule__EntityList__Group_2__07667 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__EntityList__Group_2__1_in_rule__EntityList__Group_2__07670 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_52_in_rule__EntityList__Group_2__0__Impl7698 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__EntityList__Group_2__1__Impl_in_rule__EntityList__Group_2__17729 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__EntityList__RefsAssignment_2_1_in_rule__EntityList__Group_2__1__Impl7756 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Note__Group__0__Impl_in_rule__Note__Group__07790 = new BitSet(new long[]{0x000000006003C000L});
+    public static final BitSet FOLLOW_rule__Note__Group__1_in_rule__Note__Group__07793 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_28_in_rule__Note__Group__0__Impl7821 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Note__Group__1__Impl_in_rule__Note__Group__17852 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Note__Alternatives_1_in_rule__Note__Group__1__Impl7879 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_0_0__0__Impl_in_rule__Note__Group_1_0_0__07913 = new BitSet(new long[]{0x0000000080000000L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_0_0__1_in_rule__Note__Group_1_0_0__07916 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Note__PositionAssignment_1_0_0_0_in_rule__Note__Group_1_0_0__0__Impl7943 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_0_0__1__Impl_in_rule__Note__Group_1_0_0__17973 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_0_0_1__0_in_rule__Note__Group_1_0_0__1__Impl8000 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_0_0_1__0__Impl_in_rule__Note__Group_1_0_0_1__08034 = new BitSet(new long[]{0x00000007FFFFF070L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_0_0_1__1_in_rule__Note__Group_1_0_0_1__08037 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_31_in_rule__Note__Group_1_0_0_1__0__Impl8065 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_0_0_1__1__Impl_in_rule__Note__Group_1_0_0_1__18096 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_0_0_1__2_in_rule__Note__Group_1_0_0_1__18099 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Note__ValueAssignment_1_0_0_1_1_in_rule__Note__Group_1_0_0_1__1__Impl8126 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_0_0_1__2__Impl_in_rule__Note__Group_1_0_0_1__28156 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__Note__Group_1_0_0_1__2__Impl8183 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_0_1__0__Impl_in_rule__Note__Group_1_0_1__08218 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_0_1__1_in_rule__Note__Group_1_0_1__08221 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_30_in_rule__Note__Group_1_0_1__0__Impl8249 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_0_1__1__Impl_in_rule__Note__Group_1_0_1__18280 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_0_1__2_in_rule__Note__Group_1_0_1__18283 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Note__OfAssignment_1_0_1_1_in_rule__Note__Group_1_0_1__1__Impl8310 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_0_1__2__Impl_in_rule__Note__Group_1_0_1__28340 = new BitSet(new long[]{0x00000007FFFFF070L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_0_1__3_in_rule__Note__Group_1_0_1__28343 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__Note__Group_1_0_1__2__Impl8370 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_0_1__3__Impl_in_rule__Note__Group_1_0_1__38399 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_0_1__4_in_rule__Note__Group_1_0_1__38402 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Note__ValueAssignment_1_0_1_3_in_rule__Note__Group_1_0_1__3__Impl8429 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_0_1__4__Impl_in_rule__Note__Group_1_0_1__48459 = new BitSet(new long[]{0x0020000000000000L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_0_1__5_in_rule__Note__Group_1_0_1__48462 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__Note__Group_1_0_1__4__Impl8489 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_0_1__5__Impl_in_rule__Note__Group_1_0_1__58518 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_0_1__6_in_rule__Note__Group_1_0_1__58521 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_53_in_rule__Note__Group_1_0_1__5__Impl8549 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_0_1__6__Impl_in_rule__Note__Group_1_0_1__68580 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__Note__Group_1_0_1__6__Impl8607 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_1__0__Impl_in_rule__Note__Group_1_1__08650 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_1__1_in_rule__Note__Group_1_1__08653 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_29_in_rule__Note__Group_1_1__0__Impl8681 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_1__1__Impl_in_rule__Note__Group_1_1__18712 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_1__2_in_rule__Note__Group_1_1__18715 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Note__NameAssignment_1_1_1_in_rule__Note__Group_1_1__1__Impl8742 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_1__2__Impl_in_rule__Note__Group_1_1__28772 = new BitSet(new long[]{0x00000007FFFFF070L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_1__3_in_rule__Note__Group_1_1__28775 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__Note__Group_1_1__2__Impl8802 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_1__3__Impl_in_rule__Note__Group_1_1__38831 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_1__4_in_rule__Note__Group_1_1__38834 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Note__ValueAssignment_1_1_3_in_rule__Note__Group_1_1__3__Impl8861 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_1__4__Impl_in_rule__Note__Group_1_1__48891 = new BitSet(new long[]{0x0020000000000000L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_1__5_in_rule__Note__Group_1_1__48894 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__Note__Group_1_1__4__Impl8921 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_1__5__Impl_in_rule__Note__Group_1_1__58950 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_1__6_in_rule__Note__Group_1_1__58953 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_53_in_rule__Note__Group_1_1__5__Impl8981 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Note__Group_1_1__6__Impl_in_rule__Note__Group_1_1__69012 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_END_LINE_in_rule__Note__Group_1_1__6__Impl9039 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DataType__Group__0__Impl_in_rule__DataType__Group__09082 = new BitSet(new long[]{0x0200000000000000L});
+    public static final BitSet FOLLOW_rule__DataType__Group__1_in_rule__DataType__Group__09085 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DataType__Alternatives_0_in_rule__DataType__Group__0__Impl9112 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DataType__Group__1__Impl_in_rule__DataType__Group__19142 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DataType__IsArrayAssignment_1_in_rule__DataType__Group__1__Impl9169 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QualifiedName__Group__0__Impl_in_rule__QualifiedName__Group__09204 = new BitSet(new long[]{0x0008000000000000L});
+    public static final BitSet FOLLOW_rule__QualifiedName__Group__1_in_rule__QualifiedName__Group__09207 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__QualifiedName__Group__0__Impl9234 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QualifiedName__Group__1__Impl_in_rule__QualifiedName__Group__19263 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__0_in_rule__QualifiedName__Group__1__Impl9290 = new BitSet(new long[]{0x0008000000000002L});
+    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__0__Impl_in_rule__QualifiedName__Group_1__09325 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__1_in_rule__QualifiedName__Group_1__09328 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_51_in_rule__QualifiedName__Group_1__0__Impl9356 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__1__Impl_in_rule__QualifiedName__Group_1__19387 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__QualifiedName__Group_1__1__Impl9414 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_rule__DomainModel__FileAssignment_29452 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCPackage_in_rule__DomainModel__PackagesAssignment_49483 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__CPackage__NameAssignment_19514 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePackageStyle_in_rule__CPackage__StyleAssignment_2_19545 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleElement_in_rule__CPackage__ElementsAssignment_59576 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__Relation__LeftRefAssignment_09611 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRelationParse_in_rule__Relation__RelTypeAssignment_19646 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__Relation__RightRefAssignment_29681 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleText_in_rule__Relation__NameAssignment_3_19716 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCompType_in_rule__RelationParse__CompAssignment_0_09747 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRelationType_in_rule__RelationParse__TypeAssignment_0_19778 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_54_in_rule__RelationParse__DirectAssignment_0_29814 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_MULTI_in_rule__RelationParse__MultiAssignment_0_49853 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRelationType_in_rule__RelationParse__TypeAssignment_1_09884 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_54_in_rule__RelationParse__DirectAssignment_1_1_09920 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_55_in_rule__RelationParse__ExtAssignment_1_1_19964 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_MULTI_in_rule__RelationParse__MultiAssignment_1_310003 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStrongRel_in_rule__RelationType__StrongAssignment_010034 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleWeakRel_in_rule__RelationType__WeakAssignment_110065 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__Enumer__NameAssignment_110096 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__Enumer__TypesAssignment_4_010127 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__Clazz__NameAssignment_110158 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleText_in_rule__Clazz__StereotypeAssignment_2_110189 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleProperty_in_rule__Clazz__PropertiesAssignment_3_210220 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__Property__NameAssignment_010251 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_32_in_rule__Property__OptionalAssignment_1_0_010287 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDataType_in_rule__Property__TypeAssignment_1_0_1_1_010326 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEntityList_in_rule__Property__EntityListAssignment_1_0_1_1_110357 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_56_in_rule__Property__ConstantAssignment_1_1_010393 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleText_in_rule__Property__ValueAssignment_1_1_110432 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__EntityList__RefsAssignment_110467 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__EntityList__RefsAssignment_2_110506 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNotePosition_in_rule__Note__PositionAssignment_1_0_0_010541 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleText_in_rule__Note__ValueAssignment_1_0_0_1_110572 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__Note__OfAssignment_1_0_1_110607 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleText_in_rule__Note__ValueAssignment_1_0_1_310642 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__Note__NameAssignment_1_1_110673 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleText_in_rule__Note__ValueAssignment_1_1_310704 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNativeType_in_rule__DataType__NativeAssignment_0_010735 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__DataType__EntityAssignment_0_110770 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_57_in_rule__DataType__IsArrayAssignment_110810 = new BitSet(new long[]{0x0000000000000002L});
 
 }

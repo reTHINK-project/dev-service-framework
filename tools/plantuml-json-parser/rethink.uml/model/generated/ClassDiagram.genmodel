@@ -31,6 +31,8 @@
       <genEnumLiterals ecoreEnumLiteral="ClassDiagram.ecore#//NativeType/number"/>
       <genEnumLiterals ecoreEnumLiteral="ClassDiagram.ecore#//NativeType/integer"/>
       <genEnumLiterals ecoreEnumLiteral="ClassDiagram.ecore#//NativeType/boolean"/>
+      <genEnumLiterals ecoreEnumLiteral="ClassDiagram.ecore#//NativeType/date"/>
+      <genEnumLiterals ecoreEnumLiteral="ClassDiagram.ecore#//NativeType/object"/>
     </genEnums>
     <genClasses ecoreClass="ClassDiagram.ecore#//DomainModel">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ClassDiagram.ecore#//DomainModel/file"/>

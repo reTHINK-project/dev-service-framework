@@ -57,7 +57,27 @@ public enum NativeType implements Enumerator
    * @generated
    * @ordered
    */
-  BOOLEAN(3, "boolean", "boolean");
+  BOOLEAN(3, "boolean", "boolean"),
+
+  /**
+   * The '<em><b>Date</b></em>' literal object.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #DATE_VALUE
+   * @generated
+   * @ordered
+   */
+  DATE(4, "date", "date"),
+
+  /**
+   * The '<em><b>Object</b></em>' literal object.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #OBJECT_VALUE
+   * @generated
+   * @ordered
+   */
+  OBJECT(5, "object", "object");
 
   /**
    * The '<em><b>String</b></em>' literal value.
@@ -120,6 +140,36 @@ public enum NativeType implements Enumerator
   public static final int BOOLEAN_VALUE = 3;
 
   /**
+   * The '<em><b>Date</b></em>' literal value.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>Date</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @see #DATE
+   * @model name="date"
+   * @generated
+   * @ordered
+   */
+  public static final int DATE_VALUE = 4;
+
+  /**
+   * The '<em><b>Object</b></em>' literal value.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>Object</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @see #OBJECT
+   * @model name="object"
+   * @generated
+   * @ordered
+   */
+  public static final int OBJECT_VALUE = 5;
+
+  /**
    * An array of all the '<em><b>Native Type</b></em>' enumerators.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -132,6 +182,8 @@ public enum NativeType implements Enumerator
       NUMBER,
       INTEGER,
       BOOLEAN,
+      DATE,
+      OBJECT,
     };
 
   /**
@@ -194,6 +246,8 @@ public enum NativeType implements Enumerator
       case NUMBER_VALUE: return NUMBER;
       case INTEGER_VALUE: return INTEGER;
       case BOOLEAN_VALUE: return BOOLEAN;
+      case DATE_VALUE: return DATE;
+      case OBJECT_VALUE: return OBJECT;
     }
     return null;
   }

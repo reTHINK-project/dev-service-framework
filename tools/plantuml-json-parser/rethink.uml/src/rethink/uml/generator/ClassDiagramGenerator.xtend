@@ -16,6 +16,7 @@ import rethink.uml.classDiagram.Entity
 import rethink.uml.classDiagram.CPackage
 import java.util.LinkedList
 import rethink.uml.classDiagram.DataType
+import rethink.uml.classDiagram.NativeType
 
 /**
  * Generates code from your model files on save.
@@ -28,10 +29,8 @@ class ClassDiagramGenerator implements IGenerator {
 	
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
       	for(pack: resource.allContents.filter(CPackage).toIterable) {
-      		//fsa.generateFile(pack.fullyQualifiedName.toString("/") + ".json", compile(resource, pack))
-      		
       		if(pack.elements.exists[it instanceof Entity]) {
-      			fsa.generateFile(pack.fullyQualifiedName.toString + ".json", compile(resource, pack))	
+      			fsa.generateFile(pack.fullyQualifiedName.toString + ".json", compile(resource, pack))
       		}
       	}
 	}
@@ -40,27 +39,6 @@ class ClassDiagramGenerator implements IGenerator {
 		var cPack = new LinkedList<String>
 
 		for(clazz: pack.eAllContents.filter(Clazz).toIterable) {
-			/*val hierarchy = resource.allContents.filter(Relation).filter[
-				if(leftRef == clazz && rightRef instanceof Entity && relType.ext == true)
-					return true
-				
-				return false
-			].head
-			
-			val relations = resource.allContents.filter(Relation).filter[
-				if(leftRef == clazz && rightRef instanceof Entity && relType.ext == false)
-					return true
-				
-				return false
-			].toList
-
-			val invRelations = resource.allContents.filter(Relation).filter[
-				if(rightRef == clazz && leftRef instanceof Entity && relType.direct == false && relType.ext == false)
-					return true
-				
-				return false
-			].toList
-			*/
 			
 			val invHierarchy = resource.allContents.filter(Relation).map[
 				if(leftRef instanceof Clazz && rightRef == clazz && relType.ext == true)
@@ -98,20 +76,6 @@ class ClassDiagramGenerator implements IGenerator {
 		//required properties...
 		val required = clazz.properties.filter[!optional].map[name].toList
 		
-		//required relations...
-		/*required.addAll(relations.filter[
-			relType.multi != null && relType.multi.contains("1") && !relType.multi.contains("0") ||
-			relType.comp == CompType.NONE
-		].map[relationName(false)])*/
-
-		/*
-		«IF hierarchy != null»
-			"allOf": [
-				{«hierarchy.rightRef.processRef(pack)»}
-			],
-		«ENDIF» 
-		 */
-		
 		return '''
 			"type": "object",
 			«IF !required.empty»
@@ -137,51 +101,7 @@ class ClassDiagramGenerator implements IGenerator {
 				«ENDFOR»
 			}
 		'''
-				/*
-				«IF !relations.empty»
-					«IF !clazz.properties.empty»,«ENDIF»
-					«FOR rel:relations SEPARATOR ","»
-						"«rel.relationName(false)»": {
-							«processRelation(pack, rel.rightRef, rel.relType.comp, rel.relType.multi) »
-						}
-					«ENDFOR»
-				«ENDIF»
-				«IF !invRelations.empty»
-					«IF !clazz.properties.empty || !relations.empty»,«ENDIF»
-					«FOR rel:invRelations SEPARATOR ","»
-						"«rel.relationName(true)»": {
-							«processRelation(pack, rel.leftRef, CompType.NONE, "1")»
-						}
-					«ENDFOR»
-				«ENDIF»
-				*/
 	}
-	
-	/*
-	def relationName(Relation rel, boolean isInv) {
-		if(isInv)
-			return '''«rel.leftRef.name.toFirstLower»Inv'''
-		else
-			return '''«rel.rightRef.name.toFirstLower»«IF rel.relType.comp != CompType.NONE»Array«ENDIF»'''
-	}
-	
-	def processRelation(CPackage pack, EntityAndNote ref, CompType type, String multi) {
-		var selector = 0
-		if(multi != null && multi.contains("*") || multi == null && type != CompType.NONE) {
-			selector = 1
-		}
-		
-		switch(selector) {
-			case 0: return ref.processRef(pack)
-			case 1: return '''
-				"type": "array",
-				"items": {
-					«ref.processRef(pack)»
-				}
-			'''
-		}
-	}
-	*/
 	
 	def processRefList(List<Entity> list, CPackage pack) '''
 		"anyOf": [
@@ -231,9 +151,20 @@ class ClassDiagramGenerator implements IGenerator {
 	
 	def processSimpleType(DataType type, CPackage pack) {
 		if(type.entity == null) {
-			return '''"type": "«type.native.getName.toLowerCase»"'''
+			return type.native.genNative
 		} else {
 			return type.entity.processRef(pack)
+		}
+	}
+	
+	def genNative(NativeType value) {
+		if(value == NativeType.DATE) {
+			return '''
+				"type": "string",
+				"format": "date-time"
+			'''
+		} else {
+			return '''"type": "«value.getName.toLowerCase»"'''	
 		}
 	}
 }

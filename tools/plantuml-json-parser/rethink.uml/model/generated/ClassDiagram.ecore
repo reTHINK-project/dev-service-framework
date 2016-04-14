@@ -91,5 +91,7 @@
     <eLiterals name="number" value="1" literal="number"/>
     <eLiterals name="integer" value="2" literal="integer"/>
     <eLiterals name="boolean" value="3" literal="boolean"/>
+    <eLiterals name="date" value="4" literal="date"/>
+    <eLiterals name="object" value="5" literal="object"/>
   </eClassifiers>
 </ecore:EPackage>

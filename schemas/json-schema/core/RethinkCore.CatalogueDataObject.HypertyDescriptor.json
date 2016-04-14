@@ -11,7 +11,7 @@
 		"hypertyType": {
 			"type": "array",
 			"items": {
-				"$ref": "#/HypertyResourceType"
+				"$ref": "HypertyResource.json#/HypertyResourceType"
 			}
 		},
 		"messageSchemaUrl": {
@@ -25,33 +25,6 @@
 		},
 		"policiesUrl": {
 			"type": "string"
-		}
-	}, 
-	"HypertyResourceType": {
-		"type": "object",
-		"required": ["CHAT", "AUDIO", "VIDEO", "AV", "SCREEN", "FILE", "MIDI"],
-		"properties": {
-			"CHAT": {
-				"type": "null"
-			},
-			"AUDIO": {
-				"type": "null"
-			},
-			"VIDEO": {
-				"type": "null"
-			},
-			"AV": {
-				"type": "null"
-			},
-			"SCREEN": {
-				"type": "null"
-			},
-			"FILE": {
-				"type": "null"
-			},
-			"MIDI": {
-				"type": "null"
-			}
 		}
 	}, 
 	"HypertyConfiguration": {

@@ -23,7 +23,7 @@ package HypertyResource <<Rect>> {
 		INOUT
 	}
 
-	HypertyResource -up-|> SyncDataObject.DataSyncChild
+	HypertyResource -up-|> SyncDataObject.SyncObjectChild
 	HypertyResource ..> HypertyResourceType
 	HypertyResource ..> ResourceDirection
 	Identity.Identity ..> HypertyResource: author
