@@ -101,6 +101,10 @@
     }
   },
   "dependencies": {
+    "mutationobserver-shim": "^0.3.1",
+    "array.observe": "^0.0.1",
+    "object.observe": "^0.2.6",
+    "indexeddbshim": "^2.2.1",
     "ortc-over-rtc": "^0.1.0",
     "webrtc-adapter-test": "^0.2.5",
     "webrtc-shim": "^0.1.2",

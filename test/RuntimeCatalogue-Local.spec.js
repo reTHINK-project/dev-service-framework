@@ -12,6 +12,8 @@ chai.use(sinonChai);
 import RuntimeCatalogue from '../src/runtime-catalogue/RuntimeCatalogue-Local';
 import RuntimeFactory from './resources/RuntimeFactory';
 
+import {divideURL} from '../src/utils/utils';
+
 // Testing runtimeUA;
 describe('Local Runtime Catalogue', function() {
 
@@ -22,6 +24,7 @@ describe('Local Runtime Catalogue', function() {
   let runtimeFactory = new RuntimeFactory();
 
   let runtimeCatalogue = new RuntimeCatalogue(runtimeFactory);
+  runtimeCatalogue.runtimeURL = domain;
 
   before(function() {
 
@@ -173,7 +176,7 @@ describe('Local Runtime Catalogue', function() {
     //   _hypertyType: '0',
     //   _dataObjects: []
     // }
-    let descriptorValidation = ['_guid', '_type', '_objectName', '_description', '_language', '_sourcePackageURL', '_signature', '_sourcePackage', '_configuration', '_constraints','_policies', '_messageSchema',  '_hypertyType', '_dataObjects'];
+    let descriptorValidation = ['_guid', '_type', '_version', '_objectName', '_description', '_language', '_sourcePackageURL', '_signature', '_sourcePackage', '_configuration', '_constraints','_policies', '_messageSchema',  '_hypertyType', '_dataObjects'];
 
     // TODO: Check the hyperty descriptor response and compare
     // with what is defined in the specification;
@@ -206,11 +209,14 @@ describe('Local Runtime Catalogue', function() {
     // policies, constraints, configuration,
     // hypertyCapabilities, protocolCapabilities
     //
-    let descriptorValidation = ['_guid', '_type', '_description', '_objectName', '_sourcePackageURL', '_sourcePackage', '_language', '_signature', '_messageSchemas', '_configuration', '_constraints'];
+    let descriptorValidation = ['_guid', '_type', '_version', '_description', '_objectName', '_sourcePackageURL', '_sourcePackage', '_language', '_signature', '_messageSchemas', '_configuration', '_constraints'];
 
     // TODO: Check the hyperty descriptor response and compare
     // with what is defined in the specification;
-    let domainURL = 'sp.domain';
+    let domainURL = 'domain.sp';
+
+    console.log(divideURL(domainURL));
+
     expect(runtimeCatalogue.getStubDescriptor(domainURL).then(function(stubDescriptor) {
       console.log('stubDescriptor: ', stubDescriptor);
       _stubDescriptor = stubDescriptor;
