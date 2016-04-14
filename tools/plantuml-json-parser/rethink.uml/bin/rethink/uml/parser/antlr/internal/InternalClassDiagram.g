@@ -1616,59 +1616,87 @@ ruleText returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
 
     |
+	kw='date' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getTextAccess().getDateKeyword_14()); 
+    }
+
+    |
+	kw='object' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getTextAccess().getObjectKeyword_15()); 
+    }
+
+    |
 	kw='package' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getTextAccess().getPackageKeyword_14()); 
+        newLeafNode(kw, grammarAccess.getTextAccess().getPackageKeyword_16()); 
     }
 
     |
 	kw='class' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getTextAccess().getClassKeyword_15()); 
+        newLeafNode(kw, grammarAccess.getTextAccess().getClassKeyword_17()); 
     }
 
     |
 	kw='enum' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getTextAccess().getEnumKeyword_16()); 
+        newLeafNode(kw, grammarAccess.getTextAccess().getEnumKeyword_18()); 
     }
 
     |
 	kw='note' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getTextAccess().getNoteKeyword_17()); 
+        newLeafNode(kw, grammarAccess.getTextAccess().getNoteKeyword_19()); 
     }
 
     |
 	kw='as' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getTextAccess().getAsKeyword_18()); 
+        newLeafNode(kw, grammarAccess.getTextAccess().getAsKeyword_20()); 
     }
 
     |
 	kw='of' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getTextAccess().getOfKeyword_19()); 
+        newLeafNode(kw, grammarAccess.getTextAccess().getOfKeyword_21()); 
     }
 
     |
 	kw=':' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getTextAccess().getColonKeyword_20()); 
+        newLeafNode(kw, grammarAccess.getTextAccess().getColonKeyword_22()); 
     }
 
     |
 	kw='?' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getTextAccess().getQuestionMarkKeyword_21()); 
+        newLeafNode(kw, grammarAccess.getTextAccess().getQuestionMarkKeyword_23()); 
+    }
+
+    |
+	kw='[' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getTextAccess().getLeftSquareBracketKeyword_24()); 
+    }
+
+    |
+	kw=']' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getTextAccess().getRightSquareBracketKeyword_25()); 
     }
 )+
     ;
@@ -1802,6 +1830,18 @@ ruleNativeType returns [Enumerator current=null]
 	{
         $current = grammarAccess.getNativeTypeAccess().getBooleanEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
         newLeafNode(enumLiteral_3, grammarAccess.getNativeTypeAccess().getBooleanEnumLiteralDeclaration_3()); 
+    }
+)
+    |(	enumLiteral_4='date' 
+	{
+        $current = grammarAccess.getNativeTypeAccess().getDateEnumLiteralDeclaration_4().getEnumLiteral().getInstance();
+        newLeafNode(enumLiteral_4, grammarAccess.getNativeTypeAccess().getDateEnumLiteralDeclaration_4()); 
+    }
+)
+    |(	enumLiteral_5='object' 
+	{
+        $current = grammarAccess.getNativeTypeAccess().getObjectEnumLiteralDeclaration_5().getEnumLiteral().getInstance();
+        newLeafNode(enumLiteral_5, grammarAccess.getNativeTypeAccess().getObjectEnumLiteralDeclaration_5()); 
     }
 ));
 

@@ -4,7 +4,7 @@ package Context <<Rect>> {
 
 	class Context {
 		id: string
-		type : HypertyResoource.HypertyResourceType
+		type : HypertyResource.HypertyResourceType
 		description ?: string
 		time?: date
 		units?: ContextUnit
@@ -42,7 +42,7 @@ package Context <<Rect>> {
 
 	Context *-- "1" ContextValueList
 
-	Context --> HypertyResoource.HypertyResourceType
+	Context --> HypertyResource.HypertyResourceType
 	Context --> ContextUnit
 	ContextValue --> ContextUnit
 

@@ -2,18 +2,7 @@
 package RethinkCore <<Rect>> {
 
 	package RethinkType {
-	
-		enum Basic {
-			STRING
-			BOOLEAN
-			FLOAT
-			DOUBLE
-		}
-	
-		class Date {
-	
-		}
-	
+
 		class List {
 	
 		}

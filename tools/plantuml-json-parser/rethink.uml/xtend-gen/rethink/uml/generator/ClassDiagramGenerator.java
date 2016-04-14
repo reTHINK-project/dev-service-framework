@@ -270,31 +270,6 @@ public class ClassDiagramGenerator implements IGenerator {
     return _builder.toString();
   }
   
-  /**
-   * def relationName(Relation rel, boolean isInv) {
-   * if(isInv)
-   * return '''«rel.leftRef.name.toFirstLower»Inv'''
-   * else
-   * return '''«rel.rightRef.name.toFirstLower»«IF rel.relType.comp != CompType.NONE»Array«ENDIF»'''
-   * }
-   * 
-   * def processRelation(CPackage pack, EntityAndNote ref, CompType type, String multi) {
-   * var selector = 0
-   * if(multi != null && multi.contains("*") || multi == null && type != CompType.NONE) {
-   * selector = 1
-   * }
-   * 
-   * switch(selector) {
-   * case 0: return ref.processRef(pack)
-   * case 1: return '''
-   * "type": "array",
-   * "items": {
-   * «ref.processRef(pack)»
-   * }
-   * '''
-   * }
-   * }
-   */
   public CharSequence processRefList(final List<Entity> list, final CPackage pack) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("\"anyOf\": [");
@@ -413,17 +388,31 @@ public class ClassDiagramGenerator implements IGenerator {
     Entity _entity = type.getEntity();
     boolean _equals = Objects.equal(_entity, null);
     if (_equals) {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("\"type\": \"");
       NativeType _native = type.getNative();
-      String _name = _native.getName();
-      String _lowerCase = _name.toLowerCase();
-      _builder.append(_lowerCase, "");
-      _builder.append("\"");
-      return _builder.toString();
+      return this.genNative(_native);
     } else {
       Entity _entity_1 = type.getEntity();
       return this.processRef(_entity_1, pack);
+    }
+  }
+  
+  public String genNative(final NativeType value) {
+    boolean _equals = Objects.equal(value, NativeType.DATE);
+    if (_equals) {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("\"type\": \"string\",");
+      _builder.newLine();
+      _builder.append("\"format\": \"date-time\"");
+      _builder.newLine();
+      return _builder.toString();
+    } else {
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("\"type\": \"");
+      String _name = value.getName();
+      String _lowerCase = _name.toLowerCase();
+      _builder_1.append(_lowerCase, "");
+      _builder_1.append("\"");
+      return _builder_1.toString();
     }
   }
 }

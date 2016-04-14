@@ -969,22 +969,28 @@ public class ClassDiagramGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cNumberKeyword_11 = (Keyword)cAlternatives.eContents().get(11);
 		private final Keyword cIntegerKeyword_12 = (Keyword)cAlternatives.eContents().get(12);
 		private final Keyword cBooleanKeyword_13 = (Keyword)cAlternatives.eContents().get(13);
-		private final Keyword cPackageKeyword_14 = (Keyword)cAlternatives.eContents().get(14);
-		private final Keyword cClassKeyword_15 = (Keyword)cAlternatives.eContents().get(15);
-		private final Keyword cEnumKeyword_16 = (Keyword)cAlternatives.eContents().get(16);
-		private final Keyword cNoteKeyword_17 = (Keyword)cAlternatives.eContents().get(17);
-		private final Keyword cAsKeyword_18 = (Keyword)cAlternatives.eContents().get(18);
-		private final Keyword cOfKeyword_19 = (Keyword)cAlternatives.eContents().get(19);
-		private final Keyword cColonKeyword_20 = (Keyword)cAlternatives.eContents().get(20);
-		private final Keyword cQuestionMarkKeyword_21 = (Keyword)cAlternatives.eContents().get(21);
+		private final Keyword cDateKeyword_14 = (Keyword)cAlternatives.eContents().get(14);
+		private final Keyword cObjectKeyword_15 = (Keyword)cAlternatives.eContents().get(15);
+		private final Keyword cPackageKeyword_16 = (Keyword)cAlternatives.eContents().get(16);
+		private final Keyword cClassKeyword_17 = (Keyword)cAlternatives.eContents().get(17);
+		private final Keyword cEnumKeyword_18 = (Keyword)cAlternatives.eContents().get(18);
+		private final Keyword cNoteKeyword_19 = (Keyword)cAlternatives.eContents().get(19);
+		private final Keyword cAsKeyword_20 = (Keyword)cAlternatives.eContents().get(20);
+		private final Keyword cOfKeyword_21 = (Keyword)cAlternatives.eContents().get(21);
+		private final Keyword cColonKeyword_22 = (Keyword)cAlternatives.eContents().get(22);
+		private final Keyword cQuestionMarkKeyword_23 = (Keyword)cAlternatives.eContents().get(23);
+		private final Keyword cLeftSquareBracketKeyword_24 = (Keyword)cAlternatives.eContents().get(24);
+		private final Keyword cRightSquareBracketKeyword_25 = (Keyword)cAlternatives.eContents().get(25);
 		
 		//Text:
 		//	(ID | STRING | ANY_OTHER | "up" | "down" | "top" | "bottom" | "left" | "right" | "null" | "string" | "number" |
-		//	"integer" | "boolean" | "package" | "class" | "enum" | "note" | "as" | "of" | ":" | "?")+;
+		//	"integer" | "boolean" | "date" | "object" | "package" | "class" | "enum" | "note" | "as" | "of" | ":" | "?" | "[" |
+		//	"]")+;
 		@Override public ParserRule getRule() { return rule; }
 
 		//(ID | STRING | ANY_OTHER | "up" | "down" | "top" | "bottom" | "left" | "right" | "null" | "string" | "number" |
-		//"integer" | "boolean" | "package" | "class" | "enum" | "note" | "as" | "of" | ":" | "?")+
+		//"integer" | "boolean" | "date" | "object" | "package" | "class" | "enum" | "note" | "as" | "of" | ":" | "?" | "[" |
+		//"]")+
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//ID
@@ -1029,29 +1035,41 @@ public class ClassDiagramGrammarAccess extends AbstractGrammarElementFinder {
 		//"boolean"
 		public Keyword getBooleanKeyword_13() { return cBooleanKeyword_13; }
 
+		//"date"
+		public Keyword getDateKeyword_14() { return cDateKeyword_14; }
+
+		//"object"
+		public Keyword getObjectKeyword_15() { return cObjectKeyword_15; }
+
 		//"package"
-		public Keyword getPackageKeyword_14() { return cPackageKeyword_14; }
+		public Keyword getPackageKeyword_16() { return cPackageKeyword_16; }
 
 		//"class"
-		public Keyword getClassKeyword_15() { return cClassKeyword_15; }
+		public Keyword getClassKeyword_17() { return cClassKeyword_17; }
 
 		//"enum"
-		public Keyword getEnumKeyword_16() { return cEnumKeyword_16; }
+		public Keyword getEnumKeyword_18() { return cEnumKeyword_18; }
 
 		//"note"
-		public Keyword getNoteKeyword_17() { return cNoteKeyword_17; }
+		public Keyword getNoteKeyword_19() { return cNoteKeyword_19; }
 
 		//"as"
-		public Keyword getAsKeyword_18() { return cAsKeyword_18; }
+		public Keyword getAsKeyword_20() { return cAsKeyword_20; }
 
 		//"of"
-		public Keyword getOfKeyword_19() { return cOfKeyword_19; }
+		public Keyword getOfKeyword_21() { return cOfKeyword_21; }
 
 		//":"
-		public Keyword getColonKeyword_20() { return cColonKeyword_20; }
+		public Keyword getColonKeyword_22() { return cColonKeyword_22; }
 
 		//"?"
-		public Keyword getQuestionMarkKeyword_21() { return cQuestionMarkKeyword_21; }
+		public Keyword getQuestionMarkKeyword_23() { return cQuestionMarkKeyword_23; }
+
+		//"["
+		public Keyword getLeftSquareBracketKeyword_24() { return cLeftSquareBracketKeyword_24; }
+
+		//"]"
+		public Keyword getRightSquareBracketKeyword_25() { return cRightSquareBracketKeyword_25; }
 	}
 	
 	
@@ -1206,12 +1224,16 @@ public class ClassDiagramGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cIntegerIntegerKeyword_2_0 = (Keyword)cIntegerEnumLiteralDeclaration_2.eContents().get(0);
 		private final EnumLiteralDeclaration cBooleanEnumLiteralDeclaration_3 = (EnumLiteralDeclaration)cAlternatives.eContents().get(3);
 		private final Keyword cBooleanBooleanKeyword_3_0 = (Keyword)cBooleanEnumLiteralDeclaration_3.eContents().get(0);
+		private final EnumLiteralDeclaration cDateEnumLiteralDeclaration_4 = (EnumLiteralDeclaration)cAlternatives.eContents().get(4);
+		private final Keyword cDateDateKeyword_4_0 = (Keyword)cDateEnumLiteralDeclaration_4.eContents().get(0);
+		private final EnumLiteralDeclaration cObjectEnumLiteralDeclaration_5 = (EnumLiteralDeclaration)cAlternatives.eContents().get(5);
+		private final Keyword cObjectObjectKeyword_5_0 = (Keyword)cObjectEnumLiteralDeclaration_5.eContents().get(0);
 		
 		//enum NativeType:
-		//	string | number | integer | boolean;
+		//	string | number | integer | boolean | date | object;
 		public EnumRule getRule() { return rule; }
 
-		//string | number | integer | boolean
+		//string | number | integer | boolean | date | object
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//string
@@ -1237,6 +1259,18 @@ public class ClassDiagramGrammarAccess extends AbstractGrammarElementFinder {
 
 		//"boolean"
 		public Keyword getBooleanBooleanKeyword_3_0() { return cBooleanBooleanKeyword_3_0; }
+
+		//date
+		public EnumLiteralDeclaration getDateEnumLiteralDeclaration_4() { return cDateEnumLiteralDeclaration_4; }
+
+		//"date"
+		public Keyword getDateDateKeyword_4_0() { return cDateDateKeyword_4_0; }
+
+		//object
+		public EnumLiteralDeclaration getObjectEnumLiteralDeclaration_5() { return cObjectEnumLiteralDeclaration_5; }
+
+		//"object"
+		public Keyword getObjectObjectKeyword_5_0() { return cObjectObjectKeyword_5_0; }
 	}
 	
 	private final DomainModelElements pDomainModel;
@@ -1529,7 +1563,7 @@ public class ClassDiagramGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//enum NativeType:
-	//	string | number | integer | boolean;
+	//	string | number | integer | boolean | date | object;
 	public NativeTypeElements getNativeTypeAccess() {
 		return unknownRuleNativeType;
 	}
@@ -1550,7 +1584,8 @@ public class ClassDiagramGrammarAccess extends AbstractGrammarElementFinder {
 
 	//Text:
 	//	(ID | STRING | ANY_OTHER | "up" | "down" | "top" | "bottom" | "left" | "right" | "null" | "string" | "number" |
-	//	"integer" | "boolean" | "package" | "class" | "enum" | "note" | "as" | "of" | ":" | "?")+;
+	//	"integer" | "boolean" | "date" | "object" | "package" | "class" | "enum" | "note" | "as" | "of" | ":" | "?" | "[" |
+	//	"]")+;
 	public TextElements getTextAccess() {
 		return pText;
 	}

@@ -22,7 +22,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_END_LINE", "RULE_WS", "RULE_MULTI", "RULE_ID", "RULE_ANY_OTHER", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "'@startuml'", "'@enduml'", "'package'", "'<<'", "'>>'", "'{'", "'}'", "':'", "'>'", "'|>'", "'-'", "'up'", "'down'", "'left'", "'right'", "'.'", "'enum'", "'class'", "'?'", "'='", "'['", "'|'", "']'", "'note'", "'of'", "'end note'", "'as'", "'[]'", "'top'", "'bottom'", "'null'", "'string'", "'number'", "'integer'", "'boolean'", "'Node'", "'Rect'", "'Folder'", "'Frame'", "'Cloud'", "'Database'", "'none'", "'*'", "'o'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_END_LINE", "RULE_WS", "RULE_MULTI", "RULE_ID", "RULE_ANY_OTHER", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "'@startuml'", "'@enduml'", "'package'", "'<<'", "'>>'", "'{'", "'}'", "':'", "'>'", "'|>'", "'-'", "'up'", "'down'", "'left'", "'right'", "'.'", "'enum'", "'class'", "'?'", "'='", "'['", "'|'", "']'", "'note'", "'of'", "'end note'", "'as'", "'[]'", "'top'", "'bottom'", "'null'", "'string'", "'number'", "'integer'", "'boolean'", "'date'", "'object'", "'Node'", "'Rect'", "'Folder'", "'Frame'", "'Cloud'", "'Database'", "'none'", "'*'", "'o'"
     };
     public static final int T__50=50;
     public static final int T__19=19;
@@ -33,7 +33,9 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
     public static final int T__18=18;
     public static final int T__55=55;
     public static final int T__12=12;
+    public static final int T__56=56;
     public static final int T__13=13;
+    public static final int T__57=57;
     public static final int T__14=14;
     public static final int T__51=51;
     public static final int T__52=52;
@@ -1244,7 +1246,7 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
             int alt13=2;
             int LA13_0 = input.LA(1);
 
-            if ( ((LA13_0>=53 && LA13_0<=55)) ) {
+            if ( ((LA13_0>=55 && LA13_0<=57)) ) {
                 alt13=1;
             }
             else if ( (LA13_0==22||LA13_0==27) ) {
@@ -2767,7 +2769,7 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
                             int alt27=2;
                             int LA27_0 = input.LA(1);
 
-                            if ( (LA27_0==RULE_ID||(LA27_0>=43 && LA27_0<=46)) ) {
+                            if ( (LA27_0==RULE_ID||(LA27_0>=43 && LA27_0<=48)) ) {
                                 alt27=1;
                             }
                             else if ( (LA27_0==32) ) {
@@ -3590,7 +3592,7 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
             int alt33=2;
             int LA33_0 = input.LA(1);
 
-            if ( ((LA33_0>=43 && LA33_0<=46)) ) {
+            if ( ((LA33_0>=43 && LA33_0<=48)) ) {
                 alt33=1;
             }
             else if ( (LA33_0==RULE_ID) ) {
@@ -3890,7 +3892,7 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleText"
-    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1513:1: ruleText returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID | this_STRING_1= RULE_STRING | this_ANY_OTHER_2= RULE_ANY_OTHER | kw= 'up' | kw= 'down' | kw= 'top' | kw= 'bottom' | kw= 'left' | kw= 'right' | kw= 'null' | kw= 'string' | kw= 'number' | kw= 'integer' | kw= 'boolean' | kw= 'package' | kw= 'class' | kw= 'enum' | kw= 'note' | kw= 'as' | kw= 'of' | kw= ':' | kw= '?' )+ ;
+    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1513:1: ruleText returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID | this_STRING_1= RULE_STRING | this_ANY_OTHER_2= RULE_ANY_OTHER | kw= 'up' | kw= 'down' | kw= 'top' | kw= 'bottom' | kw= 'left' | kw= 'right' | kw= 'null' | kw= 'string' | kw= 'number' | kw= 'integer' | kw= 'boolean' | kw= 'date' | kw= 'object' | kw= 'package' | kw= 'class' | kw= 'enum' | kw= 'note' | kw= 'as' | kw= 'of' | kw= ':' | kw= '?' | kw= '[' | kw= ']' )+ ;
     public final AntlrDatatypeRuleToken ruleText() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -3902,14 +3904,14 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1516:28: ( (this_ID_0= RULE_ID | this_STRING_1= RULE_STRING | this_ANY_OTHER_2= RULE_ANY_OTHER | kw= 'up' | kw= 'down' | kw= 'top' | kw= 'bottom' | kw= 'left' | kw= 'right' | kw= 'null' | kw= 'string' | kw= 'number' | kw= 'integer' | kw= 'boolean' | kw= 'package' | kw= 'class' | kw= 'enum' | kw= 'note' | kw= 'as' | kw= 'of' | kw= ':' | kw= '?' )+ )
-            // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1517:1: (this_ID_0= RULE_ID | this_STRING_1= RULE_STRING | this_ANY_OTHER_2= RULE_ANY_OTHER | kw= 'up' | kw= 'down' | kw= 'top' | kw= 'bottom' | kw= 'left' | kw= 'right' | kw= 'null' | kw= 'string' | kw= 'number' | kw= 'integer' | kw= 'boolean' | kw= 'package' | kw= 'class' | kw= 'enum' | kw= 'note' | kw= 'as' | kw= 'of' | kw= ':' | kw= '?' )+
+            // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1516:28: ( (this_ID_0= RULE_ID | this_STRING_1= RULE_STRING | this_ANY_OTHER_2= RULE_ANY_OTHER | kw= 'up' | kw= 'down' | kw= 'top' | kw= 'bottom' | kw= 'left' | kw= 'right' | kw= 'null' | kw= 'string' | kw= 'number' | kw= 'integer' | kw= 'boolean' | kw= 'date' | kw= 'object' | kw= 'package' | kw= 'class' | kw= 'enum' | kw= 'note' | kw= 'as' | kw= 'of' | kw= ':' | kw= '?' | kw= '[' | kw= ']' )+ )
+            // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1517:1: (this_ID_0= RULE_ID | this_STRING_1= RULE_STRING | this_ANY_OTHER_2= RULE_ANY_OTHER | kw= 'up' | kw= 'down' | kw= 'top' | kw= 'bottom' | kw= 'left' | kw= 'right' | kw= 'null' | kw= 'string' | kw= 'number' | kw= 'integer' | kw= 'boolean' | kw= 'date' | kw= 'object' | kw= 'package' | kw= 'class' | kw= 'enum' | kw= 'note' | kw= 'as' | kw= 'of' | kw= ':' | kw= '?' | kw= '[' | kw= ']' )+
             {
-            // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1517:1: (this_ID_0= RULE_ID | this_STRING_1= RULE_STRING | this_ANY_OTHER_2= RULE_ANY_OTHER | kw= 'up' | kw= 'down' | kw= 'top' | kw= 'bottom' | kw= 'left' | kw= 'right' | kw= 'null' | kw= 'string' | kw= 'number' | kw= 'integer' | kw= 'boolean' | kw= 'package' | kw= 'class' | kw= 'enum' | kw= 'note' | kw= 'as' | kw= 'of' | kw= ':' | kw= '?' )+
+            // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1517:1: (this_ID_0= RULE_ID | this_STRING_1= RULE_STRING | this_ANY_OTHER_2= RULE_ANY_OTHER | kw= 'up' | kw= 'down' | kw= 'top' | kw= 'bottom' | kw= 'left' | kw= 'right' | kw= 'null' | kw= 'string' | kw= 'number' | kw= 'integer' | kw= 'boolean' | kw= 'date' | kw= 'object' | kw= 'package' | kw= 'class' | kw= 'enum' | kw= 'note' | kw= 'as' | kw= 'of' | kw= ':' | kw= '?' | kw= '[' | kw= ']' )+
             int cnt36=0;
             loop36:
             do {
-                int alt36=23;
+                int alt36=27;
                 switch ( input.LA(1) ) {
                 case RULE_ID:
                     {
@@ -3981,44 +3983,64 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
                     alt36=14;
                     }
                     break;
-                case 14:
+                case 47:
                     {
                     alt36=15;
                     }
                     break;
-                case 29:
+                case 48:
                     {
                     alt36=16;
                     }
                     break;
-                case 28:
+                case 14:
                     {
                     alt36=17;
                     }
                     break;
-                case 35:
+                case 29:
                     {
                     alt36=18;
                     }
                     break;
-                case 38:
+                case 28:
                     {
                     alt36=19;
                     }
                     break;
-                case 36:
+                case 35:
                     {
                     alt36=20;
                     }
                     break;
-                case 19:
+                case 38:
                     {
                     alt36=21;
                     }
                     break;
-                case 30:
+                case 36:
                     {
                     alt36=22;
+                    }
+                    break;
+                case 19:
+                    {
+                    alt36=23;
+                    }
+                    break;
+                case 30:
+                    {
+                    alt36=24;
+                    }
+                    break;
+                case 32:
+                    {
+                    alt36=25;
+                    }
+                    break;
+                case 34:
+                    {
+                    alt36=26;
                     }
                     break;
 
@@ -4186,89 +4208,133 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 15 :
-            	    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1619:2: kw= 'package'
+            	    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1619:2: kw= 'date'
             	    {
-            	    kw=(Token)match(input,14,FOLLOW_14_in_ruleText3661); 
+            	    kw=(Token)match(input,47,FOLLOW_47_in_ruleText3661); 
 
             	            current.merge(kw);
-            	            newLeafNode(kw, grammarAccess.getTextAccess().getPackageKeyword_14()); 
+            	            newLeafNode(kw, grammarAccess.getTextAccess().getDateKeyword_14()); 
             	        
 
             	    }
             	    break;
             	case 16 :
-            	    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1626:2: kw= 'class'
+            	    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1626:2: kw= 'object'
             	    {
-            	    kw=(Token)match(input,29,FOLLOW_29_in_ruleText3680); 
+            	    kw=(Token)match(input,48,FOLLOW_48_in_ruleText3680); 
 
             	            current.merge(kw);
-            	            newLeafNode(kw, grammarAccess.getTextAccess().getClassKeyword_15()); 
+            	            newLeafNode(kw, grammarAccess.getTextAccess().getObjectKeyword_15()); 
             	        
 
             	    }
             	    break;
             	case 17 :
-            	    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1633:2: kw= 'enum'
+            	    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1633:2: kw= 'package'
             	    {
-            	    kw=(Token)match(input,28,FOLLOW_28_in_ruleText3699); 
+            	    kw=(Token)match(input,14,FOLLOW_14_in_ruleText3699); 
 
             	            current.merge(kw);
-            	            newLeafNode(kw, grammarAccess.getTextAccess().getEnumKeyword_16()); 
+            	            newLeafNode(kw, grammarAccess.getTextAccess().getPackageKeyword_16()); 
             	        
 
             	    }
             	    break;
             	case 18 :
-            	    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1640:2: kw= 'note'
+            	    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1640:2: kw= 'class'
             	    {
-            	    kw=(Token)match(input,35,FOLLOW_35_in_ruleText3718); 
+            	    kw=(Token)match(input,29,FOLLOW_29_in_ruleText3718); 
 
             	            current.merge(kw);
-            	            newLeafNode(kw, grammarAccess.getTextAccess().getNoteKeyword_17()); 
+            	            newLeafNode(kw, grammarAccess.getTextAccess().getClassKeyword_17()); 
             	        
 
             	    }
             	    break;
             	case 19 :
-            	    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1647:2: kw= 'as'
+            	    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1647:2: kw= 'enum'
             	    {
-            	    kw=(Token)match(input,38,FOLLOW_38_in_ruleText3737); 
+            	    kw=(Token)match(input,28,FOLLOW_28_in_ruleText3737); 
 
             	            current.merge(kw);
-            	            newLeafNode(kw, grammarAccess.getTextAccess().getAsKeyword_18()); 
+            	            newLeafNode(kw, grammarAccess.getTextAccess().getEnumKeyword_18()); 
             	        
 
             	    }
             	    break;
             	case 20 :
-            	    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1654:2: kw= 'of'
+            	    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1654:2: kw= 'note'
             	    {
-            	    kw=(Token)match(input,36,FOLLOW_36_in_ruleText3756); 
+            	    kw=(Token)match(input,35,FOLLOW_35_in_ruleText3756); 
 
             	            current.merge(kw);
-            	            newLeafNode(kw, grammarAccess.getTextAccess().getOfKeyword_19()); 
+            	            newLeafNode(kw, grammarAccess.getTextAccess().getNoteKeyword_19()); 
             	        
 
             	    }
             	    break;
             	case 21 :
-            	    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1661:2: kw= ':'
+            	    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1661:2: kw= 'as'
             	    {
-            	    kw=(Token)match(input,19,FOLLOW_19_in_ruleText3775); 
+            	    kw=(Token)match(input,38,FOLLOW_38_in_ruleText3775); 
 
             	            current.merge(kw);
-            	            newLeafNode(kw, grammarAccess.getTextAccess().getColonKeyword_20()); 
+            	            newLeafNode(kw, grammarAccess.getTextAccess().getAsKeyword_20()); 
             	        
 
             	    }
             	    break;
             	case 22 :
-            	    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1668:2: kw= '?'
+            	    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1668:2: kw= 'of'
             	    {
-            	    kw=(Token)match(input,30,FOLLOW_30_in_ruleText3794); 
+            	    kw=(Token)match(input,36,FOLLOW_36_in_ruleText3794); 
 
             	            current.merge(kw);
-            	            newLeafNode(kw, grammarAccess.getTextAccess().getQuestionMarkKeyword_21()); 
+            	            newLeafNode(kw, grammarAccess.getTextAccess().getOfKeyword_21()); 
+            	        
+
+            	    }
+            	    break;
+            	case 23 :
+            	    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1675:2: kw= ':'
+            	    {
+            	    kw=(Token)match(input,19,FOLLOW_19_in_ruleText3813); 
+
+            	            current.merge(kw);
+            	            newLeafNode(kw, grammarAccess.getTextAccess().getColonKeyword_22()); 
+            	        
+
+            	    }
+            	    break;
+            	case 24 :
+            	    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1682:2: kw= '?'
+            	    {
+            	    kw=(Token)match(input,30,FOLLOW_30_in_ruleText3832); 
+
+            	            current.merge(kw);
+            	            newLeafNode(kw, grammarAccess.getTextAccess().getQuestionMarkKeyword_23()); 
+            	        
+
+            	    }
+            	    break;
+            	case 25 :
+            	    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1689:2: kw= '['
+            	    {
+            	    kw=(Token)match(input,32,FOLLOW_32_in_ruleText3851); 
+
+            	            current.merge(kw);
+            	            newLeafNode(kw, grammarAccess.getTextAccess().getLeftSquareBracketKeyword_24()); 
+            	        
+
+            	    }
+            	    break;
+            	case 26 :
+            	    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1696:2: kw= ']'
+            	    {
+            	    kw=(Token)match(input,34,FOLLOW_34_in_ruleText3870); 
+
+            	            current.merge(kw);
+            	            newLeafNode(kw, grammarAccess.getTextAccess().getRightSquareBracketKeyword_25()); 
             	        
 
             	    }
@@ -4301,7 +4367,7 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "rulePackageStyle"
-    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1681:1: rulePackageStyle returns [Enumerator current=null] : ( (enumLiteral_0= 'Node' ) | (enumLiteral_1= 'Rect' ) | (enumLiteral_2= 'Folder' ) | (enumLiteral_3= 'Frame' ) | (enumLiteral_4= 'Cloud' ) | (enumLiteral_5= 'Database' ) ) ;
+    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1709:1: rulePackageStyle returns [Enumerator current=null] : ( (enumLiteral_0= 'Node' ) | (enumLiteral_1= 'Rect' ) | (enumLiteral_2= 'Folder' ) | (enumLiteral_3= 'Frame' ) | (enumLiteral_4= 'Cloud' ) | (enumLiteral_5= 'Database' ) ) ;
     public final Enumerator rulePackageStyle() throws RecognitionException {
         Enumerator current = null;
 
@@ -4314,38 +4380,38 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
 
          enterRule(); 
         try {
-            // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1683:28: ( ( (enumLiteral_0= 'Node' ) | (enumLiteral_1= 'Rect' ) | (enumLiteral_2= 'Folder' ) | (enumLiteral_3= 'Frame' ) | (enumLiteral_4= 'Cloud' ) | (enumLiteral_5= 'Database' ) ) )
-            // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1684:1: ( (enumLiteral_0= 'Node' ) | (enumLiteral_1= 'Rect' ) | (enumLiteral_2= 'Folder' ) | (enumLiteral_3= 'Frame' ) | (enumLiteral_4= 'Cloud' ) | (enumLiteral_5= 'Database' ) )
+            // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1711:28: ( ( (enumLiteral_0= 'Node' ) | (enumLiteral_1= 'Rect' ) | (enumLiteral_2= 'Folder' ) | (enumLiteral_3= 'Frame' ) | (enumLiteral_4= 'Cloud' ) | (enumLiteral_5= 'Database' ) ) )
+            // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1712:1: ( (enumLiteral_0= 'Node' ) | (enumLiteral_1= 'Rect' ) | (enumLiteral_2= 'Folder' ) | (enumLiteral_3= 'Frame' ) | (enumLiteral_4= 'Cloud' ) | (enumLiteral_5= 'Database' ) )
             {
-            // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1684:1: ( (enumLiteral_0= 'Node' ) | (enumLiteral_1= 'Rect' ) | (enumLiteral_2= 'Folder' ) | (enumLiteral_3= 'Frame' ) | (enumLiteral_4= 'Cloud' ) | (enumLiteral_5= 'Database' ) )
+            // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1712:1: ( (enumLiteral_0= 'Node' ) | (enumLiteral_1= 'Rect' ) | (enumLiteral_2= 'Folder' ) | (enumLiteral_3= 'Frame' ) | (enumLiteral_4= 'Cloud' ) | (enumLiteral_5= 'Database' ) )
             int alt37=6;
             switch ( input.LA(1) ) {
-            case 47:
+            case 49:
                 {
                 alt37=1;
                 }
                 break;
-            case 48:
+            case 50:
                 {
                 alt37=2;
                 }
                 break;
-            case 49:
+            case 51:
                 {
                 alt37=3;
                 }
                 break;
-            case 50:
+            case 52:
                 {
                 alt37=4;
                 }
                 break;
-            case 51:
+            case 53:
                 {
                 alt37=5;
                 }
                 break;
-            case 52:
+            case 54:
                 {
                 alt37=6;
                 }
@@ -4359,12 +4425,12 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
 
             switch (alt37) {
                 case 1 :
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1684:2: (enumLiteral_0= 'Node' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1712:2: (enumLiteral_0= 'Node' )
                     {
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1684:2: (enumLiteral_0= 'Node' )
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1684:4: enumLiteral_0= 'Node'
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1712:2: (enumLiteral_0= 'Node' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1712:4: enumLiteral_0= 'Node'
                     {
-                    enumLiteral_0=(Token)match(input,47,FOLLOW_47_in_rulePackageStyle3849); 
+                    enumLiteral_0=(Token)match(input,49,FOLLOW_49_in_rulePackageStyle3925); 
 
                             current = grammarAccess.getPackageStyleAccess().getNodeEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_0, grammarAccess.getPackageStyleAccess().getNodeEnumLiteralDeclaration_0()); 
@@ -4376,12 +4442,12 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1690:6: (enumLiteral_1= 'Rect' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1718:6: (enumLiteral_1= 'Rect' )
                     {
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1690:6: (enumLiteral_1= 'Rect' )
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1690:8: enumLiteral_1= 'Rect'
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1718:6: (enumLiteral_1= 'Rect' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1718:8: enumLiteral_1= 'Rect'
                     {
-                    enumLiteral_1=(Token)match(input,48,FOLLOW_48_in_rulePackageStyle3866); 
+                    enumLiteral_1=(Token)match(input,50,FOLLOW_50_in_rulePackageStyle3942); 
 
                             current = grammarAccess.getPackageStyleAccess().getRectEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_1, grammarAccess.getPackageStyleAccess().getRectEnumLiteralDeclaration_1()); 
@@ -4393,12 +4459,12 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1696:6: (enumLiteral_2= 'Folder' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1724:6: (enumLiteral_2= 'Folder' )
                     {
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1696:6: (enumLiteral_2= 'Folder' )
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1696:8: enumLiteral_2= 'Folder'
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1724:6: (enumLiteral_2= 'Folder' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1724:8: enumLiteral_2= 'Folder'
                     {
-                    enumLiteral_2=(Token)match(input,49,FOLLOW_49_in_rulePackageStyle3883); 
+                    enumLiteral_2=(Token)match(input,51,FOLLOW_51_in_rulePackageStyle3959); 
 
                             current = grammarAccess.getPackageStyleAccess().getFolderEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_2, grammarAccess.getPackageStyleAccess().getFolderEnumLiteralDeclaration_2()); 
@@ -4410,12 +4476,12 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1702:6: (enumLiteral_3= 'Frame' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1730:6: (enumLiteral_3= 'Frame' )
                     {
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1702:6: (enumLiteral_3= 'Frame' )
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1702:8: enumLiteral_3= 'Frame'
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1730:6: (enumLiteral_3= 'Frame' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1730:8: enumLiteral_3= 'Frame'
                     {
-                    enumLiteral_3=(Token)match(input,50,FOLLOW_50_in_rulePackageStyle3900); 
+                    enumLiteral_3=(Token)match(input,52,FOLLOW_52_in_rulePackageStyle3976); 
 
                             current = grammarAccess.getPackageStyleAccess().getFrameEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_3, grammarAccess.getPackageStyleAccess().getFrameEnumLiteralDeclaration_3()); 
@@ -4427,12 +4493,12 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1708:6: (enumLiteral_4= 'Cloud' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1736:6: (enumLiteral_4= 'Cloud' )
                     {
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1708:6: (enumLiteral_4= 'Cloud' )
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1708:8: enumLiteral_4= 'Cloud'
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1736:6: (enumLiteral_4= 'Cloud' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1736:8: enumLiteral_4= 'Cloud'
                     {
-                    enumLiteral_4=(Token)match(input,51,FOLLOW_51_in_rulePackageStyle3917); 
+                    enumLiteral_4=(Token)match(input,53,FOLLOW_53_in_rulePackageStyle3993); 
 
                             current = grammarAccess.getPackageStyleAccess().getCloudEnumLiteralDeclaration_4().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_4, grammarAccess.getPackageStyleAccess().getCloudEnumLiteralDeclaration_4()); 
@@ -4444,12 +4510,12 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1714:6: (enumLiteral_5= 'Database' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1742:6: (enumLiteral_5= 'Database' )
                     {
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1714:6: (enumLiteral_5= 'Database' )
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1714:8: enumLiteral_5= 'Database'
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1742:6: (enumLiteral_5= 'Database' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1742:8: enumLiteral_5= 'Database'
                     {
-                    enumLiteral_5=(Token)match(input,52,FOLLOW_52_in_rulePackageStyle3934); 
+                    enumLiteral_5=(Token)match(input,54,FOLLOW_54_in_rulePackageStyle4010); 
 
                             current = grammarAccess.getPackageStyleAccess().getDatabaseEnumLiteralDeclaration_5().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_5, grammarAccess.getPackageStyleAccess().getDatabaseEnumLiteralDeclaration_5()); 
@@ -4481,7 +4547,7 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleCompType"
-    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1724:1: ruleCompType returns [Enumerator current=null] : ( (enumLiteral_0= 'none' ) | (enumLiteral_1= '*' ) | (enumLiteral_2= 'o' ) ) ;
+    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1752:1: ruleCompType returns [Enumerator current=null] : ( (enumLiteral_0= 'none' ) | (enumLiteral_1= '*' ) | (enumLiteral_2= 'o' ) ) ;
     public final Enumerator ruleCompType() throws RecognitionException {
         Enumerator current = null;
 
@@ -4491,23 +4557,23 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
 
          enterRule(); 
         try {
-            // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1726:28: ( ( (enumLiteral_0= 'none' ) | (enumLiteral_1= '*' ) | (enumLiteral_2= 'o' ) ) )
-            // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1727:1: ( (enumLiteral_0= 'none' ) | (enumLiteral_1= '*' ) | (enumLiteral_2= 'o' ) )
+            // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1754:28: ( ( (enumLiteral_0= 'none' ) | (enumLiteral_1= '*' ) | (enumLiteral_2= 'o' ) ) )
+            // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1755:1: ( (enumLiteral_0= 'none' ) | (enumLiteral_1= '*' ) | (enumLiteral_2= 'o' ) )
             {
-            // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1727:1: ( (enumLiteral_0= 'none' ) | (enumLiteral_1= '*' ) | (enumLiteral_2= 'o' ) )
+            // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1755:1: ( (enumLiteral_0= 'none' ) | (enumLiteral_1= '*' ) | (enumLiteral_2= 'o' ) )
             int alt38=3;
             switch ( input.LA(1) ) {
-            case 53:
+            case 55:
                 {
                 alt38=1;
                 }
                 break;
-            case 54:
+            case 56:
                 {
                 alt38=2;
                 }
                 break;
-            case 55:
+            case 57:
                 {
                 alt38=3;
                 }
@@ -4521,12 +4587,12 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
 
             switch (alt38) {
                 case 1 :
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1727:2: (enumLiteral_0= 'none' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1755:2: (enumLiteral_0= 'none' )
                     {
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1727:2: (enumLiteral_0= 'none' )
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1727:4: enumLiteral_0= 'none'
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1755:2: (enumLiteral_0= 'none' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1755:4: enumLiteral_0= 'none'
                     {
-                    enumLiteral_0=(Token)match(input,53,FOLLOW_53_in_ruleCompType3979); 
+                    enumLiteral_0=(Token)match(input,55,FOLLOW_55_in_ruleCompType4055); 
 
                             current = grammarAccess.getCompTypeAccess().getNoneEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_0, grammarAccess.getCompTypeAccess().getNoneEnumLiteralDeclaration_0()); 
@@ -4538,12 +4604,12 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1733:6: (enumLiteral_1= '*' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1761:6: (enumLiteral_1= '*' )
                     {
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1733:6: (enumLiteral_1= '*' )
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1733:8: enumLiteral_1= '*'
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1761:6: (enumLiteral_1= '*' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1761:8: enumLiteral_1= '*'
                     {
-                    enumLiteral_1=(Token)match(input,54,FOLLOW_54_in_ruleCompType3996); 
+                    enumLiteral_1=(Token)match(input,56,FOLLOW_56_in_ruleCompType4072); 
 
                             current = grammarAccess.getCompTypeAccess().getCompEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_1, grammarAccess.getCompTypeAccess().getCompEnumLiteralDeclaration_1()); 
@@ -4555,12 +4621,12 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1739:6: (enumLiteral_2= 'o' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1767:6: (enumLiteral_2= 'o' )
                     {
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1739:6: (enumLiteral_2= 'o' )
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1739:8: enumLiteral_2= 'o'
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1767:6: (enumLiteral_2= 'o' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1767:8: enumLiteral_2= 'o'
                     {
-                    enumLiteral_2=(Token)match(input,55,FOLLOW_55_in_ruleCompType4013); 
+                    enumLiteral_2=(Token)match(input,57,FOLLOW_57_in_ruleCompType4089); 
 
                             current = grammarAccess.getCompTypeAccess().getAgreEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_2, grammarAccess.getCompTypeAccess().getAgreEnumLiteralDeclaration_2()); 
@@ -4592,7 +4658,7 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleNotePosition"
-    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1749:1: ruleNotePosition returns [Enumerator current=null] : ( (enumLiteral_0= 'top' ) | (enumLiteral_1= 'bottom' ) | (enumLiteral_2= 'left' ) | (enumLiteral_3= 'right' ) ) ;
+    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1777:1: ruleNotePosition returns [Enumerator current=null] : ( (enumLiteral_0= 'top' ) | (enumLiteral_1= 'bottom' ) | (enumLiteral_2= 'left' ) | (enumLiteral_3= 'right' ) ) ;
     public final Enumerator ruleNotePosition() throws RecognitionException {
         Enumerator current = null;
 
@@ -4603,10 +4669,10 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
 
          enterRule(); 
         try {
-            // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1751:28: ( ( (enumLiteral_0= 'top' ) | (enumLiteral_1= 'bottom' ) | (enumLiteral_2= 'left' ) | (enumLiteral_3= 'right' ) ) )
-            // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1752:1: ( (enumLiteral_0= 'top' ) | (enumLiteral_1= 'bottom' ) | (enumLiteral_2= 'left' ) | (enumLiteral_3= 'right' ) )
+            // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1779:28: ( ( (enumLiteral_0= 'top' ) | (enumLiteral_1= 'bottom' ) | (enumLiteral_2= 'left' ) | (enumLiteral_3= 'right' ) ) )
+            // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1780:1: ( (enumLiteral_0= 'top' ) | (enumLiteral_1= 'bottom' ) | (enumLiteral_2= 'left' ) | (enumLiteral_3= 'right' ) )
             {
-            // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1752:1: ( (enumLiteral_0= 'top' ) | (enumLiteral_1= 'bottom' ) | (enumLiteral_2= 'left' ) | (enumLiteral_3= 'right' ) )
+            // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1780:1: ( (enumLiteral_0= 'top' ) | (enumLiteral_1= 'bottom' ) | (enumLiteral_2= 'left' ) | (enumLiteral_3= 'right' ) )
             int alt39=4;
             switch ( input.LA(1) ) {
             case 40:
@@ -4638,12 +4704,12 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
 
             switch (alt39) {
                 case 1 :
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1752:2: (enumLiteral_0= 'top' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1780:2: (enumLiteral_0= 'top' )
                     {
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1752:2: (enumLiteral_0= 'top' )
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1752:4: enumLiteral_0= 'top'
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1780:2: (enumLiteral_0= 'top' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1780:4: enumLiteral_0= 'top'
                     {
-                    enumLiteral_0=(Token)match(input,40,FOLLOW_40_in_ruleNotePosition4058); 
+                    enumLiteral_0=(Token)match(input,40,FOLLOW_40_in_ruleNotePosition4134); 
 
                             current = grammarAccess.getNotePositionAccess().getTopEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_0, grammarAccess.getNotePositionAccess().getTopEnumLiteralDeclaration_0()); 
@@ -4655,12 +4721,12 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1758:6: (enumLiteral_1= 'bottom' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1786:6: (enumLiteral_1= 'bottom' )
                     {
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1758:6: (enumLiteral_1= 'bottom' )
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1758:8: enumLiteral_1= 'bottom'
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1786:6: (enumLiteral_1= 'bottom' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1786:8: enumLiteral_1= 'bottom'
                     {
-                    enumLiteral_1=(Token)match(input,41,FOLLOW_41_in_ruleNotePosition4075); 
+                    enumLiteral_1=(Token)match(input,41,FOLLOW_41_in_ruleNotePosition4151); 
 
                             current = grammarAccess.getNotePositionAccess().getBottomEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_1, grammarAccess.getNotePositionAccess().getBottomEnumLiteralDeclaration_1()); 
@@ -4672,12 +4738,12 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1764:6: (enumLiteral_2= 'left' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1792:6: (enumLiteral_2= 'left' )
                     {
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1764:6: (enumLiteral_2= 'left' )
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1764:8: enumLiteral_2= 'left'
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1792:6: (enumLiteral_2= 'left' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1792:8: enumLiteral_2= 'left'
                     {
-                    enumLiteral_2=(Token)match(input,25,FOLLOW_25_in_ruleNotePosition4092); 
+                    enumLiteral_2=(Token)match(input,25,FOLLOW_25_in_ruleNotePosition4168); 
 
                             current = grammarAccess.getNotePositionAccess().getLeftEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_2, grammarAccess.getNotePositionAccess().getLeftEnumLiteralDeclaration_2()); 
@@ -4689,12 +4755,12 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1770:6: (enumLiteral_3= 'right' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1798:6: (enumLiteral_3= 'right' )
                     {
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1770:6: (enumLiteral_3= 'right' )
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1770:8: enumLiteral_3= 'right'
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1798:6: (enumLiteral_3= 'right' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1798:8: enumLiteral_3= 'right'
                     {
-                    enumLiteral_3=(Token)match(input,26,FOLLOW_26_in_ruleNotePosition4109); 
+                    enumLiteral_3=(Token)match(input,26,FOLLOW_26_in_ruleNotePosition4185); 
 
                             current = grammarAccess.getNotePositionAccess().getRightEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_3, grammarAccess.getNotePositionAccess().getRightEnumLiteralDeclaration_3()); 
@@ -4726,7 +4792,7 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleNativeType"
-    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1780:1: ruleNativeType returns [Enumerator current=null] : ( (enumLiteral_0= 'string' ) | (enumLiteral_1= 'number' ) | (enumLiteral_2= 'integer' ) | (enumLiteral_3= 'boolean' ) ) ;
+    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1808:1: ruleNativeType returns [Enumerator current=null] : ( (enumLiteral_0= 'string' ) | (enumLiteral_1= 'number' ) | (enumLiteral_2= 'integer' ) | (enumLiteral_3= 'boolean' ) | (enumLiteral_4= 'date' ) | (enumLiteral_5= 'object' ) ) ;
     public final Enumerator ruleNativeType() throws RecognitionException {
         Enumerator current = null;
 
@@ -4734,14 +4800,16 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
         Token enumLiteral_1=null;
         Token enumLiteral_2=null;
         Token enumLiteral_3=null;
+        Token enumLiteral_4=null;
+        Token enumLiteral_5=null;
 
          enterRule(); 
         try {
-            // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1782:28: ( ( (enumLiteral_0= 'string' ) | (enumLiteral_1= 'number' ) | (enumLiteral_2= 'integer' ) | (enumLiteral_3= 'boolean' ) ) )
-            // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1783:1: ( (enumLiteral_0= 'string' ) | (enumLiteral_1= 'number' ) | (enumLiteral_2= 'integer' ) | (enumLiteral_3= 'boolean' ) )
+            // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1810:28: ( ( (enumLiteral_0= 'string' ) | (enumLiteral_1= 'number' ) | (enumLiteral_2= 'integer' ) | (enumLiteral_3= 'boolean' ) | (enumLiteral_4= 'date' ) | (enumLiteral_5= 'object' ) ) )
+            // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1811:1: ( (enumLiteral_0= 'string' ) | (enumLiteral_1= 'number' ) | (enumLiteral_2= 'integer' ) | (enumLiteral_3= 'boolean' ) | (enumLiteral_4= 'date' ) | (enumLiteral_5= 'object' ) )
             {
-            // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1783:1: ( (enumLiteral_0= 'string' ) | (enumLiteral_1= 'number' ) | (enumLiteral_2= 'integer' ) | (enumLiteral_3= 'boolean' ) )
-            int alt40=4;
+            // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1811:1: ( (enumLiteral_0= 'string' ) | (enumLiteral_1= 'number' ) | (enumLiteral_2= 'integer' ) | (enumLiteral_3= 'boolean' ) | (enumLiteral_4= 'date' ) | (enumLiteral_5= 'object' ) )
+            int alt40=6;
             switch ( input.LA(1) ) {
             case 43:
                 {
@@ -4763,6 +4831,16 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
                 alt40=4;
                 }
                 break;
+            case 47:
+                {
+                alt40=5;
+                }
+                break;
+            case 48:
+                {
+                alt40=6;
+                }
+                break;
             default:
                 NoViableAltException nvae =
                     new NoViableAltException("", 40, 0, input);
@@ -4772,12 +4850,12 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
 
             switch (alt40) {
                 case 1 :
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1783:2: (enumLiteral_0= 'string' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1811:2: (enumLiteral_0= 'string' )
                     {
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1783:2: (enumLiteral_0= 'string' )
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1783:4: enumLiteral_0= 'string'
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1811:2: (enumLiteral_0= 'string' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1811:4: enumLiteral_0= 'string'
                     {
-                    enumLiteral_0=(Token)match(input,43,FOLLOW_43_in_ruleNativeType4154); 
+                    enumLiteral_0=(Token)match(input,43,FOLLOW_43_in_ruleNativeType4230); 
 
                             current = grammarAccess.getNativeTypeAccess().getStringEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_0, grammarAccess.getNativeTypeAccess().getStringEnumLiteralDeclaration_0()); 
@@ -4789,12 +4867,12 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1789:6: (enumLiteral_1= 'number' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1817:6: (enumLiteral_1= 'number' )
                     {
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1789:6: (enumLiteral_1= 'number' )
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1789:8: enumLiteral_1= 'number'
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1817:6: (enumLiteral_1= 'number' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1817:8: enumLiteral_1= 'number'
                     {
-                    enumLiteral_1=(Token)match(input,44,FOLLOW_44_in_ruleNativeType4171); 
+                    enumLiteral_1=(Token)match(input,44,FOLLOW_44_in_ruleNativeType4247); 
 
                             current = grammarAccess.getNativeTypeAccess().getNumberEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_1, grammarAccess.getNativeTypeAccess().getNumberEnumLiteralDeclaration_1()); 
@@ -4806,12 +4884,12 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1795:6: (enumLiteral_2= 'integer' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1823:6: (enumLiteral_2= 'integer' )
                     {
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1795:6: (enumLiteral_2= 'integer' )
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1795:8: enumLiteral_2= 'integer'
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1823:6: (enumLiteral_2= 'integer' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1823:8: enumLiteral_2= 'integer'
                     {
-                    enumLiteral_2=(Token)match(input,45,FOLLOW_45_in_ruleNativeType4188); 
+                    enumLiteral_2=(Token)match(input,45,FOLLOW_45_in_ruleNativeType4264); 
 
                             current = grammarAccess.getNativeTypeAccess().getIntegerEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_2, grammarAccess.getNativeTypeAccess().getIntegerEnumLiteralDeclaration_2()); 
@@ -4823,15 +4901,49 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1801:6: (enumLiteral_3= 'boolean' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1829:6: (enumLiteral_3= 'boolean' )
                     {
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1801:6: (enumLiteral_3= 'boolean' )
-                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1801:8: enumLiteral_3= 'boolean'
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1829:6: (enumLiteral_3= 'boolean' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1829:8: enumLiteral_3= 'boolean'
                     {
-                    enumLiteral_3=(Token)match(input,46,FOLLOW_46_in_ruleNativeType4205); 
+                    enumLiteral_3=(Token)match(input,46,FOLLOW_46_in_ruleNativeType4281); 
 
                             current = grammarAccess.getNativeTypeAccess().getBooleanEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_3, grammarAccess.getNativeTypeAccess().getBooleanEnumLiteralDeclaration_3()); 
+                        
+
+                    }
+
+
+                    }
+                    break;
+                case 5 :
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1835:6: (enumLiteral_4= 'date' )
+                    {
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1835:6: (enumLiteral_4= 'date' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1835:8: enumLiteral_4= 'date'
+                    {
+                    enumLiteral_4=(Token)match(input,47,FOLLOW_47_in_ruleNativeType4298); 
+
+                            current = grammarAccess.getNativeTypeAccess().getDateEnumLiteralDeclaration_4().getEnumLiteral().getInstance();
+                            newLeafNode(enumLiteral_4, grammarAccess.getNativeTypeAccess().getDateEnumLiteralDeclaration_4()); 
+                        
+
+                    }
+
+
+                    }
+                    break;
+                case 6 :
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1841:6: (enumLiteral_5= 'object' )
+                    {
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1841:6: (enumLiteral_5= 'object' )
+                    // ../rethink.uml/src-gen/rethink/uml/parser/antlr/internal/InternalClassDiagram.g:1841:8: enumLiteral_5= 'object'
+                    {
+                    enumLiteral_5=(Token)match(input,48,FOLLOW_48_in_ruleNativeType4315); 
+
+                            current = grammarAccess.getNativeTypeAccess().getObjectEnumLiteralDeclaration_5().getEnumLiteral().getInstance();
+                            newLeafNode(enumLiteral_5, grammarAccess.getNativeTypeAccess().getObjectEnumLiteralDeclaration_5()); 
                         
 
                     }
@@ -4887,7 +4999,7 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_EOF_in_entryRuleCPackage628 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_14_in_ruleCPackage665 = new BitSet(new long[]{0x0000000000000100L});
     public static final BitSet FOLLOW_ruleQualifiedName_in_ruleCPackage686 = new BitSet(new long[]{0x0000000000028000L});
-    public static final BitSet FOLLOW_15_in_ruleCPackage699 = new BitSet(new long[]{0x001F800000000000L});
+    public static final BitSet FOLLOW_15_in_ruleCPackage699 = new BitSet(new long[]{0x007E000000000000L});
     public static final BitSet FOLLOW_rulePackageStyle_in_ruleCPackage720 = new BitSet(new long[]{0x0000000000010000L});
     public static final BitSet FOLLOW_16_in_ruleCPackage732 = new BitSet(new long[]{0x0000000000020000L});
     public static final BitSet FOLLOW_17_in_ruleCPackage746 = new BitSet(new long[]{0x0000000000000020L});
@@ -4897,15 +5009,15 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_RULE_END_LINE_in_ruleCPackage801 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleRelation_in_entryRuleRelation836 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleRelation846 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_ruleRelation894 = new BitSet(new long[]{0x00E0000008400000L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_ruleRelation894 = new BitSet(new long[]{0x0380000008400000L});
     public static final BitSet FOLLOW_ruleRelationParse_in_ruleRelation915 = new BitSet(new long[]{0x0000000000000100L});
     public static final BitSet FOLLOW_ruleQualifiedName_in_ruleRelation938 = new BitSet(new long[]{0x0000000000080020L});
-    public static final BitSet FOLLOW_19_in_ruleRelation951 = new BitSet(new long[]{0x00007F5877884310L});
+    public static final BitSet FOLLOW_19_in_ruleRelation951 = new BitSet(new long[]{0x0001FF5D77884310L});
     public static final BitSet FOLLOW_ruleText_in_ruleRelation972 = new BitSet(new long[]{0x0000000000000020L});
     public static final BitSet FOLLOW_RULE_END_LINE_in_ruleRelation985 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleRelationParse_in_entryRuleRelationParse1026 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleRelationParse1036 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCompType_in_ruleRelationParse1087 = new BitSet(new long[]{0x00E0000008400000L});
+    public static final BitSet FOLLOW_ruleCompType_in_ruleRelationParse1087 = new BitSet(new long[]{0x0380000008400000L});
     public static final BitSet FOLLOW_ruleRelationType_in_ruleRelationParse1108 = new BitSet(new long[]{0x0000000000100040L});
     public static final BitSet FOLLOW_20_in_ruleRelationParse1126 = new BitSet(new long[]{0x0000000000000040L});
     public static final BitSet FOLLOW_RULE_WS_in_ruleRelationParse1151 = new BitSet(new long[]{0x0000000000000082L});
@@ -4949,7 +5061,7 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_EOF_in_entryRuleClazz2038 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_29_in_ruleClazz2075 = new BitSet(new long[]{0x0000000000000100L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleClazz2092 = new BitSet(new long[]{0x0000000000028020L});
-    public static final BitSet FOLLOW_15_in_ruleClazz2110 = new BitSet(new long[]{0x00007F5877884310L});
+    public static final BitSet FOLLOW_15_in_ruleClazz2110 = new BitSet(new long[]{0x0001FF5D77884310L});
     public static final BitSet FOLLOW_ruleText_in_ruleClazz2131 = new BitSet(new long[]{0x0000000000010000L});
     public static final BitSet FOLLOW_16_in_ruleClazz2143 = new BitSet(new long[]{0x0000000000020020L});
     public static final BitSet FOLLOW_17_in_ruleClazz2158 = new BitSet(new long[]{0x0000000000040120L});
@@ -4961,10 +5073,10 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_EOF_in_entryRuleProperty2263 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleProperty2305 = new BitSet(new long[]{0x00000000C0080020L});
     public static final BitSet FOLLOW_30_in_ruleProperty2330 = new BitSet(new long[]{0x0000000000080020L});
-    public static final BitSet FOLLOW_19_in_ruleProperty2357 = new BitSet(new long[]{0x0000780100000100L});
+    public static final BitSet FOLLOW_19_in_ruleProperty2357 = new BitSet(new long[]{0x0001F80100000100L});
     public static final BitSet FOLLOW_ruleDataType_in_ruleProperty2379 = new BitSet(new long[]{0x0000000000000020L});
     public static final BitSet FOLLOW_ruleEntityList_in_ruleProperty2406 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_31_in_ruleProperty2435 = new BitSet(new long[]{0x00007F5877884310L});
+    public static final BitSet FOLLOW_31_in_ruleProperty2435 = new BitSet(new long[]{0x0001FF5D77884310L});
     public static final BitSet FOLLOW_ruleText_in_ruleProperty2469 = new BitSet(new long[]{0x0000000000000020L});
     public static final BitSet FOLLOW_RULE_END_LINE_in_ruleProperty2482 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleEntityList_in_entryRuleEntityList2517 = new BitSet(new long[]{0x0000000000000000L});
@@ -4978,19 +5090,19 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_EOF_in_entryRuleNote2683 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_35_in_ruleNote2720 = new BitSet(new long[]{0x0000035006000000L});
     public static final BitSet FOLLOW_ruleNotePosition_in_ruleNote2744 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_19_in_ruleNote2757 = new BitSet(new long[]{0x00007F5877884310L});
+    public static final BitSet FOLLOW_19_in_ruleNote2757 = new BitSet(new long[]{0x0001FF5D77884310L});
     public static final BitSet FOLLOW_ruleText_in_ruleNote2778 = new BitSet(new long[]{0x0000000000000020L});
     public static final BitSet FOLLOW_RULE_END_LINE_in_ruleNote2789 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_36_in_ruleNote2809 = new BitSet(new long[]{0x0000000000000100L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleNote2829 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_END_LINE_in_ruleNote2840 = new BitSet(new long[]{0x00007F5877884310L});
+    public static final BitSet FOLLOW_RULE_END_LINE_in_ruleNote2840 = new BitSet(new long[]{0x0001FF5D77884310L});
     public static final BitSet FOLLOW_ruleText_in_ruleNote2860 = new BitSet(new long[]{0x0000000000000020L});
     public static final BitSet FOLLOW_RULE_END_LINE_in_ruleNote2871 = new BitSet(new long[]{0x0000002000000000L});
     public static final BitSet FOLLOW_37_in_ruleNote2882 = new BitSet(new long[]{0x0000000000000020L});
     public static final BitSet FOLLOW_RULE_END_LINE_in_ruleNote2893 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_38_in_ruleNote2913 = new BitSet(new long[]{0x0000000000000100L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleNote2930 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_END_LINE_in_ruleNote2946 = new BitSet(new long[]{0x00007F5877884310L});
+    public static final BitSet FOLLOW_RULE_END_LINE_in_ruleNote2946 = new BitSet(new long[]{0x0001FF5D77884310L});
     public static final BitSet FOLLOW_ruleText_in_ruleNote2966 = new BitSet(new long[]{0x0000000000000020L});
     public static final BitSet FOLLOW_RULE_END_LINE_in_ruleNote2977 = new BitSet(new long[]{0x0000002000000000L});
     public static final BitSet FOLLOW_37_in_ruleNote2988 = new BitSet(new long[]{0x0000000000000020L});
@@ -5007,44 +5119,50 @@ public class InternalClassDiagramParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_RULE_ID_in_ruleQualifiedName3277 = new BitSet(new long[]{0x0000000008000002L});
     public static final BitSet FOLLOW_ruleText_in_entryRuleText3325 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleText3336 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleText3376 = new BitSet(new long[]{0x00007F5877884312L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleText3402 = new BitSet(new long[]{0x00007F5877884312L});
-    public static final BitSet FOLLOW_RULE_ANY_OTHER_in_ruleText3428 = new BitSet(new long[]{0x00007F5877884312L});
-    public static final BitSet FOLLOW_23_in_ruleText3452 = new BitSet(new long[]{0x00007F5877884312L});
-    public static final BitSet FOLLOW_24_in_ruleText3471 = new BitSet(new long[]{0x00007F5877884312L});
-    public static final BitSet FOLLOW_40_in_ruleText3490 = new BitSet(new long[]{0x00007F5877884312L});
-    public static final BitSet FOLLOW_41_in_ruleText3509 = new BitSet(new long[]{0x00007F5877884312L});
-    public static final BitSet FOLLOW_25_in_ruleText3528 = new BitSet(new long[]{0x00007F5877884312L});
-    public static final BitSet FOLLOW_26_in_ruleText3547 = new BitSet(new long[]{0x00007F5877884312L});
-    public static final BitSet FOLLOW_42_in_ruleText3566 = new BitSet(new long[]{0x00007F5877884312L});
-    public static final BitSet FOLLOW_43_in_ruleText3585 = new BitSet(new long[]{0x00007F5877884312L});
-    public static final BitSet FOLLOW_44_in_ruleText3604 = new BitSet(new long[]{0x00007F5877884312L});
-    public static final BitSet FOLLOW_45_in_ruleText3623 = new BitSet(new long[]{0x00007F5877884312L});
-    public static final BitSet FOLLOW_46_in_ruleText3642 = new BitSet(new long[]{0x00007F5877884312L});
-    public static final BitSet FOLLOW_14_in_ruleText3661 = new BitSet(new long[]{0x00007F5877884312L});
-    public static final BitSet FOLLOW_29_in_ruleText3680 = new BitSet(new long[]{0x00007F5877884312L});
-    public static final BitSet FOLLOW_28_in_ruleText3699 = new BitSet(new long[]{0x00007F5877884312L});
-    public static final BitSet FOLLOW_35_in_ruleText3718 = new BitSet(new long[]{0x00007F5877884312L});
-    public static final BitSet FOLLOW_38_in_ruleText3737 = new BitSet(new long[]{0x00007F5877884312L});
-    public static final BitSet FOLLOW_36_in_ruleText3756 = new BitSet(new long[]{0x00007F5877884312L});
-    public static final BitSet FOLLOW_19_in_ruleText3775 = new BitSet(new long[]{0x00007F5877884312L});
-    public static final BitSet FOLLOW_30_in_ruleText3794 = new BitSet(new long[]{0x00007F5877884312L});
-    public static final BitSet FOLLOW_47_in_rulePackageStyle3849 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_48_in_rulePackageStyle3866 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_49_in_rulePackageStyle3883 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_50_in_rulePackageStyle3900 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_51_in_rulePackageStyle3917 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_52_in_rulePackageStyle3934 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_53_in_ruleCompType3979 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_54_in_ruleCompType3996 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_55_in_ruleCompType4013 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_40_in_ruleNotePosition4058 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_41_in_ruleNotePosition4075 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_25_in_ruleNotePosition4092 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_26_in_ruleNotePosition4109 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_43_in_ruleNativeType4154 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_44_in_ruleNativeType4171 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_45_in_ruleNativeType4188 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_46_in_ruleNativeType4205 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleText3376 = new BitSet(new long[]{0x0001FF5D77884312L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleText3402 = new BitSet(new long[]{0x0001FF5D77884312L});
+    public static final BitSet FOLLOW_RULE_ANY_OTHER_in_ruleText3428 = new BitSet(new long[]{0x0001FF5D77884312L});
+    public static final BitSet FOLLOW_23_in_ruleText3452 = new BitSet(new long[]{0x0001FF5D77884312L});
+    public static final BitSet FOLLOW_24_in_ruleText3471 = new BitSet(new long[]{0x0001FF5D77884312L});
+    public static final BitSet FOLLOW_40_in_ruleText3490 = new BitSet(new long[]{0x0001FF5D77884312L});
+    public static final BitSet FOLLOW_41_in_ruleText3509 = new BitSet(new long[]{0x0001FF5D77884312L});
+    public static final BitSet FOLLOW_25_in_ruleText3528 = new BitSet(new long[]{0x0001FF5D77884312L});
+    public static final BitSet FOLLOW_26_in_ruleText3547 = new BitSet(new long[]{0x0001FF5D77884312L});
+    public static final BitSet FOLLOW_42_in_ruleText3566 = new BitSet(new long[]{0x0001FF5D77884312L});
+    public static final BitSet FOLLOW_43_in_ruleText3585 = new BitSet(new long[]{0x0001FF5D77884312L});
+    public static final BitSet FOLLOW_44_in_ruleText3604 = new BitSet(new long[]{0x0001FF5D77884312L});
+    public static final BitSet FOLLOW_45_in_ruleText3623 = new BitSet(new long[]{0x0001FF5D77884312L});
+    public static final BitSet FOLLOW_46_in_ruleText3642 = new BitSet(new long[]{0x0001FF5D77884312L});
+    public static final BitSet FOLLOW_47_in_ruleText3661 = new BitSet(new long[]{0x0001FF5D77884312L});
+    public static final BitSet FOLLOW_48_in_ruleText3680 = new BitSet(new long[]{0x0001FF5D77884312L});
+    public static final BitSet FOLLOW_14_in_ruleText3699 = new BitSet(new long[]{0x0001FF5D77884312L});
+    public static final BitSet FOLLOW_29_in_ruleText3718 = new BitSet(new long[]{0x0001FF5D77884312L});
+    public static final BitSet FOLLOW_28_in_ruleText3737 = new BitSet(new long[]{0x0001FF5D77884312L});
+    public static final BitSet FOLLOW_35_in_ruleText3756 = new BitSet(new long[]{0x0001FF5D77884312L});
+    public static final BitSet FOLLOW_38_in_ruleText3775 = new BitSet(new long[]{0x0001FF5D77884312L});
+    public static final BitSet FOLLOW_36_in_ruleText3794 = new BitSet(new long[]{0x0001FF5D77884312L});
+    public static final BitSet FOLLOW_19_in_ruleText3813 = new BitSet(new long[]{0x0001FF5D77884312L});
+    public static final BitSet FOLLOW_30_in_ruleText3832 = new BitSet(new long[]{0x0001FF5D77884312L});
+    public static final BitSet FOLLOW_32_in_ruleText3851 = new BitSet(new long[]{0x0001FF5D77884312L});
+    public static final BitSet FOLLOW_34_in_ruleText3870 = new BitSet(new long[]{0x0001FF5D77884312L});
+    public static final BitSet FOLLOW_49_in_rulePackageStyle3925 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_50_in_rulePackageStyle3942 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_51_in_rulePackageStyle3959 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_52_in_rulePackageStyle3976 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_53_in_rulePackageStyle3993 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_54_in_rulePackageStyle4010 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_55_in_ruleCompType4055 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_56_in_ruleCompType4072 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_57_in_ruleCompType4089 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_40_in_ruleNotePosition4134 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_41_in_ruleNotePosition4151 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_25_in_ruleNotePosition4168 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_26_in_ruleNotePosition4185 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_43_in_ruleNativeType4230 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_44_in_ruleNativeType4247 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_45_in_ruleNativeType4264 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_46_in_ruleNativeType4281 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_47_in_ruleNativeType4298 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_48_in_ruleNativeType4315 = new BitSet(new long[]{0x0000000000000002L});
 
 }

@@ -3,7 +3,7 @@
 
 	"id": "RegistryDataObject",
 	"type": "object",
-	"required": ["id", "url", "descriptor", "startingTime", "lastModified", "status", "expires"],
+	"required": ["id", "url", "descriptor", "startingTime", "lastModified", "expires"],
 	"anyOf": [
 		{ "$ref": "RegistryDataObject.HypertyInstance.json#/HypertyInstance" },
 		{ "$ref": "RegistryDataObject.HypertyRuntimeInstance.json#/HypertyRuntimeInstance" },
@@ -21,18 +21,12 @@
 			"type": "string"
 		},
 		"startingTime": {
-			"$ref": "RethinkCore.RethinkType.json#/Date"
+			"type": "string",
+			"format": "date-time"
 		},
 		"lastModified": {
-			"$ref": "RethinkCore.RethinkType.json#/Date"
-		},
-		"status": {
-			"enum": [
-				"created",
-				"live",
-				"disconnected",
-				"dead"
-			]
+			"type": "string",
+			"format": "date-time"
 		},
 		"expires": {
 			"type": "integer"

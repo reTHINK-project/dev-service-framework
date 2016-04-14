@@ -936,6 +936,8 @@ public class ClassDiagramPackageImpl extends EPackageImpl implements ClassDiagra
     addEEnumLiteral(nativeTypeEEnum, NativeType.NUMBER);
     addEEnumLiteral(nativeTypeEEnum, NativeType.INTEGER);
     addEEnumLiteral(nativeTypeEEnum, NativeType.BOOLEAN);
+    addEEnumLiteral(nativeTypeEEnum, NativeType.DATE);
+    addEEnumLiteral(nativeTypeEEnum, NativeType.OBJECT);
 
     // Create resource
     createResource(eNS_URI);
