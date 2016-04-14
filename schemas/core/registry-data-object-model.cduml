@@ -6,9 +6,8 @@ package RegistryDataObject <<Rect>> {
 		id : string
 		url : URL.URL
 		descriptor : URL.HypertyCatalogueURL
-		startingTime : RethinkCore.RethinkType.Date
-		lastModified : RethinkCore.RethinkType.Date
-		status : RegistryDataObjectStatus
+		startingTime : date
+		lastModified : date
 		expires : integer
 		stubs ?: URL.HypertyCatalogueURL
 		stubsConfiguration ?: RethinkCore.CatalogueDataObject.ProtoStubDescriptor.ProtostubConfiguration

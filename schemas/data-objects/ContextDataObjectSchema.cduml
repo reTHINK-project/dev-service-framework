@@ -4,9 +4,9 @@ package Context <<Rect>> {
 
 	class Context {
 		id: string
-		type : ContextType
+		type : HypertyResoource.HypertyResourceType
 		description ?: string
-		time?: RethinkCore.RethinkType.Date
+		time?: date
 		units?: ContextUnit
 		version?: integer
 		value: ContextValueList
@@ -14,9 +14,6 @@ package Context <<Rect>> {
 	}
 	note top : compliant with https://tools.ietf.org/html/draft-jennings-core-senml-01
 
-	class ContextType {
-
-	}
 
 	class ContextUnit {
 
@@ -29,11 +26,11 @@ package Context <<Rect>> {
 	class ContextValue {
 		name : string
 		units : ContextUnit
-		value : RethinkCore.RethinkType.Basic
+		value : object
 		sum
-		time ?: RethinkCore.RethinkType.Date
-		updateTime ?: RethinkCore.RethinkType.Date
-		expires ?: RethinkCore.RethinkType.Date
+		time ?: date
+		updateTime ?: date
+		expires ?: date
 		address ?: URL.HypertyRuntimeURL
 	}
 
@@ -45,15 +42,11 @@ package Context <<Rect>> {
 
 	Context *-- "1" ContextValueList
 
-	Context --> ContextType
+	Context --> HypertyResoource.HypertyResourceType
 	Context --> ContextUnit
 	ContextValue --> ContextUnit
-	ContextValue --> RethinkCore.RethinkType.Basic
 
 	ContextValueList *-- ContextValue
-
-	ContextValue --|> RethinkCore.RethinkType.ListElement
-	ContextValueList --|> RethinkCore.RethinkType.List
 
 	RawContextValue -up-|> ContextValue
 	ProcessedContextValue -up-|> ContextValue

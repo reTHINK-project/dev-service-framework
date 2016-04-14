@@ -3,9 +3,9 @@
 package Communication <<Rect>> {
 
 	class Communication {
-		startingTime : RethinkCore.RethinkType.Date
-		lastModified : RethinkCore.RethinkType.Date
-		duration ?: RethinkCore.RethinkType.Date
+		startingTime : date
+		lastModified : date
+		duration ?: date
 		status : CommunicationStatus
 		participants ?: Participant[]
 		qos ?: CommunicationQuality

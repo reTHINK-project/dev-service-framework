@@ -8,8 +8,8 @@ package RegistryDataObject <<Rect>> {
 			url : URL.HypertyURL
 			user : URL.UserURL
 			guid : URL.UserGUIDURL
-			dataSchemes : RethinkCore.CatalogueDataObject.DataObjectSchema.HypertyDataObjectSchema[]
-			resources : RethinkCore.CatalogueDataObject.HypertyDescriptor.HypertyResourceType[]
+			dataSchemes : RethinkCore.CatalogueDataObject.DataObjectSchema.DataUrlScheme[]
+			resources : HypertyResource.HypertyResourceType[]
 			runtime : URL.HypertyRuntimeURL
 			context : URL.ContextURL
 		}

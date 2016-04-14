@@ -3,40 +3,31 @@
 package RethinkCore <<Rect>> {
 
 	package CatalogueDataObject <<Rect>> {
-	
+
 		package HypertyRuntimeDescriptor <<Rect>> {
 		}
-	
+
 		package HypertyDescriptor <<Rect>> {
-	
+
 			class HypertyDescriptor {
 				dataObjectUrls : URL.HypertyCatalogueURLList
-				hypertyType : HypertyResourceType[]
+				hypertyType : HypertyResource.HypertyResourceType[]
 				messageSchemaUrl : URL.HypertyCatalogueURL
 				configuration ?: HypertyConfiguration
 				constraints : RethinkCore.CatalogueDataObject.HypertyRuntimeDescriptor.RuntimeHypertyCapabilities
 				policiesUrl ?: URL.HypertyCatalogueURL
 			}
-	
-			class HypertyResourceType {
-				CHAT
-				AUDIO
-				VIDEO
-				AV
-				SCREEN
-				FILE
-				MIDI
-			}
-	
+
+
 			class HypertyConfiguration {
 			}
-	
+
 			HypertyDescriptor .up.|> RethinkCore.CatalogueDataObject.CatalogueDataObject
-	
-			HypertyDescriptor .. HypertyResourceType
+
+			HypertyDescriptor .. HypertyResource.HypertyResourceType
 			HypertyDescriptor *.. "0..1" RethinkCore.CatalogueDataObject.HypertyRuntimeDescriptor.RuntimeHypertyCapabilities
 			HypertyDescriptor *.. "0..1" HypertyConfiguration
-	
+
 		}
 	}
 }
