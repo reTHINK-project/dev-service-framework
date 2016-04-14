@@ -284,7 +284,6 @@ class RuntimeCatalogue {
     }
 
     _createSourcePackage(_this, sp) {
-        //console.log("creating sourcePackage. factory:", factory, ", raw package:", sp);
         try {
             sp = JSON.parse(sp);
         } catch (e) {
@@ -296,7 +295,7 @@ class RuntimeCatalogue {
             sp["sourceCode"] = atob(sp["sourceCode"]);
         }
 
-        let sourcePackage = _this.factory.createSourcePackage(sp["sourceCodeClassname"], sp["sourceCode"]);
+        let sourcePackage = _this._factory.createSourcePackage(sp["sourceCodeClassname"], sp["sourceCode"]);
         if (sp["encoding"])
             sourcePackage.encoding = sp["encoding"];
 
