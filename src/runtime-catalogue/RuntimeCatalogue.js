@@ -39,6 +39,14 @@ class RuntimeCatalogue {
                             // TODO handle error properly
                             reject(result);
                         } else {
+                            // FIXME hotfix for unparsed arrays (e.g. hypertyType), will be fixed in Catalogue 1.1.0
+                            for (var key in result) {
+                                try {
+                                    result[key] = JSON.parse(result[key]);
+                                } catch (e) {
+                                    // do nothing
+                                }
+                            }
                             // console.log("creating descriptor based on: ", result);
                             let descriptor = createFunc(_this, result);
                             persistenceManager.set(descriptorURL, descriptor.version, result);
