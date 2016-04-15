@@ -223,16 +223,29 @@ class RuntimeCatalogue {
     _createDataSchema(_this, rawSchema) {
         console.log("creating dataSchema based on: ", rawSchema);
 
-        // FIXME: accessControlPolicy field not needed?
-        // create the descriptor
-        let dataSchema = _this._factory.createDataObjectSchema(
-            rawSchema["cguid"],
-            rawSchema["version"],
-            rawSchema["objectName"],
-            rawSchema["description"],
-            rawSchema["language"],
-            rawSchema["sourcePackageURL"]
-        );
+        let dataSchema;
+        if (rawSchema["accessControlPolicy"] && rawSchema["scheme"]) {
+            dataSchema = _this._factory.createHypertyDataObjectSchema(
+                rawSchema["cguid"],
+                rawSchema["version"],
+                rawSchema["objectName"],
+                rawSchema["description"],
+                rawSchema["language"],
+                rawSchema["sourcePackageURL"],
+                rawSchema["accessControlPolicy"],
+                rawSchema["scheme"]
+            )
+        } else {
+            dataSchema = _this._factory.createMessageDataObjectSchema(
+                rawSchema["cguid"],
+                rawSchema["version"],
+                rawSchema["objectName"],
+                rawSchema["description"],
+                rawSchema["language"],
+                rawSchema["sourcePackageURL"]
+            )
+        }
+
 
         // optional fields
         dataSchema.signature = rawSchema["signature"];
@@ -244,7 +257,7 @@ class RuntimeCatalogue {
             dataSchema.sourcePackage = _this._createSourcePackage(_this, sourcePackage);
         }
 
-        console.log("created dataSchema descriptor object:", dataSchema);
+        //console.log("created dataSchema descriptor object:", dataSchema);
         return dataSchema;
     }
 
