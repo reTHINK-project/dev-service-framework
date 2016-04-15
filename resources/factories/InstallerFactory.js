@@ -1,7 +1,6 @@
 import config from '../../system.config.json!json';
 import Core from '../../src/runtime-loader/Core';
 import RuntimeFactory from '../../resources/factories/RuntimeFactory';
-import RuntimeCatalogue from '../../../src/runtime-catalogue/RuntimeCatalogue-Local';
 
 class InstallerFactory extends Core  {
 
@@ -21,7 +20,7 @@ class InstallerFactory extends Core  {
 
       let runtimeFactory = new RuntimeFactory();
 
-      let catalogue = new RuntimeCatalogue(runtimeFactory);
+      let catalogue = runtimeFactory.createRuntimeCatalogue();
       let domain = config.domain;
 
       window.catalogue = catalogue;

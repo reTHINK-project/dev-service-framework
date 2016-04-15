@@ -34,6 +34,7 @@
     "browserify": "^12.0.1",
     "chai": "^2.1.2",
     "chai-as-promised": "^5.1.0",
+    "chai-json-schema": "^1.2.0",
     "deep-eql": "^0.1.3",
     "esdoc-es7-plugin": "0.0.3",
     "gulp": "^3.9.0",
@@ -89,6 +90,7 @@
       "object.observe": "npm:object.observe@^0.2.6",
       "ortc-over-rtc": "npm:ortc-over-rtc@^0.1.0",
       "runtime-core": "github:rethink-project/dev-runtime-core@dev-0.4",
+      "universal-localstorage": "npm:universal-localstorage@^1.0.2",
       "webrtc-adapter-test": "npm:webrtc-adapter-test@^0.2.5",
       "webrtc-shim": "npm:webrtc-shim@^0.1.2"
     },

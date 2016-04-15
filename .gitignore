@@ -18,5 +18,3 @@ resources/bundle.js
 resources/tmp
 privatekey.csr
 *.pem
-package.json
-package.json
