@@ -201,6 +201,7 @@ class CatalogueDataObjectFactory extends RethinkObject {
 
     /**
      * Create DataObjectSchema which in effect is the MessageDataObjectSchema
+     * @deprecated Use either createMessageDataObjectSchema or createHypertyDataObjectSchema instead
      * @param {string} guid - Catalogue Global Unique identifier of the Catalogue Object
      * @param {string} version - Indicates the version of Catalogue Data
      * @param {string} objectName - Human-understandable name of the catalogue object
