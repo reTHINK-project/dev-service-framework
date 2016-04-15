@@ -141,11 +141,11 @@ class CatalogueDataObject {
             this._sourcePackageURL = sourcePackageURL;
     }
 }
-
+//Alice: removed POLICY_ENFORCER: 'policy_enforcer', DATA_SCHEMA: 'data_schema' from the list
+//wrt: https://github.com/reTHINK-project/dev-service-framework/blob/develop/docs/datamodel/core/hyperty-catalogue/readme.md#data-object-schema
 export const CatalogueObjectType = {
     HYPERTY: 'hyperty', PROTOSTUB: 'protostub', HYPERTY_RUNTIME: 'hyperty_runtime',
-    HYPERTY_INTERCEPTOR: 'hyperty_inspector', HYPERTY_DATA_OBJECT: 'hyperty_data_object',
-    POLICY_ENFORCER: 'policy_enforcer', DATA_SCHEMA: 'data_schema'
+    HYPERTY_INTERCEPTOR: 'hyperty_inspector', HYPERTY_DATA_OBJECT: 'hyperty_data_object'
 };
 export const DataObjectSourceLanguage = {
     JAVASCRIPT_ECMA6: 'javascript_ecma6', JAVASCRIPT_ECMA5: 'javascript_ecma5',

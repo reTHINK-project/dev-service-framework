@@ -38,11 +38,11 @@ class HypertyRuntimeDescriptor extends CatalogueDataObject {
         if (hypertyCapabilities)
             this._hypertyCapabilities = hypertyCapabilities;
         else
-            this._hypertyCapabilities = {};
+            this._hypertyCapabilities = new RuntimeHypertyCapability(true, false, false,false,false);
         if (protocolCapabilities)
             this._protocolCapabilities = protocolCapabilities;
         else
-            this._protocolCapabilities = {};
+            this._protocolCapabilities = new RuntimeProtocolCapability(true, false, true,false,false,false);
     }
 
     get runtimeType() {
@@ -73,13 +73,100 @@ class HypertyRuntimeDescriptor extends CatalogueDataObject {
     }
 }
 
-export var RuntimeType = {BROWSER: 'browser', STANDALONE: 'standalone', SERVER: 'server', GATEWAY: 'gateway'};
-export var RuntimeHypertyCapabilityType = {
-    MIC: 'mic', CAMERA: 'camera', SENSOR: 'sensor', WEBRTC: 'webrtc',
-    ORTC: 'ortc'
-};
-export var RuntimeProtocolCapabilityType = {
-    HTTP: 'http', HTTPS: 'https', WS: 'ws', WSS: 'wss', COAP: 'coap',
-    DATACHANEL: 'datachannel'
-};
+/**
+ * A class representation of the capability set of the Runtime Hyperty
+ */
+export class RuntimeHypertyCapability{
+    /**
+     * Creates an object of the Runtime Hyperty capability set
+     * @param {boolean} isWebRTCSupported
+     * @param {boolean} isMicSupported
+     * @param {boolean} isCameraSupported
+     * @param {boolean} isSensorSupported
+     * @param {boolean} isORTCSupported
+     */
+    constructor(isWebRTCSupported, isMicSupported, isCameraSupported, isSensorSupported, isORTCSupported){
+        this._isWebRTC = isWebRTCSupported;
+        this._isMic = isMicSupported;
+        this._isCamera = isCameraSupported;
+        this._isSensor = isSensorSupported;
+        this._isORTC = isORTCSupported;
+    }
+
+    get isMic(){
+        return this._isMic;
+    }
+    get isCamera(){
+        return this._isCamera;
+    }
+    get isSensor(){
+        return this._isSensor;
+    }
+    get isWebRTC(){
+        return this._isWebRTC;
+    }
+    get isORTCS(){
+        return this._isORTC;
+    }
+
+    getCapabilitySet(){
+        return JSON.stringify(this);
+    }
+}
+
+
+/**
+ * A class representation of the protocol capability set of the Runtime Hyperty
+ */
+export class RuntimeProtocolCapability{
+
+    /**
+     * Creates an object of the runtime protocol capability
+     * @param {boolean} isHttp
+     * @param {boolean} isHttps
+     * @param {boolean} isWS
+     * @param {boolean} isWSS
+     * @param {boolean} isCoap
+     * @param {boolean} isDataChannel
+     */
+    constructor(isHttp, isHttps, isWS, isWSS, isCoap, isDataChannel){
+        this._isHttp = isHttp;
+        this._isHttps = isHttps;
+        this._isWS = isWS;
+        this._isWSS = isWSS;
+        this._isCoap = isCoap;
+        this._isDataChannel = isDataChannel;
+    }
+
+    isHttp(){
+        return this._isHttp;
+    }
+
+    isHttps(){
+        return this._isHttps;
+    }
+    isWS(){
+        return this._isWS;
+    }
+    isSensorSupported(){
+        return this._isSensor;
+    }
+    isWSS(){
+        return this._isWSS;
+    }
+    isCoap(){
+        return this._isCoap;
+    }
+    isDataChannel(){
+        return this._isDataChannel;
+    }
+
+
+    getCapabilitySet(){
+        return JSON.stringify(this);
+    }
+}
+
+export const RuntimeType = {BROWSER: 'browser', STANDALONE: 'standalone', SERVER: 'server', GATEWAY: 'gateway'};
+
 export default HypertyRuntimeDescriptor;

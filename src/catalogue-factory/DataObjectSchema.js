@@ -27,7 +27,7 @@
 
 import CatalogueDataObject from './CatalogueDataObject';
 
-class DataObjectSchema extends CatalogueDataObject {
+export class DataObjectSchema extends CatalogueDataObject {
     constructor(guid, type, version, objectName, description, language, sourcePackageURL) {
         super(guid, type, version, objectName, description, language, sourcePackageURL);
     }
@@ -43,9 +43,10 @@ export class MessageDataObjectSchema extends DataObjectSchema {
 }
 
 export class HypertyDataObjectSchema extends DataObjectSchema {
-    constructor(guid, type, version, objectName, description, language, sourcePackageURL, accessControlPolicy) {
+    constructor(guid, type, version, objectName, description, language, sourcePackageURL, accessControlPolicy, dataUrlScheme) {
         super(guid, type, version, objectName, description, language, sourcePackageURL);
         this._accessControlPolicy = accessControlPolicy;
+        this._scheme = dataUrlScheme;
     }
 }
 
@@ -62,7 +63,7 @@ export class ConnectionDataObjectSchema extends HypertyDataObjectSchema {
     }
 }
 
-export class IdentifyDataObjectSchema extends HypertyDataObjectSchema {
+export class IdentityDataObjectSchema extends HypertyDataObjectSchema {
     constructor(guid, type, version, objectName, description, language, sourcePackageURL, accessControlPolicy) {
         super(guid, type, version, objectName, description, language, sourcePackageURL, accessControlPolicy);
     }
@@ -73,5 +74,9 @@ export class ContextDataObjectSchema extends HypertyDataObjectSchema {
         super(guid, type, version, objectName, description, language, sourcePackageURL, accessControlPolicy);
     }
 }
+
+export const DataUrlScheme = {
+    COMM: 'COMM', CONNECTION: 'CONNECTION', CTXT: 'CTXT', IDENTITY: 'IDENTITY'
+};
 
 export default DataObjectSchema;
