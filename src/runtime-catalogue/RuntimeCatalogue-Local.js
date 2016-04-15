@@ -373,7 +373,7 @@ class RuntimeCatalogue {
 
           // FIXME: accessControlPolicy field not needed?
           // create the descriptor
-          let dataSchema = _this._factory.createMessageDataObjectSchema(
+          let dataSchema = _this._factory.createDataObjectSchema(
             result.cguid,
             result.version,
             result.objectName,
