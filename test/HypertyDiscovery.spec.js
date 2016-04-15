@@ -12,9 +12,9 @@ describe('HypertyDiscovery', function() {
     postMessage: (msg, replyCallback) => {
 
       //if the discoverHypertyPerUser don't receive a domain, it will use the domain from the constructor
-      if (msg.from === 'hyperty://' + domain + '/hypertyDiscovery') {
+      if (msg.to === 'domain://registry.ist.pt/') {
         expect(msg).to.eql({
-          type: 'READ', from: 'hyperty://ist.pt/hypertyDiscovery', to: 'domain://registry.ist.pt/',
+          type: 'read', from: domain, to: 'domain://registry.ist.pt/',
           body: {resource: 'user://gmail.com/openidtest10'}
         });
         replyCallback({
@@ -26,7 +26,7 @@ describe('HypertyDiscovery', function() {
         });
       } else {
         expect(msg).to.eql({
-          type: 'READ', from: 'hyperty://specific.com/hypertyDiscovery', to: 'domain://registry.specific.com/',
+          type: 'read', from: domain, to: 'domain://registry.specific.com/',
           body: {resource: 'user://specific.com/openidtest10'}
         });
         replyCallback({
@@ -45,7 +45,7 @@ describe('HypertyDiscovery', function() {
 
   describe('constructor()', function() {
     it('should create a HypertyDiscovery object without error', function() {
-      expect(hypertyDiscovery.discoveryURL).to.be.equal('hyperty://ist.pt/hypertyDiscovery');
+      expect(hypertyDiscovery.discoveryURL).to.be.equal(domain);
     });
   });
 
