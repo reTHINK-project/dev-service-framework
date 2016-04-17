@@ -1,4 +1,5 @@
-let openIDConfiguration;
+let identities = {};
+let nIdentity = 0;
 
 let googleInfo = {
   clientSecret:          'Xx4rKucb5ZYTaXlcZX9HLfZW',
@@ -89,34 +90,6 @@ let exchangeCode = (function(code) {
 let IdpProxy = {
 
   /**
-  * Function to generate an identity Assertion
-  * TODO add details of the implementation, and improve implementation
-  *
-  * @param  {contents} The contents includes information about the identity received
-  * @param  {origin} Origin parameter that identifies the origin of the RTCPeerConnection
-  * @param  {usernameHint} optional usernameHint parameter
-  * @return {Promise} returns a promise with an identity assertion
-  */
-  generateAssertion: (contents, origin, hint) => {
-    let i = googleInfo;
-    let tokenID = contents;
-    return new Promise(function(resolve,reject) {
-      if (origin !== undefined) {
-        sendHTTPRequest('GET', i.tokenInfo + tokenID).then(function(value) {
-          let tokenIDJSON = value;
-          let encodedContent = btoa(JSON.stringify({tokenID: tokenID, tokenIDJSON: tokenIDJSON}));
-          resolve(encodedContent);
-        }, function(error) {
-          reject(error);
-        });
-
-      } else {
-        reject('err');
-      }
-    });
-  },
-
-  /**
   * Function to validate an identity Assertion received
   * TODO add details of the implementation, and improve the implementation
   *
@@ -133,7 +106,7 @@ let IdpProxy = {
       sendHTTPRequest('GET', i.tokenInfo + content.tokenID).then(function(result) {
 
         if (JSON.stringify(result) === JSON.stringify(content.tokenIDJSON)) {
-          resolve('valid');
+          resolve({identity: content.tokenIDJSON.email, contents: content.tokenIDJSON});
         } else {
           reject('invalid');
         }
@@ -145,13 +118,15 @@ let IdpProxy = {
   },
 
   /**
-  * Function to obtain an user identity
-  * TODO add details of the implementation
-  * @return {Promise} returns a promise an URL so the Identity Module can use to obtain an identity
+  * Function to generate an identity Assertion
+  * TODO add details of the implementation, and improve implementation
   *
-  * @param  {scope}     Scope
+  * @param  {contents} The contents includes information about the identity received
+  * @param  {origin} Origin parameter that identifies the origin of the RTCPeerConnection
+  * @param  {usernameHint} optional usernameHint parameter
+  * @return {Promise} returns a promise with an identity assertion
   */
-  getIdentityAssertion: (contents) => {
+  generateAssertion: (contents, origin, hint) => {
     let i = googleInfo;
 
     //start the login phase
@@ -177,28 +152,44 @@ let IdpProxy = {
         let code = urlParser(contents, 'code');
 
         exchangeCode(code).then(function(value) {
-          let identityBundle = {accessToken: value.access_token, idToken: value.id_token, refreshToken: value.refresh_token, tokenType: value.token_type};
 
           //obtain information about the user
           let infoTokenURL = i.userinfo + value.access_token;
           sendHTTPRequest('GET', infoTokenURL).then(function(infoToken) {
 
-            //TODO delete later, and delete the need in the example
-            identityBundle.token = infoToken;
-            identityBundle.infoToken = infoToken;
+            let identityBundle = {accessToken: value.access_token, idToken: value.id_token, refreshToken: value.refresh_token, tokenType: value.token_type, infoToken: infoToken};
+
             let idTokenURL = i.tokenInfo + value.id_token;
 
             //obtain information about the user idToken
             sendHTTPRequest('GET', idTokenURL).then(function(idToken) {
-              identityBundle.idTokenJSON = idToken;
-              resolve(identityBundle);
+
+
+
+              identityBundle.tokenIDJSON = idToken;
+              identityBundle.expires = idToken.exp;
+              identityBundle.email = idToken.email;
+
+              let assertion = btoa(JSON.stringify({tokenID: value.id_token, tokenIDJSON: idToken}));
+              let idpBundle = {domain: 'google.com', protocol: 'OIDC'};
+
+              //TODO delete later the field infoToken, and delete the need in the example
+              let returnValue = {assertion: assertion, idp: idpBundle, info: identityBundle, infoToken: infoToken};
+
+              identities[nIdentity] = returnValue;
+              ++nIdentity;
+
+              resolve(returnValue);
             }, function(e) {
+
               reject(e);
             });
           }, function(error) {
+
             reject(error);
           });
         }, function(err) {
+
           reject(err);
         });
 
@@ -244,13 +235,6 @@ class IdpProxyProtoStub {
     let params = msg.body.params;
 
     switch (msg.body.method) {
-      case 'login':
-        IdpProxy.getIdentityAssertion(params).then(
-          function(value) { _this.replyMessage(msg, value);},
-
-          function(error) { _this.replyMessage(msg, error);}
-        );
-        break;
       case 'generateAssertion':
         IdpProxy.generateAssertion(params.contents, params.origin, params.usernameHint).then(
           function(value) { _this.replyMessage(msg, value);},
