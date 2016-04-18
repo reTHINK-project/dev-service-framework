@@ -20,6 +20,7 @@ package Message <<Rect>> {
 		assertedIdentity ?: boolean
 		via ?: URL.URL[]
 		source ?: URL.URL
+		auth ?: boolean
 	}
 
 	class CreateMessageBody {
