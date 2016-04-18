@@ -73,6 +73,17 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     _this._responseListener.remove();
   }
 
+  inviteObservers(observers) {
+    let _this = this;
+
+    let inviteMsg = {
+      type: 'create', from: _this._syncher._owner, to: _this._syncher._subURL,
+      body: { resource: _this._url, schema: _this._schema, value: _this._syncObj.data, authorise: observers }
+    };
+
+    _this._bus.postMessage(inviteMsg);
+  }
+
   /**
    * Release and delete object data
    */
