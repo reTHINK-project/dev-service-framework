@@ -17,13 +17,18 @@
 		"dataSchemes": {
 			"type": "array",
 			"items": {
-				"$ref": "RethinkCore.CatalogueDataObject.DataObjectSchema.json#/HypertyDataObjectSchema"
+				"enum": [
+					"comm",
+					"connection",
+					"ctxt",
+					"identity"
+				]
 			}
 		},
 		"resources": {
 			"type": "array",
 			"items": {
-				"$ref": "RethinkCore.CatalogueDataObject.HypertyDescriptor.json#/HypertyResourceType"
+				"$ref": "HypertyResource.json#/HypertyResourceType"
 			}
 		},
 		"runtime": {

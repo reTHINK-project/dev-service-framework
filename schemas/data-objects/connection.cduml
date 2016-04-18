@@ -3,7 +3,7 @@
 package Connection <<Rect>> {
 
 	class Connection {
-		status : String
+		status : string
 		owner : URL.UserURL
 		peer : URL.ConnectionURL
 	}

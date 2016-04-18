@@ -28,7 +28,21 @@ import CatalogueDataObject from './CatalogueDataObject';
 
 class HypertyDescriptor extends CatalogueDataObject {
 
-    constructor(guid, catalogueType, version, objectName, description, language, sourcePackageURL, hypertyType, dataObjects) {
+    /**
+     *
+     * @param {string} guid - Catalogue Global Unique identifier of the Catalogue Object enabling the same object to be
+     * stored and discovered in different Catalogues. Guid corresponds to <resource-type-id> per BNF of Resource Path.
+     * @param {CatalogueObjectType} catalogueType - 	Indicates the type of Catalogue Data Object
+     * @param {string} version
+     * @param {string} objectName
+     * @param {string} description
+     * @param {string} language
+     * @param {string} sourcePackageURL
+     * @param {HypertyResourceType[]} hypertyType A tag that identifies what type of hyperty is described in the object.
+     * @param {URL.HypertyCatalogueURLList} dataObjectUrls - It defines the Data Object Schemas supported by the Hyperty
+     * through a list of Catalogue URLs from where these schemas can be reached
+     */
+    constructor(guid, catalogueType, version, objectName, description, language, sourcePackageURL, hypertyType, dataObjectUrls) {
         super(guid, catalogueType, version, objectName, description, language, sourcePackageURL);
 
         this._configuration = {};
@@ -37,7 +51,7 @@ class HypertyDescriptor extends CatalogueDataObject {
         this._messageSchema = null;
 
         this._hypertyType = hypertyType;
-        this._dataObjects = dataObjects;
+        this._dataObjects = dataObjectUrls;
     }
 
     get hypertyType() {
@@ -97,6 +111,8 @@ class HypertyDescriptor extends CatalogueDataObject {
 }
 
 
-export var RuntimeHypertyCapabilityType = {};
-export var HypertyType = {COMMUNICATOR: 'communicator', IDENTITY: 'identity', CONTEXT: 'context'};
+export const RuntimeHypertyCapabilityType = {};
+export const HypertyType = {COMMUNICATOR: 'communicator', IDENTITY: 'identity', CONTEXT: 'context'};
+export const HypertyResourceType = {chat: 'CHAT', audio: 'Audio', video: 'Video', av: 'AV', screen:'SCREEN',
+    file: 'FILe', midi:'MIDI'};
 export default HypertyDescriptor;

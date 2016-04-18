@@ -224,7 +224,8 @@ class DataObject {
       from: msg.from,
       url: msg.to,
       value: msg.body.value,
-      childId: msgChildId
+      childId: msgChildId,
+      identity: msg.body.idToken,
     };
 
     if (_this._onAddChildrenHandler) {

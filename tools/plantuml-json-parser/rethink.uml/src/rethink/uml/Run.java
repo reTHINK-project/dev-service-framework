@@ -26,6 +26,7 @@ public class Run {
 	final XtextResourceSet resourceSet;
 
 	final Map<String, XtextResource> loaded = new HashMap<>();
+	final Map<String, String> targets = new HashMap<>(); //target folders
 	
 	public Run() {
 		injector = new ClassDiagramStandaloneSetup().createInjectorAndDoEMFRegistration();
@@ -34,18 +35,29 @@ public class Run {
 		resourceSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
 	}
 	
-	public void load() throws Exception {
+	public void loadAll() throws Exception {
 		final File folder = new File(".");
-		final String[] files = folder.list();
+		load(folder, "");
+	}
+	
+	public void load(File folder, String targetFolder) throws Exception {
+		out.println("SEARCH-FOLDER: " + targetFolder);
+		final File[] files = folder.listFiles();
 		
-		for(String file: files) {
-			if(file.endsWith("cduml")) {
-				out.println("LOAD: " + file);
-				final XtextResource resource = (XtextResource) resourceSet.createResource(URI.createURI("file:/" + file));
+		for(File file: files) {
+			final String fileName = file.getName();
+			final String filePath = targetFolder + "/" + fileName;
+			
+			if(file.isFile() && fileName.endsWith("cduml")) {
+				out.println("LOAD: " + filePath);
+				final XtextResource resource = (XtextResource) resourceSet.createResource(URI.createURI("file:" + filePath));
 				try(FileInputStream in = new FileInputStream(file)) {
 					resource.load(in, resourceSet.getLoadOptions());
-					loaded.put(file, resource);
+					loaded.put(filePath, resource);
+					targets.put(filePath, targetFolder);
 				}
+			} else if(file.isDirectory()) {
+				load(file, targetFolder + "/" + fileName);
 			}
 		}
 	}
@@ -53,11 +65,11 @@ public class Run {
 	public void parseAll() throws Exception {
 		for(String name: loaded.keySet()) {
 			out.println("PARSE: " + name);
-			parse(loaded.get(name));
+			parse(loaded.get(name), targets.get(name));
 		}
 	}
 	
-	public void parse(XtextResource resource) throws Exception {
+	public void parse(XtextResource resource, String targetFolder) throws Exception {
 		//syntax errors...
 		for(INode node: resource.getParseResult().getSyntaxErrors()) {
 			out.println("ERROR AT LINE " + node.getStartLine() + " -> " + node.getSyntaxErrorMessage().getMessage());
@@ -78,7 +90,7 @@ public class Run {
 				
 				@Override
 				public void generateFile(String fileName, CharSequence contents) {
-					final String path = "json/"  + fileName;
+					final String path = "json-schema"  + targetFolder + "/" + fileName;
 					out.print("  " + path);
 					
 					final File file = new File(path);
@@ -106,7 +118,7 @@ public class Run {
 	
 	public static void main(String[] args) throws Exception {
 		final Run run = new Run();
-		run.load();
+		run.loadAll();
 		run.parseAll();
 	}
 }

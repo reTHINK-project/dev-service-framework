@@ -137,7 +137,7 @@ export class DeleteMessageBody extends MessageBody {
      */
     constructor(idToken, accessToken, resource, schema, assertedIdentity,attribute ){
 
-        if (typeof resource === Array || resource instanceof Array) {
+        if (resource instanceof Array) {
             super(idToken, accessToken , null, schema, assertedIdentity);
             this.childrenResources = resource;
         } else {
@@ -254,11 +254,15 @@ export class ExecuteMessageBody extends MessageBody {
      */
     constructor(idToken, accessToken, resource, schema, assertedIdentity, method, params){
 
-
         super(idToken,accessToken ,resource, schema, assertedIdentity );
 
         this.method = method;
-        this.params = params;
+        if (params){
+            if(params instanceof Array)
+                this.params = params;
+            else
+                this.params = [params];
+        }
     }
 
 }

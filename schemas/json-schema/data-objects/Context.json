@@ -9,13 +9,14 @@
 			"type": "string"
 		},
 		"type": {
-			"$ref": "#/ContextType"
+			"$ref": "HypertyResource.json#/HypertyResourceType"
 		},
 		"description": {
 			"type": "string"
 		},
 		"time": {
-			"$ref": "RethinkCore.RethinkType.json#/Date"
+			"type": "string",
+			"format": "date-time"
 		},
 		"units": {
 			"$ref": "#/ContextUnit"
@@ -28,11 +29,6 @@
 		},
 		"tag": {
 			"type": "string"
-		}
-	}, 
-	"ContextType": {
-		"type": "object",
-		"properties": {
 		}
 	}, 
 	"ContextUnit": {
@@ -61,24 +57,22 @@
 				"$ref": "#/ContextUnit"
 			},
 			"value": {
-				"enum": [
-					"string",
-					"boolean",
-					"float",
-					"double"
-				]
+				"type": "object"
 			},
 			"sum": {
 				"type": "null"
 			},
 			"time": {
-				"$ref": "RethinkCore.RethinkType.json#/Date"
+				"type": "string",
+				"format": "date-time"
 			},
 			"updateTime": {
-				"$ref": "RethinkCore.RethinkType.json#/Date"
+				"type": "string",
+				"format": "date-time"
 			},
 			"expires": {
-				"$ref": "RethinkCore.RethinkType.json#/Date"
+				"type": "string",
+				"format": "date-time"
 			},
 			"address": {
 				"type": "string"
