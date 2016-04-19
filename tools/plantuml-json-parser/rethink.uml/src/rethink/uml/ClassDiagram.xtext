@@ -1,0 +1,115 @@
+grammar rethink.uml.ClassDiagram hidden(WS, ML_COMMENT, SL_COMMENT)
+
+generate classDiagram "http://www.uml.rethink/ClassDiagram"
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+DomainModel: '@startuml' {DomainModel} (file=STRING)? END_LINE
+	(packages += CPackage)+
+'@enduml';
+
+Element:
+	Relation | Node
+;
+
+Node:
+	CPackage | Entity | Note
+;
+
+Entity:
+	Enumer | Clazz
+;
+
+CPackage: 'package' name=QualifiedName ('<<' style=PackageStyle '>>')? '{' END_LINE
+	(elements += Element)*
+'}' END_LINE;
+
+enum PackageStyle:
+	Node | Rect | Folder | Frame | Cloud | Database
+;
+
+
+//BEGIN: relation rules
+Relation:
+	leftRef=[Node | QualifiedName] relType=RelationParse rightRef=[Node | QualifiedName] (':' name=Text)? END_LINE
+;
+
+RelationParse hidden():
+	comp=CompType type=RelationType (direct?='>')? WS multi=MULTI? |
+	type=RelationType (direct?='>' | ext?='|>')? WS multi=MULTI?
+;
+
+RelationType hidden():
+	strong?=StrongRel | weak?=WeakRel
+;
+
+enum CompType:
+	none | comp='*' | agre='o'
+;
+
+StrongRel: '-' ("up" | "down" | "left" | "right")? '-'+;
+WeakRel: '.' ("up" | "down" | "left" | "right")? '.'+;
+//END: relation rules
+
+//BEGIN: entity rules
+Enumer: 'enum' name=ID '{' END_LINE?
+	(types += ID END_LINE?)*
+'}' END_LINE;
+
+Clazz: 'class' name=ID ('<<' stereotype=Text '>>')? ('{' END_LINE?
+	(properties += Property)*
+'}')? END_LINE;
+
+Property:
+	name=ID ( 
+		(optional?='?'? (':' (type=DataType | entityList=EntityList) )? ) |
+		(constant?='=' value=Text)
+	) END_LINE
+;
+
+EntityList: '['
+	refs += [Entity | QualifiedName] ('|' refs += [Entity | QualifiedName])*
+']';
+//END: entity rules
+
+//BEGIN: note rules
+Note: 'note' ( 
+	(position=NotePosition (':' value=Text END_LINE) | ('of' of=[Entity] END_LINE value=Text END_LINE 'end note' END_LINE) ) | 
+	('as' name=ID END_LINE value=Text END_LINE 'end note' END_LINE)
+);
+
+enum NotePosition:
+	top | bottom | left | right
+;
+//END: note rules
+
+DataType:
+	(native=NativeType | entity=[Entity | QualifiedName]) (isArray?='[]')?
+;
+
+enum NativeType:
+	string | number | integer | boolean | date | object
+;
+
+QualifiedName: ID ('.' ID)*;
+
+Text: (
+	ID | STRING | ANY_OTHER | 
+	"up" | "down" | "top" | "bottom" | "left" | "right" | 
+	"null" | "string" | "number" | "integer" | "boolean" | "date" | "object" | 
+	"package" | "class" | "enum" | 
+	"note" | "as" | "of" | ":" | "?" | "[" | "]"
+)+;
+
+terminal ID: ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+
+terminal WS: (' '|'\t')+;
+terminal END_LINE: ('\t'|'\r'|'\n')+;
+
+terminal ML_COMMENT: '/*' -> '*/';
+terminal SL_COMMENT: '//' !('\n'|'\r')* ('\r'? '\n')?;
+
+terminal MULTI: '"' (('0' | '1') '..')? ('1' | '*') '"';
+terminal STRING: '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"';
+
+terminal ANY_OTHER: .;

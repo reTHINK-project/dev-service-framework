@@ -1,0 +1,41 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+
+	"id": "HypertyInstance",
+	"type": "object",
+	"required": ["url", "user", "guid", "dataSchemes", "resources", "runtime", "context"],
+	"properties": {
+		"url": {
+			"type": "string"
+		},
+		"user": {
+			"type": "string"
+		},
+		"guid": {
+			"type": "string"
+		},
+		"dataSchemes": {
+			"type": "array",
+			"items": {
+				"enum": [
+					"comm",
+					"connection",
+					"ctxt",
+					"identity"
+				]
+			}
+		},
+		"resources": {
+			"type": "array",
+			"items": {
+				"$ref": "HypertyResource.json#/HypertyResourceType"
+			}
+		},
+		"runtime": {
+			"type": "string"
+		},
+		"context": {
+			"type": "string"
+		}
+	}
+}

@@ -3,7 +3,7 @@
 /* global Materialize */
 
 import config from '../system.config.json!json';
-import {removeLoader, ready, errorMessage} from './support';
+import {ready, errorMessage} from './support';
 
 // polyfills
 import 'babel-polyfill';
@@ -12,8 +12,8 @@ import 'mutationobserver-shim';
 import 'object.observe';
 import 'array.observe';
 
+import InstallerFactory from '../resources/factories/InstallerFactory';
 import RuntimeLoader from '../src/runtime-loader/RuntimeLoader';
-import CoreFactory from '../resources/CoreFactory';
 
 // reTHINK modules
 // import RuntimeUA from 'runtime-core/dist/runtimeUA';
@@ -24,9 +24,9 @@ let avatar = 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAA
 
 // You can change this at your own domain
 let domain = config.domain;
-//
-// let runtime = new RuntimeUA(sandboxFactory, domain);
-// window.runtime = runtime;
+
+// Hack because the GraphConnector jsrsasign module;
+window.KJUR = {};
 
 // Check if the document is ready
 if (document.readyState === 'complete') {
@@ -36,6 +36,8 @@ if (document.readyState === 'complete') {
   document.addEventListener('DOMContentLoaded', documentReady, false);
 }
 
+var runtimeLoader;
+
 function documentReady() {
 
   ready();
@@ -43,10 +45,17 @@ function documentReady() {
   let hypertyHolder = $('.hyperties');
   hypertyHolder.removeClass('hide');
 
-  let hyperty = 'hyperty-catalogue://' + domain + '/.well-known/hyperty/HypertyChat';
+  let installerFactory = new InstallerFactory();
+  let runtimeURL = 'hyperty-catalogue://' + domain + '/.well-known/runtime/RuntimeUA';
+  runtimeLoader = new RuntimeLoader(installerFactory, runtimeURL);
+  runtimeLoader.install().then(runtimeInstalled).catch(errorMessage);
+}
 
-  let core = new CoreFactory();
-  let runtimeLoader = new RuntimeLoader(core);
+function runtimeInstalled() {
+
+  console.log(runtimeLoader);
+
+  let hyperty = 'hyperty-catalogue://' + domain + '/.well-known/hyperty/HypertyChat';
 
   // Load First Hyperty
   runtimeLoader.requireHyperty(hyperty).then(hypertyDeployed).catch(function(reason) {
@@ -78,19 +87,55 @@ function hypertyDeployed(result) {
   let createRoomModal = $('.create-chat');
   let participantsForm = createRoomModal.find('.participants-form');
   let createRoomBtn = createRoomModal.find('.btn-create');
+  let addParticipantBtn = createRoomModal.find('.btn-add');
+
+  let countParticipants = 0;
+
+  addParticipantBtn.on('click', function(event) {
+
+    event.preventDefault();
+
+    countParticipants++;
+
+    let participantEl = '<div class="row">' +
+      '<div class="input-field col s8">' +
+      '  <input class="input-email" name="email" id="email-' + countParticipants + '" required aria-required="true" type="text">' +
+      '  <label for="email-' + countParticipants + '">Participant Email</label>' +
+      '</div>' +
+      '<div class="input-field col s4">' +
+      '  <input class="input-domain" name="domain" id="domain-' + countParticipants + '" type="text">' +
+      '  <label for="domain-' + countParticipants + '">Participant domain</label>' +
+      '</div>' +
+    '</div>';
+
+    let participants = createRoomModal.find('.participants-form');
+    participants.append(participantEl);
+
+  });
 
   createRoomBtn.on('click', function(event) {
     event.preventDefault();
 
     let participants = [];
-    participantsForm.find('.input-email').each(function() {
+    /* participantsForm.find('.input-email').each(function() {
       participants.push($(this).val());
-    });
+    });*/
+    let serializedObject = $(participantsForm).serializeObjectArray();
 
     // Prepare the chat
     let name = createRoomModal.find('.input-name').val();
 
-    console.log(name, participants);
+    console.log(serializedObject);
+
+    if (serializedObject.hasOwnProperty('email')) {
+
+      serializedObject.email.forEach(function(value, index) {
+        participants.push({email: value, domain: serializedObject.domain[index]});
+      });
+
+    }
+
+    console.log('Participants: ', participants);
 
     hypertyChat.create(name, participants).then(function(chatGroup) {
 
@@ -172,6 +217,11 @@ function prepareChat(chatGroup) {
       processMessage(message);
     });
 
+    chatGroup.addEventListener('participant:added', function(participant) {
+      console.info('new participant', participant);
+      addParticipant(participant);
+    });
+
   });
 
 }
@@ -218,7 +268,7 @@ function chatManagerReady(chatGroup) {
 
     let object = $(this).serializeObject();
     let message = object.message;
-    chatGroup.send(message).then(function(result){
+    chatGroup.send(message).then(function(result) {
       console.log('message sent', result);
       messageForm[0].reset();
     }).catch(function(reason) {
@@ -247,7 +297,6 @@ function chatManagerReady(chatGroup) {
     event.preventDefault();
     addParticipantModal.openModal();
   });
-
 
 }
 

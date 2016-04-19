@@ -1,0 +1,35 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+
+	"id": "HypertyDescriptor",
+	"type": "object",
+	"required": ["dataObjectUrls", "hypertyType", "messageSchemaUrl", "constraints"],
+	"properties": {
+		"dataObjectUrls": {
+			"type": "string"
+		},
+		"hypertyType": {
+			"type": "array",
+			"items": {
+				"$ref": "HypertyResource.json#/HypertyResourceType"
+			}
+		},
+		"messageSchemaUrl": {
+			"type": "string"
+		},
+		"configuration": {
+			"$ref": "#/HypertyConfiguration"
+		},
+		"constraints": {
+			"$ref": "RethinkCore.CatalogueDataObject.HypertyRuntimeDescriptor.json#/RuntimeHypertyCapabilities"
+		},
+		"policiesUrl": {
+			"type": "string"
+		}
+	}, 
+	"HypertyConfiguration": {
+		"type": "object",
+		"properties": {
+		}
+	}
+}

@@ -38,21 +38,53 @@ class DataObjectChild /* implements SyncStatus */ {
    * @ignore
    * Should not be used directly by Hyperties. It's called by the DataObject.addChildren
    */
-  constructor(owner, childId, msgId, bus, initialData) {
+  constructor(parent, childId, initialData, owner, msgId) {
     let _this = this;
 
-    _this._owner = owner;
+    _this._parent = parent;
     _this._childId = childId;
-    _this._bus = bus;
+    _this._owner = owner;
+    _this._msgId = msgId;
+
     _this._syncObj = new SyncObject(initialData);
 
-    bus.addListener(owner, (msg) => {
-      if (msg.type === 'response' && msg.id === msgId) {
-        console.log('DataObjectChild.onResponse:', msg);
-        _this._onResponse(msg);
-      }
-    });
+    _this._bus = parent._bus;
+    _this._allocateListeners();
+  }
 
+  _allocateListeners() {
+    let _this = this;
+
+    //this is only needed for children reporters
+    if (_this._owner) {
+      _this._listener = _this._bus.addListener(_this._owner, (msg) => {
+        if (msg.type === 'response' && msg.id === _this._msgId) {
+          console.log('DataObjectChild.onResponse:', msg);
+          _this._onResponse(msg);
+        }
+      });
+    }
+  }
+
+  _releaseListeners() {
+    let _this = this;
+
+    if (_this._listener) {
+      _this._listener.remove();
+    }
+  }
+
+  /**
+   * Release and delete object data
+   */
+  delete() {
+    let _this = this;
+
+    delete _this._parent._children[_this._childId];
+
+    _this._releaseListeners();
+
+    //TODO: send delete message ?
   }
 
   /**

@@ -145,7 +145,7 @@
 
 
 !ifdef SHOW_SP1
-	box "Service Provider 1"
+	box "Service Provider 1\nReporter"
 		participant "Back-end Service" as SP1
 
 		!ifdef SHOW_Msg1
@@ -211,7 +211,7 @@
 	!endif
 
 	!ifdef SHOW_SP1SandboxAtRuntime1B
-		box "Service Provider 1 Sandbox at Bob Device" #DarkSalmon
+		box "Service Provider 1 Sandbox\n at Bob Device" #DarkSalmon
 			!ifdef SHOW_Protostub1AtRuntime1B
 			participant "SP1\nprotoStub" as Proto1@1B
 			!endif
@@ -248,7 +248,7 @@
 	!endif
 
 	!ifdef SHOW_SP2SandboxAtRuntime1B
-		box "Service Provider 2 Sandbox at Bob Device"
+		box "Service Provider 2\n Sandbox at Bob Device"
 			!ifdef SHOW_Protostub2AtRuntime1B
 			participant "SP2\nprotoStub" as Proto2@1B
 			!endif
@@ -268,8 +268,12 @@
 
 
 !ifdef SHOW_SP2
-	box "Service Provider 2"
+	box "Service Provider 2\nObserver"
 		participant "Backend Service" as SP2
+
+		!ifdef SHOW_SMAtSP2
+			participant "Synch Manager" as SM@SP2
+		!endif
 	end box
 !endif
 

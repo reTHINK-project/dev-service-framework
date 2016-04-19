@@ -1,0 +1,67 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+
+	"id": "DataObjectSchema",
+	"type": "object",
+	"anyOf": [
+		{ "$ref": "#/MessageDataObjectSchema" },
+		{ "$ref": "#/HypertyDataObjectSchema" }
+	]
+	,
+	"properties": {
+	}, 
+	"MessageDataObjectSchema": {
+		"type": "object",
+		"properties": {
+		}
+	}, 
+	"HypertyDataObjectSchema": {
+		"type": "object",
+		"required": ["scheme", "accessControlPolicy"],
+		"anyOf": [
+			{ "$ref": "#/CommunicationDataObjectSchema" },
+			{ "$ref": "#/ConnectionDataObjectSchema" },
+			{ "$ref": "#/IdentityDataObjectSchema" },
+			{ "$ref": "#/ContextDataObjectSchema" }
+		]
+		,
+		"properties": {
+			"scheme": {
+				"enum": [
+					"comm",
+					"connection",
+					"ctxt",
+					"identity"
+				]
+			},
+			"accessControlPolicy": {
+				"type": "string"
+			}
+		}
+	}, 
+	"AccessControlPolicy": {
+		"type": "object",
+		"properties": {
+		}
+	}, 
+	"CommunicationDataObjectSchema": {
+		"type": "object",
+		"properties": {
+		}
+	}, 
+	"ConnectionDataObjectSchema": {
+		"type": "object",
+		"properties": {
+		}
+	}, 
+	"IdentityDataObjectSchema": {
+		"type": "object",
+		"properties": {
+		}
+	}, 
+	"ContextDataObjectSchema": {
+		"type": "object",
+		"properties": {
+		}
+	}
+}

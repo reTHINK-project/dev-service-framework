@@ -7,6 +7,9 @@ autonumber
 !define SHOW_SP1
 !define SHOW_SMAtSP1
 
+!define SHOW_SP2
+!define SHOW_SMAtSP2
+
 !define SHOW_RuntimeA
 
 !define SHOW_CoreRuntimeA
@@ -46,16 +49,23 @@ end
 
 RunSM@A -> RunSM@1B : Unsubscription\nResponse Message
 
-== listeners removed at Observer side to stop receiving data object updates ==
-
-RunSM@1B -> RunSM@1B : listener.remove()
-
+== Routing Path removed from Reporter side to stop receiving data object updates ==
 
 RunSM@1B -> SM@SP1 : Unsubscribe Msg
 SM@SP1 -> SM@SP1 : removeListeners
 
 RunSM@1B <- SM@SP1 : OK Unsubscribe Response Msg
 
-RunSM@1B -> Sync1@B1 : OK Unsubscribe Response Msg
+== listeners removed at Observer side to stop receiving data object updates ==
+
+RunSM@1B -> RunSM@1B : listener.remove()
+
+RunSM@1B -> SM@SP2 : Unsubscribe Msg
+SM@SP2 -> SM@SP2 : removeListeners
+
+RunSM@1B <- SM@SP2 : OK Unsubscribe Response Msg
+
+
+RunSM@1B -> Sync1@1B : OK Unsubscribe Response Msg
 
 @enduml

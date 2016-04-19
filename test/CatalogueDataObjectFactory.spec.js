@@ -1,10 +1,10 @@
-import CatalogueDataObjectFactory from '../src/catalogue-factory/CatalogueDataObjectFactory'
-import CatalogueDataObject from '../src/catalogue-factory/CatalogueDataObject'
-import RuntimeConstraint from '../src/catalogue-factory/RuntimeConstraint'
-import {CatalogueObjectType} from '../src/catalogue-factory/CatalogueDataObject'
-import {DataObjectSourceLanguage} from '../src/catalogue-factory/CatalogueDataObject'
-import {HypertyType} from '../src/catalogue-factory/HypertyDescriptor'
-
+import CatalogueDataObjectFactory from '../src/catalogue-factory/CatalogueDataObjectFactory';
+import RuntimeConstraint from '../src/catalogue-factory/RuntimeConstraint';
+import {CatalogueObjectType} from '../src/catalogue-factory/CatalogueDataObject';
+import {DataUrlScheme} from '../src/catalogue-factory/DataObjectSchema';
+import {DataObjectSourceLanguage} from '../src/catalogue-factory/CatalogueDataObject';
+import {HypertyResourceType} from '../src/catalogue-factory/HypertyDescriptor';
+import {RuntimeType, RuntimeHypertyCapability, RuntimeProtocolCapability} from '../src/catalogue-factory/HypertyRuntimeDescriptor.js';
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 
@@ -34,7 +34,7 @@ describe('CatalogueDataObjectFactory', function () {
             hypertyDescriptor = catalogueDataObjectFactory.createHypertyDescriptorObject(
                 "525f4671-ebd8-4b35-b062-5a126bf44628", "1.0", "My awesome Hyperty", "Description of Hyperty",
                 DataObjectSourceLanguage.JAVASCRIPT_ECMA6, "https://example.org/my-awesome-hyperty/source",
-                HypertyType.COMMUNICATOR, {});
+                [HypertyResourceType.av, HypertyResourceType.chat], {});
             expect(hypertyDescriptor).not.to.be.empty;
         });
 
@@ -45,7 +45,7 @@ describe('CatalogueDataObjectFactory', function () {
         it('testing getters/setters (name, type, messageSchema)', function () {
             let name = "My amazing Hyperty";
             let messageSchema = "test";
-            let type = CatalogueObjectType.POLICY_ENFORCER;
+            let type = CatalogueObjectType.HYPERTY;
 
             hypertyDescriptor.name = name;
             hypertyDescriptor.type = type;
@@ -59,7 +59,7 @@ describe('CatalogueDataObjectFactory', function () {
         it('should have valid GUID', function () {
             let guid = hypertyDescriptor.guid;
             expect(guidCheck(guid)).to.be.true;
-        })
+        });
     });
 
     describe('createProtoStubDescriptorObject()', function () {
@@ -83,25 +83,25 @@ describe('CatalogueDataObjectFactory', function () {
         })
     });
 
-    describe('createPolicyEnforcerObject()', function () {
-        let policyEnforcerDescriptor;
+    describe('createHypertyInterceptorObject()', function () {
+        let hypertyInterceptorDescriptor;
 
-        it('should generate PolicyEnforcerDescriptor', function () {
-            policyEnforcerDescriptor = catalogueDataObjectFactory.createPolicyEnforcerDescriptorObject(
+        it('should generate HypertyInterceptorDescriptor', function () {
+            hypertyInterceptorDescriptor = catalogueDataObjectFactory.createHypertyInterceptorDescriptorObject(
                 "5dc08572-56e5-4ad1-99c8-79c49578a5b0", "1.0", "My awesome Hyperty 3", "Description of Hyperty 2",
                 DataObjectSourceLanguage.PYTHON, "https://example.com/my-awesome-hyperty-3/source", {},
                 []);
-            expect(policyEnforcerDescriptor).not.to.be.empty;
+            expect(hypertyInterceptorDescriptor).not.to.be.empty;
         });
 
-        it('should be of type POLICY_ENFORCER', function () {
-            expect(policyEnforcerDescriptor.type).to.eql(CatalogueObjectType.POLICY_ENFORCER);
+        it('should be of type HYPERTY_INTERCEPTOR', function () {
+            expect(hypertyInterceptorDescriptor.type).to.eql(CatalogueObjectType.HYPERTY_INTERCEPTOR);
         });
 
         it('should have valid GUID', function () {
-            let guid = policyEnforcerDescriptor.guid;
+            let guid = hypertyInterceptorDescriptor.guid;
             expect(guidCheck(guid)).to.be.true;
-        })
+        });
     });
 
     describe('createSourcePackage()', function () {
@@ -132,7 +132,7 @@ describe('CatalogueDataObjectFactory', function () {
         it('should have valid GUID', function () {
             let guid = catalogueDataObject.guid;
             expect(guidCheck(guid)).to.be.true;
-        })
+        });
     });
 
     describe('createHypertyRuntimeDescriptorObject()', function () {
@@ -141,8 +141,9 @@ describe('CatalogueDataObjectFactory', function () {
         it('should generate HypertyRuntimeDescriptor', function () {
             hypertyRuntimeDescriptor = catalogueDataObjectFactory.createHypertyRuntimeDescriptorObject(
                 "b36392c3-73d4-4a63-942b-4a9c2c663eea", "0.4.4", "My awesome Hyperty 5", "Description of Hyperty 5",
-                DataObjectSourceLanguage.JAVASCRIPT_ECMA6, "https://example.org/my-awesome-hyperty-5/source", {}, {},
-                {});
+                DataObjectSourceLanguage.JAVASCRIPT_ECMA6, "https://example.org/my-awesome-hyperty-5/source",
+                RuntimeType.BROWSER, new RuntimeHypertyCapability(true, true, true, false, false),
+                new RuntimeProtocolCapability(true, true, true, true, false, true));
             expect(hypertyRuntimeDescriptor).not.to.be.empty;
         });
 
@@ -153,29 +154,31 @@ describe('CatalogueDataObjectFactory', function () {
         it('should have valid GUID', function () {
             let guid = hypertyRuntimeDescriptor.guid;
             expect(guidCheck(guid)).to.be.true;
-        })
+        });
     });
 
-    describe('createDataObjectSchema()', function () {
+    describe('createHypertyDataObjectSchema()', function () {
         let dataObjectSchema;
 
-        it('should generate DataObjectSchema', function () {
-            dataObjectSchema = catalogueDataObjectFactory.createDataObjectSchema(
+        it('should generate HypertyDataObjectSchema', function () {
+            dataObjectSchema = catalogueDataObjectFactory.createHypertyDataObjectSchema(
                 "b36392c3-73d4-4a63-942b-4a9c2c663eea", "1.2.1", "My awesome Schema",
                 "Description of Schema",
-                DataObjectSourceLanguage.JAVASCRIPT_ECMA6, "https://example.org/my-awesome-schema/source");
+                DataObjectSourceLanguage.JAVASCRIPT_ECMA6, "https://example.org/my-awesome-schema/source",
+                "accessControlPolicyString", DataUrlScheme.COMM
+            );
             expect(dataObjectSchema).not.to.be.empty;
         });
 
 
         it('should be of type DATA_SCHEMA', function () {
-            expect(dataObjectSchema.type).to.eql(CatalogueObjectType.DATA_SCHEMA);
+            expect(dataObjectSchema.type).to.eql(CatalogueObjectType.HYPERTY_DATA_OBJECT);
         });
 
         it('should have valid GUID', function () {
             let guid = dataObjectSchema.guid;
             expect(guidCheck(guid)).to.be.true;
-        })
+        });
     });
 
 
@@ -183,7 +186,7 @@ describe('CatalogueDataObjectFactory', function () {
         if (typeof guid === "undefined") return false;
         else {
             //GUID should match standard RFC4122
-            var match = guid.match(/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i);
+            let match = guid.match(/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i);
             return match !== null && match.length === 1;
         }
     }

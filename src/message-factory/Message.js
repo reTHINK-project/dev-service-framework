@@ -106,6 +106,6 @@ export class Message{
  * @type {{CREATE: string, READ: string, UPDATE: string, DELETE: string, SUBSCRIBE: string, UNSUBSCRIBE: string, RESPONSE: string, FORWARD: string}}
  */
 export const MessageType = {CREATE: 'create', READ: 'read', UPDATE: 'update', DELETE: 'delete', SUBSCRIBE: 'subscribe',
-    UNSUBSCRIBE: 'unsubscribe', RESPONSE: 'response', FORWARD: 'forward'};
+    UNSUBSCRIBE: 'unsubscribe', RESPONSE: 'response', FORWARD: 'forward', EXECUTE: 'execute'};
 
 export default Message;

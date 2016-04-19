@@ -41,22 +41,67 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
    * @ignore
    * Should not be used directly by Hyperties. It's called by the Syncher.create method
    */
-  constructor(owner, url, schema, bus, initialStatus, initialData, children) {
-    super(owner, url, schema, bus, initialStatus, initialData, children);
+  constructor(syncher, url, schema, initialStatus, initialData, childrens) {
+    super(syncher, url, schema, initialStatus, initialData, childrens);
     let _this = this;
 
-    bus.addListener(url, (msg) => {
-      if (msg.type === 'response') {
-        _this._onResponse(msg);
-      }
-    });
+    _this._subscriptions = {};
 
     _this._syncObj.observe((event) => {
       console.log('DataObjectReporter-' + url + '-SEND: ', event);
       _this._onChange(event);
     });
 
-    _this._subscriptions = {};
+    _this._allocateListeners();
+  }
+
+  _allocateListeners() {
+    super._allocateListeners();
+    let _this = this;
+
+    _this._responseListener = _this._bus.addListener(_this._url, (msg) => {
+      if (msg.type === 'response') {
+        _this._onResponse(msg);
+      }
+    });
+  }
+
+  _releaseListeners() {
+    super._releaseListeners();
+    let _this = this;
+
+    _this._responseListener.remove();
+  }
+
+  inviteObservers(observers) {
+    let _this = this;
+
+    let inviteMsg = {
+      type: 'create', from: _this._syncher._owner, to: _this._syncher._subURL,
+      body: { resource: _this._url, schema: _this._schema, value: _this._syncObj.data, authorise: observers }
+    };
+
+    _this._bus.postMessage(inviteMsg);
+  }
+
+  /**
+   * Release and delete object data
+   */
+  delete() {
+    let _this = this;
+
+    let deleteMsg = {
+      type: 'delete', from: _this._owner, to: _this._syncher._subURL,
+      body: { resource: _this._url }
+    };
+
+    _this._bus.postMessage(deleteMsg, (reply) => {
+      console.log('DataObjectReporter-DELETE: ', reply);
+      if (reply.body.code === 200) {
+        _this._releaseListeners();
+        delete _this._syncher._reporters[_this._url];
+      }
+    });
   }
 
   /**
@@ -104,10 +149,17 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
         let sub = { url: hypertyUrl, status: 'on' };
         _this._subscriptions[hypertyUrl] = sub;
 
+        //process and send childrens data
+        let childrenValues = {};
+        Object.keys(_this._childrenObjects).forEach((childId) => {
+          let childData = _this._childrenObjects[childId].data;
+          childrenValues[childId] = deepClone(childData);
+        });
+
         //send ok response message
         _this._bus.postMessage({
           id: msg.id, type: 'response', from: msg.to, to: msg.from,
-          body: { code: 200, schema: _this._schema, version: _this._version, value: deepClone(_this.data) }
+          body: { code: 200, schema: _this._schema, version: _this._version, value: { data: deepClone(_this.data), childrens: childrenValues } }
         });
 
         return sub;

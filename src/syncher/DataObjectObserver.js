@@ -22,6 +22,7 @@
 **/
 
 import DataObject from './DataObject';
+import DataObjectChild from './DataObjectChild';
 
 let FilterType = {ANY: 'any', START: 'start', EXACT: 'exact'};
 
@@ -31,6 +32,7 @@ let FilterType = {ANY: 'any', START: 'start', EXACT: 'exact'};
  */
 class DataObjectObserver extends DataObject /* implements SyncStatus */ {
   /* private
+  _changeListener: MsgListener
 
   ----event handlers----
   _filters: {<filter>: {type: <start, exact>, callback: <function>} }
@@ -40,23 +42,73 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
    * @ignore
    * Should not be used directly by Hyperties. It's called by the Syncher.subscribe method
    */
-  constructor(owner, url, schema, bus, initialStatus, initialData, children, initialVersion) {
-    super(owner, url, schema, bus, initialStatus, initialData, children);
+  constructor(syncher, url, schema, initialStatus, initialData, childrens, initialVersion) {
+    super(syncher, url, schema, initialStatus, initialData.data, childrens);
     let _this = this;
 
     _this._version = initialVersion;
-
-    //add listener for objURL
-    bus.addListener(url + '/changes', (msg) => {
-      console.log('DataObjectObserver-' + url + '-RCV: ', msg);
-      _this._changeObject(_this._syncObj, msg);
-    });
+    _this._filters = {};
 
     _this._syncObj.observe((event) => {
       _this._onFilter(event);
     });
 
-    _this._filters = {};
+    //setup childrens data from subscription
+    Object.keys(initialData.childrens).forEach((childId) => {
+      let childData = initialData.childrens[childId];
+      _this._childrenObjects[childId] = new DataObjectChild(_this, childId, childData);
+    });
+
+    _this._allocateListeners();
+  }
+
+  _allocateListeners() {
+    super._allocateListeners();
+    let _this = this;
+
+    _this._changeListener = _this._bus.addListener(_this._url + '/changes', (msg) => {
+      if (msg.type === 'update') {
+          console.log('DataObjectObserver-' + _this._url + '-RCV: ', msg);
+          _this._changeObject(_this._syncObj, msg);
+      }
+    });
+  }
+
+  _releaseListeners() {
+    super._releaseListeners();
+    let _this = this;
+
+    _this._changeListener.remove();
+  }
+
+  /**
+   * Release and delete object data
+   */
+  delete() {
+    let _this = this;
+
+    _this._releaseListeners();
+    delete _this._syncher._observers[_this._url];
+  }
+
+  /**
+   * Release and delete object data
+   */
+  unsubscribe() {
+    let _this = this;
+
+    let unSubscribeMsg = {
+      type: 'unsubscribe', from: _this._owner, to: _this._syncher._subURL,
+      body: { resource: _this._url }
+    };
+
+    _this._bus.postMessage(unSubscribeMsg, (reply) => {
+      console.log('DataObjectObserver-UNSUBSCRIBE: ', reply);
+      if (reply.body.code === 200) {
+        _this._releaseListeners();
+        delete _this._syncher._observers[_this._url];
+      }
+    });
   }
 
   /**

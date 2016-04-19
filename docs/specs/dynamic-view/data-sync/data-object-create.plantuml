@@ -34,14 +34,32 @@ group Allocate Data Object URL
 
   note right
    Register Data Object
- 	 and its URL is reachable in its domain
- 	 (listeners added at event/msg bus)
   end note
 
 
   RunSM@A <- SP1 : Create Allocation Response Message
 end
 
+group Setup Routing Path for the new Data Object
+  RunSM@A -> SP1 : Subscribe Data Object URLs Message
+
+  note right
+    add listeners to <ObjectUrl>, <ObjectUrl>/subscription,
+    and  <ObjectUrl>/children,
+  end note
+
+  RunSM@A <- SP1 : subscription Response Message
+end
+
+group Register Data Object at Domain Registry
+  RunSM@A -> SP1 : Create Data Object Registration at Domain Registry Message
+
+  note right
+    Data Object is registered in the Domain Registry
+  end note
+
+  RunSM@A <- SP1 : Create Registration Response Message
+end
 
 Sync1@A <- RunSM@A : Create Response MSG
 

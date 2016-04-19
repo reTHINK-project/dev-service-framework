@@ -21,6 +21,8 @@
 * limitations under the License.
 **/
 
+import {divideURL} from '../utils/utils';
+
 /**
 * Core HypertyDiscovery interface
 * Class to allow applications to search for hyperties using the message bus
@@ -33,40 +35,89 @@ class HypertyDiscovery {
   * @param  {MessageBus}          msgbus                msgbus
   * @param  {RuntimeURL}          runtimeURL            runtimeURL
   */
-  constructor(domain, msgBus) {
+  constructor(hypertyURL, msgBus) {
     let _this = this;
     _this.messageBus = msgBus;
 
-    _this.domain = domain;
-    _this.discoveryURL = 'hyperty://' + domain + '/hypertyDisovery';
+    _this.domain = divideURL(hypertyURL).domain;
+    _this.discoveryURL = hypertyURL;
+  }
+
+  /**
+  * function to request about dataObject registered in domain registry, and
+  * return the dataObject instance  url, if found.
+  * @param  {String}              name  dataObject Name
+  * @param  {String}            domain (Optional)
+  * @return {Promise}          Promise
+  */
+  discoverDataObjectPerName(name, domain) {
+    let _this = this;
+    let activeDomain;
+
+    if (!domain) {
+      activeDomain = _this.domain;
+    } else {
+      activeDomain = domain;
+    }
+
+    let msg = {
+      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: 'dataObject://' + name}
+    };
+
+    return new Promise(function(resolve, reject) {
+
+      _this.messageBus.postMessage(msg, (reply) => {
+
+        let dataObjectUrl = reply.body.value.url;
+
+        if (dataObjectUrl) {
+          resolve(dataObjectUrl);
+        } else {
+          reject('DataObject name does not exist');
+        }
+      });
+
+    });
+
   }
 
   /**
   * function to request about users registered in domain registry, and
   * return the hyperty instance if found.
   * @param  {email}              email
+  * @param  {domain}            domain (Optional)
   * @return {Promise}          Promise
   */
-  discoverHypertyPerUser(email) {
+  discoverHypertyPerUser(email, domain) {
     let _this = this;
+    let activeDomain;
+
+    if (!domain) {
+      activeDomain = _this.domain;
+    } else {
+      activeDomain = domain;
+    }
+
     let identityURL = 'user://' + email.substring(email.indexOf('@') + 1, email.length) + '/' + email.substring(0, email.indexOf('@'));
 
     // message to query domain registry, asking for a user hyperty.
     let message = {
-      type: 'READ', from: _this.discoveryURL, to: 'domain://registry.' + _this.domain + '/', body: { resource: identityURL}
+      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: identityURL}
     };
 
+    console.log('Message: ', message, activeDomain, identityURL);
+
+    //console.log('message READ', message);
     return new Promise(function(resolve, reject) {
 
       _this.messageBus.postMessage(message, (reply) => {
-        //console.log('MESSAGE', reply);
+        console.log('message reply', reply);
 
         let hyperty;
         let mostRecent;
         let lastHyperty;
         let value = reply.body.value;
 
-        //console.log('valueParsed', valueParsed);
         for (hyperty in value) {
           if (value[hyperty].lastModified !== undefined) {
             if (mostRecent === undefined) {
@@ -80,8 +131,10 @@ class HypertyDiscovery {
               }
             }
           }
-
         }
+
+        console.log('Last Hyperty: ', lastHyperty, mostRecent);
+
         let hypertyURL = lastHyperty;
 
         if (hypertyURL === undefined) {
@@ -94,7 +147,7 @@ class HypertyDiscovery {
           hypertyURL: hypertyURL
         };
 
-        console.log('===> RegisterHyperty messageBundle: ', idPackage);
+        console.log('===> hypertyDiscovery messageBundle: ', idPackage);
         resolve(idPackage);
       });
     });

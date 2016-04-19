@@ -156,6 +156,22 @@ describe('MessageFactory', function() {
         });
     });
 
+    describe('createExecuteMessageRequest()', function() {
+
+        it('should create a new Execute Message Request', function(done) {
+
+            //from, to, method, params
+            let executeMessage = messageFactory.createExecuteMessageRequest(
+                "hyperty-runtime-esn://fromdomain.com/12345", "[hyperty-runtime-imei://todomain.com/12345]",
+                "read", ['Param1', 'Param2']);
+
+            console.log('Execute Message Request', JSON.stringify(executeMessage));
+            expect(executeMessage).to.not.be.empty;
+            expect(executeMessage.type).to.eql(MessageType.EXECUTE);
+            done();
+        });
+    });
+
     describe('createMessageResponse()', function() {
         it('should be a Response Message of Type RESPONSE', function(done) {
             //message, code, value, source

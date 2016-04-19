@@ -1,26 +1,35 @@
-import SandboxBrowser from './SandboxBrowser';
-import AppSandboxBrowser from './AppSandboxBrowser';
+import SandboxBrowser from '../sandboxes/SandboxBrowser';
+import AppSandboxBrowser from '../sandboxes/AppSandboxBrowser';
+import Request from '../browser/Request';
+import {RuntimeCatalogueLocal, RuntimeCatalogue} from '../../src/RuntimeCatalogue';
 
 class SandboxFactory {
 
-  get messageBus() {
-    let _this = this;
-    return _this._messageBus;
-  }
-
-  set messageBus(messageBus) {
-    let _this = this;
-    _this._messageBus = messageBus;
-  }
-
   createSandbox() {
-    let _this = this;
-    return new SandboxBrowser(_this._messageBus);
+    return new SandboxBrowser();
   }
 
   createAppSandbox() {
+    return new AppSandboxBrowser();
+  }
+
+  createHttpRequest() {
+    let request = new Request();
+    return request;
+  }
+
+  // TODO optimize the parameter was passed to inside the RuntimeCatalogue
+  createRuntimeCatalogue() {
+
     let _this = this;
-    return new AppSandboxBrowser(_this._messageBus);
+    let factory = {
+      createHttpRequest: function() {
+        return _this.createHttpRequest();
+      }
+    };
+
+    return new RuntimeCatalogueLocal(factory);
+
   }
 
   removeSandbox() {

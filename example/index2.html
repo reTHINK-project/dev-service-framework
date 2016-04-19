@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Demo of Hyperty and Protostubs</title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Hyperty Chat - PTInovacao -</title>
 
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
@@ -51,7 +53,7 @@
     </div>
 
     <!-- Modal Structure -->
-    <div class="modal create-chat">
+    <div class="modal modal-fixed-footer create-chat">
       <div class="modal-content">
         <div class="chat-name">
           <h4>Name of Chat Group</h4>
@@ -59,21 +61,10 @@
         </div>
         <div class="participants">
           <form class="participants-form">
-            <div class="row">
-              <div class="input-field col s8">
-                <i class="material-icons prefix">user</i>
-                <input class="input-email" name="email1" placeholder="Participant email" id="email1" required aria-required="true" type="text">
-                <label for="email1">Email</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s8">
-                <i class="material-icons prefix">user</i>
-                <input class="input-email" name="email2" placeholder="Participant email" id="email2" type="text">
-                <label for="email2">Email</label>
-              </div>
-            </div>
           </form>
+        </div>
+        <div class="row">
+          <button class="btn waves-effect waves-light btn-add" type="submit" name="action">Add Participant<i class="material-icons right">add</i></button>
         </div>
       </div>
       <div class="modal-footer">

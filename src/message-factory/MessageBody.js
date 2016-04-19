@@ -1,25 +1,25 @@
 /**
-* Copyright 2016 PT Inovação e Sistemas SA
-* Copyright 2016 INESC-ID
-* Copyright 2016 QUOBIS NETWORKS SL
-* Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
-* Copyright 2016 ORANGE SA
-* Copyright 2016 Deutsche Telekom AG
-* Copyright 2016 Apizee
-* Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*   http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-**/
+ * Copyright 2016 PT Inovação e Sistemas SA
+ * Copyright 2016 INESC-ID
+ * Copyright 2016 QUOBIS NETWORKS SL
+ * Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
+ * Copyright 2016 ORANGE SA
+ * Copyright 2016 Deutsche Telekom AG
+ * Copyright 2016 Apizee
+ * Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **/
 
 /**
  * @author alice.cheambe[at]fokus.fraunhofer.de
@@ -38,20 +38,28 @@ export class MessageBody{
      * @param {Identity.Identity} assertedIdentity - AssertedIdentity is compliant with User Identity Data Model
      *
      */
-	constructor(idToken, accessToken, resource, schema, assertedIdentity){
+    constructor(idToken, accessToken, resource, schema, assertedIdentity){
 
-        //if(idToken)
-            this.idToken = idToken;
-       // if(accessToken)
-            this.accessToken = accessToken;
-       // if(resource )
-            this.resource = resource;
-        //if(schema )
-            this.schema = schema;
-        //if(assertedIdentity)
-            this.assertedIdentity = assertedIdentity;
-	}
+        this.idToken = idToken;
+        this.accessToken = accessToken;
+        this.resource = resource;
+        this.schema = schema;
+        this.assertedIdentity = assertedIdentity;
+    }
 
+    /**
+     * Adds a via URL to the given message body. The "MessageBody.via" attribute contains a list of all Protostub
+     * addresses (Protostub) that the message has been passed through. It is used to prevent infinite cycles in the
+     * Hyperty Messaging Framework.
+     * @param {Identity.JWT} token - identity token to include in the message
+     * @return {MessageBody} - the updated message body
+     */
+    addVia(viaURL){
+        if(!viaURL )
+            throw  new Error("via URL to be added, must be provided");
+        this.via = viaURL;
+        return this;
+    }
 
 }
 
@@ -122,14 +130,19 @@ export class DeleteMessageBody extends MessageBody {
      *
      * @param {Identity.JWT} idToken -
      * @param {Identity.JWT} accessToken
-     * @param {URL.URL} resource - URL of the object
+     * @param {URL.URLList} resource - One or more URLs of objects to be deleted
      * @param {URL.HypertyCatalogueURL} schema - URL of the Data object schema stored in the Catalogue
      * @param {Identity.Identity} assertedIdentity - AssertedIdentity is compliant with User Identity Data Model
      * @param {String} attribute - Identifies the attribute in the Object to be deleted (optional)
      */
     constructor(idToken, accessToken, resource, schema, assertedIdentity,attribute ){
 
-        super(idToken,accessToken ,resource, schema, assertedIdentity );
+        if (resource instanceof Array) {
+            super(idToken, accessToken , null, schema, assertedIdentity);
+            this.childrenResources = resource;
+        } else {
+            super(idToken, accessToken ,resource, schema, assertedIdentity);
+        }
 
         if(attribute){
             this.attribute = attribute;
@@ -149,7 +162,7 @@ export class UpdateMessageBody extends MessageBody {
      * @param {URL.URL} resource - URL of the object
      * @param {URL.HypertyCatalogueURL} schema - URL of the Data object schema stored in the Catalogue
      * @param {Identity.Identity} assertedIdentity - AssertedIdentity is compliant with User Identity Data Model
-     * @param {String} attribute - Identifies the attribute in the Object to be deleted (optional)
+     * @param {String} attribute - Identifies the attribute in the Object to be updated (optional)
      * @param {String} value - Contains the updated value object in JSON format.
      */
     constructor(idToken, accessToken, resource, schema, assertedIdentity, attribute, value){
@@ -157,6 +170,17 @@ export class UpdateMessageBody extends MessageBody {
         super(idToken,accessToken ,resource, schema, assertedIdentity );
         this.attribute = attribute;
         this.value = value;
+    }
+
+    addAttributeType(attributeType){
+        if(attributeType)
+            this.attributeType = attributeType;
+    }
+
+    addOperation(operation)
+    {
+        if(operation)
+            this.operation = operation;
     }
 }
 
@@ -210,6 +234,37 @@ export class ResponseMessageBody extends MessageBody {
             this.value = value;
 
     }
+}
+
+/**
+ * Class representation of the ExecuteMessageBoday data Object. Contains the name of method to be invoked and an array
+ * and an Array of objects to be passed as parameters to the defined method. This is compliant with JSON-RPC Spec.
+ */
+export class ExecuteMessageBody extends MessageBody {
+
+    /**
+     * Constructor to create the object
+     *
+     * @param {Identity.JWT} idToken -
+     * @param {Identity.JWT} accessToken
+     * @param {URL.URL} resource - URL of the object
+     * @param {URL.HypertyCatalogueURL} schema - URL of the Data object schema stored in the Catalogue
+     * @param {Identity.Identity} assertedIdentity - AssertedIdentity is compliant with User Identity Data Model
+     * @param {Message} message - Message to be forwarded
+     */
+    constructor(idToken, accessToken, resource, schema, assertedIdentity, method, params){
+
+        super(idToken,accessToken ,resource, schema, assertedIdentity );
+
+        this.method = method;
+        if (params){
+            if(params instanceof Array)
+                this.params = params;
+            else
+                this.params = [params];
+        }
+    }
+
 }
 
 export function Enum(a){
@@ -316,6 +371,17 @@ export const REASON_PHRASE = Enum({
     503: 'Service Unavailable',
     504: 'Gateway Time-out',
     505: 'HTTP Version Not Supported'
+});
+
+
+export const ATTRIBUTE_TYPE = Enum({
+    OBJECT: 'OBJECT',
+    ARRAY: 'ARRAY'
+});
+
+export const UPDATE_OPERATION = Enum({
+    ADD: 'ADD',
+    REMOVE: 'REMOVE'
 });
 
 export default MessageBody;

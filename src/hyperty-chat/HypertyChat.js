@@ -47,12 +47,13 @@ class HypertyChat extends EventEmitter {
     let syncher = new Syncher(hypertyURL, bus, configuration);
 
     let domain = divideURL(hypertyURL).domain;
-    let hypertyDiscovery = new HypertyDiscovery(domain, bus);
+    let hypertyDiscovery = new HypertyDiscovery(hypertyURL, bus);
 
     _this._objectDescURL = 'hyperty-catalogue://' + domain + '/.well-known/dataschemas/FakeDataSchema';
 
     _this._hypertyURL = hypertyURL;
     _this._syncher = syncher;
+    _this._domain = domain;
     _this._hypertyDiscovery = hypertyDiscovery;
 
     syncher.onNotification(function(event) {
@@ -64,11 +65,13 @@ class HypertyChat extends EventEmitter {
 
   _autoSubscribe(resource) {
     let _this = this;
-    _this.join(resource).then(function(chatGroup){
+
+    _this.join(resource).then(function(chatGroup) {
       _this.trigger('chat:subscribe', chatGroup);
     }).catch(function(reason) {
       console.error(reason);
-    })
+    });
+
   }
 
   /**
@@ -95,17 +98,17 @@ class HypertyChat extends EventEmitter {
       communication.participants.push(participant);
 
       console.info('----------------------- Mapping Particpants -------------------- \n');
-      _this._mappingUser(participants).then(function(hyperties){
-        console.info('------------------------ Syncher Create ---------------------- \n');
-        return syncher.create(_this._objectDescURL, hyperties, {communication: communication});
-      })
+      _this._mappingUser(participants)
+      .then((hyperties) => _this.createSyncher(hyperties))
+      .catch((hyperties) => _this.createSyncher(hyperties))
       .then(function(dataObjectReporter) {
         console.info('3. Return Create Data Object Reporter', dataObjectReporter);
 
         let chat = new ChatGroup(syncher, hypertyDiscovery, _this._domain);
+        resolve(chat);
+
         chat.dataObjectReporter = dataObjectReporter;
 
-        resolve(chat);
       }).catch(function(reason) {
         reject(reason);
       });
@@ -114,11 +117,21 @@ class HypertyChat extends EventEmitter {
 
   }
 
+  createSyncher(hyperties) {
+    let _this = this;
+    let syncher = _this._syncher;
+
+    console.info(`Have ${hyperties.length} participants;`);
+
+    console.info('------------------------ Syncher Create ---------------------- \n');
+    return syncher.create(_this._objectDescURL, hyperties, {communication: communication});
+  }
+
   join(resource) {
     let _this = this;
     let syncher = _this._syncher;
 
-    return new Promise(function(resolve, reject){
+    return new Promise(function(resolve, reject) {
 
       console.info('------------------------ Syncher subscribe ---------------------- \n');
       console.info(resource);
@@ -141,24 +154,35 @@ class HypertyChat extends EventEmitter {
     let _this = this;
 
     return new Promise(function(resolve, reject) {
-      let promiseList = [];
 
-      userList.forEach(function(email) {
-        if (email.length) {
-          promiseList.push(_this._hypertyDiscovery.discoverHypertyPerUser(email));
+      let hyperties = [];
+      let count = 0;
+
+      if (userList.length === 0) reject(hyperties);
+
+      let resultUsers = function() {
+        if (count === userList.length) {
+          console.info('Have ' + hyperties.length + 'users found;');
+          resolve(hyperties);
         }
-      });
+      };
 
-      Promise.all(promiseList).then(function(values) {
-        let hyperties = [];
+      let activeUsers = function(user) {
+        count++;
+        hyperties.push(user.hypertyURL);
+        resultUsers();
+      };
 
-        values.forEach(function(value) {
-          hyperties.push(value.hypertyURL);
-        });
+      let inactiveUsers = function() {
+        count++;
+        resultUsers();
+      };
 
-        resolve(hyperties);
-      }).catch(function(reason) {
-        reject(reason);
+      userList.forEach(function(user) {
+        console.log(user);
+        if (user.email.length) {
+          return _this._hypertyDiscovery.discoverHypertyPerUser(user.email, user.domain).then(activeUsers).catch(inactiveUsers);
+        }
       });
 
     });
