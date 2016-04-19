@@ -112,7 +112,6 @@ System.config({
       "base64-url": "npm:base64-url@1.2.1",
       "bip39": "npm:bip39@2.2.0",
       "bitcoinjs-lib": "npm:bitcoinjs-lib@2.2.0",
-      "hellojs": "npm:hellojs@1.12.0",
       "jsrsasign": "npm:jsrsasign@5.0.7",
       "service-framework": "github:rethink-project/dev-service-framework@develop",
       "sjcl": "npm:sjcl@1.0.3"
@@ -125,6 +124,7 @@ System.config({
       "object.observe": "npm:object.observe@0.2.6",
       "ortc-over-rtc": "npm:ortc-over-rtc@0.1.0",
       "runtime-core": "github:rethink-project/dev-runtime-core@dev-0.4",
+      "universal-localstorage": "npm:universal-localstorage@1.0.2",
       "webrtc-adapter-test": "npm:webrtc-adapter-test@0.2.10",
       "webrtc-shim": "npm:webrtc-shim@0.1.2"
     },
@@ -916,21 +916,6 @@ System.config({
     },
     "npm:hash.js@1.0.3": {
       "inherits": "npm:inherits@2.0.1"
-    },
-    "npm:hellojs@1.12.0": {
-      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
-      "child_process": "github:jspm/nodelibs-child_process@0.1.0",
-      "events": "github:jspm/nodelibs-events@0.1.1",
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "http": "github:jspm/nodelibs-http@1.7.1",
-      "os": "github:jspm/nodelibs-os@0.1.0",
-      "path": "github:jspm/nodelibs-path@0.1.0",
-      "process": "github:jspm/nodelibs-process@0.1.2",
-      "stream": "github:jspm/nodelibs-stream@0.1.0",
-      "string_decoder": "github:jspm/nodelibs-string_decoder@0.1.0",
-      "tty": "github:jspm/nodelibs-tty@0.1.0",
-      "url": "github:jspm/nodelibs-url@0.1.0",
-      "util": "github:jspm/nodelibs-util@0.1.0"
     },
     "npm:http-browserify@1.7.0": {
       "Base64": "npm:Base64@0.2.1",
