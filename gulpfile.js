@@ -6,6 +6,7 @@ var prompt = require('gulp-prompt');
 
 // Task and dependencies to distribute for all environments;
 var babel = require('babelify');
+var _ = require('lodash');
 var browserify = require('browserify');
 var buffer = require('vinyl-buffer');
 var source = require('vinyl-source-stream');
@@ -17,9 +18,12 @@ var argv = require('yargs').argv;
 var through = require('through2');
 var path = require('path');
 var gulpif = require('gulp-if');
+var gutil = require('gulp-util');
 
 var Base64 = require('js-base64').Base64;
 var fs = require('fs');
+
+var extensions = ['.js', '.json'];
 
 var pkg = require('./package.json');
 
@@ -94,409 +98,17 @@ function prependLicense(clean) {
 
 }
 
-function dist(debug) {
-
-  if (!debug) debug = false;
-
-  return through.obj(function(file, enc, cb) {
-
-    if (file.isNull()) {
-      return cb(new Error('Fil is null'));
-    }
-
-    if (file.isStream()) {
-      return cb(new Error('Streaming not supported'));
-    }
-
-    var filename = path.basename(file.path, '.js');
-
-    console.log('Make a distribution file from', filename + '.js');
-
-    return browserify({
-      entries: [file.path],
-      standalone: filename,
-      debug: debug
-    }).transform(babel, {compact: debug, optional: 'runtime'})
-    .bundle()
-    .on('error', function(err) {
-      console.error(err);
-      this.emit('end');
-    })
-    .pipe(source(filename + '.js'))
-    .pipe(buffer())
-    .pipe(gulpif(!debug, uglify()))
-    .pipe(gulpif(!debug, insert.prepend(license + '// Distribution file for {{package}} \n// version: {{version}}\n\n')))
-    .pipe(gulpif(!debug, replace('{{version}}', pkg.version)))
-    .pipe(gulpif(!debug, replace('{{package}}', filename + '.js')))
-    .pipe(gulp.dest(__dirname + '/dist'))
-    .on('end', function() {
-      console.log('Distribution done;\n');
-      cb();
-    });
-  });
-
-}
-
 gulp.task('dist', function() {
 
-  return gulp.src(['src/*.js'])
+  return gulp.src(['src/CatalogueFactory.js',
+  'src/HypertyDiscovery.js',
+  'src/MessageFactory.js',
+  'src/RuntimeCatalogue.js',
+  'src/service-framework.js',
+  'src/Syncher.js'])
   .pipe(dist());
 
 });
-
-gulp.task('build', function() {
-
-  return gulp.src(['src/*.js'])
-  .pipe(dist(true));
-
-});
-
-gulp.task('watch-rethink', function(done) {
-
-  var sep = path.sep;
-  var parentDir = fs.readdirSync(__dirname + '/..');
-  var currentDirs = function getDirectories() {
-    return fs.readdirSync(__dirname).filter(function(file) {
-      return fs.statSync(file).isDirectory();
-    });
-  };
-
-  gulp.src('./', {buffer:false})
-    .pipe(prompt.prompt([{
-      type: 'list',
-      name: 'repository',
-      message: 'Repository from where you copy a distribution file:',
-      choices: parentDir
-    },
-    {
-      type: 'list',
-      name: 'destination',
-      message: 'Folder in dev-service-framework where you will put the file:',
-      choices: currentDirs
-    },
-    {
-      type: 'list',
-      name: 'watch',
-      message: 'Watch changes:',
-      choices: ['yes', 'no']
-    }], function(res) {
-
-      var watchDir = __dirname + '/..' + sep + res.repository + sep + 'dist';
-      var files = fs.readdirSync(watchDir);
-      var destDir = res.destination;
-
-      gulp.src(watchDir + '/../', {buffer:false})
-        .pipe(prompt.prompt([{
-          type: 'list',
-          name: 'file',
-          message: 'File to be copied',
-          choices: files
-        }], function(fileResponse) {
-
-          var fileObject;
-          var watch = true;
-          if (res.watch === 'no') watch = false;
-
-          if (watch) {
-            gulp.watch([watchDir + '/*.js'], function(event) {
-              fileObject = path.parse(event.path);
-
-              gulp.src([fileObject.dir + sep + fileObject.base])
-              .pipe(gulp.dest(__dirname + sep + destDir + sep))
-              .on('end', function() {
-                resource(__dirname + sep + destDir + sep + fileObject.base, {}, false);
-                console.log('Copied and encoded');
-              });
-
-            });
-          } else {
-            fileObject = path.parse(__dirname + sep +  '..' + sep +  res.repository + sep +  'dist' + sep + fileResponse.file);
-
-            console.log(fileObject);
-
-            return gulp.src([fileObject.dir + sep + fileObject.base])
-            .pipe(gulp.dest(__dirname + sep + destDir + sep))
-            .on('end', function() {
-              resource(__dirname + sep + destDir + sep + fileObject.base, {}, false);
-            });
-          }
-
-        }
-      ));
-
-    }));
-});
-
-gulp.task('build-hyperties', function() {
-
-  var destination = argv.dest;
-  if (!destination) destination = __dirname + path.sep + 'resources';
-
-  return gulp.src([
-    'src/hyperty-connector/HypertyConnector.js',
-    'src/hyperty-chat/HypertyChat.js'])
-  .pipe(buildHyperties(destination));
-
-});
-
-function buildHyperties(destination) {
-
-  return through.obj(function(file, enc, cb) {
-
-    if (file.isNull()) {
-      return cb(null, file);
-    }
-
-    if (file.isStream()) {
-      return cb(new Error('Streaming not supported'));
-    }
-
-    var fileObject = path.parse(file.path);
-
-    console.log('----------------- Building hyperty -----------------------');
-    console.log(fileObject.base);
-
-    return browserify({
-      entries: [file.path],
-      standalone: 'activate',
-      debug: false
-    }).transform(babel, {global: true, compact: false})
-    .bundle()
-    .on('error', function(err) {
-      console.error(err);
-    })
-    .pipe(source(fileObject.base))
-    .pipe(gulp.dest(destination))
-    .pipe(buffer())
-    .pipe(resource(file.path, {}, false))
-    .on('end', function() {
-      console.log('----------------- Hyperty Builded -----------------------\n');
-      cb();
-    });
-
-  });
-
-}
-
-gulp.task('compile', function() {
-
-  var file = __dirname + path.sep + argv.file;
-  var tmp = __dirname + path.sep + 'resources' + path.sep + 'tmp';
-
-  if (!file) {
-    this.emit('end');
-  }
-
-  var fileObject = path.parse(file);
-  console.log(fileObject);
-
-  return browserify({
-    entries: [fileObject.dir + path.sep + fileObject.base],
-    standalone: 'activate',
-    debug: false
-  }).transform(babel, {global: false, compact: false})
-  .bundle()
-  .on('error', function(err) {
-    console.error(err);
-  })
-  .pipe(source(fileObject.base))
-  .pipe(gulp.dest(tmp))
-  .pipe(buffer())
-  .pipe(resource(tmp + path.sep + fileObject.base, {}, false))
-  .on('end', function() {
-    console.log('File converted');
-  });
-
-});
-
-/**
-* Compile on specific file from ES6 to ES5
-* @param  {string} 'compile' task name
-*
-* How to use: gulp compile --file 'path/to/file';
-*/
-function compile(file, destination, cb) {
-
-  if (!file) {
-    cb(new Error('No such file or directory'));
-  }
-
-  var fileObject = path.parse(file);
-
-  console.log('Converting ' + fileObject.base + ' on ' + fileObject.dir + ' to ES5');
-
-  return browserify({
-    entries: [file],
-    standalone: 'activate',
-    debug: false
-  }).transform(babel, {global: true, compact: false})
-  .bundle()
-  .on('error', function(err) {
-    console.error(err);
-  })
-  .pipe(source(fileObject.base))
-  .pipe(gulp.dest(destination))
-  .pipe(buffer())
-  .pipe(encode(fileObject.name, 'Hyperties'))
-  .pipe(source('Hyperties.json'))
-  .pipe(gulp.dest('resources/descriptors/'))
-  .on('end', function() {
-    console.log('File converted');
-  });
-
-}
-
-gulp.task('watch-hyperty', function(cb) {
-
-  var destination = argv.dest;
-
-  gulp.watch(['src/hyperty-connector/*.js', 'src/hyperty-chat/*.js', 'examples/**/*.js'], function(event) {
-
-    console.log(event.path);
-
-    var pathSplit = event.path.split(path.sep); // on windows is backslash;
-    var dir = pathSplit[pathSplit.length - 2];
-    var file = pathSplit[pathSplit.length - 1];
-
-    switch (dir) {
-      case 'hyperty-chat':
-        return compile(__dirname + '/src/' + dir + '/HypertyChat.js', destination, cb);
-
-      case 'hyperty-connector':
-        return compile(__dirname + '/src/' + dir + '/HypertyConnector.js', destination, cb);
-
-      default:
-        return compile(event.path, destination, cb);
-
-    }
-
-  });
-
-});
-
-gulp.task('watch', function(cb) {
-  gulp.watch(['src/**/*.js'], ['dist'], cb);
-});
-
-function encode(filename, descriptorName, configuration, isDefault) {
-
-  var descriptor = fs.readFileSync('resources/descriptors/' + descriptorName + '.json', 'utf8');
-  var json = JSON.parse(descriptor);
-
-  return through.obj(function(file, enc, cb) {
-
-    if (file.isNull()) {
-      return cb(null, file);
-    }
-
-    if (file.isStream()) {
-      return cb(new Error('Streaming not supported'));
-    }
-
-    var encoded = Base64.encode(file.contents);
-    var value = 'default';
-
-    if (isDefault) {
-      value = 'default';
-    } else {
-      value = filename;
-    }
-
-    if (!json.hasOwnProperty(value)) {
-      var newObject = {};
-      json[value] = newObject;
-      json[value].sourcePackage = {};
-    }
-
-    var language = 'javascript';
-    if (descriptorName === 'DataSchemas') {
-      language = 'JSON-Schema';
-    }
-
-    json[value].cguid = Math.floor(Math.random() + 1);
-    json[value].type = descriptorName;
-    json[value].version = '0.1';
-    json[value].description = 'Description of ' + filename;
-    json[value].objectName = filename;
-
-    if (!json[value].hasOwnProperty('configuration') && configuration) {
-      json[value].configuration = configuration;
-      console.log('setting configuration: ', configuration);
-    }
-
-    if (descriptorName === 'Runtimes') {
-      json[value].runtimeType = 'browser';
-      json[value].hypertyCapabilities = {mic: false };
-      json[value].protocolCapabilities = {http: true };
-    }
-
-    if (descriptorName === 'ProtoStubs') {
-      json[value].constraints = '';
-    }
-
-    json[value].sourcePackageURL = '/sourcePackage';
-    json[value].sourcePackage.sourceCode = encoded;
-    json[value].sourcePackage.sourceCodeClassname = filename;
-    json[value].sourcePackage.encoding = 'base64';
-    json[value].sourcePackage.signature = '';
-    json[value].language = language;
-    json[value].signature = '';
-    json[value].messageSchemas = '';
-    json[value].dataObjects = [];
-    json[value].accessControlPolicy = 'somePolicy';
-
-    var newDescriptor = new Buffer(JSON.stringify(json, null, 2));
-    console.log('file encoded: ', value);
-    cb(null, newDescriptor);
-
-  });
-
-}
-
-function resource(file, configuration, isDefault) {
-
-  var fileObject = path.parse(file);
-  var filename = fileObject.name;
-  var extension = fileObject.ext;
-  var descriptorName;
-  if (filename.indexOf('Hyperty') !== -1) {
-    descriptorName = 'Hyperties';
-  } else if (filename.indexOf('ProtoStub') !== -1) {
-    descriptorName = 'ProtoStubs';
-  } else if (filename.indexOf('DataSchema') !== -1) {
-    descriptorName = 'DataSchemas';
-  } else if (filename.indexOf('runtime') !== -1 || filename.indexOf('Runtime') !== -1) {
-    descriptorName = 'Runtimes';
-  } else if (filename.indexOf('ProxyStub') !== -1) {
-    descriptorName = 'IDPProxys';
-  }
-
-  var defaultPath = 'resources/';
-  if (fileObject.dir.indexOf('tmp') !== -1) {
-    defaultPath = 'resources/tmp/';
-  }
-
-  console.log('DATA:', defaultPath, filename, descriptorName, configuration, isDefault, extension);
-
-  if (extension === '.js') {
-    return gulp.src([defaultPath + filename + '.js'])
-    .pipe(gulp.dest(defaultPath))
-    .pipe(buffer())
-    .pipe(encode(filename, descriptorName, configuration, isDefault))
-    .pipe(source(descriptorName + '.json'))
-    .pipe(gulp.dest('resources/descriptors/'));
-  } else if (extension === '.json') {
-
-    return gulp.src(['resources/' + filename + '.json'])
-    .pipe(gulp.dest('resources/'))
-    .pipe(buffer())
-    .pipe(encode(filename, descriptorName, configuration, isDefault))
-    .pipe(source(descriptorName + '.json'))
-    .pipe(gulp.dest('resources/descriptors/'));
-
-  }
-
-}
 
 gulp.task('encode', function(done) {
 
@@ -524,6 +136,12 @@ gulp.task('encode', function(done) {
       choices: files
     },
     {
+      type: 'list',
+      name: 'esVersion',
+      message: 'This file are in ES5 or ES6',
+      choices: ['ES5', 'ES6']
+    },
+    {
       type: 'input',
       name: 'configuration',
       message: 'ProtoStub Configuration, use something like:\n{"url": "wss://msg-node.localhost:9090/ws"}\nConfiguration:',
@@ -532,16 +150,21 @@ gulp.task('encode', function(done) {
           JSON.parse(value);
           return true;
         } catch (e) {
-          console.error('Check your configuration JSON\nShould be something like:\n{"url": "wss://msg-node.localhost:9090/ws"}');
-          return false;
+          gutil.log('Default value is {}');
+          return true;
         }
       }
+    },
+    {
+      type: 'input',
+      name: 'name',
+      message: 'Name of hyperty, protostub, dataschema (not specify use the file name):'
     },
     {
       type: 'list',
       name: 'defaultFile',
       message: 'This will be a default file to be loaded?',
-      choices: ['yes', 'no']
+      choices: ['no', 'yes']
     }], function(res) {
 
       fs.access(res.file, fs.R_OK | fs.W_OK, function(err) {
@@ -549,59 +172,265 @@ gulp.task('encode', function(done) {
         return;
       });
 
-      var configuration = JSON.parse(res.configuration);
+      var configuration = JSON.parse(res.configuration || '{}');
 
-      var isDefault = true;
-      if (res.defaultFile === 'no' || res.defaultFile === 'n') {
-        isDefault = false;
+      var isDefault = false;
+      if (res.defaultFile === 'yes' || res.defaultFile === 'y') {
+        isDefault = true;
+      }
+
+      var opts = {
+        configuration: configuration,
+        isDefault: isDefault
+      };
+
+      var transpileOpts = {
+        configuration: {},
+        debug: false,
+        standalone: path.parse(res.file).basename,
+        destination: __dirname + '/resources/tmp'
+      };
+
+      if (res.name) {
+        opts.name = res.name;
+      }
+
+      var isES6 = false;
+      if (res.esVersion === 'ES6') {
+        isES6 = true;
+        transpileOpts.standalone = 'activate';
       }
 
       if (res.file) {
-        resource(res.file, configuration, isDefault);
+        return gulp.src(res.file)
+        .pipe(gulpif(isES6, transpile(transpileOpts)))
+        .pipe(resource(opts))
+        .on('end', function() {
+          gutil.log('encoded');
+        });
       }
     })
   );
 
 });
 
-/**
-* Bumping version number and tagging the repository with it.
-* Please read http://semver.org/
-*
-* You can use the commands
-*
-*     gulp patch     # makes v0.1.0 → v0.1.1
-*     gulp feature   # makes v0.1.1 → v0.2.0
-*     gulp release   # makes v0.2.1 → v1.0.0
-*
-* To bump the version numbers accordingly after you did a patch,
-* introduced a feature or made a backwards-incompatible release.
-*/
-function inc(importance) {
-  // get all the files to bump version in
-  return gulp.src(['./package.json'])
+function dist(debug) {
 
-  // bump the version number in those files
-  .pipe(bump({type: importance}))
+  if (!debug) debug = false;
 
-  // save it back to filesystem
-  .pipe(gulp.dest('./'));
+  return through.obj(function(file, enc, cb) {
+
+    if (file.isNull()) {
+      return cb(new Error('Fil is null'));
+    }
+
+    if (file.isStream()) {
+      return cb(new Error('Streaming not supported'));
+    }
+
+    var filename = path.basename(file.path, '.js');
+
+    var opts = {
+      configuration: {},
+      debug: false,
+      standalone: filename,
+      destination: __dirname + '/dist'
+    };
+
+    gutil.log(gutil.colors.yellow('Make a distribution file from', filename + '.js'));
+
+    gulp.src([file.path])
+    .pipe(transpile(opts))
+    .pipe(gulpif(!debug, uglify()))
+    .pipe(gulpif(!debug, insert.prepend(license + '// Distribution file for {{package}} \n// version: {{version}}\n\n')))
+    .pipe(gulpif(!debug, replace('{{version}}', pkg.version)))
+    .pipe(gulpif(!debug, replace('{{package}}', filename + '.js')))
+    .pipe(gulp.dest(__dirname + '/dist'))
+    .on('error', function(error) {
+      gutil.log(gutil.colors.red(error));
+    })
+    .on('end', function() {
+      gutil.log('> ' + gutil.colors.green('Distribution ') + gutil.colors.white(filename) + gutil.colors.green(' done!'));
+      cb();
+    });
+  });
+
 }
 
-gulp.task('patch', ['test'], function() { return inc('patch'); });
+function transpile(opts) {
 
-gulp.task('feature', ['test'], function() {  return inc('minor'); });
+  return through.obj(function(file, enc, cb) {
 
-gulp.task('release', ['test'], function() {  return inc('major'); });
+    var fileObject = path.parse(file.path);
+    var args = {};
 
-var Server = require('karma').Server;
+    var environment = argv.production || process.env.NODE_ENV;
+    process.env.environment = environment ? 'production' : 'development';
 
-/**
-* Run test once and exit
-*/
-gulp.task('test', function(done) {
-  new Server({
-    configFile: __dirname + '/karma.conf.js',
-    singleRun: true
-  }, done).start();
-});
+    args.entries = [file.path];
+    args.extensions = extensions;
+    if (opts.debug) args.debug = opts.debug;
+    if (opts.standalone) args.standalone = opts.standalone;
+
+    return browserify(args)
+    .transform(babel, {
+      compact: true,
+      presets: ['es2015', 'stage-0'],
+      plugins: ['add-module-exports', 'transform-inline-environment-variables']
+    })
+    .bundle()
+    .on('error', function(err) {
+      gutil.log(gutil.colors.red(err.message));
+      this.emit('end');
+    })
+    .pipe(source(fileObject.base))
+    .pipe(gulp.dest(opts.destination))
+    .on('end', function() {
+      file.contents = fs.readFileSync(opts.destination + '/' + fileObject.base);
+      file.path = opts.destination + '/' + fileObject.base;
+      cb(null, file);
+    });
+
+  });
+
+}
+
+function resource(opts) {
+
+  return through.obj(function(file, enc, done) {
+
+    gutil.log('Resource: ', file.path);
+    var fileObject = path.parse(file.path);
+
+    opts = _.extend({
+      configuration: {},
+      isDefault: false
+    }, opts || {});
+
+    var filename = fileObject.name;
+    var descriptorName;
+    if (filename.indexOf('hy') !== -1) {
+      descriptorName = 'Hyperties';
+    } else if (filename.indexOf('ProtoStub') !== -1) {
+      descriptorName = 'ProtoStubs';
+    } else if (filename.indexOf('ds') !== -1) {
+      descriptorName = 'DataSchemas';
+    } else if (filename.indexOf('runtime') !== -1 || filename.indexOf('Runtime') !== -1) {
+      descriptorName = 'Runtimes';
+    } else if (filename.indexOf('ProxyStub') !== -1) {
+      descriptorName = 'IDPProxys';
+    }
+
+    var defaultPath = 'resources/';
+    if (fileObject.dir.indexOf('tmp') !== -1) {
+      defaultPath = 'resources/tmp/';
+    }
+
+    opts.descriptor = descriptorName;
+
+    gutil.log('Encoding: ', defaultPath, filename, opts);
+
+    return gulp.src([file.path])
+    .pipe(encode(opts))
+    .pipe(source(opts.descriptor + '.json'))
+    .pipe(gulp.dest('resources/descriptors/'))
+    .on('end', function() {
+      var path = 'resources/descriptors/' + opts.descriptor + '.json';
+      file.contents = fs.readFileSync(path);
+      file.path = path;
+      done(null, file);
+    });
+
+  });
+
+}
+
+function encode(opts) {
+
+  opts = _.extend({}, opts || {});
+
+  return through.obj(function(file, enc, cb) {
+
+    if (file.isNull()) {
+      return cb(null, file);
+    }
+
+    if (file.isStream()) {
+      return cb(new Error('Streaming not supported'));
+    }
+
+    gutil.log('Encode: ', file.path);
+
+    var fileObject = path.parse(file.path);
+    var descriptor = fs.readFileSync('resources/descriptors/' + opts.descriptor + '.json', 'utf8');
+    var json = JSON.parse(descriptor);
+    var contents = fs.readFileSync(file.path, 'utf8');
+
+    var encoded = Base64.encode(contents);
+    var value = 'default';
+    var filename = fileObject.name;
+
+    if (fileObject.name.indexOf('.hy') !== -1) {
+      filename = fileObject.name.replace('.hy', '');
+    } else if (fileObject.name.indexOf('.ds') !== -1) {
+      filename = fileObject.name.replace('.ds', '');
+    }
+
+    if (opts.isDefault) {
+      value = 'default';
+    } else {
+      value = opts.name || filename;
+    }
+
+    if (!json.hasOwnProperty(value)) {
+      var newObject = {};
+      json[value] = newObject;
+      json[value].sourcePackage = {};
+    }
+
+    var language = 'javascript';
+    if (opts.descriptor === 'DataSchemas') {
+      language = 'JSON-Schema';
+    }
+
+    json[value].cguid = Math.floor(Math.random() + 1);
+    json[value].type = opts.descriptor;
+    json[value].version = '0.1';
+    json[value].description = 'Description of ' + filename;
+    json[value].objectName = filename;
+
+    if (opts.configuration) {
+      if (_.isEmpty(opts.configuration) && json[value].hasOwnProperty('configuration')) {
+        opts.configuration = json[value].configuration;
+      }
+
+      json[value].configuration = opts.configuration;
+      gutil.log('setting configuration: ', opts.configuration);
+    }
+
+    if (opts.descriptor === 'Runtimes') {
+      json[value].runtimeType = 'browser';
+      json[value].hypertyCapabilities = {mic: false };
+      json[value].protocolCapabilities = {http: true };
+    }
+
+    if (opts.descriptor === 'ProtoStubs' || opts.descriptor === 'IDPProxys') {
+      json[value].constraints = '';
+    }
+
+    json[value].sourcePackageURL = '/sourcePackage';
+    json[value].sourcePackage.sourceCode = encoded;
+    json[value].sourcePackage.sourceCodeClassname = filename;
+    json[value].sourcePackage.encoding = 'base64';
+    json[value].sourcePackage.signature = '';
+    json[value].language = language;
+    json[value].signature = '';
+    json[value].messageSchemas = '';
+    json[value].dataObjects = [];
+    json[value].accessControlPolicy = 'somePolicy';
+
+    var newDescriptor = new Buffer(JSON.stringify(json, null, 2));
+    cb(null, newDescriptor);
+
+  });
+}

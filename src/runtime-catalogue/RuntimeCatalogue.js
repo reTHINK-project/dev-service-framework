@@ -76,7 +76,7 @@ class RuntimeCatalogue {
      */
     getStubDescriptor(stubURL) {
         let _this = this;
-        return _this.getDescriptor(runtimeURL, _this._createStub)
+        return _this.getDescriptor(stubURL, _this._createStub)
     }
 
     /**
@@ -96,7 +96,7 @@ class RuntimeCatalogue {
      */
     getDataSchemaDescriptor(dataSchemaURL) {
         let _this = this;
-        return _this.getDescriptor(runtimeURL, _this._createDataSchema)
+        return _this.getDescriptor(dataSchemaURL, _this._createDataSchema)
     }
 
     /**
@@ -106,7 +106,7 @@ class RuntimeCatalogue {
      */
     getIdpProxyDescriptor(idpProxyURL) {
         let _this = this;
-        return _this.getDescriptor(runtimeURL, _this._createIdpProxy)
+        return _this.getDescriptor(idpProxyURL, _this._createIdpProxy)
     }
 
     /**

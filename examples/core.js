@@ -46,7 +46,7 @@ function documentReady() {
   hypertyHolder.removeClass('hide');
 
   let installerFactory = new InstallerFactory();
-  let runtimeURL = 'hyperty-catalogue://' + domain + '/.well-known/runtime/RuntimeUA';
+  let runtimeURL = 'hyperty-catalogue://' + domain + '/.well-known/runtime/Runtime';
   runtimeLoader = new RuntimeLoader(installerFactory, runtimeURL);
   runtimeLoader.install().then(runtimeInstalled).catch(errorMessage);
 }
@@ -63,7 +63,7 @@ function runtimeInstalled() {
 
   selection.append(helloReporter);
   selection.append(helloObserver);
-  
+
   $('.deploy-reporter').on('click', deployReporterEvent);
   $('.deploy-observer').on('click', deployObserverEvent);
 }

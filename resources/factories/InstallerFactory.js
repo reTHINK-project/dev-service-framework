@@ -14,24 +14,32 @@ class InstallerFactory extends Core  {
    * @param  {URL} runtimeURL     RuntimeURL to be loaded
    * @return {Promise}           Status of instalation;
    */
-  install(minibus, runtimeURL) {
+   install(minibus, runtimeURL) {
 
-    return new Promise(function(resolve, reject) {
+     return new Promise(function(resolve, reject) {
 
-      let runtimeFactory = new RuntimeFactory();
+       let runtimeFactory = new RuntimeFactory();
 
-      let catalogue = runtimeFactory.createRuntimeCatalogue();
-      let domain = config.domain;
+       let domain = config.domain;
 
-      window.catalogue = catalogue;
+       let catalogue = runtimeFactory.createRuntimeCatalogue();
 
-      catalogue.getRuntimeDescriptor(runtimeURL)
-      .then(function(descriptor) {
+       catalogue.getRuntimeDescriptor(runtimeURL).then(function(descriptor) {
 
-        eval(descriptor.sourcePackage.sourceCode);
+         // if (descriptor.sourcePackageURL === '/sourcePackage') {
+         //   return descriptor.sourcePackage;
+         // } else {
+         //   return catalogue.getSourcePackageFromURL(descriptor.sourcePackageURL);
+         // }
 
-        let runtime = new RuntimeUA(runtimeFactory, domain);
-        window.runtime = runtime;
+         return catalogue.getSourceCodeFromDescriptor(descriptor);
+       })
+       .then(function(sourceCode) {
+
+         window.eval(sourceCode);
+
+         let runtime = new Runtime(runtimeFactory, domain);
+         window.runtime = runtime;
 
         minibus.addListener('core:loadHyperty', function(msg) {
           console.log('Load Hyperty: ', msg);
