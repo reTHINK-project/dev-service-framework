@@ -1,6 +1,4 @@
-import {
-    divideURL
-} from '../utils/utils';
+import { divideURL } from '../utils/utils';
 import RuntimeCatalogue from './RuntimeCatalogue';
 import persistenceManager from '../persistence/PersistenceManager';
 
