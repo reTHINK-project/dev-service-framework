@@ -104,6 +104,9 @@ class Syncher {
  create(schema, observers, initialData) {
    let _this = this;
 
+   initialData.reporter = _this._owner;
+   initialData.schema = schema;
+
    let requestMsg = {
      type: 'create', from: _this._owner, to: _this._subURL,
      body: { schema: schema, value: initialData, authorise: observers }
