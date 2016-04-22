@@ -18,7 +18,7 @@ Message sent by the Identity Module function to Identity Management (IDP Proxy) 
 "id" : "1"
 "type" : "EXECUTE",
 "from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/id-module",
-"to" : "domain://<idp-domain>",
+"to" : "domain-idp://<idp-domain>",
 "body" : { "resource" : "/identity/<user identifier>", "method" : "login" , "params" : { ["scope" : "<login-scope>"] }
 ```
 
@@ -27,7 +27,7 @@ Response Message sent back from the Identity Management (IDP Proxy).
 ```
 "id" : "<1>"
 "type" : "RESPONSE",
-"from" : "domain://<idp-domain>",
+"from" : "domain-idp://<idp-domain>",
 "to" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/id-module",
 "body" : { "code": 200, "value": "<JWT Token>" }
 ```
@@ -41,7 +41,7 @@ Message sent by the Identity Module function to Identity Management (IDP Proxy) 
 "id" : "2"
 "type" : "EXECUTE",
 "from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/id-module",
-"to" : "domain://<idp-domain>",
+"to" : "domain-idp://<idp-domain>",
 "body" : { "resource" : "/identity/<user identifier>", "method" : "generateAssertion" , "params" : { ["contents" : "<contents-value>", "origin" : "<origin-value>", "usernameHint" : "<usernameHint-value>"] }
 ```
 
@@ -50,7 +50,7 @@ Response Message sent back from the Identity Management (IDP Proxy).
 ```
 "id" : "<2>"
 "type" : "RESPONSE",
-"from" : "domain://<idp-domain>",
+"from" : "domain-idp://<idp-domain>",
 "to" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/id-module",
 "body" : { "code": 200, "value" : <JWT Token> }
 ```
@@ -63,7 +63,7 @@ Message sent by the Identity Module function to Identity Management (IDP Proxy) 
 "id" : "3"
 "type" : "EXECUTE",
 "from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/id-module",
-"to" : "domain://<idp-domain>",
+"to" : "domain-idp://<idp-domain>",
 "body" : { "resource" : "/identity/<user identifier>", "method" : "validateAssertion" , "params" : { ["assertion" : "<assertion-value>", "origin" : "<origin-value>"] }
 ```
 
@@ -72,7 +72,7 @@ Response Message sent back from the Identity Management (IDP Proxy).
 ```
 "id" : "<3>"
 "type" : "RESPONSE",
-"from" : "domain://<idp-domain>",
+"from" : "domain-idp://<idp-domain>",
 "to" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/id-module",
 "body" : { "code": 200, "value" : "<boolean?>" }
 ```
