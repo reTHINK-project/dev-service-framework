@@ -78,11 +78,15 @@ class RuntimeCatalogueLocal extends RuntimeCatalogue {
             _this[resource] = descriptor;
           }
 
+          if (!_this[resource].hasOwnProperty(identity)) {
+            reject('The ' + identity + ' is not available on ' + resource);
+          }
+
           let result = _this[resource][identity];
 
           if (result.ERROR) {
-              // TODO handle error properly
-              reject(result);
+            // TODO handle error properly
+            reject(result);
           } else {
             // FIXME hotfix for unparsed arrays (e.g. hypertyType), will be fixed in Catalogue 1.1.0
             for (let key in result) {
@@ -95,6 +99,7 @@ class RuntimeCatalogueLocal extends RuntimeCatalogue {
 
             // console.log('creating descriptor based on: ', result);
             let descriptor = createFunc(_this, result);
+
             // persistenceManager.set(descriptorURL, descriptor.version, result);
             // console.log('created descriptor object:', hyperty);
             resolve(descriptor);
@@ -108,6 +113,30 @@ class RuntimeCatalogueLocal extends RuntimeCatalogue {
     /**
      * Get StubDescriptor
      * @param stubURL - e.g. mydomain.com/.well-known/protostub/MyProtostub
+     * @returns {Promise}
+     */
+    getStubDescriptor(stubURL) {
+      let _this = this;
+
+      let dividedURL = divideURL(stubURL);
+      let type = dividedURL.type;
+      let domain = dividedURL.domain;
+      let protostub = dividedURL.identity;
+
+      if (!protostub) {
+        protostub = 'default';
+      } else {
+        protostub = protostub.substring(protostub.lastIndexOf('/') + 1);
+      }
+
+      stubURL = type + '://' + domain + '/.well-known/protostub/' + protostub;
+
+      return _this.getDescriptor(stubURL, _this._createStub);
+    }
+
+    /**
+     * Get IDPProxyDescriptor
+     * @param idpProxyURL - e.g. mydomain.com/.well-known/idp-proxy/MyProxy
      * @returns {Promise}
      */
     getIdpProxyDescriptor(idpProxyURL) {
