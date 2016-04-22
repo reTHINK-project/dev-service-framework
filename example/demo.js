@@ -61,9 +61,9 @@ function runtimeInstalled() {
   let hyperty = 'hyperty-catalogue://' + domain + '/.well-known/hyperty/HypertyConnector';
 
   // Load First Hyperty
-  // runtimeLoader.requireHyperty(hyperty).then(hypertyDeployed).catch(function(reason) {
-  //   errorMessage(reason);
-  // });
+  runtimeLoader.requireHyperty(hyperty).then(hypertyDeployed).catch(function(reason) {
+    errorMessage(reason);
+  });
 
 }
 
