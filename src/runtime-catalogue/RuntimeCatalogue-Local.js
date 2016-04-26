@@ -140,49 +140,27 @@ class RuntimeCatalogueLocal extends RuntimeCatalogue {
     getIdpProxyDescriptor(idpProxyURL) {
       let _this = this;
 
-      return new Promise(function(resolve, reject) {
+      let dividedURL = divideURL(idpProxyURL);
+      let type = dividedURL.type;
+      let domain = dividedURL.domain;
+      let idpproxy = dividedURL.identity;
 
-        let dividedURL = divideURL(idpProxyURL);
-        let type = dividedURL.type;
-        let domain = dividedURL.domain;
-        let idpproxy = dividedURL.identity;
+      let originDividedURL = divideURL(_this.runtimeURL);
+      let originDomain = originDividedURL.domain;
 
-        let originDividedURL = divideURL(_this.runtimeURL);
-        let originDomain = originDividedURL.domain;
+      if (!domain) {
+        domain = idpProxyURL;
+      }
 
-        if (!domain) {
-          domain = idpProxyURL;
-        }
+      if (domain === originDomain || !idpproxy) {
+        idpproxy = 'default';
+      } else {
+        idpproxy = idpproxy.substring(idpproxy.lastIndexOf('/') + 1);
+      }
 
-        if (domain === originDomain || !idpproxy) {
-          idpproxy = 'default';
-        } else {
-          idpproxy = idpproxy.substring(idpproxy.lastIndexOf('/') + 1);
-        }
+      idpProxyURL = type + '://' + domain + '/.well-known/idp-proxy/' + idpproxy;
 
-        idpProxyURL = type + '://' + domain + '/.well-known/idp-proxy/' + idpproxy;
-
-        return _this.getDescriptor(idpProxyURL, _this._createIdpProxy).then(function(result) {
-
-          console.log('result: ', result);
-          resolve(result);
-
-        }).catch(function(reason) {
-
-          idpproxy = domain;
-          domain = originDomain;
-
-          console.log('Get an specific protostub for domain', domain, ' specific for: ', idpproxy);
-          idpProxyURL = 'hyperty-catalogue://' + domain + '/.well-known/idp-proxy/' + idpproxy;
-
-          return _this.getDescriptor(idpProxyURL, _this._createIdpProxy);
-        }).then(function(result) {
-          resolve(result);
-        }).catch(function(reason) {
-          reject(reason);
-        });
-
-      });
+      return _this.getDescriptor(idpProxyURL, _this._createIdpProxy);
 
     }
 

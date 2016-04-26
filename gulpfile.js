@@ -278,7 +278,7 @@ function transpile(opts) {
     })
     .bundle()
     .on('error', function(err) {
-      gutil.log(gutil.colors.red(err.message));
+      gutil.log(gutil.colors.red(err));
       this.emit('end');
     })
     .pipe(source(fileObject.base))
