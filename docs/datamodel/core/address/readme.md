@@ -10,10 +10,82 @@ The different types of URLs required by reTHINK are defined in the picture below
 
 ![reTHINK Address Model](Address-Model.png)
 
-*to be done:* check whether we need all URL components including:
-* username
-* passsword
+### Domain URL Type
 
+The Domain URL is used to identify a reTHINK Service Provider domain and, if required associated functional element.
+
+Usage examples:
+
+* to support messaging communication between Hyperty instances and Service Provider back-end Support Services eg to query Domain Registry for an Hyperty Instance
+* to support messaging communication between Core Runtime components and Service Provider back-end Support Services eg to request address allocation for a new Hyperty Instance
+* to support messaging communication between Core Runtime components and Service Provider back-end Support Services eg to request address allocation for a new Hyperty Instance
+
+It is proposed to use a new scheme e.g. "domain"
+
+    domain://<rethink-functional-element>.<service-provider-domain>/<functionality-identifier>
+
+where:
+
+**<rethink-functional-element>:** identifies reTHINK Architecture functionality being addressed including:
+
+  **msg-node** for Messaging Node functional element
+
+  **registry** for Domain Registry functional element
+
+**<functionality-identifier>:** identifies a specific functionality of a functional element. At this stage only applicable to [Messaging Nodes functionalities](../../../specs/msg-node/readme.md).
+
+**examples**
+
+    `domain://registry.hyperty.com`
+
+    `domain://msg-node.hyperty.com/hyperty-address-allocation`
+
+#### Business Role Domain URL Type
+
+    The Business Role Domain URL is an extension of the reTHINK Service Provider domain for specific reTHINK Business Role, and, if required, associated functional element.
+
+    Usage examples:
+
+    * to support messaging communication between Hyperty Core Runtime Functionalities and an IDP
+
+    It is proposed to use:
+
+        domain-<business-role>://<rethink-functional-element>.<service-provider-domain>/<functionality-identifier>
+
+    where  **<business-role>:** identifies a specific business role including:
+
+      **idp** for IDP Business role
+
+      **csp** for CSP Business role
+
+      **broker** for CSP Broker business role
+
+
+    **examples**
+
+        `domain-idp://google.com`
+
+
+### Global URL Type
+
+            The Global URL is used to identify reTHINK functionalities that are domain agnostic.
+
+            Usage examples:
+
+            * to support messaging communication between Hyperty Core Runtime Functionalities and the Global Registry
+
+            It is proposed to use:
+
+                global://<rethink-functional-element>
+
+            where  **<rethink-functional-element>:** identifies a global reTHINK functionality:
+
+              **registry** for reTHINK Global Registry functionalities
+
+
+            **examples**
+
+                `global://registry`
 
 ### User URL Type
 
@@ -101,13 +173,13 @@ Usage examples:
 
 It is proposed a new ""hyperty-catalogue" scheme:
 
-    hyperty-catalogue://<service-provider-domain>/version/<catalogue-object-identifier>
+    hyperty-catalogue://catalogue.<service-provider-domain>/.well-known/<object-type>/<catalogue-object-identifier>
 
 **example**
 
 In case version 1.0 Hyperty "wonder-hype" is provided by "hyperty-provider.com", it URL would be:
 
-    hyperty-catalogue://hyperty-provider.com/1/wonder-hype
+    hyperty-catalogue://catalogue.hyperty-provider.com/.well-known/hyperty/HelloWorldReporter
 
 
 ### Device Runtime Address
@@ -141,11 +213,10 @@ The Hyperty URL is used to identify [Hyperty Instance Data Objects](../hyperty-i
 Usage examples:
 
 * to support messaging communication among Hyperty instances eg to control a Video Conference setup
-* to query the Registry about an Hyperty Instance
 
 It is proposed to use a new scheme eg "hyperty"
 
-    hyperty://<registry-domain>/<hyperty-instance-identifier>
+    hyperty://<hyperty-domain>/<hyperty-instance-identifier>
 
 **open issue:** Should we include in the URL its timeout / expires or in the Registration message?
 

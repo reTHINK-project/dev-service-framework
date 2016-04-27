@@ -17,8 +17,8 @@ Message sent by the Identity Module function to Identity Management (IDP Proxy) 
 ```
 "id" : "1"
 "type" : "EXECUTE",
-"from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/id-module",
-"to" : "domain://<idp-domain>",
+"from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
+"to" : "domain-idp://<idp-domain>",
 "body" : { "resource" : "/identity/<user identifier>", "method" : "login" , "params" : { ["scope" : "<login-scope>"] }
 ```
 
@@ -27,8 +27,8 @@ Response Message sent back from the Identity Management (IDP Proxy).
 ```
 "id" : "<1>"
 "type" : "RESPONSE",
-"from" : "domain://<idp-domain>",
-"to" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/id-module",
+"from" : "domain-idp://<idp-domain>",
+"to" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/idm",
 "body" : { "code": 200, "value": "<JWT Token>" }
 ```
 
@@ -40,8 +40,8 @@ Message sent by the Identity Module function to Identity Management (IDP Proxy) 
 ```
 "id" : "2"
 "type" : "EXECUTE",
-"from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/id-module",
-"to" : "domain://<idp-domain>",
+"from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/idm",
+"to" : "domain-idp://<idp-domain>",
 "body" : { "resource" : "/identity/<user identifier>", "method" : "generateAssertion" , "params" : { ["contents" : "<contents-value>", "origin" : "<origin-value>", "usernameHint" : "<usernameHint-value>"] }
 ```
 
@@ -50,8 +50,8 @@ Response Message sent back from the Identity Management (IDP Proxy).
 ```
 "id" : "<2>"
 "type" : "RESPONSE",
-"from" : "domain://<idp-domain>",
-"to" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/id-module",
+"from" : "domain-idp://<idp-domain>",
+"to" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/idm",
 "body" : { "code": 200, "value" : <JWT Token> }
 ```
 
@@ -62,8 +62,8 @@ Message sent by the Identity Module function to Identity Management (IDP Proxy) 
 ```
 "id" : "3"
 "type" : "EXECUTE",
-"from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/id-module",
-"to" : "domain://<idp-domain>",
+"from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/idm",
+"to" : "domain-idp://<idp-domain>",
 "body" : { "resource" : "/identity/<user identifier>", "method" : "validateAssertion" , "params" : { ["assertion" : "<assertion-value>", "origin" : "<origin-value>"] }
 ```
 
@@ -72,7 +72,29 @@ Response Message sent back from the Identity Management (IDP Proxy).
 ```
 "id" : "<3>"
 "type" : "RESPONSE",
-"from" : "domain://<idp-domain>",
-"to" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/id-module",
+"from" : "domain-idp://<idp-domain>",
+"to" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/idm",
 "body" : { "code": 200, "value" : "<boolean?>" }
+```
+
+#### Hide / Unhide Identity Module admin page
+
+Message sent by the Identity Module function to Application Sandbox to unhide admin page.
+
+```
+"id" : "3"
+"type" : "EXECUTE",
+"from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/idm",
+"to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/<app-sandbox-identifier>",
+"body" : { "method" : "unhideAdminPage" }
+```
+
+Message sent by the Identity Module function to Application Sandbox to hide admin page.
+
+```
+"id" : "3"
+"type" : "EXECUTE",
+"from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/idm",
+"to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/<app-sandbox-identifier>",
+"body" : { "method" : "hideAdminPage" }
 ```

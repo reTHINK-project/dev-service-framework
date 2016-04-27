@@ -2,17 +2,35 @@
 
 ![Communication Data Object Model](Communication-Data-Object-Model.png)
 
-The Communication Data Model is used to model the reTHINK Communications. The Communication data model is handled by Messaging Services functionality and also by Communicator type Hyperties.
+The Communication Data Model is used to model the reTHINK Communications.
 
-Only The Connection objects are mandatory by using W3C standardized interfaces/classes including RTCICECandidate and RTCSessionDescription classes.
+**starting time:** when communication is opened the first time
 
-#### Communication Control Model
+**last modified:** last change in the communication like new participant added or last message sent
 
-The conventional Offer-Answer Communication Control model proposed by JSEP implies the usage of specific messages to handle the offer and response of communication using messages like Invite, Accept, Bye. This approach is quite mature but [constrains very much the use cases to be supported](http://blog.webrtc.is/2013/03/06/sdp-the-webrtc-boat-anchor/).
+**duration:** period of time between the first "OPEN" status and the last "CLOSED" status.
 
-Another approach is to model communication and connections as a resource tree model as defined above and peers use CRUD generic operations to be synchronised and control the communication eg Create Conversation Resource and create Conversation Participant to add a new peer joined with access control authorisation policies to handle who may join the conversation. In principle, this model is more open to innovation imposing less restrictions to add new features then the conventional one.
+**status:** status of the communication. See CommunicationStatus below
 
-The analysis of this pattern to support a Communication setup is done [here](data-synch-communication-model.md)
+**participants:** list of participants in the Communication (see below)
+
+**qos:** *to be provided*
+
+**resources:** list of ResourceTypes supported by the communication. See below
+
+**children = ["chatmessages"]:** definition of ChatMessages as a SyncObjectChildren of Communication (see below)
+
+#### CommunicationStatus
+
+**OPEN:** Hyperty Resources can be shared in the communication
+
+**PENDING:** Communication was created but no invited user has subscribed yet
+
+**CLOSED:** Hyperty Resources can be shared in the communication
+
+**PAUSED:** *skip?*
+
+**FAILED:** communication creation failed for some reason eg no subscription received
 
 #### Hyperty Resource
 

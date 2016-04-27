@@ -16,7 +16,11 @@ package Communication <<Rect>> {
 	class ChatMessages <<Children>> {
 		parent = "communication"
 		listener = "chatmessages"
-		type : string
+		type : ChatMessage
+	}
+
+	class ChatMessage <<SyncObjectChild>> {
+		message : string
 	}
 
 	enum CommunicationStatus {
@@ -39,11 +43,12 @@ package Communication <<Rect>> {
 
 	Communication -up-|> SyncDataObject.SyncObjectParent
 	ChatMessages -up-|> SyncDataObject.SyncObjectChildren
+	ChatMessage -up-|> SyncDataObject.SyncObjectChild
 	Communication .. CommunicationStatus
 	Communication .left. ChatMessages
+	ChatMessage .right. ChatMessages
 	Communication *.. Participant
 	Communication *.. CommunicationQuality
-	Communication *.. Message.Message
 	Participant .. ParticipantStatus
 	Participant ..> HypertyResource.HypertyResource
 	Participant ..> Identity.Identity

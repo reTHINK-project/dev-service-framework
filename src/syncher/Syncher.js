@@ -104,6 +104,9 @@ class Syncher {
  create(schema, observers, initialData) {
    let _this = this;
 
+   initialData.reporter = _this._owner;
+   initialData.schema = schema;
+
    let requestMsg = {
      type: 'create', from: _this._owner, to: _this._subURL,
      body: { schema: schema, value: initialData, authorise: observers }
@@ -196,7 +199,7 @@ class Syncher {
      url: resource,
      schema: msg.body.schema,
      value: msg.body.value,
-     identity: msg.body.idToken,
+     identity: msg.body.identity,
 
      ack: (type) => {
        let lType = 200;
@@ -229,7 +232,7 @@ class Syncher {
      let event = {
        type: msg.type,
        url: resource,
-       identity: msg.body.idToken,
+       identity: msg.body.identity,
 
        ack: (type) => {
          let lType = 200;

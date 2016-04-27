@@ -4,10 +4,8 @@
   "description": "Set of JavaScript factory modules for thr reTHINK base Data Models and Data Synchronization",
   "main": "dist/service-framework.js",
   "scripts": {
-    "init-setup": "npm init && npm install -g jspm karma-cli gulp-cli && npm install && jspm init && node setup.js",
+    "preinstall": "npm install -g karma-cli gulp-cli",
     "test": "karma start",
-    "preinstall": "npm install -g http-server",
-    "start": "http-server --cors -S -p 443 -C rethink-certificate.cert -K rethink-certificate.key",
     "build": "node scripts/transform.js"
   },
   "repository": {
@@ -57,7 +55,6 @@
     "jscs": "^1.13.0",
     "jsdoc": "^3.4.0",
     "jshint": "^2.7.0",
-    "jspm": "^0.16.10",
     "karma": "^0.13.10",
     "karma-browserify": "^4.4.0",
     "karma-chrome-launcher": "^0.2.1",
@@ -84,30 +81,6 @@
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.4.0",
     "yargs": "~3.27.0"
-  },
-  "jspm": {
-    "directories": {
-      "packages": "vendor"
-    },
-    "dependencies": {
-      "array.observe": "npm:array.observe@^0.0.1",
-      "babel-polyfill": "npm:babel-polyfill@^6.3.14",
-      "indexeddbshim": "npm:indexeddbshim@^2.2.1",
-      "json": "github:systemjs/plugin-json@^0.1.0",
-      "object.observe": "npm:object.observe@^0.2.6",
-      "ortc-over-rtc": "npm:ortc-over-rtc@^0.1.0",
-      "runtime-core": "github:rethink-project/dev-runtime-core@dev-0.4",
-      "universal-localstorage": "npm:universal-localstorage@^1.0.2",
-      "webrtc-adapter-test": "npm:webrtc-adapter-test@^0.2.5",
-      "webrtc-shim": "npm:webrtc-shim@^0.1.2"
-    },
-    "devDependencies": {
-      "babel": "npm:babel-core@^5.8.34",
-      "babel-runtime": "npm:babel-runtime@^5.8.34",
-      "core-js": "npm:core-js@^1.2.6",
-      "mutationobserver-shim": "npm:mutationobserver-shim@^0.3.1",
-      "tv4": "npm:tv4@^1.2.7"
-    }
   },
   "dependencies": {
     "mutationobserver-shim": "^0.3.1",
