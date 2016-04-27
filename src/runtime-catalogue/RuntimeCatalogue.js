@@ -232,6 +232,8 @@ class RuntimeCatalogue {
         console.log("creating dataSchema based on: ", rawSchema);
 
         let dataSchema;
+        console.log('1. createMessageDataObjectSchema: ', rawSchema["accessControlPolicy"]);
+        console.log('2. createMessageDataObjectSchema: ', rawSchema["scheme"]);
         if (rawSchema["accessControlPolicy"] && rawSchema["scheme"]) {
             dataSchema = _this._factory.createHypertyDataObjectSchema(
                 rawSchema["cguid"],
@@ -244,6 +246,7 @@ class RuntimeCatalogue {
                 rawSchema["scheme"]
             )
         } else {
+          console.log('3. createMessageDataObjectSchema: ', rawSchema);
             dataSchema = _this._factory.createMessageDataObjectSchema(
                 rawSchema["cguid"],
                 rawSchema["version"],
@@ -254,7 +257,6 @@ class RuntimeCatalogue {
             )
         }
 
-
         // optional fields
         dataSchema.signature = rawSchema["signature"];
 
@@ -263,6 +265,13 @@ class RuntimeCatalogue {
         if (sourcePackage) {
             // console.log("dataSchema has sourcePackage:", sourcePackage);
             dataSchema.sourcePackage = _this._createSourcePackage(_this, sourcePackage);
+
+            try {
+              dataSchema.sourcePackage.sourceCode = JSON.parse(dataSchema.sourcePackage.sourceCode);
+            } catch (e) {
+              console.log('DataSchema Source code is already parsed');
+            }
+
         }
 
         //console.log("created dataSchema descriptor object:", dataSchema);
