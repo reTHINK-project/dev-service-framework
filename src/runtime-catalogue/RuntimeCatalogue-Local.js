@@ -1,11 +1,10 @@
 import { divideURL } from '../utils/utils';
 import RuntimeCatalogue from './RuntimeCatalogue';
-import persistenceManager from '../persistence/PersistenceManager';
 
 class RuntimeCatalogueLocal extends RuntimeCatalogue {
 
     constructor(runtimeFactory) {
-        super(runtimeFactory);
+      super(runtimeFactory);
     }
 
     /**
@@ -16,7 +15,6 @@ class RuntimeCatalogueLocal extends RuntimeCatalogue {
      */
     getDescriptor(descriptorURL, createFunc) {
       let _this = this;
-      // console.log("getDescriptor", descriptorURL);
 
       return new Promise(function(resolve, reject) {
 
@@ -137,32 +135,59 @@ class RuntimeCatalogueLocal extends RuntimeCatalogue {
      * @param idpProxyURL - e.g. mydomain.com/.well-known/idp-proxy/MyProxy
      * @returns {Promise}
      */
-    getIdpProxyDescriptor(idpProxyURL) {
-      let _this = this;
+     /**
+      * Get IDPProxyDescriptor
+      * @param idpProxyURL - e.g. mydomain.com/.well-known/idp-proxy/MyProxy
+      * @returns {Promise}
+      */
+     getIdpProxyDescriptor(idpProxyURL) {
+       let _this = this;
 
-      let dividedURL = divideURL(idpProxyURL);
-      let type = dividedURL.type;
-      let domain = dividedURL.domain;
-      let idpproxy = dividedURL.identity;
+       return new Promise(function(resolve, reject) {
 
-      let originDividedURL = divideURL(_this.runtimeURL);
-      let originDomain = originDividedURL.domain;
+         let dividedURL = divideURL(idpProxyURL);
+         let type = dividedURL.type;
+         let domain = dividedURL.domain;
+         let idpproxy = dividedURL.identity;
 
-      if (!domain) {
-        domain = idpProxyURL;
-      }
+         let originDividedURL = divideURL(_this.runtimeURL);
+         let originDomain = originDividedURL.domain;
 
-      if (domain === originDomain || !idpproxy) {
-        idpproxy = 'default';
-      } else {
-        idpproxy = idpproxy.substring(idpproxy.lastIndexOf('/') + 1);
-      }
+         if (!domain) {
+           domain = idpProxyURL;
+         }
 
-      idpProxyURL = type + '://' + domain + '/.well-known/idp-proxy/' + idpproxy;
+         if (domain === originDomain || !idpproxy) {
+           idpproxy = 'default';
+         } else {
+           idpproxy = idpproxy.substring(idpproxy.lastIndexOf('/') + 1);
+         }
 
-      return _this.getDescriptor(idpProxyURL, _this._createIdpProxy);
+         idpProxyURL = type + '://' + domain + '/.well-known/idp-proxy/' + idpproxy;
 
-    }
+         return _this.getDescriptor(idpProxyURL, _this._createIdpProxy).then(function(result) {
+
+           console.log('result: ', result);
+           resolve(result);
+
+         }).catch(function() {
+
+           idpproxy = domain;
+           domain = originDomain;
+
+           console.log('Get an specific protostub for domain', domain, ' specific for: ', idpproxy);
+           idpProxyURL = 'hyperty-catalogue://' + domain + '/.well-known/idp-proxy/' + idpproxy;
+
+           return _this.getDescriptor(idpProxyURL, _this._createIdpProxy);
+         }).then(function(result) {
+           resolve(result);
+         }).catch(function(reason) {
+           reject(reason);
+         });
+
+       });
+
+     }
 
     //
     // set runtimeURL(runtimeURL) {
