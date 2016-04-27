@@ -143,6 +143,8 @@ class RuntimeCatalogueLocal extends RuntimeCatalogue {
      getIdpProxyDescriptor(idpProxyURL) {
        let _this = this;
 
+       console.info('GET IDPProxy Descriptor: ', idpProxyURL);
+
        return new Promise(function(resolve, reject) {
 
          let dividedURL = divideURL(idpProxyURL);
