@@ -199,7 +199,7 @@ class Syncher {
      url: resource,
      schema: msg.body.schema,
      value: msg.body.value,
-     identity: msg.body.idToken,
+     identity: msg.body.identity,
 
      ack: (type) => {
        let lType = 200;
@@ -232,7 +232,7 @@ class Syncher {
      let event = {
        type: msg.type,
        url: resource,
-       identity: msg.body.idToken,
+       identity: msg.body.identity,
 
        ack: (type) => {
          let lType = 200;
