@@ -45,7 +45,7 @@ class DataObject {
   _childrenListeners: [MsgListener]
 
   ----event handlers----
-  _onAddChildrenHandler: (event) => void
+  _onAddChildHandler: (event) => void
   */
 
   /**
@@ -83,7 +83,7 @@ class DataObject {
           if (msg.from !== this._owner) {
             console.log('DataObject-Children-RCV: ', msg);
             switch (msg.type) {
-              case 'create': _this._onChildrenCreate(msg); break;
+              case 'create': _this._onChildCreate(msg); break;
               case 'delete': console.log(msg); break;
               default: _this._changeChildren(msg); break;
             }
@@ -167,7 +167,7 @@ class DataObject {
    * @param {JSON} initialData - Initial data of the child
    * @return {Promise<DataObjectChild>} - Return Promise to a new Children.
    */
-  addChildren(resource, initialData) {
+  addChild(resource, initialData) {
     let _this = this;
 
     //create new child unique ID, based on hypertyURL
@@ -200,11 +200,11 @@ class DataObject {
    * Setup the callback to process create and delete childrens
    * @param {function(event: MsgEvent)} callback
    */
-  onAddChildren(callback) {
+  onAddChild(callback) {
     this._onAddChildrenHandler = callback;
   }
 
-  _onChildrenCreate(msg) {
+  _onChildCreate(msg) {
     let _this = this;
     let msgChildId = msg.body.resource;
 
@@ -225,7 +225,7 @@ class DataObject {
       url: msg.to,
       value: msg.body.value,
       childId: msgChildId,
-      identity: msg.body.idToken,
+      identity: msg.body.identity,
     };
 
     if (_this._onAddChildrenHandler) {
