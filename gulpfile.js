@@ -274,7 +274,10 @@ function transpile(opts) {
     .transform(babel, {
       compact: true,
       presets: ['es2015', 'stage-0'],
-      plugins: ['add-module-exports', 'transform-inline-environment-variables']
+      plugins: ['add-module-exports', 'babel-polyfill',
+      'transform-inline-environment-variables',
+      'transform-runtime',
+      'transform-regenerator']
     })
     .bundle()
     .on('error', function(err) {
