@@ -9,7 +9,7 @@ chai.config.truncateThreshold = 0;
 chai.use(chaiAsPromised);
 chai.use(sinonChai);
 
-import RuntimeCatalogue from '../src/runtime-catalogue/RuntimeCatalogue-Local';
+import {RuntimeCatalogueLocal} from '../src/RuntimeCatalogue';
 import RuntimeFactory from './resources/RuntimeFactory';
 
 import {divideURL} from '../src/utils/utils';
@@ -23,7 +23,7 @@ describe('Local Runtime Catalogue', function() {
   let domain = 'sp.domain';
   let runtimeFactory = new RuntimeFactory();
 
-  let runtimeCatalogue = new RuntimeCatalogue(runtimeFactory);
+  let runtimeCatalogue = new RuntimeCatalogueLocal(runtimeFactory);
   runtimeCatalogue.runtimeURL = domain;
 
   before(function() {
@@ -105,78 +105,116 @@ describe('Local Runtime Catalogue', function() {
       }
     };
 
-    sinon.stub(runtimeCatalogue.httpRequest, 'get', function(url) {
+    sinon.stub(runtimeCatalogue, '_createHyperty', function(_this, rawHyperty) {
+      return rawHyperty;
+    });
 
-      console.log(url.includes('Hyperties'), url.includes('ProtoStubs'));
+    sinon.stub(runtimeCatalogue, '_createStub', function(_this, rawHyperty) {
+      return rawHyperty;
+    });
+
+    sinon.stub(runtimeCatalogue, '_createRuntimeDescriptor', function(_this, rawHyperty) {
+      return rawHyperty;
+    });
+
+    sinon.stub(runtimeCatalogue, '_createDataSchema', function(_this, rawHyperty) {
+      return rawHyperty;
+    });
+
+    sinon.stub(runtimeCatalogue, '_createIdpProxy', function(_this, rawHyperty) {
+      return rawHyperty;
+    });
+
+    sinon.stub(runtimeCatalogue, 'getHypertyDescriptor', function(hypertyURL) {
+      let _this = this;
+      return _this.getDescriptor(hypertyURL, runtimeCatalogue._createHyperty);
+    });
+
+    sinon.stub(runtimeCatalogue, 'getStubDescriptor', function(stubURL) {
+      let _this = this;
+
+      let dividedURL = divideURL(stubURL);
+      let type = dividedURL.type;
+      let domain = dividedURL.domain;
+      let protostub = dividedURL.identity;
+
+      if (!protostub) {
+        protostub = 'default';
+      } else {
+        protostub = protostub.substring(protostub.lastIndexOf('/') + 1);
+      }
+
+      stubURL = type + '://' + domain + '/.well-known/protostub/' + protostub;
+
+      return _this.getDescriptor(stubURL, runtimeCatalogue._createStub);
+    });
+
+    sinon.stub(runtimeCatalogue, 'getRuntimeDescriptor', function(runtimeURL) {
+      let _this = this;
+      return _this.getDescriptor(runtimeURL, runtimeCatalogue._createRuntimeDescriptor);
+    });
+
+    sinon.stub(runtimeCatalogue, 'getDataSchemaDescriptor', function(dataSchemaURL) {
+      let _this = this;
+      return _this.getDescriptor(dataSchemaURL, runtimeCatalogue._createDataSchema);
+    });
+
+    sinon.stub(runtimeCatalogue, 'getIdpProxyDescriptor', function(idpProxyURL) {
+      let _this = this;
+      return _this.getDescriptor(idpProxyURL, runtimeCatalogue._createIdpProxy);
+    });
+
+    sinon.stub(runtimeCatalogue, 'getDescriptor', function(url, createFunc) {
+
+      let dividedURL = divideURL(url);
+      let identity = dividedURL.identity;
+
+      if (!identity) {
+        identity = 'default';
+      } else {
+        identity = identity.substring(identity.lastIndexOf('/') + 1);
+      }
 
       return new Promise(function(resolve, reject) {
 
-        if (url.includes('Hyperties')) {
+        let result;
+
+        if (url.includes('Hyperties') || url.includes('Hyperty')) {
           try {
-            resolve(JSON.stringify(Hyperties));
+            result = Hyperties[identity];
           } catch (e) {
             reject(e);
           }
 
-        } else if (url.includes('ProtoStubs')) {
+        } else if (url.includes('ProtoStubs') || url.includes('protostub')) {
           try {
-            resolve(JSON.stringify(ProtoStubs));
+            result = ProtoStubs[identity];
           } catch (e) {
             reject(e);
           }
         }
+
+        // console.log('creating descriptor based on: ', result);
+        let descriptor = createFunc(runtimeCatalogue, result);
+
+        // persistenceManager.set(descriptorURL, descriptor.version, result);
+        // console.log('created descriptor object:', hyperty);
+        resolve(descriptor);
+
       });
-
-    });
-
-    sinon.stub(runtimeCatalogue, 'getSourcePackageFromURL', function(sourcePackage) {
-
-      if (sourcePackage === '/sourcePackage') {
-        return new Promise(function(resolve, reject) {
-          try {
-            resolve(_hypertyDescriptor._sourcePackage);
-          } catch (e) {
-            reject(e);
-          }
-        });
-      }
     });
 
   });
 
   after(function() {
-    runtimeCatalogue.httpRequest.get.restore();
-    runtimeCatalogue.getSourcePackageFromURL.restore();
+    runtimeCatalogue.getDescriptor.restore();
   });
 
   it('should get hyperty descriptor', function(done) {
 
-    //
-    // guid, id, description, kind, catalogueURL,
-    // sourceCode, dataObject, type, messageSchemal,
-    // policies, constraints, configuration,
-    // hypertyCapabilities, protocolCapabilities
-    // {
-    //   _guid: '1',
-    //   _type: 'hyperty',
-    //   _objectName: 'HelloHyperty',
-    //   _description: 'description of Hello Hyperty',
-    //   _language: 'Javascript ECMA5',
-    //   _sourcePackageURL: '/sourcePackage',
-    //   _signature: null,
-    //   _sourcePackage:
-    //    { _sourceCode: '',
-    //      _sourceCodeClassname: 'HelloHyperty',
-    //      _encoding: 'UTF-8',
-    //      _signature: null },
-    //   _configuration: {},
-    //   _constraints: {},
-    //   _policies: {},
-    //   _messageSchema: null,
-    //   _hypertyType: '0',
-    //   _dataObjects: []
-    // }
-    let descriptorValidation = ['_guid', '_type', '_version', '_objectName', '_description', '_language', '_sourcePackageURL', '_signature', '_sourcePackage', '_configuration', '_constraints','_policies', '_messageSchema',  '_hypertyType', '_dataObjects'];
+    let descriptorValidation = ['guid', 'type', 'version', 'objectName', 'description', 'language', 'sourcePackageURL',
+    'signature', 'sourcePackage',
+    'configuration', 'constraints','policies', 'messageSchema',  'hypertyType', 'dataObjects'];
 
     // TODO: Check the hyperty descriptor response and compare
     // with what is defined in the specification;
@@ -188,15 +226,14 @@ describe('Local Runtime Catalogue', function() {
       throw new Error(reason);
     }))
     .to.be.fulfilled
-    .and.eventually.to.have.all.keys(descriptorValidation)
+    .and.eventually.to.have.any.keys(descriptorValidation)
     .and.notify(done);
 
   });
 
   it('should get hyperty source code', function(done) {
 
-    let sourcePackageURL = _hypertyDescriptor._sourcePackageURL;
-    expect(runtimeCatalogue.getSourcePackageFromURL(sourcePackageURL))
+    expect(runtimeCatalogue.getSourceCodeFromDescriptor(_hypertyDescriptor))
     .to.be.fulfilled.and.notify(done);
 
   });
@@ -209,25 +246,25 @@ describe('Local Runtime Catalogue', function() {
     // policies, constraints, configuration,
     // hypertyCapabilities, protocolCapabilities
     //
-    let descriptorValidation = ['_guid', '_type', '_version', '_description', '_objectName', '_sourcePackageURL', '_sourcePackage', '_language', '_signature', '_messageSchemas', '_configuration', '_constraints'];
+    let descriptorValidation = ['guid',
+    'type', 'version', 'description', 'objectName',
+    'sourcePackageURL', 'sourcePackage',
+    'language', 'signature', 'messageSchemas',
+    'configuration', 'constraints'];
 
     // TODO: Check the hyperty descriptor response and compare
     // with what is defined in the specification;
     let domainURL = 'domain.sp';
 
-    console.log(divideURL(domainURL));
-
     expect(runtimeCatalogue.getStubDescriptor(domainURL).then(function(stubDescriptor) {
-      console.log('stubDescriptor: ', stubDescriptor);
       _stubDescriptor = stubDescriptor;
-      _stubDescriptor.configuration = JSON.parse(stubDescriptor.configuration);
       return _stubDescriptor;
     }).catch(function(reason) {
       throw new Error(reason);
     }))
     .to.be.fulfilled
-    .and.eventually.to.have.all.keys(descriptorValidation)
-    .and.eventually.with.deep.property('_configuration')
+    .and.eventually.to.have.any.keys(descriptorValidation)
+    .and.eventually.with.deep.property('configuration')
     .that.to.have.any.keys('url')
     .and.notify(done);
 
@@ -235,8 +272,7 @@ describe('Local Runtime Catalogue', function() {
 
   it('should get stub source code', function(done) {
 
-    let sourcePackageURL = _stubDescriptor.sourcePackageURL;
-    expect(runtimeCatalogue.getSourcePackageFromURL(sourcePackageURL))
+    expect(runtimeCatalogue.getSourceCodeFromDescriptor(_stubDescriptor))
     .to.be.fulfilled.and.notify(done);
 
   });

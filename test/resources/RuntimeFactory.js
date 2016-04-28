@@ -1,11 +1,7 @@
+import Request from './Request';
+import {RuntimeCatalogueLocal, RuntimeCatalogue} from '../../src/RuntimeCatalogue';
+
 class RuntimeFactory {
-
-  get messageBus() {
-  }
-
-  set messageBus(messageBus) {
-    this._messageBus = messageBus;
-  }
 
   createSandbox() {
     return {};
@@ -16,15 +12,22 @@ class RuntimeFactory {
   }
 
   createHttpRequest() {
-    return {
-      post: function() {},
+    let request = new Request();
+    return request;
+  }
 
-      get: function() {},
+  // TODO optimize the parameter was passed to inside the RuntimeCatalogue
+  createRuntimeCatalogue() {
 
-      put: function() {},
-
-      delete: function() {}
+    let _this = this;
+    let factory = {
+      createHttpRequest: function() {
+        return _this.createHttpRequest();
+      }
     };
+
+    return new RuntimeCatalogueLocal(factory);
+
   }
 
   removeSandbox() {
