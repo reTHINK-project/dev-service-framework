@@ -28,7 +28,7 @@ Response Message sent back from the Identity Management (IDP Proxy).
 "id" : "<1>"
 "type" : "RESPONSE",
 "from" : "domain-idp://<idp-domain>",
-"to" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/idm",
+"to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
 "body" : { "code": 200, "value": "<JWT Token>" }
 ```
 
@@ -40,7 +40,7 @@ Message sent by the Identity Module function to Identity Management (IDP Proxy) 
 ```
 "id" : "2"
 "type" : "EXECUTE",
-"from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/idm",
+"from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
 "to" : "domain-idp://<idp-domain>",
 "body" : { "resource" : "/identity/<user identifier>", "method" : "generateAssertion" , "params" : { ["contents" : "<contents-value>", "origin" : "<origin-value>", "usernameHint" : "<usernameHint-value>"] }
 ```
@@ -51,7 +51,7 @@ Response Message sent back from the Identity Management (IDP Proxy).
 "id" : "<2>"
 "type" : "RESPONSE",
 "from" : "domain-idp://<idp-domain>",
-"to" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/idm",
+"to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
 "body" : { "code": 200, "value" : <JWT Token> }
 ```
 
@@ -62,7 +62,7 @@ Message sent by the Identity Module function to Identity Management (IDP Proxy) 
 ```
 "id" : "3"
 "type" : "EXECUTE",
-"from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/idm",
+"from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
 "to" : "domain-idp://<idp-domain>",
 "body" : { "resource" : "/identity/<user identifier>", "method" : "validateAssertion" , "params" : { ["assertion" : "<assertion-value>", "origin" : "<origin-value>"] }
 ```
@@ -73,7 +73,7 @@ Response Message sent back from the Identity Management (IDP Proxy).
 "id" : "<3>"
 "type" : "RESPONSE",
 "from" : "domain-idp://<idp-domain>",
-"to" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/idm",
+"to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
 "body" : { "code": 200, "value" : "<boolean?>" }
 ```
 
@@ -84,8 +84,8 @@ Message sent by the Identity Module function to Application Sandbox to unhide ad
 ```
 "id" : "3"
 "type" : "EXECUTE",
-"from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/idm",
-"to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/<app-sandbox-identifier>",
+"from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
+"to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/gui-manager",
 "body" : { "method" : "unhideAdminPage" }
 ```
 
@@ -94,7 +94,7 @@ Message sent by the Identity Module function to Application Sandbox to hide admi
 ```
 "id" : "3"
 "type" : "EXECUTE",
-"from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/idm",
-"to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/<app-sandbox-identifier>",
+"from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
+"to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/gui-manager",
 "body" : { "method" : "hideAdminPage" }
 ```
