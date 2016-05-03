@@ -9,17 +9,13 @@ package Context <<Rect>> {
 		time?: date
 		units?: ContextUnit
 		version?: integer
-		value: ContextValueList
+		value: ContextValue[]
 		tag?: string
 	}
 	note top : compliant with https://tools.ietf.org/html/draft-jennings-core-senml-01
 
 
 	class ContextUnit {
-
-	}
-
-	class ContextValueList {
 
 	}
 
@@ -40,13 +36,12 @@ package Context <<Rect>> {
 	class ProcessedContextValue {
 	}
 
-	Context *-- "1" ContextValueList
+	Context *-- "1..*" ContextValue
 
 	Context --> HypertyResource.HypertyResourceType
 	Context --> ContextUnit
 	ContextValue --> ContextUnit
 
-	ContextValueList *-- ContextValue
 
 	RawContextValue -up-|> ContextValue
 	ProcessedContextValue -up-|> ContextValue

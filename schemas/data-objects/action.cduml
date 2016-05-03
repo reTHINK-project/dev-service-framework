@@ -9,7 +9,7 @@ package Action <<Rect>> {
 		time?: date
 		units?: ActionUnit
 		version?: integer
-		value: ActionValueList
+		value: ActionValue[]
 		tag?: string
 	}
 
@@ -17,9 +17,6 @@ package Action <<Rect>> {
 
 	}
 
-	class ActionValueList {
-
-	}
 
 	class ActionValue {
 		name : string
@@ -33,13 +30,12 @@ package Action <<Rect>> {
 	}
 
 
-	Action *-- "1" ActionValueList
+	Action *-- "1..*" ActionValue
 
 	Action --> HypertyResource.HypertyResourceType
 	Action --> ActionUnit
 	ActionValue --> ActionUnit
 
-	ActionValueList *-- ActionValue
 
 }
 
