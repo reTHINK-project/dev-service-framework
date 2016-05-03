@@ -1,0 +1,46 @@
+@startuml "../../docs/datamodel/data-objects/action/action.png"
+
+package Action <<Rect>> {
+
+	class Action {
+		id: string
+		type : HypertyResource.HypertyResourceType
+		description ?: string
+		time?: date
+		units?: ActionUnit
+		version?: integer
+		value: ActionValueList
+		tag?: string
+	}
+
+	class ActionUnit {
+
+	}
+
+	class ActionValueList {
+
+	}
+
+	class ActionValue {
+		name : string
+		units : ActionUnit
+		value : object
+		sum
+		time ?: date
+		updateTime ?: date
+		expires ?: date
+		address ?: URL.HypertyRuntimeURL
+	}
+
+
+	Action *-- "1" ActionValueList
+
+	Action --> HypertyResource.HypertyResourceType
+	Action --> ActionUnit
+	ActionValue --> ActionUnit
+
+	ActionValueList *-- ActionValue
+
+}
+
+@enduml
