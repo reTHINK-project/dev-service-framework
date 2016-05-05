@@ -55,6 +55,8 @@ class RuntimeCatalogue {
                         }
                     });
                 }
+            }).catch(function(reason) {
+              reject(reason);
             });
         });
     }
@@ -76,6 +78,25 @@ class RuntimeCatalogue {
      */
     getStubDescriptor(stubURL) {
         let _this = this;
+
+        let dividedURL = divideURL(stubURL);
+        let type = dividedURL.type;
+        let domain = dividedURL.domain;
+        let protostub = dividedURL.identity;
+
+        if (!protostub) {
+          protostub = 'default';
+        } else {
+          protostub = protostub.substring(protostub.lastIndexOf('/') + 1);
+        }
+
+        let prefix = 'catalogue.'
+        if (stubURL.includes('catalogue')) {
+          prefix = '';
+        }
+
+        stubURL = type + '://' + prefix  + domain + '/.well-known/protocolstub/' + protostub;
+
         return _this.getDescriptor(stubURL, _this._createStub)
     }
 
@@ -105,8 +126,56 @@ class RuntimeCatalogue {
      * @returns {Promise}
      */
     getIdpProxyDescriptor(idpProxyURL) {
-        let _this = this;
-        return _this.getDescriptor(idpProxyURL, _this._createIdpProxy)
+      let _this = this;
+
+      return new Promise(function(resolve, reject) {
+
+        let dividedURL = divideURL(idpProxyURL);
+        let type = dividedURL.type;
+        let domain = dividedURL.domain;
+        let idpproxy = dividedURL.identity;
+
+        let originDividedURL = divideURL(_this.runtimeURL);
+        let originDomain = originDividedURL.domain;
+
+        if (!domain) {
+          domain = idpProxyURL;
+        }
+
+        if (domain === originDomain || !idpproxy) {
+          idpproxy = 'default';
+        } else {
+          idpproxy = idpproxy.substring(idpproxy.lastIndexOf('/') + 1);
+        }
+
+        let prefix = 'catalogue.'
+        if (idpProxyURL.includes('catalogue')) {
+          prefix = '';
+        }
+
+        idpProxyURL = type + '://' + prefix + domain + '/.well-known/idp-proxy/' + idpproxy;
+
+        return _this.getDescriptor(idpProxyURL, _this._createIdpProxy).then(function(result) {
+
+          console.log('result: ', result);
+          resolve(result);
+
+        }).catch(function() {
+
+          idpproxy = domain;
+          domain = originDomain;
+
+          console.log('Get an specific protostub for domain', domain, ' specific for: ', idpproxy);
+          idpProxyURL = type + '://' + prefix + domain + '/.well-known/idp-proxy/' + idpproxy;
+
+          return _this.getDescriptor(idpProxyURL, _this._createIdpProxy);
+        }).then(function(result) {
+          resolve(result);
+        }).catch(function(reason) {
+          reject(reason);
+        });
+
+      });
     }
 
     /**
