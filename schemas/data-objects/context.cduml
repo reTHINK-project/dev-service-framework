@@ -9,17 +9,12 @@ package Context <<Rect>> {
 		time?: date
 		units?: ContextUnit
 		version?: integer
-		value: ContextValueList
+		value: ContextValue[]
 		tag?: string
+		children ?=["actions"]
 	}
-	note top : compliant with https://tools.ietf.org/html/draft-jennings-core-senml-01
-
 
 	class ContextUnit {
-
-	}
-
-	class ContextValueList {
 
 	}
 
@@ -34,19 +29,40 @@ package Context <<Rect>> {
 		address ?: URL.HypertyRuntimeURL
 	}
 
+	class ContextActions <<Children>> {
+		parent = "context"
+		listener = "actions"
+		type : ContextAction
+	}
+
+	class ContextAction <<SyncObjectChild>> {
+		id: string
+		type : HypertyResource.HypertyResourceType
+		description ?: string
+		time?: date
+		units?: ContextUnit
+		version?: integer
+		value: ContextValue[]
+		tag?: string
+	}
+
 	class RawContextValue {
 	}
 
 	class ProcessedContextValue {
 	}
 
-	Context *-- "1" ContextValueList
+	Context *-- "1..*" ContextValue
 
+	Context -up-|> SyncDataObject.SyncObjectParent
+	ContextActions -up-|> SyncDataObject.SyncObjectChildren
+	ContextAction -up-|> SyncDataObject.SyncObjectChild
+	Context .left. ContextActions
+	ContextAction .. ContextActions
 	Context --> HypertyResource.HypertyResourceType
 	Context --> ContextUnit
 	ContextValue --> ContextUnit
 
-	ContextValueList *-- ContextValue
 
 	RawContextValue -up-|> ContextValue
 	ProcessedContextValue -up-|> ContextValue

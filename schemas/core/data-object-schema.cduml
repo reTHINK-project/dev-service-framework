@@ -3,63 +3,76 @@
 package RethinkCore <<Rect>> {
 
 	package CatalogueDataObject <<Rect>> {
-	
+
 		package DataObjectSchema <<Rect>> {
-	
+
 			class DataObjectSchema {
 			}
-	
+
 			class MessageDataObjectSchema {
 			}
-	
+
 			enum DataUrlScheme {
 				COMM
 				CONNECTION
 				CTXT
+				ACTION
 				IDENTITY
 			}
-	
-	
+
+
 			class HypertyDataObjectSchema {
-			  	scheme : DataUrlScheme
+		  	scheme : DataUrlScheme
 				accessControlPolicy : string
 			}
-	
+
+			HypertyDataObjectSchema .right. DataUrlScheme
+
 			class AccessControlPolicy {
 			}
-	
+
 			class CommunicationDataObjectSchema {
+			scheme = "comm"
 			}
-	
+
 			class ConnectionDataObjectSchema {
+			scheme = "connection"
 			}
-	
+
 			class IdentityDataObjectSchema {
+			scheme = "identity"
 			}
-	
+
 			class ContextDataObjectSchema {
+			scheme = "ctxt"
 			}
-	
+
+			class ActionDataObjectSchema {
+			scheme = "action"
+			}
+
 			DataObjectSchema .up.|> RethinkCore.CatalogueDataObject.CatalogueDataObject
-	
+
 			MessageDataObjectSchema .up.|> DataObjectSchema
-	
+
 			HypertyDataObjectSchema .up.|> DataObjectSchema
 			HypertyDataObjectSchema *.up. AccessControlPolicy
-	
+
 			CommunicationDataObjectSchema .up.|> HypertyDataObjectSchema
-	
+
 			ConnectionDataObjectSchema .up.|> HypertyDataObjectSchema
 			IdentityDataObjectSchema .up.|> HypertyDataObjectSchema
 			ContextDataObjectSchema .up.|> HypertyDataObjectSchema
-	
+			ActionDataObjectSchema .up.|> HypertyDataObjectSchema
+
 			CommunicationDataObjectSchema -down-> Communication.Communication : schema for
-	
+
 			ConnectionDataObjectSchema -down-> Connection.Connection : schema for
-	
+
 			IdentityDataObjectSchema -down-> Identity.Identity : schema for
-	
+
 			ContextDataObjectSchema -down-> Context.Context : schema for
+			ActionDataObjectSchema -down-> Action.Action : schema for
 		}
 	}
 }
