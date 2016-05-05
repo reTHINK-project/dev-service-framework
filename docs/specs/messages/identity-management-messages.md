@@ -98,3 +98,26 @@ Message sent by the Identity Module function to Application Sandbox to hide admi
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/gui-manager",
 "body" : { "method" : "hideAdminPage" }
 ```
+#### Authentication url to Application / Response url
+
+Message sent by the Identity Module to Application Sandbox, so the Application can load the authentication url received
+
+```
+"id" : "4"
+"type" : "execute",
+"from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
+"to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/gui-manager",
+"body" : { "method" : "openURL", "value" : "<authenticationURL>" }
+```
+
+Message sent by the Application Sandbox to Identity Module, with the redirect url from the user authetication.
+This message should not be the "response" type because the time the user needs to authenticate could lead to a timeout.
+
+```
+"id" : "5"
+"type" : "execute",
+"from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/gui-manager",
+"to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
+"body" : { "method" : "redirectURL", "value" : "<redirectURL>" }
+```
+
