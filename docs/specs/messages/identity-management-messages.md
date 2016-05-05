@@ -110,14 +110,12 @@ Message sent by the Identity Module to Application Sandbox, so the Application c
 "body" : { "method" : "openURL", "value" : "<authenticationURL>" }
 ```
 
-Message sent by the Application Sandbox to Identity Module, with the redirect url from the user authetication.
-This message should not be the "response" type because the time the user needs to authenticate could lead to a timeout.
+Authentication response.
 
 ```
-"id" : "5"
-"type" : "execute",
+"id" : "4"
+"type" : "response",
 "from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/gui-manager",
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
-"body" : { "method" : "redirectURL", "value" : "<redirectURL>" }
+"body" : { "type" : "200", "value" : "<authentication response>" }
 ```
-
