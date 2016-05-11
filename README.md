@@ -30,7 +30,7 @@ In case you want want to know more details about reTHINK, have a look [here](doc
 
 The first thing you need for the quick start, is to setup up your development environment and play around with some available tutorials that highlight the main reTHINK concepts. These Information can be found in the links below.  
 * [Quick Setup Guide](https://github.com/reTHINK-project/dev-hyperty-toolkit)
-* [Tutorials](https://github.com/reTHINK-project/dev-hyperty-toolkit/master/docs/tutorials/readme.md)
+* [Tutorials](https://github.com/reTHINK-project/dev-hyperty-toolkit/docs/tutorials/readme.md)
 
 
 #### <a id="how-to-install"></a>Installation as a NPM Module;
