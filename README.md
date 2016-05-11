@@ -3,6 +3,7 @@ reTHINK Service Framework
 
 -	[Overview](#rethink-framework-overview)
 -	[Getting Started](#quick-start)
+-	[Installation as a NPM Module](#installation-as-a-npm-module)
 -	[Contribute to reTHINK](#how-to-contribute)
 
 ### ReThink Framework Overview
@@ -31,20 +32,8 @@ The first thing you need for the quick start, is to setup up your development en
 * [Quick Setup Guide](https://github.com/reTHINK-project/dev-hyperty-toolkit)
 * [Tutorials](https://github.com/reTHINK-project/dev-hyperty-toolkit/master/docs/tutorials/readme.md)
 
-### How to contribute
 
-This section provides guidelines on how to contribute to reTHINK Service Framework. Contributions to other reTHINK components should follow its own guidelines:
-
--	[Hyperty Core Runtime Development guidelines](https://github.com/reTHINK-project/dev-runtime-core/blob/master/readme.md#developer-view);
--	[Hyperty Browser Runtime Development guidelines](https://github.com/reTHINK-project/dev-runtime-browser);
--	[Hyperty Nodejs Runtime Development guidelines](https://github.com/reTHINK-project/dev-runtime-nodejs);
--	[Development guidelines for new Hyperty Runtime Platforms](https://github.com/reTHINK-project/dev-runtime-core/blob/d3.2-working-docs/readme.md#browser-runtime);
--	[Vertx Message Node Development guidelines](https://github.com/reTHINK-project/dev-msg-node-vertx);
--	[Matrix Message Node Development guidelines](https://github.com/reTHINK-project/dev-msg-node-matrix);
--	[NodeJS Message Node Development guidelines](https://github.com/reTHINK-project/dev-msg-node-nodejs);
--	[Development guidelines for new Message Nodes](docs/manuals/development-of-protostubs-and-msg-nodes.md); -
-
-#### <a id="how-to-install"></a>How to install this repository like a NPM Module;
+#### <a id="how-to-install"></a>Installation as a NPM Module;
 
 How to include this repository in other software parts, like [dev-runtime-browser](https://github.com/reTHINK-project/dev-runtime-browser), [dev-runtime-node](https://github.com/reTHINK-project/dev-runtime-node) or [dev-runtime-core](https://github.com/reTHINK-project/dev-runtime-core);
 
@@ -89,3 +78,15 @@ console.log('MessageFactory: ', MessageFactory);
 
 If you have problems with the `npm install` service framework module, you should check [Github Help](https://help.github.com/articles/generating-ssh-keys/). and select the operation system you are using.
 
+### How to contribute
+
+This section provides guidelines on how to contribute to reTHINK Service Framework. Contributions to other reTHINK components should follow its own guidelines:
+
+-	[Hyperty Core Runtime Development guidelines](https://github.com/reTHINK-project/dev-runtime-core/blob/master/readme.md#developer-view);
+-	[Hyperty Browser Runtime Development guidelines](https://github.com/reTHINK-project/dev-runtime-browser);
+-	[Hyperty Nodejs Runtime Development guidelines](https://github.com/reTHINK-project/dev-runtime-nodejs);
+-	[Development guidelines for new Hyperty Runtime Platforms](https://github.com/reTHINK-project/dev-runtime-core/blob/d3.2-working-docs/readme.md#browser-runtime);
+-	[Vertx Message Node Development guidelines](https://github.com/reTHINK-project/dev-msg-node-vertx);
+-	[Matrix Message Node Development guidelines](https://github.com/reTHINK-project/dev-msg-node-matrix);
+-	[NodeJS Message Node Development guidelines](https://github.com/reTHINK-project/dev-msg-node-nodejs);
+-	[Development guidelines for new Message Nodes](docs/manuals/development-of-protostubs-and-msg-nodes.md); -
