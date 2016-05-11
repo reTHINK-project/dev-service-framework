@@ -9,7 +9,18 @@ reTHINK Service Framework
 
 reTHINK provides a Javascript framework to build and deliver Real Time Communication Microservices in end-user devices (browsers and standalone mobile apps) and in Network edge servers (NodeJS):
 
-* **Hyperty** is a the so called Javascript Microservice that communicates through P2P Data Synchronisation with mimimum usage of back-end services; A Hyperty must be deployed in a runtime (as mentioned in an end-user device or Network edge server).
+* **Hyperty** is similar to an Agent or a Bot that performs tasks on user's behalf, by communicating through P2P Data Synchronisation with other Hyperties. Some examples (see demos), are:
+
+  - the Hyperty Connector that uses WebRTC to manage video calls between users;
+
+  - the Group Chat Hyperty (name says it all);
+
+  - the myBracelet Hyperty, is a sensing Hyperty that encapsulates a Bracelet, by collecting and publishing data from it
+
+  - the myContext Hyperty is a Big Data Hyperty that uses data published by different sensing Hyperties (like the myBracelet Hyperty) to infer and calculate more meaningful Contextual data about the user.
+* **Protocol on-the-fly** is used by Hyperties to support seamless interoperability without the need of federation or standardisation of network protocols
+* Hyperties are **Trustful**. Hyperties are decoupled from the User Identity, which can be securely asserted by existing IDPs (Identity Provider), when communicating with other Hyperties.
+
 * **Protocol on-the-fly** is used by Hyperties to support seamless interoperability without federation or standardisation of network protocols;
 * Hyperties are **Trustful**. Hyperties are decoupled from the User Identity, which can be securely asserted by existing IDPs (Identity Provider), when communicating with other Hyperties.
 
