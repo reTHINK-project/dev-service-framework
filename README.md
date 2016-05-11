@@ -27,87 +27,9 @@ In case you want want to know more details about reTHINK, have a look [here](doc
 
 ### Quick Start
 
-The easiert way to set up your development environment for Hyperty development, follow the set up Guide on the dev-hyperty-toolkit. 
-Just a few couple of lines are required for the reTHINK Hello World.
-
-```
-// This is the Hello World Reporter who owns and reports changes done in the Hello Data Object.
-
-// The `hello()` function is used to create the Hello Data Object
-// and invite an Hello World Observer (`hypertyURL`):
-
-    syncher.create(_this._objectDescURL, [hypertyURL], hello).then(function(helloObjtReporter) {
-
-        helloObjtReporter.onSubscription(function(event) {
-
-        // All subscription requests are accepted
-
-        event.accept();
-      });
-
-      resolve(dataObjectReporter);
-
-    })
-    .catch(function(reason) {
-      console.error(reason);
-      reject(reason);
-    });
-
-  });
-}
-
-// This is the "Bye()" function that changes the Hello Object.
-
-helloObjtReporter.data.hello = "Bye!!";
-
-// This change  will be received by the Observer:
-```
-
-The Hello World Observer is the Hyperty that observes changes on the Hello Data Object performed by the Reporter:
-
-```
-// This is the Hello World Observer who subscribes the Hello Data Object to be synched with it.
-
- syncher.subscribe(_this._objectDescURL, event.url).then(function(helloObjtObserver) {
-
-// Any change done in the Hello Object by the Reporter will be received by the Observer:
-
-helloObjtObserver.onChange('*', function(event) {
-
-  // Object was changed, let's do something
-  console.log('Hello was changed: ', helloObjtObserver.data);
-
-});
-
-```
-
-You may find all the HelloWorld source code [here](/examples).
-
-In order to execute the HelloWorld Hyperties, ensure you have npm, jspm and gulp globaly available in your environment.
-
-The provisioning of Hyperties in the Catalogue is done by a gulp task (at this stage you have to make a change in the file to trigger the provisioning process):
-
-`gulp watch-hyperty --dest=resources`
-
-The DataSchema of the HelloWorld Data Object is already provisioned, but if you want to do it yourself, run:
-
-`gulp encode`
-
-and select "HelloWorldDataSchema"
-
-To avoid the installation of reTHINK back-end (Messaging Node and Domain Registry), you can change your hosts file to point to your `localhost` the DNS name of an existing reTHINK domain like `hybroker.rethink.ptinovacao.pt`. But you are free to [deploy your own back-end](Installation.md). Then start the Local Catalogue server and Web Application Server:
-
-`npm start`
-
-In case you have problems starting the HTTPS server pls ensure there is no other service using HTTPS port 443 (eg Skype). If the problem persists, execute:
-
-`http-server --cors -S -p 443 -C rethink-certificate.cert -K rethink-certificate.key`
-
-Now, open two windows with your favorite browser at `https://localhost/examples/`. In one select "Hello World Reporter" and in the other one select "Hello World Observer". Authorise the usage of your Google Identity (currently that's the only supported IDP). The HypertyURL  of deployed Hyperties will be displayed in each window. Copy the Observer HypertyURL and paste in the Reporter Window "Invite Hyperte:". Click say hello. You should see "Hello World!!" in the Observer Window together with your Identity Name. Click "Bye" in the Reporter Window. You should see "Byes!!" in the Observer window.
-
-Did you like it? Do you want to learn more about reTHINK and Hyperties? Have a look at [tutorials](docs/manuals).
-
-You may find more complex Hyperty WebRTC and Group Chat examples [here](/example).
+The first thing you need for the quick start, is to setup up your development environment and play around with some available tutorials that highlight the main reTHINK concepts. These Information can be found in the links below.  
+* [Quick Setup Guide](https://github.com/reTHINK-project/dev-hyperty-toolkit)
+* [Tutorials](https://github.com/reTHINK-project/dev-hyperty-toolkit/master/docs/tutorials/readme.md)
 
 ### How to contribute
 
