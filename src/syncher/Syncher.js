@@ -171,6 +171,25 @@ class Syncher {
    });
  }
 
+ read(objURL) {
+   let _this = this;
+
+   let readMsg = {
+     type: 'read', from: _this._owner, to: objURL
+   };
+
+   return new Promise((resolve, reject) => {
+     _this._bus.postMessage(readMsg, (reply) => {
+       console.log('read-response: ', reply);
+       if (reply.body.code === 200) {
+         resolve(reply.body.value);
+       } else {
+         reject(reply.body.desc);
+       }
+     });
+   });
+ }
+
  /**
   * Setup the callback to process create and delete events of remove Reporter objects.
   * This is releated to the messagens sent by create to the observers Hyperty array.

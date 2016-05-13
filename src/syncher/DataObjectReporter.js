@@ -35,6 +35,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
   ----event handlers----
   _onSubscriptionHandler: (event) => void
   _onResponseHandler: (event) => void
+  _onReadHandler: (event) => void
   */
 
   /**
@@ -59,9 +60,11 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     super._allocateListeners();
     let _this = this;
 
-    _this._responseListener = _this._bus.addListener(_this._url, (msg) => {
-      if (msg.type === 'response') {
-        _this._onResponse(msg);
+    _this._objectListener = _this._bus.addListener(_this._url, (msg) => {
+      console.log('DataObject-' + _this._url + '-RCV: ', msg);
+      switch (msg.type) {
+        case 'response': _this._onResponse(msg); break;
+        case 'read': _this._onRead(msg); break;
       }
     });
   }
@@ -70,7 +73,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     super._releaseListeners();
     let _this = this;
 
-    _this._responseListener.remove();
+    _this._objectListener.remove();
   }
 
   inviteObservers(observers) {
@@ -124,6 +127,14 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
    */
   onResponse(callback) {
     this._onResponseHandler = callback;
+  }
+
+  /**
+   * Setup the callback to process read notifications
+   * @param {function(event: MsgEvent)} callback
+   */
+  onRead(callback) {
+    this._onReadHandler = callback;
   }
 
   _onForward(msg) {
@@ -211,6 +222,34 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     if (_this._onResponseHandler) {
       console.log('RESPONSE-EVENT: ', event);
       _this._onResponseHandler(event);
+    }
+  }
+
+  _onRead(msg) {
+    let _this = this;
+
+    let event = {
+      type: msg.type,
+      url: msg.from,
+
+      accept: () => {
+        _this._bus.postMessage({
+          id: msg.id, type: 'response', from: msg.to, to: msg.from,
+          body: { code: 200, value: deepClone(_this.data) }
+        });
+      },
+
+      reject: (reason) => {
+        _this._bus.postMessage({
+          id: msg.id, type: 'response', from: msg.to, to: msg.from,
+          body: { code: 401, desc: reason }
+        });
+      }
+    };
+
+    if (_this._onReadHandler) {
+      console.log('READ-EVENT: ', event);
+      _this._onReadHandler(event);
     }
   }
 
