@@ -11,7 +11,7 @@ package Context <<Rect>> {
 		version?: integer
 		value: ContextValue[]
 		tag?: string
-		children ?=["actions"]
+		children ?=["actions","contexts"]
 	}
 
 	class ContextUnit {
@@ -29,13 +29,19 @@ package Context <<Rect>> {
 		address ?: URL.HypertyRuntimeURL
 	}
 
-	class ContextActions <<Children>> {
+	class Contexts <<Children>> {
 		parent = "context"
-		listener = "actions"
-		type : ContextAction
+		listener = "contexts"
+		type : Context
 	}
 
-	class ContextAction <<SyncObjectChild>> {
+	class Actions <<Children>> {
+		parent = "context"
+		listener = "actions"
+		type : Action
+	}
+
+	class Action <<SyncObjectChild>> {
 		id: string
 		type : HypertyResource.HypertyResourceType
 		description ?: string
@@ -55,10 +61,13 @@ package Context <<Rect>> {
 	Context *-- "1..*" ContextValue
 
 	Context -up-|> SyncDataObject.SyncObjectParent
-	ContextActions -up-|> SyncDataObject.SyncObjectChildren
-	ContextAction -up-|> SyncDataObject.SyncObjectChild
-	Context .left. ContextActions
-	ContextAction .. ContextActions
+	Contexts -up-|> SyncDataObject.SyncObjectChildren
+	Actions -up-|> SyncDataObject.SyncObjectChildren
+	Action -up-|> SyncDataObject.SyncObjectChild
+	Context -up-|> SyncDataObject.SyncObjectChild
+	Context .left. Actions
+	Context .left. Contexts
+	Action .. Actions
 	Context --> HypertyResource.HypertyResourceType
 	Context --> ContextUnit
 	ContextValue --> ContextUnit
