@@ -83,7 +83,7 @@ class HypertyDiscovery {
 
   /**
   * function to request about users registered in domain registry, and
-  * return the hyperty instance if found.
+  * return the last hyperty instance registered by the user.
   * @param  {email}              email
   * @param  {domain}            domain (Optional)
   * @return {Promise}          Promise
@@ -149,6 +149,49 @@ class HypertyDiscovery {
 
         console.log('===> hypertyDiscovery messageBundle: ', idPackage);
         resolve(idPackage);
+      });
+    });
+  }
+
+  /**
+  * function to request about users registered in domain registry, and
+  * return the all the hyperties registered by the user
+  * @param  {email}              email
+  * @param  {domain}            domain (Optional)
+  * @return {Promise}          Promise
+  */
+  discoverHypertiesPerUser(email, domain) {
+    let _this = this;
+    let activeDomain;
+
+    if (!domain) {
+      activeDomain = _this.domain;
+    } else {
+      activeDomain = domain;
+    }
+
+    let identityURL = 'user://' + email.substring(email.indexOf('@') + 1, email.length) + '/' + email.substring(0, email.indexOf('@'));
+
+    // message to query domain registry, asking for a user hyperty.
+    let message = {
+      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: identityURL}
+    };
+
+    console.log('Message discoverHypertiesPerUser: ', message, activeDomain, identityURL);
+
+    //console.log('message READ', message);
+    return new Promise(function(resolve, reject) {
+
+      _this.messageBus.postMessage(message, (reply) => {
+        console.log('discoverHypertiesPerUser reply', reply);
+
+        let value = reply.body.value;
+
+        if (!value) {
+          return reject('User Hyperty not found');
+        }
+
+        resolve(value);
       });
     });
   }
