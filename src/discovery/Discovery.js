@@ -102,9 +102,9 @@ class Discovery {
 
       _this.messageBus.postMessage(msg, (reply) => {
 
-        let response = reply.body.value;
+        let response = reply.body.code;
 
-        if (response) {
+        if (response === 200) {
           resolve(response);
         } else {
           reject('Error on deleting dataObject');
