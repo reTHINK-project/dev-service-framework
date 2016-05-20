@@ -79,6 +79,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
   inviteObservers(observers) {
     let _this = this;
 
+    //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onCreate
     let inviteMsg = {
       type: 'create', from: _this._syncher._owner, to: _this._syncher._subURL,
       body: { resource: _this._url, schema: _this._schema, value: _this._syncObj.data, authorise: observers }
@@ -93,6 +94,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
   delete() {
     let _this = this;
 
+    //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onDelete
     let deleteMsg = {
       type: 'delete', from: _this._owner, to: _this._syncher._subURL,
       body: { resource: _this._url }
@@ -137,6 +139,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     this._onReadHandler = callback;
   }
 
+  //FLOW-IN: message received from parent Syncher -> _onForward
   _onForward(msg) {
     let _this = this;
 
@@ -147,6 +150,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     }
   }
 
+  //FLOW-IN: message received from this -> _onForward: emitted by a remote Syncher -> subscribe
   _onSubscribe(msg) {
     let _this = this;
     let hypertyUrl = msg.body.from;
@@ -191,6 +195,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     }
   }
 
+  //FLOW-IN: message received from this -> _onForward: emitted by a remote DataObjectObserver -> unsubscribe
   _onUnSubscribe(msg) {
     let _this = this;
     let hypertyUrl = msg.body.from;
@@ -210,6 +215,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     }
   }
 
+  //FLOW-IN: message received from ReporterURL address: emited by a remote Syncher -> _onRemoteCreate -> event.ack
   _onResponse(msg) {
     let _this = this;
 
@@ -225,6 +231,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     }
   }
 
+  //FLOW-IN: message received from ReporterURL address: emited by a remote Syncher -> read
   _onRead(msg) {
     let _this = this;
 

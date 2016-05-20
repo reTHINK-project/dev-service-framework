@@ -97,6 +97,7 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
   unsubscribe() {
     let _this = this;
 
+    //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onLocalUnSubscribe
     let unSubscribeMsg = {
       type: 'unsubscribe', from: _this._owner, to: _this._syncher._subURL,
       body: { resource: _this._url }

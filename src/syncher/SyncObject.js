@@ -25,6 +25,8 @@ import {deepClone} from '../utils/utils.js';
 
 /**
  * @access private
+ * Main class that maintains a JSON object, and observes changes in this object, recursively.
+ * Internal objects and arrays are also observed.
  */
 class SyncObject {
   /* private

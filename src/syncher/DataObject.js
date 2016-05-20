@@ -175,6 +175,7 @@ class DataObject {
     let msgChildId = _this._owner + '#' + _this._childId;
     let msgChildPath = _this._url + '/children/' + resource;
 
+    //FLOW-OUT: this message will be sent directly to a resource child address: MessageBus
     let requestMsg = {
       type: 'create', from: _this._owner, to: msgChildPath,
       body: { resource: msgChildId, value: initialData }
@@ -204,6 +205,7 @@ class DataObject {
     this._onAddChildrenHandler = callback;
   }
 
+  //FLOW-IN: message received from a remote DataObject -> addChild
   _onChildCreate(msg) {
     let _this = this;
     let msgChildId = msg.body.resource;
@@ -213,6 +215,7 @@ class DataObject {
     _this._childrenObjects[msgChildId] = newChild;
 
     setTimeout(() => {
+      //FLOW-OUT: will flow to DataObjectChild -> _onResponse
       _this._bus.postMessage({
         id: msg.id, type: 'response', from: msg.to, to: msg.from,
         body: { code: 200, source: _this._owner }
@@ -241,6 +244,7 @@ class DataObject {
     _this._version++;
 
     if (_this._status === 'on') {
+      //FLOW-OUT: this message will be sent directly to a resource changes address: MessageBus
       let changeMsg = {
         type: 'update', from: _this._url, to: _this._url + '/changes',
         body: { version: _this._version, source: _this._owner, attribute: event.field }
@@ -268,7 +272,7 @@ class DataObject {
     }
   }
 
-  //receive and process delta messages
+  //FLOW-IN: delta message received from a remote DataObjectReporter or DataObjectChild when changing data
   _changeObject(syncObj, msg) {
     let _this = this;
 
@@ -306,6 +310,7 @@ class DataObject {
     }
   }
 
+  //FLOW-IN: message received from a remote DataObjectChild when changing data
   _changeChildren(msg) {
     let _this = this;
     console.log('Change children: ', _this._owner, msg);
