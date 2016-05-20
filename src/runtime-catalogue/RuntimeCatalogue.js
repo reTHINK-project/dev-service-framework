@@ -332,7 +332,7 @@ class RuntimeCatalogue {
         // parse and attach sourcePackage
         let sourcePackage = rawSchema["sourcePackage"];
         if (sourcePackage) {
-            // console.log("dataSchema has sourcePackage:", sourcePackage);
+            console.log("dataSchema has sourcePackage:", sourcePackage);
             dataSchema.sourcePackage = _this._createSourcePackage(_this, sourcePackage);
 
             try {
@@ -341,10 +341,25 @@ class RuntimeCatalogue {
               console.log('DataSchema Source code is already parsed');
             }
 
-        }
+            return dataSchema;
 
-        //console.log("created dataSchema descriptor object:", dataSchema);
-        return dataSchema;
+        } else {
+          console.log('4. getSourcePackageFromURL: ', rawSchema.sourcePackageURL);
+
+          return new Promise(function(resolve, reject) {
+
+            _this.getSourcePackageFromURL(rawSchema.sourcePackageURL).then(function(sourcePackage) {
+              console.log('5. result of getSourcePackageFromURL', sourcePackage);
+              dataSchema.sourcePackage = sourcePackage;
+              resolve(dataSchema);
+            }).catch(function(reason) {
+              console.log('Error getting the sourcePackageURL ', reason);
+              reject(reason);
+            });
+          })
+        }
+        // console.log("created dataSchema descriptor object:", dataSchema);
+        // return dataSchema;
     }
 
     /**
