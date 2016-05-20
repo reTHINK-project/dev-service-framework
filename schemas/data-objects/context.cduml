@@ -7,9 +7,9 @@ package Context <<Rect>> {
 		type : HypertyResource.HypertyResourceType
 		description ?: string
 		time?: date
-		units?: ContextUnit
+		unit?: ContextUnit
 		version?: integer
-		value: ContextValue[]
+		values: ContextValue[]
 		tag?: string
 		children ?=["actions","contexts"]
 	}
@@ -20,9 +20,9 @@ package Context <<Rect>> {
 
 	class ContextValue {
 		name : string
-		units : ContextUnit
+		unit : ContextUnit
 		value : object
-		sum
+		sum : ContextUnit
 		time ?: date
 		updateTime ?: date
 		expires ?: date
@@ -46,9 +46,9 @@ package Context <<Rect>> {
 		type : HypertyResource.HypertyResourceType
 		description ?: string
 		time?: date
-		units?: ContextUnit
+		unit?: ContextUnit
 		version?: integer
-		value: ContextValue[]
+		values: ContextValue[]
 		tag?: string
 	}
 
