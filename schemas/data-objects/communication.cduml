@@ -16,7 +16,7 @@ package Communication <<Rect>> {
 	class ChatMessages <<Children>> {
 		parent = "communication"
 		listener = "chatmessages"
-		type : ChatMessage
+		type = "ChatMessage"
 	}
 
 	class ChatMessage <<SyncObjectChild>> {

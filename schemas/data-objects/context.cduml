@@ -38,7 +38,7 @@ package Context <<Rect>> {
 	class Actions <<Children>> {
 		parent = "context"
 		listener = "actions"
-		type : Action
+		type = "Action"
 	}
 
 	class Action <<SyncObjectChild>> {
@@ -71,6 +71,7 @@ package Context <<Rect>> {
 	Context --> HypertyResource.HypertyResourceType
 	Context --> ContextUnit
 	ContextValue --> ContextUnit
+	ContextValue --> Core.URL.HypertyRuntimeURL
 
 
 	RawContextValue -up-|> ContextValue

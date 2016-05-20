@@ -18,7 +18,7 @@ package SyncDataObject {
 	class SyncObjectChildren <<Children>> {
 		parent : string
 		listener : string
-		type : SyncObjectChild
+		type : string
 		childrenUrls ?: URL.URL[]
 	}
 
