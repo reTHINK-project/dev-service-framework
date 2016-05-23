@@ -92,12 +92,18 @@ interface ChangeEvent {
   data?: value | [value]
 }
 
+interface ReadEvent {
+  accept(): void
+  reject(reason): void
+}
+
 CreateEvent --|> Event
 DeleteEvent --|> Event
 SubscribeEvent --|> Event
 UnSubscribeEvent --|> Event
 ResponseEvent --|> Event
 ChangeEvent --|> Event
+ReadEvent --|> Event
 
 SyncSubscription --|> SyncStatus
 
