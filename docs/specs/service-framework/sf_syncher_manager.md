@@ -19,8 +19,10 @@ The main class for the package. Should only be available one per Hyperty/URL. It
 * constructor(owner: HypertyURL, bus: MiniBus, config: Config)
 * create(schema: SchemaURL, observers?: [HypertyURL], initialData?: JSON): Promise\<DataObjectReporter\>
 * subscribe(schema: SchemaURL, url: ObjectURL): Promise\<DataObjectObserver\>
+* read(url: ObjectURL): Promise<JSON>
 
 These methods are able to create Reporters or subscribe to existing ones, giving Observers.
+It's also possible to read existing reporter objects without subscription.
 
 ##### Event Handlers
 * onNotification(callback: (event: CreateEvent | DeleteEvent) => void): void
@@ -37,11 +39,11 @@ Top implementation of Reporters and Observers.
 * children: { \<childId\>: DataObjectChild }
 
 ##### Methods
-* addChildren(resource: string, initialData: JSON): Promise\<DataObjectChild\>
+* addChild(resource: string, initialData: JSON): Promise\<DataObjectChild\>
 
 ##### Event Handlers
 * onChange(filter: string, callback: (event: ChangeEvent) => void): void
-* onAddChildren(callback: (event: CreateEvent) => void): void
+* onAddChild(callback: (event: CreateEvent) => void): void
 
 Handlers to report changes in the reporters that are synchronized with the observer.
 
@@ -57,8 +59,10 @@ In addition to the inherited properties, it has a registry of all remote observe
 ##### Event Handlers
 * onSubscription(callback: (event: SubscribeEvent | UnSubscribeEvent) => void)
 * onResponse(callback: (event: ReponseEvent) => void): void
+* onRead(callback: (event: ReponseEvent) => void): void
 
-In addition to the inherited handlers, the reporter can listen to subscriptions/unsubscriptions and responses to creates from observers.
+In addition to the inherited handlers, the reporter can listen to subscriptions/unsubscriptions and responses to "create" from observers.
+It also can accept or reject read requests.
 
 ### DataObjectObserver
 Read only observer object, giving a data view of a remote reporter object.
