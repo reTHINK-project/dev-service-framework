@@ -1,14 +1,17 @@
-## SyncherManager (Micael proposal)
+## Syncher and SyncherManager
 ![](SyncherManager.png)
 
 Although some properties, methods and event handlers are subject to change. The most important is the structure of the framework, because structure is much harder to change than changing method, properties, etc.
 
-MiniBus is a core component that represents a view of the MessageBus, and it's inserted as a dependency. When an object (Reporter or Observed) is created, the Syncher will add a listener in the MiniBus to receive/send Messages of that object.
+MiniBus is a core component that represents a view of the MessageBus, and it's inserted as a dependency. When an object (Reporter or Observed) is created, the Syncher will add listeners in the MiniBus to receive/send Messages of that object.
 
 [Sequence Diagram Doc](https://github.com/reTHINK-project/core-framework/blob/master/docs/specs/runtime/dynamic-view/basics/create-sync-data-object.md)
 
+### SyncherManager
+The SyncherManager and other related classes available in the dev-core-runtime/syncher are part of the internal system tha manages subscriptions and object creations. There is only one instance of this, at address "<runtimeURL>/sm". This instance is not available directly to hyperties. Only contacted by the message system.
+
 ### Syncher
-The main class for the package. Should only be available one per Hyperty/URL. It's the owner of all kind of DataObjects.
+This is the main class where the API is available to hyperties. Should only be available one per Hyperty/URL. It's the owner of all kind of DataObject's (reporters, observers and children).
 
 ##### Properties
 * owner: HypertyURL
