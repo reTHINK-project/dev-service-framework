@@ -165,3 +165,19 @@ For the Connection package it generates the JSON Schema:
 	}
 }
 ```
+
+#### Development
+There are 2 eclipse projects:
+* rethink.uml - Core project with grammar definitions and JSON generator
+* rethink.uml.ui - Eclipse plugin for a small grammar IDE
+
+Best way to import the projects is by adding a git repository on the "Git" Eclipse View. Right click on the "dev-service-framework" git repo and "Import projects". Select the "plantuml-json-parser" folder and import.
+
+Projects are dependent of Xtend IDE plugin (version 2.8.4), don't use the 2.9 versions or above.
+There should be probable errors on the projects. Select file "src/rethink/uml/ClassDiagram.xtext" where is the grammar definition and generate the Eclipse EMF models (right click -> Run As -> Generate Xtext Artifacts).
+The EMF generation process is needed every time there's a change in the grammar file.
+
+JSON generator is at "src/rethink/uml/generator/ClassDiagramGenerator.xtend" using the Xtend language.
+
+For more information about the Xtext grammar definitions, visit the [Xtext](https://eclipse.org/Xtext/) project.
+For more information about the Xtend language and template system, visit the [Xtend](http://www.eclipse.org/xtend/) project.
