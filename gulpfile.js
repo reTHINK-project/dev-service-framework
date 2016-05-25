@@ -8,7 +8,9 @@ var prompt = require('gulp-prompt');
 var babel = require('babelify');
 var _ = require('lodash');
 var browserify = require('browserify');
+var buffer = require('vinyl-buffer');
 var source = require('vinyl-source-stream');
+var sourcemaps = require('gulp-sourcemaps');
 var replace = require('gulp-replace');
 var insert = require('gulp-insert');
 var uglify = require('gulp-uglify');
@@ -99,6 +101,7 @@ function prependLicense(clean) {
 gulp.task('dist', function() {
 
   return gulp.src(['src/CatalogueFactory.js',
+  'src/discovery/Discovery.js',
   'src/HypertyDiscovery.js',
   'src/MessageFactory.js',
   'src/RuntimeCatalogue.js',
@@ -239,7 +242,6 @@ function dist(debug) {
 
     gulp.src([file.path])
     .pipe(transpile(opts))
-    .pipe(gulpif(!debug, uglify()))
     .pipe(gulpif(!debug, insert.prepend(license + '// Distribution file for {{package}} \n// version: {{version}}\n\n')))
     .pipe(gulpif(!debug, replace('{{version}}', pkg.version)))
     .pipe(gulpif(!debug, replace('{{package}}', filename + '.js')))
@@ -285,6 +287,10 @@ function transpile(opts) {
       this.emit('end');
     })
     .pipe(source(fileObject.base))
+    .pipe(buffer())
+    .pipe(sourcemaps.init({loadMaps: true}))
+    .pipe(uglify())
+    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(opts.destination))
     .on('end', function() {
       file.contents = fs.readFileSync(opts.destination + '/' + fileObject.base);
