@@ -102,6 +102,7 @@ gulp.task('dist', function() {
 
   return gulp.src(['src/CatalogueFactory.js',
   'src/discovery/Discovery.js',
+  'src/identityManager/IdentityManager.js',
   'src/HypertyDiscovery.js',
   'src/MessageFactory.js',
   'src/RuntimeCatalogue.js',
