@@ -5,7 +5,7 @@ import chaiAsPromised from 'chai-as-promised';
 import sinonChai from 'sinon-chai';
 
 // internal modules to be tested
-import {divideURL} from '../src/utils/utils';
+import {divideURL, convertToUserURL} from '../src/utils/utils';
 
 let expect = chai.expect;
 
@@ -47,6 +47,14 @@ describe('Utils Module', function() {
 
     url = 'https://localhost:9090/secure-test';
     expect(divideURL(url)).to.deep.equal({'type' : 'https','domain': 'localhost:9090', 'identity': '/secure-test'});
-  })
+  });
 
-})
+  it('should convert a user identity to userURL', function() {
+
+    let userIdentity = 'openidtest10@gmail.com';
+    expect(convertToUserURL(userIdentity)).to.deep.equal('user://gmail.com/openidtest10');
+
+    userIdentity = 'user://gmail.com/openidtest10';
+    expect(convertToUserURL(userIdentity)).to.deep.equal('user://gmail.com/openidtest10');
+  });
+});

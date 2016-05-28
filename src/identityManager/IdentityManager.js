@@ -46,13 +46,16 @@ class IdentityManager {
 
   /**
   * Function to query the runtime registry about the identity to which the hyperty was associated
-  * @param {String}       hypertyURL   (Optional)
+  * @param {String}       type (Optional)         type of user info required
+  * @param {String}       hypertyURL (Optional)   hypertyURL to search for
   * @return {Promise}     userURL       userURL associated to the hyperty
   */
-  discoverUserRegistered(hypertyURL) {
+  discoverUserRegistered(type, hypertyURL) {
     let _this = this;
-    let activeDomain;
     let activeHypertyURL;
+
+    // if any type of search is selected query for that type, otherwise query for default user info
+    let searchType = (type) ? type : '.';
 
     if (!hypertyURL) {
       activeHypertyURL = _this.hypertyURL;
@@ -61,7 +64,7 @@ class IdentityManager {
     }
 
     let msg = {
-      type: 'read', from: activeHypertyURL, to: _this.runtimeURL + '/registry/', body: { resource: '.', criteria: activeHypertyURL}
+      type: 'read', from: activeHypertyURL, to: _this.runtimeURL + '/registry/', body: { resource: searchType, criteria: activeHypertyURL}
     };
 
     return new Promise(function(resolve, reject) {

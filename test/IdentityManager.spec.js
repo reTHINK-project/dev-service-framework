@@ -19,12 +19,13 @@ describe('IdentityManager', function() {
 
       replyCallback({
         type: 'read', from: runtimeURL + '/registry/', to: hypertyURL,
-        body: { resource: 'user://gmail.com/openidtest10'}
+        body: { resource: {cn: 'test OpenID', userURL: 'user://gmail.com/openidtest10', username: 'openidtest10@gmail.com', avatar: 'avatarURL'}}
       });
     }
   };
 
   let identityManager = new IdentityManager(hypertyURL, runtimeURL, msgBus);
+  let expectedValue = {cn: 'test OpenID', userURL: 'user://gmail.com/openidtest10', username: 'openidtest10@gmail.com', avatar: 'avatarURL'};
 
   describe('constructor()', function() {
     it('should create a identityManager object without error', function() {
@@ -34,7 +35,6 @@ describe('IdentityManager', function() {
 
   describe('discoverUserRegistered()', function() {
     it('sould return a Promise with the identity associated', function(done) {
-      let expectedValue = 'user://gmail.com/openidtest10';
 
       expect(identityManager.discoverUserRegistered().then(function(response) {
         return response;
@@ -42,9 +42,8 @@ describe('IdentityManager', function() {
     });
 
     it('sould return a Promise with the identity associated (with optional hyperty field)', function(done) {
-      let expectedValue = 'user://gmail.com/openidtest10';
 
-      expect(identityManager.discoverUserRegistered(hypertyURL).then(function(response) {
+      expect(identityManager.discoverUserRegistered('.', hypertyURL).then(function(response) {
         return response;
       })).to.be.fulfilled.and.eventually.eql(expectedValue).and.notify(done);
     });

@@ -21,7 +21,7 @@
 * limitations under the License.
 **/
 
-import {divideURL} from '../utils/utils';
+import {divideURL, convertToUserURL} from '../utils/utils';
 
 /**
 * Core Discovery interface
@@ -41,6 +41,7 @@ class Discovery {
 
     _this.domain = divideURL(hypertyURL).domain;
     _this.discoveryURL = hypertyURL;
+
   }
 
   /**
@@ -151,11 +152,15 @@ class Discovery {
   }
 
   /** Advanced Search for Hyperties registered in domain registry
-  *
+  * @param  {String}           user                  user identifier, either in url or email format
+  * @param  {Array<string>}    schema (Optional)     types of hyperties schemas
+  * @param  {Array<string>}    resources (Optional)  types of hyperties resources
+  * @param  {String}           domain (Optional)     domain of the registry to search
   */
-  advancedSearchPerHyperty(user, schema, resources, domain) {
+  discoverHyperty(user, schema, resources, domain) {
     let _this = this;
     let activeDomain;
+    let userIdentifier = convertToUserURL(user);
 
     if (!domain) {
       activeDomain = _this.domain;
@@ -164,7 +169,7 @@ class Discovery {
     }
 
     let msg = {
-      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: {user: user, resources: resources, dataSchemes: schema}, search:'hypertyResourcesDataSchemes'}
+      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: {user: userIdentifier, resources: resources, dataSchemes: schema}, search:'hypertyResourcesDataSchemes'}
     };
 
     return new Promise(function(resolve, reject) {
