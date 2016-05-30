@@ -32,7 +32,7 @@ package Context <<Rect>> {
 	class Contexts <<Children>> {
 		parent = "context"
 		listener = "contexts"
-		type : Context
+		type : "Context"
 	}
 
 	class Actions <<Children>> {

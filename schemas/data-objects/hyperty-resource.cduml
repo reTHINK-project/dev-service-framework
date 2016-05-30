@@ -7,7 +7,7 @@ package HypertyResource <<Rect>> {
 		direction ?: ResourceDirection
 	}
 
-	class HypertyResourceType {
+	enum HypertyResourceType {
 		CHAT
 		AUDIO
 		VIDEO
@@ -15,11 +15,6 @@ package HypertyResource <<Rect>> {
 		SCREEN
 		FILE
 		MIDI
-		TEMPERATURE
-		HUMIDITY
-		LIGHT
-		HEART-RATE
-		STEPS
 	}
 
 	enum ResourceDirection {
