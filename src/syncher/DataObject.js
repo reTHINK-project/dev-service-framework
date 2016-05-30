@@ -165,7 +165,7 @@ class DataObject {
    * Create and add a children to the subscription group.
    * @param {String} resource - Resource name, one of the items in the schema.properties.scheme of the parent object.
    * @param {JSON} initialData - Initial data of the child
-   * @return {Promise<DataObjectChild>} - Return Promise to a new Children.
+   * @return {Promise<DataObjectChild>} - Return Promise to a new DataObjectChild.
    */
   addChild(resource, initialData) {
     let _this = this;
@@ -198,7 +198,7 @@ class DataObject {
   }
 
   /**
-   * Setup the callback to process create and delete childrens
+   * Setup the callback to process create and delete of childrens.
    * @param {function(event: MsgEvent)} callback
    */
   onAddChild(callback) {

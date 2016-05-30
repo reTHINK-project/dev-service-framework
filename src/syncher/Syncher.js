@@ -96,7 +96,7 @@ class Syncher {
 
  /**
   * Request a DataObjectReporter creation. The URL will be be requested by the allocation mechanism.
-  * @param  {SchemaURL} schema - URL of the object descriptor
+  * @param  {SchemaURL} schema - Hyperty Catalogue URL address that can be used to retrieve the JSON-Schema describing the Data Object schema
   * @param  {HypertyURL[]} observers - List of hyperties that are pre-authorized for subscription
   * @param  {JSON} initialData - Initial data of the reporter
   * @return {Promise<DataObjectReporter>} Return Promise to a new Reporter. The reporter can be accepted or rejected by the PEP
@@ -134,9 +134,9 @@ class Syncher {
 
  /**
   * Request a subscription to an existent reporter object.
-  * @param {SchemaURL} schema - URL of the object descriptor
-  * @param {ObjectURL} objURL - Address of the existent reporter object
-  * @return {Promise<DataObjectObserver>} Return Promise to a new observer.
+  * @param {SchemaURL} schema - Hyperty Catalogue URL address that can be used to retrieve the JSON-Schema describing the Data Object schema
+  * @param {ObjectURL} objURL - Address of the existent reporter object to be observed
+  * @return {Promise<DataObjectObserver>} Return Promise to a new observer. It's associated with the reporter.
   */
  subscribe(schema, objURL) {
    let _this = this;
@@ -175,7 +175,7 @@ class Syncher {
 
  /**
   * Request a read action on the reporter object
-  * @param {ObjectURL} objURL - URL of the reporter object
+  * @param {ObjectURL} objURL - URL of the reporter object to be read
   * @return {Promise<Object>} Return Promise to last available data of the reporter
   */
  read(objURL) {

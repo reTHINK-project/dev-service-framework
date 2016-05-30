@@ -76,6 +76,10 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     _this._objectListener.remove();
   }
 
+  /**
+   * Send invitations (create messages) to hyperties, observers list.
+   * @param  {HypertyURL[]} observers List of Hyperty URL's
+   */
   inviteObservers(observers) {
     let _this = this;
 
@@ -117,7 +121,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
 
   /**
    * Setup the callback to process subscribe and unsubscribe notifications
-   * @param {function(event: MsgEvent)} callback
+   * @param {function(event: MsgEvent)} callback function to receive events
    */
   onSubscription(callback) {
     this._onSubscriptionHandler = callback;
@@ -125,7 +129,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
 
   /**
    * Setup the callback to process response notifications of the create's
-   * @param {function(event: MsgEvent)} callback
+   * @param {function(event: MsgEvent)} callback function to receive events
    */
   onResponse(callback) {
     this._onResponseHandler = callback;

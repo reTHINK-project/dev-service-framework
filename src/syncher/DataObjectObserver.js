@@ -114,7 +114,7 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
 
   /**
    * Register the change listeners sent by the reporter
-   * @param {string} filter - Filter that identifies the field (separeted dot path). Accepts * at the end for a more unrestricted filtering.
+   * @param {string} filter - Filter that identifies the field (separated dot path). Accepts * at the end for a more unrestricted filtering.
    * @param {function(event: MsgEvent)} callback
    */
   onChange(filter, callback) {
