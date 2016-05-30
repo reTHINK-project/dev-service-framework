@@ -11,11 +11,23 @@ MiniBus is a core component that represents a view of the MessageBus, and it's i
 The SyncherManager and other related classes available in the dev-core-runtime/syncher are part of the internal system that manages subscriptions and object creations. There is only one instance of this, at address "<runtimeURL>/sm". This instance is not available directly to hyperties. Only contacted by the message system.
 
 ### Interfaces (SyncStatus, SyncSubscription)
-*Should be introduced earlier. Description is incomplete*
-* **SyncStatus** is used to get and control the status of a DataObject (local, remote, reporter or observer).
-* **SyncSubscription** reference to a remote observer/subscription.
+
+* **SyncStatus** is used to get and control the status of a DataObject (local, remote, reporter or observer). The interface is not yet implemented, documentation should be updated accordingly from the provided implementation behavior.
 
 **TODO** Maybe some kind of state machine diagram is needed to define better all the status, and the actions that activate the status transitions.
+
+##### Properties
+status: actual state based on the actions: pause, resume, stop, ...
+
+##### Methods
+pause: should pause the synchronization process, pause the mission of update messages between the reporter/observer link.
+resume: resume the synchronization process from a pause action.
+stop: probably the same as unsubscribe, so maybe this method is outdated.
+
+* **SyncSubscription** reference to a remote observer/subscription, associated to a HypertyURL.
+
+##### Properties
+url: HypertyURL of the observer.
 
 ### Methods, Events and Handlers
 Every object have methods, and event handlers to map to a pulling and push scheme. 
@@ -88,10 +100,10 @@ Receive create invitations or delete notifications from Reporter objects. Hypert
 Top implementation of Data Object Reporters and Observers with common properties, methods and handlers.
 
 ##### Properties
-* url: ObjectURL
+* url: ObjectURL address for this instance.
 * data: JSON data syncronized with the associated remote Reporter or Observer
-* schema: SchemaURL
-* children: { \<childId\>: DataObjectChild }
+* schema: SchemaURL address, for the JSON Schema
+* childrens: All created childrens since the subscription, doesn't contain all childrens since reporter creation.
 
 ##### Methods
 
@@ -120,7 +132,7 @@ Read/Write reporter object. Syncronization is shared with other observers.
 
 ##### Properties
 * (inherited) status: on | paused | waiting
-* subscriptions: [SyncSubscription]
+* subscriptions: [SyncSubscription] array of subscriptions, Hyperties that are listening this object
 
 In addition to the inherited properties, it has a registry of all remote observers subscriptions. Since all subscriptions are instances of SyncSubscription, it's possible to read the status of the subscription and act on it (pause, resume, stop). For example, in a chat room it will be possible to kick out someone executing the stop().
 
@@ -162,7 +174,7 @@ Setup the callback to process response notifications of the create (invite) requ
 Read only observer object, giving a data view of a remote reporter object.
 
 ##### Properties
-* owner: HypertyURL
+* owner: HypertyURL address of the owner Hyperty. Reporter Hyperty.
 
 ##### Methods
 
@@ -189,8 +201,8 @@ DataObjectChild are created in relation to a pre-existent path on the parent obj
 Child objects can be created from a Reporter or Observer and are shared between them.
 
 ##### Properties
-* childId: URL
-* data: JSON
+* childId: URL address for a child, related to an ObjectURL
+* data: JSON data for the object
 
 ##### Event Handlers
 
