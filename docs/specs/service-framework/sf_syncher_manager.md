@@ -23,8 +23,7 @@ This is the main class where the API is available to hyperties. It is a singleto
 * constructor(owner: HypertyURL, bus: MiniBus, config: Config)
 
 **create**
-
-`create(schema: SchemaURL, observers?: [HypertyURL], initialData: JSON): Promise\<DataObjectReporter\>`
+`create(schema: SchemaURL, observers?: [HypertyURL], initialData: JSON): Promise<DataObjectReporter>`
 
 This Method is used to create objects to be reported i.e. the Hyperty Instance plays the Reporter role. The following parameters are used:
 
@@ -94,6 +93,9 @@ Read/Write reporter object. Syncronization is shared with other observers.
 * subscriptions: [SyncSubscription]
 
 In addition to the inherited properties, it has a registry of all remote observers subscriptions. Since all subscriptions are instances of SyncSubscription, it's possible to read the status of the subscription and act on it (pause, resume, stop). For example, in a chat room it will be possible to kick out someone executing the stop().
+
+##### Methods
+inviteObservers
 
 ##### Event Handlers
 *to complete*
