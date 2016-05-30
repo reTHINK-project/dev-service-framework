@@ -17,6 +17,13 @@ The SyncherManager and other related classes available in the dev-core-runtime/s
 
 **TODO** Maybe some kind of state machine diagram is needed to define better all the status, and the actions that activate the status transitions.
 
+### Methods, Events and Handlers
+Every object have methods, and event handlers to map to a pulling and push scheme. 
+Methods fire actions and Handlers react to actions and respond accordingly.
+All events listed on the class diagram are intercepted in an event handler. From a functional perspective, methods like (accept, reject, wait, ...) are responses to an action. Since actions are represented by events, it makes sense that responses are directly related to them. Some rules:
+* All events are inherited from the Event interface
+* All handlers have method signature of "on\<classifier\>(..., callback)"
+
 ### Syncher
 This is the main class where the API is available to hyperties. It is a singleton i.e. only one instance is available per Hyperty instance. It's the owner of all kind of [Data Objects](../../datamodel/data-objects/data-synch) that can be synchronised by the Syncher including Reported Objects (DataObjectReporter) and Observed Objects (DataObjectObserver).
 
@@ -114,11 +121,13 @@ In addition to the inherited properties, it has a registry of all remote observe
 
 `inviteObservers(observers: [HypertyURL])`
 
-Send invitations (create messages) to hyperties, observers list.
+Send invitations (create messages) to hyperties, observers list. Invitations do not associate a Reporter/Observer. An explicit subscription must be sent from the Observer.
 
 * observers: array of hyperties to invite
 
 ##### Event Handlers
+
+In addition to the inherited handlers, the reporter can listen to subscriptions/unsubscriptions and responses to invitations sent to observers. It also can accept or reject read requests.
 
 **onSubscription**
 
@@ -132,7 +141,7 @@ Setup the callback to process subscribe and unsubscribe notifications
 
 `onResponse(callback: (event: ResponseEvent) => void): void`
 
-Setup the callback to process response notifications of the create (invite) request's.
+Setup the callback to process response notifications of the create (invite) request's. These are responses to `DataObjectReporter.inviteObservers` or `Syncher.create` invocation.
 
 * callback: callback function to receive events
 
@@ -140,22 +149,37 @@ Setup the callback to process response notifications of the create (invite) requ
 
 `onRead(callback: (event: ResponseEvent) => void): void`
 
-In addition to the inherited handlers, the reporter can listen to subscriptions/unsubscriptions and responses to invitations sent to observers when the Data Object was created ("create" method). *how can we invite new observers outside the data object creation?*
-It also can accept or reject read requests.
-
 ### DataObjectObserver
 Read only observer object, giving a data view of a remote reporter object.
 
 ##### Properties
-*to complete*
 * owner: HypertyURL
 
+##### Methods
+
+**unsubscribe**
+
+`unsubscribe()`
+
+Remove this subscription from the reporter database. No more data updates will be received.
+
+##### Event Handlers
+
+**onChange**
+
+`onChange(filter: string, callback: (event: ChangeEvent) => void): void`
+
+Setup the callback to process change events from the associated reporter.
+
+* filter: Filter that identifies the field (separated dot path). Accepts * at the end for a more unrestricted filtering.
+* allback: callback function to receive events
+
 ### DataObjectChild
-*not clear*
-Is a result of the call to "addChild". DataObjectChild are created in relation to a pre-existent path on the parent object schema.
+Child objects are returned from the `DataObject.addChild`.
+DataObjectChild are created in relation to a pre-existent path on the parent object schema.
+Child objects can be created from a Reporter or Observer and are shared between them.
 
 ##### Properties
-*to complete*
 * childId: URL
 * data: JSON
 
@@ -165,17 +189,14 @@ Is a result of the call to "addChild". DataObjectChild are created in relation t
 
 `onResponse(callback: (event: ReponseEvent) => void): void`
 
+Setup the callback to process response notifications of the child creates. Responses to `DataObject.addChild`
+
+* callback: callback function to receive events
+
 **onChange**
 
-`onChange(filter: string, callback: (event: ChangeEvent) => void): void`
+`onChange(callback: (event: ChangeEvent) => void): void`
 
-Receive change events from the associated reporter.
+Setup the callback to process change events from the associated reporter child.
 
-* filter: 
-
-### Events and Handlers
-*to complete*
-Methods fire actions and Handlers react to actions and respond accordingly.
-All events listed on the class diagram are intercepted in an event handler. From a functional perspective, methods like (accept, reject, wait, ...) are responses to an action. Since actions are represented by events, it makes sense that responses are directly related to them. Some rules:
-* All events are inherited from the Event interface
-* All handlers have method signature of "on\<classifier\>(..., callback)"
+* callback: callback function to receive events
