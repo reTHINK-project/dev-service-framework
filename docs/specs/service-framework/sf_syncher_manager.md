@@ -28,12 +28,21 @@ All events listed on the class diagram are intercepted in an event handler. From
 This is the main class where the API is available to hyperties. It is a singleton i.e. only one instance is available per Hyperty instance. It's the owner of all kind of [Data Objects](../../datamodel/data-objects/data-synch) that can be synchronised by the Syncher including Reported Objects (DataObjectReporter) and Observed Objects (DataObjectObserver).
 
 ##### Properties
-* owner: HypertyURL of Syncher's Hyperty instance
+* owner: HypertyURL of Syncher's Hyperty instance owner
 * observers: [DataObjectObserver] Array of Observed Objects
-* reporters: [DataObjectReporter] Array of Reported Objects\
+* reporters: [DataObjectReporter] Array of Reported Objects
 
 ##### Methods
-* constructor(owner: HypertyURL, bus: MiniBus, config: Config)
+
+**constructor**
+
+`constructor(owner: HypertyURL, bus: MiniBus, config: Config)`
+
+Syncher is created one per Hyperty. The parameters are basically the same as the ones that are passed to the Hyperty constructor.
+
+* owner: HypertyURL of Syncher's Hyperty instance owner
+* bus: MiniBus interface to send and receive message, using postMessage and addListener
+* config: Configuration data. The only required field for now is the runtimeURL
 
 **create**
 
