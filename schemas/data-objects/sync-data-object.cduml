@@ -37,7 +37,8 @@ package SyncDataObject {
 	SyncObjectParent .up.|> SyncObject
 	SyncObjectChild .up.|> SyncObject
 
-	SyncObjectParent .down.> "1..*" SyncObjectChildren
+	SyncObjectParent .down.> "0..*" SyncObjectChildren
+	SyncObjectParent .down.> "0..*" SyncObjectChild
 	SyncObjectChildren .down.> "1..*" SyncObjectChild : ChildId
 }
 
