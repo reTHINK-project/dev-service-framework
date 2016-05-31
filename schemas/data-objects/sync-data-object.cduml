@@ -13,16 +13,25 @@ package SyncDataObject {
 
 	class SyncObjectParent {
 		children : string[]
+		observerPermissions ?: ObserverPermission
+		childrenUrls ?: URL.URL[]
 	}
 
 	class SyncObjectChildren <<Children>> {
 		parent : string
 		listener : string
-		type : string
+		type : SyncObjectChild
 		childrenUrls ?: URL.URL[]
 	}
 
 	class SyncObjectChild {
+	parent : URL.URL
+	}
+
+	enum ObserverPermission {
+	WRITE
+	WRITE-READ
+	READ
 	}
 
 	SyncObjectParent .up.|> SyncObject
