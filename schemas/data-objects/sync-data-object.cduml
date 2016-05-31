@@ -12,9 +12,8 @@ package SyncDataObject {
 	}
 
 	class SyncObjectParent {
-		children : string[]
-		observerPermissions ?: ObserverPermission
-		childrenUrls ?: URL.URL[]
+		children ?: string[]
+		childUrls ?: URL.URL[]
 	}
 
 	class SyncObjectChildren <<Children>> {
@@ -22,6 +21,7 @@ package SyncDataObject {
 		listener : string
 		type : SyncObjectChild
 		childrenUrls ?: URL.URL[]
+		observerPermissions ?: ObserverPermission
 	}
 
 	class SyncObjectChild {
