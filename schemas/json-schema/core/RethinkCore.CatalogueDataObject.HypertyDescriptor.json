@@ -6,12 +6,25 @@
 	"required": ["dataObjectUrls", "hypertyType", "messageSchemaUrl", "constraints"],
 	"properties": {
 		"dataObjectUrls": {
-			"type": "string"
+			"$ref": "URL.json#/HypertyCatalogueURLList"
 		},
 		"hypertyType": {
 			"type": "array",
 			"items": {
-				"$ref": "HypertyResource.json#/HypertyResourceType"
+				"enum": [
+					"chat",
+					"audio",
+					"video",
+					"av",
+					"screen",
+					"file",
+					"midi",
+					"temperature",
+					"humidity",
+					"light",
+					"heart_rate",
+					"steps"
+				]
 			}
 		},
 		"messageSchemaUrl": {

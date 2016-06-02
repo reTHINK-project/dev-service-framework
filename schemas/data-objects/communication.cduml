@@ -11,6 +11,7 @@ package Communication <<Rect>> {
 		qos ?: CommunicationQuality
 		resources : HypertyResource.HypertyResource[]
 		children = ["chatmessages"]
+		scheme = "comm"
 	}
 
 	class ChatMessages <<Children>> {

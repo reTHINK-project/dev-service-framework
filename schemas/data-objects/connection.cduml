@@ -6,6 +6,7 @@ package Connection <<Rect>> {
 		status : string
 		owner : URL.UserURL
 		peer : URL.ConnectionURL
+		scheme = "connection"
 	}
 
   	class OwnerPeer {
@@ -43,8 +44,8 @@ package Connection <<Rect>> {
 	    closed
 	}
 
-	Connection -up-|> RethinkCore.SyncData
-	Peer -up-|> RethinkCore.SyncData
+	Connection -up-|> SyncDataObject.SyncDataObject
+	Peer -up-|> SyncDataObject.SyncDataObject
 
 	Connection *--> "1" OwnerPeer
 	Connection ..> "1" Peer

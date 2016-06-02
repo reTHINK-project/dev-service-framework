@@ -3,7 +3,7 @@
 
 	"id": "Communication",
 	"type": "object",
-	"required": ["startingTime", "lastModified", "status", "resources", "children"],
+	"required": ["startingTime", "lastModified", "status", "resources", "children", "scheme"],
 	"properties": {
 		"startingTime": {
 			"type": "string",
@@ -43,10 +43,14 @@
 		},
 		"children": {
 			"constant": ["chatmessages"]
+		},
+		"scheme": {
+			"constant": "comm"
 		}
 	}, 
 	"ChatMessages": {
 		"type": "object",
+		"stereotype": "children",
 		"required": ["parent", "listener", "type"],
 		"properties": {
 			"parent": {
@@ -56,6 +60,16 @@
 				"constant": "chatmessages"
 			},
 			"type": {
+				"constant": "ChatMessage"
+			}
+		}
+	}, 
+	"ChatMessage": {
+		"type": "object",
+		"stereotype": "syncobjectchild",
+		"required": ["message"],
+		"properties": {
+			"message": {
 				"type": "string"
 			}
 		}

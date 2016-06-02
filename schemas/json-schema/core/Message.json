@@ -81,6 +81,9 @@
 			},
 			"source": {
 				"type": "string"
+			},
+			"auth": {
+				"type": "boolean"
 			}
 		}
 	}, 

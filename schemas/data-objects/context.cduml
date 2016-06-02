@@ -12,6 +12,7 @@ package Context <<Rect>> {
 		values: ContextValue[]
 		tag?: string
 		children ?=["actions","contexts"]
+		scheme = "context"
 	}
 
 	class ContextUnit {
@@ -32,7 +33,7 @@ package Context <<Rect>> {
 	class Contexts <<Children>> {
 		parent = "context"
 		listener = "contexts"
-		type : "Context"
+		type = "Context"
 	}
 
 	class Actions <<Children>> {
@@ -71,7 +72,7 @@ package Context <<Rect>> {
 	Context --> HypertyResource.HypertyResourceType
 	Context --> ContextUnit
 	ContextValue --> ContextUnit
-	ContextValue --> Core.URL.HypertyRuntimeURL
+	ContextValue --> URL.HypertyRuntimeURL
 
 
 	RawContextValue -up-|> ContextValue
