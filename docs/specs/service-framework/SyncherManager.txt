@@ -17,6 +17,7 @@ class Syncher {
   constructor(owner: HypertyURL, bus: MiniBus, config: Config)
   create(schema: SchemaURL, observers?: [HypertyURL], initialData?: JSON): Promise<DataObjectReporter>
   subscribe(schema: SchemaURL, url: ObjectURL): Promise<DataObjectObserver>
+  read(url: ObjectURL): Promise<JSON>
   __ event handlers __
   onNotification(callback: (event: CreateEvent | DeleteEvent) => void): void
 }
@@ -25,10 +26,10 @@ class DataObject {
   url: ObjectURL
   data: JSON
   schema: SchemaURL
-  addChildren(resource: string, initialData: JSON): Promise<DataObjectChild>
+  addChild(resource: string, initialData: JSON): Promise<DataObjectChild>
   __ event handlers __
   onChange(filter: string, callback: (event: ChangeEvent) => void): void
-  onAddChildren(callback: (event: CreateEvent) => void): void
+  onAddChil(callback: (event: CreateEvent) => void): void
 }
 
 class DataObjectChild {
@@ -40,9 +41,11 @@ class DataObjectChild {
 }
 
 class DataObjectReporter {
+  inviteObservers(observers: [HypertyURL]): void
   __ event handlers __
-  onSubscription(callback: (event: SubscribeEvent | UnSubscribeEvent) => void)
+  onSubscription(callback: (event: SubscribeEvent | UnSubscribeEvent) => void): void
   onResponse(callback: (event: ReponseEvent) => void): void
+  onRead(callback: (event: ReponseEvent) => void): void
 }
 
 class DataObjectObserver {
@@ -57,14 +60,15 @@ interface Event {
 interface CreateEvent {
   from: HypertyURL
   value: JSON
+  identity: Identity
   schema?: SchemaURL
-  childId?: URL
   reject(reason): void
   ack(type): void
 }
 
 interface DeleteEvent {
   object: DataObjectObserver
+  identity: Identity
 }
 
 interface SubscribeEvent {
@@ -88,12 +92,18 @@ interface ChangeEvent {
   data?: value | [value]
 }
 
+interface ReadEvent {
+  accept(): void
+  reject(reason): void
+}
+
 CreateEvent --|> Event
 DeleteEvent --|> Event
 SubscribeEvent --|> Event
 UnSubscribeEvent --|> Event
 ResponseEvent --|> Event
 ChangeEvent --|> Event
+ReadEvent --|> Event
 
 SyncSubscription --|> SyncStatus
 

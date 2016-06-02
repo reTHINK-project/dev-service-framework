@@ -23,6 +23,14 @@
 
 /**
  * @access private
+ * This class is responsible for collecting delta changes in remote objects, before the response of subscription reach the observer.
+ * It's used in Syncher -> subscribe. The flow is defined as:
+ * 1. (observer) --subscribe--> (reporter)
+ * 2. (observer) <--delta updates-- (reporter)
+ * 3. (observer) <--subscribe response-- (reporter)
+ * This means that there could be delta updates transferred before the subscription confirmation.
+ * Since there is no DataObjectObserver before the ubscription confirmation, there should be some other object collecting the updates.
+ * Provisional data is applied to the DataObjectObserver after confirmation. Or discarded if there is no confirmation.
  */
 class DataProvisional {
   /* private
