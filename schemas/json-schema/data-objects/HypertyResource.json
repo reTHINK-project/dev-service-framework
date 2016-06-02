@@ -6,7 +6,14 @@
 	"required": ["type"],
 	"properties": {
 		"type": {
-			"enum": [
+			"$ref": "#/HypertyResourceType"
+		},
+		"direction": {
+			"$ref": "#/ResourceDirection"
+		}
+	},
+	"HypertyResourceType": {
+		"enum": [
 				"chat",
 				"audio",
 				"video",
@@ -15,13 +22,12 @@
 				"file",
 				"midi"
 			]
-		},
-		"direction": {
-			"enum": [
+	},
+	"ResourceDirection": {
+		"enum": [
 				"in",
 				"out",
 				"inout"
 			]
-		}
 	}
 }
