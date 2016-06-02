@@ -8,7 +8,9 @@ var prompt = require('gulp-prompt');
 var babel = require('babelify');
 var _ = require('lodash');
 var browserify = require('browserify');
+var buffer = require('vinyl-buffer');
 var source = require('vinyl-source-stream');
+var sourcemaps = require('gulp-sourcemaps');
 var replace = require('gulp-replace');
 var insert = require('gulp-insert');
 var uglify = require('gulp-uglify');
@@ -99,6 +101,8 @@ function prependLicense(clean) {
 gulp.task('dist', function() {
 
   return gulp.src(['src/CatalogueFactory.js',
+  'src/discovery/Discovery.js',
+  'src/identityManager/IdentityManager.js',
   'src/HypertyDiscovery.js',
   'src/MessageFactory.js',
   'src/RuntimeCatalogue.js',
@@ -239,10 +243,7 @@ function dist(debug) {
 
     gulp.src([file.path])
     .pipe(transpile(opts))
-    .pipe(gulpif(!debug, uglify()))
-    .pipe(gulpif(!debug, insert.prepend(license + '// Distribution file for {{package}} \n// version: {{version}}\n\n')))
-    .pipe(gulpif(!debug, replace('{{version}}', pkg.version)))
-    .pipe(gulpif(!debug, replace('{{package}}', filename + '.js')))
+    .pipe(mark())
     .pipe(gulp.dest(__dirname + '/dist'))
     .on('error', function(error) {
       gutil.log(gutil.colors.red(error));
@@ -251,6 +252,26 @@ function dist(debug) {
       gutil.log('> ' + gutil.colors.green('Distribution ') + gutil.colors.white(filename) + gutil.colors.green(' done!'));
       cb();
     });
+  });
+
+}
+
+function mark() {
+
+  return through.obj(function(file, enc, cb) {
+
+    var fileObject = path.parse(file.path);
+
+    gulp.src([file.path])
+    .pipe(insert.prepend(license + '// Distribution file for {{package}} \n// version: {{version}}\n// Last build: {{date}}\n\n'))
+    .pipe(replace('{{version}}', pkg.version))
+    .pipe(replace('{{package}}', fileObject.name + '.js'))
+    .pipe(replace('{{date}}', new Date()))
+    .pipe(gulp.dest(__dirname + '/dist'))
+    .on('end', function() {
+      cb();
+    });
+
   });
 
 }
@@ -285,6 +306,10 @@ function transpile(opts) {
       this.emit('end');
     })
     .pipe(source(fileObject.base))
+    .pipe(buffer())
+    .pipe(sourcemaps.init({loadMaps: true}))
+    .pipe(uglify())
+    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(opts.destination))
     .on('end', function() {
       file.contents = fs.readFileSync(opts.destination + '/' + fileObject.base);

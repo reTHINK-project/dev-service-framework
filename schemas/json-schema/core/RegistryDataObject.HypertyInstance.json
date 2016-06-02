@@ -21,6 +21,7 @@
 					"comm",
 					"connection",
 					"ctxt",
+					"action",
 					"identity"
 				]
 			}
@@ -28,7 +29,15 @@
 		"resources": {
 			"type": "array",
 			"items": {
-				"$ref": "HypertyResource.json#/HypertyResourceType"
+				"enum": [
+					"chat",
+					"audio",
+					"video",
+					"av",
+					"screen",
+					"file",
+					"midi"
+				]
 			}
 		},
 		"runtime": {

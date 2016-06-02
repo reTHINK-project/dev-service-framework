@@ -1,0 +1,82 @@
+@startuml "../../docs/datamodel/data-objects/context/Context.png"
+
+package Context <<Rect>> {
+
+	class Context {
+		scheme = "context"
+		id: string
+		type : HypertyResource.HypertyResourceType
+		description ?: string
+		time?: date
+		unit?: ContextUnit
+		version?: integer
+		values: ContextValue[]
+		tag?: string
+		children ?=["actions","contexts"]
+	}
+
+	class ContextUnit {
+
+	}
+
+	class ContextValue {
+		name : string
+		unit : ContextUnit
+		value : object
+		sum : ContextUnit
+		time ?: date
+		updateTime ?: date
+		expires ?: date
+		address ?: URL.HypertyRuntimeURL
+	}
+
+	class Contexts <<Children>> {
+		parent = "context"
+		listener = "contexts"
+		type = "Context"
+	}
+
+	class Actions <<Children>> {
+		parent = "context"
+		listener = "actions"
+		type = "Action"
+	}
+
+	class Action <<SyncObjectChild>> {
+		id: string
+		type : HypertyResource.HypertyResourceType
+		description ?: string
+		time?: date
+		unit?: ContextUnit
+		version?: integer
+		values: ContextValue[]
+		tag?: string
+	}
+
+	class RawContextValue {
+	}
+
+	class ProcessedContextValue {
+	}
+
+	Context *-- "1..*" ContextValue
+
+	Context -up-|> SyncDataObject.SyncObjectParent
+	Contexts -up-|> SyncDataObject.SyncObjectChildren
+	Actions -up-|> SyncDataObject.SyncObjectChildren
+	Action -up-|> SyncDataObject.SyncObjectChild
+	Context -up-|> SyncDataObject.SyncObjectChild
+	Context .left. Actions
+	Context .left. Contexts
+	Action .. Actions
+	Context --> HypertyResource.HypertyResourceType
+	Context --> ContextUnit
+	ContextValue --> ContextUnit
+	ContextValue --> URL.HypertyRuntimeURL
+
+
+	RawContextValue -up-|> ContextValue
+	ProcessedContextValue -up-|> ContextValue
+}
+
+@enduml

@@ -8,6 +8,7 @@ This doc specifies Messages that are used to manage Hyperty Data Object Synchron
 -	[Synchronisation management by Sync Manager Observer](#synchronisation-management-by-sync-manager-observer)
 -	[Synchronisation Management by Message Node](#synchronisation-management-by-message-node)
 -	[Synchronisation Messages among Synchers](#synchronisation-messages-among-synchers)
+-	[Data Object Read Messages between Synchers](#data-object-read)
 
 where,
 
@@ -457,4 +458,39 @@ Message sent by Child Object Reporter Hyperty to Data Object Parent Children Han
 "from" : "hyperty://<sp-domain>/<hyperty-child-reporter-identifier>",
 "to" : "<ObjectURL>/children/<resource-children-name>",
 "body" : { "resource" : "hyperty://<sp-domain>/<hyperty-child-reporter-identifier>#<1>" }
+```
+
+#### Data Object Read
+
+Read Message sent by Reader Hyperty to Data Object URL.
+
+```
+"id" : "1",
+"type" : "read",
+"from" : "hyperty://<sp-domain>/<hyperty-reader-identifier>",
+"to" : "<ObjectURL>"
+```
+
+##### Successful Read Response with Data Object
+
+Successful Read Response Message from Reporter Hyperty to Reader Hyperty.
+
+```
+"id" : "1",
+"type" : "response",
+"from" : "<ObjectURL>",
+"to" : "hyperty://<sp-domain>/<hyperty-reader-identifier>",
+"body" : { "code" : "2XX" , "value" : "<data object>" }
+```
+
+##### Unauthorised Read Response
+
+Unauthorised Read Response Message from Reporter Hyperty to Reader Hyperty.
+
+```
+"id" : "1",
+"type" : "response",
+"from" : "<ObjectURL>",
+"to" : "hyperty://<sp-domain>/<hyperty-reader-identifier>",
+"body" : { "code" : "401" , "description" : "unauthorized" }
 ```

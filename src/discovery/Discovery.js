@@ -21,13 +21,13 @@
 * limitations under the License.
 **/
 
-import {divideURL} from '../utils/utils';
+import {divideURL, convertToUserURL} from '../utils/utils';
 
 /**
-* Core HypertyDiscovery interface
-* Class to allow applications to search for hyperties using the message bus
+* Core Discovery interface
+* Class to allow applications to search for hyperties and DataObjects using the message bus
 */
-class HypertyDiscovery {
+class Discovery {
 
   /**
   * To initialise the HypertyDiscover, which will provide the support for hyperties to
@@ -41,16 +41,17 @@ class HypertyDiscovery {
 
     _this.domain = divideURL(hypertyURL).domain;
     _this.discoveryURL = hypertyURL;
+
   }
 
   /**
   * function to request about dataObject registered in domain registry, and
-  * return the dataObject instance  url, if found.
-  * @param  {String}              name  dataObject Name
+  * return the dataObject information, if found.
+  * @param  {String}              name  dataObject URL
   * @param  {String}            domain (Optional)
   * @return {Promise}          Promise
   */
-  discoverDataObjectPerName(name, domain) {
+  discoverDataObjectPerURL(url, domain) {
     let _this = this;
     let activeDomain;
 
@@ -61,24 +62,129 @@ class HypertyDiscovery {
     }
 
     let msg = {
-      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: 'dataObject://' + name}
+      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: url, search:'dataObjectPerURL'}
     };
 
     return new Promise(function(resolve, reject) {
 
       _this.messageBus.postMessage(msg, (reply) => {
 
-        let dataObjectUrl = reply.body.value.url;
+        let dataObject = reply.body.value;
 
-        if (dataObjectUrl) {
-          resolve(dataObjectUrl);
+        if (dataObject) {
+          resolve(dataObject);
         } else {
-          reject('DataObject name does not exist');
+          reject('DataObject not found');
         }
       });
+    });
+  }
 
+  /**
+  *  function to delete an Data Object registered in the Domain Registry
+  *  @param   {String}           url              dataObject url
+  *  @param   {domain}           domain         (Optional)
+  *  @return  {Promise}          Promise          result
+  */
+  deleteDataObject(url, domain) {
+    let _this = this;
+    let activeDomain;
+
+    if (!domain) {
+      activeDomain = _this.domain;
+    } else {
+      activeDomain = domain;
+    }
+
+    let msg = {
+      type: 'delete', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/',  body: { value: {name: url}}};
+
+    return new Promise(function(resolve, reject) {
+
+      _this.messageBus.postMessage(msg, (reply) => {
+
+        let response = reply.body.code;
+
+        if (response === 200) {
+          resolve(response);
+        } else {
+          reject('Error on deleting dataObject');
+        }
+      });
     });
 
+  }
+
+  /**
+  * function to request about specific reporter dataObject registered in domain registry, and
+  * return the dataObjects from that reporter.
+  * @param  {String}           reporter     dataObject reporter
+  * @param  {String}           domain       (Optional)
+  * @return {Array}           Promise       DataObjects
+  */
+  discoverDataObjectPerReporter(reporter, domain) {
+    let _this = this;
+    let activeDomain;
+
+    if (!domain) {
+      activeDomain = _this.domain;
+    } else {
+      activeDomain = domain;
+    }
+
+    let msg = {
+      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: reporter, search:'dataObjectPerReporter'}
+    };
+
+    return new Promise(function(resolve, reject) {
+
+      _this.messageBus.postMessage(msg, (reply) => {
+
+        let dataObjects = reply.body.value;
+
+        if (dataObjects) {
+          resolve(dataObjects);
+        } else {
+          reject('No dataObject was found');
+        }
+      });
+    });
+  }
+
+  /** Advanced Search for Hyperties registered in domain registry
+  * @param  {String}           user                  user identifier, either in url or email format
+  * @param  {Array<string>}    schema (Optional)     types of hyperties schemas
+  * @param  {Array<string>}    resources (Optional)  types of hyperties resources
+  * @param  {String}           domain (Optional)     domain of the registry to search
+  */
+  discoverHyperty(user, schema, resources, domain) {
+    let _this = this;
+    let activeDomain;
+    let userIdentifier = convertToUserURL(user);
+
+    if (!domain) {
+      activeDomain = _this.domain;
+    } else {
+      activeDomain = domain;
+    }
+
+    let msg = {
+      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: {user: userIdentifier, resources: resources, dataSchemes: schema}, search:'hypertyResourcesDataSchemes'}
+    };
+
+    return new Promise(function(resolve, reject) {
+
+      _this.messageBus.postMessage(msg, (reply) => {
+
+        let hyperties = reply.body.value;
+
+        if (hyperties) {
+          resolve(hyperties);
+        } else {
+          reject('No Hyperty was found');
+        }
+      });
+    });
   }
 
   /**
@@ -102,7 +208,7 @@ class HypertyDiscovery {
 
     // message to query domain registry, asking for a user hyperty.
     let message = {
-      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: identityURL}
+      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: identityURL, search:'HypertyPerUser'}
     };
 
     console.log('Message: ', message, activeDomain, identityURL);
@@ -174,7 +280,7 @@ class HypertyDiscovery {
 
     // message to query domain registry, asking for a user hyperty.
     let message = {
-      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: identityURL}
+      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: identityURL, search:'HypertyPerUser'}
     };
 
     console.log('Message discoverHypertiesPerUser: ', message, activeDomain, identityURL);
@@ -196,6 +302,42 @@ class HypertyDiscovery {
     });
   }
 
+  /**
+  *  function to delete an hypertyInstance in the Domain Registry
+  *  @param   {String}           user              user url
+  *  @param   {String}           hypertyInstance   HypertyInsntance url
+  *  @param   {domain}           domain (Optional)
+  *  @return  {Promise}          Promise          result
+  */
+  deleteHyperty(user, hypertyInstance, domain) {
+    let _this = this;
+    let activeDomain;
+
+    if (!domain) {
+      activeDomain = _this.domain;
+    } else {
+      activeDomain = domain;
+    }
+
+    let msg = {
+      type: 'delete', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/',   body: { value: {user: user, hypertyURL: hypertyInstance }}};
+
+    return new Promise(function(resolve, reject) {
+
+      _this.messageBus.postMessage(msg, (reply) => {
+
+        let response = reply.body.code;
+
+        if (response) {
+          resolve('Hyperty successfully deleted');
+        } else {
+          reject('Error on deleting hyperty');
+        }
+      });
+    });
+
+  }
+
 }
 
-export default HypertyDiscovery;
+export default Discovery;

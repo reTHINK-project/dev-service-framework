@@ -7,7 +7,7 @@ package HypertyResource <<Rect>> {
 		direction ?: ResourceDirection
 	}
 
-	class HypertyResourceType {
+	enum HypertyResourceType {
 		CHAT
 		AUDIO
 		VIDEO

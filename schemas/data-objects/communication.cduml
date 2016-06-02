@@ -3,6 +3,7 @@
 package Communication <<Rect>> {
 
 	class Communication {
+		scheme = "comm"
 		startingTime : date
 		lastModified : date
 		duration ?: date
@@ -16,7 +17,7 @@ package Communication <<Rect>> {
 	class ChatMessages <<Children>> {
 		parent = "communication"
 		listener = "chatmessages"
-		type : ChatMessage
+		type = "ChatMessage"
 	}
 
 	class ChatMessage <<SyncObjectChild>> {

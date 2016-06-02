@@ -1,6 +1,6 @@
 {
   "name": "service-framework",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Set of JavaScript factory modules for thr reTHINK base Data Models and Data Synchronization",
   "main": "dist/service-framework.js",
   "scripts": {
@@ -47,6 +47,7 @@
     "gulp-insert": "^0.5.0",
     "gulp-prompt": "^0.1.2",
     "gulp-replace": "^0.5.4",
+    "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.4.2",
     "gulp-util": "^3.0.7",
     "gulp-watch": "^4.3.5",

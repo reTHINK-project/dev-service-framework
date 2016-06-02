@@ -98,3 +98,13 @@ Message sent by the Identity Module function to Application Sandbox to hide admi
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/gui-manager",
 "body" : { "method" : "hideAdminPage" }
 ```
+
+#### Get Identity Associated to Hyperty Instance
+
+```
+"id" : "4"
+"type" : "read",
+"from" : "hyperty://<hyperty-connector>/<hyperty-instance-identifier>",
+"to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
+"body" : { "resource" : "." , "criteria" : "hyperty = hyperty://<hyperty-connector>/<hyperty-instance-identifier>" }
+```
