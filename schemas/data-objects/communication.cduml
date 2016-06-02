@@ -3,6 +3,7 @@
 package Communication <<Rect>> {
 
 	class Communication {
+		scheme = "comm"
 		startingTime : date
 		lastModified : date
 		duration ?: date
@@ -11,7 +12,6 @@ package Communication <<Rect>> {
 		qos ?: CommunicationQuality
 		resources : HypertyResource.HypertyResource[]
 		children = ["chatmessages"]
-		scheme = "comm"
 	}
 
 	class ChatMessages <<Children>> {

@@ -1,139 +1,64 @@
 {
 	"$schema": "http://json-schema.org/draft-04/schema#",
 
-	"id": "URL",
-	"type": "object",
-	"required": ["scheme"],
-	"anyOf": [
-		{ "type": "string" },
-		{ "type": "string" },
-		{ "type": "string" },
-		{ "type": "string" },
-		{ "type": "string" },
-		{ "type": "string" },
-		{ "type": "string" },
-		{ "type": "string" },
-		{ "type": "string" },
-		{ "type": "string" }
-	]
-	,
-	"properties": {
-		"scheme": {
-			"type": "string"
-		},
-		"username": {
-			"type": "string"
-		},
-		"password": {
-			"type": "string"
-		},
-		"host": {
-			"type": "string"
-		},
-		"port": {
-			"type": "string"
-		},
-		"path": {
-			"type": "string"
-		},
-		"query": {
-			"type": "string"
-		},
-		"fragment": {
-			"type": "string"
+	"URLList": {
+		"type": "object",
+		"anyOf": [
+			{ "$ref": "#/UserURLList" },
+			{ "$ref": "#/UserUUIDURLList" },
+			{ "$ref": "#/UserAccountURLList" },
+			{ "$ref": "#/HypertyURLList" },
+			{ "$ref": "#/HypertyCatalogueURLList" },
+			{ "$ref": "#/HypertyRuntimeURLList" },
+			{ "$ref": "#/CommunicationURLList" },
+			{ "$ref": "#/DomainURLList" },
+			{ "$ref": "#/ContextURLList" }
+		]
+		,
+		"properties": {
 		}
 	}, 
-	"UserURL": {
+	"UserURLList": {
 		"type": "object",
-		"required": ["scheme"],
 		"properties": {
-			"scheme": {
-				"constant": "user"
-			}
 		}
 	}, 
-	"UserGUIDURL": {
+	"UserUUIDURLList": {
 		"type": "object",
-		"required": ["scheme"],
 		"properties": {
-			"scheme": {
-				"constant": "user-guid"
-			}
 		}
 	}, 
-	"DomainURL": {
+	"DomainURLList": {
 		"type": "object",
-		"required": ["scheme"],
 		"properties": {
-			"scheme": {
-				"constant": "domain"
-			}
 		}
 	}, 
-	"UserAccountURL": {
+	"UserAccountURLList": {
 		"type": "object",
-		"required": ["scheme"],
 		"properties": {
-			"scheme": {
-				"constant": "acct"
-			}
 		}
 	}, 
-	"HypertyURL": {
+	"HypertyURLList": {
 		"type": "object",
-		"required": ["scheme"],
 		"properties": {
-			"scheme": {
-				"constant": "hyperty"
-			}
-		}
-	}, 
-	"HypertyCatalogueURL": {
-		"type": "object",
-		"required": ["scheme"],
-		"properties": {
-			"scheme": {
-				"constant": "hyperty-catalogue"
-			}
-		}
-	}, 
-	"HypertyRuntimeURL": {
-		"type": "object",
-		"required": ["scheme"],
-		"properties": {
-			"scheme": {
-				"constant": "hyperty-runtime"
-			}
-		}
-	}, 
-	"CommunicationURL": {
-		"type": "object",
-		"required": ["scheme"],
-		"properties": {
-			"scheme": {
-				"constant": "comm"
-			}
-		}
-	}, 
-	"ConnectionURL": {
-		"type": "object",
-		"required": ["scheme"],
-		"properties": {
-			"scheme": {
-				"constant": "connection"
-			}
-		}
-	}, 
-	"ContextURL": {
-		"type": "object",
-		"required": ["scheme"],
-		"properties": {
-			"scheme": {
-				"constant": "ctxt"
-			}
 		}
 	}, 
 	"HypertyCatalogueURLList": {
+		"type": "object",
+		"properties": {
+		}
+	}, 
+	"HypertyRuntimeURLList": {
+		"type": "object",
+		"properties": {
+		}
+	}, 
+	"CommunicationURLList": {
+		"type": "object",
+		"properties": {
+		}
+	}, 
+	"ContextURLList": {
 		"type": "object",
 		"properties": {
 		}

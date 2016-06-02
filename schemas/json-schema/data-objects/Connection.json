@@ -3,8 +3,11 @@
 
 	"id": "Connection",
 	"type": "object",
-	"required": ["status", "owner", "peer", "scheme"],
+	"required": ["scheme", "status", "owner", "peer"],
 	"properties": {
+		"scheme": {
+			"constant": "connection"
+		},
 		"status": {
 			"type": "string"
 		},
@@ -13,9 +16,6 @@
 		},
 		"peer": {
 			"type": "string"
-		},
-		"scheme": {
-			"constant": "connection"
 		}
 	}, 
 	"OwnerPeer": {

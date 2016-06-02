@@ -3,10 +3,10 @@
 package Connection <<Rect>> {
 
 	class Connection {
+		scheme = "connection"
 		status : string
 		owner : URL.UserURL
 		peer : URL.ConnectionURL
-		scheme = "connection"
 	}
 
   	class OwnerPeer {

@@ -3,8 +3,11 @@
 
 	"id": "Communication",
 	"type": "object",
-	"required": ["startingTime", "lastModified", "status", "resources", "children", "scheme"],
+	"required": ["scheme", "startingTime", "lastModified", "status", "resources", "children"],
 	"properties": {
+		"scheme": {
+			"constant": "comm"
+		},
 		"startingTime": {
 			"type": "string",
 			"format": "date-time"
@@ -43,9 +46,6 @@
 		},
 		"children": {
 			"constant": ["chatmessages"]
-		},
-		"scheme": {
-			"constant": "comm"
 		}
 	}, 
 	"ChatMessages": {

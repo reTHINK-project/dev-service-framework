@@ -36,12 +36,7 @@
 					"av",
 					"screen",
 					"file",
-					"midi",
-					"temperature",
-					"humidity",
-					"light",
-					"heart_rate",
-					"steps"
+					"midi"
 				]
 			}
 		},

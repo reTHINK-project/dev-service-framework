@@ -3,6 +3,7 @@
 package Context <<Rect>> {
 
 	class Context {
+		scheme = "context"
 		id: string
 		type : HypertyResource.HypertyResourceType
 		description ?: string
@@ -12,7 +13,6 @@ package Context <<Rect>> {
 		values: ContextValue[]
 		tag?: string
 		children ?=["actions","contexts"]
-		scheme = "context"
 	}
 
 	class ContextUnit {

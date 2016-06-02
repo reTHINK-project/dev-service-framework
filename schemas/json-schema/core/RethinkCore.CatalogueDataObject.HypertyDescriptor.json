@@ -6,7 +6,7 @@
 	"required": ["dataObjectUrls", "hypertyType", "messageSchemaUrl", "constraints"],
 	"properties": {
 		"dataObjectUrls": {
-			"$ref": "URL.json#/HypertyCatalogueURLList"
+			"type": "string"
 		},
 		"hypertyType": {
 			"type": "array",
@@ -18,12 +18,7 @@
 					"av",
 					"screen",
 					"file",
-					"midi",
-					"temperature",
-					"humidity",
-					"light",
-					"heart_rate",
-					"steps"
+					"midi"
 				]
 			}
 		},

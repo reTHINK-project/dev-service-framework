@@ -3,8 +3,11 @@
 
 	"id": "Context",
 	"type": "object",
-	"required": ["id", "type", "values", "scheme"],
+	"required": ["scheme", "id", "type", "values"],
 	"properties": {
+		"scheme": {
+			"constant": "context"
+		},
 		"id": {
 			"type": "string"
 		},
@@ -43,9 +46,6 @@
 		},
 		"children": {
 			"constant": ["actions","contexts"]
-		},
-		"scheme": {
-			"constant": "context"
 		}
 	}, 
 	"ContextUnit": {
