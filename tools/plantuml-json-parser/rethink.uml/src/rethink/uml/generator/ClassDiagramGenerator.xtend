@@ -78,6 +78,9 @@ class ClassDiagramGenerator implements IGenerator {
 		
 		return '''
 			"type": "object",
+			«IF clazz.stereotype != null && clazz.stereotype != '(T,orchid)'»
+				"stereotype": "«clazz.stereotype.toLowerCase»",
+			«ENDIF»
 			«IF !required.empty»
 				"required": [«FOR prop:required SEPARATOR ", "»"«prop»"«ENDFOR»],
 			«ENDIF»

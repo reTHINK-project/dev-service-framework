@@ -35,6 +35,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
   ----event handlers----
   _onSubscriptionHandler: (event) => void
   _onResponseHandler: (event) => void
+  _onReadHandler: (event) => void
   */
 
   /**
@@ -59,9 +60,11 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     super._allocateListeners();
     let _this = this;
 
-    _this._responseListener = _this._bus.addListener(_this._url, (msg) => {
-      if (msg.type === 'response') {
-        _this._onResponse(msg);
+    _this._objectListener = _this._bus.addListener(_this._url, (msg) => {
+      console.log('DataObject-' + _this._url + '-RCV: ', msg);
+      switch (msg.type) {
+        case 'response': _this._onResponse(msg); break;
+        case 'read': _this._onRead(msg); break;
       }
     });
   }
@@ -70,12 +73,17 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     super._releaseListeners();
     let _this = this;
 
-    _this._responseListener.remove();
+    _this._objectListener.remove();
   }
 
+  /**
+   * Send invitations (create messages) to hyperties, observers list.
+   * @param  {HypertyURL[]} observers List of Hyperty URL's
+   */
   inviteObservers(observers) {
     let _this = this;
 
+    //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onCreate
     let inviteMsg = {
       type: 'create', from: _this._syncher._owner, to: _this._syncher._subURL,
       body: { resource: _this._url, schema: _this._schema, value: _this._syncObj.data, authorise: observers }
@@ -90,6 +98,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
   delete() {
     let _this = this;
 
+    //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onDelete
     let deleteMsg = {
       type: 'delete', from: _this._owner, to: _this._syncher._subURL,
       body: { resource: _this._url }
@@ -112,7 +121,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
 
   /**
    * Setup the callback to process subscribe and unsubscribe notifications
-   * @param {function(event: MsgEvent)} callback
+   * @param {function(event: MsgEvent)} callback function to receive events
    */
   onSubscription(callback) {
     this._onSubscriptionHandler = callback;
@@ -120,12 +129,21 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
 
   /**
    * Setup the callback to process response notifications of the create's
-   * @param {function(event: MsgEvent)} callback
+   * @param {function(event: MsgEvent)} callback function to receive events
    */
   onResponse(callback) {
     this._onResponseHandler = callback;
   }
 
+  /**
+   * Setup the callback to process read notifications
+   * @param {function(event: MsgEvent)} callback
+   */
+  onRead(callback) {
+    this._onReadHandler = callback;
+  }
+
+  //FLOW-IN: message received from parent Syncher -> _onForward
   _onForward(msg) {
     let _this = this;
 
@@ -136,6 +154,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     }
   }
 
+  //FLOW-IN: message received from this -> _onForward: emitted by a remote Syncher -> subscribe
   _onSubscribe(msg) {
     let _this = this;
     let hypertyUrl = msg.body.from;
@@ -180,6 +199,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     }
   }
 
+  //FLOW-IN: message received from this -> _onForward: emitted by a remote DataObjectObserver -> unsubscribe
   _onUnSubscribe(msg) {
     let _this = this;
     let hypertyUrl = msg.body.from;
@@ -199,6 +219,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     }
   }
 
+  //FLOW-IN: message received from ReporterURL address: emited by a remote Syncher -> _onRemoteCreate -> event.ack
   _onResponse(msg) {
     let _this = this;
 
@@ -211,6 +232,35 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     if (_this._onResponseHandler) {
       console.log('RESPONSE-EVENT: ', event);
       _this._onResponseHandler(event);
+    }
+  }
+
+  //FLOW-IN: message received from ReporterURL address: emited by a remote Syncher -> read
+  _onRead(msg) {
+    let _this = this;
+
+    let event = {
+      type: msg.type,
+      url: msg.from,
+
+      accept: () => {
+        _this._bus.postMessage({
+          id: msg.id, type: 'response', from: msg.to, to: msg.from,
+          body: { code: 200, value: deepClone(_this.data) }
+        });
+      },
+
+      reject: (reason) => {
+        _this._bus.postMessage({
+          id: msg.id, type: 'response', from: msg.to, to: msg.from,
+          body: { code: 401, desc: reason }
+        });
+      }
+    };
+
+    if (_this._onReadHandler) {
+      console.log('READ-EVENT: ', event);
+      _this._onReadHandler(event);
     }
   }
 

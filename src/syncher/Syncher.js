@@ -96,7 +96,7 @@ class Syncher {
 
  /**
   * Request a DataObjectReporter creation. The URL will be be requested by the allocation mechanism.
-  * @param  {SchemaURL} schema - URL of the object descriptor
+  * @param  {SchemaURL} schema - Hyperty Catalogue URL address that can be used to retrieve the JSON-Schema describing the Data Object schema
   * @param  {HypertyURL[]} observers - List of hyperties that are pre-authorized for subscription
   * @param  {JSON} initialData - Initial data of the reporter
   * @return {Promise<DataObjectReporter>} Return Promise to a new Reporter. The reporter can be accepted or rejected by the PEP
@@ -107,19 +107,19 @@ class Syncher {
    initialData.reporter = _this._owner;
    initialData.schema = schema;
 
+   //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onCreate
    let requestMsg = {
      type: 'create', from: _this._owner, to: _this._subURL,
      body: { schema: schema, value: initialData, authorise: observers }
    };
 
    return new Promise((resolve, reject) => {
-     //request create to the Allocation system? Can be rejected by the PolicyEngine.
+     //request create to the allocation system. Can be rejected by the PolicyEngine.
      _this._bus.postMessage(requestMsg, (reply) => {
        console.log('create-response: ', reply);
        if (reply.body.code === 200) {
-         let objURL = reply.body.resource;
-
          //reporter creation accepted
+         let objURL = reply.body.resource;
          let newObj = new DataObjectReporter(_this, objURL, schema, 'on', initialData, reply.body.childrenResources);
          _this._reporters[objURL] = newObj;
 
@@ -133,15 +133,15 @@ class Syncher {
  }
 
  /**
-  * Request a subscription to an existent object.
-  * @param {SchemaURL} schema - URL of the object descriptor
-  * @param {ObjectURL} objURL - Address of the existent reporter object
-  * @return {Promise<DataObjectObserver>} Return Promise to a new observer.
+  * Request a subscription to an existent reporter object.
+  * @param {SchemaURL} schema - Hyperty Catalogue URL address that can be used to retrieve the JSON-Schema describing the Data Object schema
+  * @param {ObjectURL} objURL - Address of the existent reporter object to be observed
+  * @return {Promise<DataObjectObserver>} Return Promise to a new observer. It's associated with the reporter.
   */
  subscribe(schema, objURL) {
    let _this = this;
 
-   //TODO: validate if subscription already exists ?
+   //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onLocalSubscribe
    let subscribeMsg = {
      type: 'subscribe', from: _this._owner, to: _this._subURL,
      body: { schema: schema, resource: objURL }
@@ -149,6 +149,8 @@ class Syncher {
 
    return new Promise((resolve, reject) => {
      //request subscription
+     //Provisional data is applied to the DataObjectObserver after confirmation. Or discarded if there is no confirmation.
+     //for more info see the DataProvisional class documentation.
      _this._bus.postMessage(subscribeMsg, (reply) => {
        console.log('subscribe-response: ', reply);
        let newProvisional = _this._provisionals[objURL];
@@ -172,6 +174,32 @@ class Syncher {
  }
 
  /**
+  * Request a read action on the reporter object
+  * @param {ObjectURL} objURL - URL of the reporter object to be read
+  * @return {Promise<Object>} Return Promise to last available data of the reporter
+  */
+ read(objURL) {
+   let _this = this;
+
+   //FLOW-OUT: this message will be sent directly to reporter object (maybe there is no listener available, so it will be resolved with MessageBus -> resolve)
+   //will reach the remote object in DataObjectReporter -> _onRead
+   let readMsg = {
+     type: 'read', from: _this._owner, to: objURL
+   };
+
+   return new Promise((resolve, reject) => {
+     _this._bus.postMessage(readMsg, (reply) => {
+       console.log('read-response: ', reply);
+       if (reply.body.code === 200) {
+         resolve(reply.body.value);
+       } else {
+         reject(reply.body.desc);
+       }
+     });
+   });
+ }
+
+ /**
   * Setup the callback to process create and delete events of remove Reporter objects.
   * This is releated to the messagens sent by create to the observers Hyperty array.
   * @param {function(event: MsgEvent)} callback
@@ -180,6 +208,7 @@ class Syncher {
    this._onNotificationHandler = callback;
  }
 
+ //FLOW-IN: message received from a local runtime ReporterObject -> _onRemoteSubscribe
  _onForward(msg) {
    let _this = this;
 
@@ -187,6 +216,7 @@ class Syncher {
    reporter._onForward(msg);
  }
 
+ //FLOW-IN: message received from a remote Syncher -> create (this is actually an invitation to subscribe)
  _onRemoteCreate(msg) {
    let _this = this;
 
@@ -221,6 +251,7 @@ class Syncher {
    }
  }
 
+ //FLOW-IN: message received from a remote DataObjectReporter -> delete
  _onRemoteDelete(msg) {
    let _this = this;
 

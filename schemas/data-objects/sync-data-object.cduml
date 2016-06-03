@@ -30,12 +30,12 @@ package SyncDataObject {
 
 	enum ObserverPermission {
 	WRITE
-	WRITE-READ
+	WRITE_READ
 	READ
 	}
 
-	SyncObjectParent .up.|> SyncObject
-	SyncObjectChild .up.|> SyncObject
+	SyncObjectParent .up.|> SyncDataObject
+	SyncObjectChild .up.|> SyncDataObject
 
 	SyncObjectParent .down.> "0..*" SyncObjectChildren
 	SyncObjectParent .down.> "0..*" SyncObjectChild

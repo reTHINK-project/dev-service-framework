@@ -3,6 +3,7 @@
 package Context <<Rect>> {
 
 	class Context {
+		scheme = "context"
 		id: string
 		type : HypertyResource.HypertyResourceType
 		description ?: string
@@ -68,7 +69,7 @@ package Context <<Rect>> {
 	Context --> HypertyResource.HypertyResourceType
 	Context --> ContextUnit
 	ContextValue --> ContextUnit
-	ContextValue --> Core.URL.HypertyRuntimeURL
+	ContextValue --> URL.HypertyRuntimeURL
 
 
 	RawContextValue -up-|> ContextValue

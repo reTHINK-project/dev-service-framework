@@ -22,7 +22,8 @@
 			{ "$ref": "#/CommunicationDataObjectSchema" },
 			{ "$ref": "#/ConnectionDataObjectSchema" },
 			{ "$ref": "#/IdentityDataObjectSchema" },
-			{ "$ref": "#/ContextDataObjectSchema" }
+			{ "$ref": "#/ContextDataObjectSchema" },
+			{ "$ref": "#/ActionDataObjectSchema" }
 		]
 		,
 		"properties": {
@@ -31,6 +32,7 @@
 					"comm",
 					"connection",
 					"ctxt",
+					"action",
 					"identity"
 				]
 			},
@@ -46,22 +48,47 @@
 	}, 
 	"CommunicationDataObjectSchema": {
 		"type": "object",
+		"required": ["scheme"],
 		"properties": {
+			"scheme": {
+				"constant": "comm"
+			}
 		}
 	}, 
 	"ConnectionDataObjectSchema": {
 		"type": "object",
+		"required": ["scheme"],
 		"properties": {
+			"scheme": {
+				"constant": "connection"
+			}
 		}
 	}, 
 	"IdentityDataObjectSchema": {
 		"type": "object",
+		"required": ["scheme"],
 		"properties": {
+			"scheme": {
+				"constant": "identity"
+			}
 		}
 	}, 
 	"ContextDataObjectSchema": {
 		"type": "object",
+		"required": ["scheme"],
 		"properties": {
+			"scheme": {
+				"constant": "ctxt"
+			}
+		}
+	}, 
+	"ActionDataObjectSchema": {
+		"type": "object",
+		"required": ["scheme"],
+		"properties": {
+			"scheme": {
+				"constant": "action"
+			}
 		}
 	}
 }
