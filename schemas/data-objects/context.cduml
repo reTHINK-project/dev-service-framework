@@ -32,6 +32,12 @@ package Context <<Rect>> {
 		address ?: URL.HypertyRuntimeURL
 	}
 
+	class Contexts <<Children>> {
+		parent = "context"
+		listener = "contexts"
+		type = "Context"
+	}
+
 	class Actions <<Children>> {
 		parent = "context"
 		listener = "<actions>"
