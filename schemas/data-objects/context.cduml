@@ -11,34 +11,31 @@ package Context <<Rect>> {
 		version?: integer
 		values: ContextValue[]
 		tag?: string
-		children ?=["actions","contexts"]
+		children ?=["<actions>"]
 	}
 
-	class ContextUnit {
-
+	enum ContextUnit {
+	TIME_MINUTES
+	TIME_SECONDS
+	TIME_HOURS
 	}
 
 	class ContextValue {
 		name : string
-		unit : ContextUnit
+		unit ?: ContextUnit
 		value : object
-		sum : ContextUnit
+		sum ?: ContextUnit
 		time ?: date
 		updateTime ?: date
 		expires ?: date
 		address ?: URL.HypertyRuntimeURL
 	}
 
-	class Contexts <<Children>> {
-		parent = "context"
-		listener = "contexts"
-		type : "Context"
-	}
-
 	class Actions <<Children>> {
 		parent = "context"
-		listener = "actions"
-		type = "Action"
+		listener = "<actions>"
+		type = "<Action>"
+		resourcePermissions = "write"
 	}
 
 	class Action <<SyncObjectChild>> {

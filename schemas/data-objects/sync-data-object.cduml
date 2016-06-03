@@ -2,7 +2,7 @@
 
 package SyncDataObject {
 
-	class SyncObject {
+	class SyncDataObject {
 		url : URL.URL
 		reporter : URL.HypertyURL
 		schema : URL.HypertyCatalogueURL

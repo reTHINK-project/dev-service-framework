@@ -15,6 +15,11 @@ package HypertyResource <<Rect>> {
 		SCREEN
 		FILE
 		MIDI
+		ACTIVITY
+		AVAILABILITY
+		LOCATION
+		LIGHT
+		HUMIDITY
 	}
 
 	enum ResourceDirection {
