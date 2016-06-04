@@ -3,6 +3,10 @@
 package Context <<Rect>> {
 
 	class Context {
+		url : URL.URL
+		reporter : URL.HypertyURL
+		schema : URL.HypertyCatalogueURL
+		name : string
 		scheme = "context"
 		id: string
 		type : HypertyResource.HypertyResourceType
@@ -13,12 +17,59 @@ package Context <<Rect>> {
 		values: ContextValue[]
 		tag?: string
 		children ?=["<actions>"]
+		childUrls ?: URL.URL[]
 	}
 
 	enum ContextUnit {
-	TIME_MINUTES
-	TIME_SECONDS
-	TIME_HOURS
+	METER
+	GRAM
+	SECOND
+	AMPERE
+	KELVIN
+	CANDELA
+	MOLE
+	HERTZ
+	RADIAN
+	STERADIAN
+	NEWTON
+	PASCAL
+	JOULE
+	WATT
+	COULOMB
+	VOLT
+	FARAD
+	OHM
+	SIEMENS
+	WEBER
+	TESLA
+	HENRY
+	DEGREES_CELSIUS
+	LUMEN
+	LUX
+	BECQUEREL
+	GRAY
+	SIEVERT
+	KATAL
+	PH_ACIDITY
+	VALUE_OF_A_SWITCH
+	COUNTER_VALUE
+	RELATIVE_HUMIDITY
+	AREA
+	VOLUME_IN_LITERS
+	VELOCITY
+	ACCELERATION
+	FLOW_RATE_IN_LITERS_PER_SECOND
+	IRRADIANCE
+	LUMINANCE
+	BEL_SOUND_PRESSURE_LEVEL
+	BITS_PER_SECOND
+	DEGREES_LATITUDE
+	DEGREES_LONGITUDE
+	REMAINING_BATTERY_ENERGY_LEVEL_IN_PERCENTS
+	REMAINING_BATTERY_ENERGY_LEVEL_IN_SECONDS
+	HEART_RATE_IN_BEATS_PER_MINUTE
+	CUMULATIVE_NUMBER_OF_HEART_BEATS
+	STEPS
 	}
 
 	class ContextValue {
@@ -32,20 +83,17 @@ package Context <<Rect>> {
 		address ?: URL.HypertyRuntimeURL
 	}
 
-	class Contexts <<Children>> {
-		parent = "context"
-		listener = "contexts"
-		type = "Context"
-	}
-
 	class Actions <<Children>> {
 		parent = "context"
 		listener = "<actions>"
 		type = "<Action>"
-		resourcePermissions = "write"
+		observerPermissions = "write"
 	}
 
 	class Action <<SyncObjectChild>> {
+		url : URL.URL
+		reporter : URL.HypertyURL
+		schema : URL.HypertyCatalogueURL
 		id: string
 		type : HypertyResource.HypertyResourceType
 		description ?: string
@@ -65,16 +113,14 @@ package Context <<Rect>> {
 	Context *-- "1..*" ContextValue
 
 	Context -up-|> SyncDataObject.SyncObjectParent
-	Contexts -up-|> SyncDataObject.SyncObjectChildren
 	Actions -up-|> SyncDataObject.SyncObjectChildren
 	Action -up-|> SyncDataObject.SyncObjectChild
 	Context -up-|> SyncDataObject.SyncObjectChild
 	Context .left. Actions
-	Context .left. Contexts
 	Action .. Actions
 	Context --> HypertyResource.HypertyResourceType
 	Context --> ContextUnit
-	ContextValue --> ContextUnit
+	ContextValue -right-> ContextUnit
 	ContextValue --> URL.HypertyRuntimeURL
 
 
