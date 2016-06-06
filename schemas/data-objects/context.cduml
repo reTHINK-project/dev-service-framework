@@ -70,6 +70,7 @@ package Context <<Rect>> {
 	HEART_RATE_IN_BEATS_PER_MINUTE
 	CUMULATIVE_NUMBER_OF_HEART_BEATS
 	STEPS
+	AVAILABILITY
 	}
 
 	class ContextValue {
@@ -81,6 +82,13 @@ package Context <<Rect>> {
 		updateTime ?: date
 		expires ?: date
 		address ?: URL.HypertyRuntimeURL
+	}
+
+	enum AvailabilityStatus {
+	 AVAILABLE
+	 UNAVAILABLE
+	 AWAY
+	 BUSY
 	}
 
 	class Actions <<Children>> {
@@ -123,6 +131,7 @@ package Context <<Rect>> {
 	ContextValue -right-> ContextUnit
 	ContextValue --> URL.HypertyRuntimeURL
 
+	ContextValue .left.> AvailabilityStatus : for Availability Context
 
 	RawContextValue -up-|> ContextValue
 	ProcessedContextValue -up-|> ContextValue
