@@ -9,7 +9,7 @@ package Context <<Rect>> {
 		name : string
 		scheme = "context"
 		id: string
-		type : HypertyResource.HypertyResourceType[]
+		type : HypertyResource.HypertyResourceType
 		description ?: string
 		time?: date
 		unit?: ContextUnit

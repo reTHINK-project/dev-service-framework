@@ -24,6 +24,7 @@ package HypertyResource <<Rect>> {
 		SLEEP
 		LIGHT
 		HUMIDITY
+		POWER
 	}
 
 	enum ResourceDirection {
