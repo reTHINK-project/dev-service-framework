@@ -9,7 +9,7 @@ package Context <<Rect>> {
 		name : string
 		scheme = "context"
 		id: string
-		type : HypertyResource.HypertyResourceType
+		type ?: HypertyResource.HypertyResourceType
 		description ?: string
 		time?: date
 		unit?: ContextUnit
@@ -74,6 +74,7 @@ package Context <<Rect>> {
 	}
 
 	class ContextValue {
+		type ?: HypertyResource.HypertyResourceType
 		name : string
 		unit ?: ContextUnit
 		value : object
@@ -99,6 +100,7 @@ package Context <<Rect>> {
 	}
 
 	class Action <<SyncObjectChild>> {
+		type ?: HypertyResource.HypertyResourceType
 		url : URL.URL
 		reporter : URL.HypertyURL
 		schema : URL.HypertyCatalogueURL
@@ -126,10 +128,10 @@ package Context <<Rect>> {
 	Context -up-|> SyncDataObject.SyncObjectChild
 	Context .left. Actions
 	Action .. Actions
-	Context --> HypertyResource.HypertyResourceType
+	ContextValue -up-> HypertyResource.HypertyResourceType
 	Context --> ContextUnit
 	ContextValue -right-> ContextUnit
-	ContextValue --> URL.HypertyRuntimeURL
+	ContextValue -up-> URL.HypertyRuntimeURL
 
 	ContextValue .left.> AvailabilityStatus : for Availability Context
 
