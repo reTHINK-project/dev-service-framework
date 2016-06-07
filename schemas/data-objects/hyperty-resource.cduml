@@ -18,6 +18,10 @@ package HypertyResource <<Rect>> {
 		ACTIVITY
 		AVAILABILITY
 		LOCATION
+		HEART_RATE
+		USER_STEPS
+		BATTERY
+		SLEEP
 		LIGHT
 		HUMIDITY
 	}
