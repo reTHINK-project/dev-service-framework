@@ -153,7 +153,7 @@ class RuntimeCatalogue {
           prefix = '';
         }
 
-        idpProxyURL = type + '://' + prefix + domain + '/.well-known/idp-proxy/' + idpproxy;
+        idpProxyURL = type + '://' + domain + '/.well-known/idp-proxy/' + idpproxy;
 
         return _this.getDescriptor(idpProxyURL, _this._createIdpProxy).then(function(result) {
 

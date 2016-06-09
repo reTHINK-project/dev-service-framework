@@ -163,6 +163,8 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
       type: msg.body.type,
       url: hypertyUrl,
 
+      identity: msg.body.identity,
+
       accept: () => {
         //create new subscription
         let sub = { url: hypertyUrl, status: 'on' };
