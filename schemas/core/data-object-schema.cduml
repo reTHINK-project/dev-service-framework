@@ -15,8 +15,7 @@ package RethinkCore <<Rect>> {
 			enum DataUrlScheme {
 				COMM
 				CONNECTION
-				CTXT
-				ACTION
+				CONTEXT
 				IDENTITY
 			}
 

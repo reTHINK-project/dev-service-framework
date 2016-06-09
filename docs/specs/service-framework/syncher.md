@@ -1,43 +1,28 @@
-*To be moved to dev-toolkit docs?*
+## Syncher
 
-## Syncher and SyncherManager
-![](SyncherManager.png)
+The Syncher API provides data object synchronisation among Hyperties as described by the [Reporter-Observer communication pattern](https://github.com/reTHINK-project/dev-hyperty-toolkit/blob/master/docs/tutorials/p2p-data-sync.md).
 
-MiniBus is a core component that represents a view of the MessageBus, and it's inserted as a dependency. When an object (Reporter or Observed) is created, the Syncher will add listeners in the MiniBus to receive/send Messages of that object.
+The synchronised Data Objects are JSON data objects that are compliant with [SyncDataObject JSON Schema](../../../schemas/json-schema/data-objects/SyncDataObject.json).
 
-[Sequence Diagram Doc](../specs/dynamic-view/data-sync/readme.md)
+The Syncher API is depicted in the following diagram:
 
-### SyncherManager
-The SyncherManager and other related classes available in the dev-core-runtime/syncher are part of the internal system that manages subscriptions and object creations. There is only one instance of this, at address "<runtimeURL>/sm". This instance is not available directly to hyperties. Only contacted by the message system.
+![Syncher API](SyncherAPI.png)
 
-### Interfaces (SyncStatus, SyncSubscription)
+The Syncher is a singleton owned by a Hyperty Instance that uses it to communicate with other Hyperty instance through data synchronisation. The Syncher "owns" all DataObjects (DataObject class) used by its Hyperty Instance i.e. DataObject instances (creation, destruction) are managed by the Syncher and not by the Hyperty Instance. Each DataObject is addressed by a URL - ObjectURL - that is used by the [Hyperty Messaging Framework](https://github.com/reTHINK-project/dev-hyperty-toolkit/blob/master/docs/tutorials/hyperty-messaging-framework.md) to correctly route messages required to support the data synchronisation, via the MiniBUS component. When a new Data Object (Reporter or Observed) is created, the Syncher will add listeners in the MiniBus to receive messages targeting the ObjectURL. This means, the Syncher is the end-point associated to ObjectURL and not the Hyperty Instance.
 
-* **SyncStatus** is used to get and control the status of a DataObject (local, remote, reporter or observer). The interface is not yet implemented, documentation should be updated accordingly from the provided implementation behavior.
+According to the Reporter-Observer pattern, there are two types of DataObjects that each Syncher can manage:
 
-**TODO** Maybe some kind of state machine diagram is needed to define better all the status, and the actions that activate the status transitions.
+DataObjectReporter - provides functions to handle DataObjects as a Reporter i.e. the data that is written in the object by the DataObject owner, is immediately propagated to all observers. It also handles requests from other Hyperty instance to subscribe (ie request to be an Observer) or to read the Data Object.
 
-##### Properties
-status: actual state based on the actions: pause, resume, stop, ...
+DataObjectObserver - provides functions to handle DataObjects as a Observer i.e. it handles a "copy" of the original Data Object which is updated as soon as the Reporter changes. Changes on the DataObject are notified to the Hyperty Instance Observers.
 
-##### Methods
-pause: should pause the synchronization process, pause the mission of update messages between the reporter/observer link.
-resume: resume the synchronization process from a pause action.
-stop: probably the same as unsubscribe, so maybe this method is outdated.
+In addition, DataObjects can be SyncObjectParents with collections of DataObjectChild. Each collection is called DataObjectChildren. Either Reporter (DataObjectReporter) or Observers (DataObjectObserver) can create DataObjectChilds in a certain children collection (`addChild()` function).
 
-* **SyncSubscription** reference to a remote observer/subscription, associated to a HypertyURL.
+*todo: add code snippets for each main function*
 
-##### Properties
-url: HypertyURL of the observer.
+### Syncher API
 
-### Methods, Events and Handlers
-Every object have methods, and event handlers to map to a pulling and push scheme. 
-Methods fire actions and Handlers react to actions and respond accordingly.
-All events listed on the class diagram are intercepted in an event handler. From a functional perspective, methods like (accept, reject, wait, ...) are responses to an action. Since actions are represented by events, it makes sense that responses are directly related to them. Some rules:
-* All events are inherited from the Event interface
-* All handlers have method signature of "on\<classifier\>(..., callback)"
-
-### Syncher
-This is the main class where the API is available to hyperties. It is a singleton i.e. only one instance is available per Hyperty instance. It's the owner of all kind of [Data Objects](../../datamodel/data-objects/data-synch) that can be synchronised by the Syncher including Reported Objects (DataObjectReporter) and Observed Objects (DataObjectObserver).
+This is the main class that manages the creation of Data Objects. It is a singleton i.e. only one instance is available per Hyperty instance. It's the owner of all kind of [Data Objects](../../datamodel/data-objects/data-synch) that can be synchronised by the Syncher including Reported Objects (DataObjectReporter) and Observed Objects (DataObjectObserver).
 
 ##### Properties
 * owner: HypertyURL of Syncher's Hyperty instance owner
@@ -92,9 +77,9 @@ This Method is used to read an existing object i.e. the Hyperty Instance does no
 
 `onNotification(callback: (event: CreateEvent | DeleteEvent) => void): void`
 
-Receive create invitations or delete notifications from Reporter objects. Hyperties should listen and respond accordingly, using the event methods. Invitations are sent thought Syncher.create(..) or DataObjectReporter.inviteObservers(..)
+Receive create invitations or delete notifications from Reporter objects. Hyperties should listen and respond accordingly, using the event methods. Invitations are sent with `Syncher.create(..)`` or `DataObjectReporter.inviteObservers(..)``
 
-* callback: callback function to receive create and delete events. 
+* callback: callback function to receive create and delete events.
 
 ### DataObject
 Top implementation of Data Object Reporters and Observers with common properties, methods and handlers.
@@ -111,7 +96,7 @@ Top implementation of Data Object Reporters and Observers with common properties
 
 `addChild(resource: string, initialData: JSON): Promise<DataObjectChild>`
 
-Create and add a children to the subscription group. 
+Create and add a children to the subscription group.
 
 * resource: resource name (child channel name), one of the items in the schema.properties.scheme of the parent object.
 * initialData: Initial data of the child
@@ -221,3 +206,31 @@ Setup the callback to process response notifications of the child creates. Respo
 Setup the callback to process change events from the associated reporter child.
 
 * callback: callback function to receive events
+
+### Methods, Events and Handlers
+Every object have methods, and event handlers to map to a pulling and push scheme.
+Methods fire actions and Handlers react to actions and respond accordingly.
+All events listed on the class diagram are intercepted in an event handler. From a functional perspective, methods like (accept, reject, wait, ...) are responses to an action. Since actions are represented by events, it makes sense that responses are directly related to them. Some rules:
+* All events are inherited from the Event interface
+* All handlers have method signature of "on\<classifier\>(..., callback)"
+
+### SyncStatus
+
+It is used to get and control the status of a DataObject (local, remote, reporter or observer). The interface is not yet implemented, documentation should be updated accordingly from the provided implementation behavior.
+
+**TODO** Maybe some kind of state machine diagram is needed to define better all the status, and the actions that activate the status transitions.
+
+##### Properties
+status: actual state based on the actions: pause, resume, stop, ...
+
+##### Methods
+pause: should pause the synchronization process, pause the mission of update messages between the reporter/observer link.
+resume: resume the synchronization process from a pause action.
+stop: probably the same as unsubscribe, so maybe this method is outdated.
+
+### SyncSubscription
+
+A reference to a remote observer/subscription, associated to a HypertyURL.
+
+##### Properties
+url: HypertyURL of the observer.

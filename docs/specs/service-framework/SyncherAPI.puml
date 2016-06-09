@@ -53,6 +53,7 @@ class DataObjectObserver {
 }
 
 interface Event {
+  identity: ?Identity.Identity
   url: URL
   type: create | delete | subscribe | unsubscribe | response | change
 }
@@ -60,15 +61,12 @@ interface Event {
 interface CreateEvent {
   from: HypertyURL
   value: JSON
-  identity: Identity
   schema?: SchemaURL
-  reject(reason): void
   ack(type): void
 }
 
 interface DeleteEvent {
   object: DataObjectObserver
-  identity: Identity
 }
 
 interface SubscribeEvent {
@@ -117,5 +115,11 @@ DataObjectReporter *--"*" SyncSubscription:subscriptions
 
 Syncher *--"*" DataObjectReporter:reporters
 Syncher *--"*" DataObjectObserver:observers
+
+DataObjectChild -[hidden]down- DeleteEvent
+DataObjectChild -[hidden]down- CreateEvent
+DataObjectChild -[hidden]down- SubscribeEvent
+DataObjectChild -[hidden]down- UnSubscribeEvent
+DataObjectChild -[hidden]down- ResponseEvent
 
 @enduml

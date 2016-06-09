@@ -1,6 +1,8 @@
 Service Framework
 -----------------
 
+*to be reviewed with links to existing documented framework libs. Missing Documentation for Discovery and IdentityManager lib*
+
 The Hyperty Runtime APIs were designed to be Developer friendly and they only have to deal with a few functions namely:
 
 -	MsgBUS.postMessage() that is used to post messages in order to communicate with other remote Hyperty Instances and with back-end reTHINK Support Services
