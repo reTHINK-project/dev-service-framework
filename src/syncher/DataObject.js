@@ -163,17 +163,17 @@ class DataObject {
 
   /**
    * Create and add a children to the subscription group.
-   * @param {String} resource - Resource name, one of the items in the schema.properties.scheme of the parent object.
+   * @param {String} children - Children name where the child is added.
    * @param {JSON} initialData - Initial data of the child
    * @return {Promise<DataObjectChild>} - Return Promise to a new DataObjectChild.
    */
-  addChild(resource, initialData) {
+  addChild(children, initialData) {
     let _this = this;
 
     //create new child unique ID, based on hypertyURL
     _this._childId++;
     let msgChildId = _this._owner + '#' + _this._childId;
-    let msgChildPath = _this._url + '/children/' + resource;
+    let msgChildPath = _this._url + '/children/' + children;
 
     //FLOW-OUT: this message will be sent directly to a resource child address: MessageBus
     let requestMsg = {

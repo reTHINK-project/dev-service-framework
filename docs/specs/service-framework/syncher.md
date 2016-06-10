@@ -94,11 +94,12 @@ Top implementation of Data Object Reporters and Observers with common properties
 
 **addChild**
 
-`addChild(resource: string, initialData: JSON): Promise<DataObjectChild>`
 
-Create and add a children to the subscription group.
+`addChild(children: string, initialData: JSON): Promise<DataObjectChild>`
 
-* resource: resource name (child channel name), one of the items in the schema.properties.scheme of the parent object.
+Create and add a DataObjectChild to a children collection.
+
+* children: children name where the child is added.
 * initialData: Initial data of the child
 * return: Promise to a new DataObjectChild.
 
@@ -108,7 +109,7 @@ Create and add a children to the subscription group.
 
 `onAddChild(callback: (event: CreateEvent) => void): void`
 
-Setup the callback to process create and delete of remote childrens. Remote childrens are any created child from an associated Reporter or Observer.
+Setup the callback to process create and delete of remote DataObjectChild. Remote DataObjectChilds are any created child from an associated Reporter or Observer.
 
 * callback: callback function to receive child create and delete events.
 

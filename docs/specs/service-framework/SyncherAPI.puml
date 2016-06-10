@@ -26,7 +26,7 @@ class DataObject {
   url: ObjectURL
   data: JSON
   schema: SchemaURL
-  addChild(resource: string, initialData: JSON): Promise<DataObjectChild>
+  addChild(children: string, initialData: JSON): Promise<DataObjectChild>
   __ event handlers __
   onChange(filter: string, callback: (event: ChangeEvent) => void): void
   onAddChil(callback: (event: CreateEvent) => void): void
