@@ -162,7 +162,7 @@ class DataObject {
   }
 
   /**
-   * Create and add a children to the subscription group.
+   * Create and add a DataObjectChild to a children collection.
    * @param {String} children - Children name where the child is added.
    * @param {JSON} initialData - Initial data of the child
    * @return {Promise<DataObjectChild>} - Return Promise to a new DataObjectChild.
