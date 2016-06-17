@@ -21,7 +21,7 @@ package Context <<Rect>> {
 		address ?: URL.HypertyRuntimeURL
 	}
 
-	enum ContextUnit {
+	enum ContextUnitName {
 	METER
 	GRAM
 	SECOND
@@ -72,11 +72,70 @@ package Context <<Rect>> {
 	CUMULATIVE_NUMBER_OF_HEART_BEATS
 	STEPS
 	AVAILABILITY
+	USER_ACTIVITY
+	USER_COMMUNICATION
 	}
+
+	enum ContextUnit {
+	METER
+	GRAM
+	SECOND
+	AMPERE
+	KELVIN
+	CANDELA
+	MOLE
+	HERTZ
+	RADIAN
+	STERADIAN
+	NEWTON
+	PASCAL
+	JOULE
+	WATT
+	COULOMB
+	VOLT
+	FARAD
+	OHM
+	SIEMENS
+	WEBER
+	TESLA
+	HENRY
+	DEGREES_CELSIUS
+	LUMEN
+	LUX
+	BECQUEREL
+	GRAY
+	SIEVERT
+	KATAL
+	PH_ACIDITY
+	VALUE_OF_A_SWITCH
+	COUNTER_VALUE
+	RELATIVE_HUMIDITY
+	AREA
+	VOLUME_IN_LITERS
+	VELOCITY
+	ACCELERATION
+	FLOW_RATE_IN_LITERS_PER_SECOND
+	IRRADIANCE
+	LUMINANCE
+	BEL_SOUND_PRESSURE_LEVEL
+	BITS_PER_SECOND
+	DEGREES_LATITUDE
+	DEGREES_LONGITUDE
+	REMAINING_BATTERY_ENERGY_LEVEL_IN_PERCENTS
+	REMAINING_BATTERY_ENERGY_LEVEL_IN_SECONDS
+	HEART_RATE_IN_BEATS_PER_MINUTE
+	CUMULATIVE_NUMBER_OF_HEART_BEATS
+	STEPS
+	PRES
+	ACT
+	COMM
+	}
+
+note bottom : to be updated
 
 	class ContextValue {
 		type ?: HypertyResource.HypertyResourceType
-		name : string
+		name : ContextUnitName
 		unit ?: ContextUnit
 		value : object
 		sum ?: ContextUnit
@@ -90,6 +149,20 @@ package Context <<Rect>> {
 	 UNAVAILABLE
 	 AWAY
 	 BUSY
+	}
+
+	enum UserActivity {
+	 WALKING
+	 RUNNING
+	 SLEEPING
+	 STILL
+	}
+
+	enum UserCommunication {
+	 TALKING
+	 CHATTING
+	 ON_AUDIO_COMM
+	 ON_VIDEO_COMM
 	}
 
 	class Actions <<Children>> {
@@ -114,11 +187,7 @@ package Context <<Rect>> {
 		tag?: string
 	}
 
-	class RawContextValue {
-	}
 
-	class ProcessedContextValue {
-	}
 
 	Context *-- "1..*" ContextValue
 
@@ -129,14 +198,16 @@ package Context <<Rect>> {
 	Context .left. Actions
 	Action .. Actions
 	ContextValue -up-> HypertyResource.HypertyResourceType
-	Context --> ContextUnit
-	ContextValue -right-> ContextUnit
 	ContextValue -up-> URL.HypertyRuntimeURL
 
-	ContextValue .left.> AvailabilityStatus : for Availability Context
 
-	RawContextValue -up-|> ContextValue
-	ProcessedContextValue -up-|> ContextValue
+	ContextValue .down.> AvailabilityStatus : for Availability Context
+	ContextValue .down.> UserActivity : for UserActivity Context
+	ContextValue .down.> UserCommunication : for UserCommunication Context
+
+	ContextValue -right- ContextUnitName
+	ContextValue -left- ContextUnit
+
 }
 
 @enduml
