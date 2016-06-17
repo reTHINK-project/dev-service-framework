@@ -16,7 +16,7 @@ package Context <<Rect>> {
 		version?: integer
 		values: ContextValue[]
 		tag?: string
-		children ?=["<actions>"]
+		children ?: string[]
 		childUrls ?: URL.URL[]
 		address ?: URL.HypertyRuntimeURL
 	}
@@ -163,6 +163,10 @@ note bottom : to be updated
 	 CHATTING
 	 ON_AUDIO_COMM
 	 ON_VIDEO_COMM
+	 IN_AUDIO_COMM_FAILED
+	 OUT_AUDIO_COMM_FAILED
+	 IN_VIDEO_COMM_FAILED
+	 OUT_VIDEO_COMM_FAILED
 	}
 
 	class Actions <<Children>> {

@@ -15,6 +15,8 @@ The Context model is comprised by two main types of Objects:
 A Context is defined by:
 
 - **type**: its the ResourceType
+- **children**(optional): list of collections of Child Context Objects. Useful to support actions performance on parent Context Object. **FFS:** to facilitate interoperability a standard syntax should be used for the children name eg `<ContextValueName>-actions`. Example: `lumen-actions` for actions related with light brightness
+- **childUris**(optional): list of Child Context Objects eg sensors of a parent room context data object.
 
 ### Open Issues
 1. JSON encoding directly derived from class design is unlikely to be SENML-compliant (see also https://github.com/reTHINK-project/architecture/issues/60)
