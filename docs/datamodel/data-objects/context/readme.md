@@ -6,9 +6,9 @@
 
 The Context model is comprised by two main types of Objects:
 
-**Context: ** contains data that characterises the environment around a certain reTHINK User (ie a human being or physical things) usualy derived from data collected from sensors.
+**Context:** contains data that characterises the environment around a certain reTHINK User (ie a human being or physical things) usualy derived from data collected from sensors.
 
-**Action: ** contains data used to perform actions on reTHINK physical things users
+**Action:** contains data used to perform actions on reTHINK physical things users
 
 ### Context
 

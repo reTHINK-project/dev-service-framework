@@ -1,11 +1,17 @@
-@startuml "../../docs/datamodel/data-objects/communication/Hyperty-Resource-Data-Object-Model.png"
+@startuml "../../docs/datamodel/data-objects/hyperty-resource/Hyperty-Resource-Data-Object-Model.png"
 
 package HypertyResource <<Rect>> {
 
 	class HypertyResource {
 		type : HypertyResourceType
 		direction ?: ResourceDirection
+		author ?: URL.UserURL
+		content ?: Object
+		contentUrl ?: URL.URL
+		player ?: URL.CatalogueURL
 	}
+
+	note right : player is provided by a certain Hyperty\n to play the HypertyResource Content 
 
 	enum HypertyResourceType {
 		CHAT
