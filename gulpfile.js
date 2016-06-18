@@ -243,9 +243,7 @@ function dist(debug) {
 
     gulp.src([file.path])
     .pipe(transpile(opts))
-    .pipe(gulpif(!debug, insert.prepend(license + '// Distribution file for {{package}} \n// version: {{version}}\n\n')))
-    .pipe(gulpif(!debug, replace('{{version}}', pkg.version)))
-    .pipe(gulpif(!debug, replace('{{package}}', filename + '.js')))
+    .pipe(mark())
     .pipe(gulp.dest(__dirname + '/dist'))
     .on('error', function(error) {
       gutil.log(gutil.colors.red(error));
@@ -254,6 +252,26 @@ function dist(debug) {
       gutil.log('> ' + gutil.colors.green('Distribution ') + gutil.colors.white(filename) + gutil.colors.green(' done!'));
       cb();
     });
+  });
+
+}
+
+function mark() {
+
+  return through.obj(function(file, enc, cb) {
+
+    var fileObject = path.parse(file.path);
+
+    gulp.src([file.path])
+    .pipe(insert.prepend(license + '// Distribution file for {{package}} \n// version: {{version}}\n// Last build: {{date}}\n\n'))
+    .pipe(replace('{{version}}', pkg.version))
+    .pipe(replace('{{package}}', fileObject.name + '.js'))
+    .pipe(replace('{{date}}', new Date()))
+    .pipe(gulp.dest(__dirname + '/dist'))
+    .on('end', function() {
+      cb();
+    });
+
   });
 
 }

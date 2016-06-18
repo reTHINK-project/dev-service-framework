@@ -6,6 +6,7 @@ package RegistryDataObject <<Rect>> {
 
 		class HypertyDataObjectInstance {
 			owner : URL.HypertyURL
+			resources : HypertyResource.HypertyResourceType[]
 			name : string
 			description ?: string
 			tags ?: string[]
@@ -21,7 +22,7 @@ package RegistryDataObject <<Rect>> {
 
 		HypertyContextDataObjectInstance .up.|> HypertyDataObjectInstance
 		HypertyCommunicationDataObjectInstance .up.|> HypertyDataObjectInstance
-		
+
 		HypertyDataObjectInstance .up.|> RegistryDataObject.RegistryDataObject
 	}
 
@@ -30,6 +31,7 @@ package RegistryDataObject <<Rect>> {
 
 	HypertyDataObjectInstance ..> RegistryDataObject.HypertyInstance.HypertyInstance : owned by
 	HypertyDataObjectInstance ..> RethinkCore.CatalogueDataObject.DataObjectSchema.DataObjectSchema : described by
+	HypertyDataObjectInstance .up.> HypertyResource.HypertyResourceType
 }
 
 @enduml

@@ -117,6 +117,7 @@ class DataObjectChild /* implements SyncStatus */ {
     this._onResponseHandler = callback;
   }
 
+  //FLOW-IN: message received from a remote DataObject -> _onChildCreate
   _onResponse(msg) {
     let _this = this;
 
