@@ -11,18 +11,15 @@ package Communication <<Rect>> {
 		participants ?: Participant[]
 		qos ?: CommunicationQuality
 		resources ?: URL.HypertyResourceURL[]
-		children = ["chatmessages"]
+		children = ["resources"]
 	}
 
-	class ChatMessages <<Children>> {
+	class Resources <<Children>> {
 		parent = "communication"
-		listener = "chatmessages"
-		type = "ChatMessage"
+		listener = "resources"
+		type = "HypertyResource"
 	}
 
-	class ChatMessage <<SyncObjectChild>> {
-		message : string
-	}
 
 	enum CommunicationStatus {
 		OPEN
@@ -43,11 +40,9 @@ package Communication <<Rect>> {
 	}
 
 	Communication -up-|> SyncDataObject.SyncObjectParent
-	ChatMessages -up-|> SyncDataObject.SyncObjectChildren
-	ChatMessage -up-|> SyncDataObject.SyncObjectChild
+	Resources -up-|> SyncDataObject.SyncObjectChildren
 	Communication .. CommunicationStatus
-	Communication .left. ChatMessages
-	ChatMessage .right. ChatMessages
+	Communication .left. Resources
 	Communication *.. Participant
 	Communication *.. CommunicationQuality
 	Participant .. ParticipantStatus

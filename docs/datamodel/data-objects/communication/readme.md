@@ -16,15 +16,10 @@ The Communication Data Model is used to model the reTHINK Communications.
 
 **qos:** *to be provided*
 
-**resources:** list of ResourceTypes supported by the communication. See below
+**resources:** list of HypertyResourceTypes supported by the communication. See below
 
-**children = ["chatmessages"]:** definition of ChatMessages as a SyncObjectChildren of Communication (see below).
+**children = ["resources"]:** defines the Communication children (yncObjectChildren) where all HypertyResources are shared as a DataObjectChild of a Communication.
 
-  **Note:** more types of resources cna be shared in a communication. The following syntax is proposed `<HypertyResourceType>-resources`. Examples:
-
-  - `chat-resources` for chat messages
-  - `file-resources` for shared files
-  - `video-resources` for recorded video communication
 
 #### CommunicationStatus
 
