@@ -98,7 +98,21 @@ let IdpProxy = {
   * @return {Promise}      Returns a promise with the identity assertion validation result
   */
   validateAssertion: (assertion, origin) => {
+
+    //TODO check the values with the hash received
     return new Promise(function(resolve,reject) {
+
+      let decodedContent = atob(assertion);
+      let content = JSON.parse(decodedContent);
+
+      let idTokenSplited = content.tokenID.split('.');
+
+      let idToken = JSON.parse(atob(idTokenSplited[1]));
+
+      resolve({identity: idToken.email, contents: idToken});
+
+    });
+    /*return new Promise(function(resolve,reject) {
       let i = googleInfo;
 
       let decodedContent = atob(assertion);
@@ -114,7 +128,7 @@ let IdpProxy = {
 
         reject(err);
       });
-    });
+    });*/
   },
 
   /**
