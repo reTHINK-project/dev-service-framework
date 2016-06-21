@@ -84,7 +84,7 @@ Message sent by an Hyperty Instance to Registry Domain server (Connector or Prot
 "type" : "read",
 "from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "to" : "domain://registry.<sp1>"
-"body" : { "resource" : "/<registry-object-url-scheme>/user/<userURL>" }
+"body" : { "resource" : "/<registry-object-url-scheme>/user/<userURL>", "search": "HypertyPerUser" }
 ```
 
 **Response Message returning the discovered Hyperty Instances**
@@ -99,7 +99,7 @@ Message sent by Registry Domain server (Connector or Protostub) to an Hyperty In
 "body" : { "code": 200, "value" : ["<discoveredRegistryDataObjects>"] }
 ```
 
-#### Hyperty Instance Query per User and per type
+#### Hyperty Instance Query per User and/or per resources and/or per Object Scheme
 
 Message sent by an Hyperty Instance to Registry Domain server (Connector or Protostub).
 
@@ -108,31 +108,7 @@ Message sent by an Hyperty Instance to Registry Domain server (Connector or Prot
 "type" : "read",
 "from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "to" : "domain://registry.<sp1>"
-"body" : { "resource" : "/hyperty/user/<userURL>", "criteria" : { "descriptor.hypertyType" : <hyperty-type> } }
-```
-
-**Response Message returning the discovered Hyperty Instances**
-
-Message sent by Registry Domain server (Connector or Protostub) to an Hyperty Instance.
-
-```
-"id" : "2"
-"type" : "response",
-"from" : "domain://registry.<sp-domain>",
-"to" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
-"body" : { "code": 200, "value" : ["<discoveredHypertyInstance>"] }
-```
-
-#### Hyperty Instance Query per User and per Object Scheme
-
-Message sent by an Hyperty Instance to Registry Domain server (Connector or Protostub).
-
-```
-"id" : "2",
-"type" : "read",
-"from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
-"to" : "domain://registry.<sp1>"
-"body" : { "resource" : "/hyperty/user/<userURL>", "criteria" : { "objects" : [{"<Object URL Scheme>",..}] } }
+"body" : { "resource": {"user": "userIdentifier", "resources": ["<resources>"], "dataSchemes": ["<schema>"]}, search:'hypertyResourcesDataSchemes'}
 ```
 
 **Response Message returning the discovered Hyperty Instances**
