@@ -6,9 +6,9 @@ package HypertyResource <<Rect>> {
 		type : HypertyResourceType
 		direction ?: ResourceDirection
 		author ?: URL.UserURL
-		content ?: Object
+		content ?: object
 		contentUrl ?: URL.URL
-		player ?: URL.CatalogueURL
+		player ?: URL.HypertyCatalogueURL
 	}
 
 	note right : player is provided by a certain Hyperty\n to play the HypertyResource Content 
@@ -40,11 +40,12 @@ package HypertyResource <<Rect>> {
 		OUT
 		INOUT
 	}
-
+	
 	HypertyResource -up-|> SyncDataObject.SyncObjectChild
 	HypertyResource ..> HypertyResourceType
 	HypertyResource ..> ResourceDirection
 	Identity.Identity ..> HypertyResource: author
+	
 }
 
 @enduml

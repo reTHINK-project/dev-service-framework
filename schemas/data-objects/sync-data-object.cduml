@@ -41,5 +41,4 @@ package SyncDataObject {
 	SyncObjectParent .down.> "0..*" SyncObjectChild
 	SyncObjectChildren .down.> "1..*" SyncObjectChild : ChildId
 }
-
 @enduml
