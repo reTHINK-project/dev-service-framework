@@ -3,8 +3,20 @@
 
 	"id": "Context",
 	"type": "object",
-	"required": ["scheme", "id", "type", "values"],
+	"required": ["url", "reporter", "schema", "name", "scheme", "id", "values"],
 	"properties": {
+		"url": {
+			"type": "string"
+		},
+		"reporter": {
+			"type": "string"
+		},
+		"schema": {
+			"type": "string"
+		},
+		"name": {
+			"type": "string"
+		},
 		"scheme": {
 			"constant": "context"
 		},
@@ -12,7 +24,27 @@
 			"type": "string"
 		},
 		"type": {
-			"$ref": "HypertyResource.json#/HypertyResourceType"
+			"enum": [
+				"chat",
+				"audio",
+				"video",
+				"av",
+				"screen",
+				"file",
+				"midi",
+				"activity_context",
+				"availability_context",
+				"location_context",
+				"heart_rate_contexst",
+				"user_steps_context",
+				"battery_context",
+				"sleep_context",
+				"light_context",
+				"humidity_context",
+				"power",
+				"user_activity_context",
+				"user_communication_context"
+			]
 		},
 		"description": {
 			"type": "string"
@@ -22,7 +54,60 @@
 			"format": "date-time"
 		},
 		"unit": {
-			"$ref": "#/ContextUnit"
+			"enum": [
+				"meter",
+				"gram",
+				"second",
+				"ampere",
+				"kelvin",
+				"candela",
+				"mole",
+				"hertz",
+				"radian",
+				"steradian",
+				"newton",
+				"pascal",
+				"joule",
+				"watt",
+				"coulomb",
+				"volt",
+				"farad",
+				"ohm",
+				"siemens",
+				"weber",
+				"tesla",
+				"henry",
+				"degrees_celsius",
+				"lumen",
+				"lux",
+				"becquerel",
+				"gray",
+				"sievert",
+				"katal",
+				"ph_acidity",
+				"value_of_a_switch",
+				"counter_value",
+				"relative_humidity",
+				"area",
+				"volume_in_liters",
+				"velocity",
+				"acceleration",
+				"flow_rate_in_liters_per_second",
+				"irradiance",
+				"luminance",
+				"bel_sound_pressure_level",
+				"bits_per_second",
+				"degrees_latitude",
+				"degrees_longitude",
+				"remaining_battery_energy_level_in_percents",
+				"remaining_battery_energy_level_in_seconds",
+				"heart_rate_in_beats_per_minute",
+				"cumulative_number_of_heart_beats",
+				"steps",
+				"pres",
+				"act",
+				"comm"
+			]
 		},
 		"version": {
 			"type": "integer"
@@ -37,34 +122,218 @@
 			"type": "string"
 		},
 		"children": {
-			"constant": ["actions","contexts"]
-		}
-	}, 
-	"ContextUnit": {
-		"type": "object",
-		"properties": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			}
+		},
+		"childUrls": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			}
+		},
+		"address": {
+			"type": "string"
 		}
 	}, 
 	"ContextValue": {
 		"type": "object",
-		"required": ["name", "unit", "value", "sum"],
-		"anyOf": [
-			{ "$ref": "#/RawContextValue" },
-			{ "$ref": "#/ProcessedContextValue" }
-		]
-		,
+		"required": ["name", "value"],
 		"properties": {
+			"type": {
+				"enum": [
+					"chat",
+					"audio",
+					"video",
+					"av",
+					"screen",
+					"file",
+					"midi",
+					"activity_context",
+					"availability_context",
+					"location_context",
+					"heart_rate_contexst",
+					"user_steps_context",
+					"battery_context",
+					"sleep_context",
+					"light_context",
+					"humidity_context",
+					"power",
+					"user_activity_context",
+					"user_communication_context"
+				]
+			},
 			"name": {
-				"type": "string"
+				"enum": [
+					"meter",
+					"gram",
+					"second",
+					"ampere",
+					"kelvin",
+					"candela",
+					"mole",
+					"hertz",
+					"radian",
+					"steradian",
+					"newton",
+					"pascal",
+					"joule",
+					"watt",
+					"coulomb",
+					"volt",
+					"farad",
+					"ohm",
+					"siemens",
+					"weber",
+					"tesla",
+					"henry",
+					"degrees_celsius",
+					"lumen",
+					"lux",
+					"becquerel",
+					"gray",
+					"sievert",
+					"katal",
+					"ph_acidity",
+					"value_of_a_switch",
+					"counter_value",
+					"relative_humidity",
+					"area",
+					"volume_in_liters",
+					"velocity",
+					"acceleration",
+					"flow_rate_in_liters_per_second",
+					"irradiance",
+					"luminance",
+					"bel_sound_pressure_level",
+					"bits_per_second",
+					"degrees_latitude",
+					"degrees_longitude",
+					"remaining_battery_energy_level_in_percents",
+					"remaining_battery_energy_level_in_seconds",
+					"heart_rate_in_beats_per_minute",
+					"cumulative_number_of_heart_beats",
+					"steps",
+					"availability",
+					"user_activity",
+					"user_communication"
+				]
 			},
 			"unit": {
-				"$ref": "#/ContextUnit"
+				"enum": [
+					"meter",
+					"gram",
+					"second",
+					"ampere",
+					"kelvin",
+					"candela",
+					"mole",
+					"hertz",
+					"radian",
+					"steradian",
+					"newton",
+					"pascal",
+					"joule",
+					"watt",
+					"coulomb",
+					"volt",
+					"farad",
+					"ohm",
+					"siemens",
+					"weber",
+					"tesla",
+					"henry",
+					"degrees_celsius",
+					"lumen",
+					"lux",
+					"becquerel",
+					"gray",
+					"sievert",
+					"katal",
+					"ph_acidity",
+					"value_of_a_switch",
+					"counter_value",
+					"relative_humidity",
+					"area",
+					"volume_in_liters",
+					"velocity",
+					"acceleration",
+					"flow_rate_in_liters_per_second",
+					"irradiance",
+					"luminance",
+					"bel_sound_pressure_level",
+					"bits_per_second",
+					"degrees_latitude",
+					"degrees_longitude",
+					"remaining_battery_energy_level_in_percents",
+					"remaining_battery_energy_level_in_seconds",
+					"heart_rate_in_beats_per_minute",
+					"cumulative_number_of_heart_beats",
+					"steps",
+					"pres",
+					"act",
+					"comm"
+				]
 			},
 			"value": {
 				"type": "object"
 			},
 			"sum": {
-				"$ref": "#/ContextUnit"
+				"enum": [
+					"meter",
+					"gram",
+					"second",
+					"ampere",
+					"kelvin",
+					"candela",
+					"mole",
+					"hertz",
+					"radian",
+					"steradian",
+					"newton",
+					"pascal",
+					"joule",
+					"watt",
+					"coulomb",
+					"volt",
+					"farad",
+					"ohm",
+					"siemens",
+					"weber",
+					"tesla",
+					"henry",
+					"degrees_celsius",
+					"lumen",
+					"lux",
+					"becquerel",
+					"gray",
+					"sievert",
+					"katal",
+					"ph_acidity",
+					"value_of_a_switch",
+					"counter_value",
+					"relative_humidity",
+					"area",
+					"volume_in_liters",
+					"velocity",
+					"acceleration",
+					"flow_rate_in_liters_per_second",
+					"irradiance",
+					"luminance",
+					"bel_sound_pressure_level",
+					"bits_per_second",
+					"degrees_latitude",
+					"degrees_longitude",
+					"remaining_battery_energy_level_in_percents",
+					"remaining_battery_energy_level_in_seconds",
+					"heart_rate_in_beats_per_minute",
+					"cumulative_number_of_heart_beats",
+					"steps",
+					"pres",
+					"act",
+					"comm"
+				]
 			},
 			"time": {
 				"type": "string",
@@ -77,54 +346,90 @@
 			"expires": {
 				"type": "string",
 				"format": "date-time"
-			},
-			"address": {
-				"type": "string"
-			}
-		}
-	}, 
-	"Contexts": {
-		"type": "object",
-		"stereotype": "children",
-		"required": ["parent", "listener", "type"],
-		"properties": {
-			"parent": {
-				"constant": "context"
-			},
-			"listener": {
-				"constant": "contexts"
-			},
-			"type": {
-				"constant": "Context"
 			}
 		}
 	}, 
 	"Actions": {
 		"type": "object",
 		"stereotype": "children",
-		"required": ["parent", "listener", "type"],
+		"required": ["parent", "listener", "type", "observerPermissions"],
 		"properties": {
 			"parent": {
 				"constant": "context"
 			},
 			"listener": {
-				"constant": "actions"
+				"constant": "<actions>"
 			},
 			"type": {
-				"constant": "Action"
+				"constant": "<Action>"
+			},
+			"observerPermissions": {
+				"constant": "write"
 			}
 		}
 	}, 
 	"Action": {
 		"type": "object",
 		"stereotype": "syncobjectchild",
-		"required": ["id", "type", "values"],
+		"required": ["url", "reporter", "schema", "id", "type", "values"],
 		"properties": {
+			"type": {
+				"enum": [
+					"chat",
+					"audio",
+					"video",
+					"av",
+					"screen",
+					"file",
+					"midi",
+					"activity_context",
+					"availability_context",
+					"location_context",
+					"heart_rate_contexst",
+					"user_steps_context",
+					"battery_context",
+					"sleep_context",
+					"light_context",
+					"humidity_context",
+					"power",
+					"user_activity_context",
+					"user_communication_context"
+				]
+			},
+			"url": {
+				"type": "string"
+			},
+			"reporter": {
+				"type": "string"
+			},
+			"schema": {
+				"type": "string"
+			},
 			"id": {
 				"type": "string"
 			},
 			"type": {
-				"$ref": "HypertyResource.json#/HypertyResourceType"
+				"enum": [
+					"chat",
+					"audio",
+					"video",
+					"av",
+					"screen",
+					"file",
+					"midi",
+					"activity_context",
+					"availability_context",
+					"location_context",
+					"heart_rate_contexst",
+					"user_steps_context",
+					"battery_context",
+					"sleep_context",
+					"light_context",
+					"humidity_context",
+					"power",
+					"user_activity_context",
+					"user_communication_context"
+				]
 			},
 			"description": {
 				"type": "string"
@@ -134,7 +439,60 @@
 				"format": "date-time"
 			},
 			"unit": {
-				"$ref": "#/ContextUnit"
+				"enum": [
+					"meter",
+					"gram",
+					"second",
+					"ampere",
+					"kelvin",
+					"candela",
+					"mole",
+					"hertz",
+					"radian",
+					"steradian",
+					"newton",
+					"pascal",
+					"joule",
+					"watt",
+					"coulomb",
+					"volt",
+					"farad",
+					"ohm",
+					"siemens",
+					"weber",
+					"tesla",
+					"henry",
+					"degrees_celsius",
+					"lumen",
+					"lux",
+					"becquerel",
+					"gray",
+					"sievert",
+					"katal",
+					"ph_acidity",
+					"value_of_a_switch",
+					"counter_value",
+					"relative_humidity",
+					"area",
+					"volume_in_liters",
+					"velocity",
+					"acceleration",
+					"flow_rate_in_liters_per_second",
+					"irradiance",
+					"luminance",
+					"bel_sound_pressure_level",
+					"bits_per_second",
+					"degrees_latitude",
+					"degrees_longitude",
+					"remaining_battery_energy_level_in_percents",
+					"remaining_battery_energy_level_in_seconds",
+					"heart_rate_in_beats_per_minute",
+					"cumulative_number_of_heart_beats",
+					"steps",
+					"pres",
+					"act",
+					"comm"
+				]
 			},
 			"version": {
 				"type": "integer"
@@ -148,16 +506,6 @@
 			"tag": {
 				"type": "string"
 			}
-		}
-	}, 
-	"RawContextValue": {
-		"type": "object",
-		"properties": {
-		}
-	}, 
-	"ProcessedContextValue": {
-		"type": "object",
-		"properties": {
 		}
 	}
 }

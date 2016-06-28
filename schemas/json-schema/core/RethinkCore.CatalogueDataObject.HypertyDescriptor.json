@@ -6,7 +6,7 @@
 	"required": ["dataObjectUrls", "hypertyType", "messageSchemaUrl", "constraints"],
 	"properties": {
 		"dataObjectUrls": {
-			"type": "string"
+			"$ref": "URL.json#/HypertyCatalogueURLList"
 		},
 		"hypertyType": {
 			"type": "array",
@@ -18,7 +18,19 @@
 					"av",
 					"screen",
 					"file",
-					"midi"
+					"midi",
+					"activity_context",
+					"availability_context",
+					"location_context",
+					"heart_rate_contexst",
+					"user_steps_context",
+					"battery_context",
+					"sleep_context",
+					"light_context",
+					"humidity_context",
+					"power",
+					"user_activity_context",
+					"user_communication_context"
 				]
 			}
 		},
