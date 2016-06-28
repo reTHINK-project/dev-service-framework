@@ -77,19 +77,19 @@ Response Message sent back by the Registry Domain server (Connector or Protostub
 
 #### Registry Data Object search per User
 
-Message sent by an Hyperty Instance to Registry Domain server (Connector or Protostub).
+Message sent by an Hyperty Instance to Registry Domain server to query about all active Hyperty instances associated to a certain user.
 
 ```
 "id" : "2",
 "type" : "read",
 "from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "to" : "domain://registry.<sp1>"
-"body" : { "resource" : "/<registry-object-url-scheme>/user/<userURL>", "search": "HypertyPerUser" }
+"body" : { "resource" : "/<registry-object-url-scheme>/user/<userURL>" }
 ```
 
 **Response Message returning the discovered Hyperty Instances**
 
-Message sent by Registry Domain server (Connector or Protostub) to an Hyperty Instance.
+Message sent by Registry Domain server to an Hyperty Instance.
 
 ```
 "id" : "2"
@@ -101,14 +101,14 @@ Message sent by Registry Domain server (Connector or Protostub) to an Hyperty In
 
 #### Hyperty Instance Query per User and/or per resources and/or per Object Scheme
 
-Message sent by an Hyperty Instance to Registry Domain server (Connector or Protostub).
+Message sent by an Hyperty Instance to Registry Domain server to query about all active instances associated to a certain user for some types of Hyperty Resources and data schemes.
 
 ```
 "id" : "2",
 "type" : "read",
 "from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "to" : "domain://registry.<sp1>"
-"body" : { "resource": {"user": "userIdentifier", "resources": ["<resources>"], "dataSchemes": ["<schema>"]}, search:'hypertyResourcesDataSchemes'}
+"body" : { "resource": "/<registry-object-url-scheme>/user/<userURL>", "criteria" : { "resources": ["<resources>"], "dataSchemes": ["<schema>"] }}
 ```
 
 **Response Message returning the discovered Hyperty Instances**
@@ -121,4 +121,16 @@ Message sent by Registry Domain server (Connector or Protostub) to an Hyperty In
 "from" : "domain://registry.<sp-domain>",
 "to" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "body" : { "code": 200, "value" : ["<discoveredHypertyInstance>"] }
+```
+
+#### Registry Not Found Responses
+
+Message sent by Registry Domain server to an Hyperty Instance when no entries are found for a query request.
+
+```
+"id" : "2"
+"type" : "response",
+"from" : "domain://registry.<sp-domain>",
+"to" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
+"body" : { "code": 404, "description" : "Not Found" }
 ```

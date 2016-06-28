@@ -18,7 +18,7 @@ The Communication Data Model is used to model the reTHINK Communications.
 
 **resources:** list of HypertyResourceTypes supported by the communication. See below
 
-**children = ["resources"]:** defines the Communication children (yncObjectChildren) where all HypertyResources are shared as a DataObjectChild of a Communication.
+**children = ["resources"]:** defines the Communication children (SyncObjectChildren) where all HypertyResources are shared DataObjectChild of a Communication.
 
 
 #### CommunicationStatus
