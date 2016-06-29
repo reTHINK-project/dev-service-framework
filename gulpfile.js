@@ -5,7 +5,8 @@ var exec = require('child_process').exec;
 var prompt = require('gulp-prompt');
 
 // Task and dependencies to distribute for all environments;
-var babel = require('babelify');
+var babelify = require('babelify');
+var babel = require('gulp-babel');
 var _ = require('lodash');
 var browserify = require('browserify');
 var buffer = require('vinyl-buffer');
@@ -103,6 +104,7 @@ gulp.task('dist', function() {
   return gulp.src(['src/CatalogueFactory.js',
   'src/discovery/Discovery.js',
   'src/identityManager/IdentityManager.js',
+  'src/persistence/PersistenceManager.js',
   'src/HypertyDiscovery.js',
   'src/MessageFactory.js',
   'src/RuntimeCatalogue.js',
@@ -188,7 +190,7 @@ gulp.task('encode', function(done) {
 
       var transpileOpts = {
         configuration: {},
-        debug: false,
+        debug: true,
         standalone: path.parse(res.file).basename,
         destination: __dirname + '/resources/tmp'
       };
@@ -234,7 +236,7 @@ function dist(debug) {
 
     var opts = {
       configuration: {},
-      debug: false,
+      debug: true,
       standalone: filename,
       destination: __dirname + '/dist'
     };
@@ -292,8 +294,9 @@ function transpile(opts) {
     if (opts.standalone) args.standalone = opts.standalone;
 
     return browserify(args)
-    .transform(babel, {
+    .transform(babelify, {
       compact: true,
+      sourceMaps: false,
       presets: ['es2015', 'stage-0'],
       plugins: ['add-module-exports', 'babel-polyfill',
       'transform-inline-environment-variables',
@@ -308,7 +311,7 @@ function transpile(opts) {
     .pipe(source(fileObject.base))
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true}))
-    .pipe(uglify())
+    // .pipe(uglify())
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(opts.destination))
     .on('end', function() {
