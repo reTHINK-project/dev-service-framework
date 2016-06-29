@@ -277,6 +277,7 @@ function mark() {
 
 }
 
+var insertGlobals = require('insert-module-globals');
 function transpile(opts) {
 
   return through.obj(function(file, enc, cb) {
@@ -289,6 +290,16 @@ function transpile(opts) {
 
     args.entries = [file.path];
     args.extensions = extensions;
+    args.builtins = false;
+    args.commondir = false;
+    args.insertGlobalVars = {
+      __filename: insertGlobals.vars.__filename,
+      __dirname: insertGlobals.vars.__dirname,
+      process: function() {
+        return;
+      }
+    };
+    args.browserField = false;
     if (opts.debug) args.debug = opts.debug;
     if (opts.standalone) args.standalone = opts.standalone;
 

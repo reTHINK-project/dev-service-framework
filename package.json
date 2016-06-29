@@ -88,6 +88,7 @@
   "dependencies": {
     "array.observe": "^0.0.1",
     "indexeddbshim": "^2.2.1",
+    "insert-module-globals": "^7.0.1",
     "mutationobserver-shim": "^0.3.1",
     "node-localstorage": "1.3.0",
     "object.observe": "^0.2.6",
