@@ -110,7 +110,7 @@ class Syncher {
    //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onCreate
    let requestMsg = {
      type: 'create', from: _this._owner, to: _this._subURL,
-     body: { schema: schema, value: initialData, authorise: observers }
+     body: { scheme: schema, value: initialData, authorise: observers }
    };
 
    return new Promise((resolve, reject) => {
