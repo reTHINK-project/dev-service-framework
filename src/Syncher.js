@@ -1,7 +1,8 @@
 // polyfills
-import 'mutationobserver-shim';
-import 'object.observe';
-import 'array.observe';
+// Removed because the compatibility of runtime-nodejs
+// import 'mutationobserver-shim';
+// import 'object.observe';
+// import 'array.observe';
 
 import Syncher from './syncher/Syncher';
 import DataObjectReporter from './syncher/DataObjectReporter';

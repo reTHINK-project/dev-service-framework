@@ -277,7 +277,6 @@ function mark() {
 
 }
 
-var insertGlobals = require('insert-module-globals');
 function transpile(opts) {
 
   return through.obj(function(file, enc, cb) {
@@ -290,21 +289,13 @@ function transpile(opts) {
 
     args.entries = [file.path];
     args.extensions = extensions;
-    args.builtins = false;
-    args.commondir = false;
-    args.insertGlobalVars = {
-      __filename: insertGlobals.vars.__filename,
-      __dirname: insertGlobals.vars.__dirname,
-      process: function() {
-        return;
-      }
-    };
-    args.browserField = false;
+
     if (opts.debug) args.debug = opts.debug;
     if (opts.standalone) args.standalone = opts.standalone;
 
     return browserify(args)
     .transform(babelify, {
+      sourceMaps: 'both',
       compact: true,
       presets: ['es2015', 'stage-0'],
       plugins: ['add-module-exports', 'babel-polyfill',
@@ -319,9 +310,9 @@ function transpile(opts) {
     })
     .pipe(source(fileObject.base))
     .pipe(buffer())
-    .pipe(sourcemaps.init({loadMaps: true}))
+    .pipe(sourcemaps.init())
     .pipe(uglify())
-    .pipe(sourcemaps.write('./'))
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(opts.destination))
     .on('end', function() {
       file.contents = fs.readFileSync(opts.destination + '/' + fileObject.base);
