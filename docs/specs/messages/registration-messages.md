@@ -2,12 +2,12 @@
 
 This doc specifies Messages to be used to manage registrations in the Domain Registry, where,
 
--	`<RegistryDataObject>` is a JSON object compliant with [RegistryDataObject data model](https://github.com/reTHINK-project/dev-service-framework/tree/master/docs/datamodel/hyperty-registry).
+-	`<RegistryDataObject>` is a JSON object compliant with [RegistryDataObject data model](https://github.com/reTHINK-project/dev-service-framework/tree/master/docs/datamodel/core/hyperty-registry).
 -	`<registry-object-identifier>` is a string that is part of the RegistryDataObject.url to uniquely identify the RegistryDataObject in its domain. In the Hyperty URL example `hyperty://example.com/1234-qwert` , "1234-qwert" is the `<registry-object-identifier>`
 -	`<registry-object-url-scheme>` is the URL Scheme used in the RegistryDataObject.url. In this RegistryOject URL example `connection://example.com/1234-qwert` , "connection" is the `<registry-object-url-scheme>`
--	`<userURL>` is the user address compliant with [UserURL data model](https://github.com/reTHINK-project/dev-service-framework/blob/master/docs/datamodel/address/readme.md#user-url-type). Example: `user://example.com/bob`
--	`<DiscoveredHypertyInstance>` is a JSON object compliant with [HypertyInstance data model](https://github.com/reTHINK-project/dev-service-framework/tree/develop/docs/datamodel/hyperty-registry#hyperty-instance).
--	`<discoveredRegistryDataObjects>` is a JSON object compliant with [HypertyDataObjectInstance data model](https://github.com/reTHINK-project/dev-service-framework/tree/develop/docs/datamodel/hyperty-registry#hyperty-instance).
+-	`<userURL>` is the user address compliant with [UserURL data model](https://github.com/reTHINK-project/dev-service-framework/blob/master/docs/datamodel/core/address/readme.md#user-url-type). Example: `user://example.com/bob`
+-	`<DiscoveredHypertyInstance>` is a JSON object compliant with [HypertyInstance data model](https://github.com/reTHINK-project/dev-service-framework/tree/develop/docs/datamodel/core/hyperty-registry#hyperty-instance).
+-	`<discoveredRegistryDataObjects>` is a JSON object compliant with [HypertyDataObjectInstance data model](https://github.com/reTHINK-project/dev-service-framework/tree/develop/docs/datamodel/core/hyperty-registry#hyperty-instance).
 
 #### Registration request
 
