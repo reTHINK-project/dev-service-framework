@@ -20,14 +20,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+import RethinkObject from '../reTHINKObject/RethinkObject.js';
 
 /**
  * @author alice.cheambe[at]fokus.fraunhofer.de
  * The MessageBody class is the base implementation of the Message Body Data Model from which the other body types extend.
  *
  */
-
-export class MessageBody{
+export class MessageBody extends RethinkObject {
 
     /**
      *
@@ -38,8 +38,8 @@ export class MessageBody{
      * @param {Identity.Identity} assertedIdentity - AssertedIdentity is compliant with User Identity Data Model
      *
      */
-    constructor(idToken, accessToken, resource, schema, assertedIdentity){
-
+    constructor(idToken, accessToken, resource, schema, assertedIdentity) {
+        super();
         this.idToken = idToken;
         this.accessToken = accessToken;
         this.resource = resource;
@@ -54,8 +54,8 @@ export class MessageBody{
      * @param {Identity.JWT} token - identity token to include in the message
      * @return {MessageBody} - the updated message body
      */
-    addVia(viaURL){
-        if(!viaURL )
+    addVia(viaURL) {
+        if (!viaURL)
             throw  new Error("via URL to be added, must be provided");
         this.via = viaURL;
         return this;
@@ -78,13 +78,13 @@ export class CreateMessageBody extends MessageBody {
      * @param {URL.HypertyCatalogueURL} schema - URL of the Data object schema stored in the Catalogue
      * @param {Identity.Identity} assertedIdentity - AssertedIdentity is compliant with User Identity Data Model
      */
-    constructor(value, policy, idToken, accessToken, resource, schema, assertedIdentity){
-        if(!value)
+    constructor(value, policy, idToken, accessToken, resource, schema, assertedIdentity) {
+        if (!value)
             throw new Error("The value parameter is null");
-        super(idToken,accessToken, resource, schema, assertedIdentity, schema, assertedIdentity);
+        super(idToken, accessToken, resource, schema, assertedIdentity, schema, assertedIdentity);
 
         this.value = value;
-        if(policy)
+        if (policy)
             this.policy = policy;
     }
 }
@@ -106,17 +106,17 @@ export class ReadMessageBody extends MessageBody {
      * @param {String} criteria -Defines the criteria to be used for search purposes. Syntax used to define the criteria
      * is set in the criteriaSyntax.
      */
-    constructor( idToken, accessToken, resource, schema, assertedIdentity, attribute, criteriaSyntax, criteria){
+    constructor(idToken, accessToken, resource, schema, assertedIdentity, attribute, criteriaSyntax, criteria) {
 
-        super(idToken,accessToken ,resource, schema, assertedIdentity );
+        super(idToken, accessToken, resource, schema, assertedIdentity);
 
-        if(attribute)
+        if (attribute)
             this.attribute = attribute;
 
-        if(criteriaSyntax)
+        if (criteriaSyntax)
             this.criteriaSyntax = criteriaSyntax;
 
-        if(criteria)
+        if (criteria)
             this.criteria = criteria;
     }
 }
@@ -135,16 +135,16 @@ export class DeleteMessageBody extends MessageBody {
      * @param {Identity.Identity} assertedIdentity - AssertedIdentity is compliant with User Identity Data Model
      * @param {String} attribute - Identifies the attribute in the Object to be deleted (optional)
      */
-    constructor(idToken, accessToken, resource, schema, assertedIdentity,attribute ){
+    constructor(idToken, accessToken, resource, schema, assertedIdentity, attribute) {
 
         if (resource instanceof Array) {
-            super(idToken, accessToken , null, schema, assertedIdentity);
+            super(idToken, accessToken, null, schema, assertedIdentity);
             this.childrenResources = resource;
         } else {
-            super(idToken, accessToken ,resource, schema, assertedIdentity);
+            super(idToken, accessToken, resource, schema, assertedIdentity);
         }
 
-        if(attribute){
+        if (attribute) {
             this.attribute = attribute;
         }
     }
@@ -165,21 +165,20 @@ export class UpdateMessageBody extends MessageBody {
      * @param {String} attribute - Identifies the attribute in the Object to be updated (optional)
      * @param {String} value - Contains the updated value object in JSON format.
      */
-    constructor(idToken, accessToken, resource, schema, assertedIdentity, attribute, value){
+    constructor(idToken, accessToken, resource, schema, assertedIdentity, attribute, value) {
 
-        super(idToken,accessToken ,resource, schema, assertedIdentity );
+        super(idToken, accessToken, resource, schema, assertedIdentity);
         this.attribute = attribute;
         this.value = value;
     }
 
-    addAttributeType(attributeType){
-        if(attributeType)
+    addAttributeType(attributeType) {
+        if (attributeType)
             this.attributeType = attributeType;
     }
 
-    addOperation(operation)
-    {
-        if(operation)
+    addOperation(operation) {
+        if (operation)
             this.operation = operation;
     }
 }
@@ -198,10 +197,10 @@ export class ForwardMessageBody extends MessageBody {
      * @param {Identity.Identity} assertedIdentity - AssertedIdentity is compliant with User Identity Data Model
      * @param {Message} message - Message to be forwarded
      */
-    constructor(idToken, accessToken, resource, schema, assertedIdentity, message){
+    constructor(idToken, accessToken, resource, schema, assertedIdentity, message) {
 
 
-        super(idToken,accessToken ,resource, schema, assertedIdentity );
+        super(idToken, accessToken, resource, schema, assertedIdentity);
 
         this.message = message;
     }
@@ -221,16 +220,15 @@ export class ResponseMessageBody extends MessageBody {
      * @param code - A response code compliant with HTTP response codes (RFC7231)
      * @param value - Contains a data value in JSON format. Applicable to Responses to READ MessageType.
      */
-    constructor(idToken, accessToken, resource, code, value){
+    constructor(idToken, accessToken, resource, code, value) {
 
-        super(idToken, accessToken ,resource );
+        super(idToken, accessToken, resource);
 
-        if(code)
-        {
+        if (code) {
             this.code = code;
             this.description = REASON_PHRASE[code];
         }
-        if(value)
+        if (value)
             this.value = value;
 
     }
@@ -252,13 +250,13 @@ export class ExecuteMessageBody extends MessageBody {
      * @param {Identity.Identity} assertedIdentity - AssertedIdentity is compliant with User Identity Data Model
      * @param {Message} message - Message to be forwarded
      */
-    constructor(idToken, accessToken, resource, schema, assertedIdentity, method, params){
+    constructor(idToken, accessToken, resource, schema, assertedIdentity, method, params) {
 
-        super(idToken,accessToken ,resource, schema, assertedIdentity );
+        super(idToken, accessToken, resource, schema, assertedIdentity);
 
         this.method = method;
-        if (params){
-            if(params instanceof Array)
+        if (params) {
+            if (params instanceof Array)
                 this.params = params;
             else
                 this.params = [params];
@@ -267,14 +265,14 @@ export class ExecuteMessageBody extends MessageBody {
 
 }
 
-export function Enum(a){
+export function Enum(a) {
     let i = Object
         .keys(a)
-        .reduce((o,k)=>(o[a[k]]=k,o),{});
+        .reduce((o, k)=>(o[a[k]] = k, o), {});
 
     return Object.freeze(
         Object.keys(a).reduce(
-            (o,k)=>(o[k]=a[k],o), v=>i[v]
+            (o, k)=>(o[k] = a[k], o), v=>i[v]
         )
     );
 }

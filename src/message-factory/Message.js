@@ -1,34 +1,34 @@
 /**
-* Copyright 2016 PT Inovação e Sistemas SA
-* Copyright 2016 INESC-ID
-* Copyright 2016 QUOBIS NETWORKS SL
-* Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
-* Copyright 2016 ORANGE SA
-* Copyright 2016 Deutsche Telekom AG
-* Copyright 2016 Apizee
-* Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*   http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-**/
+ * Copyright 2016 PT Inovação e Sistemas SA
+ * Copyright 2016 INESC-ID
+ * Copyright 2016 QUOBIS NETWORKS SL
+ * Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
+ * Copyright 2016 ORANGE SA
+ * Copyright 2016 Deutsche Telekom AG
+ * Copyright 2016 Apizee
+ * Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **/
+import RethinkObject from '../reTHINKObject/RethinkObject.js';
 
 /**
  *
  * @author alice.cheambe[at]fokus.fraunhofer.de
  * The Message class is the representation of the reTHINK Message Data Model
  *
-*/
-
-export class Message{
+ */
+export class Message extends RethinkObject {
 
     /**
      * Generates a message data object
@@ -43,14 +43,15 @@ export class Message{
      * contain JWT tokens for Access Control for Identity Assertion purposes that are inserted by the Identity Module
      * before the message is routed to proto stubs
      */
-    constructor(id, from, toList, type,  body) {
+    constructor(id, from, toList, type, body) {
+        super();
 
         this.id = id;
         this.from = from;
         this.to = toList;
         this.type = type;
         this.body = body;
-     }
+    }
 
 
     /**
@@ -59,8 +60,8 @@ export class Message{
      * @param {Identity.Identity} identity - asserted identity to include
      * @return {Message.Message} message - updated message
      */
-    assertIdentity(token, identity){
-        if(!token || !identity)
+    assertIdentity(token, identity) {
+        if (!token || !identity)
             throw  new Error("message, token to be removed, and assertedIdentity must be provided");
         //console.log('given message', message);
         let newBody = this.body;
@@ -68,7 +69,7 @@ export class Message{
         newBody.idToken = null;
 
         newBody.assertedIdentity = identity;
-        this.body= newBody;
+        this.body = newBody;
         return this;
     }
 
@@ -77,8 +78,8 @@ export class Message{
      * @param {Identity.JWT} token - identity token to include in the message
      * @return {Message.Message} - the updated message
      */
-    addIdToken(token){
-        if(!token )
+    addIdToken(token) {
+        if (!token)
             throw  new Error("message, token to be added, must be provided");
         let newBody = this.body;
         newBody.idToken = token;
@@ -91,8 +92,8 @@ export class Message{
      * @param {Identity.JWT} token - token to be added to the given message
      * @return {Message.Message} -  the updated Message
      */
-    addAccessToken(token){
-        if(!token )
+    addAccessToken(token) {
+        if (!token)
             throw  new Error("message, token to be added, must be provided");
         let newBody = this.body;
         newBody.accessToken = token;
@@ -105,7 +106,9 @@ export class Message{
  * MessageType representing the type of message
  * @type {{CREATE: string, READ: string, UPDATE: string, DELETE: string, SUBSCRIBE: string, UNSUBSCRIBE: string, RESPONSE: string, FORWARD: string}}
  */
-export const MessageType = {CREATE: 'create', READ: 'read', UPDATE: 'update', DELETE: 'delete', SUBSCRIBE: 'subscribe',
-    UNSUBSCRIBE: 'unsubscribe', RESPONSE: 'response', FORWARD: 'forward', EXECUTE: 'execute'};
+export const MessageType = {
+    CREATE: 'create', READ: 'read', UPDATE: 'update', DELETE: 'delete', SUBSCRIBE: 'subscribe',
+    UNSUBSCRIBE: 'unsubscribe', RESPONSE: 'response', FORWARD: 'forward', EXECUTE: 'execute'
+};
 
 export default Message;
