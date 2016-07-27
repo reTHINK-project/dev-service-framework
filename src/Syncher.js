@@ -1,5 +1,6 @@
 // polyfills
-import 'mutationobserver-shim';
+// Removed because the compatibility of runtime-nodejs
+// import 'mutationobserver-shim';
 import 'object.observe';
 import 'array.observe';
 
