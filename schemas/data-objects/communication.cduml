@@ -10,7 +10,6 @@ package Communication <<Rect>> {
 		status : CommunicationStatus
 		participants ?: Participant[]
 		qos ?: CommunicationQuality
-		resources ?: URL.URL[]
 		children = ["resources"]
 	}
 

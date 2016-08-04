@@ -9,6 +9,7 @@ package SyncDataObject {
 		name : string
 		description ?: string
 		tags ?: string[]
+		resources ?: HypertyResource.HypertyResourceType[]
 	}
 
 	class SyncObjectParent {
