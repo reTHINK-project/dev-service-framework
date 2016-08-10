@@ -120,7 +120,6 @@ gulp.task('dist', function() {
   'src/discovery/Discovery.js',
   'src/identityManager/IdentityManager.js',
   'src/persistence/PersistenceManager.js',
-  'src/HypertyDiscovery.js',
   'src/MessageFactory.js',
   'src/RuntimeCatalogue.js',
   'src/service-framework.js',
