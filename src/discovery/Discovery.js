@@ -45,9 +45,41 @@ class Discovery {
   }
 
   /**
-  * function to request about dataObject registered in domain registry, and
+  * function to request about an dataObject registered in domain registry with a given name, and
   * return the dataObject information, if found.
   * @param  {String}              name  dataObject URL
+  * @param  {String}            domain (Optional)
+  * @return {Promise}          Promise
+  */
+  discoverDataObjectPerName(name, domain) {
+    let _this = this;
+    let activeDomain;
+
+    activeDomain = (!domain) ? _this.domain : domain;
+
+    let msg = {
+      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: name}
+    };
+
+    return new Promise(function(resolve, reject) {
+
+      _this.messageBus.postMessage(msg, (reply) => {
+
+        let dataObject = reply.body.value;
+
+        if (dataObject) {
+          resolve(dataObject);
+        } else {
+          reject('DataObject not found');
+        }
+      });
+    });
+  }
+
+  /**
+  * function to request about dataObject registered in domain registry, and
+  * return the dataObject information, if found.
+  * @param  {String}              url  dataObject URL
   * @param  {String}            domain (Optional)
   * @return {Promise}          Promise
   */
@@ -62,7 +94,7 @@ class Discovery {
     }
 
     let msg = {
-      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: url, search:'dataObjectPerURL'}
+      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: url}
     };
 
     return new Promise(function(resolve, reject) {
@@ -133,7 +165,7 @@ class Discovery {
     }
 
     let msg = {
-      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: reporter, search:'dataObjectPerReporter'}
+      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: reporter}
     };
 
     return new Promise(function(resolve, reject) {
@@ -146,6 +178,40 @@ class Discovery {
           resolve(dataObjects);
         } else {
           reject('No dataObject was found');
+        }
+      });
+    });
+  }
+
+  /** Advanced Search for dataObjects registered in domain registry
+  * @param  {String}           user                  user identifier, either in url or email format
+  * @param  {Array<string>}    schema (Optional)     types of dataObject schemas
+  * @param  {Array<string>}    resources (Optional)  types of dataObject resources
+  * @param  {String}           domain (Optional)     domain of the registry to search
+  */
+  discoverDataObject(name, schema, resources, domain) {
+    let _this = this;
+    let activeDomain;
+    //let userIdentifier = convertToUserURL(user);
+
+    activeDomain = (!domain) ? _this.domain : domain;
+
+    let msg = {
+      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: name,
+      criteria: {resources: resources, dataSchemes: schema}
+      }
+    };
+
+    return new Promise(function(resolve, reject) {
+
+      _this.messageBus.postMessage(msg, (reply) => {
+
+        let hyperties = reply.body.value;
+
+        if (hyperties) {
+          resolve(hyperties);
+        } else {
+          reject('No DataObject was found');
         }
       });
     });
@@ -169,7 +235,9 @@ class Discovery {
     }
 
     let msg = {
-      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: {user: userIdentifier, resources: resources, dataSchemes: schema}, search:'hypertyResourcesDataSchemes'}
+      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: userIdentifier,
+      criteria: {resources: resources, dataSchemes: schema}
+      }
     };
 
     return new Promise(function(resolve, reject) {
@@ -208,7 +276,7 @@ class Discovery {
 
     // message to query domain registry, asking for a user hyperty.
     let message = {
-      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: identityURL, search:'HypertyPerUser'}
+      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: identityURL}
     };
 
     console.log('Message: ', message, activeDomain, identityURL);
@@ -280,7 +348,7 @@ class Discovery {
 
     // message to query domain registry, asking for a user hyperty.
     let message = {
-      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: identityURL, search:'HypertyPerUser'}
+      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: identityURL}
     };
 
     console.log('Message discoverHypertiesPerUser: ', message, activeDomain, identityURL);
@@ -320,7 +388,7 @@ class Discovery {
     }
 
     let msg = {
-      type: 'delete', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/',   body: { value: {user: user, hypertyURL: hypertyInstance }}};
+      type: 'delete', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/',   body: { value: {user: user, url: hypertyInstance }}};
 
     return new Promise(function(resolve, reject) {
 
