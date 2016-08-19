@@ -21,14 +21,14 @@ class RuntimeCatalogue {
      */
     getDescriptor(descriptorURL, createFunc) {
         let _this = this;
-        // console.log("getDescriptor", descriptorURL);
+        // // console.log("getDescriptor", descriptorURL);
 
         return new Promise(function (resolve, reject) {
 
             _this.httpRequest.get(descriptorURL + "/version").then(function (result) {
                 if (persistenceManager.getVersion(descriptorURL) >= result) {
                     // return saved version
-                    console.log("returning saved version:", persistenceManager.get(descriptorURL));
+                    // console.log("returning saved version:", persistenceManager.get(descriptorURL));
                     resolve(createFunc(_this, persistenceManager.get(descriptorURL)))
                 } else {
                     // request the json
@@ -48,10 +48,10 @@ class RuntimeCatalogue {
                                     // do nothing
                                 }
                             }
-                            // console.log("creating descriptor based on: ", result);
+                            // // console.log("creating descriptor based on: ", result);
                             let descriptor = createFunc(_this, result);
                             persistenceManager.set(descriptorURL, descriptor.version, result);
-                            // console.log("created descriptor object:", hyperty);
+                            // // console.log("created descriptor object:", hyperty);
                             resolve(descriptor);
                         }
                     });
@@ -158,7 +158,7 @@ class RuntimeCatalogue {
 
         return _this.getDescriptor(idpProxyURL, _this._createIdpProxy).then(function(result) {
 
-          console.log('result: ', result);
+          // console.log('result: ', result);
           resolve(result);
 
         }).catch(function() {
@@ -166,7 +166,7 @@ class RuntimeCatalogue {
           idpproxy = domain;
           domain = originDomain;
 
-          console.log('Get an specific protostub for domain', domain, ' specific for: ', idpproxy);
+          // console.log('Get an specific protostub for domain', domain, ' specific for: ', idpproxy);
           idpProxyURL = type + '://' + prefix + domain + '/.well-known/idp-proxy/' + idpproxy;
 
           return _this.getDescriptor(idpProxyURL, _this._createIdpProxy);
@@ -208,7 +208,7 @@ class RuntimeCatalogue {
         // parse and attach sourcePackage
         let sourcePackage = rawHyperty["sourcePackage"];
         if (sourcePackage) {
-            // console.log("hyperty has sourcePackage:", sourcePackage);
+            // // console.log("hyperty has sourcePackage:", sourcePackage);
             hyperty.sourcePackage = _this._createSourcePackage(_this, sourcePackage);
         }
 
@@ -222,7 +222,7 @@ class RuntimeCatalogue {
      * @returns {ProtocolStubDescriptor}
      */
     _createStub(_this, rawStub) {
-        // console.log("creating stub descriptor based on: ", rawStub);
+        // // console.log("creating stub descriptor based on: ", rawStub);
 
         // create the descriptor
         let stub = _this._factory.createProtoStubDescriptorObject(
@@ -264,7 +264,7 @@ class RuntimeCatalogue {
         } catch (e) {
             // already json object
         }
-        console.log("creating runtime descriptor based on: ", rawRuntime);
+        // console.log("creating runtime descriptor based on: ", rawRuntime);
 
 
         // create the descriptor
@@ -286,7 +286,7 @@ class RuntimeCatalogue {
         // parse and attach sourcePackage
         let sourcePackage = rawRuntime["sourcePackage"];
         if (sourcePackage) {
-            // console.log("runtime has sourcePackage:", sourcePackage);
+            // // console.log("runtime has sourcePackage:", sourcePackage);
             runtime.sourcePackage = _this._createSourcePackage(_this, sourcePackage);
         }
         return runtime;
@@ -299,11 +299,11 @@ class RuntimeCatalogue {
      * @returns {DataObjectSchema}
      */
     _createDataSchema(_this, rawSchema) {
-        console.log("creating dataSchema based on: ", rawSchema);
+        // console.log("creating dataSchema based on: ", rawSchema);
 
         let dataSchema;
-        console.log('1. createMessageDataObjectSchema: ', rawSchema["accessControlPolicy"]);
-        console.log('2. createMessageDataObjectSchema: ', rawSchema["scheme"]);
+        // console.log('1. createMessageDataObjectSchema: ', rawSchema["accessControlPolicy"]);
+        // console.log('2. createMessageDataObjectSchema: ', rawSchema["scheme"]);
         if (rawSchema["accessControlPolicy"] && rawSchema["scheme"]) {
             dataSchema = _this._factory.createHypertyDataObjectSchema(
                 rawSchema["cguid"],
@@ -316,7 +316,7 @@ class RuntimeCatalogue {
                 rawSchema["scheme"]
             )
         } else {
-          console.log('3. createMessageDataObjectSchema: ', rawSchema);
+          // console.log('3. createMessageDataObjectSchema: ', rawSchema);
             dataSchema = _this._factory.createMessageDataObjectSchema(
                 rawSchema["cguid"],
                 rawSchema["version"],
@@ -333,33 +333,33 @@ class RuntimeCatalogue {
         // parse and attach sourcePackage
         let sourcePackage = rawSchema["sourcePackage"];
         if (sourcePackage) {
-            console.log("dataSchema has sourcePackage:", sourcePackage);
+            // console.log("dataSchema has sourcePackage:", sourcePackage);
             dataSchema.sourcePackage = _this._createSourcePackage(_this, sourcePackage);
 
             try {
               dataSchema.sourcePackage.sourceCode = JSON.parse(dataSchema.sourcePackage.sourceCode);
             } catch (e) {
-              console.log('DataSchema Source code is already parsed');
+              // console.log('DataSchema Source code is already parsed');
             }
 
             return dataSchema;
 
         } else {
-          console.log('4. getSourcePackageFromURL: ', rawSchema.sourcePackageURL);
+          // console.log('4. getSourcePackageFromURL: ', rawSchema.sourcePackageURL);
 
           return new Promise(function(resolve, reject) {
 
             _this.getSourcePackageFromURL(rawSchema.sourcePackageURL).then(function(sourcePackage) {
-              console.log('5. result of getSourcePackageFromURL', sourcePackage);
+              // console.log('5. result of getSourcePackageFromURL', sourcePackage);
               dataSchema.sourcePackage = sourcePackage;
               resolve(dataSchema);
             }).catch(function(reason) {
-              console.log('Error getting the sourcePackageURL ', reason);
+              // console.log('Error getting the sourcePackageURL ', reason);
               reject(reason);
             });
           })
         }
-        // console.log("created dataSchema descriptor object:", dataSchema);
+        // // console.log("created dataSchema descriptor object:", dataSchema);
         // return dataSchema;
     }
 
@@ -370,7 +370,7 @@ class RuntimeCatalogue {
      * @returns {ProtocolStubDescriptor}
      */
     _createIdpProxy(_this, rawProxy) {
-        // console.log("creating idpproxy descriptor based on: ", rawProxy);
+        // // console.log("creating idpproxy descriptor based on: ", rawProxy);
 
         // create the descriptor
         let idpproxy = _this._factory.createProtoStubDescriptorObject(
@@ -402,7 +402,7 @@ class RuntimeCatalogue {
         try {
             sp = JSON.parse(sp);
         } catch (e) {
-            console.log("parsing sourcePackage failed. already parsed? -> ", sp);
+            // console.log("parsing sourcePackage failed. already parsed? -> ", sp);
         }
 
         // check encoding
@@ -429,14 +429,14 @@ class RuntimeCatalogue {
     getSourcePackageFromURL(sourcePackageURL) {
         let _this = this;
 
-        console.log("getting sourcePackage from:", sourcePackageURL);
+        // console.log("getting sourcePackage from:", sourcePackageURL);
         console.warn("-------------------------------------------------------------------------------------------");
         console.warn("ATTENTION: This function may fail if the sourceCode of the the sourcePackage is very large!");
         console.warn("-------------------------------------------------------------------------------------------");
 
         return new Promise(function (resolve, reject) {
             _this.httpRequest.get(sourcePackageURL).then(function (result) {
-                //console.log("got raw sourcePackage:", result);
+                //// console.log("got raw sourcePackage:", result);
                 if (result["ERROR"]) {
                     // TODO handle error properly
                     reject(result);
@@ -462,12 +462,12 @@ class RuntimeCatalogue {
         let _this = this;
         return new Promise(function (resolve, reject) {
             if (descriptor.sourcePackage) {
-                //console.log("descriptor has sourcePackage");
-                //console.log("returning sourceCode:", descriptor.sourcePackage.sourceCode);
+                //// console.log("descriptor has sourcePackage");
+                //// console.log("returning sourceCode:", descriptor.sourcePackage.sourceCode);
                 resolve(descriptor.sourcePackage.sourceCode);
             } else {
                 if (persistenceManager.getVersion(descriptor.sourcePackageURL + "/sourceCode") >= descriptor.version) {
-                    console.log("returning cached version from persistence manager");
+                    // console.log("returning cached version from persistence manager");
                     resolve(persistenceManager.get(descriptor.sourcePackageURL + "/sourceCode"));
                 } else {
                     _this.httpRequest.get(descriptor.sourcePackageURL + "/sourceCode").then(function (sourceCode) {
