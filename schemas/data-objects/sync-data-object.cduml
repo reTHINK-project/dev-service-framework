@@ -9,6 +9,7 @@ package SyncDataObject {
 		name : string
 		description ?: string
 		tags ?: string[]
+		resources ?: HypertyResource.HypertyResourceType[]
 	}
 
 	class SyncObjectParent {
@@ -41,5 +42,4 @@ package SyncDataObject {
 	SyncObjectParent .down.> "0..*" SyncObjectChild
 	SyncObjectChildren .down.> "1..*" SyncObjectChild : ChildId
 }
-
 @enduml

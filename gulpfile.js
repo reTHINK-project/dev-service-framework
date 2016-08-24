@@ -5,7 +5,7 @@ var exec = require('child_process').exec;
 var prompt = require('gulp-prompt');
 
 // Task and dependencies to distribute for all environments;
-var babel = require('babelify');
+var babelify = require('babelify');
 var _ = require('lodash');
 var browserify = require('browserify');
 var buffer = require('vinyl-buffer');
@@ -22,6 +22,9 @@ var gutil = require('gulp-util');
 
 var Base64 = require('js-base64').Base64;
 var fs = require('fs');
+
+var jsonschemaBundle = require('gulp-jsonschema-bundle');
+var merge = require('merge-stream');
 
 var extensions = ['.js', '.json'];
 
@@ -72,6 +75,19 @@ gulp.task('license', function() {
 
 });
 
+gulp.task('schemabundle', function () {
+
+  var core = gulp.src(['schemas/json-schema/core/*.json'])
+    .pipe(jsonschemaBundle())
+    .pipe(gulp.dest('schemas/json-schema/core/bundled'));
+
+  var dataObjects = gulp.src(['schemas/json-schema/data-objects/*.json'])
+    .pipe(jsonschemaBundle())
+    .pipe(gulp.dest('schemas/json-schema/data-objects/bundled'));
+
+  return merge([core, dataObjects]);
+});
+
 function prependLicense(clean) {
 
   return through.obj(function(file, enc, cb) {
@@ -103,7 +119,7 @@ gulp.task('dist', function() {
   return gulp.src(['src/CatalogueFactory.js',
   'src/discovery/Discovery.js',
   'src/identityManager/IdentityManager.js',
-  'src/HypertyDiscovery.js',
+  'src/persistence/PersistenceManager.js',
   'src/MessageFactory.js',
   'src/RuntimeCatalogue.js',
   'src/service-framework.js',
@@ -188,7 +204,7 @@ gulp.task('encode', function(done) {
 
       var transpileOpts = {
         configuration: {},
-        debug: false,
+        debug: true,
         standalone: path.parse(res.file).basename,
         destination: __dirname + '/resources/tmp'
       };
@@ -288,11 +304,13 @@ function transpile(opts) {
 
     args.entries = [file.path];
     args.extensions = extensions;
+
     if (opts.debug) args.debug = opts.debug;
     if (opts.standalone) args.standalone = opts.standalone;
 
     return browserify(args)
-    .transform(babel, {
+    .transform(babelify, {
+      sourceMaps: 'both',
       compact: true,
       presets: ['es2015', 'stage-0'],
       plugins: ['add-module-exports', 'babel-polyfill',
@@ -307,9 +325,9 @@ function transpile(opts) {
     })
     .pipe(source(fileObject.base))
     .pipe(buffer())
-    .pipe(sourcemaps.init({loadMaps: true}))
+    .pipe(sourcemaps.init())
     .pipe(uglify())
-    .pipe(sourcemaps.write('./'))
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(opts.destination))
     .on('end', function() {
       file.contents = fs.readFileSync(opts.destination + '/' + fileObject.base);

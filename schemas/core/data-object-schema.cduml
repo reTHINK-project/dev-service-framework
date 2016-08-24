@@ -15,8 +15,7 @@ package RethinkCore <<Rect>> {
 			enum DataUrlScheme {
 				COMM
 				CONNECTION
-				CTXT
-				ACTION
+				CONTEXT
 				IDENTITY
 			}
 
@@ -44,12 +43,9 @@ package RethinkCore <<Rect>> {
 			}
 
 			class ContextDataObjectSchema {
-			scheme = "ctxt"
+			scheme = "context"
 			}
 
-			class ActionDataObjectSchema {
-			scheme = "action"
-			}
 
 			DataObjectSchema .up.|> RethinkCore.CatalogueDataObject.CatalogueDataObject
 
@@ -63,7 +59,6 @@ package RethinkCore <<Rect>> {
 			ConnectionDataObjectSchema .up.|> HypertyDataObjectSchema
 			IdentityDataObjectSchema .up.|> HypertyDataObjectSchema
 			ContextDataObjectSchema .up.|> HypertyDataObjectSchema
-			ActionDataObjectSchema .up.|> HypertyDataObjectSchema
 
 			CommunicationDataObjectSchema -down-> Communication.Communication : schema for
 
@@ -72,7 +67,6 @@ package RethinkCore <<Rect>> {
 			IdentityDataObjectSchema -down-> Identity.Identity : schema for
 
 			ContextDataObjectSchema -down-> Context.Context : schema for
-			ActionDataObjectSchema -down-> Context.Action : schema for
 		}
 	}
 }

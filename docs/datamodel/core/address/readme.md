@@ -107,6 +107,9 @@ In case, the user identifier is not managed by an IdP but by some other naming m
     user-guid://<unique-user-identifier>
 
 
+Anonymous User URL is `user://anonymous`
+
+
 **examples**
 
 Individuals:

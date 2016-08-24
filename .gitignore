@@ -8,6 +8,7 @@ CVS
 .DS_Store
 ._*
 .idea
+.project
 npm-debug.log
 vendor
 node_modules

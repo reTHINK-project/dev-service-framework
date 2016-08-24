@@ -16,9 +16,10 @@ The Communication Data Model is used to model the reTHINK Communications.
 
 **qos:** *to be provided*
 
-**resources:** list of ResourceTypes supported by the communication. See below
+**resources:** list of HypertyResourceTypes supported by the communication. See below
 
-**children = ["chatmessages"]:** definition of ChatMessages as a SyncObjectChildren of Communication (see below)
+**children = ["resources"]:** defines the Communication children (SyncObjectChildren) where all HypertyResources are shared DataObjectChild of a Communication.
+
 
 #### CommunicationStatus
 
@@ -31,11 +32,3 @@ The Communication Data Model is used to model the reTHINK Communications.
 **PAUSED:** *skip?*
 
 **FAILED:** communication creation failed for some reason eg no subscription received
-
-#### Hyperty Resource
-
-![Hyperty Resource Data Object Model](Hyperty-Resource-Data-Object-Model.png)
-
-The Hyperty Resource Data Model is used by the Communication Data Model to model Resources shared in reTHINK Communications e.g. user audio, user video, files, chat messages, etc. The Hyperty Resource data model is handled by Messaging Services functionality and also by Communicator type Hyperties.
-
-This model is compliant with W3C MediaStream API.

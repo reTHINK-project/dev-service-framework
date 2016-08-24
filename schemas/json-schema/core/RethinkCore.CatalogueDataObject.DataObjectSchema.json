@@ -22,8 +22,7 @@
 			{ "$ref": "#/CommunicationDataObjectSchema" },
 			{ "$ref": "#/ConnectionDataObjectSchema" },
 			{ "$ref": "#/IdentityDataObjectSchema" },
-			{ "$ref": "#/ContextDataObjectSchema" },
-			{ "$ref": "#/ActionDataObjectSchema" }
+			{ "$ref": "#/ContextDataObjectSchema" }
 		]
 		,
 		"properties": {
@@ -31,8 +30,7 @@
 				"enum": [
 					"comm",
 					"connection",
-					"ctxt",
-					"action",
+					"context",
 					"identity"
 				]
 			},
@@ -78,16 +76,7 @@
 		"required": ["scheme"],
 		"properties": {
 			"scheme": {
-				"constant": "ctxt"
-			}
-		}
-	}, 
-	"ActionDataObjectSchema": {
-		"type": "object",
-		"required": ["scheme"],
-		"properties": {
-			"scheme": {
-				"constant": "action"
+				"constant": "context"
 			}
 		}
 	}

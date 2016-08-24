@@ -73,10 +73,10 @@ class IdentityManager {
 
         let userURL = reply.body.resource;
 
-        if (userURL) {
+        if (userURL && reply.body.code === 200) {
           resolve(userURL);
         } else {
-          reject('No user was not found');
+          reject('code: ' + reply.body.code + ' No user was not found');
         }
       });
     });

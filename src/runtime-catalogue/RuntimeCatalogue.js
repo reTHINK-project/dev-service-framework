@@ -10,6 +10,7 @@ class RuntimeCatalogue {
         let _this = this;
         _this._factory = new CatalogueFactory(false, undefined);
         _this.httpRequest = runtimeFactory.createHttpRequest();
+        _this.atob = runtimeFactory.atob ? runtimeFactory.atob : atob;
     }
 
     /**
@@ -153,7 +154,7 @@ class RuntimeCatalogue {
           prefix = '';
         }
 
-        idpProxyURL = type + '://' + prefix + domain + '/.well-known/idp-proxy/' + idpproxy;
+        idpProxyURL = type + '://' + domain + '/.well-known/idp-proxy/' + idpproxy;
 
         return _this.getDescriptor(idpProxyURL, _this._createIdpProxy).then(function(result) {
 
@@ -406,7 +407,8 @@ class RuntimeCatalogue {
 
         // check encoding
         if (sp["encoding"] === "base64") {
-            sp["sourceCode"] = atob(sp["sourceCode"]);
+          sp["sourceCode"] = _this.atob(sp["sourceCode"])
+          sp["encoding"] = "UTF-8";
         }
 
         let sourcePackage = _this._factory.createSourcePackage(sp["sourceCodeClassname"], sp["sourceCode"]);

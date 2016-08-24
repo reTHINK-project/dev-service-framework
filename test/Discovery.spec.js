@@ -1,4 +1,4 @@
-import HypertyDiscovery from '../src/hyperty-discovery/HypertyDiscovery';
+import HypertyDiscovery from '../src/discovery/Discovery';
 
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
@@ -6,13 +6,13 @@ import chaiAsPromised from 'chai-as-promised';
 let expect = chai.expect;
 chai.use(chaiAsPromised);
 
-describe('HypertyDiscovery', function() {
+describe('Discovery', function() {
   let domain = 'ist.pt';
   let messageBus = {
     postMessage: (msg, replyCallback) => {
 
       //if the discoverHypertyPerUser don't receive a domain, it will use the domain from the constructor
-      if (msg.to === 'domain://registry.ist.pt/') {
+      if (msg.body.resource === 'user://gmail.com/openidtest10') {
         expect(msg).to.eql({
           type: 'read', from: domain, to: 'domain://registry.ist.pt/',
           body: {resource: 'user://gmail.com/openidtest10'}
@@ -24,7 +24,7 @@ describe('HypertyDiscovery', function() {
                         {descriptor: 'hyperty-catalogue://ist.pt/.well-known/hyperty/HelloHyperty',
                          lastModified: '"2016-03-03T13:32:06Z"'}}}
         });
-      } else {
+      } else if (msg.body.resource === 'user://specific.com/openidtest10') {
         expect(msg).to.eql({
           type: 'read', from: domain, to: 'domain://registry.specific.com/',
           body: {resource: 'user://specific.com/openidtest10'}
@@ -35,6 +35,20 @@ describe('HypertyDiscovery', function() {
             value: {'hyperty://specific.com/1':
                         {descriptor: 'hyperty-catalogue://specific.com/.well-known/hyperty/HelloHyperty',
                          lastModified: '"2016-03-03T13:32:06Z"'}}}
+        });
+      } else if (msg.body.resource === 'user://gmail.com/openidtest20') {
+        expect(msg).to.eql({
+          type: 'read', from: domain, to: 'domain://registry.ist.pt/',
+          body: {resource: 'user://gmail.com/openidtest20', criteria: {resources: ['chat'], dataSchemes: ['comm']}}
+        });
+        replyCallback({
+          id: 1, type: 'response', to: msg.from, from: msg.to, body: {code: 200,
+            assertedIdentity: 'user://gmail.com/openidtest20',
+            value: {'hyperty://ist.pt/1':
+                        {descriptor: 'hyperty-catalogue://ist.pt/.well-known/hyperty/HelloHyperty',
+                         lastModified: '"2016-03-03T13:32:06Z"',
+                         dataSchemes: ['comm'],
+                         resources:   ['chat']}}}
         });
       }
 
@@ -69,6 +83,21 @@ describe('HypertyDiscovery', function() {
                             hypertyURL: 'hyperty://specific.com/1'};
 
       expect(hypertyDiscovery.discoverHypertyPerUser('openidtest10@specific.com', 'specific.com').then(function(response) {
+        return response;
+      })).to.be.fulfilled.and.eventually.eql(expectedMessage).and.notify(done);
+    });
+  });
+
+  describe('discoverHyperty()', function() {
+    it('should conclude the advanced search without error', function(done) {
+      let expectedMessage = {'hyperty://ist.pt/1':
+                      {descriptor: 'hyperty-catalogue://ist.pt/.well-known/hyperty/HelloHyperty',
+                       lastModified: '"2016-03-03T13:32:06Z"',
+                       dataSchemes: ['comm'],
+                       resources:   ['chat']}
+      };
+
+      expect(hypertyDiscovery.discoverHyperty('user://gmail.com/openidtest20', ['comm'], ['chat']).then(function(response) {
         return response;
       })).to.be.fulfilled.and.eventually.eql(expectedMessage).and.notify(done);
     });
