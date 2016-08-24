@@ -3,7 +3,7 @@
 package Message <<Rect>> {
 
 	class Message {
-		id : string
+		id : integer
 		from : URL.URL
 		to : URL.URL[]
 		type : MessageType
