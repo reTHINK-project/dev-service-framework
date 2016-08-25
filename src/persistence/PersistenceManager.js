@@ -20,32 +20,42 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 **/
-import localStorage from './universal-localstorage'
+class PersistenceManager {
 
-const persistenceManager = {
-    set: (key, version, value) => {
-        localStorage.setItem(key, JSON.stringify({'version': version, 'value': value}))
-    },
+  constructor(storage) {
+    if (!storage) throw Error('The Persistence Manager needs the localStorage');
+    let _this = this;
+    _this.localStorage = storage;
 
-    get: (key) => {
-        try {
-            return JSON.parse(localStorage.getItem(key)).value
-        } catch (e) {
-            // return undefined
-        }
-    },
+  }
 
-    getVersion: (key) => {
-        try {
-            return JSON.parse(localStorage.getItem(key)).version
-        } catch (e) {
-            // return undefined
-        }
-    },
+  set (key, version, value) {
+    let _this = this;
+    _this.localStorage.setItem(key, JSON.stringify({version: version, value: value}));
+  }
 
-    delete: (key) => {
-        localStorage.removeItem(key)
+  get (key) {
+    let _this = this;
+    try {
+      return JSON.parse(_this.localStorage.getItem(key)).value;
+    } catch (e) {
+      // return undefined
     }
-};
+  }
 
-export default persistenceManager
+  getVersion (key) {
+    let _this = this;
+    try {
+      return JSON.parse(_this.localStorage.getItem(key)).version;
+    } catch (e) {
+      // return undefined
+    }
+  }
+
+  delete (key) {
+    let _this = this;
+    _this.localStorage.removeItem(key);
+  }
+}
+
+export default PersistenceManager;

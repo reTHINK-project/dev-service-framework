@@ -1,2 +1,0 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var localStorage=void 0;if("undefined"==typeof window){var LocalStorage=require("node-localstorage").LocalStorage;localStorage=new LocalStorage("./uls-scratch")}else localStorage="undefined"==typeof window.localStorage||"undefined"==typeof window.sessionStorage?require("./rem-localstorage"):window.localStorage;exports["default"]=localStorage,module.exports=exports["default"];
-//# sourceMappingURL=universal-localstorage.js.map

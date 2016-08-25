@@ -1,6 +1,5 @@
 import {divideURL} from '../utils/utils';
 import CatalogueFactory from '../catalogue-factory/CatalogueDataObjectFactory';
-import persistenceManager from '../persistence/PersistenceManager';
 
 class RuntimeCatalogue {
 
@@ -11,6 +10,7 @@ class RuntimeCatalogue {
         _this._factory = new CatalogueFactory(false, undefined);
         _this.httpRequest = runtimeFactory.createHttpRequest();
         _this.atob = runtimeFactory.atob ? runtimeFactory.atob : atob;
+        _this.persistenceManager = runtimeFactory.persistenceManager();
     }
 
     /**
@@ -26,10 +26,12 @@ class RuntimeCatalogue {
         return new Promise(function (resolve, reject) {
 
             _this.httpRequest.get(descriptorURL + "/version").then(function (result) {
-                if (persistenceManager.getVersion(descriptorURL) >= result) {
+                console.log('AHA H: ', _this.persistenceManager.getVersion(descriptorURL));
+                if (_this.persistenceManager.getVersion(descriptorURL) >= result) {
                     // return saved version
-                    // console.log("returning saved version:", persistenceManager.get(descriptorURL));
-                    resolve(createFunc(_this, persistenceManager.get(descriptorURL)))
+                    // console.log("returning saved version:", _this.persistenceManager.get(descriptorURL));
+                    console.log('AHA H: ', _this.persistenceManager.get(descriptorURL));
+                    resolve(createFunc(_this, _this.persistenceManager.get(descriptorURL)))
                 } else {
                     // request the json
                     _this.httpRequest.get(descriptorURL).then(function (result) {
@@ -50,7 +52,8 @@ class RuntimeCatalogue {
                             }
                             // // console.log("creating descriptor based on: ", result);
                             let descriptor = createFunc(_this, result);
-                            persistenceManager.set(descriptorURL, descriptor.version, result);
+                            console.log('AHA H: ', _this.persistenceManager.set(descriptorURL, descriptor.version, result));
+                            _this.persistenceManager.set(descriptorURL, descriptor.version, result);
                             // // console.log("created descriptor object:", hyperty);
                             resolve(descriptor);
                         }
@@ -466,16 +469,19 @@ class RuntimeCatalogue {
                 //// console.log("returning sourceCode:", descriptor.sourcePackage.sourceCode);
                 resolve(descriptor.sourcePackage.sourceCode);
             } else {
-                if (persistenceManager.getVersion(descriptor.sourcePackageURL + "/sourceCode") >= descriptor.version) {
+                console.log('AHA H: ', _this.persistenceManager.getVersion(descriptor.sourcePackageURL + "/sourceCode"));
+                if (_this.persistenceManager.getVersion(descriptor.sourcePackageURL + "/sourceCode") >= descriptor.version) {
                     // console.log("returning cached version from persistence manager");
-                    resolve(persistenceManager.get(descriptor.sourcePackageURL + "/sourceCode"));
+                    console.log('AHA H: ', _this.persistenceManager.get(descriptor.sourcePackageURL + "/sourceCode"));
+                    resolve(_this.persistenceManager.get(descriptor.sourcePackageURL + "/sourceCode"));
                 } else {
                     _this.httpRequest.get(descriptor.sourcePackageURL + "/sourceCode").then(function (sourceCode) {
                         if (sourceCode["ERROR"]) {
                             // TODO handle error properly
                             reject(sourceCode);
                         } else {
-                            persistenceManager.set(descriptor.sourcePackageURL + "/sourceCode", descriptor.version, sourceCode);
+                            console.log('AHA H: ', _this.persistenceManager.set(descriptor.sourcePackageURL + "/sourceCode", descriptor.version, sourceCode));
+                            _this.persistenceManager.set(descriptor.sourcePackageURL + "/sourceCode", descriptor.version, sourceCode);
                             resolve(sourceCode);
                         }
                     });
@@ -495,7 +501,8 @@ class RuntimeCatalogue {
     }
 
     deleteFromPM(url) {
-        persistenceManager.delete(url);
+      console.log('AHA H: ', _this.persistenceManager.delete(url));
+        _this.persistenceManager.delete(url);
     }
 
 }

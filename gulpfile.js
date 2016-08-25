@@ -7,7 +7,6 @@ var prompt = require('gulp-prompt');
 // Task and dependencies to distribute for all environments;
 var babelify = require('babelify');
 var _ = require('lodash');
-var babel = require('gulp-babel');
 var browserify = require('browserify');
 var buffer = require('vinyl-buffer');
 var source = require('vinyl-source-stream');
@@ -117,24 +116,15 @@ function prependLicense(clean) {
 
 gulp.task('dist', function() {
 
-  return gulp.src(['src/**/*.js'])
-  .pipe(sourcemaps.init())
-  .pipe(babel({
-    sourceMaps: 'both',
-    compact: true,
-    presets: ['es2015'],
-    plugins: ['add-module-exports']
-  })).on('error', function(err) {
-    gutil.log(gutil.colors.red(err));
-    this.emit('end');
-  })
-  .pipe(uglify())
-  .pipe(sourcemaps.write('.'))
-  // .pipe(mark())
-  .pipe(gulp.dest('dist'))
-  .on('end', function() {
-    gutil.log('Distribution files done');
-  });
+  return gulp.src(['src/CatalogueFactory.js',
+  'src/discovery/Discovery.js',
+  'src/identityManager/IdentityManager.js',
+  'src/persistence/PersistenceManager.js',
+  'src/MessageFactory.js',
+  'src/RuntimeCatalogue.js',
+  'src/service-framework.js',
+  'src/Syncher.js'])
+  .pipe(dist());
 
 });
 
