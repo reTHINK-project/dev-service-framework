@@ -20,10 +20,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-import Message from './Message.js';
-import {MessageBody, CreateMessageBody, DeleteMessageBody, UpdateMessageBody, ReadMessageBody, ResponseMessageBody,
-    ForwardMessageBody, ExecuteMessageBody} from './MessageBody.js';
-import {MessageType} from './Message.js';
+import Message, {MessageType} from "./Message.js";
+import {
+    MessageBody,
+    CreateMessageBody,
+    DeleteMessageBody,
+    UpdateMessageBody,
+    ReadMessageBody,
+    ResponseMessageBody,
+    ForwardMessageBody,
+    ExecuteMessageBody
+} from "./MessageBody.js";
 
 /**
  * @author alice.cheambe[at]fokus.fraunhofer.de
@@ -52,7 +59,7 @@ class MessageFactory {
         if (!from || !to || !value)
             throw  new Error("from, to, and value of object to be created MUST be specified");
 
-        let id = "" + this.myGenerator.next().value;
+        let id = this.myGenerator.next().value;
         let messageBody = new CreateMessageBody(value, policy, undefined, undefined, undefined, undefined, undefined);
         let message = new Message(id, from, to, MessageType.CREATE, messageBody);
         return message;
@@ -71,7 +78,7 @@ class MessageFactory {
         if (!from || !to || !message)
             throw  new Error("from, to, and message to forward MUST be specified");
 
-        let id = "" + this.myGenerator.next().value;
+        let id = this.myGenerator.next().value;
         let messageBody = new ForwardMessageBody(undefined, undefined, undefined, undefined, undefined, message);
         let forwardMessage = new Message(id, from, to, MessageType.FORWARD, messageBody);
         return forwardMessage;
@@ -91,7 +98,7 @@ class MessageFactory {
         if (!from || !to)
             throw  new Error("from and to parameters MUST be specified");
 
-        let id = "" + this.myGenerator.next().value;
+        let id = this.myGenerator.next().value;
         let messageBody = new DeleteMessageBody(undefined, undefined, resource, attribute, undefined, undefined);
         let message = new Message(id, from, to, MessageType.DELETE, messageBody);
         return message;
@@ -113,7 +120,7 @@ class MessageFactory {
         if (!from || !to || !value)
             throw  new Error("from, and to and value MUST be specified");
 
-        let id = "" + this.myGenerator.next().value;
+        let id = this.myGenerator.next().value;
         let messageBody = new UpdateMessageBody(undefined, undefined, resource, undefined, undefined, attribute, value);
         let message = new Message(id, from, to, MessageType.UPDATE, messageBody);
         return message;
@@ -132,7 +139,7 @@ class MessageFactory {
         if (!from || !to || !resource)
             throw  new Error("from, to and the resource to read from MUST be specified");
 
-        let id = "" + this.myGenerator.next().value;
+        let id = this.myGenerator.next().value;
         let messageBody = new ReadMessageBody(undefined, undefined, resource, undefined, undefined, attribute,
             undefined, undefined);
         let message = new Message(id, from, to, MessageType.READ, messageBody);
@@ -150,7 +157,7 @@ class MessageFactory {
         if (!from || !to || !resource)
             throw  new Error("from, to and the resource to subscribe to MUST be specified");
 
-        let id = "" + this.myGenerator.next().value;
+        let id = this.myGenerator.next().value;
         let messageBody = new MessageBody(undefined, undefined, resource, undefined, undefined);
         let message = new Message(id, from, to, MessageType.SUBSCRIBE, messageBody);
         return message;
@@ -167,7 +174,7 @@ class MessageFactory {
         if (!from || !to || !resource)
             throw  new Error("from, to and the resource to subscribe to MUST be specified");
 
-        let id = "" + this.myGenerator.next().value;
+        let id = this.myGenerator.next().value;
         let messageBody = new MessageBody(undefined, undefined, resource, undefined, undefined);
         let message = new Message(id, from, to, MessageType.UNSUBSCRIBE, messageBody);
         return message;
@@ -185,7 +192,7 @@ class MessageFactory {
         if (!from || !to || !method)
             throw  new Error("from, to and the method to execute MUST be specified");
 
-        let id = "" + this.myGenerator.next().value;
+        let id = this.myGenerator.next().value;
         let messageBody = new ExecuteMessageBody(undefined, undefined, undefined, undefined, undefined, method, params)
         let executeMessage = new Message(id, from, to, MessageType.EXECUTE, messageBody);
         return executeMessage;

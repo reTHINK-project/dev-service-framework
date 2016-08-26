@@ -6,7 +6,7 @@
 	"required": ["id", "from", "to", "type"],
 	"properties": {
 		"id": {
-			"type": "string"
+			"type": "integer"
 		},
 		"from": {
 			"type": "string"
@@ -33,7 +33,7 @@
 		"body": {
 			"$ref": "#/MessageBody"
 		}
-	}, 
+	},
 	"MessageBody": {
 		"type": "object",
 		"anyOf": [
@@ -86,7 +86,7 @@
 				"type": "boolean"
 			}
 		}
-	}, 
+	},
 	"CreateMessageBody": {
 		"type": "object",
 		"required": ["value"],
@@ -104,7 +104,7 @@
 				"type": "string"
 			}
 		}
-	}, 
+	},
 	"UpdateMessageBody": {
 		"type": "object",
 		"required": ["value"],
@@ -122,12 +122,12 @@
 				"type": "string"
 			}
 		}
-	}, 
+	},
 	"ResponseCode": {
 		"type": "object",
 		"properties": {
 		}
-	}, 
+	},
 	"ResponseMessageBody": {
 		"type": "object",
 		"required": ["code"],
@@ -142,7 +142,7 @@
 				"type": "string"
 			}
 		}
-	}, 
+	},
 	"DeleteMessageBody": {
 		"type": "object",
 		"properties": {
@@ -150,7 +150,7 @@
 				"type": "string"
 			}
 		}
-	}, 
+	},
 	"ReadMessageBody": {
 		"type": "object",
 		"properties": {
@@ -164,7 +164,7 @@
 				"type": "string"
 			}
 		}
-	}, 
+	},
 	"SubscribeMessageBody": {
 		"type": "object",
 		"properties": {
@@ -175,7 +175,7 @@
 				}
 			}
 		}
-	}, 
+	},
 	"UnsubscribeMessageBody": {
 		"type": "object",
 		"properties": {
@@ -186,7 +186,7 @@
 				}
 			}
 		}
-	}, 
+	},
 	"FowardMessageBody": {
 		"type": "object",
 		"properties": {
@@ -194,7 +194,7 @@
 				"$ref": "#/Message"
 			}
 		}
-	}, 
+	},
 	"ExecuteMessageBody": {
 		"type": "object",
 		"required": ["method"],

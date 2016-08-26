@@ -20,7 +20,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-import RethinkObject from '../reTHINKObject/RethinkObject.js';
+import RethinkObject from "../reTHINKObject/RethinkObject.js";
 
 /**
  *
@@ -33,7 +33,7 @@ export class Message extends RethinkObject {
     /**
      * Generates a message data object
      *
-     * @param {String} id - To be used to associate Response messages to the initial request message.
+     * @param {number} id - To be used to associate Response messages to the initial request message.
      * @param {URL.URL} from - URL of Hyperty instance or User associated with it
      * @param {URL.URLList} toList - One or more URLs of Message recipients. According to the URL scheme it may be
      * handled in different ways
