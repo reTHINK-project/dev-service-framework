@@ -1,4 +1,4 @@
-@startuml "../../datamodel/core/hyperty-domain/domain.png"
+@startuml "../../docs/datamodel/core/hyperty-domain/domain.png"
 
 package HypertyDomain <<Rect>> {
 

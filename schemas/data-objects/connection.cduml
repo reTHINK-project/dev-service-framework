@@ -1,4 +1,4 @@
-@startuml "../../datamodel/data-objects/connection/Connection-Data-Object-Model.png"
+@startuml "../../docs/datamodel/data-objects/connection/Connection-Data-Object-Model.png"
 
 package Connection <<Rect>> {
 
@@ -43,7 +43,7 @@ package Connection <<Rect>> {
 	    disconnected
 	    closed
 	}
-	
+
 	Connection -up-|> SyncDataObject.SyncDataObject
 	Peer -up-|> SyncDataObject.SyncDataObject
 

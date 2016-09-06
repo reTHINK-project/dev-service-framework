@@ -1,4 +1,4 @@
-@startuml "../../datamodel/core/hyperty-catalogue/Catalogue-Data-Object.png"
+@startuml "../../docs/datamodel/core/hyperty-catalogue/Catalogue-Data-Object.png"
 
 package CatalogueDataObject <<Rect>> {
 
