@@ -1,3 +1,5 @@
+ "This Spec is for Phase 1!! Most updated version is [here](https://github.com/reTHINK-project/specs/tree/master/service-framework)" 
+=============== 
 ### Address Resource Factory
 
 The Address Resource Factory creates the different types of URLs required as specified [here](https://github.com/reTHINK-project/architecture/tree/master/docs/datamodel/address). It is compliant with the API described [](https://url.spec.whatwg.org/#api)

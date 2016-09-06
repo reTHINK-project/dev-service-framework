@@ -1,3 +1,5 @@
+ "This Spec is for Phase 1!! Most updated version is [here](https://github.com/reTHINK-project/specs/tree/master/messages)" 
+=============== 
 ### Global Registry Messages
 
 This doc specifies the Messages to be used when interacting with the Global Registry.

@@ -1,3 +1,5 @@
+ "This Spec is for Phase 1!! Most updated version is [here](https://github.com/reTHINK-project/specs/tree/master/service-framework)" 
+=============== 
 ## Syncher
 
 The Syncher API provides data object synchronisation among Hyperties as described by the [Reporter-Observer communication pattern](https://github.com/reTHINK-project/dev-hyperty-toolkit/blob/master/docs/tutorials/p2p-data-sync.md).

@@ -1,3 +1,5 @@
+ "This Spec is for Phase 1!! Most updated version is [here](https://github.com/reTHINK-project/specs/tree/master/dynamic-view)" 
+=============== 
 #### Data Object Subscription by Observer
 
 ![Figure @data-sync-subscription Request to subscribe a Sync Data Object](data-object-subscribe.png)

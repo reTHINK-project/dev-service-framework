@@ -1,3 +1,5 @@
+ "This Spec is for Phase 1!! Most updated version is [here](https://github.com/reTHINK-project/specs/tree/master/dynamic-view)" 
+=============== 
 #### Data Object Creation by Reporter
 
 This MSC diagrams shows the most relevant steps to support the setup of data object synchronisation.

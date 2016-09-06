@@ -1,3 +1,5 @@
+ "This Spec is for Phase 1!! Most updated version is [here](https://github.com/reTHINK-project/specs/tree/master/datamodel)" 
+=============== 
 ## Context Data Object Model
 
 *To be compliant with [SENML](https://tools.ietf.org/html/draft-jennings-core-senml-01)*

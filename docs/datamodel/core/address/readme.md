@@ -1,3 +1,5 @@
+ "This Spec is for Phase 1!! Most updated version is [here](https://github.com/reTHINK-project/specs/tree/master/datamodel)" 
+=============== 
 ## reTHINK Address Model
 
 It is proposed to use as much as possible Web URLs model for reTHINK addressing model as defined in the [WHATWG standard](https://url.spec.whatwg.org/). According to this standard, there is no distinguish betweeb URL and URI. The intention is not to depend on existing DNS based naming resolution but to keep it open as such decision will take place in WP4.
