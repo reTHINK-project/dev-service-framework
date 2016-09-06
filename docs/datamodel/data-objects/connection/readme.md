@@ -1,3 +1,5 @@
+"This Spec is for Phase 1!! Most updated version is at https://github.com/reTHINK-project/specs/tree/master/datamodel" 
+========== 
 ### Connection
 
 ![Connection Data Object Model](Connection-Data-Object-Model.png)
