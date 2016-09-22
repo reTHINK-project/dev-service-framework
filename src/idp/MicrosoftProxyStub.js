@@ -59,11 +59,15 @@ let idp = {
       } else {
 
         //later verify the token and use the information from the JWT
-        let hintSplited = hint.split('.');
+
+        let token = hint.split('/');
+        let tokenSplited = token[3];
+
+        let hintSplited = tokenSplited.split('.');
 
         let idToken = JSON.parse(atob(hintSplited[1]));
 
-        let idpBundle = {domain: 'google.com', protocol: 'OIDC'};
+        let idpBundle = {domain: 'microsoft.com', protocol: 'OIDC'};
         let identityBundle = {assertion: hintSplited[1], idp: idpBundle, infoToken: idToken};
 
         resolve(identityBundle);
