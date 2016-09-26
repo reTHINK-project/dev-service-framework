@@ -1,6 +1,5 @@
 import {divideURL} from '../utils/utils';
 import CatalogueFactory from '../catalogue-factory/CatalogueDataObjectFactory';
-import persistenceManager from '../persistence/PersistenceManager';
 
 class RuntimeCatalogue {
 
@@ -9,6 +8,9 @@ class RuntimeCatalogue {
 
         this._factory = new CatalogueFactory(false, undefined);
         this.httpRequest = runtimeFactory.createHttpRequest();
+        this.atob = runtimeFactory.atob ? runtimeFactory.atob : atob;
+        this.persistenceManager = runtimeFactory.persistenceManager();
+
     }
 
     /**
@@ -33,8 +35,8 @@ class RuntimeCatalogue {
 
             // check if same version is contained in localStorage
             //persistenceManager.delete(cguid);
-            if (persistenceManager.getVersion(cguid) >= version) {
-                let savedDescriptor = persistenceManager.get(cguid);
+            if (this.persistenceManager.getVersion(cguid) >= version) {
+                let savedDescriptor = this.persistenceManager.get(cguid);
                 console.log("persistenceManager contains saved version: ", savedDescriptor);
                 isSavedDescriptor = true;
                 return savedDescriptor;
@@ -77,7 +79,7 @@ class RuntimeCatalogue {
         returnPromise = returnPromise.then((descriptor) => {
             // store if not saved before, or if full descriptor was requested and only partial descriptor was stored.
             if (!isSavedDescriptor || (isSavedDescriptor && !isCompleteDescriptor && getFull)) {
-                persistenceManager.set(descriptor.cguid, descriptor.version, descriptor);
+                this.persistenceManager.set(descriptor.cguid, descriptor.version, descriptor);
             }
             return createFunc.apply(this, [descriptor]);
         });
@@ -412,16 +414,16 @@ class RuntimeCatalogue {
                 //console.log("returning sourceCode:", descriptor.sourcePackage.sourceCode);
                 resolve(descriptor.sourcePackage.sourceCode);
             } else {
-                if (persistenceManager.getVersion(descriptor.sourcePackageURL + "/sourceCode") >= descriptor.version) {
+                if (this.persistenceManager.getVersion(descriptor.sourcePackageURL + "/sourceCode") >= descriptor.version) {
                     console.log("returning cached version from persistence manager");
-                    resolve(persistenceManager.get(descriptor.sourcePackageURL + "/sourceCode"));
+                    resolve(this.persistenceManager.get(descriptor.sourcePackageURL + "/sourceCode"));
                 } else {
                     this.httpRequest.get(descriptor.sourcePackageURL + "/sourceCode").then((sourceCode) => {
                         if (sourceCode["ERROR"]) {
                             // TODO handle error properly
                             reject(sourceCode);
                         } else {
-                            persistenceManager.set(descriptor.sourcePackageURL + "/sourceCode", descriptor.version, sourceCode);
+                            this.persistenceManager.set(descriptor.sourcePackageURL + "/sourceCode", descriptor.version, sourceCode);
                             resolve(sourceCode);
                         }
                     });
@@ -439,7 +441,7 @@ class RuntimeCatalogue {
     }
 
     deleteFromPM(url) {
-        persistenceManager.delete(url);
+        this.persistenceManager.delete(url);
     }
 
 }

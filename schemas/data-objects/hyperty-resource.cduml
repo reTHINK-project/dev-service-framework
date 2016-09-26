@@ -4,6 +4,7 @@ package HypertyResource <<Rect>> {
 
 	class HypertyResource {
 		type : HypertyResourceType
+		mimetype ?: string
 		direction ?: ResourceDirection
 		author ?: URL.UserURL
 		content ?: object
@@ -11,7 +12,7 @@ package HypertyResource <<Rect>> {
 		player ?: URL.HypertyCatalogueURL
 	}
 
-	note right : player is provided by a certain Hyperty\n to play the HypertyResource Content 
+	note right : player is provided by a certain Hyperty\n to play the HypertyResource Content
 
 	enum HypertyResourceType {
 		CHAT
@@ -40,12 +41,12 @@ package HypertyResource <<Rect>> {
 		OUT
 		INOUT
 	}
-	
+
 	HypertyResource -up-|> SyncDataObject.SyncObjectChild
 	HypertyResource ..> HypertyResourceType
 	HypertyResource ..> ResourceDirection
 	Identity.Identity ..> HypertyResource: author
-	
+
 }
 
 @enduml

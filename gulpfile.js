@@ -23,6 +23,9 @@ var gutil = require('gulp-util');
 var Base64 = require('js-base64').Base64;
 var fs = require('fs');
 
+var jsonschemaBundle = require('gulp-jsonschema-bundle');
+var merge = require('merge-stream');
+
 var extensions = ['.js', '.json'];
 
 var pkg = require('./package.json');
@@ -72,6 +75,19 @@ gulp.task('license', function() {
 
 });
 
+gulp.task('schemabundle', function () {
+
+  var core = gulp.src(['schemas/json-schema/core/*.json'])
+    .pipe(jsonschemaBundle())
+    .pipe(gulp.dest('schemas/json-schema/core/bundled'));
+
+  var dataObjects = gulp.src(['schemas/json-schema/data-objects/*.json'])
+    .pipe(jsonschemaBundle())
+    .pipe(gulp.dest('schemas/json-schema/data-objects/bundled'));
+
+  return merge([core, dataObjects]);
+});
+
 function prependLicense(clean) {
 
   return through.obj(function(file, enc, cb) {
@@ -104,7 +120,6 @@ gulp.task('dist', function() {
   'src/discovery/Discovery.js',
   'src/identityManager/IdentityManager.js',
   'src/persistence/PersistenceManager.js',
-  'src/HypertyDiscovery.js',
   'src/MessageFactory.js',
   'src/RuntimeCatalogue.js',
   'src/service-framework.js',
