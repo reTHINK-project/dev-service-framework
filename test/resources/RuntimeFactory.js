@@ -1,5 +1,6 @@
 import Request from './Request';
-import {RuntimeCatalogueLocal, RuntimeCatalogue} from '../../src/RuntimeCatalogue';
+import { RuntimeCatalogue } from '../../src/RuntimeCatalogue';
+import PersistenceManager from '../../src/persistence/PersistenceManager';
 
 class RuntimeFactory {
 
@@ -16,6 +17,15 @@ class RuntimeFactory {
     return request;
   }
 
+  atob(b64) {
+    return atob(b64);
+  }
+
+  persistenceManager() {
+    let localStorage = window.localStorage;
+    return new PersistenceManager(localStorage);
+  }
+
   // TODO optimize the parameter was passed to inside the RuntimeCatalogue
   createRuntimeCatalogue() {
 
@@ -26,7 +36,7 @@ class RuntimeFactory {
       }
     };
 
-    return new RuntimeCatalogueLocal(factory);
+    return new RuntimeCatalogue(factory);
 
   }
 

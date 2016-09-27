@@ -34,7 +34,7 @@ class Request {
             let protocolmap = {
                 'localhost://': 'https://',
                 'undefined://': 'https://',
-                'hyperty-catalogue://': 'http://',
+                'hyperty-catalogue://': 'https://',
                 'https://': 'https://',
                 'http://': 'http://',
                 '../': '../'

@@ -8,7 +8,7 @@ import tv4 from "tv4";
 let expect = chai.expect;
 let assert = chai.assert;
 let should = chai.should();
-let tv4 = chai.tv4();
+// let tv4 = chai.tv4();
 
 
 chai.use(chaiAsPromised);
