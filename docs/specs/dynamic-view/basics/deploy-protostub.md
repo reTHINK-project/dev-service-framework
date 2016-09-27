@@ -1,3 +1,5 @@
+ "This Spec is for Phase 1!! Most updated version is [here](https://github.com/reTHINK-project/specs/tree/master/dynamic-view)" 
+=============== 
 #### Deploy Protocol Stub
 
 The main data flows to support the deployment of protocol stubs required to connect the Hyperty Runtime to a specific back-end server, is presented in the figure below and described in this section.

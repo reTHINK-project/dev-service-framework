@@ -1,3 +1,5 @@
+ "This Spec is for Phase 1!! Most updated version is [here](https://github.com/reTHINK-project/specs/tree/master/messages)" 
+=============== 
 ### Hyperty Data Object Synchronisation Messages
 
 This doc specifies Messages that are used to manage Hyperty Data Object Synchronisation, including:

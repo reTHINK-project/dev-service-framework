@@ -1,3 +1,5 @@
+ "This Spec is for Phase 1!! Most updated version is [here](https://github.com/reTHINK-project/specs/tree/master/dynamic-view)" 
+=============== 
 #### Message Routing in Message BUS
 
 The Runtime procedures to route a message by the Runtime BUS are described in this section.

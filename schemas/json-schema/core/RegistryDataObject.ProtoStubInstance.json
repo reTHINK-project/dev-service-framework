@@ -1,12 +1,13 @@
-{
-	"$schema": "http://json-schema.org/draft-04/schema#",
+{ 
+  "_comment": "This Spec is for Phase 1!! Most updated version is at https://github.com/reTHINK-project/specs/tree/master/schemas", 
+        "$schema": "http://json-schema.org/draft-04/schema#",
 
-	"id": "ProtoStubInstance",
-	"type": "object",
-	"required": ["runtime"],
-	"properties": {
-		"runtime": {
-			"type": "string"
-		}
-	}
+        "id": "ProtoStubInstance",
+        "type": "object",
+        "required": ["runtime"],
+        "properties": {
+                "runtime": {
+                        "type": "string"
+                }
+        }
 }

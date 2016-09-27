@@ -1,3 +1,5 @@
+"This Spec is for Phase 1!! Most updated version is at https://github.com/reTHINK-project/specs/tree/master/datamodel" 
+==========
 ### User Hyperty Account
 
 The User Hyperty Account data object contains data managed by Hyperty Service providers required to deliver Hyperty to users.

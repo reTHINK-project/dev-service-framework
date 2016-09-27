@@ -1,3 +1,5 @@
+ "This Spec is for Phase 1!! Most updated version is [here](https://github.com/reTHINK-project/specs/tree/master/dynamic-view)" 
+=============== 
 #### Inter-domain Remote Communication
 
 The routing of messages between two Hyperties running in different Runtime instance and from different domains, is described below.

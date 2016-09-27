@@ -1,3 +1,5 @@
+ "This Spec is for Phase 1!! Most updated version is [here](https://github.com/reTHINK-project/specs/tree/master/dynamic-view)" 
+=============== 
 #### Intra-domain Local Communication
 
 Communication between two Hyperties running in the same Runtime instance can be performed locally by using some non-standard function or through the Runtime BUS using postMessage standard function. 

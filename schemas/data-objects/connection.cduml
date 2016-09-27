@@ -43,7 +43,7 @@ package Connection <<Rect>> {
 	    disconnected
 	    closed
 	}
-	
+
 	Connection -up-|> SyncDataObject.SyncDataObject
 	Peer -up-|> SyncDataObject.SyncDataObject
 

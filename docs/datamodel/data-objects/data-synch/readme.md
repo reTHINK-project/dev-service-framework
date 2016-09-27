@@ -1,3 +1,5 @@
+"This Spec is for Phase 1!! Most updated version is at https://github.com/reTHINK-project/specs/tree/master/datamodel" 
+========== 
 ### Sync Data Object Model
 
 The SyncDataObject Model is used to specify the JSON format used in the [Reporter-Observer data synchronisation communication mechanism](../../manuals/p2p-data-sync.md) used to support Hyperty Interoperability at run time.
