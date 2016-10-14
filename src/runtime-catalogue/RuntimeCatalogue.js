@@ -21,7 +21,7 @@ class RuntimeCatalogue {
      * @returns {Promise}
      */
     getDescriptor(descriptorURL, createFunc, getFull = true) {
-        //console.log("getDescriptor", arguments);
+        console.log("getting descriptor from:", descriptorURL);
 
         // some flags for optimization
         // (later the descriptor will not be saved in case both of these booleans are true)
@@ -37,10 +37,11 @@ class RuntimeCatalogue {
             //persistenceManager.delete(cguid);
             if (this.persistenceManager.getVersion(cguid) >= version) {
                 let savedDescriptor = this.persistenceManager.get(cguid);
-                console.log("persistenceManager contains saved version: ", savedDescriptor);
+                console.debug("persistenceManager contains saved version");
                 isSavedDescriptor = true;
                 return savedDescriptor;
             } else {
+                console.debug("persistenceManager does not contain saved version");
                 // no saved copy, proceed with retrieving descriptor
                 return this.httpRequest.get(descriptorURL).then((descriptor) => {
                     descriptor = JSON.parse(descriptor);
@@ -93,12 +94,12 @@ class RuntimeCatalogue {
      * @returns {Promise} - fulfills with complete descriptor
      */
     attachRawSourcePackage(descriptor) {
-        console.debug("attachRawSourcePackage:", arguments);
+        console.debug("attaching raw sourcePackage from:", descriptor.sourcePackageURL);
         return new Promise((resolve) => {
             this.httpRequest.get(descriptor.sourcePackageURL).then((sourcePackage) => {
                 sourcePackage = JSON.parse(sourcePackage);
                 //delete descriptor.sourcePackageURL;
-                console.debug("attaching sourcePackage:", sourcePackage);
+                //console.debug("attaching sourcePackage:", sourcePackage);
                 descriptor.sourcePackage = sourcePackage;
                 resolve(descriptor);
             });
@@ -161,7 +162,7 @@ class RuntimeCatalogue {
      * @returns {HypertyDescriptor}
      */
     createHyperty(rawHyperty) {
-        console.debug("createHyperty:", rawHyperty);
+        //console.debug("createHyperty:", rawHyperty);
         // create the descriptor
         let hyperty = this._factory.createHypertyDescriptorObject(
             rawHyperty["cguid"],
@@ -185,7 +186,6 @@ class RuntimeCatalogue {
         // parse and attach sourcePackage
         let sourcePackage = rawHyperty["sourcePackage"];
         if (sourcePackage) {
-            console.log("hyperty has sourcePackage:", sourcePackage);
             hyperty.sourcePackage = this.createSourcePackage(sourcePackage);
         }
 
@@ -219,8 +219,7 @@ class RuntimeCatalogue {
         // parse and attach the sourcePackage
         let sourcePackage = rawStub["sourcePackage"];
         if (sourcePackage) {
-            sourcePackage = this.createSourcePackage(sourcePackage);
-            stub.sourcePackage = sourcePackage;
+            stub.sourcePackage = this.createSourcePackage(sourcePackage);
         }
 
         return stub;
@@ -239,7 +238,7 @@ class RuntimeCatalogue {
         } catch (e) {
             // already json object
         }
-        console.log("creating runtime descriptor based on: ", rawRuntime);
+        //console.log("creating runtime descriptor based on: ", rawRuntime);
 
 
         // create the descriptor
@@ -273,11 +272,11 @@ class RuntimeCatalogue {
      * @returns {DataObjectSchema}
      */
     createDataSchema(rawSchema) {
-        console.log("creating dataSchema based on: ", rawSchema);
+        //console.log("creating dataSchema based on: ", rawSchema);
 
         let dataSchema;
-        console.log('1. createMessageDataObjectSchema: ', rawSchema["accessControlPolicy"]);
-        console.log('2. createMessageDataObjectSchema: ', rawSchema["scheme"]);
+        //console.log('1. createMessageDataObjectSchema: ', rawSchema["accessControlPolicy"]);
+        //console.log('2. createMessageDataObjectSchema: ', rawSchema["scheme"]);
         if (rawSchema["accessControlPolicy"] && rawSchema["scheme"]) {
             dataSchema = this._factory.createHypertyDataObjectSchema(
                 rawSchema["cguid"],
@@ -290,7 +289,7 @@ class RuntimeCatalogue {
                 rawSchema["scheme"]
             )
         } else {
-            console.log('3. createMessageDataObjectSchema: ', rawSchema);
+            //console.log('3. createMessageDataObjectSchema: ', rawSchema);
             dataSchema = this._factory.createMessageDataObjectSchema(
                 rawSchema["cguid"],
                 rawSchema["version"],
@@ -307,7 +306,7 @@ class RuntimeCatalogue {
         // parse and attach sourcePackage
         let sourcePackage = rawSchema["sourcePackage"];
         if (sourcePackage) {
-            console.log("dataSchema has sourcePackage:", sourcePackage);
+            //console.log("dataSchema has sourcePackage:", sourcePackage);
             dataSchema.sourcePackage = this.createSourcePackage(sourcePackage);
 
             try {
@@ -319,7 +318,7 @@ class RuntimeCatalogue {
             return dataSchema;
 
         }
-        console.log("created dataSchema descriptor object:", dataSchema);
+        //console.log("created dataSchema descriptor object:", dataSchema);
         return dataSchema;
     }
 
@@ -358,7 +357,7 @@ class RuntimeCatalogue {
     }
 
     createSourcePackage(sp) {
-        console.debug("createSourcePackage:", sp);
+        //console.debug("createSourcePackage:", sp);
 
         // check encoding
         if (sp["encoding"] === "base64") {
