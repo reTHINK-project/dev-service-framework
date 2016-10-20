@@ -1,5 +1,4 @@
-import {divideURL} from '../utils/utils';
-import CatalogueFactory from '../catalogue-factory/CatalogueDataObjectFactory';
+import CatalogueFactory from "../catalogue-factory/CatalogueDataObjectFactory";
 
 class RuntimeCatalogue {
 
@@ -31,17 +30,17 @@ class RuntimeCatalogue {
         // get raw descriptor
         // first checks if descriptor is already in localStorage (based on cguid and version)
         let descriptorPromise = Promise.all([this.httpRequest.get(descriptorURL + "/version"), this.httpRequest.get(descriptorURL + "/cguid")]).then(([version, cguid]) => {
-            console.debug("got version (" + version + ") and cguid (" + cguid + ") for descriptor " + descriptorURL);
+            console.log("got version (" + version + ") and cguid (" + cguid + ") for descriptor " + descriptorURL);
 
             // check if same version is contained in localStorage
             //persistenceManager.delete(cguid);
             if (this.persistenceManager.getVersion(cguid) >= version) {
                 let savedDescriptor = this.persistenceManager.get(cguid);
-                console.debug("persistenceManager contains saved version");
+                console.log("persistenceManager contains saved version");
                 isSavedDescriptor = true;
                 return savedDescriptor;
             } else {
-                console.debug("persistenceManager does not contain saved version");
+                console.log("persistenceManager does not contain saved version");
                 // no saved copy, proceed with retrieving descriptor
                 return this.httpRequest.get(descriptorURL).then((descriptor) => {
                     descriptor = JSON.parse(descriptor);
@@ -64,7 +63,7 @@ class RuntimeCatalogue {
 
         // if getFull, attach sourcePackage
         if (getFull) {
-            console.debug("adding promise to attach sourcePackage");
+            console.log("adding promise to attach sourcePackage");
             returnPromise = descriptorPromise.then((descriptor) => {
                 if (descriptor.sourcePackage) {
                     isCompleteDescriptor = true;
@@ -94,12 +93,12 @@ class RuntimeCatalogue {
      * @returns {Promise} - fulfills with complete descriptor
      */
     attachRawSourcePackage(descriptor) {
-        console.debug("attaching raw sourcePackage from:", descriptor.sourcePackageURL);
+        console.log("attaching raw sourcePackage from:", descriptor.sourcePackageURL);
         return new Promise((resolve) => {
             this.httpRequest.get(descriptor.sourcePackageURL).then((sourcePackage) => {
                 sourcePackage = JSON.parse(sourcePackage);
                 //delete descriptor.sourcePackageURL;
-                //console.debug("attaching sourcePackage:", sourcePackage);
+                //console.log("attaching sourcePackage:", sourcePackage);
                 descriptor.sourcePackage = sourcePackage;
                 resolve(descriptor);
             });
@@ -162,7 +161,7 @@ class RuntimeCatalogue {
      * @returns {HypertyDescriptor}
      */
     createHyperty(rawHyperty) {
-        //console.debug("createHyperty:", rawHyperty);
+        //console.log("createHyperty:", rawHyperty);
         // create the descriptor
         let hyperty = this._factory.createHypertyDescriptorObject(
             rawHyperty["cguid"],
@@ -174,7 +173,7 @@ class RuntimeCatalogue {
             rawHyperty["type"] || rawHyperty["hypertyType"],
             rawHyperty["dataObjects"]
         );
-        //console.debug("factory returned:", hyperty);
+        //console.log("factory returned:", hyperty);
 
         // optional fields
         hyperty.configuration = rawHyperty["configuration"];
@@ -357,7 +356,7 @@ class RuntimeCatalogue {
     }
 
     createSourcePackage(sp) {
-        //console.debug("createSourcePackage:", sp);
+        //console.log("createSourcePackage:", sp);
 
         // check encoding
         if (sp["encoding"] === "base64") {

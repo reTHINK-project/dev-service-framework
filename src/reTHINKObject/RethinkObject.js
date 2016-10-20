@@ -46,7 +46,7 @@ export class RethinkObject {
         // print more details about validation if it fails or schema contains $refs
         if (!result.valid || (result.missing.length > 0)) {
             console.warn("Object validation " + (result.valid ? "succeeded, but schema contained references:" : "failed:"), JSON.stringify(result, null, 2));
-            console.debug("Object:", JSON.stringify(this, null, 2));
+            console.log("Object:", JSON.stringify(this, null, 2));
         }
         return result.valid;
     }
