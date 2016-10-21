@@ -6,6 +6,13 @@ reTHINK Service Framework
 -	[Installation as a NPM Module](#installation-as-a-npm-module)
 -	[Contribute to reTHINK](#how-to-contribute)
 
+## <a id="note">Note</a>
+In order to try speed up the instalation process, we remove the first verification of global modules, so, if you want install this repository, you should install globaly this modules:
+
+```shell
+npm install -g karma-cli gulp-cli browserify
+```
+
 ### ReThink Framework Overview
 
 reTHINK provides a Javascript framework to build and deliver Real Time Communication Microservices in end-user devices (browsers and standalone mobile apps) and in Network edge servers (NodeJS):

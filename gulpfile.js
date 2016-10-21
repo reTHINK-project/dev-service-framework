@@ -122,7 +122,6 @@ gulp.task('dist', function() {
   'src/persistence/PersistenceManager.js',
   'src/MessageFactory.js',
   'src/RuntimeCatalogue.js',
-  'src/service-framework.js',
   'src/Syncher.js'])
   .pipe(dist());
 
