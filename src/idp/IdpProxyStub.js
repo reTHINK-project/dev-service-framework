@@ -122,7 +122,7 @@ let IdpProxy = {
 
       let idToken = JSON.parse(atob(idTokenSplited[1]));
 
-      resolve({identity: idToken.email, contents: idToken});
+      resolve({identity: idToken.email, contents: idToken.nonce});
 
     });
     /*return new Promise(function(resolve,reject) {

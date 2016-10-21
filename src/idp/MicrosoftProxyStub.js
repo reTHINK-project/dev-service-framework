@@ -52,7 +52,7 @@ let idp = {
 
       let idToken = JSON.parse(atob(assertion));
 
-      resolve({identity: idToken.email, contents: idToken});
+      resolve({identity: idToken.email, contents: idToken.nonce});
 
     });
   },
