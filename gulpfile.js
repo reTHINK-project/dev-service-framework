@@ -118,6 +118,7 @@ gulp.task('dist', function() {
 
   return gulp.src(['src/CatalogueFactory.js',
   'src/discovery/Discovery.js',
+  'src/StorageManager/StorageManager.js',
   'src/identityManager/IdentityManager.js',
   'src/persistence/PersistenceManager.js',
   'src/MessageFactory.js',
