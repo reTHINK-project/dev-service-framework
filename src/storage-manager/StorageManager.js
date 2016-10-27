@@ -11,7 +11,7 @@ class StorageManager {
       try {
         resolve(this.store.set(key, {version: version, value: value}));
       } catch (e) {
-        reject(e);
+        resolve(e);
       }
     });
   }
@@ -23,7 +23,7 @@ class StorageManager {
       try {
         resolve(this.store.get(key));
       } catch (e) {
-        reject(e);
+        resolve(undefined);
       }
     });
   }
@@ -31,11 +31,11 @@ class StorageManager {
   getVersion(key) {
     console.log('[Service Framework] - Get Version:', key);
     return new Promise((resolve, reject) => {
-      console.log('GET Version:', this.store.get(key));
+      console.log('GET:', this.store.get(key));
       try {
         resolve(this.store.get(key).version);
       } catch (e) {
-        reject(e);
+        resolve(undefined);
       }
     });
   }
@@ -46,7 +46,7 @@ class StorageManager {
       try {
         resolve(this.store.delete(key));
       } catch (e) {
-        reject(e);
+        resolve(e);
       }
     });
   }
