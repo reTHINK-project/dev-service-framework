@@ -9,8 +9,6 @@ class StorageManager {
     let stores =  {};
     stores[storageName] = 'key,version,value';
 
-    console.info('DB', db);
-
     db.version(version).stores(stores);
     db.open().then((db) => {
       console.info('Found database name ' + db.name + ' with version no: ' + db.verno);
@@ -40,7 +38,7 @@ class StorageManager {
         if (object) return object.value;
       })
       .catch(error => {
-        console.error('error getting the key ', key, ' with error: ', error);
+        console.info('error getting the key ', key, ' with error: ', error);
         return undefined;
       });
   }
@@ -54,7 +52,7 @@ class StorageManager {
         if (object) return object.version;
       })
       .catch(error => {
-        console.error('error getting the version for ', key, ' with error: ', error);
+        console.info('error getting the version for ', key, ' with error: ', error);
         return undefined;
       });
   }
