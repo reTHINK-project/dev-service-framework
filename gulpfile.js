@@ -118,6 +118,7 @@ gulp.task('dist', function() {
 
   return gulp.src(['src/CatalogueFactory.js',
   'src/discovery/Discovery.js',
+  'src/storage-manager/StorageManager.js',
   'src/identityManager/IdentityManager.js',
   'src/persistence/PersistenceManager.js',
   'src/MessageFactory.js',
@@ -307,10 +308,12 @@ function transpile(opts) {
     if (opts.debug) args.debug = opts.debug;
     if (opts.standalone) args.standalone = opts.standalone;
 
+    args.debug = true;
+
     return browserify(args)
     .transform(babelify, {
-      sourceMaps: 'both',
-      compact: true,
+      sourceMaps: true,
+      compact: false,
       presets: ['es2015', 'stage-0'],
       plugins: ['add-module-exports', 'babel-polyfill',
       'transform-inline-environment-variables',
