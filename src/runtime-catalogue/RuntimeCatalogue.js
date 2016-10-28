@@ -33,7 +33,6 @@ class RuntimeCatalogue {
 
             // check if same version is contained in localStorage
             return this.storageManager.getVersion(cguid).then((dbVersion) => {
-                console.log(dbVersion, version);
                 if (dbVersion >= version) {
                     console.log("storageManager contains saved version that is the same or newer than requested");
                     isSavedDescriptor = true;
