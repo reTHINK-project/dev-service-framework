@@ -37,7 +37,6 @@ class StorageManager {
       .equals(key)
       .first()
       .then(object => {
-        console.info('[StorageManager success] - get ', object);
         if (object) return object.value;
       })
       .catch(error => {
@@ -52,7 +51,7 @@ class StorageManager {
       .equals(key)
       .first()
       .then((object) => {
-        return object.version;
+        if (object) return object.version;
       })
       .catch(error => {
         console.error('error getting the version for ', key, ' with error: ', error);
