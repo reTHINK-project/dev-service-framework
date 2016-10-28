@@ -9,6 +9,8 @@ class StorageManager {
     let stores =  {};
     stores[storageName] = 'key,version,value';
 
+    console.info('DB', db);
+
     db.version(version).stores(stores);
     db.open().then((db) => {
       console.info('Found database name ' + db.name + ' with version no: ' + db.verno);
@@ -18,27 +20,24 @@ class StorageManager {
       //   console.log('Table Schema: ' + JSON.stringify(table.schema, null, 4));
       // });
 
-    })
-    .catch('NoSuchDatabaseError', (e) => {
-      // Database with that name did not exist
-      console.error('Database not found', e);
-    }).catch((e) => {
-      console.error('Oh uh: ' + e);
-    });
+    }).catch(console.error);
 
     this.db = db;
     this.storageName = storageName;
   }
 
   set(key, version, value) {
+    console.info('[StorageManager] - set ', key);
     return this.db[this.storageName].put({key:key, version:version, value:value});
   }
 
   get(key) {
+    console.info('[StorageManager] - get ', key);
     return this.db[this.storageName].where('key')
       .equals(key)
       .first()
       .then(object => {
+        console.info('[StorageManager success] - get ', object);
         if (object) return object.value;
       })
       .catch(error => {
@@ -48,11 +47,12 @@ class StorageManager {
   }
 
   getVersion(key) {
+    console.info('[StorageManager] - getVersion for key ', key);
     return this.db[this.storageName].where('key')
       .equals(key)
       .first()
-      .then(object => {
-        if (object) return object.version;
+      .then((object) => {
+        return object.version;
       })
       .catch(error => {
         console.error('error getting the version for ', key, ' with error: ', error);
