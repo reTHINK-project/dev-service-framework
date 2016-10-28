@@ -24,15 +24,21 @@ class StorageManager {
     this.storageName = storageName;
   }
 
+  _checkKey(key) {
+    if (typeof key !== 'string') return key.toString();
+    return key;
+  }
+
   set(key, version, value) {
     console.info('[StorageManager] - set ', key);
-    return this.db[this.storageName].put({key:key, version:version, value:value});
+
+    return this.db[this.storageName].put({key: this._checkKey(key), version:version, value:value});
   }
 
   get(key) {
     console.info('[StorageManager] - get ', key);
     return this.db[this.storageName].where('key')
-      .equals(key)
+      .equals(this._checkKey(key))
       .first()
       .then(object => {
         if (object) return object.value;
@@ -46,7 +52,7 @@ class StorageManager {
   getVersion(key) {
     console.info('[StorageManager] - getVersion for key ', key);
     return this.db[this.storageName].where('key')
-      .equals(key)
+      .equals(this._checkKey(key))
       .first()
       .then((object) => {
         if (object) return object.version;
@@ -60,7 +66,7 @@ class StorageManager {
   delete(key) {
     return this.db[this.storageName]
       .where('key')
-      .equals(key)
+      .equals(this._checkKey(key))
       .delete();
   }
 
