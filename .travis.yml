@@ -1,0 +1,21 @@
+sudo: required
+
+language: node_js
+
+node_js:
+  - "6"
+
+services:
+  - docker
+
+before_install:
+  - docker pull rethink/catalogue-broker
+  - docker run -it -d --name="catalogue-broker" rethink/catalogue-broker -host localhost
+  - docker pull rethink/catalogue-database
+  - docker run -it -d --name="catalogue-database" rethink/catalogue-database -host localhost
+
+install:
+  - npm install
+
+script:
+  - karma start

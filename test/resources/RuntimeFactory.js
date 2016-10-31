@@ -26,6 +26,10 @@ class RuntimeFactory {
     return new PersistenceManager(localStorage);
   }
 
+  storageManager() {
+    
+  }
+
   // TODO optimize the parameter was passed to inside the RuntimeCatalogue
   createRuntimeCatalogue() {
 
