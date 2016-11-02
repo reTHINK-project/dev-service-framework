@@ -27,7 +27,6 @@ class RuntimeFactory {
   }
 
   storageManager() {
-    
   }
 
   // TODO optimize the parameter was passed to inside the RuntimeCatalogue

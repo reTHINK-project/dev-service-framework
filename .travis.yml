@@ -1,5 +1,9 @@
 sudo: required
 
+addons:
+  hosts:
+    - 172.17.0.2 localhost
+
 language: node_js
 
 node_js:
@@ -10,9 +14,9 @@ services:
 
 before_install:
   - docker pull rethink/catalogue-broker
-  - docker run -it -d --name="catalogue-broker" rethink/catalogue-broker -host localhost
+  - docker run -it -d --name="catalogue-broker" --expose 443 rethink/catalogue-broker -host 172.17.0.2
   - docker pull rethink/catalogue-database
-  - docker run -it -d --name="catalogue-database" rethink/catalogue-database -host localhost
+  - docker run -it -d --name="catalogue-database" rethink/catalogue-database -host 172.17.0.2
 
 install:
   - npm install
