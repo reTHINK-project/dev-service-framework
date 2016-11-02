@@ -19,7 +19,7 @@ describe('IdentityManager', function() {
 
       replyCallback({
         type: 'read', from: runtimeURL + '/registry/', to: hypertyURL,
-        body: { resource: {cn: 'test OpenID', userURL: 'user://gmail.com/openidtest10', username: 'openidtest10@gmail.com', avatar: 'avatarURL'}}
+        body: { code: 200, resource: {cn: 'test OpenID', userURL: 'user://gmail.com/openidtest10', username: 'openidtest10@gmail.com', avatar: 'avatarURL'}}
       });
     }
   };
@@ -34,14 +34,14 @@ describe('IdentityManager', function() {
   });
 
   describe('discoverUserRegistered()', function() {
-    it('sould return a Promise with the identity associated', function(done) {
+    it('should return a Promise with the identity associated', function(done) {
 
       expect(identityManager.discoverUserRegistered().then(function(response) {
         return response;
       })).to.be.fulfilled.and.eventually.eql(expectedValue).and.notify(done);
     });
 
-    it('sould return a Promise with the identity associated (with optional hyperty field)', function(done) {
+    it('should return a Promise with the identity associated (with optional hyperty field)', function(done) {
 
       expect(identityManager.discoverUserRegistered('.', hypertyURL).then(function(response) {
         return response;
