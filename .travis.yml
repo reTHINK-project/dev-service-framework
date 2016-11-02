@@ -1,9 +1,5 @@
 sudo: required
 
-addons:
-  hosts:
-    - 172.17.0.2 localhost
-
 language: node_js
 
 node_js:
@@ -17,9 +13,10 @@ before_install:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
   - docker pull rethink/catalogue-broker
-  - docker run -it -d --name="catalogue-broker" --expose 443 rethink/catalogue-broker -host 172.17.0.2
-  - docker pull rethink/catalogue-database
-  - docker run -it -d --name="catalogue-database" rethink/catalogue-database -host 172.17.0.2
+  - docker run -it -d --name="catalogue-broker" --net=host --expose=433 rethink/catalogue-broker
+  - git clone https://github.com/reTHINK-project/testbeds.git
+  - cd /testbeds/nodes/PT-node/tests
+  - docker run -it -d --net=host --name="catalogue-database" catalogue-database -host localhost
 
 install:
   - npm install

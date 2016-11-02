@@ -27,6 +27,36 @@ class RuntimeFactory {
   }
 
   storageManager() {
+    return {
+      get: (key) => {
+        console.log('get: ', key);
+        return new Promise((resolve) => {
+          resolve(undefined);
+        });
+      },
+
+      set:(key, version, value) => {
+        console.log('set: ', key, version, value);
+        return new Promise((resolve) => {
+          resolve(undefined);
+        });
+      },
+
+      getVersion: (key) => {
+        console.log('get version: ', key);
+        return new Promise((resolve) => {
+          resolve(undefined);
+        });
+      },
+
+      delete: (key) => {
+        console.log('delete: ', key);
+        return new Promise((resolve) => {
+          resolve(undefined);
+        });
+      }
+    };
+
   }
 
   // TODO optimize the parameter was passed to inside the RuntimeCatalogue
