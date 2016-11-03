@@ -1,58 +1,42 @@
 /**
-* Copyright 2016 PT Inovação e Sistemas SA
-* Copyright 2016 INESC-ID
-* Copyright 2016 QUOBIS NETWORKS SL
-* Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
-* Copyright 2016 ORANGE SA
-* Copyright 2016 Deutsche Telekom AG
-* Copyright 2016 Apizee
-* Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*   http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-**/
+ * Copyright 2016 PT Inovação e Sistemas SA
+ * Copyright 2016 INESC-ID
+ * Copyright 2016 QUOBIS NETWORKS SL
+ * Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
+ * Copyright 2016 ORANGE SA
+ * Copyright 2016 Deutsche Telekom AG
+ * Copyright 2016 Apizee
+ * Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **/
 
-import RethinkObject from '../reTHINKObject/RethinkObject';
+import CatalogueDataObject, {CatalogueObjectType, DataObjectSourceLanguage} from "./CatalogueDataObject";
+import SourcePackage from "./SourcePackage";
+import HypertyDescriptor from "./HypertyDescriptor";
+import ProtocolStubDescriptor from "./ProtocolStubDescriptor";
+import HypertyRuntimeDescriptor, {RuntimeType} from "./HypertyRuntimeDescriptor";
+import HypertyInterceptorDescriptor from "./HypertyInterceptorDescriptor";
+import {
+    DataObjectSchema,
+    DataUrlScheme,
+    CommunicationDataObjectSchema,
+    ConnectionDataObjectSchema,
+    ContextDataObjectSchema,
+    IdentityDataObjectSchema
+} from "./DataObjectSchema";
 
-import CatalogueDataObject from './CatalogueDataObject';
-import {CatalogueObjectType} from './CatalogueDataObject';
-import {DataObjectSourceLanguage} from './CatalogueDataObject';
-
-import SourcePackage from './SourcePackage';
-
-import HypertyDescriptor from './HypertyDescriptor';
-import {HypertyType} from './HypertyDescriptor';
-
-import ProtocolStubDescriptor from './ProtocolStubDescriptor';
-
-import HypertyRuntimeDescriptor from './HypertyRuntimeDescriptor';
-import {RuntimeType} from './HypertyRuntimeDescriptor';
-import {RuntimeHypertyCapability, RuntimeProtocolCapability} from './HypertyRuntimeDescriptor';
-
-
-import HypertyInterceptorDescriptor from './HypertyInterceptorDescriptor';
-import {DataObjectSchema, HypertyDataObjectSchema, DataUrlScheme, CommunicationDataObjectSchema,
-    ConnectionDataObjectSchema, ContextDataObjectSchema, IdentityDataObjectSchema} from './DataObjectSchema';
-
-class CatalogueDataObjectFactory extends RethinkObject {
-
-    /**
-     * Constructor
-     * @param {boolean} validation
-     * @param {URL.URL } schema - link to the schema
-     */
-    constructor(validation, schema) {
-        super(validation, schema);
-    }
+class CatalogueDataObjectFactory {
 
     /**
      * Create CatalogueDataObject
@@ -121,10 +105,15 @@ class CatalogueDataObjectFactory extends RethinkObject {
      * @param {URL.URL} messageSchemas - Defines the Schema describing the Message Data Model used by the Hyperty through the Catalogue URL from where the Message schema can be reached. If not defined, by default it is assumed the standard Message Model is used.
      * @param configuration - Data required to configure the ProtocolStub
      * @param constraints - Describes capabilities required from the Hyperty Runtime in order to be able to execute the ProtocolStub
+     * @param hypertyType
+     * @param dataObjects
+     * @param interworking
+     * @param idpProxy
+     * @param mutualAuthentication
      * @returns {ProtocolStubDescriptor}
      */
     createProtoStubDescriptorObject(guid, version, objectName, description, language, sourcePackageURL, messageSchemas,
-                                    configuration, constraints) {
+                                    configuration, constraints, hypertyType, dataObjects, interworking, idpProxy, mutualAuthentication) {
         if (
             typeof guid === "undefined"
             || typeof version === "undefined"
@@ -138,7 +127,7 @@ class CatalogueDataObjectFactory extends RethinkObject {
         )
             throw new Error("Invalid parameters!");
         return new ProtocolStubDescriptor(guid, CatalogueObjectType.PROTOSTUB, version, objectName, description,
-            language, sourcePackageURL, messageSchemas, configuration, constraints);
+            language, sourcePackageURL, messageSchemas, configuration, constraints, hypertyType, dataObjects, interworking, idpProxy, mutualAuthentication);
     }
 
     /**
@@ -152,10 +141,12 @@ class CatalogueDataObjectFactory extends RethinkObject {
      * @param {RuntimeType}runtimeType
      * @param {RuntimeHypertyCapabilities} hypertyCapabilities - Supported capabilities to execute Hyperties
      * @param {RuntimeProtocolCapabilities} protocolCapabilities - Supported capabilities to execute Protocol Stubs
+     * @param p2pHandlerStub
+     * @param p2pRequesterStub
      * @returns {HypertyRuntimeDescriptor} the data object of the Hyperty Runtime Descriptor
      */
     createHypertyRuntimeDescriptorObject(guid, version, objectName, description, language, sourcePackageURL,
-                                         runtimeType, hypertyCapabilities, protocolCapabilities) {
+                                         runtimeType, hypertyCapabilities, protocolCapabilities, p2pHandlerStub, p2pRequesterStub) {
         if (
             typeof guid === "undefined"
             || typeof version === "undefined"
@@ -168,7 +159,7 @@ class CatalogueDataObjectFactory extends RethinkObject {
             throw new Error("Invalid parameters!");
 
         return new HypertyRuntimeDescriptor(guid, CatalogueObjectType.HYPERTY_RUNTIME, version, objectName,
-            description, language, sourcePackageURL, runtimeType, hypertyCapabilities, protocolCapabilities);
+            description, language, sourcePackageURL, runtimeType, hypertyCapabilities, protocolCapabilities, p2pHandlerStub, p2pRequesterStub);
     }
 
     /**
@@ -184,7 +175,7 @@ class CatalogueDataObjectFactory extends RethinkObject {
      * @returns {PolicyEnforcerDescriptor}
      */
     createHypertyInterceptorDescriptorObject(guid, version, objectName, description, language, sourcePackageURL, configuration,
-                                         policies) {
+                                             policies) {
         if (
             typeof guid === "undefined"
             || typeof version === "undefined"
@@ -276,16 +267,16 @@ class CatalogueDataObjectFactory extends RethinkObject {
         )
             throw new Error("Invalid parameters!");
 
-        if(scheme === DataUrlScheme.COMM)
+        if (scheme === DataUrlScheme.COMM)
             return new CommunicationDataObjectSchema(guid, CatalogueObjectType.HYPERTY_DATA_OBJECT, version, objectName, description,
-            language, sourcePackageURL, scheme, accessControlPolicy);
-        else if(scheme === DataUrlScheme.CONNECTION)
+                language, sourcePackageURL, scheme, accessControlPolicy);
+        else if (scheme === DataUrlScheme.CONNECTION)
             return new ConnectionDataObjectSchema(guid, CatalogueObjectType.HYPERTY_DATA_OBJECT, version, objectName, description,
                 language, sourcePackageURL, scheme, accessControlPolicy);
-        else if(scheme === DataUrlScheme.CTXT)
+        else if (scheme === DataUrlScheme.CTXT)
             return new ContextDataObjectSchema(guid, CatalogueObjectType.HYPERTY_DATA_OBJECT, version, objectName, description,
                 language, sourcePackageURL, scheme, accessControlPolicy);
-        else if(scheme === DataUrlScheme.IDENTITY)
+        else if (scheme === DataUrlScheme.IDENTITY)
             return new IdentityDataObjectSchema(guid, CatalogueObjectType.HYPERTY_DATA_OBJECT, version, objectName, description,
                 language, sourcePackageURL, scheme, accessControlPolicy);
     }
