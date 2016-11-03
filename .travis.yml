@@ -14,8 +14,8 @@ before_install:
   - sh -e /etc/init.d/xvfb start
   - docker pull rethink/catalogue-broker
   - docker run -it -d --name="catalogue-broker" --net=host --expose=433 rethink/catalogue-broker
-  - docker pull rethink/catalogue-database-testing --tag="catalogue-database"
-  - docker run -it -d --net=host --name="catalogue-database" catalogue-database -host localhost
+  - docker pull rethink/catalogue-test-client:dev
+  - docker run -it -d --net=host --name="catalogue-database" rethink/catalogue-test-client:dev -host localhost
 
 install:
   - npm install
