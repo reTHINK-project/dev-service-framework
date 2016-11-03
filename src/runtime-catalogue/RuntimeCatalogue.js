@@ -5,7 +5,7 @@ class RuntimeCatalogue {
     constructor(runtimeFactory) {
         if (!runtimeFactory) throw Error('The catalogue needs the runtimeFactory');
 
-        this._factory = new CatalogueFactory(false, undefined);
+        this._factory = new CatalogueFactory();
         this.httpRequest = runtimeFactory.createHttpRequest();
         this.atob = runtimeFactory.atob ? runtimeFactory.atob : atob;
         this.storageManager = runtimeFactory.storageManager();
