@@ -15,7 +15,6 @@ module.exports = function(config) {
     files: [
       'node_modules/mutationobserver-shim/dist/mutationobserver.min.js',
       'node_modules/babel-polyfill/dist/polyfill.js',
-      'node_modules/indexeddbshim/dist/indexeddbshim.js',
       'node_modules/object.observe/dist/object-observe.js',
       'node_modules/array.observe/array-observe.js',
       'src/**/*.js',
