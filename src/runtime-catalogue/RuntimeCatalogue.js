@@ -209,7 +209,12 @@ class RuntimeCatalogue {
             rawStub["sourcePackageURL"],
             rawStub["messageSchemas"],
             rawStub["configuration"],
-            rawStub["constraints"]
+            rawStub["constraints"],
+            rawStub["hypertyType"],
+            rawStub["dataObjects"],
+            rawStub["interworking"],
+            rawStub["idpProxy"],
+            rawStub["mutualAuthentication"]
         );
 
         // optional fields
@@ -250,7 +255,9 @@ class RuntimeCatalogue {
             rawRuntime["sourcePackageURL"],
             rawRuntime["type"] || rawRuntime["runtimeType"],
             rawRuntime["hypertyCapabilities"],
-            rawRuntime["protocolCapabilities"]
+            rawRuntime["protocolCapabilities"],
+            rawRuntime["p2pHandlerStub"],
+            rawRuntime["p2pRequesterStub"]
         );
 
         // optional fields
