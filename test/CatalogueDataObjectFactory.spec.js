@@ -1,12 +1,15 @@
-import CatalogueDataObjectFactory from '../src/catalogue-factory/CatalogueDataObjectFactory';
-import RuntimeConstraint from '../src/catalogue-factory/RuntimeConstraint';
-import {CatalogueObjectType} from '../src/catalogue-factory/CatalogueDataObject';
-import {DataUrlScheme} from '../src/catalogue-factory/DataObjectSchema';
-import {DataObjectSourceLanguage} from '../src/catalogue-factory/CatalogueDataObject';
-import {HypertyResourceType} from '../src/catalogue-factory/HypertyDescriptor';
-import {RuntimeType, RuntimeHypertyCapability, RuntimeProtocolCapability} from '../src/catalogue-factory/HypertyRuntimeDescriptor.js';
-import chai from 'chai';
-import chaiAsPromised from 'chai-as-promised';
+import CatalogueDataObjectFactory from "../src/catalogue-factory/CatalogueDataObjectFactory";
+import RuntimeConstraint from "../src/catalogue-factory/RuntimeConstraint";
+import {CatalogueObjectType, DataObjectSourceLanguage} from "../src/catalogue-factory/CatalogueDataObject";
+import {DataUrlScheme} from "../src/catalogue-factory/DataObjectSchema";
+import {HypertyResourceType} from "../src/catalogue-factory/HypertyDescriptor";
+import {
+    RuntimeType,
+    RuntimeHypertyCapability,
+    RuntimeProtocolCapability
+} from "../src/catalogue-factory/HypertyRuntimeDescriptor.js";
+import chai from "chai";
+import chaiAsPromised from "chai-as-promised";
 
 let expect = chai.expect;
 chai.use(chaiAsPromised);
@@ -19,12 +22,9 @@ describe('CatalogueDataObjectFactory', function () {
     describe('constructor()', function () {
 
         it('should create a CatalogueDataObject-Factory object without error', function () {
-            catalogueDataObjectFactory = new CatalogueDataObjectFactory("false", '{}');
+            catalogueDataObjectFactory = new CatalogueDataObjectFactory();
         });
 
-        it('should validate', function () {
-            expect(catalogueDataObjectFactory.validate()).to.be.true;
-        });
     });
     describe('createHypertyDescriptorObject()', function () {
 
