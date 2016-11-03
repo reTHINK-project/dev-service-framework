@@ -4,8 +4,6 @@ class StorageManager {
     if (!db) throw Error('The Storage Manager needs the database instance');
     if (!storageName) throw Error('The Storage Manager needs the storage name');
 
-    if (db.constructor.name !== 'Dexie') throw Error('The database instance should an Dexie instance');
-
     let stores =  {};
     stores[storageName] = 'key,version,value';
 
