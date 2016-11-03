@@ -21,7 +21,6 @@
  * limitations under the License.
  **/
 
-import RethinkObject from "../reTHINKObject/RethinkObject";
 import CatalogueDataObject, {CatalogueObjectType, DataObjectSourceLanguage} from "./CatalogueDataObject";
 import SourcePackage from "./SourcePackage";
 import HypertyDescriptor from "./HypertyDescriptor";
@@ -37,7 +36,7 @@ import {
     IdentityDataObjectSchema
 } from "./DataObjectSchema";
 
-class CatalogueDataObjectFactory extends RethinkObject {
+class CatalogueDataObjectFactory {
 
     /**
      * Create CatalogueDataObject
