@@ -1,36 +1,36 @@
 /**
-* Copyright 2016 PT Inovação e Sistemas SA
-* Copyright 2016 INESC-ID
-* Copyright 2016 QUOBIS NETWORKS SL
-* Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
-* Copyright 2016 ORANGE SA
-* Copyright 2016 Deutsche Telekom AG
-* Copyright 2016 Apizee
-* Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*   http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-**/
+ * Copyright 2016 PT Inovação e Sistemas SA
+ * Copyright 2016 INESC-ID
+ * Copyright 2016 QUOBIS NETWORKS SL
+ * Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
+ * Copyright 2016 ORANGE SA
+ * Copyright 2016 Deutsche Telekom AG
+ * Copyright 2016 Apizee
+ * Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **/
 
 /**
  * Created by amo on 14/11/2015.
  */
 
-import CatalogueDataObject from './CatalogueDataObject';
+import CatalogueDataObject from "./CatalogueDataObject";
 
 class HypertyRuntimeDescriptor extends CatalogueDataObject {
 
     constructor(guid, catalogueType, version, objectName, description, language, sourcePackageURL, runtimeType,
-                hypertyCapabilities, protocolCapabilities) {
+                hypertyCapabilities, protocolCapabilities, p2pHandlerStub, p2pRequesterStub) {
         super(guid, catalogueType, version, objectName, description, language, sourcePackageURL);
 
         this._runtimeType = runtimeType;
@@ -38,11 +38,14 @@ class HypertyRuntimeDescriptor extends CatalogueDataObject {
         if (hypertyCapabilities)
             this._hypertyCapabilities = hypertyCapabilities;
         else
-            this._hypertyCapabilities = new RuntimeHypertyCapability(true, false, false,false,false);
+            this._hypertyCapabilities = new RuntimeHypertyCapability(true, false, false, false, false);
         if (protocolCapabilities)
             this._protocolCapabilities = protocolCapabilities;
         else
-            this._protocolCapabilities = new RuntimeProtocolCapability(true, false, true,false,false,false);
+            this._protocolCapabilities = new RuntimeProtocolCapability(true, false, true, false, false, false);
+
+        this._p2pHandlerStub = p2pHandlerStub;
+        this._p2pRequesterStub = p2pRequesterStub;
     }
 
     get runtimeType() {
@@ -71,12 +74,28 @@ class HypertyRuntimeDescriptor extends CatalogueDataObject {
         if (protocolCapabilities)
             this._protocolCapabilities = protocolCapabilities;
     }
+
+    get p2pHandlerStub() {
+        return this._p2pHandlerStub;
+    }
+
+    set p2pHandlerStub(value) {
+        this._p2pHandlerStub = value;
+    }
+
+    get p2pRequesterStub() {
+        return this._p2pRequesterStub;
+    }
+
+    set p2pRequesterStub(value) {
+        this._p2pRequesterStub = value;
+    }
 }
 
 /**
  * A class representation of the capability set of the Runtime Hyperty
  */
-export class RuntimeHypertyCapability{
+export class RuntimeHypertyCapability {
     /**
      * Creates an object of the Runtime Hyperty capability set
      * @param {boolean} isWebRTCSupported
@@ -85,7 +104,7 @@ export class RuntimeHypertyCapability{
      * @param {boolean} isSensorSupported
      * @param {boolean} isORTCSupported
      */
-    constructor(isWebRTCSupported, isMicSupported, isCameraSupported, isSensorSupported, isORTCSupported){
+    constructor(isWebRTCSupported, isMicSupported, isCameraSupported, isSensorSupported, isORTCSupported) {
         this._isWebRTC = isWebRTCSupported;
         this._isMic = isMicSupported;
         this._isCamera = isCameraSupported;
@@ -93,23 +112,27 @@ export class RuntimeHypertyCapability{
         this._isORTC = isORTCSupported;
     }
 
-    get isMic(){
+    get isMic() {
         return this._isMic;
     }
-    get isCamera(){
+
+    get isCamera() {
         return this._isCamera;
     }
-    get isSensor(){
+
+    get isSensor() {
         return this._isSensor;
     }
-    get isWebRTC(){
+
+    get isWebRTC() {
         return this._isWebRTC;
     }
-    get isORTCS(){
+
+    get isORTCS() {
         return this._isORTC;
     }
 
-    getCapabilitySet(){
+    getCapabilitySet() {
         return JSON.stringify(this);
     }
 }
@@ -118,7 +141,7 @@ export class RuntimeHypertyCapability{
 /**
  * A class representation of the protocol capability set of the Runtime Hyperty
  */
-export class RuntimeProtocolCapability{
+export class RuntimeProtocolCapability {
 
     /**
      * Creates an object of the runtime protocol capability
@@ -129,7 +152,7 @@ export class RuntimeProtocolCapability{
      * @param {boolean} isCoap
      * @param {boolean} isDataChannel
      */
-    constructor(isHttp, isHttps, isWS, isWSS, isCoap, isDataChannel){
+    constructor(isHttp, isHttps, isWS, isWSS, isCoap, isDataChannel) {
         this._isHttp = isHttp;
         this._isHttps = isHttps;
         this._isWS = isWS;
@@ -138,31 +161,36 @@ export class RuntimeProtocolCapability{
         this._isDataChannel = isDataChannel;
     }
 
-    isHttp(){
+    isHttp() {
         return this._isHttp;
     }
 
-    isHttps(){
+    isHttps() {
         return this._isHttps;
     }
-    isWS(){
+
+    isWS() {
         return this._isWS;
     }
-    isSensorSupported(){
+
+    isSensorSupported() {
         return this._isSensor;
     }
-    isWSS(){
+
+    isWSS() {
         return this._isWSS;
     }
-    isCoap(){
+
+    isCoap() {
         return this._isCoap;
     }
-    isDataChannel(){
+
+    isDataChannel() {
         return this._isDataChannel;
     }
 
 
-    getCapabilitySet(){
+    getCapabilitySet() {
         return JSON.stringify(this);
     }
 }

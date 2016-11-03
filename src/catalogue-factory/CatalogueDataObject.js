@@ -1,31 +1,32 @@
 /**
-* Copyright 2016 PT Inovação e Sistemas SA
-* Copyright 2016 INESC-ID
-* Copyright 2016 QUOBIS NETWORKS SL
-* Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
-* Copyright 2016 ORANGE SA
-* Copyright 2016 Deutsche Telekom AG
-* Copyright 2016 Apizee
-* Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*   http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-**/
+ * Copyright 2016 PT Inovação e Sistemas SA
+ * Copyright 2016 INESC-ID
+ * Copyright 2016 QUOBIS NETWORKS SL
+ * Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
+ * Copyright 2016 ORANGE SA
+ * Copyright 2016 Deutsche Telekom AG
+ * Copyright 2016 Apizee
+ * Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **/
+import RethinkObject from "../reTHINKObject/RethinkObject";
 
 /**
  * @author alice.cheambe[at]fokus.fraunhofer.de
  * The CatalogueDataObject class is the representation of the reTHINK Catalogue Data Model
  */
-class CatalogueDataObject {
+class CatalogueDataObject extends RethinkObject {
     /**
      * Creates the Catalogue Data Object
      * @param guid - Global Unique identifier of the Catalogue Object (e.g. Hyperty descriptor, ProtocolStub descriptor,
@@ -40,6 +41,7 @@ class CatalogueDataObject {
      * catalogue object, e.g. deployable packages containing executable code for Hyperties or ProtoStubs, can be downloaded
      */
     constructor(guid, type, version, objectName, description, language, sourcePackageURL) {
+        super();
         this._guid = guid;
         this._type = type;
         this._version = version;
