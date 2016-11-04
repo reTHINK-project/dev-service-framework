@@ -13,10 +13,21 @@ describe('StorageManager', function(){
 	})
 
 	describe('set', function(){
+
 		it('should set the value for a given key-version tuple', function(done){
 			storage.set('key', 'v1.0.0', {})
 				.then( key => {
 					expect(key).to.be.eql('key')
+					done()
+				})
+		})
+
+		it('should replace the value for a given key-version tuple if it exists', function(done){
+			storage.set('key', 'v1.0.0', {})
+				.then(() => storage.set('key', 'v1.0.0', {name: 'test'}))
+				.then(() => storage.get('key'))
+				.then( object => {
+					expect(object).to.be.eql({name:'test'})
 					done()
 				})
 		})
@@ -55,6 +66,14 @@ describe('StorageManager', function(){
 						})
 				})
 		})
+
+		it('should get undefined if no object with the given key exists', function(done){
+			storage.getVersion('key123')
+				.then(version => {
+					expect(version).to.be.undefined
+					done()
+				})
+		})
 	})
 
 	describe('delete', function(){
@@ -66,6 +85,14 @@ describe('StorageManager', function(){
 							expect(affected_records).to.be.eql(1)
 							done()
 						})
+				})
+		})
+
+		it('shouldnt remove a value from StorageManager if the given key doesnt exist', function(done){
+			storage.delete('key321')
+				.then(affected_records => {
+					expect(affected_records).to.be.eql(0)
+					done()
 				})
 		})
 	})
