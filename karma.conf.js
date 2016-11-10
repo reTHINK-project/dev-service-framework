@@ -23,7 +23,7 @@ module.exports = function(config) {
 
     // list of files to exclude
     exclude: [
-      'src/**/RuntimeLoader.js'
+      'node_modules/**/*.map'
     ],
 
     // preprocess matching files before serving them to the browser
