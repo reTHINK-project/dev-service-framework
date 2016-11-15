@@ -1,4 +1,4 @@
-class RuntimeCapabilites {
+class RuntimeCapabilities {
 
   constructor() {
 
@@ -30,4 +30,4 @@ class RuntimeCapabilites {
 
 }
 
-export default RuntimeCapabilites;
+export default RuntimeCapabilities;
