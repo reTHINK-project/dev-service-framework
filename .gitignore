@@ -10,6 +10,7 @@ CVS
 .idea
 .project
 npm-debug.log
+npm-debug.log.*
 vendor
 node_modules
 
