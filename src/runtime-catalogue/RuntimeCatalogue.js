@@ -16,7 +16,9 @@ class RuntimeCatalogue {
      * @param {String} descriptorURL - e.g. mydomain.com/.well-known/hyperty/MyHyperty
      * @param {function} createFunc - e.g. createHyperty
      * @param {boolean} [getFull] - whether or not to get descriptor with sourcePackage, or only the descriptor part
-     * @returns {Promise}
+     * @param {JSON} constraints - constraints object
+     * @returns {Promise} - Promise that fulfills with the requested descriptor in the appropriate type.
+     * If constraints were provided, a descriptor is only returned if it meets the constraints, otherwise the promise will be rejected.
      */
     getDescriptor(descriptorURL, createFunc, getFull = true, constraints) {
         console.log("getting descriptor from:", descriptorURL);
@@ -30,7 +32,7 @@ class RuntimeCatalogue {
         // first checks if descriptor is already in localStorage (based on cguid and version)
         let descriptorPromise;
         if (constraints != undefined) {
-            descriptorPromise = Promise.all([this.httpRequest.post(descriptorURL + "/version", constraints), this.httpRequest.post(descriptorURL + "/cguid", constraints)])
+            descriptorPromise = Promise.all([this.httpRequest.post(descriptorURL + "/version", JSON.stringify(constraints)), this.httpRequest.post(descriptorURL + "/cguid", JSON.stringify(constraints))])
         } else {
             descriptorPromise = Promise.all([this.httpRequest.get(descriptorURL + "/version"), this.httpRequest.get(descriptorURL + "/cguid")])
         }
@@ -46,7 +48,7 @@ class RuntimeCatalogue {
                 } else {
                     console.log("storageManager does not contain saved version");
                     // no saved copy, proceed with retrieving descriptor
-                    let retrievePromise = constraints != undefined ? this.httpRequest.post(descriptorURL, constraints) : this.httpRequest.get(descriptorURL);
+                    let retrievePromise = constraints != undefined ? this.httpRequest.post(descriptorURL, JSON.stringify(constraints)) : this.httpRequest.get(descriptorURL);
                     return retrievePromise.then((descriptor) => {
                         descriptor = JSON.parse(descriptor);
                         //console.log("got descriptor:", JSON.stringify(descriptor, null, 2));
@@ -60,7 +62,7 @@ class RuntimeCatalogue {
                 }
             })
         }).catch((error) => {
-            let errorString = "Unable to get descriptor for " + descriptorURL + ": " + error;
+            let errorString = "Unable to get descriptor for " + descriptorURL + (constraints != undefined ? " with constraints " + constraints : "") + ": " + error;
             console.error(errorString);
             throw new Error(errorString);
         });
@@ -96,12 +98,13 @@ class RuntimeCatalogue {
     /**
      * Uses the sourcePackageURL from the descriptor, requests the sourcePackage and attaches it to the descriptor.
      * @param {CatalogueDataObject} descriptor
+     * @param {JSON} constraints - constraints object
      * @returns {Promise} - fulfills with complete descriptor
      */
     attachRawSourcePackage(descriptor, constraints) {
         console.log("attaching raw sourcePackage from:", descriptor.sourcePackageURL);
         return new Promise((resolve) => {
-            let retrievePromise = constraints != undefined ? this.httpRequest.post(descriptor.sourcePackageURL, constraints) : this.httpRequest.get(descriptor.sourcePackageURL);
+            let retrievePromise = constraints != undefined ? this.httpRequest.post(descriptor.sourcePackageURL, JSON.stringify(constraints)) : this.httpRequest.get(descriptor.sourcePackageURL);
             retrievePromise.then((sourcePackage) => {
                 sourcePackage = JSON.parse(sourcePackage);
                 //delete descriptor.sourcePackageURL;
@@ -116,6 +119,7 @@ class RuntimeCatalogue {
      * Get HypertyDescriptor
      * @param hypertyURL - e.g. mydomain.com/.well-known/hyperty/MyHyperty
      * @param {boolean} [getFull] - boolean to decide to get the descriptor with the sourcePackage or (potentially) without
+     * @param {JSON} constraints - constraints object
      * @returns {Promise}
      */
     getHypertyDescriptor(hypertyURL, getFull = true, constraints) {
@@ -126,6 +130,7 @@ class RuntimeCatalogue {
      * Get StubDescriptor
      * @param stubURL - e.g. mydomain.com/.well-known/protostub/MyProtostub
      * @param {boolean} [getFull] - boolean to decide to get the descriptor with the sourcePackage or (potentially) without
+     * @param {JSON} constraints - constraints object
      * @returns {Promise}
      */
     getStubDescriptor(stubURL, getFull = true, constraints) {
@@ -136,6 +141,7 @@ class RuntimeCatalogue {
      * Get RuntimeDescriptor
      * @param runtimeURL - e.g. mydomain.com/.well-known/runtime/MyRuntime
      * @param {boolean} [getFull] - boolean to decide to get the descriptor with the sourcePackage or (potentially) without
+     * @param {JSON} constraints - constraints object
      * @returns {Promise}
      */
     getRuntimeDescriptor(runtimeURL, getFull = true, constraints) {
@@ -146,6 +152,7 @@ class RuntimeCatalogue {
      * Get DataSchemaDescriptor
      * @param dataSchemaURL - e.g. mydomain.com/.well-known/dataschema/MyDataSchema
      * @param {boolean} [getFull] - boolean to decide to get the descriptor with the sourcePackage or (potentially) without
+     * @param {JSON} constraints - constraints object
      * @returns {Promise}
      */
     getDataSchemaDescriptor(dataSchemaURL, getFull = true, constraints) {
@@ -156,6 +163,7 @@ class RuntimeCatalogue {
      * Get IDPProxyDescriptor
      * @param idpProxyURL - e.g. mydomain.com/.well-known/idp-proxy/MyProxy
      * @param {boolean} [getFull] - boolean to decide to get the descriptor with the sourcePackage or (potentially) without
+     * @param {JSON} constraints - constraints object
      * @returns {Promise}
      */
     getIdpProxyDescriptor(idpProxyURL, getFull = true, constraints) {
@@ -453,12 +461,14 @@ class RuntimeCatalogue {
      * i.e. a catalogue URL that specifies a type, but no catalogue object name.
      * @param typeURL - URL pointing to the catalogue object type you want a list of available objects for,
      * e.g. hyperty-catalogue://catalogue.fokus.fraunhofer.de/.well-known/idp-proxy
+     * @param {JSON} constraints - constraints object
      * @returns {Promise} typeListPromise - Promise that fulfills with the list of available catalogue object names for the requested type,
      * rejects on HTTP error or if the HTTP response is not in JSON.
+     * If constraints were provided, then the list only contains those objects that meet the constraints
      */
     getTypeList(typeURL, constraints) {
         return new Promise((resolve, reject) => {
-            let requestPromise = constraints != undefined ? this.httpRequest.post(typeURL, constraints) : this.httpRequest.get(typeURL);
+            let requestPromise = constraints != undefined ? this.httpRequest.post(typeURL, JSON.stringify(constraints)) : this.httpRequest.get(typeURL);
             requestPromise.then((typeList) => {
                 typeList = JSON.parse(typeList);
                 resolve(typeList);
