@@ -18,7 +18,7 @@ class RuntimeCatalogue {
      * @param {boolean} [getFull] - whether or not to get descriptor with sourcePackage, or only the descriptor part
      * @returns {Promise}
      */
-    getDescriptor(descriptorURL, createFunc, getFull = true) {
+    getDescriptor(descriptorURL, createFunc, getFull = true, constraints) {
         console.log("getting descriptor from:", descriptorURL);
 
         // some flags for optimization
@@ -28,7 +28,13 @@ class RuntimeCatalogue {
 
         // get raw descriptor
         // first checks if descriptor is already in localStorage (based on cguid and version)
-        let descriptorPromise = Promise.all([this.httpRequest.get(descriptorURL + "/version"), this.httpRequest.get(descriptorURL + "/cguid")]).then(([version, cguid]) => {
+        let descriptorPromise;
+        if (constraints != undefined) {
+            descriptorPromise = Promise.all([this.httpRequest.post(descriptorURL + "/version", constraints), this.httpRequest.post(descriptorURL + "/cguid", constraints)])
+        } else {
+            descriptorPromise = Promise.all([this.httpRequest.get(descriptorURL + "/version"), this.httpRequest.get(descriptorURL + "/cguid")])
+        }
+        descriptorPromise.then(([version, cguid]) => {
             console.log("got version (" + version + ") and cguid (" + cguid + ") for descriptor " + descriptorURL);
 
             // check if same version is contained in localStorage
@@ -40,7 +46,8 @@ class RuntimeCatalogue {
                 } else {
                     console.log("storageManager does not contain saved version");
                     // no saved copy, proceed with retrieving descriptor
-                    return this.httpRequest.get(descriptorURL).then((descriptor) => {
+                    let retrievePromise = constraints != undefined ? this.httpRequest.post(descriptorURL, constraints) : this.httpRequest.get(descriptorURL);
+                    return retrievePromise.then((descriptor) => {
                         descriptor = JSON.parse(descriptor);
                         //console.log("got descriptor:", JSON.stringify(descriptor, null, 2));
                         if (descriptor["ERROR"]) {
@@ -52,7 +59,6 @@ class RuntimeCatalogue {
                     });
                 }
             })
-
         }).catch((error) => {
             let errorString = "Unable to get descriptor for " + descriptorURL + ": " + error;
             console.error(errorString);
@@ -70,7 +76,7 @@ class RuntimeCatalogue {
                     return descriptor;
                 } else {
                     isCompleteDescriptor = false;
-                    return this.attachRawSourcePackage(descriptor);
+                    return this.attachRawSourcePackage(descriptor, constraints);
                 }
             })
         }
@@ -81,7 +87,7 @@ class RuntimeCatalogue {
             if (!isSavedDescriptor || (isSavedDescriptor && !isCompleteDescriptor && getFull)) {
                 this.storageManager.set(descriptor.cguid, descriptor.version, descriptor);
             }
-            return createFunc.apply(this, [descriptor]);
+            return createFunc.apply(this, [descriptor, constraints]);
         });
 
         return returnPromise;
@@ -92,10 +98,11 @@ class RuntimeCatalogue {
      * @param {CatalogueDataObject} descriptor
      * @returns {Promise} - fulfills with complete descriptor
      */
-    attachRawSourcePackage(descriptor) {
+    attachRawSourcePackage(descriptor, constraints) {
         console.log("attaching raw sourcePackage from:", descriptor.sourcePackageURL);
         return new Promise((resolve) => {
-            this.httpRequest.get(descriptor.sourcePackageURL).then((sourcePackage) => {
+            let retrievePromise = constraints != undefined ? this.httpRequest.post(descriptor.sourcePackageURL, constraints) : this.httpRequest.get(descriptor.sourcePackageURL);
+            retrievePromise.then((sourcePackage) => {
                 sourcePackage = JSON.parse(sourcePackage);
                 //delete descriptor.sourcePackageURL;
                 //console.log("attaching sourcePackage:", sourcePackage);
@@ -111,8 +118,8 @@ class RuntimeCatalogue {
      * @param {boolean} [getFull] - boolean to decide to get the descriptor with the sourcePackage or (potentially) without
      * @returns {Promise}
      */
-    getHypertyDescriptor(hypertyURL, getFull = true) {
-        return this.getDescriptor(hypertyURL, this.createHyperty, getFull)
+    getHypertyDescriptor(hypertyURL, getFull = true, constraints) {
+        return this.getDescriptor(hypertyURL, this.createHyperty, getFull, constraints)
     }
 
     /**
@@ -121,8 +128,8 @@ class RuntimeCatalogue {
      * @param {boolean} [getFull] - boolean to decide to get the descriptor with the sourcePackage or (potentially) without
      * @returns {Promise}
      */
-    getStubDescriptor(stubURL, getFull = true) {
-        return this.getDescriptor(stubURL, this.createStub, getFull)
+    getStubDescriptor(stubURL, getFull = true, constraints) {
+        return this.getDescriptor(stubURL, this.createStub, getFull, constraints)
     }
 
     /**
@@ -131,8 +138,8 @@ class RuntimeCatalogue {
      * @param {boolean} [getFull] - boolean to decide to get the descriptor with the sourcePackage or (potentially) without
      * @returns {Promise}
      */
-    getRuntimeDescriptor(runtimeURL, getFull = true) {
-        return this.getDescriptor(runtimeURL, this.createRuntimeDescriptor, getFull)
+    getRuntimeDescriptor(runtimeURL, getFull = true, constraints) {
+        return this.getDescriptor(runtimeURL, this.createRuntimeDescriptor, getFull, constraints)
     }
 
     /**
@@ -141,8 +148,8 @@ class RuntimeCatalogue {
      * @param {boolean} [getFull] - boolean to decide to get the descriptor with the sourcePackage or (potentially) without
      * @returns {Promise}
      */
-    getDataSchemaDescriptor(dataSchemaURL, getFull = true) {
-        return this.getDescriptor(dataSchemaURL, this.createDataSchema, getFull)
+    getDataSchemaDescriptor(dataSchemaURL, getFull = true, constraints) {
+        return this.getDescriptor(dataSchemaURL, this.createDataSchema, getFull, constraints)
     }
 
     /**
@@ -151,8 +158,8 @@ class RuntimeCatalogue {
      * @param {boolean} [getFull] - boolean to decide to get the descriptor with the sourcePackage or (potentially) without
      * @returns {Promise}
      */
-    getIdpProxyDescriptor(idpProxyURL, getFull = true) {
-        return this.getDescriptor(idpProxyURL, this.createIdpProxy, getFull)
+    getIdpProxyDescriptor(idpProxyURL, getFull = true, constraints) {
+        return this.getDescriptor(idpProxyURL, this.createIdpProxy, getFull, constraints)
     }
 
     /**
@@ -449,9 +456,10 @@ class RuntimeCatalogue {
      * @returns {Promise} typeListPromise - Promise that fulfills with the list of available catalogue object names for the requested type,
      * rejects on HTTP error or if the HTTP response is not in JSON.
      */
-    getTypeList(typeURL) {
+    getTypeList(typeURL, constraints) {
         return new Promise((resolve, reject) => {
-            this.httpRequest.get(typeURL).then((typeList) => {
+            let requestPromise = constraints != undefined ? this.httpRequest.post(typeURL, constraints) : this.httpRequest.get(typeURL);
+            requestPromise.then((typeList) => {
                 typeList = JSON.parse(typeList);
                 resolve(typeList);
             }).catch((reason) => {
