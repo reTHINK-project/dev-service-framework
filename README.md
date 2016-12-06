@@ -1,4 +1,4 @@
-reTHINK Service Framework [![Build Status](https://travis-ci.org/reTHINK-project/dev-service-framework.svg?branch=master)](https://travis-ci.org/reTHINK-project/dev-service-framework)
+reTHINK Service Framework [![Build Status](https://travis-ci.org/reTHINK-project/dev-service-framework.svg?branch=dev-interworking)](https://travis-ci.org/reTHINK-project/dev-service-framework)
 -------------------------
 
 -	[Overview](#rethink-framework-overview)
