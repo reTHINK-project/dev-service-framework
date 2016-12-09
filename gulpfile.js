@@ -312,15 +312,7 @@ function transpile(opts) {
     args.debug = true;
 
     return browserify(args)
-    .transform(babelify, {
-      sourceMaps: true,
-      compact: false,
-      presets: ['es2015', 'stage-0'],
-      plugins: ['add-module-exports', 'babel-polyfill',
-      'transform-inline-environment-variables',
-      'transform-runtime',
-      'transform-regenerator']
-    })
+    .transform(babelify)
     .bundle()
     .on('error', function(err) {
       gutil.log(gutil.colors.red(err));

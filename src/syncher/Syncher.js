@@ -43,6 +43,7 @@ class Syncher {
 
   ----event handlers----
   _onNotificationHandler: (event) => void
+  _onResume: (event) => void
   */
 
   /**
@@ -145,38 +146,39 @@ class Syncher {
   * @return {Promise<DataObjectObserver>} Return Promise to a new observer. It's associated with the reporter.
   */
   subscribe(schema, objURL) {
-   let _this = this;
+    let _this = this;
 
-   //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onLocalSubscribe
-   let subscribeMsg = {
-     type: 'subscribe', from: _this._owner, to: _this._subURL,
-     body: { schema: schema, resource: objURL }
-   };
+    //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onLocalSubscribe
+    let subscribeMsg = {
+      type: 'subscribe', from: _this._owner, to: _this._subURL,
+      body: { schema: schema, resource: objURL }
+    };
 
-   return new Promise((resolve, reject) => {
-     //request subscription
-     //Provisional data is applied to the DataObjectObserver after confirmation. Or discarded if there is no confirmation.
-     //for more info see the DataProvisional class documentation.
-     _this._bus.postMessage(subscribeMsg, (reply) => {
-       console.log('subscribe-response: ', reply);
-       let newProvisional = _this._provisionals[objURL];
-       delete _this._provisionals[objURL];
-       if (newProvisional) newProvisional._releaseListeners();
+    return new Promise((resolve, reject) => {
+      //request subscription
+      //Provisional data is applied to the DataObjectObserver after confirmation. Or discarded if there is no confirmation.
+      //for more info see the DataProvisional class documentation.
+      _this._bus.postMessage(subscribeMsg, (reply) => {
+        console.log('subscribe-response: ', reply);
+        let newProvisional = _this._provisionals[objURL];
+        delete _this._provisionals[objURL];
+        if (newProvisional) newProvisional._releaseListeners();
 
-       if (reply.body.code < 200) {
-         newProvisional = new DataProvisional(_this._owner, objURL, _this._bus, reply.body.childrenResources);
-         _this._provisionals[objURL] = newProvisional;
-       } else if (reply.body.code === 200) {
-         let newObj = new DataObjectObserver(_this, objURL, schema, 'on', reply.body.value, newProvisional.children, reply.body.version);
-         _this._observers[objURL] = newObj;
+        if (reply.body.code < 200) {
+          newProvisional = new DataProvisional(_this._owner, objURL, _this._bus, reply.body.childrenResources);
+          _this._provisionals[objURL] = newProvisional;
+        } else if (reply.body.code === 200) {
 
-         resolve(newObj);
-         newProvisional.apply(newObj);
-       } else {
-         reject(reply.body.desc);
-       }
-     });
-   });
+          let newObj = new DataObjectObserver(_this, objURL, schema, 'on', reply.body.value, newProvisional.children, reply.body.version);
+          _this._observers[objURL] = newObj;
+
+          resolve(newObj);
+          newProvisional.apply(newObj);
+        } else {
+          reject(reply.body.desc);
+        }
+      });
+    });
   }
 
   /**
@@ -185,24 +187,24 @@ class Syncher {
   * @return {Promise<Object>} Return Promise to last available data of the reporter
   */
   read(objURL) {
-   let _this = this;
+    let _this = this;
 
-   //FLOW-OUT: this message will be sent directly to reporter object (maybe there is no listener available, so it will be resolved with MessageBus -> resolve)
-   //will reach the remote object in DataObjectReporter -> _onRead
-   let readMsg = {
-     type: 'read', from: _this._owner, to: objURL
-   };
+    //FLOW-OUT: this message will be sent directly to reporter object (maybe there is no listener available, so it will be resolved with MessageBus -> resolve)
+    //will reach the remote object in DataObjectReporter -> _onRead
+    let readMsg = {
+      type: 'read', from: _this._owner, to: objURL
+    };
 
-   return new Promise((resolve, reject) => {
-     _this._bus.postMessage(readMsg, (reply) => {
-       console.log('read-response: ', reply);
-       if (reply.body.code === 200) {
-         resolve(reply.body.value);
-       } else {
-         reject(reply.body.desc);
-       }
-     });
-   });
+    return new Promise((resolve, reject) => {
+      _this._bus.postMessage(readMsg, (reply) => {
+        console.log('read-response: ', reply);
+        if (reply.body.code === 200) {
+          resolve(reply.body.value);
+        } else {
+          reject(reply.body.desc);
+        }
+      });
+    });
   }
 
   /**
@@ -211,97 +213,155 @@ class Syncher {
   * @param {function(event: MsgEvent)} callback
   */
   onNotification(callback) {
-   this._onNotificationHandler = callback;
+    this._onNotificationHandler = callback;
+  }
+
+  onResume(callback) {
+    this._onResume = callback;
+
+    let msg = {
+      type: 'read', from: this._owner, to: this._subURL
+    };
+
+    this._bus.postMessage(msg, (reply) => this._onResumeSyncher(reply));
+  }
+
+  _onResumeSyncher(msg) {
+    if (msg.type === 'response' && msg.body.code === 200) {
+
+      console.log('[onResumeSyncher - msg] - ', msg);
+
+      msg.body.value.forEach((dataObject) => {
+        let objURL = dataObject.url;
+        let schema = dataObject.schema;
+        let status = dataObject.status;
+        let isReporter = dataObject.isReporter;
+        let initialData = dataObject.initialData;
+        let children = dataObject.childrenResources;
+
+        initialData.data = {};
+        initialData.childrens = {};
+
+        let newObj;
+        console.info('Resuming : ', isReporter ? 'Reporter' : 'Observer', this, objURL, schema, status, initialData, children);
+
+        // update the object
+        this.read(objURL).then((savedData) => {
+
+          initialData.data = Object.assign({}, savedData);
+
+          if (isReporter) {
+            console.log('[onResponse] - Reporter', initialData);
+            newObj = new DataObjectReporter(this, objURL, schema, status, initialData, children);
+            this._reporters[objURL] = newObj;
+          } else {
+            console.log('[onResponse] - Observer', initialData);
+            newObj = new DataObjectObserver(this, objURL, schema, status, initialData, children, 0);
+            this._observers[objURL] = newObj;
+          }
+
+          if (this._onResume) this._onResume(newObj);
+
+          // newObj.data = updated;
+
+        }).catch((reason) => {
+          console.info('[on response] - after read', reason);
+        });
+
+      });
+
+    }
+
   }
 
   //FLOW-IN: message received from a local runtime ReporterObject -> _onRemoteSubscribe
   _onForward(msg) {
-   let _this = this;
+    let _this = this;
 
-   let reporter = _this._reporters[msg.body.to];
-   reporter._onForward(msg);
+    let reporter = _this._reporters[msg.body.to];
+    reporter._onForward(msg);
   }
 
   //FLOW-IN: message received from a remote Syncher -> create (this is actually an invitation to subscribe)
   _onRemoteCreate(msg) {
-   let _this = this;
+    let _this = this;
 
-   //remove "/subscription" from the URL
-   let resource = msg.from.slice(0, -13);
+    //remove "/subscription" from the URL
+    let resource = msg.from.slice(0, -13);
 
-   let event = {
-     type: msg.type,
-     from: msg.body.source,
-     url: resource,
-     schema: msg.body.schema,
-     value: msg.body.value,
-     identity: msg.body.identity,
+    let event = {
+      type: msg.type,
+      from: msg.body.source,
+      url: resource,
+      schema: msg.body.schema,
+      value: msg.body.value,
+      identity: msg.body.identity,
 
-     ack: (type) => {
-       let lType = 200;
-       if (type) {
-         lType = type;
-       }
+      ack: (type) => {
+        let lType = 200;
+        if (type) {
+          lType = type;
+        }
 
-       //send ack response message
-       _this._bus.postMessage({
-         id: msg.id, type: 'response', from: msg.to, to: msg.from,
-         body: { code: lType }
-       });
-     }
-   };
+        //send ack response message
+        _this._bus.postMessage({
+          id: msg.id, type: 'response', from: msg.to, to: msg.from,
+          body: { code: lType }
+        });
+      }
+    };
 
-   if (_this._onNotificationHandler) {
-     console.log('NOTIFICATION-EVENT: ', event);
-     _this._onNotificationHandler(event);
-   }
+    if (_this._onNotificationHandler) {
+      console.log('NOTIFICATION-EVENT: ', event);
+      _this._onNotificationHandler(event);
+    }
   }
 
   //FLOW-IN: message received from a remote DataObjectReporter -> delete
   _onRemoteDelete(msg) {
-   let _this = this;
+    let _this = this;
 
-   //remove "/subscription" from the URL
-   let resource = msg.body.resource;
+    //remove "/subscription" from the URL
+    let resource = msg.body.resource;
 
-   let object = _this._observers[resource];
-   if (object) {
-     let event = {
-       type: msg.type,
-       url: resource,
-       identity: msg.body.identity,
+    let object = _this._observers[resource];
+    if (object) {
+      let event = {
+        type: msg.type,
+        url: resource,
+        identity: msg.body.identity,
 
-       ack: (type) => {
-         let lType = 200;
-         if (type) {
-           lType = type;
-         }
+        ack: (type) => {
+          let lType = 200;
+          if (type) {
+            lType = type;
+          }
 
-         //TODO: any other different options for the release process, like accept but nor release local?
-         if (lType === 200) {
-           object.delete();
-         }
+          //TODO: any other different options for the release process, like accept but nor release local?
+          if (lType === 200) {
+            object.delete();
+          }
 
-         //send ack response message
-         _this._bus.postMessage({
-           id: msg.id, type: 'response', from: msg.to, to: msg.from,
-           body: { code: lType, source: _this._owner }
-         });
-       }
-     };
+          //send ack response message
+          _this._bus.postMessage({
+            id: msg.id, type: 'response', from: msg.to, to: msg.from,
+            body: { code: lType, source: _this._owner }
+          });
+        }
+      };
 
-     if (_this._onNotificationHandler) {
-       console.log('NOTIFICATION-EVENT: ', event);
-       _this._onNotificationHandler(event);
-     }
-   } else {
-     _this._bus.postMessage({
-       id: msg.id, type: 'response', from: msg.to, to: msg.from,
-       body: { code: 404, source: _this._owner }
-     });
-   }
+      if (_this._onNotificationHandler) {
+        console.log('NOTIFICATION-EVENT: ', event);
+        _this._onNotificationHandler(event);
+      }
+    } else {
+      _this._bus.postMessage({
+        id: msg.id, type: 'response', from: msg.to, to: msg.from,
+        body: { code: 404, source: _this._owner }
+      });
+    }
   }
 
-  }
+}
 
-  export default Syncher;
+export default Syncher;
