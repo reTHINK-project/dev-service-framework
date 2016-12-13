@@ -69,6 +69,7 @@ class Syncher {
       if (msg.from !== owner) {
         console.log('Syncher-RCV: ', msg);
         switch (msg.type) {
+          case 'response': _this._onResumeSyncher(msg); break;
           case 'forward': _this._onForward(msg); break;
           case 'create': _this._onRemoteCreate(msg); break;
           case 'delete': _this._onRemoteDelete(msg); break;
@@ -223,7 +224,8 @@ class Syncher {
       type: 'read', from: this._owner, to: this._subURL
     };
 
-    this._bus.postMessage(msg, (reply) => this._onResumeSyncher(reply));
+    console.log('[on message read] - ', msg);
+    this._bus.postMessage(msg);
   }
 
   _onResumeSyncher(msg) {
@@ -245,27 +247,28 @@ class Syncher {
         let newObj;
         console.info('Resuming : ', isReporter ? 'Reporter' : 'Observer', this, objURL, schema, status, initialData, children);
 
+        if (isReporter) {
+          console.log('[onResponse] - Reporter', initialData);
+          newObj = new DataObjectReporter(this, objURL, schema, status, initialData, children);
+          this._reporters[objURL] = newObj;
+        } else {
+          console.log('[onResponse] - Observer', initialData);
+          newObj = new DataObjectObserver(this, objURL, schema, status, initialData, children, 0);
+          this._observers[objURL] = newObj;
+        }
+
+        if (this._onResume) this._onResume(this._observers, this._reporters);
+
         // update the object
         this.read(objURL).then((savedData) => {
 
-          initialData.data = Object.assign({}, savedData);
-
-          if (isReporter) {
-            console.log('[onResponse] - Reporter', initialData);
-            newObj = new DataObjectReporter(this, objURL, schema, status, initialData, children);
-            this._reporters[objURL] = newObj;
-          } else {
-            console.log('[onResponse] - Observer', initialData);
-            newObj = new DataObjectObserver(this, objURL, schema, status, initialData, children, 0);
-            this._observers[objURL] = newObj;
-          }
-
-          if (this._onResume) this._onResume(newObj);
-
-          // newObj.data = updated;
+          //TODO: we need to rethink this, because, the object is empty, and for each savedData property,
+          // the add event will be dispatched;
+          Object.assign(newObj.data, savedData);
 
         }).catch((reason) => {
-          console.info('[on response] - after read', reason);
+          console.info('Nothing to resume: ', reason);
+          if (this._onResume) this._onResume({}, {});
         });
 
       });
