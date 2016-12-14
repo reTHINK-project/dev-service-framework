@@ -69,7 +69,6 @@ class Syncher {
       if (msg.from !== owner) {
         console.log('Syncher-RCV: ', msg);
         switch (msg.type) {
-          case 'response': _this._onResumeSyncher(msg); break;
           case 'forward': _this._onForward(msg); break;
           case 'create': _this._onRemoteCreate(msg); break;
           case 'delete': _this._onRemoteDelete(msg); break;
@@ -148,38 +147,26 @@ class Syncher {
   */
   subscribe(schema, objURL) {
     let _this = this;
+    let criteria = {};
 
-    //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onLocalSubscribe
-    let subscribeMsg = {
-      type: 'subscribe', from: _this._owner, to: _this._subURL,
-      body: { schema: schema, resource: objURL }
-    };
+    criteria.schema = schema;
+    criteria.url = objURL;
 
-    return new Promise((resolve, reject) => {
-      //request subscription
-      //Provisional data is applied to the DataObjectObserver after confirmation. Or discarded if there is no confirmation.
-      //for more info see the DataProvisional class documentation.
-      _this._bus.postMessage(subscribeMsg, (reply) => {
-        console.log('subscribe-response: ', reply);
-        let newProvisional = _this._provisionals[objURL];
-        delete _this._provisionals[objURL];
-        if (newProvisional) newProvisional._releaseListeners();
+    console.log('[syncher] - subscribe: ', criteria);
 
-        if (reply.body.code < 200) {
-          newProvisional = new DataProvisional(_this._owner, objURL, _this._bus, reply.body.childrenResources);
-          _this._provisionals[objURL] = newProvisional;
-        } else if (reply.body.code === 200) {
+    return _this._subscribe(criteria);
+  }
 
-          let newObj = new DataObjectObserver(_this, objURL, schema, 'on', reply.body.value, newProvisional.children, reply.body.version);
-          _this._observers[objURL] = newObj;
+  /**
+  * Request a subscription to an existent reporter object.
+  * @param {criteria} schema - Hyperty Catalogue URL address that can be used to retrieve the JSON-Schema describing the Data Object schema
+  * @param {ObjectURL} objURL - Address of the existent reporter object to be observed
+  * @return {Promise<DataObjectObserver>} Return Promise to a new observer. It's associated with the reporter.
+  */
+  resume(criteria) {
+    let _this = this;
 
-          resolve(newObj);
-          newProvisional.apply(newObj);
-        } else {
-          reject(reply.body.desc);
-        }
-      });
-    });
+    return _this._subscribe(criteria);
   }
 
   /**
@@ -219,13 +206,69 @@ class Syncher {
 
   onResume(callback) {
     this._onResume = callback;
+  }
 
-    let msg = {
-      type: 'read', from: this._owner, to: this._subURL
-    };
+  _subscribe(criteria) {
+    let _this = this;
 
-    console.log('[on message read] - ', msg);
-    this._bus.postMessage(msg);
+    return new Promise((resolve, reject) => {
+
+      //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onLocalSubscribe
+      let subscribeMsg = {
+        type: 'subscribe', from: _this._owner, to: _this._subURL,
+        body: {}
+      };
+
+      // Hyperty request to be an Observer
+      // https://github.com/reTHINK-project/specs/blob/master/messages/data-sync-messages.md#hyperty-request-to-be-an-observer
+
+      // Resume Subscriptions for the same Hyperty URL
+      // https://github.com/reTHINK-project/specs/blob/master/messages/data-sync-messages.md#resume-subscriptions-for-the-same-hyperty-url
+
+      // Resume Subscriptions for a certain user and data schema independently of the Hyperty URL.
+      // https://github.com/reTHINK-project/specs/blob/master/messages/data-sync-messages.md#resume-subscriptions-for-a-certain-user-and-data-schema-independently-of-the-hyperty-url
+      if (criteria) {
+        if (criteria.p2p) subscribeMsg.body.p2p = criteria.p2p;
+        if (criteria.url) subscribeMsg.body.resource = criteria.url;
+        if (criteria.store) subscribeMsg.body.store = criteria.store;
+        if (criteria.schema) subscribeMsg.body.schema = criteria.schema;
+        if (criteria.identity) subscribeMsg.body.identity = criteria.identity;
+      }
+
+      console.log('[syncher] - subscribeMsg: ', subscribeMsg);
+
+      //request subscription
+      //Provisional data is applied to the DataObjectObserver after confirmation. Or discarded if there is no confirmation.
+      //for more info see the DataProvisional class documentation.
+      _this._bus.postMessage(subscribeMsg, (reply) => {
+        console.log('[syncher] - subscribe-response: ', reply);
+
+        let schema = reply.body.schema;
+        let objURL = reply.body.resource;
+
+        let newProvisional = _this._provisionals[objURL];
+
+        if (reply.body.code < 200) {
+          delete _this._provisionals[objURL];
+          if (newProvisional) newProvisional._releaseListeners();
+
+          newProvisional = new DataProvisional(_this._owner, objURL, _this._bus, reply.body.childrenResources);
+          _this._provisionals[objURL] = newProvisional;
+        } else if (reply.body.code === 200) {
+
+          console.log('ASD: ', newProvisional, _this._provisionals);
+
+          let newObj = new DataObjectObserver(_this, objURL, schema, 'on', reply.body.value, newProvisional.children, reply.body.version);
+          _this._observers[objURL] = newObj;
+
+          resolve(newObj);
+          newProvisional.apply(newObj);
+        } else {
+          reject(reply.body.desc);
+        }
+      });
+    });
+
   }
 
   _onResumeSyncher(msg) {
