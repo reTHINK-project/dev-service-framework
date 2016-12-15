@@ -163,9 +163,10 @@ class Syncher {
   * @param {ObjectURL} objURL - Address of the existent reporter object to be observed
   * @return {Promise<DataObjectObserver>} Return Promise to a new observer. It's associated with the reporter.
   */
-  resume(criteria) {
+  resumeObservers(criteria) {
     let _this = this;
 
+    console.log('[syncher] - resume observers: ', criteria);
     return _this._subscribe(criteria);
   }
 
@@ -256,67 +257,19 @@ class Syncher {
           _this._provisionals[objURL] = newProvisional;
         } else if (reply.body.code === 200) {
 
-          console.log('ASD: ', newProvisional, _this._provisionals);
+          let childrenResources = newProvisional ? newProvisional.children : reply.body.childrenResources;
+          console.log('[synhcer] - new Data Object Observer: ', _this._provisionals, childrenResources);
 
-          let newObj = new DataObjectObserver(_this, objURL, schema, 'on', reply.body.value, newProvisional.children, reply.body.version);
+          let newObj = new DataObjectObserver(_this, objURL, schema, 'on', reply.body.value, childrenResources, reply.body.version);
           _this._observers[objURL] = newObj;
 
           resolve(newObj);
-          newProvisional.apply(newObj);
+          if (newProvisional) newProvisional.apply(newObj);
         } else {
           reject(reply.body.desc);
         }
       });
     });
-
-  }
-
-  _onResumeSyncher(msg) {
-    if (msg.type === 'response' && msg.body.code === 200) {
-
-      console.log('[onResumeSyncher - msg] - ', msg);
-
-      msg.body.value.forEach((dataObject) => {
-        let objURL = dataObject.url;
-        let schema = dataObject.schema;
-        let status = dataObject.status;
-        let isReporter = dataObject.isReporter;
-        let initialData = dataObject.initialData;
-        let children = dataObject.childrenResources;
-
-        initialData.data = {};
-        initialData.childrens = {};
-
-        let newObj;
-        console.info('Resuming : ', isReporter ? 'Reporter' : 'Observer', this, objURL, schema, status, initialData, children);
-
-        if (isReporter) {
-          console.log('[onResponse] - Reporter', initialData);
-          newObj = new DataObjectReporter(this, objURL, schema, status, initialData, children);
-          this._reporters[objURL] = newObj;
-        } else {
-          console.log('[onResponse] - Observer', initialData);
-          newObj = new DataObjectObserver(this, objURL, schema, status, initialData, children, 0);
-          this._observers[objURL] = newObj;
-        }
-
-        if (this._onResume) this._onResume(this._observers, this._reporters);
-
-        // update the object
-        this.read(objURL).then((savedData) => {
-
-          //TODO: we need to rethink this, because, the object is empty, and for each savedData property,
-          // the add event will be dispatched;
-          Object.assign(newObj.data, savedData);
-
-        }).catch((reason) => {
-          console.info('Nothing to resume: ', reason);
-          if (this._onResume) this._onResume({}, {});
-        });
-
-      });
-
-    }
 
   }
 
