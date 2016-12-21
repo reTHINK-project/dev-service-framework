@@ -103,40 +103,30 @@ class Syncher {
   * @param  {string} objectURL - reusable dataObject URL
   * @return {Promise<DataObjectReporter>} Return Promise to a new Reporter. The reporter can be accepted or rejected by the PEP
   */
-  create(schema, observers, initialData, objectURL) {
+  create(schema, observers, initialData, store = false, p2p = false) {
     let _this = this;
+    let criteria = {};
 
-    initialData.reporter = _this._owner;
-    initialData.schema = schema;
+    criteria.p2p = p2p;
+    criteria.store = store;
+    criteria.schema = schema;
+    criteria.observers = observers;
+    criteria.initialData = initialData;
 
-    //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onCreate
-    let requestMsg = {
-      type: 'create', from: _this._owner, to: _this._subURL,
-      body: { authorise: observers, value: initialData, schema: schema}
-    };
+    console.log('[syncher - create] - create Reporter - criteria: ', criteria);
 
-    // If an objectURL will be passed, then reus
-    if (objectURL) {
-      requestMsg.body.resource = objectURL;
-    }
+    Object.assign(criteria, {resume: false});
 
-    return new Promise((resolve, reject) => {
-      //request create to the allocation system. Can be rejected by the PolicyEngine.
-      _this._bus.postMessage(requestMsg, (reply) => {
-        console.log('create-response: ', reply);
-        if (reply.body.code === 200) {
-          //reporter creation accepted
-          let objURL = reply.body.resource;
-          let newObj = new DataObjectReporter(_this, objURL, schema, 'on', initialData, reply.body.childrenResources);
-          _this._reporters[objURL] = newObj;
+    return _this._create(criteria);
+  }
 
-          resolve(newObj);
-        } else {
-          //reporter creation rejected
-          reject(reply.body.desc);
-        }
-      });
-    });
+  resumeReporters(criteria) {
+    let _this = this;
+    console.log('[syncher - create] - resume Reporter - criteria: ', criteria);
+
+    Object.assign(criteria, {resume: true});
+
+    return _this._create(criteria);
   }
 
   /**
@@ -145,29 +135,34 @@ class Syncher {
   * @param {ObjectURL} objURL - Address of the existent reporter object to be observed
   * @return {Promise<DataObjectObserver>} Return Promise to a new observer. It's associated with the reporter.
   */
-  subscribe(schema, objURL) {
+  subscribe(schema, objURL, store = false, p2p = false) {
     let _this = this;
     let criteria = {};
 
+    criteria.p2p = p2p;
+    criteria.store = store;
     criteria.schema = schema;
-    criteria.url = objURL;
+    criteria.resource = objURL;
 
-    console.log('[syncher] - subscribe: ', criteria);
+    console.log('[syncher - subscribe] - subscribe criteria: ', criteria);
+
+    Object.assign(criteria, {resume: false});
 
     return _this._subscribe(criteria);
   }
 
   /**
   * Request a subscription to an existent reporter object.
-  * @param {criteria} schema - Hyperty Catalogue URL address that can be used to retrieve the JSON-Schema describing the Data Object schema
-  * @param {ObjectURL} objURL - Address of the existent reporter object to be observed
+  * @param {criteria} criteria - Information to discovery the observer object
   * @return {Promise<DataObjectObserver>} Return Promise to a new observer. It's associated with the reporter.
   */
   resumeObservers(criteria) {
     let _this = this;
+    let _criteria = criteria || {};
 
-    console.log('[syncher] - resume observers: ', criteria);
-    return _this._subscribe(criteria);
+    Object.assign(_criteria, {resume: true});
+
+    return _this._subscribe(_criteria);
   }
 
   /**
@@ -205,8 +200,63 @@ class Syncher {
     this._onNotificationHandler = callback;
   }
 
-  onResume(callback) {
-    this._onResume = callback;
+  _create(criteria) {
+    let _this = this;
+
+    return new Promise((resolve, reject) => {
+      let resume = criteria.resume;
+      let initialData = criteria.initialData || {};
+      let schema;
+
+      //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onCreate
+      let requestMsg = {
+        type: 'create', from: _this._owner, to: _this._subURL,
+        body: { resume: resume }
+      };
+
+      console.log('[syncher - create]: ', criteria, requestMsg);
+
+      requestMsg.body.value = initialData;
+      requestMsg.body.value.reporter = _this._owner;
+
+      if (criteria.schema) {
+        schema = criteria.schema;
+        requestMsg.body.schema = criteria.schema;
+      }
+
+      if (criteria.p2p) requestMsg.body.p2p = criteria.p2p;
+      if (criteria.store) requestMsg.body.store = criteria.store;
+      if (criteria.observers) requestMsg.body.authorise = criteria.observers;
+
+      if (resume) {
+        console.log('[syncher - create] - resume message: ', requestMsg);
+      } else {
+        console.log('[syncher - create] - create message: ', requestMsg);
+      }
+
+      //request create to the allocation system. Can be rejected by the PolicyEngine.
+      _this._bus.postMessage(requestMsg, (reply) => {
+        console.log('[syncher - create] - create-response: ', reply);
+        if (reply.body.code === 200) {
+          //reporter creation accepted
+          let objURL = reply.body.resource;
+
+          if (resume) {
+            schema = reply.body.schema;
+            initialData = reply.body.value;
+          }
+
+          let newObj = new DataObjectReporter(_this, objURL, schema, 'on', initialData, reply.body.childrenResources);
+          _this._reporters[objURL] = newObj;
+
+          resolve(newObj);
+        } else {
+          //reporter creation rejected
+          reject(reply.body.desc);
+        }
+      });
+    });
+
   }
 
   _subscribe(criteria) {
@@ -230,13 +280,15 @@ class Syncher {
       // https://github.com/reTHINK-project/specs/blob/master/messages/data-sync-messages.md#resume-subscriptions-for-a-certain-user-and-data-schema-independently-of-the-hyperty-url
       if (criteria) {
         if (criteria.p2p) subscribeMsg.body.p2p = criteria.p2p;
-        if (criteria.url) subscribeMsg.body.resource = criteria.url;
         if (criteria.store) subscribeMsg.body.store = criteria.store;
         if (criteria.schema) subscribeMsg.body.schema = criteria.schema;
         if (criteria.identity) subscribeMsg.body.identity = criteria.identity;
+        if (criteria.resource) subscribeMsg.body.resource = criteria.resource;
       }
 
-      console.log('[syncher] - subscribeMsg: ', subscribeMsg);
+      subscribeMsg.body.resume = criteria.resume;
+
+      console.log('[syncher] - subscribe message: ', criteria, subscribeMsg);
 
       //request subscription
       //Provisional data is applied to the DataObjectObserver after confirmation. Or discarded if there is no confirmation.
@@ -258,13 +310,19 @@ class Syncher {
         } else if (reply.body.code === 200) {
 
           let childrenResources = newProvisional ? newProvisional.children : reply.body.childrenResources;
-          console.log('[synhcer] - new Data Object Observer: ', _this._provisionals, childrenResources);
+          console.log('[syncher] - new Data Object Observer: ', reply, _this._provisionals, childrenResources);
 
           let newObj = new DataObjectObserver(_this, objURL, schema, 'on', reply.body.value, childrenResources, reply.body.version);
           _this._observers[objURL] = newObj;
 
           resolve(newObj);
           if (newProvisional) newProvisional.apply(newObj);
+
+          // // read the last changes
+          // _this.read(objURL).then((value) => {
+          //   Object.assign(newObj.data, value);
+          // });
+
         } else {
           reject(reply.body.desc);
         }
