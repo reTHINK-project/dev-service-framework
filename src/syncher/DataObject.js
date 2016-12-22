@@ -75,6 +75,7 @@ class DataObject {
     let _this = this;
 
     let childBaseURL = _this._url + '/children/';
+    console.log('[Data Object - AllocateListeners] - ', _this._childrens);
     if (_this._childrens) {
       _this._childrens.forEach((child) => {
         let childURL = childBaseURL + child;

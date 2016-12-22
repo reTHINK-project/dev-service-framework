@@ -300,29 +300,21 @@ class Syncher {
         let objURL = reply.body.resource;
 
         let newProvisional = _this._provisionals[objURL];
+        delete _this._provisionals[objURL];
+        if (newProvisional) newProvisional._releaseListeners();
 
         if (reply.body.code < 200) {
-          delete _this._provisionals[objURL];
-          if (newProvisional) newProvisional._releaseListeners();
-
+          console.log('[syncher] - new DataProvisional: ', reply.body.childrenResources, objURL);
           newProvisional = new DataProvisional(_this._owner, objURL, _this._bus, reply.body.childrenResources);
           _this._provisionals[objURL] = newProvisional;
         } else if (reply.body.code === 200) {
+          console.log('[syncher] - new Data Object Observer: ', reply, _this._provisionals);
 
-          let childrenResources = newProvisional ? newProvisional.children : reply.body.childrenResources;
-          console.log('[syncher] - new Data Object Observer: ', reply, _this._provisionals, childrenResources);
-
-          let newObj = new DataObjectObserver(_this, objURL, schema, 'on', reply.body.value, childrenResources, reply.body.version);
+          let newObj = new DataObjectObserver(_this, objURL, schema, 'on', reply.body.value, newProvisional.children, reply.body.version);
           _this._observers[objURL] = newObj;
 
           resolve(newObj);
-          if (newProvisional) newProvisional.apply(newObj);
-
-          // // read the last changes
-          // _this.read(objURL).then((value) => {
-          //   Object.assign(newObj.data, value);
-          // });
-
+          newProvisional.apply(newObj);
         } else {
           reject(reply.body.desc);
         }
