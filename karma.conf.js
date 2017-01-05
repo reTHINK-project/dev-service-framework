@@ -13,11 +13,6 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'node_modules/mutationobserver-shim/dist/mutationobserver.min.js',
-      'node_modules/babel-polyfill/dist/polyfill.js',
-      'node_modules/object.observe/dist/object-observe.js',
-      'node_modules/array.observe/array-observe.js',
-      'src/**/*.js',
       'test/**/*.spec.js'
     ],
 
@@ -36,7 +31,7 @@ module.exports = function(config) {
     browserify: {
       debug: true,
       transform: [
-        ['babelify', {presets: ['es2015', 'stage-0'], plugins: ['add-module-exports']}]
+        ['babelify', {presets: ['es2015'], plugins: ['add-module-exports']}]
       ]
     },
 
@@ -66,9 +61,9 @@ module.exports = function(config) {
       ChromeTravis: {
         base: 'Chrome',
         flags: [
-         '--disable-web-security',
-         '--ignore-certificate-errors'
-       ]
+          '--disable-web-security',
+          '--ignore-certificate-errors'
+        ]
       }
     },
 

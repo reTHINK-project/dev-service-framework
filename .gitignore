@@ -16,6 +16,8 @@ node_modules
 
 *.iml
 
+report
+
 resources/bundle.js
 resources/tmp
 privatekey.csr

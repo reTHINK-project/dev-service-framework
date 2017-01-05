@@ -21,7 +21,7 @@
 * limitations under the License.
 **/
 
-import SyncObject from './SyncObject';
+import SyncObject from './ProxyObject';
 
 /**
  * The class returned from the DataObject addChildren call or from onAddChildren if remotely created.
