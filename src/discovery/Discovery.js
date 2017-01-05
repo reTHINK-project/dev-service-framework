@@ -234,16 +234,26 @@ class Discovery {
       activeDomain = domain;
     }
 
-    let msg = {
-      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: userIdentifier,
-      criteria: {resources: resources, dataSchemes: schema}
-      }
-    };
+
 
     return new Promise(function(resolve, reject) {
 
+      console.log('ACTIVE DOMAIN -> ', activeDomain, 'user->', user, 'schema->', schema, 'resources->', resources, 'domain->', domain);
+      if (activeDomain == 'slack.com') {
+        console.log('SLACK HEre');
+        return resolve(user);
+      }
+      let msg = {
+        type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: userIdentifier,
+        criteria: {resources: resources, dataSchemes: schema}
+        }
+      };
+
+      console.log('msg to send->', msg);
+
       _this.messageBus.postMessage(msg, (reply) => {
 
+        console.log('ON discoverHyperty->', reply);
         let hyperties = reply.body.value;
 
         if (hyperties) {
