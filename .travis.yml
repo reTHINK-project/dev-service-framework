@@ -15,7 +15,7 @@ before_install:
   - docker pull rethink/catalogue-broker
   - docker run -it -d --name="catalogue-broker" --net=host --expose=433 rethink/catalogue-broker
   - docker pull rethink/catalogue-test-client:dev
-  - docker run -it -d --net=host --name="catalogue-database" rethink/catalogue-database -host localhost
+  - docker run -it -d --net=host --name="catalogue-database" rethink/catalogue-test-client -host localhost
 
 install:
   - npm install
