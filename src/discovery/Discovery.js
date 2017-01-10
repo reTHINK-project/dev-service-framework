@@ -238,9 +238,9 @@ class Discovery {
 
     return new Promise(function(resolve, reject) {
 
-      console.log('ACTIVE DOMAIN -> ', activeDomain, 'user->', user, 'schema->', schema, 'resources->', resources, 'domain->', domain);
-      if (activeDomain == 'slack.com') {
-        console.log('SLACK HEre');
+      console.log('[Discovery.discoverHyperty] ACTIVE DOMAIN -> ', activeDomain, 'user->', user, 'schema->', schema, 'resources->', resources, 'domain->', domain);
+      if (activeDomain.includes('://')) {
+        console.log('[Discovery.discoverHyperty] is legacy domain');
         return resolve(user);
       }
       let msg = {
