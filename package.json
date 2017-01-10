@@ -20,9 +20,9 @@
   "author": "reThink Project",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/reTHINK-project/core-framework/issues"
+    "url": "https://github.com/reTHINK-project/dev-service-framework/issues"
   },
-  "homepage": "https://github.com/reTHINK-project/core-framework#readme",
+  "homepage": "https://github.com/reTHINK-project/dev-service-framework#readme",
   "dependencies": {},
   "devDependencies": {
     "babel-plugin-add-module-exports": "^0.1.2",

@@ -75,7 +75,7 @@ gulp.task('license', function() {
 
 });
 
-gulp.task('schemabundle', function () {
+gulp.task('schemabundle', function() {
 
   var core = gulp.src(['schemas/json-schema/core/*.json'])
     .pipe(jsonschemaBundle())
@@ -117,14 +117,14 @@ function prependLicense(clean) {
 gulp.task('dist', function() {
 
   return gulp.src(['src/CatalogueFactory.js',
-  'src/discovery/Discovery.js',
-  'src/storage-manager/StorageManager.js',
-  'src/runtime-capabilities/RuntimeCapabilities.js',
-  'src/identityManager/IdentityManager.js',
-  'src/persistence/PersistenceManager.js',
-  'src/MessageFactory.js',
-  'src/RuntimeCatalogue.js',
-  'src/Syncher.js'])
+    'src/discovery/Discovery.js',
+    'src/storage-manager/StorageManager.js',
+    'src/runtime-capabilities/RuntimeCapabilities.js',
+    'src/identityManager/IdentityManager.js',
+    'src/persistence/PersistenceManager.js',
+    'src/MessageFactory.js',
+    'src/RuntimeCatalogue.js',
+    'src/Syncher.js'])
   .pipe(dist());
 
 });
@@ -147,7 +147,7 @@ gulp.task('encode', function(done) {
     }
   }
 
-  gulp.src('./', {buffer:false})
+  gulp.src('./', {buffer: false})
     .pipe(prompt.prompt([{
       type: 'list',
       name: 'file',
@@ -312,15 +312,7 @@ function transpile(opts) {
     args.debug = true;
 
     return browserify(args)
-    .transform(babelify, {
-      sourceMaps: true,
-      compact: false,
-      presets: ['es2015', 'stage-0'],
-      plugins: ['add-module-exports', 'babel-polyfill',
-      'transform-inline-environment-variables',
-      'transform-runtime',
-      'transform-regenerator']
-    })
+    .transform(babelify)
     .bundle()
     .on('error', function(err) {
       gutil.log(gutil.colors.red(err));
