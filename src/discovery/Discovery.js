@@ -239,7 +239,7 @@ class Discovery {
     return new Promise(function(resolve, reject) {
 
       console.log('[Discovery.discoverHyperty] ACTIVE DOMAIN -> ', activeDomain, 'user->', user, 'schema->', schema, 'resources->', resources, 'domain->', domain);
-      if (user.includes('://')) {
+      if (user.includes('://') && !user.includes('user://')) {
         console.log('[Discovery.discoverHyperty] is legacy domain');
         let legacyUser = { userID: user, hypertyID: user, schema: schema, resources: resources };
         return resolve(legacyUser);
