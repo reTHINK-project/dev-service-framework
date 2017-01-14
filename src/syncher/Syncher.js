@@ -66,7 +66,7 @@ class Syncher {
     bus.addListener(owner, (msg) => {
       //ignore msg sent by himself
       if (msg.from !== owner) {
-        console.log('Syncher-RCV: ', msg);
+        console.info('[Syncher] Syncher-RCV: ', msg);
         switch (msg.type) {
           case 'forward': _this._onForward(msg); break;
           case 'create': _this._onRemoteCreate(msg); break;
@@ -122,7 +122,7 @@ class Syncher {
     return new Promise((resolve, reject) => {
       //request create to the allocation system. Can be rejected by the PolicyEngine.
       _this._bus.postMessage(requestMsg, (reply) => {
-        console.log('create-response: ', reply);
+        console.info('[Syncher] create-response: ', reply);
         if (reply.body.code === 200) {
           //reporter creation accepted
           let objURL = reply.body.resource;
@@ -158,7 +158,7 @@ class Syncher {
      //Provisional data is applied to the DataObjectObserver after confirmation. Or discarded if there is no confirmation.
      //for more info see the DataProvisional class documentation.
      _this._bus.postMessage(subscribeMsg, (reply) => {
-       console.log('subscribe-response: ', reply);
+       console.info('[Syncher] subscribe-response: ', reply);
        let newProvisional = _this._provisionals[objURL];
        delete _this._provisionals[objURL];
        if (newProvisional) newProvisional._releaseListeners();
@@ -168,6 +168,7 @@ class Syncher {
          _this._provisionals[objURL] = newProvisional;
        } else if (reply.body.code === 200) {
          let newObj = new DataObjectObserver(_this, objURL, schema, 'on', reply.body.value, newProvisional.children, reply.body.version);
+         console.info('[Syncher - subscribe] Observer created ', newObj);
          _this._observers[objURL] = newObj;
 
          resolve(newObj);
@@ -195,7 +196,7 @@ class Syncher {
 
    return new Promise((resolve, reject) => {
      _this._bus.postMessage(readMsg, (reply) => {
-       console.log('read-response: ', reply);
+       console.info('[Syncher] read-response: ', reply);
        if (reply.body.code === 200) {
          resolve(reply.body.value);
        } else {
@@ -252,7 +253,7 @@ class Syncher {
    };
 
    if (_this._onNotificationHandler) {
-     console.log('NOTIFICATION-EVENT: ', event);
+     console.info('[Syncher] NOTIFICATION-EVENT: ', event);
      _this._onNotificationHandler(event);
    }
   }
@@ -291,7 +292,7 @@ class Syncher {
      };
 
      if (_this._onNotificationHandler) {
-       console.log('NOTIFICATION-EVENT: ', event);
+       console.info('[Syncher] NOTIFICATION-EVENT: ', event);
        _this._onNotificationHandler(event);
      }
    } else {

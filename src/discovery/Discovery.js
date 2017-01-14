@@ -239,8 +239,8 @@ class Discovery {
     return new Promise(function(resolve, reject) {
 
       console.log('[Discovery.discoverHyperty] ACTIVE DOMAIN -> ', activeDomain, 'user->', user, 'schema->', schema, 'resources->', resources, 'domain->', domain);
-      if (user.includes('://') && !user.includes('user://')) {
-        console.log('[Discovery.discoverHyperty] is legacy domain');
+      if (user.includes(':') && !user.includes('user://')) {
+        console.log('[Discovery.discoverHyperty] ' + user + ' is legacy domain');
         let legacyUser = { userID: user, hypertyID: user, schema: schema, resources: resources };
         return resolve(legacyUser);
       }
@@ -250,11 +250,11 @@ class Discovery {
         }
       };
 
-      console.log('msg to send->', msg);
+      console.info('[Discovery] msg to send->', msg);
 
       _this.messageBus.postMessage(msg, (reply) => {
 
-        console.log('ON discoverHyperty->', reply);
+        console.info('[Discovery] ON discoverHyperty->', reply);
         let hyperties = reply.body.value;
 
         if (hyperties) {
@@ -280,10 +280,10 @@ class Discovery {
     return new Promise(function(resolve, reject) {
 
       // Hack for legacy users
-      if (email.includes('://') && !email.includes('user://')) {
-        console.log('[Discovery.discoverHyperty] is legacy domain');
+      if (email.includes(':') && !email.includes('user://')) {
+        console.log('[Discovery.discoverHyperty] ' + email +'is legacy domain');
         let legacyUser = { id: email, hypertyURL: email, descriptor: 'unknown' };
-        resolve(legacyUser);
+        return resolve(legacyUser);
       }
 
       if (!domain) {
@@ -299,12 +299,12 @@ class Discovery {
         type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: identityURL}
       };
 
-      console.log('Message: ', message, activeDomain, identityURL);
+      console.info('[Discovery] Message: ', message, activeDomain, identityURL);
 
-      //console.log('message READ', message);
+      //console.info('[Discovery] message READ', message);
 
       _this.messageBus.postMessage(message, (reply) => {
-        console.log('message reply', reply);
+        console.info('[Discovery] message reply', reply);
 
         let hyperty;
         let mostRecent;
@@ -326,7 +326,7 @@ class Discovery {
           }
         }
 
-        console.log('Last Hyperty: ', lastHyperty, mostRecent);
+        console.info('[Discovery] Last Hyperty: ', lastHyperty, mostRecent);
 
         let hypertyURL = lastHyperty;
 
@@ -340,7 +340,7 @@ class Discovery {
           hypertyURL: hypertyURL
         };
 
-        console.log('===> hypertyDiscovery messageBundle: ', idPackage);
+        console.info('[Discovery] ===> hypertyDiscovery messageBundle: ', idPackage);
         resolve(idPackage);
       });
     });
@@ -378,12 +378,12 @@ class Discovery {
         type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: identityURL}
       };
 
-      console.log('Message discoverHypertiesPerUser: ', message, activeDomain, identityURL);
-  
-      //console.log('message READ', message);
+      console.info('[Discovery] Message discoverHypertiesPerUser: ', message, activeDomain, identityURL);
+
+      //console.info('[Discovery] message READ', message);
 
       _this.messageBus.postMessage(message, (reply) => {
-        console.log('discoverHypertiesPerUser reply', reply);
+        console.info('[Discovery] discoverHypertiesPerUser reply', reply);
 
         let value = reply.body.value;
 
