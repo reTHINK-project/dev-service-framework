@@ -359,10 +359,10 @@ class Discovery {
 
     return new Promise(function(resolve, reject) {
 
-      if (email.includes('://') && !email.includes('user://')) {
+      if (email.includes(':') && !email.includes('user://')) {
         console.log('[Discovery.discoverHyperty] is legacy domain');
         let legacyUser = { userID: email, hypertyID: email, schema: schema, resources: resources };
-        resolve(legacyUser);
+        return resolve(legacyUser);
       }
 
       if (!domain) {
