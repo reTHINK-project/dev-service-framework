@@ -17,6 +17,7 @@ node_modules
 *.iml
 
 report
+coverage
 
 resources/bundle.js
 resources/tmp

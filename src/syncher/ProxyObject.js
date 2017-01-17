@@ -76,9 +76,7 @@ class SyncObject {
       });
 
       changeset.every((change) => {
-        setTimeout(() => {
-          this._onChanges(change);
-        });
+        this._onChanges(change);
       });
 
     };
