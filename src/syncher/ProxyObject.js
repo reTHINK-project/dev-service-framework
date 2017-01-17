@@ -76,7 +76,9 @@ class SyncObject {
       });
 
       changeset.every((change) => {
-        this._onChanges(change);
+        setTimeout(() => {
+          this._onChanges(change);
+        });
       });
 
     };
@@ -112,7 +114,7 @@ class SyncObject {
     //let oldValue = change.oldValue;
     let newValue = obj[change.name];
 
-    // console.info(change.type + ' | Field: ' + fieldString + ' | New Value:', JSON.stringify(newValue));
+    console.info(change.type + ' | Field: ' + fieldString + ' | New Value:', JSON.stringify(newValue));
 
     if (change.type === 'update') {
       this._fireEvent({
