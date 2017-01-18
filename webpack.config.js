@@ -98,5 +98,6 @@ module.exports = {
       }
     ]
   },
+  resolve: { extensions: ['.js'] },
   plugins: getModeConfig()
 };
