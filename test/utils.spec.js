@@ -1,6 +1,5 @@
 // Unit test modules
 import chai from 'chai';
-import sinon from 'sinon';
 import chaiAsPromised from 'chai-as-promised';
 import sinonChai from 'sinon-chai';
 
@@ -15,6 +14,10 @@ chai.config.truncateThreshold = 0;
 chai.use(chaiAsPromised);
 chai.use(sinonChai);
 
+/**
+ * this is test for Utils.
+ * @test {utils}
+ */
 describe('Utils Module', function() {
 
   it('should divide an url in 3 parts (type, domain, identity)', function() {

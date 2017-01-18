@@ -21,9 +21,8 @@
 * limitations under the License.
 **/
 
-import SyncObject from './SyncObject';
+import SyncObject, {ChangeType, ObjectType} from './ProxyObject';
 import DataObjectChild from './DataObjectChild';
-import { ChangeType, ObjectType } from './SyncObject';
 import {deepClone} from '../utils/utils.js';
 
 /**
@@ -75,6 +74,7 @@ class DataObject {
     let _this = this;
 
     let childBaseURL = _this._url + '/children/';
+    console.log('[Data Object - AllocateListeners] - ', _this._childrens);
     if (_this._childrens) {
       _this._childrens.forEach((child) => {
         let childURL = childBaseURL + child;
@@ -249,6 +249,8 @@ class DataObject {
         type: 'update', from: _this._url, to: _this._url + '/changes',
         body: { version: _this._version, source: _this._owner, attribute: event.field }
       };
+
+      console.log('[DataObject - _onChange] - ', event, childInfo, changeMsg);
 
       if (event.oType === ObjectType.OBJECT) {
         if (event.cType !== ChangeType.REMOVE) {
