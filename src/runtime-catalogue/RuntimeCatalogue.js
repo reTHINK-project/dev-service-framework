@@ -373,6 +373,7 @@ class RuntimeCatalogue {
         // check encoding
         if (sp["encoding"] === "base64") {
             sp["sourceCode"] = this.atob(sp["sourceCode"]);
+            sp["encoding"] = 'utf-8';
         }
 
         let sourcePackage = this._factory.createSourcePackage(sp["sourceCodeClassname"], sp["sourceCode"]);

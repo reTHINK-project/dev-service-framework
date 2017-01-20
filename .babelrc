@@ -1,5 +1,4 @@
 {
-  "compact": true,
-  "presets": ["es2015"],
+  "presets": ["env"],
   "plugins": ["add-module-exports", "babel-polyfill", "transform-runtime", "transform-regenerator"]
 }
