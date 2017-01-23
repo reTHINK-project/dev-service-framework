@@ -19,6 +19,3 @@ before_install:
 
 install:
   - npm install
-
-script:
-  - karma start

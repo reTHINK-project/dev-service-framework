@@ -4,9 +4,9 @@ reTHINK Service Framework
 
 #### Build status
 
-| Master                                   | Develop                                  | Current                                  |
-| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| [![Build Status](https://travis-ci.org/reTHINK-project/dev-service-framework.svg?branch=master)](https://travis-ci.org/reTHINK-project/dev-service-framework) | [![Build Status](https://travis-ci.org/reTHINK-project/dev-service-framework.svg?branch=develop)](https://travis-ci.org/reTHINK-project/dev-service-framework) | [![Build Status](https://travis-ci.org/reTHINK-project/dev-service-framework.svg?branch=dev-proxy-observe)](https://travis-ci.org/reTHINK-project/dev-service-framework) |
+| Master                                   | Develop                                  |
+| ---------------------------------------- | ---------------------------------------- |
+| [![Build Status](https://travis-ci.org/reTHINK-project/dev-service-framework.svg?branch=master)](https://travis-ci.org/reTHINK-project/dev-service-framework) | [![Build Status](https://travis-ci.org/reTHINK-project/dev-service-framework.svg?branch=develop)](https://travis-ci.org/reTHINK-project/dev-service-framework) |
 
 -------------------------
 
@@ -99,7 +99,7 @@ This section provides guidelines on how to contribute to reTHINK Service Framewo
 - [Vertx Message Node Development guidelines](https://github.com/reTHINK-project/dev-msg-node-vertx);
 - [Matrix Message Node Development guidelines](https://github.com/reTHINK-project/dev-msg-node-matrix);
 - [NodeJS Message Node Development guidelines](https://github.com/reTHINK-project/dev-msg-node-nodejs);
-- [Development guidelines for new Message Nodes](docs/manuals/development-of-protostubs-and-msg-nodes.md); 
+- [Development guidelines for new Message Nodes](docs/manuals/development-of-protostubs-and-msg-nodes.md);
 
 ### <a id="developers">Developers</a>
 
