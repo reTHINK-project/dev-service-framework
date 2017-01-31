@@ -1,11 +1,13 @@
 import chai from 'chai';
+import chaiAsPromised from 'chai-as-promised';
+import sinonChai from 'sinon-chai';
+
 import Dexie from 'dexie';
 
-import sinon from 'sinon';
-import chaiAsPromised from 'chai-as-promised';
 import StorageManager from '../src/storage-manager/StorageManager';
 import RuntimeCapabilities from '../src/runtime-capabilities/RuntimeCapabilities';
 
+chai.use(sinonChai);
 chai.use(chaiAsPromised);
 chai.config.truncateThreshold = 0;
 

@@ -86,7 +86,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onCreate
     let inviteMsg = {
       type: 'create', from: _this._syncher._owner, to: _this._syncher._subURL,
-      body: { resource: _this._url, schema: _this._schema, value: _this._syncObj.data, authorise: observers }
+      body: { resume: false, resource: _this._url, schema: _this._schema, value: _this._syncObj.data, authorise: observers }
     };
 
     _this._bus.postMessage(inviteMsg);
