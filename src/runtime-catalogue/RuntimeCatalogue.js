@@ -338,15 +338,20 @@ class RuntimeCatalogue {
 
         // create the descriptor
         let idpproxy = this._factory.createProtoStubDescriptorObject(
-            rawProxy["cguid"],
-            rawProxy["version"],
-            rawProxy["objectName"],
-            rawProxy["description"],
-            rawProxy["language"],
-            rawProxy["sourcePackageURL"],
-            rawProxy["messageSchemas"],
-            rawProxy["configuration"],
-            rawProxy["constraints"]
+          rawProxy["cguid"],
+          rawProxy["version"],
+          rawProxy["objectName"],
+          rawProxy["description"],
+          rawProxy["language"],
+          rawProxy["sourcePackageURL"],
+          rawProxy["messageSchemas"],
+          rawProxy["configuration"],
+          rawProxy["constraints"],
+          rawProxy["hypertyType"],
+          rawProxy["dataObjects"],
+          rawProxy["interworking"],
+          rawProxy["idpProxy"],
+          rawProxy["mutualAuthentication"]
         );
 
         // optional fields
@@ -368,6 +373,7 @@ class RuntimeCatalogue {
         // check encoding
         if (sp["encoding"] === "base64") {
             sp["sourceCode"] = this.atob(sp["sourceCode"]);
+            sp["encoding"] = 'utf-8';
         }
 
         let sourcePackage = this._factory.createSourcePackage(sp["sourceCodeClassname"], sp["sourceCode"]);
@@ -438,6 +444,25 @@ class RuntimeCatalogue {
                     }
                 })
             }
+        });
+    }
+
+    /**
+     * Returns the list of available catalogue objects for the given "type URL",
+     * i.e. a catalogue URL that specifies a type, but no catalogue object name.
+     * @param typeURL - URL pointing to the catalogue object type you want a list of available objects for,
+     * e.g. hyperty-catalogue://catalogue.fokus.fraunhofer.de/.well-known/idp-proxy
+     * @returns {Promise} typeListPromise - Promise that fulfills with the list of available catalogue object names for the requested type,
+     * rejects on HTTP error or if the HTTP response is not in JSON.
+     */
+    getTypeList(typeURL) {
+        return new Promise((resolve, reject) => {
+            this.httpRequest.get(typeURL).then((typeList) => {
+                typeList = JSON.parse(typeList);
+                resolve(typeList);
+            }).catch((reason) => {
+                reject(reason);
+            });
         });
     }
 

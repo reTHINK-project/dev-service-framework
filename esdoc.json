@@ -1,7 +1,10 @@
 {
+  "title": "Service Framework",
   "source": "./src",
   "destination": "./docs/api",
-  "plugins": [
-    {"name": "esdoc-es7-plugin"}
-  ]
+  "lint": true,
+  "test": {
+    "type": "mocha",
+    "source": "./test"
+  }
 }

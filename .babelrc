@@ -1,0 +1,4 @@
+{
+  "presets": ["env"],
+  "plugins": ["add-module-exports", "babel-polyfill", "transform-runtime", "transform-regenerator"]
+}
