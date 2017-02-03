@@ -413,7 +413,7 @@ class Discovery {
   * @param  {domain}            domain (Optional)
   * @return {Promise}          Promise
   */
-  discoverUserAtiveDomains(guid, domain) {
+  discoverUserActiveDomains(guid, domain) {
     let _this = this;
     let activeDomain;
 
@@ -427,7 +427,7 @@ class Discovery {
       type: 'READ', from: _this.discoveryURL, to: 'global://registry/', body: { guid: guid}
     };
 
-    console.log('Message discoverUserAtiveDomains: ', message, activeDomain, guid);
+    console.log('Message discoverUserActiveDomains: ', message, activeDomain, guid);
 
     return new Promise(function(resolve, reject) {
 
@@ -436,7 +436,7 @@ class Discovery {
         let value = reply.body.Value;
 
         if (!value) {
-          return reject('Unsuccessful discoverUserAtiveDomains in global registry');
+          return reject('Unsuccessful discoverUserActiveDomains in global registry');
         }
 
         resolve(value);
