@@ -41,7 +41,6 @@ class Discovery {
 
     _this.domain = divideURL(hypertyURL).domain;
     _this.discoveryURL = hypertyURL;
-
   }
 
   /**
@@ -61,7 +60,7 @@ class Discovery {
       type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: name}
     };
 
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
 
       _this.messageBus.postMessage(msg, (reply) => {
 
@@ -377,7 +376,7 @@ class Discovery {
   *  @param   {domain}           domain (Optional)
   *  @return  {Promise}          Promise          result
   */
-  deleteHyperty(user, hypertyInstance, domain) {
+  deleteHyperty(user, hypertyInstance, domain)  {
     let _this = this;
     let activeDomain;
 
@@ -404,6 +403,45 @@ class Discovery {
       });
     });
 
+  }
+
+
+
+  /**
+  * function to request global registry about the dataset (JSON Object) associated with the GUID
+  * @param  {guid}              guid
+  * @param  {domain}            domain (Optional)
+  * @return {Promise}          Promise
+  */
+  discoverUserAtiveDomains(guid, domain) {
+    let _this = this;
+    let activeDomain;
+
+    if (!domain) {
+      activeDomain = _this.domain;
+    } else {
+      activeDomain = domain;
+    }
+
+    let message = {
+      type: 'READ', from: _this.discoveryURL, to: 'global://registry/', body: { guid: guid}
+    };
+
+    console.log('Message discoverUserAtiveDomains: ', message, activeDomain, guid);
+
+    return new Promise(function(resolve, reject) {
+
+      _this.messageBus.postMessage(message, (reply) => {
+
+        let value = reply.body.Value;
+
+        if (!value) {
+          return reject('Unsuccessful discoverUserAtiveDomains in global registry');
+        }
+
+        resolve(value);
+      });
+    });
   }
 
 }
