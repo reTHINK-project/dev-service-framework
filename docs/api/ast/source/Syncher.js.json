@@ -1,7 +1,7 @@
 {
   "type": "File",
   "start": 0,
-  "end": 226,
+  "end": 231,
   "loc": {
     "start": {
       "line": 1,
@@ -15,7 +15,7 @@
   "program": {
     "type": "Program",
     "start": 0,
-    "end": 226,
+    "end": 231,
     "loc": {
       "start": {
         "line": 1,
@@ -99,8 +99,8 @@
       },
       {
         "type": "ImportDeclaration",
-        "start": 41,
-        "end": 103,
+        "start": 42,
+        "end": 104,
         "loc": {
           "start": {
             "line": 2,
@@ -114,8 +114,8 @@
         "specifiers": [
           {
             "type": "ImportDefaultSpecifier",
-            "start": 48,
-            "end": 66,
+            "start": 49,
+            "end": 67,
             "loc": {
               "start": {
                 "line": 2,
@@ -128,8 +128,8 @@
             },
             "local": {
               "type": "Identifier",
-              "start": 48,
-              "end": 66,
+              "start": 49,
+              "end": 67,
               "loc": {
                 "start": {
                   "line": 2,
@@ -147,8 +147,8 @@
         ],
         "source": {
           "type": "StringLiteral",
-          "start": 72,
-          "end": 102,
+          "start": 73,
+          "end": 103,
           "loc": {
             "start": {
               "line": 2,
@@ -168,8 +168,8 @@
       },
       {
         "type": "ImportDeclaration",
-        "start": 104,
-        "end": 166,
+        "start": 106,
+        "end": 168,
         "loc": {
           "start": {
             "line": 3,
@@ -183,8 +183,8 @@
         "specifiers": [
           {
             "type": "ImportDefaultSpecifier",
-            "start": 111,
-            "end": 129,
+            "start": 113,
+            "end": 131,
             "loc": {
               "start": {
                 "line": 3,
@@ -197,8 +197,8 @@
             },
             "local": {
               "type": "Identifier",
-              "start": 111,
-              "end": 129,
+              "start": 113,
+              "end": 131,
               "loc": {
                 "start": {
                   "line": 3,
@@ -216,8 +216,8 @@
         ],
         "source": {
           "type": "StringLiteral",
-          "start": 135,
-          "end": 165,
+          "start": 137,
+          "end": 167,
           "loc": {
             "start": {
               "line": 3,
@@ -237,8 +237,8 @@
       },
       {
         "type": "ExportNamedDeclaration",
-        "start": 168,
-        "end": 225,
+        "start": 172,
+        "end": 229,
         "loc": {
           "start": {
             "line": 5,
@@ -253,8 +253,8 @@
         "specifiers": [
           {
             "type": "ExportSpecifier",
-            "start": 176,
-            "end": 183,
+            "start": 180,
+            "end": 187,
             "loc": {
               "start": {
                 "line": 5,
@@ -267,8 +267,8 @@
             },
             "local": {
               "type": "Identifier",
-              "start": 176,
-              "end": 183,
+              "start": 180,
+              "end": 187,
               "loc": {
                 "start": {
                   "line": 5,
@@ -284,8 +284,8 @@
             },
             "exported": {
               "type": "Identifier",
-              "start": 176,
-              "end": 183,
+              "start": 180,
+              "end": 187,
               "loc": {
                 "start": {
                   "line": 5,
@@ -302,8 +302,8 @@
           },
           {
             "type": "ExportSpecifier",
-            "start": 185,
-            "end": 203,
+            "start": 189,
+            "end": 207,
             "loc": {
               "start": {
                 "line": 5,
@@ -316,8 +316,8 @@
             },
             "local": {
               "type": "Identifier",
-              "start": 185,
-              "end": 203,
+              "start": 189,
+              "end": 207,
               "loc": {
                 "start": {
                   "line": 5,
@@ -333,8 +333,8 @@
             },
             "exported": {
               "type": "Identifier",
-              "start": 185,
-              "end": 203,
+              "start": 189,
+              "end": 207,
               "loc": {
                 "start": {
                   "line": 5,
@@ -351,8 +351,8 @@
           },
           {
             "type": "ExportSpecifier",
-            "start": 205,
-            "end": 223,
+            "start": 209,
+            "end": 227,
             "loc": {
               "start": {
                 "line": 5,
@@ -365,8 +365,8 @@
             },
             "local": {
               "type": "Identifier",
-              "start": 205,
-              "end": 223,
+              "start": 209,
+              "end": 227,
               "loc": {
                 "start": {
                   "line": 5,
@@ -382,8 +382,8 @@
             },
             "exported": {
               "type": "Identifier",
-              "start": 205,
-              "end": 223,
+              "start": 209,
+              "end": 227,
               "loc": {
                 "start": {
                   "line": 5,
@@ -554,8 +554,8 @@
         "updateContext": null
       },
       "value": "import",
-      "start": 41,
-      "end": 47,
+      "start": 42,
+      "end": 48,
       "loc": {
         "start": {
           "line": 2,
@@ -580,8 +580,8 @@
         "binop": null
       },
       "value": "DataObjectReporter",
-      "start": 48,
-      "end": 66,
+      "start": 49,
+      "end": 67,
       "loc": {
         "start": {
           "line": 2,
@@ -606,8 +606,8 @@
         "binop": null
       },
       "value": "from",
-      "start": 67,
-      "end": 71,
+      "start": 68,
+      "end": 72,
       "loc": {
         "start": {
           "line": 2,
@@ -633,8 +633,8 @@
         "updateContext": null
       },
       "value": "./syncher/DataObjectReporter",
-      "start": 72,
-      "end": 102,
+      "start": 73,
+      "end": 103,
       "loc": {
         "start": {
           "line": 2,
@@ -659,8 +659,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 102,
-      "end": 103,
+      "start": 103,
+      "end": 104,
       "loc": {
         "start": {
           "line": 2,
@@ -687,8 +687,8 @@
         "updateContext": null
       },
       "value": "import",
-      "start": 104,
-      "end": 110,
+      "start": 106,
+      "end": 112,
       "loc": {
         "start": {
           "line": 3,
@@ -713,8 +713,8 @@
         "binop": null
       },
       "value": "DataObjectObserver",
-      "start": 111,
-      "end": 129,
+      "start": 113,
+      "end": 131,
       "loc": {
         "start": {
           "line": 3,
@@ -739,8 +739,8 @@
         "binop": null
       },
       "value": "from",
-      "start": 130,
-      "end": 134,
+      "start": 132,
+      "end": 136,
       "loc": {
         "start": {
           "line": 3,
@@ -766,8 +766,8 @@
         "updateContext": null
       },
       "value": "./syncher/DataObjectObserver",
-      "start": 135,
-      "end": 165,
+      "start": 137,
+      "end": 167,
       "loc": {
         "start": {
           "line": 3,
@@ -792,8 +792,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 165,
-      "end": 166,
+      "start": 167,
+      "end": 168,
       "loc": {
         "start": {
           "line": 3,
@@ -820,8 +820,8 @@
         "updateContext": null
       },
       "value": "export",
-      "start": 168,
-      "end": 174,
+      "start": 172,
+      "end": 178,
       "loc": {
         "start": {
           "line": 5,
@@ -845,8 +845,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 175,
-      "end": 176,
+      "start": 179,
+      "end": 180,
       "loc": {
         "start": {
           "line": 5,
@@ -871,8 +871,8 @@
         "binop": null
       },
       "value": "Syncher",
-      "start": 176,
-      "end": 183,
+      "start": 180,
+      "end": 187,
       "loc": {
         "start": {
           "line": 5,
@@ -897,8 +897,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 183,
-      "end": 184,
+      "start": 187,
+      "end": 188,
       "loc": {
         "start": {
           "line": 5,
@@ -923,8 +923,8 @@
         "binop": null
       },
       "value": "DataObjectReporter",
-      "start": 185,
-      "end": 203,
+      "start": 189,
+      "end": 207,
       "loc": {
         "start": {
           "line": 5,
@@ -949,8 +949,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 203,
-      "end": 204,
+      "start": 207,
+      "end": 208,
       "loc": {
         "start": {
           "line": 5,
@@ -975,8 +975,8 @@
         "binop": null
       },
       "value": "DataObjectObserver",
-      "start": 205,
-      "end": 223,
+      "start": 209,
+      "end": 227,
       "loc": {
         "start": {
           "line": 5,
@@ -1000,8 +1000,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 223,
-      "end": 224,
+      "start": 227,
+      "end": 228,
       "loc": {
         "start": {
           "line": 5,
@@ -1026,8 +1026,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 224,
-      "end": 225,
+      "start": 228,
+      "end": 229,
       "loc": {
         "start": {
           "line": 5,
@@ -1052,8 +1052,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 226,
-      "end": 226,
+      "start": 231,
+      "end": 231,
       "loc": {
         "start": {
           "line": 6,

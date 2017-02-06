@@ -1,7 +1,7 @@
 {
   "type": "File",
   "start": 0,
-  "end": 682,
+  "end": 715,
   "loc": {
     "start": {
       "line": 1,
@@ -15,7 +15,7 @@
   "program": {
     "type": "Program",
     "start": 0,
-    "end": 682,
+    "end": 715,
     "loc": {
       "start": {
         "line": 1,
@@ -31,7 +31,7 @@
       {
         "type": "Identifier",
         "start": 0,
-        "end": 644,
+        "end": 674,
         "loc": {
           "start": {
             "line": 1,
@@ -63,7 +63,7 @@
         "body": {
           "type": "ClassBody",
           "start": 26,
-          "end": 644,
+          "end": 674,
           "loc": {
             "start": {
               "line": 1,
@@ -77,8 +77,8 @@
           "body": [
             {
               "type": "ClassMethod",
-              "start": 31,
-              "end": 51,
+              "start": 33,
+              "end": 55,
               "loc": {
                 "start": {
                   "line": 3,
@@ -92,8 +92,8 @@
               "computed": false,
               "key": {
                 "type": "Identifier",
-                "start": 31,
-                "end": 42,
+                "start": 33,
+                "end": 44,
                 "loc": {
                   "start": {
                     "line": 3,
@@ -116,8 +116,8 @@
               "params": [],
               "body": {
                 "type": "BlockStatement",
-                "start": 45,
-                "end": 51,
+                "start": 47,
+                "end": 55,
                 "loc": {
                   "start": {
                     "line": 3,
@@ -136,9 +136,9 @@
               "trailingComments": [
                 {
                   "type": "CommentBlock",
-                  "value": "*\n   * Returns as a promise RuntimeCapabilities json object with all available capabilities of the runtime.\n   * If it was not yet persisted in the Storage Manager it collects all required info from the platform and saves in the storage manager.\n   * @returns {Promise<object>}\n   ",
-                  "start": 55,
-                  "end": 340,
+                  "value": "*\r\n   * Returns as a promise RuntimeCapabilities json object with all available capabilities of the runtime.\r\n   * If it was not yet persisted in the Storage Manager it collects all required info from the platform and saves in the storage manager.\r\n   * @returns {Promise<object>}\r\n   ",
+                  "start": 61,
+                  "end": 350,
                   "loc": {
                     "start": {
                       "line": 7,
@@ -154,8 +154,8 @@
             },
             {
               "type": "ClassMethod",
-              "start": 343,
-              "end": 374,
+              "start": 354,
+              "end": 387,
               "loc": {
                 "start": {
                   "line": 12,
@@ -169,8 +169,8 @@
               "computed": false,
               "key": {
                 "type": "Identifier",
-                "start": 343,
-                "end": 365,
+                "start": 354,
+                "end": 376,
                 "loc": {
                   "start": {
                     "line": 12,
@@ -194,8 +194,8 @@
               "params": [],
               "body": {
                 "type": "BlockStatement",
-                "start": 368,
-                "end": 374,
+                "start": 379,
+                "end": 387,
                 "loc": {
                   "start": {
                     "line": 12,
@@ -214,9 +214,9 @@
               "leadingComments": [
                 {
                   "type": "CommentBlock",
-                  "value": "*\n   * Returns as a promise RuntimeCapabilities json object with all available capabilities of the runtime.\n   * If it was not yet persisted in the Storage Manager it collects all required info from the platform and saves in the storage manager.\n   * @returns {Promise<object>}\n   ",
-                  "start": 55,
-                  "end": 340,
+                  "value": "*\r\n   * Returns as a promise RuntimeCapabilities json object with all available capabilities of the runtime.\r\n   * If it was not yet persisted in the Storage Manager it collects all required info from the platform and saves in the storage manager.\r\n   * @returns {Promise<object>}\r\n   ",
+                  "start": 61,
+                  "end": 350,
                   "loc": {
                     "start": {
                       "line": 7,
@@ -232,9 +232,9 @@
               "trailingComments": [
                 {
                   "type": "CommentBlock",
-                  "value": "*\n   * returns as a promise a boolean according to available capabilities.\n   * @returns {Promise<boolean>}\n   ",
-                  "start": 378,
-                  "end": 493,
+                  "value": "*\r\n   * returns as a promise a boolean according to available capabilities.\r\n   * @returns {Promise<boolean>}\r\n   ",
+                  "start": 393,
+                  "end": 511,
                   "loc": {
                     "start": {
                       "line": 16,
@@ -250,8 +250,8 @@
             },
             {
               "type": "ClassMethod",
-              "start": 496,
-              "end": 526,
+              "start": 515,
+              "end": 547,
               "loc": {
                 "start": {
                   "line": 20,
@@ -265,8 +265,8 @@
               "computed": false,
               "key": {
                 "type": "Identifier",
-                "start": 496,
-                "end": 507,
+                "start": 515,
+                "end": 526,
                 "loc": {
                   "start": {
                     "line": 20,
@@ -290,8 +290,8 @@
               "params": [
                 {
                   "type": "Identifier",
-                  "start": 508,
-                  "end": 518,
+                  "start": 527,
+                  "end": 537,
                   "loc": {
                     "start": {
                       "line": 20,
@@ -308,8 +308,8 @@
               ],
               "body": {
                 "type": "BlockStatement",
-                "start": 520,
-                "end": 526,
+                "start": 539,
+                "end": 547,
                 "loc": {
                   "start": {
                     "line": 20,
@@ -328,9 +328,9 @@
               "leadingComments": [
                 {
                   "type": "CommentBlock",
-                  "value": "*\n   * returns as a promise a boolean according to available capabilities.\n   * @returns {Promise<boolean>}\n   ",
-                  "start": 378,
-                  "end": 493,
+                  "value": "*\r\n   * returns as a promise a boolean according to available capabilities.\r\n   * @returns {Promise<boolean>}\r\n   ",
+                  "start": 393,
+                  "end": 511,
                   "loc": {
                     "start": {
                       "line": 16,
@@ -346,9 +346,9 @@
               "trailingComments": [
                 {
                   "type": "CommentBlock",
-                  "value": "*\n   * it refreshes previously collected capabilities and updates the storage manager\n   ",
-                  "start": 530,
-                  "end": 623,
+                  "value": "*\r\n   * it refreshes previously collected capabilities and updates the storage manager\r\n   ",
+                  "start": 553,
+                  "end": 648,
                   "loc": {
                     "start": {
                       "line": 24,
@@ -364,8 +364,8 @@
             },
             {
               "type": "ClassMethod",
-              "start": 626,
-              "end": 641,
+              "start": 652,
+              "end": 669,
               "loc": {
                 "start": {
                   "line": 27,
@@ -379,8 +379,8 @@
               "computed": false,
               "key": {
                 "type": "Identifier",
-                "start": 626,
-                "end": 632,
+                "start": 652,
+                "end": 658,
                 "loc": {
                   "start": {
                     "line": 27,
@@ -404,8 +404,8 @@
               "params": [],
               "body": {
                 "type": "BlockStatement",
-                "start": 635,
-                "end": 641,
+                "start": 661,
+                "end": 669,
                 "loc": {
                   "start": {
                     "line": 27,
@@ -422,9 +422,9 @@
               "leadingComments": [
                 {
                   "type": "CommentBlock",
-                  "value": "*\n   * it refreshes previously collected capabilities and updates the storage manager\n   ",
-                  "start": 530,
-                  "end": 623,
+                  "value": "*\r\n   * it refreshes previously collected capabilities and updates the storage manager\r\n   ",
+                  "start": 553,
+                  "end": 648,
                   "loc": {
                     "start": {
                       "line": 24,
@@ -446,8 +446,8 @@
       },
       {
         "type": "Identifier",
-        "start": 646,
-        "end": 681,
+        "start": 678,
+        "end": 713,
         "loc": {
           "start": {
             "line": 33,
@@ -460,8 +460,8 @@
         },
         "declaration": {
           "type": "Identifier",
-          "start": 661,
-          "end": 680,
+          "start": 693,
+          "end": 712,
           "loc": {
             "start": {
               "line": 33,
@@ -481,8 +481,8 @@
       },
       {
         "type": "ExportDefaultDeclaration",
-        "start": 646,
-        "end": 681,
+        "start": 678,
+        "end": 713,
         "loc": {
           "start": {
             "line": 33,
@@ -496,7 +496,7 @@
         "declaration": {
           "type": "ClassDeclaration",
           "start": 0,
-          "end": 644,
+          "end": 674,
           "loc": {
             "start": {
               "line": 1,
@@ -528,7 +528,7 @@
           "body": {
             "type": "ClassBody",
             "start": 26,
-            "end": 644,
+            "end": 674,
             "loc": {
               "start": {
                 "line": 1,
@@ -542,8 +542,8 @@
             "body": [
               {
                 "type": "ClassMethod",
-                "start": 31,
-                "end": 51,
+                "start": 33,
+                "end": 55,
                 "loc": {
                   "start": {
                     "line": 3,
@@ -557,8 +557,8 @@
                 "computed": false,
                 "key": {
                   "type": "Identifier",
-                  "start": 31,
-                  "end": 42,
+                  "start": 33,
+                  "end": 44,
                   "loc": {
                     "start": {
                       "line": 3,
@@ -581,8 +581,8 @@
                 "params": [],
                 "body": {
                   "type": "BlockStatement",
-                  "start": 45,
-                  "end": 51,
+                  "start": 47,
+                  "end": 55,
                   "loc": {
                     "start": {
                       "line": 3,
@@ -601,9 +601,9 @@
                 "trailingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * Returns as a promise RuntimeCapabilities json object with all available capabilities of the runtime.\n   * If it was not yet persisted in the Storage Manager it collects all required info from the platform and saves in the storage manager.\n   * @returns {Promise<object>}\n   ",
-                    "start": 55,
-                    "end": 340,
+                    "value": "*\r\n   * Returns as a promise RuntimeCapabilities json object with all available capabilities of the runtime.\r\n   * If it was not yet persisted in the Storage Manager it collects all required info from the platform and saves in the storage manager.\r\n   * @returns {Promise<object>}\r\n   ",
+                    "start": 61,
+                    "end": 350,
                     "loc": {
                       "start": {
                         "line": 7,
@@ -619,8 +619,8 @@
               },
               {
                 "type": "ClassMethod",
-                "start": 343,
-                "end": 374,
+                "start": 354,
+                "end": 387,
                 "loc": {
                   "start": {
                     "line": 12,
@@ -634,8 +634,8 @@
                 "computed": false,
                 "key": {
                   "type": "Identifier",
-                  "start": 343,
-                  "end": 365,
+                  "start": 354,
+                  "end": 376,
                   "loc": {
                     "start": {
                       "line": 12,
@@ -659,8 +659,8 @@
                 "params": [],
                 "body": {
                   "type": "BlockStatement",
-                  "start": 368,
-                  "end": 374,
+                  "start": 379,
+                  "end": 387,
                   "loc": {
                     "start": {
                       "line": 12,
@@ -679,9 +679,9 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * Returns as a promise RuntimeCapabilities json object with all available capabilities of the runtime.\n   * If it was not yet persisted in the Storage Manager it collects all required info from the platform and saves in the storage manager.\n   * @returns {Promise<object>}\n   ",
-                    "start": 55,
-                    "end": 340,
+                    "value": "*\r\n   * Returns as a promise RuntimeCapabilities json object with all available capabilities of the runtime.\r\n   * If it was not yet persisted in the Storage Manager it collects all required info from the platform and saves in the storage manager.\r\n   * @returns {Promise<object>}\r\n   ",
+                    "start": 61,
+                    "end": 350,
                     "loc": {
                       "start": {
                         "line": 7,
@@ -697,9 +697,9 @@
                 "trailingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * returns as a promise a boolean according to available capabilities.\n   * @returns {Promise<boolean>}\n   ",
-                    "start": 378,
-                    "end": 493,
+                    "value": "*\r\n   * returns as a promise a boolean according to available capabilities.\r\n   * @returns {Promise<boolean>}\r\n   ",
+                    "start": 393,
+                    "end": 511,
                     "loc": {
                       "start": {
                         "line": 16,
@@ -715,8 +715,8 @@
               },
               {
                 "type": "ClassMethod",
-                "start": 496,
-                "end": 526,
+                "start": 515,
+                "end": 547,
                 "loc": {
                   "start": {
                     "line": 20,
@@ -730,8 +730,8 @@
                 "computed": false,
                 "key": {
                   "type": "Identifier",
-                  "start": 496,
-                  "end": 507,
+                  "start": 515,
+                  "end": 526,
                   "loc": {
                     "start": {
                       "line": 20,
@@ -755,8 +755,8 @@
                 "params": [
                   {
                     "type": "Identifier",
-                    "start": 508,
-                    "end": 518,
+                    "start": 527,
+                    "end": 537,
                     "loc": {
                       "start": {
                         "line": 20,
@@ -773,8 +773,8 @@
                 ],
                 "body": {
                   "type": "BlockStatement",
-                  "start": 520,
-                  "end": 526,
+                  "start": 539,
+                  "end": 547,
                   "loc": {
                     "start": {
                       "line": 20,
@@ -793,9 +793,9 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * returns as a promise a boolean according to available capabilities.\n   * @returns {Promise<boolean>}\n   ",
-                    "start": 378,
-                    "end": 493,
+                    "value": "*\r\n   * returns as a promise a boolean according to available capabilities.\r\n   * @returns {Promise<boolean>}\r\n   ",
+                    "start": 393,
+                    "end": 511,
                     "loc": {
                       "start": {
                         "line": 16,
@@ -811,9 +811,9 @@
                 "trailingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * it refreshes previously collected capabilities and updates the storage manager\n   ",
-                    "start": 530,
-                    "end": 623,
+                    "value": "*\r\n   * it refreshes previously collected capabilities and updates the storage manager\r\n   ",
+                    "start": 553,
+                    "end": 648,
                     "loc": {
                       "start": {
                         "line": 24,
@@ -829,8 +829,8 @@
               },
               {
                 "type": "ClassMethod",
-                "start": 626,
-                "end": 641,
+                "start": 652,
+                "end": 669,
                 "loc": {
                   "start": {
                     "line": 27,
@@ -844,8 +844,8 @@
                 "computed": false,
                 "key": {
                   "type": "Identifier",
-                  "start": 626,
-                  "end": 632,
+                  "start": 652,
+                  "end": 658,
                   "loc": {
                     "start": {
                       "line": 27,
@@ -869,8 +869,8 @@
                 "params": [],
                 "body": {
                   "type": "BlockStatement",
-                  "start": 635,
-                  "end": 641,
+                  "start": 661,
+                  "end": 669,
                   "loc": {
                     "start": {
                       "line": 27,
@@ -887,9 +887,9 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * it refreshes previously collected capabilities and updates the storage manager\n   ",
-                    "start": 530,
-                    "end": 623,
+                    "value": "*\r\n   * it refreshes previously collected capabilities and updates the storage manager\r\n   ",
+                    "start": 553,
+                    "end": 648,
                     "loc": {
                       "start": {
                         "line": 24,
@@ -917,9 +917,9 @@
   "comments": [
     {
       "type": "CommentBlock",
-      "value": "*\n   * Returns as a promise RuntimeCapabilities json object with all available capabilities of the runtime.\n   * If it was not yet persisted in the Storage Manager it collects all required info from the platform and saves in the storage manager.\n   * @returns {Promise<object>}\n   ",
-      "start": 55,
-      "end": 340,
+      "value": "*\r\n   * Returns as a promise RuntimeCapabilities json object with all available capabilities of the runtime.\r\n   * If it was not yet persisted in the Storage Manager it collects all required info from the platform and saves in the storage manager.\r\n   * @returns {Promise<object>}\r\n   ",
+      "start": 61,
+      "end": 350,
       "loc": {
         "start": {
           "line": 7,
@@ -933,9 +933,9 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n   * returns as a promise a boolean according to available capabilities.\n   * @returns {Promise<boolean>}\n   ",
-      "start": 378,
-      "end": 493,
+      "value": "*\r\n   * returns as a promise a boolean according to available capabilities.\r\n   * @returns {Promise<boolean>}\r\n   ",
+      "start": 393,
+      "end": 511,
       "loc": {
         "start": {
           "line": 16,
@@ -949,9 +949,9 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n   * it refreshes previously collected capabilities and updates the storage manager\n   ",
-      "start": 530,
-      "end": 623,
+      "value": "*\r\n   * it refreshes previously collected capabilities and updates the storage manager\r\n   ",
+      "start": 553,
+      "end": 648,
       "loc": {
         "start": {
           "line": 24,
@@ -1057,8 +1057,8 @@
         "binop": null
       },
       "value": "constructor",
-      "start": 31,
-      "end": 42,
+      "start": 33,
+      "end": 44,
       "loc": {
         "start": {
           "line": 3,
@@ -1082,8 +1082,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 42,
-      "end": 43,
+      "start": 44,
+      "end": 45,
       "loc": {
         "start": {
           "line": 3,
@@ -1107,8 +1107,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 43,
-      "end": 44,
+      "start": 45,
+      "end": 46,
       "loc": {
         "start": {
           "line": 3,
@@ -1132,8 +1132,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 45,
-      "end": 46,
+      "start": 47,
+      "end": 48,
       "loc": {
         "start": {
           "line": 3,
@@ -1157,8 +1157,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 50,
-      "end": 51,
+      "start": 54,
+      "end": 55,
       "loc": {
         "start": {
           "line": 5,
@@ -1172,9 +1172,9 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n   * Returns as a promise RuntimeCapabilities json object with all available capabilities of the runtime.\n   * If it was not yet persisted in the Storage Manager it collects all required info from the platform and saves in the storage manager.\n   * @returns {Promise<object>}\n   ",
-      "start": 55,
-      "end": 340,
+      "value": "*\r\n   * Returns as a promise RuntimeCapabilities json object with all available capabilities of the runtime.\r\n   * If it was not yet persisted in the Storage Manager it collects all required info from the platform and saves in the storage manager.\r\n   * @returns {Promise<object>}\r\n   ",
+      "start": 61,
+      "end": 350,
       "loc": {
         "start": {
           "line": 7,
@@ -1199,8 +1199,8 @@
         "binop": null
       },
       "value": "getRuntimeCapabilities",
-      "start": 343,
-      "end": 365,
+      "start": 354,
+      "end": 376,
       "loc": {
         "start": {
           "line": 12,
@@ -1224,8 +1224,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 365,
-      "end": 366,
+      "start": 376,
+      "end": 377,
       "loc": {
         "start": {
           "line": 12,
@@ -1249,8 +1249,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 366,
-      "end": 367,
+      "start": 377,
+      "end": 378,
       "loc": {
         "start": {
           "line": 12,
@@ -1274,8 +1274,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 368,
-      "end": 369,
+      "start": 379,
+      "end": 380,
       "loc": {
         "start": {
           "line": 12,
@@ -1299,8 +1299,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 373,
-      "end": 374,
+      "start": 386,
+      "end": 387,
       "loc": {
         "start": {
           "line": 14,
@@ -1314,9 +1314,9 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n   * returns as a promise a boolean according to available capabilities.\n   * @returns {Promise<boolean>}\n   ",
-      "start": 378,
-      "end": 493,
+      "value": "*\r\n   * returns as a promise a boolean according to available capabilities.\r\n   * @returns {Promise<boolean>}\r\n   ",
+      "start": 393,
+      "end": 511,
       "loc": {
         "start": {
           "line": 16,
@@ -1341,8 +1341,8 @@
         "binop": null
       },
       "value": "isAvailable",
-      "start": 496,
-      "end": 507,
+      "start": 515,
+      "end": 526,
       "loc": {
         "start": {
           "line": 20,
@@ -1366,8 +1366,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 507,
-      "end": 508,
+      "start": 526,
+      "end": 527,
       "loc": {
         "start": {
           "line": 20,
@@ -1392,8 +1392,8 @@
         "binop": null
       },
       "value": "capability",
-      "start": 508,
-      "end": 518,
+      "start": 527,
+      "end": 537,
       "loc": {
         "start": {
           "line": 20,
@@ -1417,8 +1417,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 518,
-      "end": 519,
+      "start": 537,
+      "end": 538,
       "loc": {
         "start": {
           "line": 20,
@@ -1442,8 +1442,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 520,
-      "end": 521,
+      "start": 539,
+      "end": 540,
       "loc": {
         "start": {
           "line": 20,
@@ -1467,8 +1467,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 525,
-      "end": 526,
+      "start": 546,
+      "end": 547,
       "loc": {
         "start": {
           "line": 22,
@@ -1482,9 +1482,9 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n   * it refreshes previously collected capabilities and updates the storage manager\n   ",
-      "start": 530,
-      "end": 623,
+      "value": "*\r\n   * it refreshes previously collected capabilities and updates the storage manager\r\n   ",
+      "start": 553,
+      "end": 648,
       "loc": {
         "start": {
           "line": 24,
@@ -1509,8 +1509,8 @@
         "binop": null
       },
       "value": "update",
-      "start": 626,
-      "end": 632,
+      "start": 652,
+      "end": 658,
       "loc": {
         "start": {
           "line": 27,
@@ -1534,8 +1534,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 632,
-      "end": 633,
+      "start": 658,
+      "end": 659,
       "loc": {
         "start": {
           "line": 27,
@@ -1559,8 +1559,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 633,
-      "end": 634,
+      "start": 659,
+      "end": 660,
       "loc": {
         "start": {
           "line": 27,
@@ -1584,8 +1584,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 635,
-      "end": 636,
+      "start": 661,
+      "end": 662,
       "loc": {
         "start": {
           "line": 27,
@@ -1609,8 +1609,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 640,
-      "end": 641,
+      "start": 668,
+      "end": 669,
       "loc": {
         "start": {
           "line": 29,
@@ -1634,8 +1634,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 643,
-      "end": 644,
+      "start": 673,
+      "end": 674,
       "loc": {
         "start": {
           "line": 31,
@@ -1662,8 +1662,8 @@
         "updateContext": null
       },
       "value": "export",
-      "start": 646,
-      "end": 652,
+      "start": 678,
+      "end": 684,
       "loc": {
         "start": {
           "line": 33,
@@ -1690,8 +1690,8 @@
         "updateContext": null
       },
       "value": "default",
-      "start": 653,
-      "end": 660,
+      "start": 685,
+      "end": 692,
       "loc": {
         "start": {
           "line": 33,
@@ -1716,8 +1716,8 @@
         "binop": null
       },
       "value": "RuntimeCapabilities",
-      "start": 661,
-      "end": 680,
+      "start": 693,
+      "end": 712,
       "loc": {
         "start": {
           "line": 33,
@@ -1742,8 +1742,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 680,
-      "end": 681,
+      "start": 712,
+      "end": 713,
       "loc": {
         "start": {
           "line": 33,
@@ -1768,8 +1768,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 682,
-      "end": 682,
+      "start": 715,
+      "end": 715,
       "loc": {
         "start": {
           "line": 34,
