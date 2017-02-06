@@ -67,17 +67,16 @@ describe('The Object.Observer and Array.Observer', () => {
       }
 
       if (seq === 3) {
-        expect(event).to.deep.equal({cType: 'update', oType: 'object', field: 'name', data: 'Vitor Silva'});
+        expect(event).to.deep.equal({cType: 'update', oType: 'object', field: '1.name', data: 'Vitor Silva'});
       }
 
       if (seq === 4) {
-        expect(event).to.deep.equal({cType: 'update', oType: 'object', field: 'arr', data: [1, 0, { x: 10, y: 20 }]});
-        done();
+        expect(event).to.deep.equal({cType: 'update', oType: 'object', field: '1.arr', data: [1, 0, { x: 10, y: 20 }]});
       }
 
       if (seq === 5) {
-        expect(event).to.deep.equal({cType: 'update', oType: 'object', field: 'arr', data: [1, 0, { x: 10, y: 20 }]});
-        // done();
+        expect(event).to.deep.equal({cType: 'update', oType: 'array', field: '1.arr.1', data: 2});
+        done();
       }
 
     });
@@ -89,10 +88,7 @@ describe('The Object.Observer and Array.Observer', () => {
     data['2'] = {name: 'Luis Duarte', birthdate: '02-12-1991', email: 'luis-xxx@gmail.com', phone: 910000000, obj1: { name: 'xpto' }};
     data['1'].name = 'Vitor Silva';
     data['1'].arr = [1, 0, { x: 10, y: 20 }];
-
-    // TODO wait for the ProxyObserve fix this issue; https://github.com/anywhichway/proxy-observe/issues/16
     data['1'].arr[1] = 2;
-
   });
 
 });

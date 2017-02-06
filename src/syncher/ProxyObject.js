@@ -1,5 +1,7 @@
 import 'proxy-observe';
 
+const objectType = {ARRAY: '[object Array]', OBJECT: '[object Object]' };
+
 /**
  * @access private
  * Main class that maintains a JSON object, and observes changes in this object, recursively.
@@ -60,20 +62,6 @@ class SyncObject {
   _internalObserve(object) {
 
     let handler = (changeset) => {
-
-      changeset.forEach((change) => {
-        if (change.newValue && change.newValue instanceof Object) {
-          if (change.newValue instanceof Object) {
-            let o = Object.deepObserve(change.newValue, handler);
-            object[change.keypath] = o;
-          }
-
-          if (change.newValue instanceof Array) {
-            let o = Array.observe(change.newValue, handler);
-            object[change.keypath] = o;
-          }
-        }
-      });
 
       changeset.every((change) => {
         this._onChanges(change);
