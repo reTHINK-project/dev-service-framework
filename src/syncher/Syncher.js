@@ -133,9 +133,12 @@ class Syncher {
   * Request a subscription to an existent reporter object.
   * @param {SchemaURL} schema - Hyperty Catalogue URL address that can be used to retrieve the JSON-Schema describing the Data Object schema
   * @param {ObjectURL} objURL - Address of the existent reporter object to be observed
+  * @param {Boolean} [store=false] - Save the subscription on the Syncher Manager for further resume (Default is false)
+  * @param {Boolean} [p2p=false] - Info about if should use p2p connection (Default is false)
+  * @param {Boolean} [mutual=true] - Info about if messages of this object should be encrypted (Default is true)
   * @return {Promise<DataObjectObserver>} Return Promise to a new observer. It's associated with the reporter.
   */
-  subscribe(schema, objURL, store = false, p2p = false) {
+  subscribe(schema, objURL, store = false, p2p = false, mutual = true) {
     let _this = this;
     let criteria = {};
 
@@ -143,6 +146,10 @@ class Syncher {
     criteria.store = store;
     criteria.schema = schema;
     criteria.resource = objURL;
+
+    //TODO: For Further Study
+    criteria.mutual = mutual;
+
 
     console.log('[syncher - subscribe] - subscribe criteria: ', criteria);
 
@@ -279,14 +286,18 @@ class Syncher {
       // Resume Subscriptions for a certain user and data schema independently of the Hyperty URL.
       // https://github.com/reTHINK-project/specs/blob/master/messages/data-sync-messages.md#resume-subscriptions-for-a-certain-user-and-data-schema-independently-of-the-hyperty-url
       if (criteria) {
-        if (criteria.p2p) subscribeMsg.body.p2p = criteria.p2p;
-        if (criteria.store) subscribeMsg.body.store = criteria.store;
-        if (criteria.schema) subscribeMsg.body.schema = criteria.schema;
-        if (criteria.identity) subscribeMsg.body.identity = criteria.identity;
-        if (criteria.resource) subscribeMsg.body.resource = criteria.resource;
+        if (criteria.hasOwnProperty('p2p')) subscribeMsg.body.p2p = criteria.p2p;
+        if (criteria.hasOwnProperty('store')) subscribeMsg.body.store = criteria.store;
+        if (criteria.hasOwnProperty('schema')) subscribeMsg.body.schema = criteria.schema;
+        if (criteria.hasOwnProperty('identity')) subscribeMsg.body.identity = criteria.identity;
+        if (criteria.hasOwnProperty('resource')) subscribeMsg.body.resource = criteria.resource;
       }
 
       subscribeMsg.body.resume = criteria.resume;
+
+      //TODO: For Further Study
+      let mutualAuthentication = criteria.mutual;
+      if (!mutualAuthentication) subscribeMsg.body.mutualAuthentication = mutualAuthentication;
 
       console.log('[syncher] - subscribe message: ', criteria, subscribeMsg);
 
@@ -310,7 +321,8 @@ class Syncher {
         } else if (reply.body.code === 200) {
           console.log('[syncher] - new Data Object Observer: ', reply, _this._provisionals);
 
-          let newObj = new DataObjectObserver(_this, objURL, schema, 'on', reply.body.value, newProvisional.children, reply.body.version);
+          //TODO: For Further Study
+          let newObj = new DataObjectObserver(_this, objURL, schema, 'on', reply.body.value, newProvisional.children, reply.body.version, mutualAuthentication);
           _this._observers[objURL] = newObj;
 
           resolve(newObj);
