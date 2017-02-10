@@ -1,3 +1,3 @@
-import watchingYou from './utils/WatchingYou';
+import WatchingYou from './utils/WatchingYou';
 
-export { watchingYou };
+export { WatchingYou };

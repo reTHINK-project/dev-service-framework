@@ -40,7 +40,7 @@ class WatchingYou {
 
 }
 
-export default new WatchingYou();
+export default WatchingYou;
 
 /*let watchChanges = new WatchChanges();
 let p2pRequesterStub = watchChanges.watch('p2p', {}, true);
