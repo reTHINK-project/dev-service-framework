@@ -405,8 +405,6 @@ class Discovery {
 
   }
 
-
-
   /**
   * function to request global registry about the dataset (JSON Object) associated with the GUID
   * @param  {guid}              guid
@@ -440,6 +438,45 @@ class Discovery {
         }
 
         resolve(value);
+      });
+    });
+  }
+
+  /**
+  * function to request discovery service about the GUID associated with some user identifier (eg email, name ...)
+  * @param  {String}            userIdentifier
+  * @param  {domain}            domain (Optional)
+  * @return {Promise}           Promise
+  */
+  discoverGUIDPerUserIdentifier(userIdentifier, domain) {
+    let _this = this;
+    let activeDomain;
+
+    if (!domain) {
+      activeDomain = _this.domain;
+    } else {
+      activeDomain = domain;
+    }
+
+    return new Promise(function(resolve, reject) {
+
+      $.ajax({
+        dataType: 'text',
+        url: "https://rethink.tlabscloud.com/discovery/rest/discover/lookup?searchquery=" + userIdentifier,
+        type: 'GET',
+        success: function(json) {
+          console.log('Response', json);
+          let response = $.parseJSON(json);
+          let guid = response.results.filter(function(x) {
+            return x["rethinkID"] != undefined
+          }) [0]["rethinkID"];
+
+          if (!guid) {
+            return reject('Unsuccessful discoverGUIDPerUserIdentifier in Discovery Service');
+          }
+
+          resolve(guid)
+        }
       });
     });
   }
