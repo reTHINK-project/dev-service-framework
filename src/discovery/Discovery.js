@@ -467,13 +467,15 @@ class Discovery {
         success: function(json) {
           console.log('Response', json);
           let response = $.parseJSON(json);
-          let guid = response.results.filter(function(x) {
+          let filteredGuid = response.results.filter(function(x) {
             return x["rethinkID"] != undefined
-          }) [0]["rethinkID"];
+          });
 
-          if (!guid) {
+          if (filteredGuid.length === 0) {
             return reject('Unsuccessful discoverGUIDPerUserIdentifier in Discovery Service');
           }
+
+          let guid = filteredGuid[0]["rethinkID"];
 
           resolve(guid)
         }
