@@ -35,12 +35,12 @@ class Discovery {
   * @param  {MessageBus}          msgbus                msgbus
   * @param  {RuntimeURL}          runtimeURL            runtimeURL
   */
-  constructor(hypertyURL, msgBus) {
+  constructor(runtimeURL, msgBus) {
     let _this = this;
     _this.messageBus = msgBus;
 
-    _this.domain = divideURL(hypertyURL).domain;
-    _this.discoveryURL = hypertyURL;
+    _this.domain = divideURL(runtimeURL).domain;
+    _this.discoveryURL = runtimeURL + '/discovery/';;
   }
 
   /**
@@ -109,41 +109,6 @@ class Discovery {
         }
       });
     });
-  }
-
-  /**
-  *  function to delete an Data Object registered in the Domain Registry
-  *  @param   {String}           url              dataObject url
-  *  @param   {domain}           domain         (Optional)
-  *  @return  {Promise}          Promise          result
-  */
-  deleteDataObject(url, domain) {
-    let _this = this;
-    let activeDomain;
-
-    if (!domain) {
-      activeDomain = _this.domain;
-    } else {
-      activeDomain = domain;
-    }
-
-    let msg = {
-      type: 'delete', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/',  body: { value: {name: url}}};
-
-    return new Promise(function(resolve, reject) {
-
-      _this.messageBus.postMessage(msg, (reply) => {
-
-        let response = reply.body.code;
-
-        if (response === 200) {
-          resolve(response);
-        } else {
-          reject('Error on deleting dataObject');
-        }
-      });
-    });
-
   }
 
   /**
@@ -367,42 +332,6 @@ class Discovery {
         resolve(value);
       });
     });
-  }
-
-  /**
-  *  function to delete an hypertyInstance in the Domain Registry
-  *  @param   {String}           user              user url
-  *  @param   {String}           hypertyInstance   HypertyInsntance url
-  *  @param   {domain}           domain (Optional)
-  *  @return  {Promise}          Promise          result
-  */
-  deleteHyperty(user, hypertyInstance, domain)  {
-    let _this = this;
-    let activeDomain;
-
-    if (!domain) {
-      activeDomain = _this.domain;
-    } else {
-      activeDomain = domain;
-    }
-
-    let msg = {
-      type: 'delete', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/',   body: { value: {user: user, url: hypertyInstance }}};
-
-    return new Promise(function(resolve, reject) {
-
-      _this.messageBus.postMessage(msg, (reply) => {
-
-        let response = reply.body.code;
-
-        if (response) {
-          resolve('Hyperty successfully deleted');
-        } else {
-          reject('Error on deleting hyperty');
-        }
-      });
-    });
-
   }
 
   /**
