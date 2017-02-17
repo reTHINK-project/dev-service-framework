@@ -69,7 +69,8 @@ module.exports = {
     MessageFactory: './src/MessageFactory.js',
     PersistenceManager: './src/PersistenceManager.js',
     RuntimeCatalogue: './src/RuntimeCatalogue.js',
-    Syncher: './src/Syncher.js'
+    Syncher: './src/Syncher.js',
+    Utils: './src/Utils.js'
   },
   output: {
     path: path.join(__dirname, 'dist'),

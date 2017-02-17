@@ -158,6 +158,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
   _onSubscribe(msg) {
     let _this = this;
     let hypertyUrl = msg.body.from;
+    console.log('[DataObjectReporter._onSubscribe]', msg);
 
     let event = {
       type: msg.body.type,
@@ -177,11 +178,19 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
           childrenValues[childId] = deepClone(childData);
         });
 
-        //send ok response message
-        _this._bus.postMessage({
+        let sendMsg = {
           id: msg.id, type: 'response', from: msg.to, to: msg.from,
           body: { code: 200, schema: _this._schema, version: _this._version, value: { data: deepClone(_this.data), childrens: childrenValues } }
-        });
+        };
+
+        //TODO: For Further Study
+        if (msg.body.hasOwnProperty('mutualAuthentication') && !msg.body.mutualAuthentication) {
+          sendMsg.body.mutualAuthentication = this._mutualAuthentication;
+          this._mutualAuthentication = msg.body.mutualAuthentication;
+        }
+
+        //send ok response message
+        _this._bus.postMessage(sendMsg);
 
         return sub;
       },

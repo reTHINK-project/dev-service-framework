@@ -62,7 +62,7 @@
     "merge-stream": "^1.0.1",
     "mocha": "^3.2.0",
     "mocha-loader": "^1.1.0",
-    "proxy-observe": "https://github.com/vitormsilva/proxy-observe.git#improve-deepObserve-reobserve",
+    "proxy-observe": "^0.0.21",
     "recast": "~0.10.29",
     "sinon": "^1.17.7",
     "sinon-chai": "^2.8.0",

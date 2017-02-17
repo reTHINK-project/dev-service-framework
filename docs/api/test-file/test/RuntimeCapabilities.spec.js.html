@@ -108,13 +108,15 @@
 
 <div class="content" data-ice="content"><h1 data-ice="title">test/RuntimeCapabilities.spec.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import chai from &apos;chai&apos;;
+import chaiAsPromised from &apos;chai-as-promised&apos;;
+import sinonChai from &apos;sinon-chai&apos;;
+
 import Dexie from &apos;dexie&apos;;
 
-import sinon from &apos;sinon&apos;;
-import chaiAsPromised from &apos;chai-as-promised&apos;;
 import StorageManager from &apos;../src/storage-manager/StorageManager&apos;;
 import RuntimeCapabilities from &apos;../src/runtime-capabilities/RuntimeCapabilities&apos;;
 
+chai.use(sinonChai);
 chai.use(chaiAsPromised);
 chai.config.truncateThreshold = 0;
 

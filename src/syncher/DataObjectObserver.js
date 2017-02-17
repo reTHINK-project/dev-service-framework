@@ -42,8 +42,10 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
    * @ignore
    * Should not be used directly by Hyperties. It's called by the Syncher.subscribe method
    */
-  constructor(syncher, url, schema, initialStatus, initialData, childrens, initialVersion) {
-    super(syncher, url, schema, initialStatus, initialData.data, childrens);
+
+  //TODO: For Further Study
+  constructor(syncher, url, schema, initialStatus, initialData, childrens, initialVersion, mutual) {
+    super(syncher, url, schema, initialStatus, initialData.data, childrens, mutual);
     let _this = this;
 
     _this._version = initialVersion;

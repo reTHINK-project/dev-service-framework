@@ -343,16 +343,27 @@ class Discovery {
       activeDomain = domain;
     }
 
-    let msg = {
-      type: &apos;read&apos;, from: _this.discoveryURL, to: &apos;domain://registry.&apos; + activeDomain + &apos;/&apos;, body: { resource: userIdentifier,
-      criteria: {resources: resources, dataSchemes: schema}
-      }
-    };
+
 
     return new Promise(function(resolve, reject) {
 
+      console.log(&apos;[Discovery.discoverHyperty] ACTIVE DOMAIN -&gt; &apos;, activeDomain, &apos;user-&gt;&apos;, user, &apos;schema-&gt;&apos;, schema, &apos;resources-&gt;&apos;, resources, &apos;domain-&gt;&apos;, domain);
+      if (user.includes(&apos;:&apos;) &amp;&amp; !user.includes(&apos;user://&apos;)) {
+        console.log(&apos;[Discovery.discoverHyperty] &apos; + user + &apos; is legacy domain&apos;);
+        let legacyUser = { userID: user, hypertyID: user, schema: schema, resources: resources };
+        return resolve(legacyUser);
+      }
+      let msg = {
+        type: &apos;read&apos;, from: _this.discoveryURL, to: &apos;domain://registry.&apos; + activeDomain + &apos;/&apos;, body: { resource: userIdentifier,
+        criteria: {resources: resources, dataSchemes: schema}
+        }
+      };
+
+      console.info(&apos;[Discovery] msg to send-&gt;&apos;, msg);
+
       _this.messageBus.postMessage(msg, (reply) =&gt; {
 
+        console.info(&apos;[Discovery] ON discoverHyperty-&gt;&apos;, reply);
         let hyperties = reply.body.value;
 
         if (hyperties) {
@@ -375,26 +386,34 @@ class Discovery {
     let _this = this;
     let activeDomain;
 
-    if (!domain) {
-      activeDomain = _this.domain;
-    } else {
-      activeDomain = domain;
-    }
-
-    let identityURL = &apos;user://&apos; + email.substring(email.indexOf(&apos;@&apos;) + 1, email.length) + &apos;/&apos; + email.substring(0, email.indexOf(&apos;@&apos;));
-
-    // message to query domain registry, asking for a user hyperty.
-    let message = {
-      type: &apos;read&apos;, from: _this.discoveryURL, to: &apos;domain://registry.&apos; + activeDomain + &apos;/&apos;, body: { resource: identityURL}
-    };
-
-    console.log(&apos;Message: &apos;, message, activeDomain, identityURL);
-
-    //console.log(&apos;message READ&apos;, message);
     return new Promise(function(resolve, reject) {
 
+      // Hack for legacy users
+      if (email.includes(&apos;:&apos;) &amp;&amp; !email.includes(&apos;user://&apos;)) {
+        console.log(&apos;[Discovery.discoverHyperty] &apos; + email +&apos;is legacy domain&apos;);
+        let legacyUser = { id: email, hypertyURL: email, descriptor: &apos;unknown&apos; };
+        return resolve(legacyUser);
+      }
+
+      if (!domain) {
+        activeDomain = _this.domain;
+      } else {
+        activeDomain = domain;
+      }
+
+      let identityURL = &apos;user://&apos; + email.substring(email.indexOf(&apos;@&apos;) + 1, email.length) + &apos;/&apos; + email.substring(0, email.indexOf(&apos;@&apos;));
+
+      // message to query domain registry, asking for a user hyperty.
+      let message = {
+        type: &apos;read&apos;, from: _this.discoveryURL, to: &apos;domain://registry.&apos; + activeDomain + &apos;/&apos;, body: { resource: identityURL}
+      };
+
+      console.info(&apos;[Discovery] Message: &apos;, message, activeDomain, identityURL);
+
+      //console.info(&apos;[Discovery] message READ&apos;, message);
+
       _this.messageBus.postMessage(message, (reply) =&gt; {
-        console.log(&apos;message reply&apos;, reply);
+        console.info(&apos;[Discovery] message reply&apos;, reply);
 
         let hyperty;
         let mostRecent;
@@ -416,7 +435,7 @@ class Discovery {
           }
         }
 
-        console.log(&apos;Last Hyperty: &apos;, lastHyperty, mostRecent);
+        console.info(&apos;[Discovery] Last Hyperty: &apos;, lastHyperty, mostRecent);
 
         let hypertyURL = lastHyperty;
 
@@ -430,7 +449,7 @@ class Discovery {
           hypertyURL: hypertyURL
         };
 
-        console.log(&apos;===&gt; hypertyDiscovery messageBundle: &apos;, idPackage);
+        console.info(&apos;[Discovery] ===&gt; hypertyDiscovery messageBundle: &apos;, idPackage);
         resolve(idPackage);
       });
     });
@@ -447,26 +466,33 @@ class Discovery {
     let _this = this;
     let activeDomain;
 
-    if (!domain) {
-      activeDomain = _this.domain;
-    } else {
-      activeDomain = domain;
-    }
-
-    let identityURL = &apos;user://&apos; + email.substring(email.indexOf(&apos;@&apos;) + 1, email.length) + &apos;/&apos; + email.substring(0, email.indexOf(&apos;@&apos;));
-
-    // message to query domain registry, asking for a user hyperty.
-    let message = {
-      type: &apos;read&apos;, from: _this.discoveryURL, to: &apos;domain://registry.&apos; + activeDomain + &apos;/&apos;, body: { resource: identityURL}
-    };
-
-    console.log(&apos;Message discoverHypertiesPerUser: &apos;, message, activeDomain, identityURL);
-
-    //console.log(&apos;message READ&apos;, message);
     return new Promise(function(resolve, reject) {
 
+      if (email.includes(&apos;:&apos;) &amp;&amp; !email.includes(&apos;user://&apos;)) {
+        console.log(&apos;[Discovery.discoverHyperty] is legacy domain&apos;);
+        let legacyUser = { userID: email, hypertyID: email, schema: schema, resources: resources };
+        return resolve(legacyUser);
+      }
+
+      if (!domain) {
+        activeDomain = _this.domain;
+      } else {
+        activeDomain = domain;
+      }
+
+      let identityURL = &apos;user://&apos; + email.substring(email.indexOf(&apos;@&apos;) + 1, email.length) + &apos;/&apos; + email.substring(0, email.indexOf(&apos;@&apos;));
+
+      // message to query domain registry, asking for a user hyperty.
+      let message = {
+        type: &apos;read&apos;, from: _this.discoveryURL, to: &apos;domain://registry.&apos; + activeDomain + &apos;/&apos;, body: { resource: identityURL}
+      };
+
+      console.info(&apos;[Discovery] Message discoverHypertiesPerUser: &apos;, message, activeDomain, identityURL);
+
+      //console.info(&apos;[Discovery] message READ&apos;, message);
+
       _this.messageBus.postMessage(message, (reply) =&gt; {
-        console.log(&apos;discoverHypertiesPerUser reply&apos;, reply);
+        console.info(&apos;[Discovery] discoverHypertiesPerUser reply&apos;, reply);
 
         let value = reply.body.value;
 
