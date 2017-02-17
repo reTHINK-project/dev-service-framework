@@ -1,19 +1,14 @@
-<<<<<<< HEAD
-reTHINK Service Framework [![Build Status](https://travis-ci.org/reTHINK-project/dev-service-framework.svg?branch=dev-interworking)](https://travis-ci.org/reTHINK-project/dev-service-framework)
-||||||| merged common ancestors
-reTHINK Service Framework [![Build Status](https://travis-ci.org/reTHINK-project/dev-service-framework.svg?branch=master)](https://travis-ci.org/reTHINK-project/dev-service-framework)
-=======
 
-reTHINK Service Framework
+
+reTHINK Service Framework [![Build Status](https://travis-ci.org/reTHINK-project/dev-service-framework.svg?branch=dev-p2p-interworking-merge)](https://travis-ci.org/reTHINK-project/dev-service-framework)
 -------------------------
 
 #### Build status
 
 | Master                                   | Develop                                  |
 | ---------------------------------------- | ---------------------------------------- |
-| [![Build Status](https://travis-ci.org/reTHINK-project/dev-service-framework.svg?branch=master)](https://travis-ci.org/reTHINK-project/dev-service-framework) | [![Build Status](https://travis-ci.org/reTHINK-project/dev-service-framework.svg?branch=develop)](https://travis-ci.org/reTHINK-project/dev-service-framework) |
+| [![Build Status](https://travis-ci.org/reTHINK-project/dev-service-framework.svg?branch=master)](https://travis-ci.org/reTHINK-project/dev-service-framework) | [![Build Status](https://travis-ci.org/reTHINK-project/dev-service-framework.svg?branch=develop)](https://travis-ci.org/reTHINK-project/dev-service-framework)
 
->>>>>>> develop
 -------------------------
 
 - [Overview](#rethink-framework-overview)
