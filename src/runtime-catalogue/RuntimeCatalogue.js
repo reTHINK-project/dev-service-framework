@@ -356,15 +356,20 @@ class RuntimeCatalogue {
 
         // create the descriptor
         let idpproxy = this._factory.createProtoStubDescriptorObject(
-            rawProxy["cguid"],
-            rawProxy["version"],
-            rawProxy["objectName"],
-            rawProxy["description"],
-            rawProxy["language"],
-            rawProxy["sourcePackageURL"],
-            rawProxy["messageSchemas"],
-            rawProxy["configuration"],
-            rawProxy["constraints"]
+            rawStub["cguid"],
+            rawStub["version"],
+            rawStub["objectName"],
+            rawStub["description"],
+            rawStub["language"],
+            rawStub["sourcePackageURL"],
+            rawStub["messageSchemas"],
+            rawStub["configuration"],
+            rawStub["constraints"],
+            rawStub["hypertyType"],
+            rawStub["dataObjects"],
+            rawStub["interworking"],
+            rawStub["idpProxy"],
+            rawStub["mutualAuthentication"]
         );
 
         // optional fields
@@ -386,6 +391,7 @@ class RuntimeCatalogue {
         // check encoding
         if (sp["encoding"] === "base64") {
             sp["sourceCode"] = this.atob(sp["sourceCode"]);
+            sp["encoding"] = 'utf-8';
         }
 
         let sourcePackage = this._factory.createSourcePackage(sp["sourceCodeClassname"], sp["sourceCode"]);
