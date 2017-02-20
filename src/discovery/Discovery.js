@@ -394,7 +394,7 @@ class Discovery {
           url: "https://rethink.tlabscloud.com/discovery/rest/discover/lookup?searchquery=" + userIdentifier,
           type: 'GET',
           success: function(json) {
-            console.log('Response', json);
+            console.log('discoverGUIDPerUserIdentifier reply', json);
             let response = $.parseJSON(json);
             let filteredGuid = response.results.filter(function(x) {
               return x["rethinkID"] != undefined
@@ -404,9 +404,9 @@ class Discovery {
               return reject('Unsuccessful discoverGUIDPerUserIdentifier in Discovery Service');
             }
 
-            let guid = filteredGuid[0]["rethinkID"];
+            let guids = filteredGuid.map(function(x){ return x["rethinkID"];});
 
-            resolve(guid)
+            resolve(guids)
           }
         });
       });
