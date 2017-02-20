@@ -356,20 +356,20 @@ class RuntimeCatalogue {
 
         // create the descriptor
         let idpproxy = this._factory.createProtoStubDescriptorObject(
-            rawStub["cguid"],
-            rawStub["version"],
-            rawStub["objectName"],
-            rawStub["description"],
-            rawStub["language"],
-            rawStub["sourcePackageURL"],
-            rawStub["messageSchemas"],
-            rawStub["configuration"],
-            rawStub["constraints"],
-            rawStub["hypertyType"],
-            rawStub["dataObjects"],
-            rawStub["interworking"],
-            rawStub["idpProxy"],
-            rawStub["mutualAuthentication"]
+            rawProxy["cguid"],
+            rawProxy["version"],
+            rawProxy["objectName"],
+            rawProxy["description"],
+            rawProxy["language"],
+            rawProxy["sourcePackageURL"],
+            rawProxy["messageSchemas"],
+            rawProxy["configuration"],
+            rawProxy["constraints"],
+            rawProxy["hypertyType"],
+            rawProxy["dataObjects"],
+            rawProxy["interworking"],
+            rawProxy["idpProxy"],
+            rawProxy["mutualAuthentication"]
         );
 
         // optional fields
