@@ -221,7 +221,7 @@ class SyncObject {
     //let oldValue = change.oldValue;
     let newValue = obj[change.name];
 
-    // console.info(change.type + &apos; | Field: &apos; + fieldString + &apos; | New Value:&apos;, JSON.stringify(newValue));
+    console.info(change.type + &apos; | Field: &apos; + fieldString + &apos; | New Value:&apos;, JSON.stringify(newValue));
 
     if (change.type === &apos;update&apos;) {
       this._fireEvent({

@@ -51,7 +51,7 @@ class DataObject {
    * @ignore
    * Should not be used directly by Hyperties. It's called by the Syncher create or subscribe method's
    */
-  constructor(syncher, url, schema, initialStatus, initialData, childrens) {
+  constructor(syncher, url, schema, initialStatus, initialData, childrens, mutual = true) {
     let _this = this;
 
     _this._syncher = syncher;
@@ -60,6 +60,9 @@ class DataObject {
     _this._status = initialStatus;
     _this._syncObj = new SyncObject(initialData);
     _this._childrens = childrens;
+
+    //TODO: For Further Study
+    _this._mutualAuthentication = mutual;
 
     _this._version = 0;
     _this._childId = 0;
@@ -181,6 +184,9 @@ class DataObject {
       body: { resource: msgChildId, value: initialData }
     };
 
+    //TODO: For Further Study
+    if (!_this._mutualAuthentication) requestMsg.body.mutualAuthentication = _this._mutualAuthentication;
+
     //returns promise, in the future, the API may change to asynchronous call
     return new Promise((resolve) => {
       let msgId = _this._bus.postMessage(requestMsg);
@@ -269,6 +275,9 @@ class DataObject {
         changeMsg.to = childInfo.path;
         changeMsg.body.resource = childInfo.childId;
       }
+
+      //TODO: For Further Study
+      if (!_this._mutualAuthentication) changeMsg.body.mutualAuthentication = _this._mutualAuthentication;
 
       _this._bus.postMessage(changeMsg);
     }

@@ -177,8 +177,8 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
 
     _this._changeListener = _this._bus.addListener(_this._url + &apos;/changes&apos;, (msg) =&gt; {
       if (msg.type === &apos;update&apos;) {
-          console.log(&apos;DataObjectObserver-&apos; + _this._url + &apos;-RCV: &apos;, msg);
-          _this._changeObject(_this._syncObj, msg);
+        console.log(&apos;DataObjectObserver-&apos; + _this._url + &apos;-RCV: &apos;, msg);
+        _this._changeObject(_this._syncObj, msg);
       }
     });
   }
