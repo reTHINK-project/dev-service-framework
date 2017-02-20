@@ -1,6 +1,6 @@
 
 
-reTHINK Service Framework [![Build Status](https://travis-ci.org/reTHINK-project/dev-service-framework.svg?branch=dev-p2p-interworking-merge)](https://travis-ci.org/reTHINK-project/dev-service-framework)
+reTHINK Service Framework 
 -------------------------
 
 #### Build status
