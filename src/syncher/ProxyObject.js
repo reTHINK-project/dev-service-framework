@@ -50,15 +50,6 @@ class SyncObject {
     return obj;
   }
 
-  _isObservable(obj) {
-    if (obj.constructor === Object || obj.constructor === Array) {
-      return true;
-    }
-
-    return false;
-  }
-
-
   _internalObserve(object) {
 
     let handler = (changeset) => {
@@ -100,9 +91,9 @@ class SyncObject {
     //let oldValue = change.oldValue;
     let newValue = obj[change.name];
 
-    console.info(change.type + ' | Field: ' + fieldString + ' | New Value:', JSON.stringify(newValue));
+    // console.info(change.type + ' | Field: ' + fieldString + ' | New Value:', JSON.stringify(newValue), fieldString.includes('length'));
 
-    if (change.type === 'update') {
+    if (change.type === 'update' && !fieldString.includes('.length')) {
       this._fireEvent({
         cType: ChangeType.UPDATE,
         oType: objType,

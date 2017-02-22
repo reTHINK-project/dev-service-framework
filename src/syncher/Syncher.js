@@ -297,7 +297,7 @@ class Syncher {
 
       //TODO: For Further Study
       let mutualAuthentication = criteria.mutual;
-      if (!mutualAuthentication) subscribeMsg.body.mutualAuthentication = mutualAuthentication;
+      if (criteria.hasOwnProperty('mutual')) subscribeMsg.body.mutualAuthentication = mutualAuthentication;
 
       console.log('[syncher] - subscribe message: ', criteria, subscribeMsg);
 
