@@ -111,42 +111,6 @@ class Discovery {
       });
     }
 
-    /**
-    * function to request about specific reporter dataObject registered in domain registry, and
-    * return the dataObjects from that reporter.
-    * @param  {String}           reporter     dataObject reporter
-    * @param  {String}           domain       (Optional)
-    * @return {Array}           Promise       DataObjects
-    */
-    discoverDataObjectPerReporter(reporter, domain) {
-      let _this = this;
-      let activeDomain;
-
-      if (!domain) {
-        activeDomain = _this.domain;
-      } else {
-        activeDomain = domain;
-      }
-
-      let msg = {
-        type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: reporter}
-      };
-
-      return new Promise(function(resolve, reject) {
-
-        _this.messageBus.postMessage(msg, (reply) => {
-
-          let dataObjects = reply.body.value;
-
-          if (dataObjects) {
-            resolve(dataObjects);
-          } else {
-            reject('No dataObject was found');
-          }
-        });
-      });
-    }
-
     /** Advanced Search for dataObjects registered in domain registry
     * @param  {String}           user                  user identifier, either in url or email format
     * @param  {Array<string>}    schema (Optional)     types of dataObject schemas
@@ -181,6 +145,43 @@ class Discovery {
       });
     }
 
+    /**
+    * function to request about specific reporter dataObject registered in domain registry, and
+    * return the dataObjects from that reporter.
+    * @deprecated This function is deprecated.
+    * @param  {String}           reporter     dataObject reporter
+    * @param  {String}           domain       (Optional)
+    * @return {Array}           Promise       DataObjects
+    */
+    discoverDataObjectPerReporter(reporter, domain) {
+      let _this = this;
+      let activeDomain;
+
+      if (!domain) {
+        activeDomain = _this.domain;
+      } else {
+        activeDomain = domain;
+      }
+
+      let msg = {
+        type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: reporter}
+      };
+
+      return new Promise(function(resolve, reject) {
+
+        _this.messageBus.postMessage(msg, (reply) => {
+
+          let dataObjects = reply.body.value;
+
+          if (dataObjects) {
+            resolve(dataObjects);
+          } else {
+            reject('No dataObject was found');
+          }
+        });
+      });
+    }
+
     /** Advanced Search for Hyperties registered in domain registry
     * @param  {String}           user                  user identifier, either in url or email format
     * @param  {Array<string>}    schema (Optional)     types of hyperties schemas
@@ -199,10 +200,20 @@ class Discovery {
       }
 
       let msg = {
-        type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: userIdentifier,
-        criteria: {resources: resources, dataSchemes: schema}
+        type: 'read',
+        from: _this.discoveryURL,
+        to: 'domain://registry.' + activeDomain + '/',
+        body: {
+          resource: userIdentifier,
         }
       };
+
+      if(typeof schema !== undefined || typeof schema !== undefined) {
+        msg.body['criteria'] = {
+          resources: resources,
+          dataSchemes: schema
+        };
+      }
 
       return new Promise(function(resolve, reject) {
 
@@ -330,84 +341,6 @@ class Discovery {
           }
 
           resolve(value);
-        });
-      });
-    }
-
-    /**
-    * function to request global registry about the dataset (JSON Object) associated with the GUID
-    * @param  {guid}              guid
-    * @param  {domain}            domain (Optional)
-    * @return {Promise}          Promise
-    */
-    discoverUserActiveDomains(guid, domain) {
-      let _this = this;
-      let activeDomain;
-
-      if (!domain) {
-        activeDomain = _this.domain;
-      } else {
-        activeDomain = domain;
-      }
-
-      let message = {
-        type: 'READ', from: _this.discoveryURL, to: 'global://registry/', body: { guid: guid}
-      };
-
-      console.log('Message discoverUserActiveDomains: ', message, activeDomain, guid);
-
-      return new Promise(function(resolve, reject) {
-
-        _this.messageBus.postMessage(message, (reply) => {
-
-          let value = reply.body.Value;
-
-          if (!value) {
-            return reject('Unsuccessful discoverUserActiveDomains in global registry');
-          }
-
-          resolve(value);
-        });
-      });
-    }
-
-    /**
-    * function to request discovery service about the GUID associated with some user identifier (eg email, name ...)
-    * @param  {String}            userIdentifier
-    * @param  {domain}            domain (Optional)
-    * @return {Promise}           Promise
-    */
-    discoverGUIDPerUserIdentifier(userIdentifier, domain) {
-      let _this = this;
-      let activeDomain;
-
-      if (!domain) {
-        activeDomain = _this.domain;
-      } else {
-        activeDomain = domain;
-      }
-
-      return new Promise(function(resolve, reject) {
-
-        $.ajax({
-          dataType: 'text',
-          url: "https://rethink.tlabscloud.com/discovery/rest/discover/lookup?searchquery=" + userIdentifier,
-          type: 'GET',
-          success: function(json) {
-            console.log('discoverGUIDPerUserIdentifier reply', json);
-            let response = $.parseJSON(json);
-            let filteredGuid = response.results.filter(function(x) {
-              return x["rethinkID"] != undefined
-            });
-
-            if (filteredGuid.length === 0) {
-              return reject('Unsuccessful discoverGUIDPerUserIdentifier in Discovery Service');
-            }
-
-            let guids = filteredGuid.map(function(x){ return x["rethinkID"];});
-
-            resolve(guids)
-          }
         });
       });
     }
