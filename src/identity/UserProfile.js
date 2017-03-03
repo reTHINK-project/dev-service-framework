@@ -7,13 +7,13 @@ class UserProfile {
 
   constructor(username, userURL, avatar, cn, locale) {
 
-    if (username)      { this._userURL = userURL; }
+    if (username)      { this.userURL = userURL; }
 
-    if (avatar)      { this._avatar = avatar; }
+    if (avatar)      { this.avatar = avatar; }
 
-    if (cn)      { this._cn = cn; }
+    if (cn)      { this.cn = cn; }
 
-    if (locale)      { this._locale = locale; }
+    if (locale)      { this.locale = locale; }
 
   }
 }

@@ -13,11 +13,11 @@ class MessageBodyIdentity {
     this.cn = cn;
     this.locale = locale;
 
-    if (idp)      { this._idp = idp; }
+    if (idp)      { this.idp = idp; }
 
-    if (assertion)      { this._assertion = assertion; }
+    if (assertion)      { this.assertion = assertion; }
 
-    this._userProfile = new UserProfile(username, userURL, avatar, cn, locale);
+    this.userProfile = new UserProfile(username, userURL, avatar, cn, locale);
 
   }
 

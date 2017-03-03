@@ -168,9 +168,10 @@ class DataObject {
    * Create and add a DataObjectChild to a children collection.
    * @param {String} children - Children name where the child is added.
    * @param {JSON} initialData - Initial data of the child
+   * @param  {MessageBodyIdentity} identity - (optional) identity data to be added to identity the user reporter. To be used for legacy identities.
    * @return {Promise<DataObjectChild>} - Return Promise to a new DataObjectChild.
    */
-  addChild(children, initialData) {
+  addChild(children, initialData, identity) {
     let _this = this;
 
     //create new child unique ID, based on hypertyURL
@@ -183,6 +184,8 @@ class DataObject {
       type: 'create', from: _this._owner, to: msgChildPath,
       body: { resource: msgChildId, value: initialData }
     };
+
+    if (identity)      { requestMsg.body.identity = identity; }
 
     //TODO: For Further Study
     if (!_this._mutualAuthentication) requestMsg.body.mutualAuthentication = _this._mutualAuthentication;
