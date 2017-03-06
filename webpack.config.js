@@ -69,6 +69,7 @@ module.exports = {
     MessageFactory: './src/MessageFactory.js',
     PersistenceManager: './src/PersistenceManager.js',
     RuntimeCatalogue: './src/RuntimeCatalogue.js',
+    IdentityFactory: './src/IdentityFactory.js',
     Syncher: './src/Syncher.js',
     Utils: './src/Utils.js'
   },
@@ -82,6 +83,7 @@ module.exports = {
   devtool: process.env.MODE === 'dev' ? 'inline-source-map' : false,
   module: {
     rules: [
+
       /*{
         test: /\.js$/,
         exclude: /node_modules/,

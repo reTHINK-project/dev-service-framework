@@ -100,10 +100,12 @@ class Syncher {
   * @param  {SchemaURL} schema - Hyperty Catalogue URL address that can be used to retrieve the JSON-Schema describing the Data Object schema
   * @param  {HypertyURL[]} observers - List of hyperties that are pre-authorized for subscription
   * @param  {JSON} initialData - Initial data of the reporter
-  * @param  {string} objectURL - reusable dataObject URL
+  * @param  {boolean} store - (Optional) if true, object will be stored by the runtime
+  * @param  {boolean} p2p - (Optional) if true, data synchronisation stream will use p2p connection as much as possible
+  * @param  {MessageBodyIdentity} identity - (optional) identity data to be added to identity the user reporter. To be used for legacy identities.
   * @return {Promise<DataObjectReporter>} Return Promise to a new Reporter. The reporter can be accepted or rejected by the PEP
   */
-  create(schema, observers, initialData, store = false, p2p = false) {
+  create(schema, observers, initialData, store = false, p2p = false, identity) {
     let _this = this;
     let criteria = {};
 
@@ -112,6 +114,8 @@ class Syncher {
     criteria.schema = schema;
     criteria.observers = observers;
     criteria.initialData = initialData;
+
+    if (identity)      { criteria.identity = identity; }
 
     console.log('[syncher - create] - create Reporter - criteria: ', criteria);
 
@@ -136,20 +140,22 @@ class Syncher {
   * @param {Boolean} [store=false] - Save the subscription on the Syncher Manager for further resume (Default is false)
   * @param {Boolean} [p2p=false] - Info about if should use p2p connection (Default is false)
   * @param {Boolean} [mutual=true] - Info about if messages of this object should be encrypted (Default is true)
+  * @param  {MessageBodyIdentity} identity - (optional) identity data to be added to identity the user reporter. To be used for legacy identities.
   * @return {Promise<DataObjectObserver>} Return Promise to a new observer. It's associated with the reporter.
   */
-  subscribe(schema, objURL, store = false, p2p = false, mutual = true) {
+  subscribe(schema, objURL, store = false, p2p = false, mutual = true, identity) {
     let _this = this;
     let criteria = {};
 
     criteria.p2p = p2p;
     criteria.store = store;
     criteria.schema = schema;
+
     criteria.resource = objURL;
+    if (identity)      { criteria.identity = identity; }
 
     //TODO: For Further Study
     criteria.mutual = mutual;
-
 
     console.log('[syncher - subscribe] - subscribe criteria: ', criteria);
 
@@ -234,6 +240,7 @@ class Syncher {
       if (criteria.p2p) requestMsg.body.p2p = criteria.p2p;
       if (criteria.store) requestMsg.body.store = criteria.store;
       if (criteria.observers) requestMsg.body.authorise = criteria.observers;
+      if (criteria.identity) requestMsg.body.identity = criteria.identity;
 
       if (resume) {
         console.log('[syncher - create] - resume message: ', requestMsg);
@@ -291,6 +298,7 @@ class Syncher {
         if (criteria.hasOwnProperty('schema')) subscribeMsg.body.schema = criteria.schema;
         if (criteria.hasOwnProperty('identity')) subscribeMsg.body.identity = criteria.identity;
         if (criteria.hasOwnProperty('resource')) subscribeMsg.body.resource = criteria.resource;
+        if (criteria.hasOwnProperty('identity')) subscribeMsg.body.identity = criteria.identity;
       }
 
       subscribeMsg.body.resume = criteria.resume;
@@ -352,34 +360,34 @@ class Syncher {
     let _this = this;
 
    //remove "/subscription" from the URL
-   let resource = msg.from.slice(0, -13);
+    let resource = msg.from.slice(0, -13);
 
-   let event = {
-     type: msg.type,
-     from: msg.body.source,
-     url: resource,
-     schema: msg.body.schema,
-     value: msg.body.value,
-     identity: msg.body.identity,
+    let event = {
+      type: msg.type,
+      from: msg.body.source,
+      url: resource,
+      schema: msg.body.schema,
+      value: msg.body.value,
+      identity: msg.body.identity,
 
-     ack: (type) => {
-       let lType = 200;
-       if (type) {
-         lType = type;
-       }
+      ack: (type) => {
+        let lType = 200;
+        if (type) {
+          lType = type;
+        }
 
        //send ack response message
-       _this._bus.postMessage({
-         id: msg.id, type: 'response', from: msg.to, to: msg.from,
-         body: { code: lType }
-       });
-     }
-   };
+        _this._bus.postMessage({
+          id: msg.id, type: 'response', from: msg.to, to: msg.from,
+          body: { code: lType }
+        });
+      }
+    };
 
-   if (_this._onNotificationHandler) {
-     console.info('[Syncher] NOTIFICATION-EVENT: ', event);
-     _this._onNotificationHandler(event);
-   }
+    if (_this._onNotificationHandler) {
+      console.info('[Syncher] NOTIFICATION-EVENT: ', event);
+      _this._onNotificationHandler(event);
+    }
   }
 
   //FLOW-IN: message received from a remote DataObjectReporter -> delete
@@ -387,25 +395,25 @@ class Syncher {
     let _this = this;
 
    //remove "/subscription" from the URL
-   let resource = msg.body.resource;
+    let resource = msg.body.resource;
 
-   let object = _this._observers[resource];
-   if (object) {
-     let event = {
-       type: msg.type,
-       url: resource,
-       identity: msg.body.identity,
+    let object = _this._observers[resource];
+    if (object) {
+      let event = {
+        type: msg.type,
+        url: resource,
+        identity: msg.body.identity,
 
-       ack: (type) => {
-         let lType = 200;
-         if (type) {
-           lType = type;
-         }
+        ack: (type) => {
+          let lType = 200;
+          if (type) {
+            lType = type;
+          }
 
          //TODO: any other different options for the release process, like accept but nor release local?
-         if (lType === 200) {
-           object.delete();
-         }
+          if (lType === 200) {
+            object.delete();
+          }
 
           //send ack response message
           _this._bus.postMessage({
