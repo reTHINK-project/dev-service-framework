@@ -305,7 +305,7 @@ class Syncher {
 
       //TODO: For Further Study
       let mutualAuthentication = criteria.mutual;
-      if (!mutualAuthentication) subscribeMsg.body.mutualAuthentication = mutualAuthentication;
+      if (criteria.hasOwnProperty('mutual')) subscribeMsg.body.mutualAuthentication = mutualAuthentication;
 
       console.log('[syncher] - subscribe message: ', criteria, subscribeMsg);
 
@@ -329,8 +329,12 @@ class Syncher {
         } else if (reply.body.code === 200) {
           console.log('[syncher] - new Data Object Observer: ', reply, _this._provisionals);
 
-          //TODO: For Further Study
-          let newObj = new DataObjectObserver(_this, objURL, schema, 'on', reply.body.value, newProvisional.children, reply.body.version, mutualAuthentication);
+          let initialData = reply.body.value;
+          if (!initialData.hasOwnProperty('childrens')) { initialData.childrens = {}; }
+          if (!initialData.hasOwnProperty('data')) { initialData.data = {}; }
+
+          //TODO: mutualAuthentication For Further Study
+          let newObj = new DataObjectObserver(_this, objURL, schema, 'on', initialData, newProvisional.children, reply.body.version, mutualAuthentication);
           _this._observers[objURL] = newObj;
 
           resolve(newObj);
