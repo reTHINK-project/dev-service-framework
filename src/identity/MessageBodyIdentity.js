@@ -8,15 +8,12 @@ class MessageBodyIdentity {
 
   constructor(username, userURL, avatar, cn, locale, idp, assertion) {
 
-    this.username = username;
-    this.avatar = avatar;
-    this.cn = cn;
-    this.locale = locale;
+    if (!idp) throw new Error('IDP should be a parameter');
+    if (!username) throw new Error('username should be a parameter');
 
-    if (idp)      { this.idp = idp; }
+    this.idp = idp;
 
     if (assertion)      { this.assertion = assertion; }
-
     this.userProfile = new UserProfile(username, userURL, avatar, cn, locale);
 
   }
