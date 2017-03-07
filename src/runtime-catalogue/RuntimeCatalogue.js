@@ -79,7 +79,7 @@ class RuntimeCatalogue {
                     return descriptor;
                 } else {
                     isCompleteDescriptor = false;
-                    return this.attachRawSourcePackage(descriptor, constraints);
+                    return this.attachRawSourcePackage(descriptor);
                 }
             })
         }
