@@ -229,7 +229,7 @@ class Discovery {
   * @param  {Array<string>}    resources (Optional)  types of hyperties resources
   * @param  {String}           domain (Optional)     domain of the registry to search
   */
-  discoverHyperty(user, schema, resources, domain) {
+  discoverHyperties(user, schema, resources, domain) {
     let _this = this;
     let activeDomain;
     let userIdentifier = convertToUserURL(user);
@@ -510,6 +510,45 @@ class Discovery {
           resolve(hyperties);
         } else {
           reject('No DataObject was found');
+        }
+      });
+    });
+  }
+
+  /** Advanced Search for Hyperties registered in domain registry
+  * @deprecated Deprecated. Use discoverHyperties instead
+  * @param  {String}           user                  user identifier, either in url or email format
+  * @param  {Array<string>}    schema (Optional)     types of hyperties schemas
+  * @param  {Array<string>}    resources (Optional)  types of hyperties resources
+  * @param  {String}           domain (Optional)     domain of the registry to search
+  */
+  discoverHyperty(user, schema, resources, domain) {
+    let _this = this;
+    let activeDomain;
+    let userIdentifier = convertToUserURL(user);
+
+    if (!domain) {
+      activeDomain = _this.domain;
+    } else {
+      activeDomain = domain;
+    }
+
+    let msg = {
+      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: userIdentifier,
+      criteria: {resources: resources, dataSchemes: schema}
+      }
+    };
+
+    return new Promise(function(resolve, reject) {
+
+      _this.messageBus.postMessage(msg, (reply) => {
+
+        let hyperties = reply.body.value;
+
+        if (hyperties) {
+          resolve(hyperties);
+        } else {
+          reject('No Hyperty was found');
         }
       });
     });
