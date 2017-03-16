@@ -229,7 +229,7 @@ class Discovery {
   * @param  {Array<string>}    resources (Optional)  types of hyperties resources
   * @param  {String}           domain (Optional)     domain of the registry to search
   */
-  discoverHyperties(user, schema, resources, domain) {
+  discoverHyperty(user, schema, resources, domain) {
     let _this = this;
     let activeDomain;
     let userIdentifier = convertToUserURL(user);
