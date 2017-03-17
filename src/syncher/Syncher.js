@@ -67,7 +67,7 @@ class Syncher {
     bus.addListener(owner, (msg) => {
       //ignore msg sent by himself
       if (msg.from !== owner) {
-        console.info('[Syncher] Syncher-RCV: ', msg);
+        console.info('[Syncher] Syncher-RCV: ', msg, _this);
         switch (msg.type) {
           case 'forward': _this._onForward(msg); break;
           case 'create': _this._onRemoteCreate(msg); break;
