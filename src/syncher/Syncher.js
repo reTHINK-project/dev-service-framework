@@ -323,6 +323,8 @@ class Syncher {
 
           resolve(_this._reporters);
 
+          if (this._onReportersResume) this._onReportersResume(this._reporters);
+
         } else {
           //reporter creation rejected
           reject(reply.body.desc);
@@ -485,6 +487,8 @@ class Syncher {
 
           resolve(_this._observers);
 
+          if (this._onObserversResume) this._onObserversResume(_this._observers);
+
         } else {
           reject(reply.body.desc);
         }
@@ -581,10 +585,20 @@ class Syncher {
     }
   }
 
+  /**
+  * Callback system to trigger the resumed reporters
+  * @param  {Function} callback - function callback which will be invoked
+  * @return {Object<URL, DataObjectReporter>} Return one object with all resumed reporters;
+  */
   onReportersResume(callback) {
     this._onReportersResume = callback;
   }
 
+  /**
+  * Callback system to trigger the resumed observers
+  * @param  {Function} callback - function callback which will be invoked
+  * @return {Object<URL, DataObjectObserver>} Return one object with all resumed observers;
+  */
   onObserversResume(callback) {
     this._onObserversResume = callback;
   }
