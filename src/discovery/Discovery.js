@@ -232,7 +232,6 @@ class Discovery {
   discoverHyperties(user, schema, resources, domain) {
     let _this = this;
     let activeDomain;
-    let userIdentifier = convertToUserURL(user);
 
     activeDomain = (!domain) ? _this.domain : domain;
 
@@ -241,7 +240,7 @@ class Discovery {
       from: _this.discoveryURL,
       to: 'runtime://' + activeDomain + divideURL(_this.discoveryURL).identity + '/discovery/',
       body: {
-        resource: '/hyperty/user/' + userIdentifier,
+        resource: '/hyperty/user/' + user,
       }
     };
 
@@ -277,7 +276,6 @@ class Discovery {
   discoverDataObjects(user, schema, resources, domain) {
     let _this = this;
     let activeDomain;
-    let userIdentifier = convertToUserURL(user);
 
     activeDomain = (!domain) ? _this.domain : domain;
 
@@ -286,7 +284,7 @@ class Discovery {
       from: _this.discoveryURL,
       to: 'runtime://' + activeDomain + divideURL(_this.discoveryURL).identity + '/discovery/',
       body: {
-        resource: '/dataObject/user/' + userIdentifier,
+        resource: '/dataObject/user/' + user,
       }
     };
 
