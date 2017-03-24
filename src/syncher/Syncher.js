@@ -20,6 +20,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 **/
+import { deepClone } from '../utils/utils';
 
 import DataObjectReporter from './DataObjectReporter';
 import DataObjectObserver from './DataObjectObserver';
@@ -314,11 +315,15 @@ class Syncher {
             let objURL = dataObject.resource;
             let schema = dataObject.schema;
             let status = dataObject.status || 'on';
-            let initialData = dataObject.data;
             let childrenResources = dataObject.childrenResources;
 
-            let newObj = new DataObjectReporter(_this, objURL, schema, status, initialData, childrenResources);
+            let initialData = {};
+            initialData.childrens = deepClone(dataObject.childrens) || {};
+            initialData.data = deepClone(dataObject.data) || {};
+
+            let newObj = new DataObjectReporter(_this, objURL, schema, status, initialData, childrenResources, false, true);
             _this._reporters[objURL] = newObj;
+
           }
 
           resolve(_this._reporters);
@@ -472,14 +477,17 @@ class Syncher {
             let status = dataObject.status || 'on';
             let objURL = dataObject.resource;
             let version = dataObject.version || 0;
-            let initialData = dataObject.data;
-            if (!initialData.hasOwnProperty('childrens')) { initialData.childrens = {}; }
-            if (!initialData.hasOwnProperty('data')) { initialData.data = {}; }
+            let childrenResources = dataObject.childrenResources;
 
-            // let childrenResources = dataObject.childrenResources;
+            let initialData = {};
+            initialData.childrens = deepClone(dataObject.childrens) || {};
+            initialData.data = deepClone(dataObject.data) || {};
+
 
             //TODO: mutualAuthentication For Further Study
-            let newObj = new DataObjectObserver(_this, objURL, schema, status, initialData, _this._provisionals[objURL].children, version, mutualAuthentication);
+            console.log('[syncher - resume subscribe] - create new dataObject: ', status, initialData, childrenResources, version);
+            let newObj = new DataObjectObserver(_this, objURL, schema, status, initialData, childrenResources, version, mutualAuthentication, true);
+
             _this._observers[objURL] = newObj;
 
             _this._provisionals[objURL].apply(newObj);

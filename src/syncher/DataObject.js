@@ -51,7 +51,7 @@ class DataObject {
    * @ignore
    * Should not be used directly by Hyperties. It's called by the Syncher create or subscribe method's
    */
-  constructor(syncher, url, schema, initialStatus, initialData, childrens, mutual = true) {
+  constructor(syncher, url, schema, initialStatus, initialData, childrens, mutual = true, resumed = false) {
     let _this = this;
 
     _this._syncher = syncher;
@@ -68,6 +68,8 @@ class DataObject {
     _this._childId = 0;
     _this._childrenObjects = {};
     _this._childrenListeners = [];
+
+    _this._resumed = resumed;
 
     _this._owner = syncher._owner;
     _this._bus = syncher._bus;

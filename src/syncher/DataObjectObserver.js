@@ -21,6 +21,8 @@
 * limitations under the License.
 **/
 
+import { deepClone } from '../utils/utils';
+
 import DataObject from './DataObject';
 import DataObjectChild from './DataObjectChild';
 
@@ -44,8 +46,8 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
    */
 
   //TODO: For Further Study
-  constructor(syncher, url, schema, initialStatus, initialData, childrens, initialVersion, mutual) {
-    super(syncher, url, schema, initialStatus, initialData.data, childrens, mutual);
+  constructor(syncher, url, schema, initialStatus, initialData, childrens, initialVersion, mutual, resumed = false) {
+    super(syncher, url, schema, initialStatus, initialData.data, childrens, mutual, resumed);
     let _this = this;
 
     _this._version = initialVersion;
@@ -58,7 +60,23 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
     //setup childrens data from subscription
     Object.keys(initialData.childrens).forEach((childId) => {
       let childData = initialData.childrens[childId];
-      _this._childrenObjects[childId] = new DataObjectChild(_this, childId, childData);
+      console.log('[DataObjectObserver - new DataObjectChild]: ', childId, childData, _this._resumed);
+      if (_this._resumed) {
+
+        // if is resumed
+        Object.keys(childData).forEach((child) => {
+          _this._childrenObjects[child] = new DataObjectChild(_this, child, childData[child].value);
+          _this._childrenObjects[child].identity = childData[child].identity;
+
+          console.log('[DataObjectObserver - new DataObjectChild] - resumed: ', _this._childrenObjects[child],  child, childData[child].value);
+        });
+
+      } else {
+        // if is not resumed
+        _this._childrenObjects[childId] = new DataObjectChild(_this, childId, childData);
+        console.log('[DataObjectObserver - new DataObjectChild] - not resumed: ', _this._childrenObjects[childId]);
+      }
+
     });
 
     _this._allocateListeners();

@@ -22,6 +22,9 @@
 **/
 
 import DataObject from './DataObject';
+
+import DataObjectChild from './DataObjectChild';
+
 import { deepClone } from '../utils/utils.js';
 
 /**
@@ -42,11 +45,29 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
    * @ignore
    * Should not be used directly by Hyperties. It's called by the Syncher.create method
    */
-  constructor(syncher, url, schema, initialStatus, initialData, childrens) {
-    super(syncher, url, schema, initialStatus, initialData, childrens);
+  constructor(syncher, url, schema, initialStatus, initialData, childrens, mutual, resumed = false) {
+    super(syncher, url, schema, initialStatus, initialData, childrens, mutual, resumed);
     let _this = this;
 
     _this._subscriptions = {};
+
+    if (_this._resumed) {
+
+      //setup childrens data from subscription
+      Object.keys(initialData.childrens).forEach((childId) => {
+        let childData = initialData.childrens[childId];
+        console.log('[DataObjectReporter - new DataObjectChild]: ', childId, childData, _this._resumed);
+
+        // if is resumed
+        Object.keys(childData).forEach((child) => {
+          _this._childrenObjects[child] = new DataObjectChild(_this, child, childData[child].value);
+          _this._childrenObjects[child].identity = childData[child].identity;
+
+          console.log('[DataObjectReporter - new DataObjectChild] - resumed: ', _this._childrenObjects[child],  child, childData[child].value);
+        });
+      });
+
+    }
 
     _this._syncObj.observe((event) => {
       console.log('DataObjectReporter-' + url + '-SEND: ', event);
