@@ -301,7 +301,6 @@ class Syncher {
 
       //request create to the allocation system. Can be rejected by the PolicyEngine.
       _this._bus.postMessage(requestMsg, (reply) => {
-        console.group('Syncher Response');
         console.log('[syncher - create] - create-resumed-response: ', reply);
         if (reply.body.code === 200) {
 
@@ -331,7 +330,6 @@ class Syncher {
           }
 
           resolve(_this._reporters);
-          console.groupEnd();
           if (this._onReportersResume) this._onReportersResume(this._reporters);
 
         } else {
@@ -340,7 +338,6 @@ class Syncher {
         }
       });
     });
-
   }
 
   _subscribe(criteria) {
