@@ -51,24 +51,6 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
 
     _this._subscriptions = {};
 
-    if (_this._resumed) {
-
-      //setup childrens data from subscription
-      Object.keys(initialData.childrens).forEach((childId) => {
-        let childData = initialData.childrens[childId];
-        console.log('[DataObjectReporter - new DataObjectChild]: ', childId, childData, _this._resumed);
-
-        // if is resumed
-        Object.keys(childData).forEach((child) => {
-          _this._childrenObjects[child] = new DataObjectChild(_this, child, childData[child].value);
-          _this._childrenObjects[child].identity = childData[child].identity;
-
-          console.log('[DataObjectReporter - new DataObjectChild] - resumed: ', _this._childrenObjects[child],  child, childData[child].value);
-        });
-      });
-
-    }
-
     _this._syncObj.observe((event) => {
       console.log('DataObjectReporter-' + url + '-SEND: ', event);
       _this._onChange(event);
@@ -95,6 +77,27 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     let _this = this;
 
     _this._objectListener.remove();
+  }
+
+  /**
+   *
+   */
+  resumeChildrens(childrens) {
+
+    //setup childrens data from subscription
+    Object.keys(childrens).forEach((childId) => {
+      let childData = childrens[childId];
+      console.log('[DataObjectReporter - new DataObjectChild]: ', childId, childData, this._resumed);
+
+      // if is resumed
+      Object.keys(childData).forEach((child) => {
+        this._childrenObjects[child] = new DataObjectChild(this, child, childData[child].value);
+        this._childrenObjects[child].identity = childData[child].identity;
+
+        console.log('[DataObjectReporter - new DataObjectChild] - resumed: ', this._childrenObjects[child],  child, childData[child].value);
+      });
+    });
+
   }
 
   /**

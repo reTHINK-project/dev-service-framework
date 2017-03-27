@@ -107,6 +107,11 @@ class Syncher {
   * @return {Promise<DataObjectReporter>} Return Promise to a new Reporter. The reporter can be accepted or rejected by the PEP
   */
   create(schema, observers, initialData, store = false, p2p = false, identity) {
+
+    if (!schema) throw Error('[Syncher - Create] - You need specify the data object schema');
+    if (!observers) throw Error('[Syncher - Create] -The observers should be defined');
+    if (!initialData) throw Error('[Syncher - Create] - You initialData should be defined');
+
     let _this = this;
     let criteria = {};
 
@@ -225,7 +230,10 @@ class Syncher {
     return new Promise((resolve, reject) => {
       let resume = criteria.resume;
       let initialData = criteria.initialData || {};
-      let schema;
+      let schema = criteria.schema;
+
+      initialData.reporter = _this._owner;
+      initialData.schema = criteria.schema;
 
       //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onCreate
       let requestMsg = {
@@ -236,12 +244,8 @@ class Syncher {
       console.log('[syncher - create]: ', criteria, requestMsg);
 
       requestMsg.body.value = initialData;
-      requestMsg.body.value.reporter = _this._owner;
-
-      if (criteria.schema) {
-        schema = criteria.schema;
-        requestMsg.body.schema = criteria.schema;
-      }
+      requestMsg.body.reporter = _this._owner;
+      requestMsg.body.schema = criteria.schema;
 
       if (criteria.p2p) requestMsg.body.p2p = criteria.p2p;
       if (criteria.store) requestMsg.body.store = criteria.store;
@@ -256,11 +260,6 @@ class Syncher {
         if (reply.body.code === 200) {
           //reporter creation accepted
           let objURL = reply.body.resource;
-
-          if (resume) {
-            schema = reply.body.schema;
-            initialData = reply.body.value;
-          }
 
           let newObj = new DataObjectReporter(_this, objURL, schema, 'on', initialData, reply.body.childrenResources);
           _this._reporters[objURL] = newObj;
@@ -302,6 +301,7 @@ class Syncher {
 
       //request create to the allocation system. Can be rejected by the PolicyEngine.
       _this._bus.postMessage(requestMsg, (reply) => {
+        console.group('Syncher Response');
         console.log('[syncher - create] - create-resumed-response: ', reply);
         if (reply.body.code === 200) {
 
@@ -317,17 +317,21 @@ class Syncher {
             let status = dataObject.status || 'on';
             let childrenResources = dataObject.childrenResources;
 
-            let initialData = {};
-            initialData.childrens = deepClone(dataObject.childrens) || {};
-            initialData.data = deepClone(dataObject.data) || {};
+            // initialData.childrens = deepClone(dataObject.childrens) || {};
+            // initialData = deepClone(dataObject.data) || {};
+            let init = deepClone(dataObject.data) || {};
+            let childrens = deepClone(dataObject.childrens) || {};
 
-            let newObj = new DataObjectReporter(_this, objURL, schema, status, initialData, childrenResources, false, true);
+            console.log('[syncher - create] - create-resumed-dataObjectReporter', objURL, status, init);
+
+            let newObj = new DataObjectReporter(_this, objURL, schema, status, init, childrenResources, false, true);
+            newObj.resumeChildrens(childrens);
             _this._reporters[objURL] = newObj;
 
           }
 
           resolve(_this._reporters);
-
+          console.groupEnd();
           if (this._onReportersResume) this._onReportersResume(this._reporters);
 
         } else {
