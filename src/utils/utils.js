@@ -171,8 +171,6 @@ export function checkAttribute(path) {
   let final = [];
   let test = path.match(regex);
 
-  console.log('TEST REGEX:', test);
-
   if (test == null){
     final = path.split('.');
   } else {
@@ -186,29 +184,24 @@ export function checkAttribute(path) {
         // The result can be accessed through the `m`-variable.
         m.forEach((match, groupIndex) => {
             if (groupIndex === 0) {
-
-               console.log(`Found match, group ${groupIndex}: ${match}`);
                list.push(match);
             }
         });
     }
     let result;
     list.forEach((url) => {
-       console.log(url);
+
        result = path.replace(url, '-')
 
        final = result.split('.').map((item, idx) => {
-         console.log('item: ', item, idx);
 
          if (item === '-') { return url; }
 
          return item;
        });
-
-       console.log('Result:', result);
     });
   }
 
-  console.log('<Final>', final);
+  console.log('[ServiceFramework.Utils.checkAttribute]', final);
   return final;
 }

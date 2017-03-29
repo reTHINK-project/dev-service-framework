@@ -34,8 +34,6 @@ class SyncObject {
   }
 
   findBefore(path) {
-    console.log('ProxyObject->PATH', path);
-    debugger;
     let result = {};
     let list = checkAttribute(path);
     result.last = list.pop();
