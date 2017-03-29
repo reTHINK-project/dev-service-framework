@@ -1,4 +1,5 @@
 import 'proxy-observe';
+import {checkAttribute} from '../utils/utils';
 
 const objectType = {ARRAY: '[object Array]', OBJECT: '[object Object]' };
 
@@ -27,14 +28,16 @@ class SyncObject {
   }
 
   find(path) {
-    let list = path.split('.');
+    let list = checkAttribute(path);
 
     return this._findWithSplit(list);
   }
 
   findBefore(path) {
+    console.log('ProxyObject->PATH', path);
+    debugger;
     let result = {};
-    let list = path.split('.');
+    let list = checkAttribute(path);
     result.last = list.pop();
     result.obj = this._findWithSplit(list);
 
