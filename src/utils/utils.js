@@ -162,3 +162,46 @@ export function convertToUserURL(identifier) {
     return getUserURLFromEmail(identifier);
   }
 }
+
+export function checkAttribute(path) {
+
+  let regex = /(([a-zA-Z]+):\/\/([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})(:\d{1,4})?([-\w\/#~:?+=&%@~]*)/gm;
+
+  let list = [];
+  let final = [];
+  let test = path.match(regex);
+
+  if (test == null){
+    final = path.split('.');
+  } else {
+      let m;
+      while ((m = regex.exec(path)) !== null) {
+        // This is necessary to avoid infinite loops with zero-width matches
+        if (m.index === regex.lastIndex) {
+            regex.lastIndex++;
+        }
+
+        // The result can be accessed through the `m`-variable.
+        m.forEach((match, groupIndex) => {
+            if (groupIndex === 0) {
+               list.push(match);
+            }
+        });
+    }
+    let result;
+    list.forEach((url) => {
+
+       result = path.replace(url, '-')
+
+       final = result.split('.').map((item, idx) => {
+
+         if (item === '-') { return url; }
+
+         return item;
+       });
+    });
+  }
+
+  console.log('[ServiceFramework.Utils.checkAttribute]', final);
+  return final;
+}
