@@ -71,8 +71,30 @@ class DataObject {
 
     _this._resumed = resumed;
 
+
     _this._owner = syncher._owner;
     _this._bus = syncher._bus;
+
+    /*if (resumed && childrens) {
+      _this._childId = _this._getLastChildId();
+      console.log('[Data Object resumed] last ChildId: ', _this._childId);
+    }*/
+  }
+
+  _getLastChildId() {
+    let _this = this;
+
+    let childIdInt = 0;
+    let childIdString = _this._owner + '#' + childIdInt;
+
+
+    Object.keys(_this._childrens).filter((key) => {
+      if (_this._childrens[key].childId > childIdString) {
+        childIdString = _this._childrens[key].childId;
+      }
+    });
+
+    return childIdInt = Number(childIdString.split('#')[1]);
   }
 
   _allocateListeners() {

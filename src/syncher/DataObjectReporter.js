@@ -84,20 +84,27 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
    */
   resumeChildrens(childrens) {
 
+    let childIdString = this._owner + '#' + this._childId;
+
     //setup childrens data from subscription
-    Object.keys(childrens).forEach((childId) => {
-      let childData = childrens[childId];
-      console.log('[DataObjectReporter - new DataObjectChild]: ', childId, childData, this._resumed);
+    Object.keys(childrens).forEach((childrenResource) => {
+      let children = childrens[childrenResource];
+      console.log('[DataObjectReporter - new DataObjectChild]: ', childrenResource, children, this._resumed);
 
       // if is resumed
-      Object.keys(childData).forEach((child) => {
-        this._childrenObjects[child] = new DataObjectChild(this, child, childData[child].value);
-        this._childrenObjects[child].identity = childData[child].identity;
+      Object.keys(children).forEach((childId) => {
+        this._childrenObjects[childId] = new DataObjectChild(this, childId, children[childId].value);
+        this._childrenObjects[childId].identity = children[childId].identity;
 
-        console.log('[DataObjectReporter - new DataObjectChild] - resumed: ', this._childrenObjects[child],  child, childData[child].value);
+        if (childId > childIdString) {
+          childIdString = childId;
+        }
+
+        console.log('[DataObjectReporter - new DataObjectChild] - resumed: ', this._childrenObjects[childId],  childId, children[childId].value);
       });
     });
 
+    this._childId = Number(childIdString.split('#')[1]);
   }
 
   /**
