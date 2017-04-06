@@ -171,34 +171,32 @@ export function checkAttribute(path) {
   let final = [];
   let test = path.match(regex);
 
-  if (test == null){
+  if (test == null) {
     final = path.split('.');
   } else {
-      let m;
-      while ((m = regex.exec(path)) !== null) {
-        // This is necessary to avoid infinite loops with zero-width matches
-        if (m.index === regex.lastIndex) {
-            regex.lastIndex++;
-        }
+    let m;
+    while ((m = regex.exec(path)) !== null) {
+      // This is necessary to avoid infinite loops with zero-width matches
+      if (m.index === regex.lastIndex) {
+        regex.lastIndex++;
+      }
 
-        // The result can be accessed through the `m`-variable.
-        m.forEach((match, groupIndex) => {
-            if (groupIndex === 0) {
-               list.push(match);
-            }
-        });
+      // The result can be accessed through the `m`-variable.
+      m.forEach((match, groupIndex) => {
+        if (groupIndex === 0) {
+          list.push(match);
+        }
+      });
     }
     let result;
     list.forEach((url) => {
+      result = path.replace(url, '-');
 
-       result = path.replace(url, '-')
+      final = result.split('.').map((item) => {
+        if (item === '-') { return url; }
+        return item;
+      });
 
-       final = result.split('.').map((item, idx) => {
-
-         if (item === '-') { return url; }
-
-         return item;
-       });
     });
   }
 

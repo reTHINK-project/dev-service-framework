@@ -20,6 +20,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 **/
+import { deepClone } from '../utils/utils';
 
 import DataObjectReporter from './DataObjectReporter';
 import DataObjectObserver from './DataObjectObserver';
@@ -106,6 +107,11 @@ class Syncher {
   * @return {Promise<DataObjectReporter>} Return Promise to a new Reporter. The reporter can be accepted or rejected by the PEP
   */
   create(schema, observers, initialData, store = false, p2p = false, identity) {
+
+    if (!schema) throw Error('[Syncher - Create] - You need specify the data object schema');
+    if (!observers) throw Error('[Syncher - Create] -The observers should be defined');
+    if (!initialData) throw Error('[Syncher - Create] - You initialData should be defined');
+
     let _this = this;
     let criteria = {};
 
@@ -224,7 +230,10 @@ class Syncher {
     return new Promise((resolve, reject) => {
       let resume = criteria.resume;
       let initialData = criteria.initialData || {};
-      let schema;
+      let schema = criteria.schema;
+
+      initialData.reporter = _this._owner;
+      initialData.schema = criteria.schema;
 
       //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onCreate
       let requestMsg = {
@@ -235,12 +244,8 @@ class Syncher {
       console.log('[syncher - create]: ', criteria, requestMsg);
 
       requestMsg.body.value = initialData;
-      requestMsg.body.value.reporter = _this._owner;
-
-      if (criteria.schema) {
-        schema = criteria.schema;
-        requestMsg.body.schema = criteria.schema;
-      }
+      requestMsg.body.reporter = _this._owner;
+      requestMsg.body.schema = criteria.schema;
 
       if (criteria.p2p) requestMsg.body.p2p = criteria.p2p;
       if (criteria.store) requestMsg.body.store = criteria.store;
@@ -255,11 +260,6 @@ class Syncher {
         if (reply.body.code === 200) {
           //reporter creation accepted
           let objURL = reply.body.resource;
-
-          if (resume) {
-            schema = reply.body.schema;
-            initialData = reply.body.value;
-          }
 
           let newObj = new DataObjectReporter(_this, objURL, schema, 'on', initialData, reply.body.childrenResources);
           _this._reporters[objURL] = newObj;
@@ -314,15 +314,22 @@ class Syncher {
             let objURL = dataObject.resource;
             let schema = dataObject.schema;
             let status = dataObject.status || 'on';
-            let initialData = dataObject.data;
             let childrenResources = dataObject.childrenResources;
 
-            let newObj = new DataObjectReporter(_this, objURL, schema, status, initialData, childrenResources);
+            // initialData.childrens = deepClone(dataObject.childrens) || {};
+            // initialData = deepClone(dataObject.data) || {};
+            let init = deepClone(dataObject.data) || {};
+            let childrens = deepClone(dataObject.childrens) || {};
+
+            console.log('[syncher - create] - create-resumed-dataObjectReporter', objURL, status, init);
+
+            let newObj = new DataObjectReporter(_this, objURL, schema, status, init, childrenResources, false, true);
+            newObj.resumeChildrens(childrens);
             _this._reporters[objURL] = newObj;
+
           }
 
           resolve(_this._reporters);
-
           if (this._onReportersResume) this._onReportersResume(this._reporters);
 
         } else {
@@ -331,7 +338,6 @@ class Syncher {
         }
       });
     });
-
   }
 
   _subscribe(criteria) {
@@ -472,14 +478,17 @@ class Syncher {
             let status = dataObject.status || 'on';
             let objURL = dataObject.resource;
             let version = dataObject.version || 0;
-            let initialData = dataObject.data;
-            if (!initialData.hasOwnProperty('childrens')) { initialData.childrens = {}; }
-            if (!initialData.hasOwnProperty('data')) { initialData.data = {}; }
+            let childrenResources = dataObject.childrenResources;
 
-            // let childrenResources = dataObject.childrenResources;
+            let initialData = {};
+            initialData.childrens = deepClone(dataObject.childrens) || {};
+            initialData.data = deepClone(dataObject.data) || {};
+
 
             //TODO: mutualAuthentication For Further Study
-            let newObj = new DataObjectObserver(_this, objURL, schema, status, initialData, _this._provisionals[objURL].children, version, mutualAuthentication);
+            console.log('[syncher - resume subscribe] - create new dataObject: ', status, initialData, childrenResources, version);
+            let newObj = new DataObjectObserver(_this, objURL, schema, status, initialData, childrenResources, version, mutualAuthentication, true);
+
             _this._observers[objURL] = newObj;
 
             _this._provisionals[objURL].apply(newObj);
