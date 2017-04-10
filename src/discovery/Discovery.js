@@ -248,8 +248,13 @@ class Discovery {
     if(schema || resources) {
       msg.body['criteria'] = {
         resources: resources,
-        dataSchemes: schema
+        dataSchemes: schema,
+        domain: activeDomain
       };
+    }else {
+      msg.body['criteria'] = {
+        domain: activeDomain
+      }
     }
 
     return new Promise(function(resolve, reject) {
@@ -292,8 +297,13 @@ class Discovery {
     if(schema || resources) {
       msg.body['criteria'] = {
         resources: resources,
-        dataSchemes: schema
+        dataSchemes: schema,
+        domain: activeDomain
       };
+    }else {
+      msg.body['criteria'] = {
+        domain: activeDomain
+      }
     }
 
     return new Promise(function(resolve, reject) {
@@ -329,7 +339,8 @@ class Discovery {
       from: _this.discoveryURL,
       to: _this.runtimeURL + '/discovery/',
       body: {
-        resource: '/hyperty/url/' + url
+        resource: '/hyperty/url/' + url,
+        criteria: activeDomain
       }
     };
 
@@ -366,7 +377,8 @@ class Discovery {
       from: _this.discoveryURL,
       to: _this.runtimeURL + '/discovery/',
       body: {
-        resource: '/dataObject/url/' + url
+        resource: '/dataObject/url/' + url,
+        criteria: activeDomain
       }
     };
 
@@ -412,8 +424,13 @@ class Discovery {
     if(schema || resources) {
       msg.body['criteria'] = {
         resources: resources,
-        dataSchemes: schema
+        dataSchemes: schema,
+        domain: activeDomain
       };
+    }else {
+      msg.body['criteria'] = {
+        domain: activeDomain
+      }
     }
 
     return new Promise(function(resolve, reject) {
@@ -459,8 +476,13 @@ class Discovery {
     if(schema || resources) {
       msg.body['criteria'] = {
         resources: resources,
-        dataSchemes: schema
+        dataSchemes: schema,
+        domain: activeDomain
       };
+    }else {
+      msg.body['criteria'] = {
+        domain: activeDomain
+      }
     }
 
     return new Promise(function(resolve, reject) {
