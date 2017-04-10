@@ -35,9 +35,10 @@ class Discovery {
   * @param  {MessageBus}          msgbus                msgbus
   * @param  {RuntimeURL}          runtimeURL            runtimeURL
   */
-  constructor(hypertyURL, msgBus) {
+  constructor(hypertyURL, runtimeURL, msgBus) {
     let _this = this;
     _this.messageBus = msgBus;
+    _this.runtimeURL = runtimeURL;
 
     _this.domain = divideURL(hypertyURL).domain;
     _this.discoveryURL = hypertyURL;
@@ -59,7 +60,7 @@ class Discovery {
     let msg = {
       type: 'read',
       from: _this.discoveryURL,
-      to: 'runtime://' + activeDomain + divideURL(_this.discoveryURL).identity + '/discovery/',
+      to: _this.runtimeURL + '/discovery/',
       body: {
         resource: '/hyperty/userprofile/' + userIdentifier,
       }
@@ -104,7 +105,7 @@ class Discovery {
     let msg = {
       type: 'read',
       from: _this.discoveryURL,
-      to: 'runtime://' + activeDomain + divideURL(_this.discoveryURL).identity + '/discovery/',
+      to: _this.runtimeURL + '/discovery/',
       body: {
         resource: '/dataObject/userprofile/' + userIdentifier,
       }
@@ -149,7 +150,7 @@ class Discovery {
     let msg = {
       type: 'read',
       from: _this.discoveryURL,
-      to: 'runtime://' + activeDomain + divideURL(_this.discoveryURL).identity + '/discovery/',
+      to: _this.runtimeURL + '/discovery/',
       body: {
         resource: '/hyperty/guid/' + guidURL,
       }
@@ -194,7 +195,7 @@ class Discovery {
     let msg = {
       type: 'read',
       from: _this.discoveryURL,
-      to: 'runtime://' + activeDomain + divideURL(_this.discoveryURL).identity + '/discovery/',
+      to: _this.runtimeURL + '/discovery/',
       body: {
         resource: '/dataObject/guid/' + guidURL,
       }
@@ -238,7 +239,7 @@ class Discovery {
     let msg = {
       type: 'read',
       from: _this.discoveryURL,
-      to: 'runtime://' + activeDomain + divideURL(_this.discoveryURL).identity + '/discovery/',
+      to: _this.runtimeURL + '/discovery/',
       body: {
         resource: '/hyperty/user/' + user,
       }
@@ -282,7 +283,7 @@ class Discovery {
     let msg = {
       type: 'read',
       from: _this.discoveryURL,
-      to: 'runtime://' + activeDomain + divideURL(_this.discoveryURL).identity + '/discovery/',
+      to: _this.runtimeURL + '/discovery/',
       body: {
         resource: '/dataObject/user/' + user,
       }
@@ -326,7 +327,7 @@ class Discovery {
     let msg = {
       type: 'read',
       from: _this.discoveryURL,
-      to: 'runtime://' + activeDomain + divideURL(_this.discoveryURL).identity + '/discovery/',
+      to: _this.runtimeURL + '/discovery/',
       body: {
         resource: '/hyperty/url/' + url
       }
@@ -363,7 +364,7 @@ class Discovery {
     let msg = {
       type: 'read',
       from: _this.discoveryURL,
-      to: 'runtime://' + activeDomain + divideURL(_this.discoveryURL).identity + '/discovery/',
+      to: _this.runtimeURL + '/discovery/',
       body: {
         resource: '/dataObject/url/' + url
       }
@@ -402,7 +403,7 @@ class Discovery {
     let msg = {
       type: 'read',
       from: _this.discoveryURL,
-      to: 'runtime://' + activeDomain + divideURL(_this.discoveryURL).identity + '/discovery/',
+      to: _this.runtimeURL + '/discovery/',
       body: {
         resource: '/dataObject/name/' + name
       }
@@ -449,7 +450,7 @@ class Discovery {
     let msg = {
       type: 'read',
       from: _this.discoveryURL,
-      to: 'runtime://' + activeDomain + divideURL(_this.discoveryURL).identity + '/discovery/',
+      to: _this.runtimeURL + '/discovery/',
       body: {
         resource: '/dataObject/reporter/' + reporter
       }
