@@ -293,7 +293,7 @@ Main functionality is to create reporters and to subscribe to existing ones.</p>
         <p>
           
           
-          <span data-ice="name"><span><a href="class/src/syncher/Syncher.js~Syncher.html#instance-method-create">create</a></span></span><span data-ice="signature">(schema: <span>SchemaURL</span>, observers: <span><span>HypertyURL</span><span>[]</span></span>, initialData: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON">JSON</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span>&lt;<span><a href="class/src/syncher/DataObjectReporter.js~DataObjectReporter.html">DataObjectReporter</a></span>&gt;</span>
+          <span data-ice="name"><span><a href="class/src/syncher/Syncher.js~Syncher.html#instance-method-create">create</a></span></span><span data-ice="signature">(schema: <span>SchemaURL</span>, observers: <span><span>HypertyURL</span><span>[]</span></span>, initialData: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON">JSON</a></span>, objectURL: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span>&lt;<span><a href="class/src/syncher/DataObjectReporter.js~DataObjectReporter.html">DataObjectReporter</a></span>&gt;</span>
         </p>
       </div>
       <div>
@@ -377,6 +377,61 @@ Main functionality is to create reporters and to subscribe to existing ones.</p>
         <p>
           
           
+          <span data-ice="name"><span><a href="class/src/syncher/Syncher.js~Syncher.html#instance-method-resumeObservers">resumeObservers</a></span></span><span data-ice="signature">(criteria: <span><a href="class/src/message-factory/MessageBody.js~ReadMessageBody.html#instance-member-criteria">criteria</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span>&lt;<span><a href="class/src/syncher/DataObjectObserver.js~DataObjectObserver.html">DataObjectObserver</a></span>&gt;</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Request a subscription to an existent reporter object.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="class/src/syncher/Syncher.js~Syncher.html#instance-method-resumeReporters">resumeReporters</a></span></span><span data-ice="signature">(criteria: <span>*</span>): <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
           <span data-ice="name"><span><a href="class/src/syncher/Syncher.js~Syncher.html#instance-method-subscribe">subscribe</a></span></span><span data-ice="signature">(schema: <span>SchemaURL</span>, objURL: <span>ObjectURL</span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span>&lt;<span><a href="class/src/syncher/DataObjectObserver.js~DataObjectObserver.html">DataObjectObserver</a></span>&gt;</span>
         </p>
       </div>
@@ -414,7 +469,7 @@ Main functionality is to create reporters and to subscribe to existing ones.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/syncher/Syncher.js.html#lineNumber54">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/syncher/Syncher.js.html#lineNumber55">source</a></span></span>
     </span>
   </h3>
 
@@ -492,7 +547,7 @@ Main functionality is to create reporters and to subscribe to existing ones.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/syncher/Syncher.js.html#lineNumber95">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/syncher/Syncher.js.html#lineNumber96">source</a></span></span>
     </span>
   </h3>
 
@@ -536,7 +591,7 @@ Main functionality is to create reporters and to subscribe to existing ones.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/syncher/Syncher.js.html#lineNumber83">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/syncher/Syncher.js.html#lineNumber84">source</a></span></span>
     </span>
   </h3>
 
@@ -580,7 +635,7 @@ Main functionality is to create reporters and to subscribe to existing ones.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/syncher/Syncher.js.html#lineNumber89">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/syncher/Syncher.js.html#lineNumber90">source</a></span></span>
     </span>
   </h3>
 
@@ -623,11 +678,11 @@ Main functionality is to create reporters and to subscribe to existing ones.</p>
     
     
     
-    <span data-ice="name">create</span><span data-ice="signature">(schema: <span>SchemaURL</span>, observers: <span><span>HypertyURL</span><span>[]</span></span>, initialData: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON">JSON</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span>&lt;<span><a href="class/src/syncher/DataObjectReporter.js~DataObjectReporter.html">DataObjectReporter</a></span>&gt;</span>
+    <span data-ice="name">create</span><span data-ice="signature">(schema: <span>SchemaURL</span>, observers: <span><span>HypertyURL</span><span>[]</span></span>, initialData: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON">JSON</a></span>, objectURL: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span>&lt;<span><a href="class/src/syncher/DataObjectReporter.js~DataObjectReporter.html">DataObjectReporter</a></span>&gt;</span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/syncher/Syncher.js.html#lineNumber104">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/syncher/Syncher.js.html#lineNumber106">source</a></span></span>
     </span>
   </h3>
 
@@ -666,6 +721,13 @@ Main functionality is to create reporters and to subscribe to existing ones.</p>
       <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON">JSON</a></span></td>
       <td data-ice="appendix"></td>
       <td data-ice="description"><p>Initial data of the reporter</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" data-depth="0">objectURL</td>
+      <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>reusable dataObject URL</p>
 </td>
     </tr>
 </tbody>
@@ -715,7 +777,7 @@ Main functionality is to create reporters and to subscribe to existing ones.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/syncher/Syncher.js.html#lineNumber207">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/syncher/Syncher.js.html#lineNumber199">source</a></span></span>
     </span>
   </h3>
 
@@ -776,7 +838,7 @@ This is releated to the messagens sent by create to the observers Hyperty array.
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/syncher/Syncher.js.html#lineNumber181">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/syncher/Syncher.js.html#lineNumber173">source</a></span></span>
     </span>
   </h3>
 
@@ -839,6 +901,151 @@ This is releated to the messagens sent by create to the observers Hyperty array.
   
 </div>
 <div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-resumeObservers">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span data-ice="name">resumeObservers</span><span data-ice="signature">(criteria: <span><a href="class/src/message-factory/MessageBody.js~ReadMessageBody.html#instance-member-criteria">criteria</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span>&lt;<span><a href="class/src/syncher/DataObjectObserver.js~DataObjectObserver.html">DataObjectObserver</a></span>&gt;</span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/syncher/Syncher.js.html#lineNumber159">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Request a subscription to an existent reporter object.</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" data-depth="0">criteria</td>
+      <td data-ice="type"><span><a href="class/src/message-factory/MessageBody.js~ReadMessageBody.html#instance-member-criteria">criteria</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>Information to discovery the observer object</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span>&lt;<span><a href="class/src/syncher/DataObjectObserver.js~DataObjectObserver.html">DataObjectObserver</a></span>&gt;</td>
+          <td class="return-desc" data-ice="returnDescription"><p>Return Promise to a new observer. It&apos;s associated with the reporter.</p>
+</td>
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-resumeReporters">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span data-ice="name">resumeReporters</span><span data-ice="signature">(criteria: <span>*</span>): <span>*</span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/syncher/Syncher.js.html#lineNumber123">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" data-depth="0">criteria</td>
+      <td data-ice="type"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="instance-method-subscribe">
     <span class="access" data-ice="access">public</span>
     
@@ -850,7 +1057,7 @@ This is releated to the messagens sent by create to the observers Hyperty array.
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/syncher/Syncher.js.html#lineNumber141">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/syncher/Syncher.js.html#lineNumber138">source</a></span></span>
     </span>
   </h3>
 

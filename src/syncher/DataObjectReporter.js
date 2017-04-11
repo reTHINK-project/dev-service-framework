@@ -22,6 +22,9 @@
 **/
 
 import DataObject from './DataObject';
+
+import DataObjectChild from './DataObjectChild';
+
 import { deepClone } from '../utils/utils.js';
 
 /**
@@ -42,8 +45,8 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
    * @ignore
    * Should not be used directly by Hyperties. It's called by the Syncher.create method
    */
-  constructor(syncher, url, schema, initialStatus, initialData, childrens) {
-    super(syncher, url, schema, initialStatus, initialData, childrens);
+  constructor(syncher, url, schema, initialStatus, initialData, childrens, mutual, resumed = false) {
+    super(syncher, url, schema, initialStatus, initialData, childrens, mutual, resumed);
     let _this = this;
 
     _this._subscriptions = {};
@@ -74,6 +77,34 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     let _this = this;
 
     _this._objectListener.remove();
+  }
+
+  /**
+   *
+   */
+  resumeChildrens(childrens) {
+
+    let childIdString = this._owner + '#' + this._childId;
+
+    //setup childrens data from subscription
+    Object.keys(childrens).forEach((childrenResource) => {
+      let children = childrens[childrenResource];
+      console.log('[DataObjectReporter - new DataObjectChild]: ', childrenResource, children, this._resumed);
+
+      // if is resumed
+      Object.keys(children).forEach((childId) => {
+        this._childrenObjects[childId] = new DataObjectChild(this, childId, children[childId].value);
+        this._childrenObjects[childId].identity = children[childId].identity;
+
+        if (childId > childIdString) {
+          childIdString = childId;
+        }
+
+        console.log('[DataObjectReporter - new DataObjectChild] - resumed: ', this._childrenObjects[childId],  childId, children[childId].value);
+      });
+    });
+
+    this._childId = Number(childIdString.split('#')[1]);
   }
 
   /**
@@ -158,6 +189,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
   _onSubscribe(msg) {
     let _this = this;
     let hypertyUrl = msg.body.from;
+    console.log('[DataObjectReporter._onSubscribe]', msg);
 
     let event = {
       type: msg.body.type,
@@ -177,11 +209,19 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
           childrenValues[childId] = deepClone(childData);
         });
 
-        //send ok response message
-        _this._bus.postMessage({
+        let sendMsg = {
           id: msg.id, type: 'response', from: msg.to, to: msg.from,
           body: { code: 200, schema: _this._schema, version: _this._version, value: { data: deepClone(_this.data), childrens: childrenValues } }
-        });
+        };
+
+        //TODO: For Further Study
+        if (msg.body.hasOwnProperty('mutualAuthentication') && !msg.body.mutualAuthentication) {
+          sendMsg.body.mutualAuthentication = this._mutualAuthentication;
+          this._mutualAuthentication = msg.body.mutualAuthentication;
+        }
+
+        //send ok response message
+        _this._bus.postMessage(sendMsg);
 
         return sub;
       },

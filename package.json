@@ -9,8 +9,8 @@
     "test": "karma start",
     "test:lint": "eslint --config .eslintrc.yml ./src/",
     "build:doc": "./node_modules/.bin/esdoc -c esdoc.json",
-    "build:dev": "MODE=dev webpack",
-    "build:prod": "MODE=prod webpack",
+    "build:dev": "cross-env MODE=dev webpack",
+    "build:prod": "cross-env MODE=prod webpack",
     "build": "node scripts/transform.js"
   },
   "repository": {
@@ -22,7 +22,7 @@
     "webRTC"
   ],
   "author": "reThink Project",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/reTHINK-project/dev-service-framework/issues"
   },
@@ -42,6 +42,7 @@
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
     "chai-json-schema": "^1.4.0",
+    "cross-env": "^3.1.4",
     "dexie": "^1.5.1",
     "esdoc": "^0.5.2",
     "eslint": "^3.12.2",
@@ -51,25 +52,23 @@
     "gulp-jsonschema-bundle": "0.0.2",
     "js-base64": "^2.1.9",
     "karma": "^1.3.0",
-    "karma-browserify": "^4.4.0",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^2.0.0",
     "karma-coverage": "^1.1.1",
     "karma-mocha": "^1.3.0",
     "karma-mocha-reporter": "^2.2.1",
     "karma-sinon": "^1.0.5",
-    "karma-webpack": "^1.8.0",
+    "karma-webpack": "^2.0.2",
     "merge-stream": "^1.0.1",
-    "mocha": "^2.3.3",
+    "mocha": "^3.2.0",
     "mocha-loader": "^1.1.0",
-    "proxy-observe": "0.0.19",
+    "proxy-observe": "^0.0.21",
     "recast": "~0.10.29",
     "sinon": "^1.17.7",
     "sinon-chai": "^2.8.0",
     "tr46": "0.0.2",
     "tv4": "^1.2.7",
     "type-detect": "^1.0.0",
-    "webpack": "^2.2.0-rc.1",
-    "webpack-append": "^0.1.2"
+    "webpack": "^2.2.0"
   }
 }

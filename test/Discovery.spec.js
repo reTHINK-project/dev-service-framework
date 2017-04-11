@@ -8,6 +8,7 @@ chai.use(chaiAsPromised);
 
 describe('Discovery', function() {
   let domain = 'ist.pt';
+  let runtimeURL = 'runtimeURL';
   let messageBus = {
     postMessage: (msg, replyCallback) => {
 
@@ -55,7 +56,7 @@ describe('Discovery', function() {
     }
   };
 
-  let hypertyDiscovery = new HypertyDiscovery(domain, messageBus);
+  let hypertyDiscovery = new HypertyDiscovery(domain, runtimeURL, messageBus);
 
   describe('constructor()', function() {
     it('should create a HypertyDiscovery object without error', function() {
@@ -64,13 +65,14 @@ describe('Discovery', function() {
   });
 
   describe('discoverHypertyPerUser()', function() {
-    it('should return a Promise with an Identity using the defauld domain', function(done) {
+    it('should return a Promise with an Identity using the default domain', function(done) {
 
       let expectedMessage = {id: 'openidtest10@gmail.com',
                             descriptor: 'hyperty-catalogue://ist.pt/.well-known/hyperty/HelloHyperty',
                             hypertyURL: 'hyperty://ist.pt/1'};
 
-      expect(hypertyDiscovery.discoverHypertyPerUser('openidtest10@gmail.com').then(function(response) {
+        expect(hypertyDiscovery.discoverHypertyPerUser('openidtest10@gmail.com').then(function(response) {
+        console.log('Response->', response);
         return response;
       })).to.be.fulfilled.and.eventually.eql(expectedMessage).and.notify(done);
 

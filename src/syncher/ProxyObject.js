@@ -1,4 +1,7 @@
 import 'proxy-observe';
+import {parseAttributes} from '../utils/utils';
+
+const objectType = {ARRAY: '[object Array]', OBJECT: '[object Object]' };
 
 /**
  * @access private
@@ -25,14 +28,14 @@ class SyncObject {
   }
 
   find(path) {
-    let list = path.split('.');
+    let list = parseAttributes(path);
 
     return this._findWithSplit(list);
   }
 
   findBefore(path) {
     let result = {};
-    let list = path.split('.');
+    let list = parseAttributes(path);
     result.last = list.pop();
     result.obj = this._findWithSplit(list);
 
@@ -48,32 +51,9 @@ class SyncObject {
     return obj;
   }
 
-  _isObservable(obj) {
-    if (obj.constructor === Object || obj.constructor === Array) {
-      return true;
-    }
-
-    return false;
-  }
-
-
   _internalObserve(object) {
 
     let handler = (changeset) => {
-
-      changeset.forEach((change) => {
-        if (change.newValue && change.newValue instanceof Object) {
-          if (change.newValue instanceof Object) {
-            let o = Object.deepObserve(change.newValue, handler);
-            object[change.keypath] = o;
-          }
-
-          if (change.newValue instanceof Array) {
-            let o = Array.observe(change.newValue, handler);
-            object[change.keypath] = o;
-          }
-        }
-      });
 
       changeset.every((change) => {
         this._onChanges(change);
@@ -112,9 +92,9 @@ class SyncObject {
     //let oldValue = change.oldValue;
     let newValue = obj[change.name];
 
-    console.info(change.type + ' | Field: ' + fieldString + ' | New Value:', JSON.stringify(newValue));
+    // console.info(change.type + ' | Field: ' + fieldString + ' | New Value:', JSON.stringify(newValue), fieldString.includes('length'));
 
-    if (change.type === 'update') {
+    if (change.type === 'update' && !fieldString.includes('.length')) {
       this._fireEvent({
         cType: ChangeType.UPDATE,
         oType: objType,

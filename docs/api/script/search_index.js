@@ -1171,79 +1171,79 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/test/RuntimeCatalogue.spec.js.html#lineNumber36",
+    "test-file/test/RuntimeCatalogue.spec.js.html#lineNumber35",
     "Runtime Catalogue",
     "test"
   ],
   [
     "",
-    "test-file/test/RuntimeCatalogue.spec.js.html#lineNumber107",
+    "test-file/test/RuntimeCatalogue.spec.js.html#lineNumber106",
     "Runtime Catalogue should NOT get hyperty",
     "test"
   ],
   [
     "",
-    "test-file/test/RuntimeCatalogue.spec.js.html#lineNumber91",
+    "test-file/test/RuntimeCatalogue.spec.js.html#lineNumber90",
     "Runtime Catalogue should get dataschema descriptor",
     "test"
   ],
   [
     "",
-    "test-file/test/RuntimeCatalogue.spec.js.html#lineNumber50",
+    "test-file/test/RuntimeCatalogue.spec.js.html#lineNumber49",
     "Runtime Catalogue should get hyperty descriptor",
     "test"
   ],
   [
     "",
-    "test-file/test/RuntimeCatalogue.spec.js.html#lineNumber67",
+    "test-file/test/RuntimeCatalogue.spec.js.html#lineNumber66",
     "Runtime Catalogue should get hyperty source code",
     "test"
   ],
   [
     "",
-    "test-file/test/RuntimeCatalogue.spec.js.html#lineNumber99",
+    "test-file/test/RuntimeCatalogue.spec.js.html#lineNumber98",
     "Runtime Catalogue should get idpproxy descriptor",
     "test"
   ],
   [
     "",
-    "test-file/test/RuntimeCatalogue.spec.js.html#lineNumber75",
+    "test-file/test/RuntimeCatalogue.spec.js.html#lineNumber74",
     "Runtime Catalogue should get protostub descriptor",
     "test"
   ],
   [
     "",
-    "test-file/test/RuntimeCatalogue.spec.js.html#lineNumber83",
+    "test-file/test/RuntimeCatalogue.spec.js.html#lineNumber82",
     "Runtime Catalogue should get runtime descriptor",
     "test"
   ],
   [
     "",
-    "test-file/test/RuntimeCatalogue.spec.js.html#lineNumber59",
+    "test-file/test/RuntimeCatalogue.spec.js.html#lineNumber58",
     "Runtime Catalogue should get sourcePackage",
     "test"
   ],
   [
     "",
-    "test-file/test/RuntimeCapabilities.spec.js.html#lineNumber15",
+    "test-file/test/RuntimeCapabilities.spec.js.html#lineNumber17",
     "Runtime Runtime Capabilities",
     "test"
   ],
   [
     "",
-    "test-file/test/RuntimeCapabilities.spec.js.html#lineNumber119",
+    "test-file/test/RuntimeCapabilities.spec.js.html#lineNumber121",
     "Runtime Runtime Capabilities should return a promise with RuntimeCapabilities and save on storageManager",
     "test"
   ],
   [
     "",
-    "test-file/test/RuntimeCapabilities.spec.js.html#lineNumber127",
+    "test-file/test/RuntimeCapabilities.spec.js.html#lineNumber129",
     "Runtime Runtime Capabilities should return if a capability was available",
     "test"
   ],
   [
     "",
-    "test-file/test/RuntimeCapabilities.spec.js.html#lineNumber153",
+    "test-file/test/RuntimeCapabilities.spec.js.html#lineNumber155",
     "Runtime Runtime Capabilities should update the previous capabilites",
     "test"
   ],
@@ -1441,25 +1441,25 @@ window.esdocSearchIndex = [
   ],
   [
     "src/catalogue-factory/cataloguedataobject.js~cataloguedataobject#description",
-    "class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html#instance-set-description",
-    "src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject#description",
-    "member"
-  ],
-  [
-    "src/catalogue-factory/cataloguedataobject.js~cataloguedataobject#description",
     "class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html#instance-get-description",
     "src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject#description",
     "member"
   ],
   [
-    "src/catalogue-factory/cataloguedataobject.js~cataloguedataobject#guid",
-    "class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html#instance-get-guid",
-    "src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject#guid",
+    "src/catalogue-factory/cataloguedataobject.js~cataloguedataobject#description",
+    "class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html#instance-set-description",
+    "src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject#description",
     "member"
   ],
   [
     "src/catalogue-factory/cataloguedataobject.js~cataloguedataobject#guid",
     "class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html#instance-set-guid",
+    "src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject#guid",
+    "member"
+  ],
+  [
+    "src/catalogue-factory/cataloguedataobject.js~cataloguedataobject#guid",
+    "class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html#instance-get-guid",
     "src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject#guid",
     "member"
   ],
@@ -1489,13 +1489,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/catalogue-factory/cataloguedataobject.js~cataloguedataobject#signature",
-    "class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html#instance-get-signature",
+    "class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html#instance-set-signature",
     "src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject#signature",
     "member"
   ],
   [
     "src/catalogue-factory/cataloguedataobject.js~cataloguedataobject#signature",
-    "class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html#instance-set-signature",
+    "class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html#instance-get-signature",
     "src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject#signature",
     "member"
   ],
@@ -1537,13 +1537,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/catalogue-factory/cataloguedataobject.js~cataloguedataobject#version",
-    "class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html#instance-set-version",
+    "class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html#instance-get-version",
     "src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject#version",
     "member"
   ],
   [
     "src/catalogue-factory/cataloguedataobject.js~cataloguedataobject#version",
-    "class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html#instance-get-version",
+    "class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html#instance-set-version",
     "src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject#version",
     "member"
   ],
@@ -1747,13 +1747,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/catalogue-factory/hypertyinterceptordescriptor.js~policyenforcerdescriptor#configuration",
-    "class/src/catalogue-factory/HypertyInterceptorDescriptor.js~PolicyEnforcerDescriptor.html#instance-set-configuration",
+    "class/src/catalogue-factory/HypertyInterceptorDescriptor.js~PolicyEnforcerDescriptor.html#instance-get-configuration",
     "src/catalogue-factory/HypertyInterceptorDescriptor.js~PolicyEnforcerDescriptor#configuration",
     "member"
   ],
   [
     "src/catalogue-factory/hypertyinterceptordescriptor.js~policyenforcerdescriptor#configuration",
-    "class/src/catalogue-factory/HypertyInterceptorDescriptor.js~PolicyEnforcerDescriptor.html#instance-get-configuration",
+    "class/src/catalogue-factory/HypertyInterceptorDescriptor.js~PolicyEnforcerDescriptor.html#instance-set-configuration",
     "src/catalogue-factory/HypertyInterceptorDescriptor.js~PolicyEnforcerDescriptor#configuration",
     "member"
   ],
@@ -1765,13 +1765,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/catalogue-factory/hypertyinterceptordescriptor.js~policyenforcerdescriptor#policies",
-    "class/src/catalogue-factory/HypertyInterceptorDescriptor.js~PolicyEnforcerDescriptor.html#instance-set-policies",
+    "class/src/catalogue-factory/HypertyInterceptorDescriptor.js~PolicyEnforcerDescriptor.html#instance-get-policies",
     "src/catalogue-factory/HypertyInterceptorDescriptor.js~PolicyEnforcerDescriptor#policies",
     "member"
   ],
   [
     "src/catalogue-factory/hypertyinterceptordescriptor.js~policyenforcerdescriptor#policies",
-    "class/src/catalogue-factory/HypertyInterceptorDescriptor.js~PolicyEnforcerDescriptor.html#instance-get-policies",
+    "class/src/catalogue-factory/HypertyInterceptorDescriptor.js~PolicyEnforcerDescriptor.html#instance-set-policies",
     "src/catalogue-factory/HypertyInterceptorDescriptor.js~PolicyEnforcerDescriptor#policies",
     "member"
   ],
@@ -1813,25 +1813,25 @@ window.esdocSearchIndex = [
   ],
   [
     "src/catalogue-factory/hypertyruntimedescriptor.js~hypertyruntimedescriptor#p2prequesterstub",
-    "class/src/catalogue-factory/HypertyRuntimeDescriptor.js~HypertyRuntimeDescriptor.html#instance-set-p2pRequesterStub",
-    "src/catalogue-factory/HypertyRuntimeDescriptor.js~HypertyRuntimeDescriptor#p2pRequesterStub",
-    "member"
-  ],
-  [
-    "src/catalogue-factory/hypertyruntimedescriptor.js~hypertyruntimedescriptor#p2prequesterstub",
     "class/src/catalogue-factory/HypertyRuntimeDescriptor.js~HypertyRuntimeDescriptor.html#instance-get-p2pRequesterStub",
     "src/catalogue-factory/HypertyRuntimeDescriptor.js~HypertyRuntimeDescriptor#p2pRequesterStub",
     "member"
   ],
   [
-    "src/catalogue-factory/hypertyruntimedescriptor.js~hypertyruntimedescriptor#protocolcapabilities",
-    "class/src/catalogue-factory/HypertyRuntimeDescriptor.js~HypertyRuntimeDescriptor.html#instance-set-protocolCapabilities",
-    "src/catalogue-factory/HypertyRuntimeDescriptor.js~HypertyRuntimeDescriptor#protocolCapabilities",
+    "src/catalogue-factory/hypertyruntimedescriptor.js~hypertyruntimedescriptor#p2prequesterstub",
+    "class/src/catalogue-factory/HypertyRuntimeDescriptor.js~HypertyRuntimeDescriptor.html#instance-set-p2pRequesterStub",
+    "src/catalogue-factory/HypertyRuntimeDescriptor.js~HypertyRuntimeDescriptor#p2pRequesterStub",
     "member"
   ],
   [
     "src/catalogue-factory/hypertyruntimedescriptor.js~hypertyruntimedescriptor#protocolcapabilities",
     "class/src/catalogue-factory/HypertyRuntimeDescriptor.js~HypertyRuntimeDescriptor.html#instance-get-protocolCapabilities",
+    "src/catalogue-factory/HypertyRuntimeDescriptor.js~HypertyRuntimeDescriptor#protocolCapabilities",
+    "member"
+  ],
+  [
+    "src/catalogue-factory/hypertyruntimedescriptor.js~hypertyruntimedescriptor#protocolcapabilities",
+    "class/src/catalogue-factory/HypertyRuntimeDescriptor.js~HypertyRuntimeDescriptor.html#instance-set-protocolCapabilities",
     "src/catalogue-factory/HypertyRuntimeDescriptor.js~HypertyRuntimeDescriptor#protocolCapabilities",
     "member"
   ],
@@ -1951,13 +1951,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/catalogue-factory/protocolstubdescriptor.js~protocolstubdescriptor#configuration",
-    "class/src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor.html#instance-get-configuration",
+    "class/src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor.html#instance-set-configuration",
     "src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor#configuration",
     "member"
   ],
   [
     "src/catalogue-factory/protocolstubdescriptor.js~protocolstubdescriptor#configuration",
-    "class/src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor.html#instance-set-configuration",
+    "class/src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor.html#instance-get-configuration",
     "src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor#configuration",
     "member"
   ],
@@ -2041,13 +2041,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/catalogue-factory/protocolstubdescriptor.js~protocolstubdescriptor#mutualauthentication",
-    "class/src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor.html#instance-set-mutualAuthentication",
+    "class/src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor.html#instance-get-mutualAuthentication",
     "src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor#mutualAuthentication",
     "member"
   ],
   [
     "src/catalogue-factory/protocolstubdescriptor.js~protocolstubdescriptor#mutualauthentication",
-    "class/src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor.html#instance-get-mutualAuthentication",
+    "class/src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor.html#instance-set-mutualAuthentication",
     "src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor#mutualAuthentication",
     "member"
   ],
@@ -2077,13 +2077,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/catalogue-factory/runtimeconstraint.js~runtimeconstraint#runtimehypertycapabilitytype",
-    "class/src/catalogue-factory/RuntimeConstraint.js~RuntimeConstraint.html#instance-set-runtimeHypertyCapabilityType",
+    "class/src/catalogue-factory/RuntimeConstraint.js~RuntimeConstraint.html#instance-get-runtimeHypertyCapabilityType",
     "src/catalogue-factory/RuntimeConstraint.js~RuntimeConstraint#runtimeHypertyCapabilityType",
     "member"
   ],
   [
     "src/catalogue-factory/runtimeconstraint.js~runtimeconstraint#runtimehypertycapabilitytype",
-    "class/src/catalogue-factory/RuntimeConstraint.js~RuntimeConstraint.html#instance-get-runtimeHypertyCapabilityType",
+    "class/src/catalogue-factory/RuntimeConstraint.js~RuntimeConstraint.html#instance-set-runtimeHypertyCapabilityType",
     "src/catalogue-factory/RuntimeConstraint.js~RuntimeConstraint#runtimeHypertyCapabilityType",
     "member"
   ],
@@ -2101,25 +2101,25 @@ window.esdocSearchIndex = [
   ],
   [
     "src/catalogue-factory/sourcepackage.js~sourcepackage#encoding",
-    "class/src/catalogue-factory/SourcePackage.js~SourcePackage.html#instance-set-encoding",
-    "src/catalogue-factory/SourcePackage.js~SourcePackage#encoding",
-    "member"
-  ],
-  [
-    "src/catalogue-factory/sourcepackage.js~sourcepackage#encoding",
     "class/src/catalogue-factory/SourcePackage.js~SourcePackage.html#instance-get-encoding",
     "src/catalogue-factory/SourcePackage.js~SourcePackage#encoding",
     "member"
   ],
   [
-    "src/catalogue-factory/sourcepackage.js~sourcepackage#signature",
-    "class/src/catalogue-factory/SourcePackage.js~SourcePackage.html#instance-get-signature",
-    "src/catalogue-factory/SourcePackage.js~SourcePackage#signature",
+    "src/catalogue-factory/sourcepackage.js~sourcepackage#encoding",
+    "class/src/catalogue-factory/SourcePackage.js~SourcePackage.html#instance-set-encoding",
+    "src/catalogue-factory/SourcePackage.js~SourcePackage#encoding",
     "member"
   ],
   [
     "src/catalogue-factory/sourcepackage.js~sourcepackage#signature",
     "class/src/catalogue-factory/SourcePackage.js~SourcePackage.html#instance-set-signature",
+    "src/catalogue-factory/SourcePackage.js~SourcePackage#signature",
+    "member"
+  ],
+  [
+    "src/catalogue-factory/sourcepackage.js~sourcepackage#signature",
+    "class/src/catalogue-factory/SourcePackage.js~SourcePackage.html#instance-get-signature",
     "src/catalogue-factory/SourcePackage.js~SourcePackage#signature",
     "member"
   ],
@@ -2137,13 +2137,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/catalogue-factory/sourcepackage.js~sourcepackage#sourcecodeclassname",
-    "class/src/catalogue-factory/SourcePackage.js~SourcePackage.html#instance-get-sourceCodeClassname",
+    "class/src/catalogue-factory/SourcePackage.js~SourcePackage.html#instance-set-sourceCodeClassname",
     "src/catalogue-factory/SourcePackage.js~SourcePackage#sourceCodeClassname",
     "member"
   ],
   [
     "src/catalogue-factory/sourcepackage.js~sourcepackage#sourcecodeclassname",
-    "class/src/catalogue-factory/SourcePackage.js~SourcePackage.html#instance-set-sourceCodeClassname",
+    "class/src/catalogue-factory/SourcePackage.js~SourcePackage.html#instance-get-sourceCodeClassname",
     "src/catalogue-factory/SourcePackage.js~SourcePackage#sourceCodeClassname",
     "member"
   ],
@@ -2833,13 +2833,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/runtime-catalogue/runtimecatalogue.js~runtimecatalogue#runtimeurl",
-    "class/src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue.html#instance-set-runtimeURL",
+    "class/src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue.html#instance-get-runtimeURL",
     "src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue#runtimeURL",
     "member"
   ],
   [
     "src/runtime-catalogue/runtimecatalogue.js~runtimecatalogue#runtimeurl",
-    "class/src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue.html#instance-get-runtimeURL",
+    "class/src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue.html#instance-set-runtimeURL",
     "src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue#runtimeURL",
     "member"
   ],
@@ -3112,6 +3112,18 @@ window.esdocSearchIndex = [
     "class/src/syncher/Syncher.js~Syncher.html#instance-get-reporters",
     "src/syncher/Syncher.js~Syncher#reporters",
     "member"
+  ],
+  [
+    "src/syncher/syncher.js~syncher#resumeobservers",
+    "class/src/syncher/Syncher.js~Syncher.html#instance-method-resumeObservers",
+    "src/syncher/Syncher.js~Syncher#resumeObservers",
+    "method"
+  ],
+  [
+    "src/syncher/syncher.js~syncher#resumereporters",
+    "class/src/syncher/Syncher.js~Syncher.html#instance-method-resumeReporters",
+    "src/syncher/Syncher.js~Syncher#resumeReporters",
+    "method"
   ],
   [
     "src/syncher/syncher.js~syncher#subscribe",
