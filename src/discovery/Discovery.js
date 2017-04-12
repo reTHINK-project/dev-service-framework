@@ -49,13 +49,9 @@ class Discovery {
   * @param  {String}           userIdentifier
   * @param  {Array<string>}    schema (Optional)     types of hyperties schemas
   * @param  {Array<string>}    resources (Optional)  types of hyperties resources
-  * @param  {String}           domain (Optional)     domain of the registry to search
   */
-  discoverHypertiesPerUserProfileData(userIdentifier, schema, resources, domain) {
+  discoverHypertiesPerUserProfileData(userIdentifier, schema, resources) {
     let _this = this;
-    let activeDomain;
-
-    activeDomain = (!domain) ? _this.domain : domain;
 
     let msg = {
       type: 'read',
@@ -94,13 +90,9 @@ class Discovery {
   * @param  {String}           userIdentifier
   * @param  {Array<string>}    schema (Optional)     types of hyperties schemas
   * @param  {Array<string>}    resources (Optional)  types of hyperties resources
-  * @param  {String}           domain (Optional)     domain of the registry to search
   */
-  discoverDataObjectsPerUserProfileData(userIdentifier, schema, resources, domain) {
+  discoverDataObjectsPerUserProfileData(userIdentifier, schema, resources) {
     let _this = this;
-    let activeDomain;
-
-    activeDomain = (!domain) ? _this.domain : domain;
 
     let msg = {
       type: 'read',
@@ -139,13 +131,9 @@ class Discovery {
   * @param  {String}           guidURL                guid URL e.g user-guid://<unique-user-identifier>
   * @param  {Array<string>}    schema (Optional)     types of hyperties schemas
   * @param  {Array<string>}    resources (Optional)  types of hyperties resources
-  * @param  {String}           domain (Optional)     domain of the registry to search
   */
-  discoverHypertiesPerGUID(guidURL, schema, resources, domain) {
+  discoverHypertiesPerGUID(guidURL, schema, resources) {
     let _this = this;
-    let activeDomain;
-
-    activeDomain = (!domain) ? _this.domain : domain;
 
     let msg = {
       type: 'read',
@@ -186,11 +174,8 @@ class Discovery {
   * @param  {Array<string>}    resources (Optional)  types of hyperties resources
   * @param  {String}           domain (Optional)     domain of the registry to search
   */
-  discoverDataObjectsPerGUID(guidURL, schema, resources, domain) {
+  discoverDataObjectsPerGUID(guidURL, schema, resources) {
     let _this = this;
-    let activeDomain;
-
-    activeDomain = (!domain) ? _this.domain : domain;
 
     let msg = {
       type: 'read',
@@ -340,7 +325,9 @@ class Discovery {
       to: _this.runtimeURL + '/discovery/',
       body: {
         resource: '/hyperty/url/' + url,
-        criteria: activeDomain
+        criteria: {
+          domain: activeDomain
+        }
       }
     };
 
@@ -378,7 +365,9 @@ class Discovery {
       to: _this.runtimeURL + '/discovery/',
       body: {
         resource: '/dataObject/url/' + url,
-        criteria: activeDomain
+        criteria: {
+          domain: activeDomain
+        }
       }
     };
 
