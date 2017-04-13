@@ -50,6 +50,21 @@ class Discovery {
   * @param  {Array<string>}    schema (Optional)     types of hyperties schemas
   * @param  {Array<string>}    resources (Optional)  types of hyperties resources
   */
+  _isLegacyUser(userIdentifier) {
+    if (userIdentifier.includes(':') && !userIdentifier.includes('user://')) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+
+  /**
+  * Advanced Search for Hyperties registered in domain registry associated with some user identifier (eg email, name ...)
+  * @param  {String}           userIdentifier
+  * @param  {Array<string>}    schema (Optional)     types of hyperties schemas
+  * @param  {Array<string>}    resources (Optional)  types of hyperties resources
+  */
   discoverHypertiesPerUserProfileData(userIdentifier, schema, resources) {
     let _this = this;
 
@@ -71,17 +86,22 @@ class Discovery {
 
     return new Promise(function(resolve, reject) {
 
-      _this.messageBus.postMessage(msg, (reply) => {
+      if (!_this._isLegacyUser(userIdentifier)) {// todo: to reomve when discovery of legcay users are supported
+        _this.messageBus.postMessage(msg, (reply) => {
 
-        if(reply.body.code === 200){
-          console.log("Reply log: ",reply.body.value);
-          resolve(reply.body.value);
-        }
-        else {
-          console.log("Error Log: ", reply.body.description);
-          reject(reply.body.description);
-        }
-      });
+          if(reply.body.code === 200){
+            console.log("Reply log: ",reply.body.value);
+            resolve(reply.body.value);
+          }
+          else {
+            console.log("Error Log: ", reply.body.description);
+            reject(reply.body.description);
+          }
+        });
+      } else {
+        resolve({hypertyID: userIdentifier});
+      }
+
     });
   }
 
@@ -112,6 +132,8 @@ class Discovery {
 
     return new Promise(function(resolve, reject) {
 
+    if (!_this._isLegacyUser(userIdentifier)) {// todo: to reomve when discovery of legcay users are supported
+
       _this.messageBus.postMessage(msg, (reply) => {
 
         if(reply.body.code === 200){
@@ -123,6 +145,10 @@ class Discovery {
           reject(reply.body.description);
         }
       });
+    } else {
+      resolve({hypertyID: userIdentifier});
+    }
+
     });
   }
 
@@ -244,17 +270,23 @@ class Discovery {
 
     return new Promise(function(resolve, reject) {
 
-      _this.messageBus.postMessage(msg, (reply) => {
+      if (!_this._isLegacyUser(user)) {// todo: to reomve when discovery of legcay users are supported
 
-        if(reply.body.code === 200){
-          console.log("Reply log: ",reply.body.value);
-          resolve(reply.body.value);
-        }
-        else {
-          console.log("Error Log: ", reply.body.description);
-          reject(reply.body.description);
-        }
-      });
+        _this.messageBus.postMessage(msg, (reply) => {
+
+          if(reply.body.code === 200){
+            console.log("Reply log: ",reply.body.value);
+            resolve(reply.body.value);
+          }
+          else {
+            console.log("Error Log: ", reply.body.description);
+            reject(reply.body.description);
+          }
+        });
+      } else {
+        resolve({hypertyID: user});
+      }
+
     });
   }
 
