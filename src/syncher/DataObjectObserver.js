@@ -46,8 +46,10 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
    */
 
   //TODO: For Further Study
-  constructor(syncher, url, schema, initialStatus, initialData, childrens, initialVersion, mutual, resumed = false) {
-    super(syncher, url, schema, initialStatus, initialData.data, childrens, mutual, resumed);
+  constructor(syncher, url, created, reporter, runtime, schema, name, initialStatus, initialData, childrens, initialVersion, mutual, resumed = false, description, tags, resources, observerStorage, publicObservation) {
+
+    super(syncher, url, created, reporter, runtime, schema, name, initialStatus, initialData.data, childrens, mutual, resumed, description, tags, resources, observerStorage, publicObservation);
+
     let _this = this;
 
     _this._version = initialVersion;

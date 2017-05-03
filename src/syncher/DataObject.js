@@ -51,12 +51,21 @@ class DataObject {
    * @ignore
    * Should not be used directly by Hyperties. It's called by the Syncher create or subscribe method's
    */
-  constructor(syncher, url, schema, initialStatus, initialData, childrens, mutual = true, resumed = false) {
+  constructor(syncher, url, created, reporter, runtime, schema, name, initialStatus, initialData, childrens, mutual = true, resumed = false, description, tags, resources, observerStorage, publicObservation) {
     let _this = this;
 
-    _this._syncher = syncher;
-    _this._url = url;
-    _this._schema = schema;
+    function throwMandatoryParmMissingError(par) {
+      throw '[DataObject] ' + par + ' mandatory parameter is missing';
+    }
+
+    syncher ? _this._syncher = syncher : throwMandatoryParmMissingError('syncher');
+    url ?  _this._url = url : throwMandatoryParmMissingError('url');
+    created ? _this._created = created : throwMandatoryParmMissingError('created');
+    reporter ? _this._reporter = reporter : throwMandatoryParmMissingError('reporter');
+    runtime ? _this._runtime = runtime : throwMandatoryParmMissingError('runtime');
+    schema ? _this._schema = schema : throwMandatoryParmMissingError('schema');
+    name ? _this._name = name : throwMandatoryParmMissingError('name');
+
     _this._status = initialStatus;
     _this._syncObj = new SyncObject(initialData);
     _this._childrens = childrens;
@@ -71,9 +80,15 @@ class DataObject {
 
     _this._resumed = resumed;
 
-
     _this._owner = syncher._owner;
     _this._bus = syncher._bus;
+
+    if (description) _this._description = description;
+    if (tags) _this._tags = tags;
+    if (resources) _this._resources = resources;
+    if (observerStorage) _this._observerStorage = observerStorage;
+    if (publicObservation) _this._publicObservation = publicObservation;
+
 
     /*if (resumed && childrens) {
       _this._childId = _this._getLastChildId();

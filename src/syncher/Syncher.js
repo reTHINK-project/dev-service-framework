@@ -60,6 +60,7 @@ class Syncher {
     _this._bus = bus;
 
     _this._subURL = config.runtimeURL + '/sm';
+    _this._runtimeUrl = config.runtimeURL;
 
     _this._reporters = {};
     _this._observers = {};
@@ -106,11 +107,12 @@ class Syncher {
   * @param  {MessageBodyIdentity} identity - (optional) identity data to be added to identity the user reporter. To be used for legacy identities.
   * @return {Promise<DataObjectReporter>} Return Promise to a new Reporter. The reporter can be accepted or rejected by the PEP
   */
-  create(schema, observers, initialData, store = false, p2p = false, identity) {
+  create(schema, observers, initialData, store = false, p2p = false, name = 'data object without name', identity, description, tags, resources, observerStorage, publicObservation) {
 
     if (!schema) throw Error('[Syncher - Create] - You need specify the data object schema');
     if (!observers) throw Error('[Syncher - Create] -The observers should be defined');
-    if (!initialData) throw Error('[Syncher - Create] - You initialData should be defined');
+    //if (!initialData) throw Error('[Syncher - Create] - You initialData should be defined');
+    //todo:
 
     let _this = this;
     let criteria = {};
@@ -119,9 +121,15 @@ class Syncher {
     criteria.store = store;
     criteria.schema = schema;
     criteria.observers = observers;
-    criteria.initialData = initialData;
+    (initialData) ? criteria.initialData = initialData : criteria.initialData = {};
+    criteria.name = name;
 
+    if (description)      { criteria.description = description; }
     if (identity)      { criteria.identity = identity; }
+    if (tags)      { criteria.tags = tags; }
+    if (resources)      { criteria.resources = resources; }
+    if (observerStorage)      { criteria.observerStorage = observerStorage; }
+    if (publicObservation)      { criteria.publicObservation = publicObservation; }
 
     Object.assign(criteria, {resume: false});
 
@@ -232,8 +240,9 @@ class Syncher {
       let initialData = criteria.initialData || {};
       let schema = criteria.schema;
 
-      initialData.reporter = _this._owner;
-      initialData.schema = criteria.schema;
+      //pch: I've commented since this is not data
+      /*initialData.reporter = _this._owner;
+      initialData.schema = criteria.schema;*/
 
       //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onCreate
       let requestMsg = {
@@ -261,7 +270,13 @@ class Syncher {
           //reporter creation accepted
           let objURL = reply.body.resource;
 
-          let newObj = new DataObjectReporter(_this, objURL, schema, 'on', initialData, reply.body.childrenResources);
+          let created = (new Date).toISOString();
+
+          // pch: ffs what about also using literals in the DataObject constructor?
+
+          let newObj = new DataObjectReporter(_this, objURL, created, _this._owner,  _this._runtimeUrl, schema,
+             criteria.name, 'on', initialData, reply.body.childrenResources, criteria.mutual, resume, criteria.description, criteria.tags, criteria.resources, criteria.observerStorage, criteria.publicObservation);
+
           _this._reporters[objURL] = newObj;
 
           resolve(newObj);
