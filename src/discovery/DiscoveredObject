@@ -32,8 +32,10 @@ class DiscoveredObject {
     return this._data;
   }
 
-  constructor (data, msgBus) {
+  constructor (data, runtimeURL, discoveryURL, msgBus) {
     this._data = data;
+    this._runtimeURL = runtimeURL;
+    this._discoveredObjectURL = discoveryURL + '/discoveredobject/';
     this._messageBus = msgBus;
     this._subscribers = {
       live: {},
@@ -41,14 +43,60 @@ class DiscoveredObject {
     };
   }
 
-  onLive(subscriber, callback) {
+  onLive(url, subscriber, callback) {
     this._subscribers.live[subscriber] = callback;
+
     //Send message to the NotificationManager through MessageBus
+    const msg = {
+      type: 'subscribe',
+      from: this._discoveredObjectURL,
+      to: this._runtimeURL + '/nm/',
+      body: {
+        subscribe: url,
+        status: 'live'
+      }
+    };
+
+    return new Promise(function(resolve, reject) {
+
+      this._messageBus.postMessage(msg, (reply) => {
+        console.log("[DiscoveredObject.onLive] rcved reply ", reply);
+        //What should happen here? Update map?
+
+        if(reply.body.code === 200)
+          resolve();
+        else
+          reject();
+      });
+    });
   }
 
-  onDisconnected(subscriber, callback) {
+  onDisconnected(url, subscriber, callback) {
     this._subscribers.disconnected[subscriber] = callback;
+
     //Send message to the NotificationManager through MessageBus
+    const msg = {
+      type: 'subscribe',
+      from: this._discoveredObjectURL,
+      to: this._runtimeURL + '/nm/',
+      body: {
+        subscribe: url,
+        status: 'disconnected'
+      }
+    };
+
+    return new Promise(function(resolve, reject) {
+
+      this._messageBus.postMessage(msg, (reply) => {
+        console.log("[DiscoveredObject.onDisconnected] rcved reply ", reply);
+        //What should happen here? Update map?
+
+        if(reply.body.code === 200)
+          resolve();
+        else
+          reject();
+      });
+    });
   }
 
 }
