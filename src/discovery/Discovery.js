@@ -58,7 +58,6 @@ class Discovery {
     }
   }
 
-
   /**
   * Advanced Search for Hyperties registered in domain registry associated with some user identifier (eg email, name ...)
   * @param  {String}           userIdentifier
@@ -67,6 +66,7 @@ class Discovery {
   */
   discoverHypertiesPerUserProfileData(userIdentifier, schema, resources) {
     let _this = this;
+    let filteredHyperties = [];
 
     let msg = {
       type: 'read',
@@ -87,11 +87,20 @@ class Discovery {
     return new Promise(function(resolve, reject) {
 
       if (!_this._isLegacyUser(userIdentifier)) {// todo: to reomve when discovery of legcay users are supported
+
         _this.messageBus.postMessage(msg, (reply) => {
 
           if(reply.body.code === 200){
-            console.log("Reply log: ",reply.body.value);
-            resolve(reply.body.value);
+            reply.body.value.map(function(hyperty) {
+               if(hyperty.hypertyID != _this.discoveryURL)
+                   filteredHyperties.push(hyperty);
+            });
+            if(filteredHyperties.length === 0)
+              reject('No Hyperty was found');
+            else {
+              console.log("Reply log: ",filteredHyperties);
+              resolve(filteredHyperties);
+            }
           }
           else {
             console.log("Error Log: ", reply.body.description);
@@ -101,7 +110,6 @@ class Discovery {
       } else {
         resolve({hypertyID: userIdentifier});
       }
-
     });
   }
 
@@ -132,23 +140,22 @@ class Discovery {
 
     return new Promise(function(resolve, reject) {
 
-    if (!_this._isLegacyUser(userIdentifier)) {// todo: to reomve when discovery of legcay users are supported
+      if (!_this._isLegacyUser(userIdentifier)) {// todo: to reomve when discovery of legcay users are supported
 
-      _this.messageBus.postMessage(msg, (reply) => {
+        _this.messageBus.postMessage(msg, (reply) => {
 
-        if(reply.body.code === 200){
-          console.log("Reply log: ",reply.body.value);
-          resolve(reply.body.value);
+          if(reply.body.code === 200){
+            console.log("Reply log: ",reply.body.value);
+            resolve(reply.body.value);
+          }
+          else {
+            console.log("Error Log: ", reply.body.description);
+            reject(reply.body.description);
+          }
+        });
+      } else {
+          resolve({hypertyID: userIdentifier});
         }
-        else {
-          console.log("Error Log: ", reply.body.description);
-          reject(reply.body.description);
-        }
-      });
-    } else {
-      resolve({hypertyID: userIdentifier});
-    }
-
     });
   }
 
@@ -160,6 +167,7 @@ class Discovery {
   */
   discoverHypertiesPerGUID(guidURL, schema, resources) {
     let _this = this;
+    let filteredHyperties = [];
 
     let msg = {
       type: 'read',
@@ -182,8 +190,16 @@ class Discovery {
       _this.messageBus.postMessage(msg, (reply) => {
 
         if(reply.body.code === 200){
-          console.log("Reply log: ",reply.body.value);
-          resolve(reply.body.value);
+          reply.body.value.map(function(hyperty) {
+             if(hyperty.hypertyID != _this.discoveryURL)
+                 filteredHyperties.push(hyperty);
+          });
+          if(filteredHyperties.length === 0)
+            reject('No Hyperty was found');
+          else {
+            console.log("Reply log: ",filteredHyperties);
+            resolve(filteredHyperties);
+          }
         }
         else {
           console.log("Error Log: ", reply.body.description);
@@ -244,6 +260,7 @@ class Discovery {
   discoverHyperties(user, schema, resources, domain) {
     let _this = this;
     let activeDomain;
+    let filteredHyperties = [];
 
     activeDomain = (!domain) ? _this.domain : domain;
 
@@ -275,8 +292,16 @@ class Discovery {
         _this.messageBus.postMessage(msg, (reply) => {
 
           if(reply.body.code === 200){
-            console.log("Reply log: ",reply.body.value);
-            resolve(reply.body.value);
+            reply.body.value.map(function(hyperty) {
+               if(hyperty.hypertyID != _this.discoveryURL)
+                   filteredHyperties.push(hyperty);
+            });
+            if(filteredHyperties.length === 0)
+              reject('No Hyperty was found');
+            else {
+              console.log("Reply log: ",filteredHyperties);
+              resolve(filteredHyperties);
+            }
           }
           else {
             console.log("Error Log: ", reply.body.description);
