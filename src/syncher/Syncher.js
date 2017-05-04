@@ -306,7 +306,7 @@ class Syncher {
 
       console.log('[syncher - create]: ', criteria, requestMsg);
 
-      requestMsg.body.value = initialData;
+      requestMsg.body.value.data = initialData;
       requestMsg.body.value.reporter = _this._owner;
 
       if (criteria.p2p) requestMsg.body.p2p = criteria.p2p;
@@ -314,11 +314,11 @@ class Syncher {
       if (criteria.observers) requestMsg.body.authorise = criteria.observers;
       if (criteria.identity) requestMsg.body.identity = criteria.identity;
 
-      console.log('[syncher - create] - resume message: ', requestMsg);
+      console.log('[syncher._resumeCreate] - resume message: ', requestMsg);
 
       //request create to the allocation system. Can be rejected by the PolicyEngine.
       _this._bus.postMessage(requestMsg, (reply) => {
-        console.log('[syncher - create] - create-resumed-response: ', reply);
+        console.log('[syncher._resumeCreate] - create-resumed-response: ', reply);
         if (reply.body.code === 200) {
 
           let listOfReporters = reply.body.value;
@@ -328,21 +328,19 @@ class Syncher {
             let dataObject = listOfReporters[index];
 
             //reporter creation accepted
-            let objURL = dataObject.resource;
-            let schema = dataObject.schema;
-            let status = dataObject.status || 'on';
-            let childrenResources = dataObject.childrenResources;
 
             // initialData.childrens = deepClone(dataObject.childrens) || {};
             // initialData = deepClone(dataObject.data) || {};
-            let init = deepClone(dataObject.data) || {};
-            let childrens = deepClone(dataObject.childrens) || {};
+            dataObject.data = deepClone(dataObject.data) || {};
+            dataObject.childrens = deepClone(dataObject.childrens) || {};
+            dataObject.mutual = false;
+            dataObject.resumed = true;
 
-            console.log('[syncher - create] - create-resumed-dataObjectReporter', objURL, status, init);
+            console.log('[syncher._resumeCreate] - create-resumed-dataObjectReporter', dataObject);
 
-            let newObj = new DataObjectReporter(_this, objURL, schema, status, init, childrenResources, false, true);
-            newObj.resumeChildrens(childrens);
-            _this._reporters[objURL] = newObj;
+            let newObj = new DataObjectReporter(dataObject);
+            newObj.resumeChildrens(dataObject.childrens);
+            _this._reporters[dataObject.url] = newObj;
 
           }
 
@@ -491,7 +489,7 @@ class Syncher {
         delete _this._provisionals[objURL];
         if (newProvisional) newProvisional._releaseListeners();
 
-        if (reply.body.code < 200) {
+        if (reply.body.code < 200) { // todo: check if this is needed for the resume
 
           console.log('[syncher] - resume new DataProvisional: ', reply, objURL);
           newProvisional = new DataProvisional(_this._owner, objURL, _this._bus, reply.body.childrenResources);
@@ -506,20 +504,13 @@ class Syncher {
             let dataObject = listOfObservers[index];
             console.log('[syncher] - Resume Object Observer: ', reply, dataObject, _this._provisionals);
 
-            let schema = dataObject.schema;
-            let status = dataObject.status || 'on';
-            let objURL = dataObject.resource;
-            let version = dataObject.version || 0;
-            let childrenResources = dataObject.childrenResources;
-
-            let initialData = {};
-            initialData.childrens = deepClone(dataObject.childrens) || {};
-            initialData.data = deepClone(dataObject.data) || {};
-
+            dataObject.childrens = deepClone(dataObject.childrens) || {};
+            dataObject.data = deepClone(dataObject.data) || {};
+            dataObject.resumed = true;
 
             //TODO: mutualAuthentication For Further Study
-            console.log('[syncher - resume subscribe] - create new dataObject: ', status, initialData, childrenResources, version);
-            let newObj = new DataObjectObserver(_this, objURL, schema, status, initialData, childrenResources, version, mutualAuthentication, true);
+            console.log('[syncher._resumeSubscribe] - create new dataObject: ', dataObject);
+            let newObj = new DataObjectObserver(dataObject);
 
             _this._observers[objURL] = newObj;
 

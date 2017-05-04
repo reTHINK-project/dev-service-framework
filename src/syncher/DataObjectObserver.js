@@ -47,6 +47,7 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
 
   //TODO: For Further Study
   constructor(input) {
+    //todo: check why
     input.initialData = input.initialData.data;
 
     super(input);
@@ -65,26 +66,31 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
 
     //setup childrens data from subscription
     Object.keys(input.initialData.childrens).forEach((childrenResource) => {
-      let children = input.initialData.childrens[childrenResource];
+      let children = input.childrens[childrenResource];
       console.log('[DataObjectObserver - new DataObjectChild]: ', childrenResource, children, _this._resumed);
       if (_this._resumed) {
 
         // if is resumed
         Object.keys(children).forEach((childId) => {
-          _this._childrenObjects[childId] = new DataObjectChild(_this, childId, children[childId].value);
+          let childInput = children[childId].value;
+          childInput.parentObject = _this;
+          _this._childrenObjects[childId] = new DataObjectChild(childInput);
           _this._childrenObjects[childId].identity = children[childId].identity;
 
           if (childId > childIdString) {
             childIdString = childId;
           }
 
-          console.log('[DataObjectObserver - new DataObjectChild] - resumed: ', _this._childrenObjects[childId],  childId, children[childId].value);
+          console.log('[DataObjectObserver - new DataObjectChild] - resumed: ', _this._childrenObjects[childId]);
         });
 
       } else {
         // if is not resumed
+        //todo: shouldn't we iterate for all existing childs in order to receive all childs before the subscription?
+        // pch: commented below since I think we are not processing childs that exist before the subscription
+        /*
         _this._childrenObjects[childrenResource] = new DataObjectChild(_this, childrenResource, children);
-        console.log('[DataObjectObserver - new DataObjectChild] - not resumed: ', _this._childrenObjects[childrenResource]);
+        console.log('[DataObjectObserver - new DataObjectChild] - not resumed: ', _this._childrenObjects[childrenResource]);*/
       }
 
     });

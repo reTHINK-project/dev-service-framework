@@ -96,14 +96,16 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
 
       // if is resumed
       Object.keys(children).forEach((childId) => {
-        this._childrenObjects[childId] = new DataObjectChild(this, childId, children[childId].value);
+        let childInput = children[childId].value;
+        childInput.parentObject = this;
+        this._childrenObjects[childId] = new DataObjectChild(childInput);
         this._childrenObjects[childId].identity = children[childId].identity;
 
         if (childId > childIdString) {
           childIdString = childId;
         }
 
-        console.log('[DataObjectReporter - new DataObjectChild] - resumed: ', this._childrenObjects[childId],  childId, children[childId].value);
+        console.log('[DataObjectReporter.resumeChildrens] - resumed: ', this._childrenObjects[childId]);
       });
     });
 
