@@ -25,7 +25,6 @@ import SyncObject from './ProxyObject';
 
 /**
  * The class returned from the DataObject addChildren call or from onAddChildren if remotely created.
- * Children object synchronization is a a fast forward mechanism, no need for direct subscriptions, it uses the already authorized subscription from the parent DataObject.
  */
 class DataObjectChild /* implements SyncStatus */ {
   /* private
@@ -38,19 +37,35 @@ class DataObjectChild /* implements SyncStatus */ {
    * @ignore
    * Should not be used directly by Hyperties. It's called by the DataObject.addChildren
    */
-  constructor(parent, childId, initialData, owner, msgId) {
+  constructor(input) {
     let _this = this;
 
-    _this._parent = parent;
-    _this._childId = childId;
-    _this._owner = owner;
-    _this._msgId = msgId;
+    function throwMandatoryParmMissingError(par) {
+      throw '[DataObjectChild] ' + par + ' mandatory parameter is missing';
+    }
 
-    _this._syncObj = new SyncObject(initialData);
+    input.msgId ?  _this._msgId = input.msgId : throwMandatoryParmMissingError('msgId');
+    input.parent ?  _this._parent = input.parent : throwMandatoryParmMissingError('parent');
+    input.url ?  _this._url = input.url : throwMandatoryParmMissingError('url');
+    input.created ? _this._created = input.created : throwMandatoryParmMissingError('created');
+    input.reporter ? _this._reporter = input.reporter : throwMandatoryParmMissingError('reporter');
+    input.runtime ? _this._runtime = input.runtime : throwMandatoryParmMissingError('runtime');
+    input.schema ? _this._schema = input.schema : throwMandatoryParmMissingError('schema');
+    input.parentObject ? _this._parentObject = input.parentObject : throwMandatoryParmMissingError('parentObject');
+
+    if (input.name) _this._name = input.name;
+    if (input.description) _this._description = input.description;
+    if (input.tags) _this._tags = input.tags;
+    if (input.resources) _this._resources = input.resources;
+    if (input.observerStorage) _this._observerStorage = input.observerStorage;
+    if (input.publicObservation) _this._publicObservation = input.publicObservation;
+
+    _this._syncObj = new SyncObject(input.initialData);
 
     console.log('[DataObjectChild -  Constructor] - ', _this._syncObj);
 
-    _this._bus = parent._bus;
+    _this._bus = _this._parentObject._bus;
+
     _this._allocateListeners();
   }
 
@@ -58,8 +73,8 @@ class DataObjectChild /* implements SyncStatus */ {
     let _this = this;
 
     //this is only needed for children reporters
-    if (_this._owner) {
-      _this._listener = _this._bus.addListener(_this._owner, (msg) => {
+    if (_this._reporter) {
+      _this._listener = _this._bus.addListener(_this._reporter, (msg) => {
         if (msg.type === 'response' && msg.id === _this._msgId) {
           console.log('DataObjectChild.onResponse:', msg);
           _this._onResponse(msg);
@@ -82,7 +97,6 @@ class DataObjectChild /* implements SyncStatus */ {
   delete() {
     let _this = this;
 
-    delete _this._parent._children[_this._childId];
 
     _this._releaseListeners();
 

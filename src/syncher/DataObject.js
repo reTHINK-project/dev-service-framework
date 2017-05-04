@@ -211,18 +211,19 @@ class DataObject {
    * @param  {MessageBodyIdentity} identity - (optional) identity data to be added to identity the user reporter. To be used for legacy identities.
    * @return {Promise<DataObjectChild>} - Return Promise to a new DataObjectChild.
    */
-  addChild(children, initialData, identity) {
+  addChild(children, initialData, identity, input) {
     let _this = this;
 
+    let childInput  = Object.assign({}, input);
     //create new child unique ID, based on hypertyURL
     _this._childId++;
-    let msgChildId = _this._owner + '#' + _this._childId;
+    childInput.url = _this._owner + '#' + _this._childId;
     let msgChildPath = _this._url + '/children/' + children;
 
     //FLOW-OUT: this message will be sent directly to a resource child address: MessageBus
     let requestMsg = {
       type: 'create', from: _this._owner, to: msgChildPath,
-      body: { resource: msgChildId, value: initialData }
+      body: { resource: childInput.url, value: initialData }
     };
 
     if (identity)      { requestMsg.body.identity = identity; }
@@ -234,13 +235,21 @@ class DataObject {
     return new Promise((resolve) => {
       let msgId = _this._bus.postMessage(requestMsg);
 
+      childInput.msgId = msgId;
+      childInput.parentObject = _this;
+      childInput.initialData = initialData;
+      childInput.reporter = _this._owner;
+      childInput.created = (new Date).toISOString();
+      childInput.runtime = _this._runtime;
+      childInput.schema = _this._schema;
+
       console.log('create-reporter-child( ' + _this._owner + ' ): ', requestMsg);
-      let newChild = new DataObjectChild(_this, msgChildId, initialData, _this._owner, msgId);
+      let newChild = new DataObjectChild(childInput);
       newChild.onChange((event) => {
-        _this._onChange(event, { path: msgChildPath, childId: msgChildId });
+        _this._onChange(event, { path: msgChildPath, childId: childInput.url });
       });
 
-      _this._childrenObjects[msgChildId] = newChild;
+      _this._childrenObjects[childInput.url] = newChild;
 
       resolve(newChild);
     });
@@ -257,12 +266,15 @@ class DataObject {
   //FLOW-IN: message received from a remote DataObject -> addChild
   _onChildCreate(msg) {
     let _this = this;
-    let msgChildId = msg.body.resource;
+    let childInput = msg.body.value;
+    childInput.url = msg.body.resource;
+    childInput.parentObject = _this;
 
-    console.log('create-observer-child( ' + _this._owner + ' ): ', msg);
-    let newChild = new DataObjectChild(_this, msgChildId, msg.body.value);
-    _this._childrenObjects[msgChildId] = newChild;
+    console.log('[DataObject._onChildCreate] receivedBy ' + _this._owner + ' : ', msg);
+    let newChild = new DataObjectChild(childInput);
+    _this._childrenObjects[childInput.url] = newChild;
 
+    //todo: remove response below
     setTimeout(() => {
       //FLOW-OUT: will flow to DataObjectChild -> _onResponse
       _this._bus.postMessage({
@@ -276,7 +288,7 @@ class DataObject {
       from: msg.from,
       url: msg.to,
       value: msg.body.value,
-      childId: msgChildId,
+      childId: childInput.url,
       identity: msg.body.identity
     };
 

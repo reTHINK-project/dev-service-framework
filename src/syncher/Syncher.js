@@ -107,7 +107,7 @@ class Syncher {
   * @param  {MessageBodyIdentity} identity - (optional) identity data to be added to identity the user reporter. To be used for legacy identities.
   * @return {Promise<DataObjectReporter>} Return Promise to a new Reporter. The reporter can be accepted or rejected by the PEP
   */
-  create(schema, observers, initialData, store = false, p2p = false, name = 'data object without name', identity, description, tags, resources, observerStorage, publicObservation) {
+  create(schema, observers, initialData, store = false, p2p = false, name = 'data object without name', identity, input) {
 
     if (!schema) throw Error('[Syncher - Create] - You need specify the data object schema');
     if (!observers) throw Error('[Syncher - Create] -The observers should be defined');
@@ -115,7 +115,7 @@ class Syncher {
     //if (!initialData) throw Error('[Syncher - Create] - You initialData should be defined');
 
     let _this = this;
-    let createInput = {};
+    let createInput  = Object.assign({}, input);
 
     createInput.p2p = p2p;
     createInput.store = store;
@@ -124,15 +124,11 @@ class Syncher {
     (initialData) ? createInput.initialData = initialData : createInput.initialData = {};
     createInput.name = name;
     createInput.reporter = _this._owner;
+    createInput.resume = false;
 
-    if (description)      { createInput.description = description; }
     if (identity)      { createInput.identity = identity; }
-    if (tags)      { createInput.tags = tags; }
-    if (resources)      { createInput.resources = resources; }
-    if (observerStorage)      { createInput.observerStorage = observerStorage; }
-    if (publicObservation)      { createInput.publicObservation = publicObservation; }
 
-    Object.assign(createInput, {resume: false});
+    //Object.assign(createInput, {resume: false});
 
     console.log('[syncher - create] - create Reporter - createInput: ', createInput);
 
@@ -238,7 +234,7 @@ class Syncher {
 
     return new Promise((resolve, reject) => {
       let resume = input.resume;
-      let initialData = input.initialData || {};
+      //let initialData = input.initialData || {};
       //let schema = criteria.schema;
 
       //pch: I've commented since this is not data
@@ -278,10 +274,8 @@ class Syncher {
           input.url = reply.body.resource;
 
           input.created = (new Date).toISOString();
-          input.status = 'on';// pch: do we ned this?
+          input.status = 'live';// pch: do we ned this?
           input.syncher = _this;
-
-          // pch: ffs what about also using literals in the DataObject constructor?
 
           let newObj = new DataObjectReporter(input);
 
