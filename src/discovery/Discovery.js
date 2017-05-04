@@ -22,7 +22,7 @@
 **/
 
 import {divideURL, convertToUserURL} from '../utils/utils';
-
+import DiscoveredObject from './DiscoveredObject';
 /**
 * Core Discovery interface
 * Class to allow applications to search for hyperties and DataObjects using the message bus
@@ -110,6 +110,24 @@ class Discovery {
       } else {
         resolve({hypertyID: userIdentifier});
       }
+    });
+  }
+
+  /**
+  * Advanced Search for Hyperties registered in domain registry associated with some user identifier (eg email, name ...)
+  * returns DiscoveredObject
+  * @param  {String}           userIdentifier
+  * @param  {Array<string>}    schema (Optional)     types of hyperties schemas
+  * @param  {Array<string>}    resources (Optional)  types of hyperties resources
+  */
+  discoverHypertiesPerUserProfileDataDO(userIdentifier, schema, resources) {
+
+    return new Promise((resolve, reject) => {
+      this.discoverHypertiesPerUserProfileData(...arguments)
+      .then(hyperties => {
+        resolve(_convertToDiscoveredObject(hyperties));
+      })
+      .catch(error => reject(error));
     });
   }
 
@@ -206,6 +224,24 @@ class Discovery {
           reject(reply.body.description);
         }
       });
+    });
+  }
+
+  /**
+  * Advanced Search for Hyperties registered in domain registry associated with some GUID
+  * returns DiscoveredObject
+  * @param  {String}           guidURL                guid URL e.g user-guid://<unique-user-identifier>
+  * @param  {Array<string>}    schema (Optional)     types of hyperties schemas
+  * @param  {Array<string>}    resources (Optional)  types of hyperties resources
+  */
+  discoverHypertiesPerGUIDDO(guidURL, schema, resources) {
+
+    return new Promise((resolve, reject) => {
+      this.discoverDataObjectsPerGUID(...arguments)
+      .then(hyperties => {
+        resolve(_convertToDiscoveredObject(hyperties));
+      })
+      .catch(error => reject(error));
     });
   }
 
@@ -311,7 +347,24 @@ class Discovery {
       } else {
         resolve({hypertyID: user});
       }
+    });
+  }
 
+  /** Advanced Search for Hyperties registered in domain registry,
+  *returns DiscoveredObject
+  * @param  {String}           user                  user identifier, either in url or email format
+  * @param  {Array<string>}    schema (Optional)     types of hyperties schemas
+  * @param  {Array<string>}    resources (Optional)  types of hyperties resources
+  * @param  {String}           domain (Optional)     domain of the registry to search
+  */
+  discoverHypertiesDO(user, schema, resources, domain) {
+
+    return new Promise((resolve, reject) => {
+      this.discoverHyperties(...arguments)
+      .then(hyperties => {
+        resolve(_convertToDiscoveredObject(hyperties));
+      })
+      .catch(error => reject(error));
     });
   }
 
@@ -401,6 +454,21 @@ class Discovery {
           reject(reply.body.description);
         }
       });
+    });
+  }
+
+  /**
+  * function to request about hyperties registered in domain registry, and
+  * returns discoveredObject.
+  * @param  {String}              url  hyperty URL
+  * @param  {String}            domain (Optional)
+  */
+  discoverHypertyPerURLDO(url, domain) {
+
+    return new Promise((resolve, reject) => {
+      this.discoverHypertyPerURL(url, domain)
+        .then(hyperty => resolve(new DiscoveredObject(hyperty)))
+        .catch(error => reject(error));
     });
   }
 
@@ -544,6 +612,12 @@ class Discovery {
           reject(reply.body.description);
         }
       });
+    });
+  }
+
+  _convertToDiscoveredObject(hyperties) {
+    return hyperties.map((hyperty) => {
+      return new DiscoveredObject(hyperty);
     });
   }
 
