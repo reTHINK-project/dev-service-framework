@@ -21,6 +21,8 @@
 * limitations under the License.
 **/
 
+import { deepClone } from '../utils/utils';
+
 import DataObject from './DataObject';
 import DataObjectChild from './DataObjectChild';
 
@@ -44,8 +46,8 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
    */
 
   //TODO: For Further Study
-  constructor(syncher, url, schema, initialStatus, initialData, childrens, initialVersion, mutual) {
-    super(syncher, url, schema, initialStatus, initialData.data, childrens, mutual);
+  constructor(syncher, url, schema, initialStatus, initialData, childrens, initialVersion, mutual, resumed = false) {
+    super(syncher, url, schema, initialStatus, initialData.data, childrens, mutual, resumed);
     let _this = this;
 
     _this._version = initialVersion;
@@ -55,11 +57,36 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
       _this._onFilter(event);
     });
 
+    let childIdString = _this._owner + '#' + _this._childId;
+
+
     //setup childrens data from subscription
-    Object.keys(initialData.childrens).forEach((childId) => {
-      let childData = initialData.childrens[childId];
-      _this._childrenObjects[childId] = new DataObjectChild(_this, childId, childData);
+    Object.keys(initialData.childrens).forEach((childrenResource) => {
+      let children = initialData.childrens[childrenResource];
+      console.log('[DataObjectObserver - new DataObjectChild]: ', childrenResource, children, _this._resumed);
+      if (_this._resumed) {
+
+        // if is resumed
+        Object.keys(children).forEach((childId) => {
+          _this._childrenObjects[childId] = new DataObjectChild(_this, childId, children[childId].value);
+          _this._childrenObjects[childId].identity = children[childId].identity;
+
+          if (childId > childIdString) {
+            childIdString = childId;
+          }
+
+          console.log('[DataObjectObserver - new DataObjectChild] - resumed: ', _this._childrenObjects[childId],  childId, children[childId].value);
+        });
+
+      } else {
+        // if is not resumed
+        _this._childrenObjects[childrenResource] = new DataObjectChild(_this, childrenResource, children);
+        console.log('[DataObjectObserver - new DataObjectChild] - not resumed: ', _this._childrenObjects[childrenResource]);
+      }
+
     });
+
+    _this._childId = Number(childIdString.split('#')[1]);
 
     _this._allocateListeners();
   }

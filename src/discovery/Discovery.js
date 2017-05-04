@@ -35,42 +35,345 @@ class Discovery {
   * @param  {MessageBus}          msgbus                msgbus
   * @param  {RuntimeURL}          runtimeURL            runtimeURL
   */
-  constructor(hypertyURL, msgBus) {
+  constructor(hypertyURL, runtimeURL, msgBus) {
     let _this = this;
     _this.messageBus = msgBus;
+    _this.runtimeURL = runtimeURL;
 
     _this.domain = divideURL(hypertyURL).domain;
     _this.discoveryURL = hypertyURL;
-
   }
 
   /**
-  * function to request about an dataObject registered in domain registry with a given name, and
-  * return the dataObject information, if found.
-  * @param  {String}              name  dataObject URL
-  * @param  {String}            domain (Optional)
-  * @return {Promise}          Promise
+  * Advanced Search for Hyperties registered in domain registry associated with some user identifier (eg email, name ...)
+  * @param  {String}           userIdentifier
+  * @param  {Array<string>}    schema (Optional)     types of hyperties schemas
+  * @param  {Array<string>}    resources (Optional)  types of hyperties resources
   */
-  discoverDataObjectPerName(name, domain) {
+  _isLegacyUser(userIdentifier) {
+    if (userIdentifier.includes(':') && !userIdentifier.includes('user://')) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+
+  /**
+  * Advanced Search for Hyperties registered in domain registry associated with some user identifier (eg email, name ...)
+  * @param  {String}           userIdentifier
+  * @param  {Array<string>}    schema (Optional)     types of hyperties schemas
+  * @param  {Array<string>}    resources (Optional)  types of hyperties resources
+  */
+  discoverHypertiesPerUserProfileData(userIdentifier, schema, resources) {
+    let _this = this;
+
+    let msg = {
+      type: 'read',
+      from: _this.discoveryURL,
+      to: _this.runtimeURL + '/discovery/',
+      body: {
+        resource: '/hyperty/userprofile/' + userIdentifier,
+      }
+    };
+
+    if(schema || resources) {
+      msg.body['criteria'] = {
+        resources: resources,
+        dataSchemes: schema
+      };
+    }
+
+    return new Promise(function(resolve, reject) {
+
+      if (!_this._isLegacyUser(userIdentifier)) {// todo: to reomve when discovery of legcay users are supported
+        _this.messageBus.postMessage(msg, (reply) => {
+
+          if(reply.body.code === 200){
+            console.log("Reply log: ",reply.body.value);
+            resolve(reply.body.value);
+          }
+          else {
+            console.log("Error Log: ", reply.body.description);
+            reject(reply.body.description);
+          }
+        });
+      } else {
+        resolve({hypertyID: userIdentifier});
+      }
+
+    });
+  }
+
+  /**
+  * Advanced Search for DataObjects registered in domain registry associated with some user identifier (eg email, name ...)
+  * @param  {String}           userIdentifier
+  * @param  {Array<string>}    schema (Optional)     types of hyperties schemas
+  * @param  {Array<string>}    resources (Optional)  types of hyperties resources
+  */
+  discoverDataObjectsPerUserProfileData(userIdentifier, schema, resources) {
+    let _this = this;
+
+    let msg = {
+      type: 'read',
+      from: _this.discoveryURL,
+      to: _this.runtimeURL + '/discovery/',
+      body: {
+        resource: '/dataObject/userprofile/' + userIdentifier,
+      }
+    };
+
+    if(schema || resources) {
+      msg.body['criteria'] = {
+        resources: resources,
+        dataSchemes: schema
+      };
+    }
+
+    return new Promise(function(resolve, reject) {
+
+    if (!_this._isLegacyUser(userIdentifier)) {// todo: to reomve when discovery of legcay users are supported
+
+      _this.messageBus.postMessage(msg, (reply) => {
+
+        if(reply.body.code === 200){
+          console.log("Reply log: ",reply.body.value);
+          resolve(reply.body.value);
+        }
+        else {
+          console.log("Error Log: ", reply.body.description);
+          reject(reply.body.description);
+        }
+      });
+    } else {
+      resolve({hypertyID: userIdentifier});
+    }
+
+    });
+  }
+
+  /**
+  * Advanced Search for Hyperties registered in domain registry associated with some GUID
+  * @param  {String}           guidURL                guid URL e.g user-guid://<unique-user-identifier>
+  * @param  {Array<string>}    schema (Optional)     types of hyperties schemas
+  * @param  {Array<string>}    resources (Optional)  types of hyperties resources
+  */
+  discoverHypertiesPerGUID(guidURL, schema, resources) {
+    let _this = this;
+
+    let msg = {
+      type: 'read',
+      from: _this.discoveryURL,
+      to: _this.runtimeURL + '/discovery/',
+      body: {
+        resource: '/hyperty/guid/' + guidURL,
+      }
+    };
+
+    if(schema || resources) {
+      msg.body['criteria'] = {
+        resources: resources,
+        dataSchemes: schema
+      };
+    }
+
+    return new Promise(function(resolve, reject) {
+
+      _this.messageBus.postMessage(msg, (reply) => {
+
+        if(reply.body.code === 200){
+          console.log("Reply log: ",reply.body.value);
+          resolve(reply.body.value);
+        }
+        else {
+          console.log("Error Log: ", reply.body.description);
+          reject(reply.body.description);
+        }
+      });
+    });
+  }
+
+  /**
+  * Advanced Search for DataObjects registered in domain registry associated with some GUID
+  * @param  {String}           guidURL                guid URL e.g user-guid://<unique-user-identifier>
+  * @param  {Array<string>}    schema (Optional)     types of hyperties schemas
+  * @param  {Array<string>}    resources (Optional)  types of hyperties resources
+  * @param  {String}           domain (Optional)     domain of the registry to search
+  */
+  discoverDataObjectsPerGUID(guidURL, schema, resources) {
+    let _this = this;
+
+    let msg = {
+      type: 'read',
+      from: _this.discoveryURL,
+      to: _this.runtimeURL + '/discovery/',
+      body: {
+        resource: '/dataObject/guid/' + guidURL,
+      }
+    };
+
+    if(schema || resources) {
+      msg.body['criteria'] = {
+        resources: resources,
+        dataSchemes: schema
+      };
+    }
+
+    return new Promise(function(resolve, reject) {
+
+      _this.messageBus.postMessage(msg, (reply) => {
+
+        if(reply.body.code === 200){
+          console.log("Reply log: ",reply.body.value);
+          resolve(reply.body.value);
+        }
+        else {
+          console.log("Error Log: ", reply.body.description);
+          reject(reply.body.description);
+        }
+      });
+    });
+  }
+
+  /** Advanced Search for Hyperties registered in domain registry
+  * @param  {String}           user                  user identifier, either in url or email format
+  * @param  {Array<string>}    schema (Optional)     types of hyperties schemas
+  * @param  {Array<string>}    resources (Optional)  types of hyperties resources
+  * @param  {String}           domain (Optional)     domain of the registry to search
+  */
+  discoverHyperties(user, schema, resources, domain) {
     let _this = this;
     let activeDomain;
 
     activeDomain = (!domain) ? _this.domain : domain;
 
     let msg = {
-      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: name}
+      type: 'read',
+      from: _this.discoveryURL,
+      to: _this.runtimeURL + '/discovery/',
+      body: {
+        resource: '/hyperty/user/' + user,
+      }
+    };
+
+    if(schema || resources) {
+      msg.body['criteria'] = {
+        resources: resources,
+        dataSchemes: schema,
+        domain: activeDomain
+      };
+    }else {
+      msg.body['criteria'] = {
+        domain: activeDomain
+      }
+    }
+
+    return new Promise(function(resolve, reject) {
+
+      if (!_this._isLegacyUser(user)) {// todo: to reomve when discovery of legcay users are supported
+
+        _this.messageBus.postMessage(msg, (reply) => {
+
+          if(reply.body.code === 200){
+            console.log("Reply log: ",reply.body.value);
+            resolve(reply.body.value);
+          }
+          else {
+            console.log("Error Log: ", reply.body.description);
+            reject(reply.body.description);
+          }
+        });
+      } else {
+        resolve({hypertyID: user});
+      }
+
+    });
+  }
+
+  /** Advanced Search for DataObjects registered in domain registry
+  * @param  {String}           user                  user identifier, either in url or email format
+  * @param  {Array<string>}    schema (Optional)     types of dataObjects schemas
+  * @param  {Array<string>}    resources (Optional)  types of dataObjects resources
+  * @param  {String}           domain (Optional)     domain of the registry to search
+  */
+  discoverDataObjects(user, schema, resources, domain) {
+    let _this = this;
+    let activeDomain;
+
+    activeDomain = (!domain) ? _this.domain : domain;
+
+    let msg = {
+      type: 'read',
+      from: _this.discoveryURL,
+      to: _this.runtimeURL + '/discovery/',
+      body: {
+        resource: '/dataObject/user/' + user,
+      }
+    };
+
+    if(schema || resources) {
+      msg.body['criteria'] = {
+        resources: resources,
+        dataSchemes: schema,
+        domain: activeDomain
+      };
+    }else {
+      msg.body['criteria'] = {
+        domain: activeDomain
+      }
+    }
+
+    return new Promise(function(resolve, reject) {
+
+      _this.messageBus.postMessage(msg, (reply) => {
+
+        if(reply.body.code === 200){
+          console.log("Reply Value Log: ",reply.body.value);
+          resolve(reply.body.value);
+        }
+        else {
+          console.log("Error Log: ", reply.body.description);
+          reject(reply.body.description);
+        }
+      });
+    });
+  }
+
+  /**
+  * function to request about hyperties registered in domain registry, and
+  * return the hyperty information, if found.
+  * @param  {String}              url  hyperty URL
+  * @param  {String}            domain (Optional)
+  */
+  discoverHypertyPerURL(url, domain) {
+    let _this = this;
+    let activeDomain;
+
+    activeDomain = (!domain) ? _this.domain : domain;
+
+    let msg = {
+      type: 'read',
+      from: _this.discoveryURL,
+      to: _this.runtimeURL + '/discovery/',
+      body: {
+        resource: '/hyperty/url/' + url,
+        criteria: {
+          domain: activeDomain
+        }
+      }
     };
 
     return new Promise(function(resolve, reject) {
 
       _this.messageBus.postMessage(msg, (reply) => {
 
-        let dataObject = reply.body.value;
-
-        if (dataObject) {
-          resolve(dataObject);
-        } else {
-          reject('DataObject not found');
+        if(reply.body.code === 200){
+          console.log("Reply Value Log: ",reply.body.value);
+          resolve(reply.body.value);
+        }
+        else {
+          console.log("Error Log: ", reply.body.description);
+          reject(reply.body.description);
         }
       });
     });
@@ -81,110 +384,147 @@ class Discovery {
   * return the dataObject information, if found.
   * @param  {String}              url  dataObject URL
   * @param  {String}            domain (Optional)
-  * @return {Promise}          Promise
   */
   discoverDataObjectPerURL(url, domain) {
     let _this = this;
     let activeDomain;
 
-    if (!domain) {
-      activeDomain = _this.domain;
-    } else {
-      activeDomain = domain;
-    }
+    activeDomain = (!domain) ? _this.domain : domain;
 
     let msg = {
-      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: url}
+      type: 'read',
+      from: _this.discoveryURL,
+      to: _this.runtimeURL + '/discovery/',
+      body: {
+        resource: '/dataObject/url/' + url,
+        criteria: {
+          domain: activeDomain
+        }
+      }
     };
 
     return new Promise(function(resolve, reject) {
 
       _this.messageBus.postMessage(msg, (reply) => {
 
-        let dataObject = reply.body.value;
-
-        if (dataObject) {
-          resolve(dataObject);
-        } else {
-          reject('DataObject not found');
+        if(reply.body.code === 200){
+          console.log("Reply Value Log: ",reply.body.value);
+          resolve(reply.body.value);
+        }
+        else {
+          console.log("Error Log: ", reply.body.description);
+          reject(reply.body.description);
         }
       });
     });
   }
 
   /**
-  *  function to delete an Data Object registered in the Domain Registry
-  *  @param   {String}           url              dataObject url
-  *  @param   {domain}           domain         (Optional)
-  *  @return  {Promise}          Promise          result
+  * function to request about an dataObjects registered in domain registry with a given name, and
+  * return the dataObjects information, if found.
+  * @param  {String}              name  dataObject URL
+  * @param  {Array<string>}    schema (Optional)     types of dataObjects schemas
+  * @param  {Array<string>}    resources (Optional)  types of dataObjects resources
+  * @param  {String}            domain (Optional)
   */
-  deleteDataObject(url, domain) {
+  discoverDataObjectsPerName(name, schema, resources, domain) {
     let _this = this;
     let activeDomain;
 
-    if (!domain) {
-      activeDomain = _this.domain;
-    } else {
-      activeDomain = domain;
-    }
+    activeDomain = (!domain) ? _this.domain : domain;
 
     let msg = {
-      type: 'delete', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/',  body: { value: {name: url}}};
+      type: 'read',
+      from: _this.discoveryURL,
+      to: _this.runtimeURL + '/discovery/',
+      body: {
+        resource: '/dataObject/name/' + name
+      }
+    };
+
+    if(schema || resources) {
+      msg.body['criteria'] = {
+        resources: resources,
+        dataSchemes: schema,
+        domain: activeDomain
+      };
+    }else {
+      msg.body['criteria'] = {
+        domain: activeDomain
+      }
+    }
 
     return new Promise(function(resolve, reject) {
 
       _this.messageBus.postMessage(msg, (reply) => {
 
-        let response = reply.body.code;
-
-        if (response === 200) {
-          resolve(response);
-        } else {
-          reject('Error on deleting dataObject');
+        if(reply.body.code === 200){
+          console.log("Reply Value Log: ",reply.body.value);
+          resolve(reply.body.value);
+        }
+        else {
+          console.log("Error Log: ", reply.body.description);
+          reject(reply.body.description);
         }
       });
     });
-
   }
 
   /**
   * function to request about specific reporter dataObject registered in domain registry, and
   * return the dataObjects from that reporter.
   * @param  {String}           reporter     dataObject reporter
+  * @param  {Array<string>}    schema (Optional)     types of dataObjects schemas
+  * @param  {Array<string>}    resources (Optional)  types of dataObjects resources
   * @param  {String}           domain       (Optional)
-  * @return {Array}           Promise       DataObjects
   */
-  discoverDataObjectPerReporter(reporter, domain) {
+  discoverDataObjectsPerReporter(reporter, schema, resources, domain) {
     let _this = this;
     let activeDomain;
 
-    if (!domain) {
-      activeDomain = _this.domain;
-    } else {
-      activeDomain = domain;
-    }
+    activeDomain = (!domain) ? _this.domain : domain;
+
 
     let msg = {
-      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: reporter}
+      type: 'read',
+      from: _this.discoveryURL,
+      to: _this.runtimeURL + '/discovery/',
+      body: {
+        resource: '/dataObject/reporter/' + reporter
+      }
     };
+
+    if(schema || resources) {
+      msg.body['criteria'] = {
+        resources: resources,
+        dataSchemes: schema,
+        domain: activeDomain
+      };
+    }else {
+      msg.body['criteria'] = {
+        domain: activeDomain
+      }
+    }
 
     return new Promise(function(resolve, reject) {
 
       _this.messageBus.postMessage(msg, (reply) => {
 
-        let dataObjects = reply.body.value;
-
-        if (dataObjects) {
-          resolve(dataObjects);
-        } else {
-          reject('No dataObject was found');
+        if(reply.body.code === 200){
+          console.log("Reply Value Log: ",reply.body.value);
+          resolve(reply.body.value);
+        }
+        else {
+          console.log("Error Log: ", reply.body.description);
+          reject(reply.body.description);
         }
       });
     });
   }
 
   /** Advanced Search for dataObjects registered in domain registry
-  * @param  {String}           user                  user identifier, either in url or email format
+  * @deprecated Deprecated. Use discoverDataObjectsPerName instead
+  * @param  {String}           name                  name of the dataObject
   * @param  {Array<string>}    schema (Optional)     types of dataObject schemas
   * @param  {Array<string>}    resources (Optional)  types of dataObject resources
   * @param  {String}           domain (Optional)     domain of the registry to search
@@ -222,6 +562,7 @@ class Discovery {
   }
 
   /** Advanced Search for Hyperties registered in domain registry
+  * @deprecated Deprecated. Use discoverHyperties instead
   * @param  {String}           user                  user identifier, either in url or email format
   * @param  {Array<string>}    schema (Optional)     types of hyperties schemas
   * @param  {Array<string>}    resources (Optional)  types of hyperties resources
@@ -273,9 +614,9 @@ class Discovery {
   /**
   * function to request about users registered in domain registry, and
   * return the last hyperty instance registered by the user.
+  * @deprecated Deprecated. Use discoverHyperty instead
   * @param  {email}              email
   * @param  {domain}            domain (Optional)
-  * @return {Promise}          Promise
   */
   discoverHypertyPerUser(email, domain) {
     let _this = this;
@@ -297,6 +638,7 @@ class Discovery {
       }
 
       let identityURL = 'user://' + email.substring(email.indexOf('@') + 1, email.length) + '/' + email.substring(0, email.indexOf('@'));
+
 
       // message to query domain registry, asking for a user hyperty.
       let message = {
@@ -353,14 +695,14 @@ class Discovery {
   /**
   * function to request about users registered in domain registry, and
   * return the all the hyperties registered by the user
+  * @deprecated Deprecated. Use discoverHyperty instead
   * @param  {email}              email
   * @param  {domain}            domain (Optional)
-  * @return {Promise}          Promise
   */
   discoverHypertiesPerUser(email, domain) {
     let _this = this;
     let activeDomain;
-
+    console.log('on Function->', email);
     return new Promise(function(resolve, reject) {
 
       if (email.includes(':') && !email.includes('user://')) {
@@ -382,7 +724,7 @@ class Discovery {
         type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: identityURL}
       };
 
-      console.info('[Discovery] Message discoverHypertiesPerUser: ', message, activeDomain, identityURL);
+      console.log('[Discovery] Message discoverHypertiesPerUser: ', message, activeDomain, identityURL);
 
       //console.info('[Discovery] message READ', message);
 
@@ -398,42 +740,6 @@ class Discovery {
         resolve(value);
       });
     });
-  }
-
-  /**
-  *  function to delete an hypertyInstance in the Domain Registry
-  *  @param   {String}           user              user url
-  *  @param   {String}           hypertyInstance   HypertyInsntance url
-  *  @param   {domain}           domain (Optional)
-  *  @return  {Promise}          Promise          result
-  */
-  deleteHyperty(user, hypertyInstance, domain) {
-    let _this = this;
-    let activeDomain;
-
-    if (!domain) {
-      activeDomain = _this.domain;
-    } else {
-      activeDomain = domain;
-    }
-
-    let msg = {
-      type: 'delete', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/',   body: { value: {user: user, url: hypertyInstance }}};
-
-    return new Promise(function(resolve, reject) {
-
-      _this.messageBus.postMessage(msg, (reply) => {
-
-        let response = reply.body.code;
-
-        if (response) {
-          resolve('Hyperty successfully deleted');
-        } else {
-          reject('Error on deleting hyperty');
-        }
-      });
-    });
-
   }
 
 }
