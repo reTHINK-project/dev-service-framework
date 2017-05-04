@@ -46,13 +46,14 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
    */
 
   //TODO: For Further Study
-  constructor(syncher, url, created, reporter, runtime, schema, name, initialStatus, initialData, childrens, initialVersion, mutual, resumed = false, description, tags, resources, observerStorage, publicObservation) {
+  constructor(input) {
+    input.initialData = input.initialData.data;
 
-    super(syncher, url, created, reporter, runtime, schema, name, initialStatus, initialData.data, childrens, mutual, resumed, description, tags, resources, observerStorage, publicObservation);
+    super(input);
 
     let _this = this;
 
-    _this._version = initialVersion;
+    _this._version = input.version;
     _this._filters = {};
 
     _this._syncObj.observe((event) => {
@@ -63,8 +64,8 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
 
 
     //setup childrens data from subscription
-    Object.keys(initialData.childrens).forEach((childrenResource) => {
-      let children = initialData.childrens[childrenResource];
+    Object.keys(input.initialData.childrens).forEach((childrenResource) => {
+      let children = input.initialData.childrens[childrenResource];
       console.log('[DataObjectObserver - new DataObjectChild]: ', childrenResource, children, _this._resumed);
       if (_this._resumed) {
 

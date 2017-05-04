@@ -51,43 +51,44 @@ class DataObject {
    * @ignore
    * Should not be used directly by Hyperties. It's called by the Syncher create or subscribe method's
    */
-  constructor(syncher, url, created, reporter, runtime, schema, name, initialStatus, initialData, childrens, mutual = true, resumed = false, description, tags, resources, observerStorage, publicObservation) {
+  //constructor(syncher, url, created, reporter, runtime, schema, name, initialStatus, initialData, childrens, mutual = true, resumed = false, description, tags, resources, observerStorage, publicObservation) {
+  constructor(input) {
     let _this = this;
 
     function throwMandatoryParmMissingError(par) {
       throw '[DataObject] ' + par + ' mandatory parameter is missing';
     }
 
-    syncher ? _this._syncher = syncher : throwMandatoryParmMissingError('syncher');
-    url ?  _this._url = url : throwMandatoryParmMissingError('url');
-    created ? _this._created = created : throwMandatoryParmMissingError('created');
-    reporter ? _this._reporter = reporter : throwMandatoryParmMissingError('reporter');
-    runtime ? _this._runtime = runtime : throwMandatoryParmMissingError('runtime');
-    schema ? _this._schema = schema : throwMandatoryParmMissingError('schema');
-    name ? _this._name = name : throwMandatoryParmMissingError('name');
+    input.syncher ? _this._syncher = input.syncher : throwMandatoryParmMissingError('syncher');
+    input.url ?  _this._url = input.url : throwMandatoryParmMissingError('url');
+    input.created ? _this._created = input.created : throwMandatoryParmMissingError('created');
+    input.reporter ? _this._reporter = input.reporter : throwMandatoryParmMissingError('reporter');
+    input.runtime ? _this._runtime = input.runtime : throwMandatoryParmMissingError('runtime');
+    input.schema ? _this._schema = input.schema : throwMandatoryParmMissingError('schema');
+    input.name ? _this._name = input.name : throwMandatoryParmMissingError('name');
 
-    _this._status = initialStatus;
-    _this._syncObj = new SyncObject(initialData);
-    _this._childrens = childrens;
+    _this._status = input.status;
+    _this._syncObj = new SyncObject(input.initialData);
+    _this._childrens = input.childrens;
 
     //TODO: For Further Study
-    _this._mutualAuthentication = mutual;
+    _this._mutualAuthentication = input.mutual;
 
     _this._version = 0;
     _this._childId = 0;
     _this._childrenObjects = {};
     _this._childrenListeners = [];
 
-    _this._resumed = resumed;
+    _this._resumed = input.resumed;
 
-    _this._owner = syncher._owner;
-    _this._bus = syncher._bus;
+    _this._owner = input.syncher._owner;
+    _this._bus = input.syncher._bus;
 
-    if (description) _this._description = description;
-    if (tags) _this._tags = tags;
-    if (resources) _this._resources = resources;
-    if (observerStorage) _this._observerStorage = observerStorage;
-    if (publicObservation) _this._publicObservation = publicObservation;
+    if (input.description) _this._description = input.description;
+    if (input.tags) _this._tags = input.tags;
+    if (input.resources) _this._resources = input.resources;
+    if (input.observerStorage) _this._observerStorage = input.observerStorage;
+    if (input.publicObservation) _this._publicObservation = input.publicObservation;
 
 
     /*if (resumed && childrens) {

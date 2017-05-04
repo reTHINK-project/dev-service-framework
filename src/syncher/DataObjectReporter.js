@@ -46,15 +46,16 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
    * Should not be used directly by Hyperties. It's called by the Syncher.create method
    */
 
-  constructor(syncher, url, created, reporter, runtime, schema, name, initialStatus, initialData, childrens, mutual = true, resumed = false, description, tags, resources, observerStorage, publicObservation) {
+   //constructor(syncher, url, created, reporter, runtime, schema, name, initialStatus, initialData, childrens, mutual = true, resumed = false, description, tags, resources, observerStorage, publicObservation) {
+  constructor(input) {
 
-    super(syncher, url, created, reporter, runtime, schema, name, initialStatus, initialData, childrens, mutual, resumed, description, tags, resources, observerStorage, publicObservation);
+    super(input);
     let _this = this;
 
     _this._subscriptions = {};
 
     _this._syncObj.observe((event) => {
-      console.log('DataObjectReporter-' + url + '-SEND: ', event);
+      console.log('DataObjectReporter-' + input.url + '-SEND: ', event);
       _this._onChange(event);
     });
 
