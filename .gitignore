@@ -10,10 +10,14 @@ CVS
 .idea
 .project
 npm-debug.log
+npm-debug.log.*
 vendor
 node_modules
 
 *.iml
+
+report
+coverage
 
 resources/bundle.js
 resources/tmp

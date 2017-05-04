@@ -21,9 +21,8 @@
 * limitations under the License.
 **/
 
-import SyncObject from './SyncObject';
+import SyncObject, {ChangeType, ObjectType} from './ProxyObject';
 import DataObjectChild from './DataObjectChild';
-import { ChangeType, ObjectType } from './SyncObject';
 import {deepClone} from '../utils/utils.js';
 
 /**
@@ -52,7 +51,7 @@ class DataObject {
    * @ignore
    * Should not be used directly by Hyperties. It's called by the Syncher create or subscribe method's
    */
-  constructor(syncher, url, schema, initialStatus, initialData, childrens) {
+  constructor(syncher, url, schema, initialStatus, initialData, childrens, mutual = true, resumed = false) {
     let _this = this;
 
     _this._syncher = syncher;
@@ -62,19 +61,47 @@ class DataObject {
     _this._syncObj = new SyncObject(initialData);
     _this._childrens = childrens;
 
+    //TODO: For Further Study
+    _this._mutualAuthentication = mutual;
+
     _this._version = 0;
     _this._childId = 0;
     _this._childrenObjects = {};
     _this._childrenListeners = [];
 
+    _this._resumed = resumed;
+
+
     _this._owner = syncher._owner;
     _this._bus = syncher._bus;
+
+    /*if (resumed && childrens) {
+      _this._childId = _this._getLastChildId();
+      console.log('[Data Object resumed] last ChildId: ', _this._childId);
+    }*/
+  }
+
+  _getLastChildId() {
+    let _this = this;
+
+    let childIdInt = 0;
+    let childIdString = _this._owner + '#' + childIdInt;
+
+
+    Object.keys(_this._childrens).filter((key) => {
+      if (_this._childrens[key].childId > childIdString) {
+        childIdString = _this._childrens[key].childId;
+      }
+    });
+
+    return childIdInt = Number(childIdString.split('#')[1]);
   }
 
   _allocateListeners() {
     let _this = this;
 
     let childBaseURL = _this._url + '/children/';
+    console.log('[Data Object - AllocateListeners] - ', _this._childrens);
     if (_this._childrens) {
       _this._childrens.forEach((child) => {
         let childURL = childBaseURL + child;
@@ -165,9 +192,10 @@ class DataObject {
    * Create and add a DataObjectChild to a children collection.
    * @param {String} children - Children name where the child is added.
    * @param {JSON} initialData - Initial data of the child
+   * @param  {MessageBodyIdentity} identity - (optional) identity data to be added to identity the user reporter. To be used for legacy identities.
    * @return {Promise<DataObjectChild>} - Return Promise to a new DataObjectChild.
    */
-  addChild(children, initialData) {
+  addChild(children, initialData, identity) {
     let _this = this;
 
     //create new child unique ID, based on hypertyURL
@@ -180,6 +208,11 @@ class DataObject {
       type: 'create', from: _this._owner, to: msgChildPath,
       body: { resource: msgChildId, value: initialData }
     };
+
+    if (identity)      { requestMsg.body.identity = identity; }
+
+    //TODO: For Further Study
+    if (!_this._mutualAuthentication) requestMsg.body.mutualAuthentication = _this._mutualAuthentication;
 
     //returns promise, in the future, the API may change to asynchronous call
     return new Promise((resolve) => {
@@ -250,6 +283,8 @@ class DataObject {
         body: { version: _this._version, source: _this._owner, attribute: event.field }
       };
 
+      console.log('[DataObject - _onChange] - ', event, childInfo, changeMsg);
+
       if (event.oType === ObjectType.OBJECT) {
         if (event.cType !== ChangeType.REMOVE) {
           changeMsg.body.value = event.data;
@@ -267,6 +302,9 @@ class DataObject {
         changeMsg.to = childInfo.path;
         changeMsg.body.resource = childInfo.childId;
       }
+
+      //TODO: For Further Study
+      if (!_this._mutualAuthentication) changeMsg.body.mutualAuthentication = _this._mutualAuthentication;
 
       _this._bus.postMessage(changeMsg);
     }

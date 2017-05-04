@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/runtime-catalogue/RuntimeCatalogue.js | Service Framework API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">catalogue-factory</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html">CatalogueDataObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/CatalogueDataObjectFactory.js~CatalogueDataObjectFactory.html">CatalogueDataObjectFactory</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~CommunicationDataObjectSchema.html">CommunicationDataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~ConnectionDataObjectSchema.html">ConnectionDataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~ContextDataObjectSchema.html">ContextDataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~DataObjectSchema.html">DataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~HypertyDataObjectSchema.html">HypertyDataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~IdentityDataObjectSchema.html">IdentityDataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~MessageDataObjectSchema.html">MessageDataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/HypertyDescriptor.js~HypertyDescriptor.html">HypertyDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/HypertyInterceptorDescriptor.js~PolicyEnforcerDescriptor.html">PolicyEnforcerDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/HypertyRuntimeDescriptor.js~HypertyRuntimeDescriptor.html">HypertyRuntimeDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeHypertyCapability.html">RuntimeHypertyCapability</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeProtocolCapability.html">RuntimeProtocolCapability</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor.html">ProtocolStubDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/RuntimeConstraint.js~RuntimeConstraint.html">RuntimeConstraint</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/SourcePackage.js~SourcePackage.html">SourcePackage</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-CatalogueObjectType">CatalogueObjectType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-DataObjectSourceLanguage">DataObjectSourceLanguage</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-DataUrlScheme">DataUrlScheme</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HypertyResourceType">HypertyResourceType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HypertyType">HypertyType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RuntimeHypertyCapabilityType">RuntimeHypertyCapabilityType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RuntimeType">RuntimeType</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">discovery</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/discovery/Discovery.js~Discovery.html">Discovery</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">identityManager</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/identityManager/IdentityManager.js~IdentityManager.html">IdentityManager</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">idp</div><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-activate">activate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-activate">activate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-activate">activate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-activate">activate</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">message-factory</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/Message.js~Message.html">Message</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~CreateMessageBody.html">CreateMessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~DeleteMessageBody.html">DeleteMessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~ExecuteMessageBody.html">ExecuteMessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~ForwardMessageBody.html">ForwardMessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~MessageBody.html">MessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~ReadMessageBody.html">ReadMessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~ResponseMessageBody.html">ResponseMessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~UpdateMessageBody.html">UpdateMessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageFactory.js~IdGenerator.html">IdGenerator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageFactory.js~MessageFactory.html">MessageFactory</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Enum">Enum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-MessageType">MessageType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ATTRIBUTE_TYPE">ATTRIBUTE_TYPE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-REASON_PHRASE">REASON_PHRASE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RESPONSE_CODE">RESPONSE_CODE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-UPDATE_OPERATION">UPDATE_OPERATION</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">persistence</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/persistence/PersistenceManager.js~PersistenceManager.html">PersistenceManager</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">reTHINKObject</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/reTHINKObject/RethinkObject.js~RethinkObject.html">RethinkObject</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">runtime-capabilities</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/runtime-capabilities/RuntimeCapabilities.js~RuntimeCapabilities.html">RuntimeCapabilities</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">runtime-catalogue</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue.html">RuntimeCatalogue</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">storage-manager</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/storage-manager/StorageManager.js~StorageManager.html">StorageManager</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">syncher</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/DataObject.js~DataObject.html">DataObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/DataObjectChild.js~DataObjectChild.html">DataObjectChild</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/DataObjectObserver.js~DataObjectObserver.html">DataObjectObserver</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/DataObjectReporter.js~DataObjectReporter.html">DataObjectReporter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/Syncher.js~Syncher.html">Syncher</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ChangeType">ChangeType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ObjectType">ObjectType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ChangeType">ChangeType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ObjectType">ObjectType</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">utils</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/utils/EventEmitter.js~EventEmitter.html">EventEmitter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-convertToUserURL">convertToUserURL</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-deepClone">deepClone</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-divideEmail">divideEmail</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-divideURL">divideURL</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-emptyObject">emptyObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getUserEmailFromURL">getUserEmailFromURL</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getUserURLFromEmail">getUserURLFromEmail</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-divideURL">divideURL</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/runtime-catalogue/RuntimeCatalogue.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import CatalogueFactory from &quot;../catalogue-factory/CatalogueDataObjectFactory&quot;;
+
+class RuntimeCatalogue {
+
+    constructor(runtimeFactory) {
+        if (!runtimeFactory) throw Error(&apos;The catalogue needs the runtimeFactory&apos;);
+
+        this._factory = new CatalogueFactory();
+        this.httpRequest = runtimeFactory.createHttpRequest();
+        this.atob = runtimeFactory.atob ? runtimeFactory.atob : atob;
+        this.storageManager = runtimeFactory.storageManager();
+    }
+
+    /**
+     * Get a Catalogue Data Object (Descriptor) from a URL, and construct it using the provided function
+     * @param {String} descriptorURL - e.g. mydomain.com/.well-known/hyperty/MyHyperty
+     * @param {function} createFunc - e.g. createHyperty
+     * @param {boolean} [getFull] - whether or not to get descriptor with sourcePackage, or only the descriptor part
+     * @returns {Promise}
+     */
+    getDescriptor(descriptorURL, createFunc, getFull = true) {
+        console.log(&quot;getting descriptor from:&quot;, descriptorURL);
+
+        // some flags for optimization
+        // (later the descriptor will not be saved in case both of these booleans are true)
+        let isSavedDescriptor = false;
+        let isCompleteDescriptor = false;
+
+        // get raw descriptor
+        // first checks if descriptor is already in localStorage (based on cguid and version)
+        let descriptorPromise = Promise.all([this.httpRequest.get(descriptorURL + &quot;/version&quot;), this.httpRequest.get(descriptorURL + &quot;/cguid&quot;)]).then(([version, cguid]) =&gt; {
+            console.log(&quot;got version (&quot; + version + &quot;) and cguid (&quot; + cguid + &quot;) for descriptor &quot; + descriptorURL);
+
+            // check if same version is contained in localStorage
+            return this.storageManager.getVersion(cguid).then((dbVersion) =&gt; {
+                if (dbVersion &gt;= version) {
+                    console.log(&quot;storageManager contains saved version that is the same or newer than requested&quot;);
+                    isSavedDescriptor = true;
+                    return this.storageManager.get(cguid);
+                } else {
+                    console.log(&quot;storageManager does not contain saved version&quot;);
+                    // no saved copy, proceed with retrieving descriptor
+                    return this.httpRequest.get(descriptorURL).then((descriptor) =&gt; {
+                        descriptor = JSON.parse(descriptor);
+                        //console.log(&quot;got descriptor:&quot;, JSON.stringify(descriptor, null, 2));
+                        if (descriptor[&quot;ERROR&quot;]) {
+                            // TODO handle error properly
+                            throw new Error(descriptor);
+                        } else {
+                            return descriptor;
+                        }
+                    });
+                }
+            })
+
+        }).catch((error) =&gt; {
+            let errorString = &quot;Unable to get descriptor for &quot; + descriptorURL + &quot;: &quot; + error;
+            console.error(errorString);
+            throw new Error(errorString);
+        });
+
+        let returnPromise = descriptorPromise;
+
+        // if getFull, attach sourcePackage
+        if (getFull) {
+            console.log(&quot;adding promise to attach sourcePackage&quot;);
+            returnPromise = descriptorPromise.then((descriptor) =&gt; {
+                if (descriptor.sourcePackage) {
+                    isCompleteDescriptor = true;
+                    return descriptor;
+                } else {
+                    isCompleteDescriptor = false;
+                    return this.attachRawSourcePackage(descriptor);
+                }
+            })
+        }
+
+        // finally create object
+        returnPromise = returnPromise.then((descriptor) =&gt; {
+            // store if not saved before, or if full descriptor was requested and only partial descriptor was stored.
+            if (!isSavedDescriptor || (isSavedDescriptor &amp;&amp; !isCompleteDescriptor &amp;&amp; getFull)) {
+                this.storageManager.set(descriptor.cguid, descriptor.version, descriptor);
+            }
+            return createFunc.apply(this, [descriptor]);
+        });
+
+        return returnPromise;
+    }
+
+    /**
+     * Uses the sourcePackageURL from the descriptor, requests the sourcePackage and attaches it to the descriptor.
+     * @param {CatalogueDataObject} descriptor
+     * @returns {Promise} - fulfills with complete descriptor
+     */
+    attachRawSourcePackage(descriptor) {
+        console.log(&quot;attaching raw sourcePackage from:&quot;, descriptor.sourcePackageURL);
+        return new Promise((resolve) =&gt; {
+            this.httpRequest.get(descriptor.sourcePackageURL).then((sourcePackage) =&gt; {
+                sourcePackage = JSON.parse(sourcePackage);
+                //delete descriptor.sourcePackageURL;
+                //console.log(&quot;attaching sourcePackage:&quot;, sourcePackage);
+                descriptor.sourcePackage = sourcePackage;
+                resolve(descriptor);
+            });
+        });
+    }
+
+    /**
+     * Get HypertyDescriptor
+     * @param hypertyURL - e.g. mydomain.com/.well-known/hyperty/MyHyperty
+     * @param {boolean} [getFull] - boolean to decide to get the descriptor with the sourcePackage or (potentially) without
+     * @returns {Promise}
+     */
+    getHypertyDescriptor(hypertyURL, getFull = true) {
+        return this.getDescriptor(hypertyURL, this.createHyperty, getFull)
+    }
+
+    /**
+     * Get StubDescriptor
+     * @param stubURL - e.g. mydomain.com/.well-known/protostub/MyProtostub
+     * @param {boolean} [getFull] - boolean to decide to get the descriptor with the sourcePackage or (potentially) without
+     * @returns {Promise}
+     */
+    getStubDescriptor(stubURL, getFull = true) {
+        return this.getDescriptor(stubURL, this.createStub, getFull)
+    }
+
+    /**
+     * Get RuntimeDescriptor
+     * @param runtimeURL - e.g. mydomain.com/.well-known/runtime/MyRuntime
+     * @param {boolean} [getFull] - boolean to decide to get the descriptor with the sourcePackage or (potentially) without
+     * @returns {Promise}
+     */
+    getRuntimeDescriptor(runtimeURL, getFull = true) {
+        return this.getDescriptor(runtimeURL, this.createRuntimeDescriptor, getFull)
+    }
+
+    /**
+     * Get DataSchemaDescriptor
+     * @param dataSchemaURL - e.g. mydomain.com/.well-known/dataschema/MyDataSchema
+     * @param {boolean} [getFull] - boolean to decide to get the descriptor with the sourcePackage or (potentially) without
+     * @returns {Promise}
+     */
+    getDataSchemaDescriptor(dataSchemaURL, getFull = true) {
+        return this.getDescriptor(dataSchemaURL, this.createDataSchema, getFull)
+    }
+
+    /**
+     * Get IDPProxyDescriptor
+     * @param idpProxyURL - e.g. mydomain.com/.well-known/idp-proxy/MyProxy
+     * @param {boolean} [getFull] - boolean to decide to get the descriptor with the sourcePackage or (potentially) without
+     * @returns {Promise}
+     */
+    getIdpProxyDescriptor(idpProxyURL, getFull = true) {
+        return this.getDescriptor(idpProxyURL, this.createIdpProxy, getFull)
+    }
+
+    /**
+     * Create HypertyDescriptor based on raw object that contains its attributes
+     * @param {JSON} rawHyperty
+     * @returns {HypertyDescriptor}
+     */
+    createHyperty(rawHyperty) {
+        //console.log(&quot;createHyperty:&quot;, rawHyperty);
+        // create the descriptor
+        let hyperty = this._factory.createHypertyDescriptorObject(
+            rawHyperty[&quot;cguid&quot;],
+            rawHyperty[&quot;version&quot;],
+            rawHyperty[&quot;objectName&quot;],
+            rawHyperty[&quot;description&quot;],
+            rawHyperty[&quot;language&quot;],
+            rawHyperty[&quot;sourcePackageURL&quot;],
+            rawHyperty[&quot;type&quot;] || rawHyperty[&quot;hypertyType&quot;],
+            rawHyperty[&quot;dataObjects&quot;]
+        );
+        //console.log(&quot;factory returned:&quot;, hyperty);
+
+        // optional fields
+        hyperty.configuration = rawHyperty[&quot;configuration&quot;];
+        hyperty.constraints = rawHyperty[&quot;constraints&quot;];
+        hyperty.messageSchema = rawHyperty[&quot;messageSchema&quot;];
+        hyperty.policies = rawHyperty[&quot;policies&quot;];
+        hyperty.signature = rawHyperty[&quot;signature&quot;];
+
+        // parse and attach sourcePackage
+        let sourcePackage = rawHyperty[&quot;sourcePackage&quot;];
+        if (sourcePackage) {
+            hyperty.sourcePackage = this.createSourcePackage(sourcePackage);
+        }
+
+        return hyperty;
+    }
+
+    /**
+     * Create ProtocolStubDescriptor based on raw object that contains its attributes
+     * @param rawStub
+     * @returns {ProtocolStubDescriptor}
+     */
+    createStub(rawStub) {
+        // console.log(&quot;creating stub descriptor based on: &quot;, rawStub);
+
+        // create the descriptor
+        let stub = this._factory.createProtoStubDescriptorObject(
+            rawStub[&quot;cguid&quot;],
+            rawStub[&quot;version&quot;],
+            rawStub[&quot;objectName&quot;],
+            rawStub[&quot;description&quot;],
+            rawStub[&quot;language&quot;],
+            rawStub[&quot;sourcePackageURL&quot;],
+            rawStub[&quot;messageSchemas&quot;],
+            rawStub[&quot;configuration&quot;],
+            rawStub[&quot;constraints&quot;],
+            rawStub[&quot;hypertyType&quot;],
+            rawStub[&quot;dataObjects&quot;],
+            rawStub[&quot;interworking&quot;],
+            rawStub[&quot;idpProxy&quot;],
+            rawStub[&quot;mutualAuthentication&quot;]
+        );
+
+        // optional fields
+        stub.signature = rawStub[&quot;signature&quot;];
+
+        // parse and attach the sourcePackage
+        let sourcePackage = rawStub[&quot;sourcePackage&quot;];
+        if (sourcePackage) {
+            stub.sourcePackage = this.createSourcePackage(sourcePackage);
+        }
+
+        return stub;
+    }
+
+    /**
+     * Create HypertyRuntimeDescriptor based on raw object that contains its attributes
+     * @param rawRuntime
+     * @returns {HypertyRuntimeDescriptor}
+     */
+    createRuntimeDescriptor(rawRuntime) {
+        // parse capabilities first
+        try {
+            rawRuntime[&quot;hypertyCapabilities&quot;] = JSON.parse(rawRuntime[&quot;hypertyCapabilities&quot;]);
+            rawRuntime[&quot;protocolCapabilities&quot;] = JSON.parse(rawRuntime[&quot;protocolCapabilities&quot;]);
+        } catch (e) {
+            // already json object
+        }
+        //console.log(&quot;creating runtime descriptor based on: &quot;, rawRuntime);
+
+
+        // create the descriptor
+        let runtime = this._factory.createHypertyRuntimeDescriptorObject(
+            rawRuntime[&quot;cguid&quot;],
+            rawRuntime[&quot;version&quot;],
+            rawRuntime[&quot;objectName&quot;],
+            rawRuntime[&quot;description&quot;],
+            rawRuntime[&quot;language&quot;],
+            rawRuntime[&quot;sourcePackageURL&quot;],
+            rawRuntime[&quot;type&quot;] || rawRuntime[&quot;runtimeType&quot;],
+            rawRuntime[&quot;hypertyCapabilities&quot;],
+            rawRuntime[&quot;protocolCapabilities&quot;],
+            rawRuntime[&quot;p2pHandlerStub&quot;],
+            rawRuntime[&quot;p2pRequesterStub&quot;]
+        );
+
+        // optional fields
+        runtime.signature = rawRuntime[&quot;signature&quot;];
+
+        // parse and attach sourcePackage
+        let sourcePackage = rawRuntime[&quot;sourcePackage&quot;];
+        if (sourcePackage) {
+            // console.log(&quot;runtime has sourcePackage:&quot;, sourcePackage);
+            runtime.sourcePackage = this.createSourcePackage(sourcePackage);
+        }
+        return runtime;
+    }
+
+    /**
+     * Create DataObjectSchema based on raw object that contains its attributes
+     * @param rawSchema
+     * @returns {DataObjectSchema}
+     */
+    createDataSchema(rawSchema) {
+        //console.log(&quot;creating dataSchema based on: &quot;, rawSchema);
+
+        let dataSchema;
+        //console.log(&apos;1. createMessageDataObjectSchema: &apos;, rawSchema[&quot;accessControlPolicy&quot;]);
+        //console.log(&apos;2. createMessageDataObjectSchema: &apos;, rawSchema[&quot;scheme&quot;]);
+        if (rawSchema[&quot;accessControlPolicy&quot;] &amp;&amp; rawSchema[&quot;scheme&quot;]) {
+            dataSchema = this._factory.createHypertyDataObjectSchema(
+                rawSchema[&quot;cguid&quot;],
+                rawSchema[&quot;version&quot;],
+                rawSchema[&quot;objectName&quot;],
+                rawSchema[&quot;description&quot;],
+                rawSchema[&quot;language&quot;],
+                rawSchema[&quot;sourcePackageURL&quot;],
+                rawSchema[&quot;accessControlPolicy&quot;],
+                rawSchema[&quot;scheme&quot;]
+            )
+        } else {
+            //console.log(&apos;3. createMessageDataObjectSchema: &apos;, rawSchema);
+            dataSchema = this._factory.createMessageDataObjectSchema(
+                rawSchema[&quot;cguid&quot;],
+                rawSchema[&quot;version&quot;],
+                rawSchema[&quot;objectName&quot;],
+                rawSchema[&quot;description&quot;],
+                rawSchema[&quot;language&quot;],
+                rawSchema[&quot;sourcePackageURL&quot;]
+            )
+        }
+
+        // optional fields
+        dataSchema.signature = rawSchema[&quot;signature&quot;];
+
+        // parse and attach sourcePackage
+        let sourcePackage = rawSchema[&quot;sourcePackage&quot;];
+        if (sourcePackage) {
+            //console.log(&quot;dataSchema has sourcePackage:&quot;, sourcePackage);
+            dataSchema.sourcePackage = this.createSourcePackage(sourcePackage);
+
+            try {
+                dataSchema.sourcePackage.sourceCode = JSON.parse(dataSchema.sourcePackage.sourceCode);
+            } catch (e) {
+                console.log(&apos;DataSchema Source code is already parsed&apos;);
+            }
+
+            return dataSchema;
+
+        }
+        //console.log(&quot;created dataSchema descriptor object:&quot;, dataSchema);
+        return dataSchema;
+    }
+
+    /**
+     * Create ProtocolStubDescriptor based on raw object that contains its attributes
+     * @param rawProxy
+     * @returns {ProtocolStubDescriptor}
+     */
+    createIdpProxy(rawProxy) {
+        // console.log(&quot;creating idpproxy descriptor based on: &quot;, rawProxy);
+
+        // create the descriptor
+        let idpproxy = this._factory.createProtoStubDescriptorObject(
+          rawProxy[&quot;cguid&quot;],
+          rawProxy[&quot;version&quot;],
+          rawProxy[&quot;objectName&quot;],
+          rawProxy[&quot;description&quot;],
+          rawProxy[&quot;language&quot;],
+          rawProxy[&quot;sourcePackageURL&quot;],
+          rawProxy[&quot;messageSchemas&quot;],
+          rawProxy[&quot;configuration&quot;],
+          rawProxy[&quot;constraints&quot;],
+          rawProxy[&quot;hypertyType&quot;],
+          rawProxy[&quot;dataObjects&quot;],
+          rawProxy[&quot;interworking&quot;],
+          rawProxy[&quot;idpProxy&quot;],
+          rawProxy[&quot;mutualAuthentication&quot;]
+        );
+
+        // optional fields
+        idpproxy.signature = rawProxy[&quot;signature&quot;];
+
+        // parse and attach the sourcePackage
+        let sourcePackage = rawProxy[&quot;sourcePackage&quot;];
+        if (sourcePackage) {
+            sourcePackage = this.createSourcePackage(sourcePackage);
+            idpproxy.sourcePackage = sourcePackage;
+        }
+
+        return idpproxy;
+    }
+
+    createSourcePackage(sp) {
+        //console.log(&quot;createSourcePackage:&quot;, sp);
+
+        // check encoding
+        if (sp[&quot;encoding&quot;] === &quot;base64&quot;) {
+            sp[&quot;sourceCode&quot;] = this.atob(sp[&quot;sourceCode&quot;]);
+            sp[&quot;encoding&quot;] = &apos;utf-8&apos;;
+        }
+
+        let sourcePackage = this._factory.createSourcePackage(sp[&quot;sourceCodeClassname&quot;], sp[&quot;sourceCode&quot;]);
+        if (sp[&quot;encoding&quot;])
+            sourcePackage.encoding = sp[&quot;encoding&quot;];
+
+        if (sp[&quot;signature&quot;])
+            sourcePackage.signature = sp[&quot;signature&quot;];
+
+        return sourcePackage;
+    }
+
+    /**
+     * Get source Package from a URL
+     * @param sourcePackageURL - e.g. mydomain.com/.well-known/hyperty/MyHyperty/sourcePackage
+     * @returns {Promise}
+     */
+    getSourcePackageFromURL(sourcePackageURL) {
+        console.log(&quot;getting sourcePackage from:&quot;, sourcePackageURL);
+
+        return new Promise((resolve, reject) =&gt; {
+            this.httpRequest.get(sourcePackageURL).then((result) =&gt; {
+                //console.log(&quot;got raw sourcePackage:&quot;, result);
+                if (result[&quot;ERROR&quot;]) {
+                    // TODO handle error properly
+                    reject(result);
+                } else {
+                    result = JSON.parse(result);
+                    let sourcePackage = this.createSourcePackage(result);
+                    resolve(sourcePackage);
+                }
+            }).catch((reason) =&gt; {
+                reject(reason);
+            });
+
+        });
+
+    }
+
+    /**
+     * Returns the sourceCode of a given descriptor
+     * @param {CatalogueDataObject} descriptor - Catalogue Object that was retrieved using e.g. getHypertyDescriptor()
+     * @returns {Promise}
+     */
+    getSourceCodeFromDescriptor(descriptor) {
+        return new Promise((resolve, reject) =&gt; {
+            if (descriptor.sourcePackage) {
+                //console.log(&quot;descriptor has sourcePackage&quot;);
+                //console.log(&quot;returning sourceCode:&quot;, descriptor.sourcePackage.sourceCode);
+                resolve(descriptor.sourcePackage.sourceCode);
+            } else {
+                this.storageManager.getVersion(descriptor.sourcePackageURL + &quot;/sourceCode&quot;).then((dbVersion) =&gt; {
+                    if (dbVersion &gt;= descriptor.version) {
+                        console.log(&quot;returning cached version from storageManager&quot;);
+                        this.storageManager.get(descriptor.sourcePackageURL + &quot;/sourceCode&quot;).then((sourceCode) =&gt; {
+                            resolve(sourceCode);
+                        });
+                    } else {
+                        this.httpRequest.get(descriptor.sourcePackageURL + &quot;/sourceCode&quot;).then((sourceCode) =&gt; {
+                            if (sourceCode[&quot;ERROR&quot;]) {
+                                // TODO handle error properly
+                                reject(sourceCode);
+                            } else {
+                                this.storageManager.set(descriptor.sourcePackageURL + &quot;/sourceCode&quot;, descriptor.version, sourceCode);
+                                resolve(sourceCode);
+                            }
+                        });
+                    }
+                })
+            }
+        });
+    }
+
+    /**
+     * Returns the list of available catalogue objects for the given &quot;type URL&quot;,
+     * i.e. a catalogue URL that specifies a type, but no catalogue object name.
+     * @param typeURL - URL pointing to the catalogue object type you want a list of available objects for,
+     * e.g. hyperty-catalogue://catalogue.fokus.fraunhofer.de/.well-known/idp-proxy
+     * @returns {Promise} typeListPromise - Promise that fulfills with the list of available catalogue object names for the requested type,
+     * rejects on HTTP error or if the HTTP response is not in JSON.
+     */
+    getTypeList(typeURL) {
+        return new Promise((resolve, reject) =&gt; {
+            this.httpRequest.get(typeURL).then((typeList) =&gt; {
+                typeList = JSON.parse(typeList);
+                resolve(typeList);
+            }).catch((reason) =&gt; {
+                reject(reason);
+            });
+        });
+    }
+
+    set runtimeURL(runtimeURL) {
+        this._runtimeURL = runtimeURL;
+    }
+
+    get runtimeURL() {
+        return this._runtimeURL;
+    }
+
+    deleteFromPM(url) {
+        return this.storageManager.delete(url);
+    }
+
+}
+
+export default RuntimeCatalogue;
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.5.2)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

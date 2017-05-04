@@ -39,7 +39,7 @@ class StorageManager {
   set(key, version, value) {
     console.info('[StorageManager] - set ', key);
 
-    return this.db[this.storageName].put({key: this._checkKey(key), version:version, value:value});
+    return this.db[this.storageName].put({key: this._checkKey(key), version: version, value: value});
   }
 
 /**
@@ -54,7 +54,11 @@ class StorageManager {
       .equals(this._checkKey(key))
       .first()
       .then(object => {
-        if (object) return object.value;
+        if (object) {
+          return object.value;
+        } else {
+          return object;
+        }
       })
       .catch(error => {
         console.info('error getting the key ', key, ' with error: ', error);
@@ -74,7 +78,11 @@ class StorageManager {
       .equals(this._checkKey(key))
       .first()
       .then((object) => {
-        if (object) return object.version;
+        if (object) {
+          return object.version;
+        } else {
+          return object;
+        }
       })
       .catch(error => {
         console.info('error getting the version for ', key, ' with error: ', error);

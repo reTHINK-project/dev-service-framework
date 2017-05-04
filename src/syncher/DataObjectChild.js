@@ -21,7 +21,7 @@
 * limitations under the License.
 **/
 
-import SyncObject from './SyncObject';
+import SyncObject from './ProxyObject';
 
 /**
  * The class returned from the DataObject addChildren call or from onAddChildren if remotely created.
@@ -47,6 +47,8 @@ class DataObjectChild /* implements SyncStatus */ {
     _this._msgId = msgId;
 
     _this._syncObj = new SyncObject(initialData);
+
+    console.log('[DataObjectChild -  Constructor] - ', _this._syncObj);
 
     _this._bus = parent._bus;
     _this._allocateListeners();
@@ -100,11 +102,26 @@ class DataObjectChild /* implements SyncStatus */ {
   get data() { return this._syncObj.data; }
 
   /**
+   * Set for this dataObjectChild an identity
+   * @method identity
+   * @param  {Identity} identity identity from who created the message
+   */
+  set identity(identity) { this._identity = identity; }
+
+  /**
+   * Get for this dataObjectChild an identity
+   * @method identity
+   * @return {Identity} identity from who created the message
+   */
+  get identity() { return this._identity; }
+
+  /**
    * Register the change listeners sent by the reporter child
    * @param {function(event: MsgEvent)} callback
    */
   onChange(callback) {
     this._syncObj.observe((event) => {
+      console.log('[DataObjectChild - observer] - ', event);
       callback(event);
     });
   }

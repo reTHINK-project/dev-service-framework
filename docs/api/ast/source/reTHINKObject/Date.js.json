@@ -1,101 +1,210 @@
 {
-  "type": "Program",
+  "type": "File",
   "start": 0,
-  "end": 127,
+  "end": 1029,
   "loc": {
     "start": {
       "line": 1,
       "column": 0
     },
     "end": {
-      "line": 6,
+      "line": 29,
       "column": 0
     }
   },
-  "sourceType": "module",
-  "body": [],
-  "leadingComments": [
+  "program": {
+    "type": "Program",
+    "start": 0,
+    "end": 1029,
+    "loc": {
+      "start": {
+        "line": 1,
+        "column": 0
+      },
+      "end": {
+        "line": 29,
+        "column": 0
+      }
+    },
+    "sourceType": "module",
+    "body": [],
+    "directives": [],
+    "leadingComments": null,
+    "innerComments": [
+      {
+        "type": "CommentBlock",
+        "value": "*\r\n* Copyright 2016 PT Inovação e Sistemas SA\r\n* Copyright 2016 INESC-ID\r\n* Copyright 2016 QUOBIS NETWORKS SL\r\n* Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V\r\n* Copyright 2016 ORANGE SA\r\n* Copyright 2016 Deutsche Telekom AG\r\n* Copyright 2016 Apizee\r\n* Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN\r\n*\r\n* Licensed under the Apache License, Version 2.0 (the \"License\");\r\n* you may not use this file except in compliance with the License.\r\n* You may obtain a copy of the License at\r\n*\r\n*   http://www.apache.org/licenses/LICENSE-2.0\r\n*\r\n* Unless required by applicable law or agreed to in writing, software\r\n* distributed under the License is distributed on an \"AS IS\" BASIS,\r\n* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n* See the License for the specific language governing permissions and\r\n* limitations under the License.\r\n*",
+        "start": 0,
+        "end": 898,
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 22,
+            "column": 3
+          }
+        }
+      },
+      {
+        "type": "CommentBlock",
+        "value": "*\r\n * Created by amo on 16/11/2015.\r\n ",
+        "start": 902,
+        "end": 944,
+        "loc": {
+          "start": {
+            "line": 24,
+            "column": 0
+          },
+          "end": {
+            "line": 26,
+            "column": 3
+          }
+        }
+      },
+      {
+        "type": "CommentLine",
+        "value": "Probably not going to be needed. We could use the Date Object from JavaScript",
+        "start": 948,
+        "end": 1027,
+        "loc": {
+          "start": {
+            "line": 28,
+            "column": 0
+          },
+          "end": {
+            "line": 28,
+            "column": 79
+          }
+        }
+      }
+    ]
+  },
+  "comments": [
     {
-      "type": "Block",
-      "value": "*\r\n * Created by amo on 16/11/2015.\r\n ",
+      "type": "CommentBlock",
+      "value": "*\r\n* Copyright 2016 PT Inovação e Sistemas SA\r\n* Copyright 2016 INESC-ID\r\n* Copyright 2016 QUOBIS NETWORKS SL\r\n* Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V\r\n* Copyright 2016 ORANGE SA\r\n* Copyright 2016 Deutsche Telekom AG\r\n* Copyright 2016 Apizee\r\n* Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN\r\n*\r\n* Licensed under the Apache License, Version 2.0 (the \"License\");\r\n* you may not use this file except in compliance with the License.\r\n* You may obtain a copy of the License at\r\n*\r\n*   http://www.apache.org/licenses/LICENSE-2.0\r\n*\r\n* Unless required by applicable law or agreed to in writing, software\r\n* distributed under the License is distributed on an \"AS IS\" BASIS,\r\n* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n* See the License for the specific language governing permissions and\r\n* limitations under the License.\r\n*",
       "start": 0,
-      "end": 42,
+      "end": 898,
       "loc": {
         "start": {
           "line": 1,
           "column": 0
         },
         "end": {
-          "line": 3,
+          "line": 22,
           "column": 3
         }
-      },
-      "range": [
-        0,
-        42
-      ]
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\r\n * Created by amo on 16/11/2015.\r\n ",
+      "start": 902,
+      "end": 944,
+      "loc": {
+        "start": {
+          "line": 24,
+          "column": 0
+        },
+        "end": {
+          "line": 26,
+          "column": 3
+        }
+      }
     },
     {
       "type": "CommentLine",
       "value": "Probably not going to be needed. We could use the Date Object from JavaScript",
-      "start": 46,
-      "end": 125,
+      "start": 948,
+      "end": 1027,
       "loc": {
         "start": {
-          "line": 5,
+          "line": 28,
           "column": 0
         },
         "end": {
-          "line": 5,
+          "line": 28,
           "column": 79
         }
-      },
-      "range": [
-        46,
-        125
-      ]
+      }
     }
   ],
-  "innerComments": [
+  "tokens": [
     {
-      "type": "Block",
-      "value": "*\r\n * Created by amo on 16/11/2015.\r\n ",
+      "type": "CommentBlock",
+      "value": "*\r\n* Copyright 2016 PT Inovação e Sistemas SA\r\n* Copyright 2016 INESC-ID\r\n* Copyright 2016 QUOBIS NETWORKS SL\r\n* Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V\r\n* Copyright 2016 ORANGE SA\r\n* Copyright 2016 Deutsche Telekom AG\r\n* Copyright 2016 Apizee\r\n* Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN\r\n*\r\n* Licensed under the Apache License, Version 2.0 (the \"License\");\r\n* you may not use this file except in compliance with the License.\r\n* You may obtain a copy of the License at\r\n*\r\n*   http://www.apache.org/licenses/LICENSE-2.0\r\n*\r\n* Unless required by applicable law or agreed to in writing, software\r\n* distributed under the License is distributed on an \"AS IS\" BASIS,\r\n* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n* See the License for the specific language governing permissions and\r\n* limitations under the License.\r\n*",
       "start": 0,
-      "end": 42,
+      "end": 898,
       "loc": {
         "start": {
           "line": 1,
           "column": 0
         },
         "end": {
-          "line": 3,
+          "line": 22,
           "column": 3
         }
-      },
-      "range": [
-        0,
-        42
-      ]
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\r\n * Created by amo on 16/11/2015.\r\n ",
+      "start": 902,
+      "end": 944,
+      "loc": {
+        "start": {
+          "line": 24,
+          "column": 0
+        },
+        "end": {
+          "line": 26,
+          "column": 3
+        }
+      }
     },
     {
       "type": "CommentLine",
       "value": "Probably not going to be needed. We could use the Date Object from JavaScript",
-      "start": 46,
-      "end": 125,
+      "start": 948,
+      "end": 1027,
       "loc": {
         "start": {
-          "line": 5,
+          "line": 28,
           "column": 0
         },
         "end": {
-          "line": 5,
+          "line": 28,
           "column": 79
         }
+      }
+    },
+    {
+      "type": {
+        "label": "eof",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
       },
-      "range": [
-        46,
-        125
-      ]
+      "start": 1029,
+      "end": 1029,
+      "loc": {
+        "start": {
+          "line": 29,
+          "column": 0
+        },
+        "end": {
+          "line": 29,
+          "column": 0
+        }
+      }
     }
   ]
 }

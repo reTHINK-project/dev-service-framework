@@ -1,0 +1,299 @@
+{
+  "type": "File",
+  "start": 0,
+  "end": 8837,
+  "loc": {
+    "start": {
+      "line": 1,
+      "column": 0
+    },
+    "end": {
+      "line": 254,
+      "column": 2
+    }
+  },
+  "program": {
+    "type": "Program",
+    "start": 0,
+    "end": 8837,
+    "loc": {
+      "start": {
+        "line": 1,
+        "column": 0
+      },
+      "end": {
+        "line": 254,
+        "column": 2
+      }
+    },
+    "sourceType": "module",
+    "body": [],
+    "directives": [
+      {
+        "type": "Directive",
+        "start": 0,
+        "end": 13,
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 1,
+            "column": 13
+          }
+        },
+        "value": {
+          "type": "DirectiveLiteral",
+          "start": 0,
+          "end": 12,
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 0
+            },
+            "end": {
+              "line": 1,
+              "column": 12
+            }
+          },
+          "value": "use strict",
+          "extra": {
+            "raw": "\"use strict\"",
+            "rawValue": "use strict"
+          },
+          "trailingComments": null
+        },
+        "trailingComments": [
+          {
+            "type": "CommentBlock",
+            "value": "global describe ",
+            "start": 15,
+            "end": 35,
+            "loc": {
+              "start": {
+                "line": 2,
+                "column": 0
+              },
+              "end": {
+                "line": 2,
+                "column": 20
+              }
+            }
+          },
+          {
+            "type": "CommentBlock",
+            "value": "global it ",
+            "start": 37,
+            "end": 51,
+            "loc": {
+              "start": {
+                "line": 3,
+                "column": 0
+              },
+              "end": {
+                "line": 3,
+                "column": 14
+              }
+            }
+          },
+          {
+            "type": "CommentBlock",
+            "value": "\r\nconst assert = require(\"assert\");\r\nconst fs = require(\"fs\");\r\nconst URL = require(\"../lib/url\").createURLConstructor();\r\n\r\nfunction testAll(testurl) {\r\n    return function () {\r\n\tlet url;\r\n\r\n\ttry {\r\n\t    url = new URL(testurl.input, testurl.base);\r\n\t    assert.equal(url.protocol , testurl.output.protocol, \"\\n\\tGiven: *\" + url.protocol  +\"* \\n\\tTesturl.output.protocol: *\"+testurl.output.protocol+\"*\");\r\n\t    assert.equal(url.origin , testurl.output.origin, \"\\n\\tGiven: \" + url.origin  +   \" \\n\\tTesturl.Output.origin: \"+testurl.output.origin);\r\n\t    assert.equal(url.hostname , testurl.output.hostname, \"\\n\\tGiven: \" + url.hostname  +   \" \\n\\tTesturl.Output.hostname: \"+testurl.output.hostname);\r\n\t    assert.equal(url.host , testurl.output.host, \"\\n\\tGiven: \" + url.host  +   \" \\n\\tTesturl.Output.host: \"+testurl.output.host);\r\n\t    assert.equal(url.port , testurl.output.port, \"\\n\\tGiven: \" + url.port  +   \" \\n\\tTesturl.Output.port: \"+testurl.output.port);\r\n\t    assert.equal(url.path , testurl.output.path, \"\\n\\tGiven: \" + url.path  +   \" \\n\\tTesturl.Output.path: \"+testurl.output.path);\r\n\t    assert.equal(url.search , testurl.output.search, \"\\n\\tGiven: \" + url.search  +   \" \\n\\tTesturl.Output.search: \"+testurl.output.search);\r\n\t    assert.equal(url.hash , testurl.output.hash, \"\\n\\tGiven: \" + url.hash  +   \" \\n\\tTesturl.Output.hash: \"+testurl.output.hash);\r\n\t    assert.equal(url.href , testurl.output.href, \"\\n\\tGiven: \" + url.href  +   \" \\n\\tTesturl.Output.href: \"+testurl.output.href);\r\n\r\n\r\n\t} catch (e) {\r\n\t    if (e instanceof TypeError && expected.error === TypeError) {\r\n\t    } else {\r\n\t\tthrow e;\r\n\t    }\r\n\t}\r\n\t\r\n    }\r\n}\r\n\r\nfunction testOrigin(expected) {\r\n    return function () {\r\n\tlet url;\r\n\r\n\ttry {\r\n\t    url = new URL(expected.input, expected.base);\r\n\r\n\t    assert.equal(url.origin, expected.origin, \"\\n\\tGiven: \" + url.origin  +   \" \\n\\tExpected: \"+expected.origin);\r\n\t} catch (e) {\r\n\t    if (e instanceof TypeError && expected.error === TypeError) {\r\n\t    } else {\r\n\t\tthrow e;\r\n\t    }\r\n\t}\r\n\r\n    };\r\n}\r\n\r\n\r\nfunction testURL(expected) {\r\n  return function () {\r\n      let url;\r\n      try {\r\n\t  url = new URL(expected.input, expected.base);\r\n\t  console.warn(\"Protocol: \" + url.protocol)\r\n\t  console.warn(\"Origin: \" + url.origin)\r\n\t  console.warn(\"Hostname: \" + url.hostname)\r\n\t  console.warn(\"Host: \" + url.host)\r\n\t  console.warn(\"Port: \" + url.port)\r\n\t  console.warn(\"Path: \" + url.path)\r\n\t  console.warn(\"Search: \" + url.search)\r\n\t  console.warn(\"Hash: \" + url.hash)\r\n\t  console.warn(\"Href: \" + url.href)\t  \r\n\r\n      } catch (e) {\r\n\t  if (e instanceof TypeError && expected.protocol === \":\") {\r\n\t      console.error(\"TypeError...\");\r\n              return;\r\n\t  }\r\n\t  throw e;\r\n      }\r\n\r\n      console.warn(\"parsing...\");\r\n      if (expected.protocol === \":\" && url.protocol !== \":\") {\r\n\t  assert.fail(url.href, \"\", \"Expected URL to fail parsing, got \" + url.href);\r\n      }\r\n  };\r\n}\r\n\r\ndescribe(\"Full tests:\", function () {\r\n    let urls = []\r\n    let url = {}\r\n\r\n    url={\r\n\tinput:\"hyperty-runtime-esn://domain.com/12345\",\r\n\toutput: {\r\n\t    protocol: \"hyperty-runtime-esn:\",\r\n\t    origin: \"hyperty-runtime-esn://domain.com\",\r\n\t    hostname: \"domain.com\",\r\n\t    host: \"domain.com\",\r\n\t    port: \"\",\r\n\t    path: undefined,\r\n\t    search: \"\", \r\n\t    hash:\"\", \r\n\t    href: \"hyperty-runtime-esn://domain.com/12345\"\r\n\t}\r\n    }\r\n\r\n    urls.push(url)\r\n\r\n    url={\r\n    \tinput:\"hyperty-runtime-esn://domain.com/12345#textafterhash\",\r\n    \toutput: {\r\n\t    protocol: \"hyperty-runtime-esn:\",\r\n\t    origin: \"hyperty-runtime-esn://domain.com\",\r\n\t    hostname: \"domain.com\",\r\n\t    host: \"domain.com\",\r\n\t    port: \"\",\r\n\t    path: undefined,\r\n\t    search: \"\", \r\n\t    hash:\"#textafterhash\", \r\n\t    href: \"hyperty-runtime-esn://domain.com/12345#textafterhash\"\r\n    \t}\r\n    }\r\n    urls.push(url)\r\n\r\n    url={\r\n    \tinput:\"hyperty-runtime-esn://domain.com/12345?a=1&b=2&c=3\",\r\n    \toutput: {\r\n\t    protocol: \"hyperty-runtime-esn:\",\r\n\t    origin: \"hyperty-runtime-esn://domain.com\",\r\n\t    hostname: \"domain.com\",\r\n\t    host: \"domain.com\",\r\n\t    port: \"\",\r\n\t    path: undefined,\r\n\t    search: \"?a=1&b=2&c=3\", \r\n\t    hash:\"\", \r\n\t    href: \"hyperty-runtime-esn://domain.com/12345?a=1&b=2&c=3\"\r\n    \t}\r\n    }\r\n    urls.push(url)\r\n\r\n    // url={\r\n    // \tinput:\"hyperty-runtime-esn://domain.com/12345#hash?a=1&b=2&c=3\",\r\n    // \toutput: {\r\n    // \t    protocol: \"hyperty-runtime-esn:\",\r\n    // \t    origin: \"hyperty-runtime-esn://domain.com\",\r\n    // \t    hostname: \"domain.com\",\r\n    // \t    host: \"domain.com\",\r\n    // \t    port: \"\",\r\n    // \t    path: undefined,\r\n    // \t    search: \"?a=1&b=2&c=3\", \r\n    // \t    hash:\"\", \r\n    // \t    href: \"hyperty-runtime-esn://domain.com/12345\"\r\n    // \t}\r\n    // }\r\n    // urls.push(url)\r\n\r\n\r\n    for (let i=0; i<urls.length; i++) {\r\n\tit(urls[i].input+\": \", testAll(urls[i]))\r\n    }\r\n\r\n})\r\n\r\n\r\n\r\ndescribe(\"Tests to check 'origin':\", function () {\r\n    let urls = []\r\n    urls.push({input:\"blob:https://whatwg.org/d0360e2f-caee-469f-9a2f-87d5b0456f6f\", origin:\"https://whatwg.org:443\"})\r\n\r\n    // special scheme without port\r\n    urls.push({input:\"wss://rethink.org/\", origin:\"wss://rethink.org\"})\r\n\r\n    // special scheme with default port\r\n    urls.push({input:\"wss://rethink.org:443/\", origin:\"wss://rethink.org\"})\r\n\r\n    // special scheme without port\r\n    urls.push({input:\"ws://rethink.org/\", origin:\"ws://rethink.org\"})\r\n\r\n    // special scheme with different port\r\n    urls.push({input:\"wss://rethink.org:2345\", origin:\"wss://rethink.org:2345\"})\r\n\r\n    // special scheme with different port\r\n    urls.push({input:\"ws://rethink.org:1000\", origin:\"ws://rethink.org:1000\"})\r\n\r\n    // special scheme with same port as default one\r\n    urls.push({input:\"wss://rethink.org:443\", origin:\"wss://rethink.org\"})\r\n\r\n    urls.push({input:\"newschema://rethink.org\", origin:\"null\"})\r\n\r\n    urls.push({input:\"wss://rethink.org#section\", origin:\"wss://rethink.org\"})\r\n\r\n    urls.push({input:\"wss://rethink.org/section1/section2\", origin:\"wss://rethink.org\"})\r\n\r\n    urls.push({input:\"wss://something\", origin:\"wss://something\"})\r\n    urls.push({input:\"wss://a.b.c.d.e\", origin:\"wss://a.b.c.d.e\"})\r\n\r\n    // Invalid URLs\r\n    urls.push({input:\"wss://\", error:TypeError})\r\n    urls.push({input:\"://rethink.org\", error:TypeError})\r\n    urls.push({input:\"<some garbage>\", error:TypeError})\r\n\r\n    // Valid URLs with IPv4\r\n    urls.push({input:\"wss://127.0.0.1\", origin:\"wss://127.0.0.1\"})\r\n\r\n    // Invalid URLs with IPs v4\r\n    urls.push({input:\"wss://127.0.0.300\", error:TypeError})\r\n    urls.push({input:\"wss://127.0.0\", error:TypeError})\r\n    urls.push({input:\"wss://127.0.0.1.2\", error:TypeError})\r\n    urls.push({input:\"wss://ABCD:EF01:2345:6789:ABCD:EF01:2345:6789\", error:TypeError})\r\n\r\n    // reThink URLs\r\n    urls.push({input:\"user://twitter.com/pchainho\", origin:\"user://twitter.com\"})\r\n    urls.push({input:\"user://cm-lisboa.pt/campo-grande-28-building\", origin:\"user://cm-lisboa.pt\"})\r\n    urls.push({input:\"ctxt://myhouse/energy\", origin:\"ctxt://myhouse\"})\r\n    urls.push({input:\"comm://telekom.de/sdruesdow-20150802006\", origin:\"comm://telekom.de\"})\r\n\r\n    // reThink URls: hypertity runtime\r\n    urls.push({input:\"hyperty-runtime://domain.com/12345\", origin:\"hyperty-runtime://domain.com\"})\r\n    urls.push({input:\"hyperty-runtime-uuid://domain.com/12345\", origin:\"hyperty-runtime-uuid://domain.com\"})\r\n    urls.push({input:\"hyperty-runtime-dev-os://domain.com/12345\", origin:\"hyperty-runtime-dev-os://domain.com\"})\r\n    urls.push({input:\"hyperty-runtime-imei://domain.com/12345\", origin:\"hyperty-runtime-imei://domain.com\"})\r\n    urls.push({input:\"hyperty-runtime-esn://domain.com/12345\", origin:\"hyperty-runtime-esn://domain.com\"})\r\n    urls.push({input:\"hyperty-runtime-meid://domain.com/12345\", origin:\"hyperty-runtime-meid://domain.com\"})\r\n    urls.push({input:\"hyperty-runtime-doesnotexist://domain.com/12345\", origin:\"\"})\r\n    urls.push({input:\"hyperty://meo.pt/123456\", origin:\"hyperty://meo.pt/123456\"})\r\n\r\n    for (let i=0; i<urls.length; i++) {\r\n\tit(urls[i].input+\": \", testOrigin(urls[i]))\r\n    }\r\n}\r\n\r\n)\r\n\r\n// describe(\"Hosts\", function () {\r\n//     let url = {}\r\n//     url.input=\"newprotocol://www.google.es\";\r\n//     url.expected={}\r\n//     url.expected.protocol=\"newprotocol:\"\r\n//     it(\"Testing: \", testURL(url))\r\n\r\n//     url.input=\"newprotocol://www.google.es#section\";\r\n//     url.expected={}\r\n//     url.expected.protocol=\"newprotocol:\"\r\n//     it(\"Testing: \", testURL(url))\r\n\r\n//     url.input=\"newprotocol://google.es#section\";\r\n//     url.expected={}\r\n//     url.expected.protocol=\"newprotocol:\"\r\n//     it(\"Testing: \", testURL(url))\r\n\r\n//     url.input=\"newprotocol://google#section\";\r\n//     url.expected={}\r\n//     url.expected.protocol=\"newprotocol:\"\r\n//     it(\"Testing: \", testURL(url))\r\n    \r\n// });\r\n",
+            "start": 53,
+            "end": 8837,
+            "loc": {
+              "start": {
+                "line": 4,
+                "column": 0
+              },
+              "end": {
+                "line": 254,
+                "column": 2
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "comments": [
+    {
+      "type": "CommentBlock",
+      "value": "global describe ",
+      "start": 15,
+      "end": 35,
+      "loc": {
+        "start": {
+          "line": 2,
+          "column": 0
+        },
+        "end": {
+          "line": 2,
+          "column": 20
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "global it ",
+      "start": 37,
+      "end": 51,
+      "loc": {
+        "start": {
+          "line": 3,
+          "column": 0
+        },
+        "end": {
+          "line": 3,
+          "column": 14
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "\r\nconst assert = require(\"assert\");\r\nconst fs = require(\"fs\");\r\nconst URL = require(\"../lib/url\").createURLConstructor();\r\n\r\nfunction testAll(testurl) {\r\n    return function () {\r\n\tlet url;\r\n\r\n\ttry {\r\n\t    url = new URL(testurl.input, testurl.base);\r\n\t    assert.equal(url.protocol , testurl.output.protocol, \"\\n\\tGiven: *\" + url.protocol  +\"* \\n\\tTesturl.output.protocol: *\"+testurl.output.protocol+\"*\");\r\n\t    assert.equal(url.origin , testurl.output.origin, \"\\n\\tGiven: \" + url.origin  +   \" \\n\\tTesturl.Output.origin: \"+testurl.output.origin);\r\n\t    assert.equal(url.hostname , testurl.output.hostname, \"\\n\\tGiven: \" + url.hostname  +   \" \\n\\tTesturl.Output.hostname: \"+testurl.output.hostname);\r\n\t    assert.equal(url.host , testurl.output.host, \"\\n\\tGiven: \" + url.host  +   \" \\n\\tTesturl.Output.host: \"+testurl.output.host);\r\n\t    assert.equal(url.port , testurl.output.port, \"\\n\\tGiven: \" + url.port  +   \" \\n\\tTesturl.Output.port: \"+testurl.output.port);\r\n\t    assert.equal(url.path , testurl.output.path, \"\\n\\tGiven: \" + url.path  +   \" \\n\\tTesturl.Output.path: \"+testurl.output.path);\r\n\t    assert.equal(url.search , testurl.output.search, \"\\n\\tGiven: \" + url.search  +   \" \\n\\tTesturl.Output.search: \"+testurl.output.search);\r\n\t    assert.equal(url.hash , testurl.output.hash, \"\\n\\tGiven: \" + url.hash  +   \" \\n\\tTesturl.Output.hash: \"+testurl.output.hash);\r\n\t    assert.equal(url.href , testurl.output.href, \"\\n\\tGiven: \" + url.href  +   \" \\n\\tTesturl.Output.href: \"+testurl.output.href);\r\n\r\n\r\n\t} catch (e) {\r\n\t    if (e instanceof TypeError && expected.error === TypeError) {\r\n\t    } else {\r\n\t\tthrow e;\r\n\t    }\r\n\t}\r\n\t\r\n    }\r\n}\r\n\r\nfunction testOrigin(expected) {\r\n    return function () {\r\n\tlet url;\r\n\r\n\ttry {\r\n\t    url = new URL(expected.input, expected.base);\r\n\r\n\t    assert.equal(url.origin, expected.origin, \"\\n\\tGiven: \" + url.origin  +   \" \\n\\tExpected: \"+expected.origin);\r\n\t} catch (e) {\r\n\t    if (e instanceof TypeError && expected.error === TypeError) {\r\n\t    } else {\r\n\t\tthrow e;\r\n\t    }\r\n\t}\r\n\r\n    };\r\n}\r\n\r\n\r\nfunction testURL(expected) {\r\n  return function () {\r\n      let url;\r\n      try {\r\n\t  url = new URL(expected.input, expected.base);\r\n\t  console.warn(\"Protocol: \" + url.protocol)\r\n\t  console.warn(\"Origin: \" + url.origin)\r\n\t  console.warn(\"Hostname: \" + url.hostname)\r\n\t  console.warn(\"Host: \" + url.host)\r\n\t  console.warn(\"Port: \" + url.port)\r\n\t  console.warn(\"Path: \" + url.path)\r\n\t  console.warn(\"Search: \" + url.search)\r\n\t  console.warn(\"Hash: \" + url.hash)\r\n\t  console.warn(\"Href: \" + url.href)\t  \r\n\r\n      } catch (e) {\r\n\t  if (e instanceof TypeError && expected.protocol === \":\") {\r\n\t      console.error(\"TypeError...\");\r\n              return;\r\n\t  }\r\n\t  throw e;\r\n      }\r\n\r\n      console.warn(\"parsing...\");\r\n      if (expected.protocol === \":\" && url.protocol !== \":\") {\r\n\t  assert.fail(url.href, \"\", \"Expected URL to fail parsing, got \" + url.href);\r\n      }\r\n  };\r\n}\r\n\r\ndescribe(\"Full tests:\", function () {\r\n    let urls = []\r\n    let url = {}\r\n\r\n    url={\r\n\tinput:\"hyperty-runtime-esn://domain.com/12345\",\r\n\toutput: {\r\n\t    protocol: \"hyperty-runtime-esn:\",\r\n\t    origin: \"hyperty-runtime-esn://domain.com\",\r\n\t    hostname: \"domain.com\",\r\n\t    host: \"domain.com\",\r\n\t    port: \"\",\r\n\t    path: undefined,\r\n\t    search: \"\", \r\n\t    hash:\"\", \r\n\t    href: \"hyperty-runtime-esn://domain.com/12345\"\r\n\t}\r\n    }\r\n\r\n    urls.push(url)\r\n\r\n    url={\r\n    \tinput:\"hyperty-runtime-esn://domain.com/12345#textafterhash\",\r\n    \toutput: {\r\n\t    protocol: \"hyperty-runtime-esn:\",\r\n\t    origin: \"hyperty-runtime-esn://domain.com\",\r\n\t    hostname: \"domain.com\",\r\n\t    host: \"domain.com\",\r\n\t    port: \"\",\r\n\t    path: undefined,\r\n\t    search: \"\", \r\n\t    hash:\"#textafterhash\", \r\n\t    href: \"hyperty-runtime-esn://domain.com/12345#textafterhash\"\r\n    \t}\r\n    }\r\n    urls.push(url)\r\n\r\n    url={\r\n    \tinput:\"hyperty-runtime-esn://domain.com/12345?a=1&b=2&c=3\",\r\n    \toutput: {\r\n\t    protocol: \"hyperty-runtime-esn:\",\r\n\t    origin: \"hyperty-runtime-esn://domain.com\",\r\n\t    hostname: \"domain.com\",\r\n\t    host: \"domain.com\",\r\n\t    port: \"\",\r\n\t    path: undefined,\r\n\t    search: \"?a=1&b=2&c=3\", \r\n\t    hash:\"\", \r\n\t    href: \"hyperty-runtime-esn://domain.com/12345?a=1&b=2&c=3\"\r\n    \t}\r\n    }\r\n    urls.push(url)\r\n\r\n    // url={\r\n    // \tinput:\"hyperty-runtime-esn://domain.com/12345#hash?a=1&b=2&c=3\",\r\n    // \toutput: {\r\n    // \t    protocol: \"hyperty-runtime-esn:\",\r\n    // \t    origin: \"hyperty-runtime-esn://domain.com\",\r\n    // \t    hostname: \"domain.com\",\r\n    // \t    host: \"domain.com\",\r\n    // \t    port: \"\",\r\n    // \t    path: undefined,\r\n    // \t    search: \"?a=1&b=2&c=3\", \r\n    // \t    hash:\"\", \r\n    // \t    href: \"hyperty-runtime-esn://domain.com/12345\"\r\n    // \t}\r\n    // }\r\n    // urls.push(url)\r\n\r\n\r\n    for (let i=0; i<urls.length; i++) {\r\n\tit(urls[i].input+\": \", testAll(urls[i]))\r\n    }\r\n\r\n})\r\n\r\n\r\n\r\ndescribe(\"Tests to check 'origin':\", function () {\r\n    let urls = []\r\n    urls.push({input:\"blob:https://whatwg.org/d0360e2f-caee-469f-9a2f-87d5b0456f6f\", origin:\"https://whatwg.org:443\"})\r\n\r\n    // special scheme without port\r\n    urls.push({input:\"wss://rethink.org/\", origin:\"wss://rethink.org\"})\r\n\r\n    // special scheme with default port\r\n    urls.push({input:\"wss://rethink.org:443/\", origin:\"wss://rethink.org\"})\r\n\r\n    // special scheme without port\r\n    urls.push({input:\"ws://rethink.org/\", origin:\"ws://rethink.org\"})\r\n\r\n    // special scheme with different port\r\n    urls.push({input:\"wss://rethink.org:2345\", origin:\"wss://rethink.org:2345\"})\r\n\r\n    // special scheme with different port\r\n    urls.push({input:\"ws://rethink.org:1000\", origin:\"ws://rethink.org:1000\"})\r\n\r\n    // special scheme with same port as default one\r\n    urls.push({input:\"wss://rethink.org:443\", origin:\"wss://rethink.org\"})\r\n\r\n    urls.push({input:\"newschema://rethink.org\", origin:\"null\"})\r\n\r\n    urls.push({input:\"wss://rethink.org#section\", origin:\"wss://rethink.org\"})\r\n\r\n    urls.push({input:\"wss://rethink.org/section1/section2\", origin:\"wss://rethink.org\"})\r\n\r\n    urls.push({input:\"wss://something\", origin:\"wss://something\"})\r\n    urls.push({input:\"wss://a.b.c.d.e\", origin:\"wss://a.b.c.d.e\"})\r\n\r\n    // Invalid URLs\r\n    urls.push({input:\"wss://\", error:TypeError})\r\n    urls.push({input:\"://rethink.org\", error:TypeError})\r\n    urls.push({input:\"<some garbage>\", error:TypeError})\r\n\r\n    // Valid URLs with IPv4\r\n    urls.push({input:\"wss://127.0.0.1\", origin:\"wss://127.0.0.1\"})\r\n\r\n    // Invalid URLs with IPs v4\r\n    urls.push({input:\"wss://127.0.0.300\", error:TypeError})\r\n    urls.push({input:\"wss://127.0.0\", error:TypeError})\r\n    urls.push({input:\"wss://127.0.0.1.2\", error:TypeError})\r\n    urls.push({input:\"wss://ABCD:EF01:2345:6789:ABCD:EF01:2345:6789\", error:TypeError})\r\n\r\n    // reThink URLs\r\n    urls.push({input:\"user://twitter.com/pchainho\", origin:\"user://twitter.com\"})\r\n    urls.push({input:\"user://cm-lisboa.pt/campo-grande-28-building\", origin:\"user://cm-lisboa.pt\"})\r\n    urls.push({input:\"ctxt://myhouse/energy\", origin:\"ctxt://myhouse\"})\r\n    urls.push({input:\"comm://telekom.de/sdruesdow-20150802006\", origin:\"comm://telekom.de\"})\r\n\r\n    // reThink URls: hypertity runtime\r\n    urls.push({input:\"hyperty-runtime://domain.com/12345\", origin:\"hyperty-runtime://domain.com\"})\r\n    urls.push({input:\"hyperty-runtime-uuid://domain.com/12345\", origin:\"hyperty-runtime-uuid://domain.com\"})\r\n    urls.push({input:\"hyperty-runtime-dev-os://domain.com/12345\", origin:\"hyperty-runtime-dev-os://domain.com\"})\r\n    urls.push({input:\"hyperty-runtime-imei://domain.com/12345\", origin:\"hyperty-runtime-imei://domain.com\"})\r\n    urls.push({input:\"hyperty-runtime-esn://domain.com/12345\", origin:\"hyperty-runtime-esn://domain.com\"})\r\n    urls.push({input:\"hyperty-runtime-meid://domain.com/12345\", origin:\"hyperty-runtime-meid://domain.com\"})\r\n    urls.push({input:\"hyperty-runtime-doesnotexist://domain.com/12345\", origin:\"\"})\r\n    urls.push({input:\"hyperty://meo.pt/123456\", origin:\"hyperty://meo.pt/123456\"})\r\n\r\n    for (let i=0; i<urls.length; i++) {\r\n\tit(urls[i].input+\": \", testOrigin(urls[i]))\r\n    }\r\n}\r\n\r\n)\r\n\r\n// describe(\"Hosts\", function () {\r\n//     let url = {}\r\n//     url.input=\"newprotocol://www.google.es\";\r\n//     url.expected={}\r\n//     url.expected.protocol=\"newprotocol:\"\r\n//     it(\"Testing: \", testURL(url))\r\n\r\n//     url.input=\"newprotocol://www.google.es#section\";\r\n//     url.expected={}\r\n//     url.expected.protocol=\"newprotocol:\"\r\n//     it(\"Testing: \", testURL(url))\r\n\r\n//     url.input=\"newprotocol://google.es#section\";\r\n//     url.expected={}\r\n//     url.expected.protocol=\"newprotocol:\"\r\n//     it(\"Testing: \", testURL(url))\r\n\r\n//     url.input=\"newprotocol://google#section\";\r\n//     url.expected={}\r\n//     url.expected.protocol=\"newprotocol:\"\r\n//     it(\"Testing: \", testURL(url))\r\n    \r\n// });\r\n",
+      "start": 53,
+      "end": 8837,
+      "loc": {
+        "start": {
+          "line": 4,
+          "column": 0
+        },
+        "end": {
+          "line": 254,
+          "column": 2
+        }
+      }
+    }
+  ],
+  "tokens": [
+    {
+      "type": {
+        "label": "string",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "use strict",
+      "start": 0,
+      "end": 12,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 1,
+          "column": 12
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ";",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 12,
+      "end": 13,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 12
+        },
+        "end": {
+          "line": 1,
+          "column": 13
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "global describe ",
+      "start": 15,
+      "end": 35,
+      "loc": {
+        "start": {
+          "line": 2,
+          "column": 0
+        },
+        "end": {
+          "line": 2,
+          "column": 20
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "global it ",
+      "start": 37,
+      "end": 51,
+      "loc": {
+        "start": {
+          "line": 3,
+          "column": 0
+        },
+        "end": {
+          "line": 3,
+          "column": 14
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "\r\nconst assert = require(\"assert\");\r\nconst fs = require(\"fs\");\r\nconst URL = require(\"../lib/url\").createURLConstructor();\r\n\r\nfunction testAll(testurl) {\r\n    return function () {\r\n\tlet url;\r\n\r\n\ttry {\r\n\t    url = new URL(testurl.input, testurl.base);\r\n\t    assert.equal(url.protocol , testurl.output.protocol, \"\\n\\tGiven: *\" + url.protocol  +\"* \\n\\tTesturl.output.protocol: *\"+testurl.output.protocol+\"*\");\r\n\t    assert.equal(url.origin , testurl.output.origin, \"\\n\\tGiven: \" + url.origin  +   \" \\n\\tTesturl.Output.origin: \"+testurl.output.origin);\r\n\t    assert.equal(url.hostname , testurl.output.hostname, \"\\n\\tGiven: \" + url.hostname  +   \" \\n\\tTesturl.Output.hostname: \"+testurl.output.hostname);\r\n\t    assert.equal(url.host , testurl.output.host, \"\\n\\tGiven: \" + url.host  +   \" \\n\\tTesturl.Output.host: \"+testurl.output.host);\r\n\t    assert.equal(url.port , testurl.output.port, \"\\n\\tGiven: \" + url.port  +   \" \\n\\tTesturl.Output.port: \"+testurl.output.port);\r\n\t    assert.equal(url.path , testurl.output.path, \"\\n\\tGiven: \" + url.path  +   \" \\n\\tTesturl.Output.path: \"+testurl.output.path);\r\n\t    assert.equal(url.search , testurl.output.search, \"\\n\\tGiven: \" + url.search  +   \" \\n\\tTesturl.Output.search: \"+testurl.output.search);\r\n\t    assert.equal(url.hash , testurl.output.hash, \"\\n\\tGiven: \" + url.hash  +   \" \\n\\tTesturl.Output.hash: \"+testurl.output.hash);\r\n\t    assert.equal(url.href , testurl.output.href, \"\\n\\tGiven: \" + url.href  +   \" \\n\\tTesturl.Output.href: \"+testurl.output.href);\r\n\r\n\r\n\t} catch (e) {\r\n\t    if (e instanceof TypeError && expected.error === TypeError) {\r\n\t    } else {\r\n\t\tthrow e;\r\n\t    }\r\n\t}\r\n\t\r\n    }\r\n}\r\n\r\nfunction testOrigin(expected) {\r\n    return function () {\r\n\tlet url;\r\n\r\n\ttry {\r\n\t    url = new URL(expected.input, expected.base);\r\n\r\n\t    assert.equal(url.origin, expected.origin, \"\\n\\tGiven: \" + url.origin  +   \" \\n\\tExpected: \"+expected.origin);\r\n\t} catch (e) {\r\n\t    if (e instanceof TypeError && expected.error === TypeError) {\r\n\t    } else {\r\n\t\tthrow e;\r\n\t    }\r\n\t}\r\n\r\n    };\r\n}\r\n\r\n\r\nfunction testURL(expected) {\r\n  return function () {\r\n      let url;\r\n      try {\r\n\t  url = new URL(expected.input, expected.base);\r\n\t  console.warn(\"Protocol: \" + url.protocol)\r\n\t  console.warn(\"Origin: \" + url.origin)\r\n\t  console.warn(\"Hostname: \" + url.hostname)\r\n\t  console.warn(\"Host: \" + url.host)\r\n\t  console.warn(\"Port: \" + url.port)\r\n\t  console.warn(\"Path: \" + url.path)\r\n\t  console.warn(\"Search: \" + url.search)\r\n\t  console.warn(\"Hash: \" + url.hash)\r\n\t  console.warn(\"Href: \" + url.href)\t  \r\n\r\n      } catch (e) {\r\n\t  if (e instanceof TypeError && expected.protocol === \":\") {\r\n\t      console.error(\"TypeError...\");\r\n              return;\r\n\t  }\r\n\t  throw e;\r\n      }\r\n\r\n      console.warn(\"parsing...\");\r\n      if (expected.protocol === \":\" && url.protocol !== \":\") {\r\n\t  assert.fail(url.href, \"\", \"Expected URL to fail parsing, got \" + url.href);\r\n      }\r\n  };\r\n}\r\n\r\ndescribe(\"Full tests:\", function () {\r\n    let urls = []\r\n    let url = {}\r\n\r\n    url={\r\n\tinput:\"hyperty-runtime-esn://domain.com/12345\",\r\n\toutput: {\r\n\t    protocol: \"hyperty-runtime-esn:\",\r\n\t    origin: \"hyperty-runtime-esn://domain.com\",\r\n\t    hostname: \"domain.com\",\r\n\t    host: \"domain.com\",\r\n\t    port: \"\",\r\n\t    path: undefined,\r\n\t    search: \"\", \r\n\t    hash:\"\", \r\n\t    href: \"hyperty-runtime-esn://domain.com/12345\"\r\n\t}\r\n    }\r\n\r\n    urls.push(url)\r\n\r\n    url={\r\n    \tinput:\"hyperty-runtime-esn://domain.com/12345#textafterhash\",\r\n    \toutput: {\r\n\t    protocol: \"hyperty-runtime-esn:\",\r\n\t    origin: \"hyperty-runtime-esn://domain.com\",\r\n\t    hostname: \"domain.com\",\r\n\t    host: \"domain.com\",\r\n\t    port: \"\",\r\n\t    path: undefined,\r\n\t    search: \"\", \r\n\t    hash:\"#textafterhash\", \r\n\t    href: \"hyperty-runtime-esn://domain.com/12345#textafterhash\"\r\n    \t}\r\n    }\r\n    urls.push(url)\r\n\r\n    url={\r\n    \tinput:\"hyperty-runtime-esn://domain.com/12345?a=1&b=2&c=3\",\r\n    \toutput: {\r\n\t    protocol: \"hyperty-runtime-esn:\",\r\n\t    origin: \"hyperty-runtime-esn://domain.com\",\r\n\t    hostname: \"domain.com\",\r\n\t    host: \"domain.com\",\r\n\t    port: \"\",\r\n\t    path: undefined,\r\n\t    search: \"?a=1&b=2&c=3\", \r\n\t    hash:\"\", \r\n\t    href: \"hyperty-runtime-esn://domain.com/12345?a=1&b=2&c=3\"\r\n    \t}\r\n    }\r\n    urls.push(url)\r\n\r\n    // url={\r\n    // \tinput:\"hyperty-runtime-esn://domain.com/12345#hash?a=1&b=2&c=3\",\r\n    // \toutput: {\r\n    // \t    protocol: \"hyperty-runtime-esn:\",\r\n    // \t    origin: \"hyperty-runtime-esn://domain.com\",\r\n    // \t    hostname: \"domain.com\",\r\n    // \t    host: \"domain.com\",\r\n    // \t    port: \"\",\r\n    // \t    path: undefined,\r\n    // \t    search: \"?a=1&b=2&c=3\", \r\n    // \t    hash:\"\", \r\n    // \t    href: \"hyperty-runtime-esn://domain.com/12345\"\r\n    // \t}\r\n    // }\r\n    // urls.push(url)\r\n\r\n\r\n    for (let i=0; i<urls.length; i++) {\r\n\tit(urls[i].input+\": \", testAll(urls[i]))\r\n    }\r\n\r\n})\r\n\r\n\r\n\r\ndescribe(\"Tests to check 'origin':\", function () {\r\n    let urls = []\r\n    urls.push({input:\"blob:https://whatwg.org/d0360e2f-caee-469f-9a2f-87d5b0456f6f\", origin:\"https://whatwg.org:443\"})\r\n\r\n    // special scheme without port\r\n    urls.push({input:\"wss://rethink.org/\", origin:\"wss://rethink.org\"})\r\n\r\n    // special scheme with default port\r\n    urls.push({input:\"wss://rethink.org:443/\", origin:\"wss://rethink.org\"})\r\n\r\n    // special scheme without port\r\n    urls.push({input:\"ws://rethink.org/\", origin:\"ws://rethink.org\"})\r\n\r\n    // special scheme with different port\r\n    urls.push({input:\"wss://rethink.org:2345\", origin:\"wss://rethink.org:2345\"})\r\n\r\n    // special scheme with different port\r\n    urls.push({input:\"ws://rethink.org:1000\", origin:\"ws://rethink.org:1000\"})\r\n\r\n    // special scheme with same port as default one\r\n    urls.push({input:\"wss://rethink.org:443\", origin:\"wss://rethink.org\"})\r\n\r\n    urls.push({input:\"newschema://rethink.org\", origin:\"null\"})\r\n\r\n    urls.push({input:\"wss://rethink.org#section\", origin:\"wss://rethink.org\"})\r\n\r\n    urls.push({input:\"wss://rethink.org/section1/section2\", origin:\"wss://rethink.org\"})\r\n\r\n    urls.push({input:\"wss://something\", origin:\"wss://something\"})\r\n    urls.push({input:\"wss://a.b.c.d.e\", origin:\"wss://a.b.c.d.e\"})\r\n\r\n    // Invalid URLs\r\n    urls.push({input:\"wss://\", error:TypeError})\r\n    urls.push({input:\"://rethink.org\", error:TypeError})\r\n    urls.push({input:\"<some garbage>\", error:TypeError})\r\n\r\n    // Valid URLs with IPv4\r\n    urls.push({input:\"wss://127.0.0.1\", origin:\"wss://127.0.0.1\"})\r\n\r\n    // Invalid URLs with IPs v4\r\n    urls.push({input:\"wss://127.0.0.300\", error:TypeError})\r\n    urls.push({input:\"wss://127.0.0\", error:TypeError})\r\n    urls.push({input:\"wss://127.0.0.1.2\", error:TypeError})\r\n    urls.push({input:\"wss://ABCD:EF01:2345:6789:ABCD:EF01:2345:6789\", error:TypeError})\r\n\r\n    // reThink URLs\r\n    urls.push({input:\"user://twitter.com/pchainho\", origin:\"user://twitter.com\"})\r\n    urls.push({input:\"user://cm-lisboa.pt/campo-grande-28-building\", origin:\"user://cm-lisboa.pt\"})\r\n    urls.push({input:\"ctxt://myhouse/energy\", origin:\"ctxt://myhouse\"})\r\n    urls.push({input:\"comm://telekom.de/sdruesdow-20150802006\", origin:\"comm://telekom.de\"})\r\n\r\n    // reThink URls: hypertity runtime\r\n    urls.push({input:\"hyperty-runtime://domain.com/12345\", origin:\"hyperty-runtime://domain.com\"})\r\n    urls.push({input:\"hyperty-runtime-uuid://domain.com/12345\", origin:\"hyperty-runtime-uuid://domain.com\"})\r\n    urls.push({input:\"hyperty-runtime-dev-os://domain.com/12345\", origin:\"hyperty-runtime-dev-os://domain.com\"})\r\n    urls.push({input:\"hyperty-runtime-imei://domain.com/12345\", origin:\"hyperty-runtime-imei://domain.com\"})\r\n    urls.push({input:\"hyperty-runtime-esn://domain.com/12345\", origin:\"hyperty-runtime-esn://domain.com\"})\r\n    urls.push({input:\"hyperty-runtime-meid://domain.com/12345\", origin:\"hyperty-runtime-meid://domain.com\"})\r\n    urls.push({input:\"hyperty-runtime-doesnotexist://domain.com/12345\", origin:\"\"})\r\n    urls.push({input:\"hyperty://meo.pt/123456\", origin:\"hyperty://meo.pt/123456\"})\r\n\r\n    for (let i=0; i<urls.length; i++) {\r\n\tit(urls[i].input+\": \", testOrigin(urls[i]))\r\n    }\r\n}\r\n\r\n)\r\n\r\n// describe(\"Hosts\", function () {\r\n//     let url = {}\r\n//     url.input=\"newprotocol://www.google.es\";\r\n//     url.expected={}\r\n//     url.expected.protocol=\"newprotocol:\"\r\n//     it(\"Testing: \", testURL(url))\r\n\r\n//     url.input=\"newprotocol://www.google.es#section\";\r\n//     url.expected={}\r\n//     url.expected.protocol=\"newprotocol:\"\r\n//     it(\"Testing: \", testURL(url))\r\n\r\n//     url.input=\"newprotocol://google.es#section\";\r\n//     url.expected={}\r\n//     url.expected.protocol=\"newprotocol:\"\r\n//     it(\"Testing: \", testURL(url))\r\n\r\n//     url.input=\"newprotocol://google#section\";\r\n//     url.expected={}\r\n//     url.expected.protocol=\"newprotocol:\"\r\n//     it(\"Testing: \", testURL(url))\r\n    \r\n// });\r\n",
+      "start": 53,
+      "end": 8837,
+      "loc": {
+        "start": {
+          "line": 4,
+          "column": 0
+        },
+        "end": {
+          "line": 254,
+          "column": 2
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "eof",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 8837,
+      "end": 8837,
+      "loc": {
+        "start": {
+          "line": 254,
+          "column": 2
+        },
+        "end": {
+          "line": 254,
+          "column": 2
+        }
+      }
+    }
+  ]
+}
