@@ -38,13 +38,23 @@ class DiscoveredObject {
     this._discoveredObjectURL = discoveryURL + '/discoveredobject/';
     this._messageBus = msgBus;
     this._subscribers = {
-      live: {},
-      disconnected: {}
+      live: [],
+      disconnected: []
     };
+
+    this._messageBus.addListener(this._discoveredObjectURL, (msg) => {
+      //Decide which function to call...
+      if(msg.type === 'notification')
+        _processNotification(msg);
+    });
+  }
+
+  _processNotification(msg) {
+    this._subscribers[msg.body.status].forEach(fn => fn());
   }
 
   onLive(url, subscriber, callback) {
-    this._subscribers.live[subscriber] = callback;
+    this._subscribers.live.push(callback);
 
     //Send message to the NotificationManager through MessageBus
     const msg = {
@@ -53,26 +63,15 @@ class DiscoveredObject {
       to: this._runtimeURL + '/nm/',
       body: {
         subscribe: url,
-        status: 'live'
+        subscriber: this._discoveredObjectURL,
       }
     };
 
-    return new Promise(function(resolve, reject) {
-
-      this._messageBus.postMessage(msg, (reply) => {
-        console.log("[DiscoveredObject.onLive] rcved reply ", reply);
-        //What should happen here? Update map?
-
-        if(reply.body.code === 200)
-          resolve();
-        else
-          reject();
-      });
-    });
+    this._messageBus.postMessage(msg, (reply) => {});
   }
 
   onDisconnected(url, subscriber, callback) {
-    this._subscribers.disconnected[subscriber] = callback;
+    this._subscribers.disconnected.push(callback);
 
     //Send message to the NotificationManager through MessageBus
     const msg = {
@@ -81,22 +80,13 @@ class DiscoveredObject {
       to: this._runtimeURL + '/nm/',
       body: {
         subscribe: url,
-        status: 'disconnected'
+        subscriber: this._discoveredObjectURL
       }
     };
 
-    return new Promise(function(resolve, reject) {
-
-      this._messageBus.postMessage(msg, (reply) => {
-        console.log("[DiscoveredObject.onDisconnected] rcved reply ", reply);
-        //What should happen here? Update map?
-
-        if(reply.body.code === 200)
-          resolve();
-        else
-          reject();
-      });
-    });
+    this._messageBus.postMessage(msg, (reply) => {});
   }
 
 }
+
+export default DiscoveredObject;
