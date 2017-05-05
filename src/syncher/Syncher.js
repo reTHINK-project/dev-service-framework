@@ -241,6 +241,8 @@ class Syncher {
       /*initialData.reporter = _this._owner;
       initialData.schema = criteria.schema;*/
 
+      input.created = (new Date).toISOString();
+
       let requestValue = input;
 
       delete requestValue.p2p;
@@ -273,7 +275,6 @@ class Syncher {
           //reporter creation accepted
           input.url = reply.body.resource;
 
-          input.created = (new Date).toISOString();
           input.status = 'live';// pch: do we ned this?
           input.syncher = _this;
 

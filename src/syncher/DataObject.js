@@ -58,6 +58,8 @@ class DataObject {
     function throwMandatoryParmMissingError(par) {
       throw '[DataObject] ' + par + ' mandatory parameter is missing';
     }
+    _this._metadata = input;
+    delete _this._metadata.initialData;
 
     input.syncher ? _this._syncher = input.syncher : throwMandatoryParmMissingError('syncher');
     input.url ?  _this._url = input.url : throwMandatoryParmMissingError('url');
@@ -79,7 +81,7 @@ class DataObject {
     _this._childrenObjects = {};
     _this._childrenListeners = [];
 
-    _this._resumed = input.resumed;
+    _this._resumed = input.resume;
 
     _this._owner = input.syncher._owner;
     _this._bus = input.syncher._bus;

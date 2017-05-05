@@ -209,14 +209,18 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
 
         //process and send childrens data
         let childrenValues = {};
-        Object.keys(_this._childrenObjects).forEach((childId) => {
-          let childData = _this._childrenObjects[childId].data;
-          childrenValues[childId] = deepClone(childData);
+        Object.keys(_this._childrenObjects).forEach((childrenId) => {
+          let childrenData = _this._childrenObjects[childrenId].data;
+          childrenValues[childrenId] = deepClone(childrenData);
         });
+
+        let msgValue = _this._metadata;
+        msgValue.childrens = childrenValues;
+        msgValue.data = deepClone(_this.data);
 
         let sendMsg = {
           id: msg.id, type: 'response', from: msg.to, to: msg.from,
-          body: { code: 200, schema: _this._schema, version: _this._version, value: { data: deepClone(_this.data), childrens: childrenValues } }
+          body: { code: 200, schema: _this._schema, version: _this._version, value: msgValue }
         };
 
         //TODO: For Further Study
