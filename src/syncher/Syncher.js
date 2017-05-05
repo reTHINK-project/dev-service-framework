@@ -120,8 +120,8 @@ class Syncher {
     createInput.p2p = p2p;
     createInput.store = store;
     createInput.schema = schema;
-    createInput.observers = observers;
-    (initialData) ? createInput.initialData = initialData : createInput.initialData = {};
+    createInput.authorise = observers;
+    (initialData) ? createInput.data = initialData : createInput.data = {};
     createInput.name = name;
     createInput.reporter = _this._owner;
     createInput.resume = false;
@@ -233,6 +233,9 @@ class Syncher {
     let _this = this;
 
     return new Promise((resolve, reject) => {
+
+      let reporterInput  = Object.assign({}, input);
+
       let resume = input.resume;
       //let initialData = input.initialData || {};
       //let schema = criteria.schema;
@@ -241,9 +244,10 @@ class Syncher {
       /*initialData.reporter = _this._owner;
       initialData.schema = criteria.schema;*/
 
-      input.created = (new Date).toISOString();
+      reporterInput.created = (new Date).toISOString();
+      reporterInput.runtime = _this._runtimeUrl;
 
-      let requestValue = input;
+      let requestValue = deepClone(reporterInput);
 
       delete requestValue.p2p;
       delete requestValue.store;
@@ -259,30 +263,33 @@ class Syncher {
 
       //requestMsg.body.value = initialData;
       //requestMsg.body.reporter = _this._owner;
-      requestMsg.body.schema = input.schema;
+      requestMsg.body.schema = reporterInput.schema;
 
-      if (input.p2p) requestMsg.body.p2p = input.p2p;
-      if (input.store) requestMsg.body.store = input.store;
-      if (input.observers) requestMsg.body.authorise = input.observers;
-      if (input.identity) requestMsg.body.identity = input.identity;
+      if (reporterInput.p2p) requestMsg.body.p2p = reporterInput.p2p;
+      if (reporterInput.store) requestMsg.body.store = reporterInput.store;
+      // if (reporterInput.authorise) requestMsg.body.authorise = reporterInput.authorise;
+      if (reporterInput.identity) requestMsg.body.identity = reporterInput.identity;
 
-      console.log('[syncher._create]: ', input, requestMsg);
+      console.log('[syncher._create]: ', reporterInput, requestMsg);
 
       //request create to the allocation system. Can be rejected by the PolicyEngine.
       _this._bus.postMessage(requestMsg, (reply) => {
         console.log('[syncher - create] - create-response: ', reply);
         if (reply.body.code === 200) {
           //reporter creation accepted
-          input.url = reply.body.resource;
+          reporterInput.url = reply.body.resource;
 
-          input.status = 'live';// pch: do we ned this?
-          input.syncher = _this;
+          reporterInput.status = 'live';// pch: do we ned this?
+          reporterInput.syncher = _this;
 
-          let newObj = new DataObjectReporter(input);
+          let newObj = new DataObjectReporter(reporterInput);
 
-          _this._reporters[input.url] = newObj;
+          _this._reporters[reporterInput.url] = newObj;
+
+          newObj.inviteObservers(input.authorise);
 
           resolve(newObj);
+
         } else {
           //reporter creation rejected
           reject(reply.body.desc);
@@ -297,7 +304,7 @@ class Syncher {
 
     return new Promise((resolve, reject) => {
       let resume = criteria.resume;
-      let initialData = criteria.initialData || {};
+      //let initialData = criteria.data || {};
 
       //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onCreate
       let requestMsg = {
@@ -307,8 +314,10 @@ class Syncher {
 
       console.log('[syncher - create]: ', criteria, requestMsg);
 
-      requestMsg.body.value.data = initialData;
-      requestMsg.body.value.reporter = _this._owner;
+      if (criteria) {
+        requestMsg.body.value = criteria;
+        requestMsg.body.value.reporter = _this._owner;
+      }
 
       if (criteria.p2p) requestMsg.body.p2p = criteria.p2p;
       if (criteria.store) requestMsg.body.store = criteria.store;
@@ -348,6 +357,8 @@ class Syncher {
           resolve(_this._reporters);
           if (this._onReportersResume) this._onReportersResume(this._reporters);
 
+        } else if (reply.body.code === 404) {
+          resolve({});
         } else {
           //reporter creation rejected
           reject(reply.body.desc);
@@ -411,16 +422,14 @@ class Syncher {
         } else if (reply.body.code === 200) {
           console.log('[syncher] - new Data Object Observer: ', reply, _this._provisionals);
 
-          let initialData = reply.body.value;
+          /*let initialData = reply.body.value.data;
           if (!initialData.hasOwnProperty('childrens')) { initialData.childrens = {}; }
-          if (!initialData.hasOwnProperty('data')) { initialData.data = {}; }
-
-          //todo: take the full reply.body as input for the creation of DataObjectObserver
+          if (!initialData.hasOwnProperty('data')) { initialData.data = {}; }*/
 
           let observerInput = reply.body.value;
 
           observerInput.syncher = _this;
-          observerInput.status = 'on';
+          //observerInput.status = 'on';
           observerInput.p2p = input.p2p;
           observerInput.store = input.store;
           observerInput.identity = input.identity;
@@ -467,7 +476,7 @@ class Syncher {
         if (criteria.hasOwnProperty('store')) subscribeMsg.body.store = criteria.store;
         if (criteria.hasOwnProperty('schema')) subscribeMsg.body.schema = criteria.schema;
         if (criteria.hasOwnProperty('identity')) subscribeMsg.body.identity = criteria.identity;
-        if (criteria.hasOwnProperty('resource')) subscribeMsg.body.resource = criteria.resource;
+        if (criteria.hasOwnProperty('resource')) subscribeMsg.body.resource = criteria.url;
       }
 
       subscribeMsg.body.resume = criteria.resume;
@@ -522,6 +531,8 @@ class Syncher {
 
           if (this._onObserversResume) this._onObserversResume(_this._observers);
 
+        } else if (reply.body.code === 404) {
+          resolve({});
         } else {
           reject(reply.body.desc);
         }

@@ -48,7 +48,7 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
   //TODO: For Further Study
   constructor(input) {
     //todo: check why
-    input.initialData = input.initialData.data;
+    //input.initialData = input.initialData.data;
 
     super(input);
 
@@ -63,37 +63,38 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
 
     let childIdString = _this._owner + '#' + _this._childId;
 
-
     //setup childrens data from subscription
-    Object.keys(input.initialData.childrens).forEach((childrenResource) => {
-      let children = input.childrens[childrenResource];
-      console.log('[DataObjectObserver - new DataObjectChild]: ', childrenResource, children, _this._resumed);
-      if (_this._resumed) {
+    if (input.childrens) {
+      Object.keys(input.childrens).forEach((childrenResource) => {
+        let children = input.childrens[childrenResource];
+        console.log('[DataObjectObserver - new DataObjectChild]: ', childrenResource, children, _this._resumed);
+        if (_this._resumed) {
 
-        // if is resumed
-        Object.keys(children).forEach((childId) => {
-          let childInput = children[childId].value;
-          childInput.parentObject = _this;
-          _this._childrenObjects[childId] = new DataObjectChild(childInput);
-          _this._childrenObjects[childId].identity = children[childId].identity;
+          // if is resumed
+          Object.keys(children).forEach((childId) => {
+            let childInput = children[childId].value;
+            childInput.parentObject = _this;
+            _this._childrenObjects[childId] = new DataObjectChild(childInput);
+            _this._childrenObjects[childId].identity = children[childId].identity;
 
-          if (childId > childIdString) {
-            childIdString = childId;
-          }
+            if (childId > childIdString) {
+              childIdString = childId;
+            }
 
-          console.log('[DataObjectObserver - new DataObjectChild] - resumed: ', _this._childrenObjects[childId]);
-        });
+            console.log('[DataObjectObserver - new DataObjectChild] - resumed: ', _this._childrenObjects[childId]);
+          });
 
-      } else {
-        // if is not resumed
-        //todo: shouldn't we iterate for all existing childs in order to receive all childs before the subscription?
-        // pch: commented below since I think we are not processing childs that exist before the subscription
-        /*
-        _this._childrenObjects[childrenResource] = new DataObjectChild(_this, childrenResource, children);
-        console.log('[DataObjectObserver - new DataObjectChild] - not resumed: ', _this._childrenObjects[childrenResource]);*/
-      }
+        } else {
+          // if is not resumed
+          //todo: shouldn't we iterate for all existing childs in order to receive all childs before the subscription?
+          // pch: commented below since I think we are not processing childs that exist before the subscription
+          /*
+          _this._childrenObjects[childrenResource] = new DataObjectChild(_this, childrenResource, children);
+          console.log('[DataObjectObserver - new DataObjectChild] - not resumed: ', _this._childrenObjects[childrenResource]);*/
+        }
 
-    });
+      });
+    }
 
     _this._childId = Number(childIdString.split('#')[1]);
 

@@ -58,8 +58,6 @@ class DataObject {
     function throwMandatoryParmMissingError(par) {
       throw '[DataObject] ' + par + ' mandatory parameter is missing';
     }
-    _this._metadata = input;
-    delete _this._metadata.initialData;
 
     input.syncher ? _this._syncher = input.syncher : throwMandatoryParmMissingError('syncher');
     input.url ?  _this._url = input.url : throwMandatoryParmMissingError('url');
@@ -69,8 +67,14 @@ class DataObject {
     input.schema ? _this._schema = input.schema : throwMandatoryParmMissingError('schema');
     input.name ? _this._name = input.name : throwMandatoryParmMissingError('name');
 
+
     _this._status = input.status;
-    _this._syncObj = new SyncObject(input.initialData);
+
+    if (input.data) {
+      _this._syncObj = new SyncObject(input.data);
+    } else {
+      _this._syncObj = new SyncObject({});
+    }
     _this._childrens = input.childrens;
 
     //TODO: For Further Study
@@ -92,6 +96,10 @@ class DataObject {
     if (input.observerStorage) _this._observerStorage = input.observerStorage;
     if (input.publicObservation) _this._publicObservation = input.publicObservation;
 
+    _this._metadata = Object.assign(input);
+    delete _this._metadata.data;
+    delete _this._metadata.syncher;
+    delete _this._metadata.authorise;
 
     /*if (resumed && childrens) {
       _this._childId = _this._getLastChildId();
@@ -121,7 +129,7 @@ class DataObject {
     let childBaseURL = _this._url + '/children/';
     console.log('[Data Object - AllocateListeners] - ', _this._childrens);
     if (_this._childrens) {
-      _this._childrens.forEach((child) => {
+      Object.keys(_this.childrens).forEach((child) => {
         let childURL = childBaseURL + child;
         let listener = _this._bus.addListener(childURL, (msg) => {
           //ignore msg sent by himself
@@ -239,7 +247,7 @@ class DataObject {
 
       childInput.msgId = msgId;
       childInput.parentObject = _this;
-      childInput.initialData = initialData;
+      childInput.data = initialData;
       childInput.reporter = _this._owner;
       childInput.created = (new Date).toISOString();
       childInput.runtime = _this._runtime;
@@ -306,7 +314,7 @@ class DataObject {
 
     _this._version++;
 
-    if (_this._status === 'on') {
+    if (_this._status === 'live') {
       //FLOW-OUT: this message will be sent directly to a resource changes address: MessageBus
       let changeMsg = {
         type: 'update', from: _this._url, to: _this._url + '/changes',

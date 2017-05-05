@@ -204,7 +204,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
 
       accept: () => {
         //create new subscription
-        let sub = { url: hypertyUrl, status: 'on' };
+        let sub = { url: hypertyUrl, status: 'live' };
         _this._subscriptions[hypertyUrl] = sub;
 
         //process and send childrens data
@@ -217,10 +217,11 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
         let msgValue = _this._metadata;
         msgValue.childrens = childrenValues;
         msgValue.data = deepClone(_this.data);
+        msgValue.version = _this._version;
 
         let sendMsg = {
           id: msg.id, type: 'response', from: msg.to, to: msg.from,
-          body: { code: 200, schema: _this._schema, version: _this._version, value: msgValue }
+          body: { code: 200, schema: _this._schema, value: msgValue }
         };
 
         //TODO: For Further Study
