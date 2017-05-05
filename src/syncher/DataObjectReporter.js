@@ -120,6 +120,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     let _this = this;
 
     //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onCreate
+    // TODO: remove value and add resources? should similar to 1st create
     let inviteMsg = {
       type: 'create', from: _this._syncher._owner, to: _this._syncher._subURL,
       body: { resume: false, resource: _this._url, schema: _this._schema, value: _this._syncObj.data, authorise: observers }
