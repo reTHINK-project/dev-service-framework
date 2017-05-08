@@ -86,20 +86,22 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
    *
    */
   resumeChildrens(childrens) {
+    let _this = this;
 
     let childIdString = this._owner + '#' + this._childId;
 
     //setup childrens data from subscription
     Object.keys(childrens).forEach((childrenResource) => {
       let children = childrens[childrenResource];
-      console.log('[DataObjectReporter - new DataObjectChild]: ', childrenResource, children, this._resumed);
 
       // if is resumed
       Object.keys(children).forEach((childId) => {
         let childInput = children[childId].value;
-        childInput.parentObject = this;
-        this._childrenObjects[childId] = new DataObjectChild(childInput);
-        this._childrenObjects[childId].identity = children[childId].identity;
+        console.log('[DataObjectReporter.resumeChildrens] new DataObjectChild: ', childrenResource, children, childInput);
+        childInput.parentObject = _this;
+        childInput.parent = _this._url;
+        _this._childrenObjects[childId] = new DataObjectChild(childInput);
+        _this._childrenObjects[childId].identity = children[childId].identity;
 
         if (childId > childIdString) {
           childIdString = childId;
@@ -216,7 +218,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
         });
 
         let msgValue = _this._metadata;
-        msgValue.childrens = childrenValues;
+        msgValue.childrenObjects = childrenValues;
         msgValue.data = deepClone(_this.data);
         msgValue.version = _this._version;
 

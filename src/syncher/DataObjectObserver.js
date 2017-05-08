@@ -64,9 +64,9 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
     let childIdString = _this._owner + '#' + _this._childId;
 
     //setup childrens data from subscription
-    if (input.childrens) {
-      Object.keys(input.childrens).forEach((childrenResource) => {
-        let children = input.childrens[childrenResource];
+    if (input.childrenObjects) {
+      Object.keys(input.childrenObjects).forEach((childrenResource) => {
+        let children = input.childrenObjects[childrenResource];
         console.log('[DataObjectObserver - new DataObjectChild]: ', childrenResource, children, _this._resumed);
         if (_this._resumed) {
 

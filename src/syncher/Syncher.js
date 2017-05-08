@@ -125,6 +125,9 @@ class Syncher {
     createInput.name = name;
     createInput.reporter = _this._owner;
     createInput.resume = false;
+    if (input) {
+      createInput.mutual = input.mutual ? input.mutual : true;
+    } else { createInput.mutual = true; }
 
     if (identity)      { createInput.identity = identity; }
 
@@ -281,6 +284,7 @@ class Syncher {
 
           reporterInput.status = 'live';// pch: do we ned this?
           reporterInput.syncher = _this;
+          reporterInput.childrens = reply.body.childrenResources;
 
           let newObj = new DataObjectReporter(reporterInput);
 

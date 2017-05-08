@@ -22,6 +22,7 @@
 **/
 
 import SyncObject from './ProxyObject';
+//import { deepClone } from '../utils/utils.js';
 
 /**
  * The class returned from the DataObject addChildren call or from onAddChildren if remotely created.
@@ -44,7 +45,7 @@ class DataObjectChild /* implements SyncStatus */ {
       throw '[DataObjectChild] ' + par + ' mandatory parameter is missing';
     }
 
-    input.msgId ?  _this._msgId = input.msgId : throwMandatoryParmMissingError('msgId');
+    //input.msgId ?  _this._msgId = input.msgId : throwMandatoryParmMissingError('msgId');
     input.parent ?  _this._parent = input.parent : throwMandatoryParmMissingError('parent');
     input.url ?  _this._url = input.url : throwMandatoryParmMissingError('url');
     input.created ? _this._created = input.created : throwMandatoryParmMissingError('created');
@@ -69,15 +70,22 @@ class DataObjectChild /* implements SyncStatus */ {
     console.log('[DataObjectChild -  Constructor] - ', _this._syncObj);
 
     _this._bus = _this._parentObject._bus;
+    _this._owner = _this._parentObject._owner;
 
     _this._allocateListeners();
+
+    _this._metadata = input;
+
+    delete _this._metadata.data;
+    delete _this._metadata.parentObject;
+
   }
 
   _allocateListeners() {
     let _this = this;
 
     //this is only needed for children reporters
-    if (_this._reporter) {
+    if (_this._reporter === _this._owner) {
       _this._listener = _this._bus.addListener(_this._reporter, (msg) => {
         if (msg.type === 'response' && msg.id === _this._msgId) {
           console.log('DataObjectChild.onResponse:', msg);
@@ -106,6 +114,12 @@ class DataObjectChild /* implements SyncStatus */ {
 
     //TODO: send delete message ?
   }
+
+  /**
+   * All Metadata about the Child Data Object
+   * @type {Object} -
+   */
+  get metadata() { return this._metadata; }
 
   /**
    * Children ID generated on addChildren. Unique identifier

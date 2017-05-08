@@ -129,7 +129,7 @@ class DataObject {
     let childBaseURL = _this._url + '/children/';
     console.log('[Data Object - AllocateListeners] - ', _this._childrens);
     if (_this._childrens) {
-      Object.keys(_this.childrens).forEach((child) => {
+      _this._childrens.forEach((child) => {
         let childURL = childBaseURL + child;
         let listener = _this._bus.addListener(childURL, (msg) => {
           //ignore msg sent by himself
@@ -230,31 +230,37 @@ class DataObject {
     childInput.url = _this._owner + '#' + _this._childId;
     let msgChildPath = _this._url + '/children/' + children;
 
+    childInput.parentObject = _this;
+    childInput.data = initialData;
+    childInput.reporter = _this._owner;
+    childInput.created = (new Date).toISOString();
+    childInput.runtime = _this._runtime;
+    childInput.schema = _this._schema;
+    childInput.parent = _this.url;
+
+    let newChild = new DataObjectChild(childInput);
+
+    //TODO: For Further Study
+    if (!_this._mutualAuthentication) requestMsg.body.mutualAuthentication = _this._mutualAuthentication;
+
+    let bodyValue = newChild.metadata;
+    bodyValue.data = initialData;
+
     //FLOW-OUT: this message will be sent directly to a resource child address: MessageBus
     let requestMsg = {
       type: 'create', from: _this._owner, to: msgChildPath,
-      body: { resource: childInput.url, value: initialData }
+      body: { resource: childInput.url, value: bodyValue }
     };
 
     if (identity)      { requestMsg.body.identity = identity; }
 
-    //TODO: For Further Study
-    if (!_this._mutualAuthentication) requestMsg.body.mutualAuthentication = _this._mutualAuthentication;
+    console.log('[DataObject.addChild] added ', newChild);
 
     //returns promise, in the future, the API may change to asynchronous call
     return new Promise((resolve) => {
       let msgId = _this._bus.postMessage(requestMsg);
 
-      childInput.msgId = msgId;
-      childInput.parentObject = _this;
-      childInput.data = initialData;
-      childInput.reporter = _this._owner;
-      childInput.created = (new Date).toISOString();
-      childInput.runtime = _this._runtime;
-      childInput.schema = _this._schema;
-
-      console.log('create-reporter-child( ' + _this._owner + ' ): ', requestMsg);
-      let newChild = new DataObjectChild(childInput);
+      //childInput.msgId = msgId;
       newChild.onChange((event) => {
         _this._onChange(event, { path: msgChildPath, childId: childInput.url });
       });
@@ -276,9 +282,10 @@ class DataObject {
   //FLOW-IN: message received from a remote DataObject -> addChild
   _onChildCreate(msg) {
     let _this = this;
-    let childInput = msg.body.value;
-    childInput.url = msg.body.resource;
+    let childInput = deepClone(msg.body.value);
+    //childInput.url = msg.body.resource;
     childInput.parentObject = _this;
+    //childInput.parent = _this._url;
 
     console.log('[DataObject._onChildCreate] receivedBy ' + _this._owner + ' : ', msg);
     let newChild = new DataObjectChild(childInput);
@@ -297,7 +304,7 @@ class DataObject {
       type: msg.type,
       from: msg.from,
       url: msg.to,
-      value: msg.body.value,
+      value: msg.body.value.data,
       childId: childInput.url,
       identity: msg.body.identity
     };
