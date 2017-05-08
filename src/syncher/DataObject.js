@@ -160,6 +160,38 @@ class DataObject {
     });
   }
 
+
+    /**
+     *
+     */
+    resumeChildrens(childrens) {
+      let _this = this;
+
+      let childIdString = this._owner + '#' + this._childId;
+
+      //setup childrens data from subscription
+      Object.keys(childrens).forEach((childrenResource) => {
+        let children = childrens[childrenResource];
+
+        Object.keys(children).forEach((childId) => {
+          let childInput = children[childId].value;
+          console.log('[DataObject.resumeChildrens] new DataObjectChild: ', childrenResource, children, childInput);
+          childInput.parentObject = _this;
+          childInput.parent = _this._url;
+          _this._childrenObjects[childId] = new DataObjectChild(childInput);
+          _this._childrenObjects[childId].identity = children[childId].identity;
+
+          if (childId > childIdString) {
+            childIdString = childId;
+          }
+
+          console.log('[DataObjectReporter.resumeChildrens] - resumed: ', this._childrenObjects[childId]);
+        });
+      });
+
+      this._childId = Number(childIdString.split('#')[1]);
+    }
+
   /**
    * Object URL of reporter or observer
    * @type {ObjectURL}
@@ -240,8 +272,6 @@ class DataObject {
 
     let newChild = new DataObjectChild(childInput);
 
-    //TODO: For Further Study
-    if (!_this._mutualAuthentication) requestMsg.body.mutualAuthentication = _this._mutualAuthentication;
 
     let bodyValue = newChild.metadata;
     bodyValue.data = initialData;
@@ -253,6 +283,9 @@ class DataObject {
     };
 
     if (identity)      { requestMsg.body.identity = identity; }
+
+    //TODO: For Further Study
+    if (!_this._mutualAuthentication) requestMsg.body.mutualAuthentication = _this._mutualAuthentication;
 
     console.log('[DataObject.addChild] added ', newChild);
 

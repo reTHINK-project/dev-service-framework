@@ -85,7 +85,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
   /**
    *
    */
-  resumeChildrens(childrens) {
+/*  resumeChildrens(childrens) {
     let _this = this;
 
     let childIdString = this._owner + '#' + this._childId;
@@ -112,7 +112,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     });
 
     this._childId = Number(childIdString.split('#')[1]);
-  }
+  }*/
 
   /**
    * Send invitations (create messages) to hyperties, observers list.

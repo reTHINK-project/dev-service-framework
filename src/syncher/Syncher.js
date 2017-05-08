@@ -346,7 +346,7 @@ class Syncher {
             // initialData.childrens = deepClone(dataObject.childrens) || {};
             // initialData = deepClone(dataObject.data) || {};
             dataObject.data = deepClone(dataObject.data) || {};
-            dataObject.childrens = deepClone(dataObject.childrens) || {};
+            dataObject.childrenObjects = deepClone(dataObject.childrenObjects) || {};
             dataObject.mutual = false;
             dataObject.resumed = true;
             dataObject.status = 'live';// pch: do we ned this?
@@ -355,7 +355,7 @@ class Syncher {
             console.log('[syncher._resumeCreate] - create-resumed-dataObjectReporter', dataObject);
 
             let newObj = new DataObjectReporter(dataObject);
-            newObj.resumeChildrens(dataObject.childrens);
+            newObj.resumeChildrens(dataObject.childrenObjects);
             _this._reporters[dataObject.url] = newObj;
 
           }
@@ -520,7 +520,7 @@ class Syncher {
             let dataObject = listOfObservers[index];
             console.log('[syncher] - Resume Object Observer: ', reply, dataObject, _this._provisionals);
 
-            dataObject.childrens = deepClone(dataObject.childrens) || {};
+            dataObject.childrenObjects = deepClone(dataObject.childrenObjects) || {};
             dataObject.data = deepClone(dataObject.data) || {};
             dataObject.resumed = true;
             dataObject.syncher = _this;
@@ -528,6 +528,7 @@ class Syncher {
             //TODO: mutualAuthentication For Further Study
             console.log('[syncher._resumeSubscribe] - create new dataObject: ', dataObject);
             let newObj = new DataObjectObserver(dataObject);
+            newObj.resumeChildrens(dataObject.childrenObjects);
 
             _this._observers[objURL] = newObj;
 

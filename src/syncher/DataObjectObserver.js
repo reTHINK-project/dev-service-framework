@@ -61,6 +61,8 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
       _this._onFilter(event);
     });
 
+    /*
+
     let childIdString = _this._owner + '#' + _this._childId;
 
     //setup childrens data from subscription
@@ -72,7 +74,7 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
 
           // if is resumed
           Object.keys(children).forEach((childId) => {
-            let childInput = children[childId].value;
+            let childInput = deepClone(children[childId].value);
             childInput.parentObject = _this;
             _this._childrenObjects[childId] = new DataObjectChild(childInput);
             _this._childrenObjects[childId].identity = children[childId].identity;
@@ -87,16 +89,15 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
         } else {
           // if is not resumed
           //todo: shouldn't we iterate for all existing childs in order to receive all childs before the subscription?
-          // pch: commented below since I think we are not processing childs that exist before the subscription
-          /*
+
           _this._childrenObjects[childrenResource] = new DataObjectChild(_this, childrenResource, children);
-          console.log('[DataObjectObserver - new DataObjectChild] - not resumed: ', _this._childrenObjects[childrenResource]);*/
+          console.log('[DataObjectObserver - new DataObjectChild] - not resumed: ', _this._childrenObjects[childrenResource]);
         }
 
       });
     }
 
-    _this._childId = Number(childIdString.split('#')[1]);
+    _this._childId = Number(childIdString.split('#')[1]);*/
 
     _this._allocateListeners();
   }
