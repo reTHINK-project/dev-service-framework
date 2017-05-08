@@ -101,10 +101,6 @@ class DataObject {
     delete _this._metadata.syncher;
     delete _this._metadata.authorise;
 
-    /*if (resumed && childrens) {
-      _this._childId = _this._getLastChildId();
-      console.log('[Data Object resumed] last ChildId: ', _this._childId);
-    }*/
   }
 
   _getLastChildId() {
@@ -293,7 +289,6 @@ class DataObject {
     return new Promise((resolve) => {
       let msgId = _this._bus.postMessage(requestMsg);
 
-      //childInput.msgId = msgId;
       newChild.onChange((event) => {
         _this._onChange(event, { path: msgChildPath, childId: childInput.url });
       });
@@ -316,9 +311,7 @@ class DataObject {
   _onChildCreate(msg) {
     let _this = this;
     let childInput = deepClone(msg.body.value);
-    //childInput.url = msg.body.resource;
     childInput.parentObject = _this;
-    //childInput.parent = _this._url;
 
     console.log('[DataObject._onChildCreate] receivedBy ' + _this._owner + ' : ', msg);
     let newChild = new DataObjectChild(childInput);

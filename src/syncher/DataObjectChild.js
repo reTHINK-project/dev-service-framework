@@ -45,7 +45,6 @@ class DataObjectChild /* implements SyncStatus */ {
       throw '[DataObjectChild] ' + par + ' mandatory parameter is missing';
     }
 
-    //input.msgId ?  _this._msgId = input.msgId : throwMandatoryParmMissingError('msgId');
     input.parent ?  _this._parent = input.parent : throwMandatoryParmMissingError('parent');
     input.url ?  _this._url = input.url : throwMandatoryParmMissingError('url');
     input.created ? _this._created = input.created : throwMandatoryParmMissingError('created');

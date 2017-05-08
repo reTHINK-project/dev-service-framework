@@ -83,38 +83,6 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
   }
 
   /**
-   *
-   */
-/*  resumeChildrens(childrens) {
-    let _this = this;
-
-    let childIdString = this._owner + '#' + this._childId;
-
-    //setup childrens data from subscription
-    Object.keys(childrens).forEach((childrenResource) => {
-      let children = childrens[childrenResource];
-
-      // if is resumed
-      Object.keys(children).forEach((childId) => {
-        let childInput = children[childId].value;
-        console.log('[DataObjectReporter.resumeChildrens] new DataObjectChild: ', childrenResource, children, childInput);
-        childInput.parentObject = _this;
-        childInput.parent = _this._url;
-        _this._childrenObjects[childId] = new DataObjectChild(childInput);
-        _this._childrenObjects[childId].identity = children[childId].identity;
-
-        if (childId > childIdString) {
-          childIdString = childId;
-        }
-
-        console.log('[DataObjectReporter.resumeChildrens] - resumed: ', this._childrenObjects[childId]);
-      });
-    });
-
-    this._childId = Number(childIdString.split('#')[1]);
-  }*/
-
-  /**
    * Send invitations (create messages) to hyperties, observers list.
    * @param  {HypertyURL[]} observers List of Hyperty URL's
    */

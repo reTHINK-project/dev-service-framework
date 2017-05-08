@@ -112,8 +112,6 @@ class Syncher {
     if (!schema) throw Error('[Syncher - Create] - You need specify the data object schema');
     if (!observers) throw Error('[Syncher - Create] -The observers should be defined');
 
-    //if (!initialData) throw Error('[Syncher - Create] - You initialData should be defined');
-
     let _this = this;
     let createInput  = Object.assign({}, input);
 
@@ -127,6 +125,7 @@ class Syncher {
     createInput.resume = false;
     if (input) {
       createInput.mutual = input.mutual ? input.mutual : true;
+      createInput.name = input.name ? input.name : 'no name';
     } else { createInput.mutual = true; }
 
     if (identity)      { createInput.identity = identity; }
@@ -240,12 +239,6 @@ class Syncher {
       let reporterInput  = Object.assign({}, input);
 
       let resume = input.resume;
-      //let initialData = input.initialData || {};
-      //let schema = criteria.schema;
-
-      //pch: I've commented since this is not data
-      /*initialData.reporter = _this._owner;
-      initialData.schema = criteria.schema;*/
 
       reporterInput.created = (new Date).toISOString();
       reporterInput.runtime = _this._runtimeUrl;
@@ -264,13 +257,10 @@ class Syncher {
       };
 
 
-      //requestMsg.body.value = initialData;
-      //requestMsg.body.reporter = _this._owner;
       requestMsg.body.schema = reporterInput.schema;
 
       if (reporterInput.p2p) requestMsg.body.p2p = reporterInput.p2p;
       if (reporterInput.store) requestMsg.body.store = reporterInput.store;
-      // if (reporterInput.authorise) requestMsg.body.authorise = reporterInput.authorise;
       if (reporterInput.identity) requestMsg.body.identity = reporterInput.identity;
 
       console.log('[syncher._create]: ', reporterInput, requestMsg);
@@ -308,7 +298,6 @@ class Syncher {
 
     return new Promise((resolve, reject) => {
       let resume = criteria.resume;
-      //let initialData = criteria.data || {};
 
       //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onCreate
       let requestMsg = {
@@ -343,8 +332,6 @@ class Syncher {
 
             //reporter creation accepted
 
-            // initialData.childrens = deepClone(dataObject.childrens) || {};
-            // initialData = deepClone(dataObject.data) || {};
             dataObject.data = deepClone(dataObject.data) || {};
             dataObject.childrenObjects = deepClone(dataObject.childrenObjects) || {};
             dataObject.mutual = false;
@@ -403,7 +390,6 @@ class Syncher {
       subscribeMsg.body.resume = input.resume;
 
       //TODO: For Further Study
-      //let mutualAuthentication = input.mutual;
       if (input.hasOwnProperty('mutual')) subscribeMsg.body.mutualAuthentication = input.mutual;
 
       console.log('[syncher_subscribe] - subscribe message: ', input, subscribeMsg);
@@ -414,7 +400,6 @@ class Syncher {
       _this._bus.postMessage(subscribeMsg, (reply) => {
         console.log('[syncher] - subscribe-response: ', reply);
 
-        //let schema = reply.body.schema;
         let objURL = reply.body.resource;
 
         let newProvisional = _this._provisionals[objURL];
@@ -427,10 +412,6 @@ class Syncher {
           _this._provisionals[objURL] = newProvisional;
         } else if (reply.body.code === 200) {
           console.log('[syncher] - new Data Object Observer: ', reply, _this._provisionals);
-
-          /*let initialData = reply.body.value.data;
-          if (!initialData.hasOwnProperty('childrens')) { initialData.childrens = {}; }
-          if (!initialData.hasOwnProperty('data')) { initialData.data = {}; }*/
 
           let observerInput = reply.body.value;
 
