@@ -82,7 +82,6 @@ class DataObject {
 
     _this._version = 0;
     _this._childId = 0;
-    _this._childrenObjects = {};
     _this._childrenListeners = [];
 
     _this._resumed = input.resume;
@@ -151,9 +150,11 @@ class DataObject {
       listener.remove();
     });
 
-    Object.keys(_this._childrenObjects).forEach((key) => {
-      _this._childrenObjects[key]._releaseListeners();
-    });
+    if (_this._childrenObjects) {
+      Object.keys(_this._childrenObjects).forEach((key) => {
+        _this._childrenObjects[key]._releaseListeners();
+      });
+    }
   }
 
 
@@ -164,6 +165,10 @@ class DataObject {
       let _this = this;
 
       let childIdString = this._owner + '#' + this._childId;
+
+      if (childrens && !_this._childrenObjects) {
+        _this._childrenObjects = {};
+      }
 
       //setup childrens data from subscription
       Object.keys(childrens).forEach((childrenResource) => {
@@ -302,6 +307,8 @@ class DataObject {
         _this._onChange(event, { path: msgChildPath, childId: childInput.url });
       });
 
+      if (!_this._childrenObjects) { _this._childrenObjects = {}; }
+
       _this._childrenObjects[childInput.url] = newChild;
 
       resolve(newChild);
@@ -324,6 +331,9 @@ class DataObject {
 
     console.log('[DataObject._onChildCreate] receivedBy ' + _this._owner + ' : ', msg);
     let newChild = new DataObjectChild(childInput);
+
+    if (!_this._childrenObjects) { _this._childrenObjects = {}; }
+
     _this._childrenObjects[childInput.url] = newChild;
 
     //todo: remove response below
