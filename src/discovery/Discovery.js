@@ -125,7 +125,7 @@ class Discovery {
     return new Promise((resolve, reject) => {
       this.discoverHypertiesPerUserProfileData(...arguments)
       .then(hyperties => {
-        resolve(_convertToDiscoveredObject(hyperties));
+        resolve(this._convertToDiscoveredObject(hyperties));
       })
       .catch(error => reject(error));
     });
@@ -239,7 +239,7 @@ class Discovery {
     return new Promise((resolve, reject) => {
       this.discoverDataObjectsPerGUID(...arguments)
       .then(hyperties => {
-        resolve(_convertToDiscoveredObject(hyperties));
+        resolve(this._convertToDiscoveredObject(hyperties));
       })
       .catch(error => reject(error));
     });
@@ -362,7 +362,7 @@ class Discovery {
     return new Promise((resolve, reject) => {
       this.discoverHyperties(...arguments)
       .then(hyperties => {
-        resolve(_convertToDiscoveredObject(hyperties));
+        resolve(this._convertToDiscoveredObject(hyperties));
       })
       .catch(error => reject(error));
     });
@@ -617,7 +617,7 @@ class Discovery {
 
   _convertToDiscoveredObject(hyperties) {
     return hyperties.map((hyperty) => {
-      return new DiscoveredObject(hyperty);
+      return new DiscoveredObject(hyperty, this.runtimeURL, this.discoveryURL, this.messageBus);
     });
   }
 
