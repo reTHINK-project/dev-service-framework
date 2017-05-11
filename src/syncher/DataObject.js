@@ -188,6 +188,13 @@ class DataObject {
       this._childId = Number(childIdString.split('#')[1]);
     }
 
+    /**
+     * All Metadata about the Data Object
+     * @type {Object} -
+     */
+
+  get metadata() { return this._metadata; }
+
   /**
    * Object URL of reporter or observer
    * @type {ObjectURL}
