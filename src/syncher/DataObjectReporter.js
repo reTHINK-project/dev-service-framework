@@ -178,17 +178,20 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
         let sub = { url: hypertyUrl, status: 'live' };
         _this._subscriptions[hypertyUrl] = sub;
 
-        //process and send childrens data
-        let childrenValues = {};
-        Object.keys(_this._childrenObjects).forEach((childrenId) => {
-          let childrenData = _this._childrenObjects[childrenId].data;
-          childrenValues[childrenId] = deepClone(childrenData);
-        });
-
         let msgValue = _this._metadata;
-        msgValue.childrenObjects = childrenValues;
         msgValue.data = deepClone(_this.data);
         msgValue.version = _this._version;
+
+        //process and send childrens data
+        let childrenValues = {};
+
+        if (_this._childrenObjects) {
+          Object.keys(_this._childrenObjects).forEach((childrenId) => {
+            let childrenData = _this._childrenObjects[childrenId].data;
+            childrenValues[childrenId] = deepClone(childrenData);
+          });
+          msgValue.childrenObjects = childrenValues;
+        }
 
         let sendMsg = {
           id: msg.id, type: 'response', from: msg.to, to: msg.from,
