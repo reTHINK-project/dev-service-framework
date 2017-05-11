@@ -45,14 +45,17 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
    * @ignore
    * Should not be used directly by Hyperties. It's called by the Syncher.create method
    */
-  constructor(syncher, url, schema, initialStatus, initialData, childrens, mutual, resumed = false) {
-    super(syncher, url, schema, initialStatus, initialData, childrens, mutual, resumed);
+
+   //constructor(syncher, url, created, reporter, runtime, schema, name, initialStatus, initialData, childrens, mutual = true, resumed = false, description, tags, resources, observerStorage, publicObservation) {
+  constructor(input) {
+
+    super(input);
     let _this = this;
 
     _this._subscriptions = {};
 
     _this._syncObj.observe((event) => {
-      console.log('DataObjectReporter-' + url + '-SEND: ', event);
+      console.log('DataObjectReporter-' + input.url + '-SEND: ', event);
       _this._onChange(event);
     });
 
@@ -80,34 +83,6 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
   }
 
   /**
-   *
-   */
-  resumeChildrens(childrens) {
-
-    let childIdString = this._owner + '#' + this._childId;
-
-    //setup childrens data from subscription
-    Object.keys(childrens).forEach((childrenResource) => {
-      let children = childrens[childrenResource];
-      console.log('[DataObjectReporter - new DataObjectChild]: ', childrenResource, children, this._resumed);
-
-      // if is resumed
-      Object.keys(children).forEach((childId) => {
-        this._childrenObjects[childId] = new DataObjectChild(this, childId, children[childId].value);
-        this._childrenObjects[childId].identity = children[childId].identity;
-
-        if (childId > childIdString) {
-          childIdString = childId;
-        }
-
-        console.log('[DataObjectReporter - new DataObjectChild] - resumed: ', this._childrenObjects[childId],  childId, children[childId].value);
-      });
-    });
-
-    this._childId = Number(childIdString.split('#')[1]);
-  }
-
-  /**
    * Send invitations (create messages) to hyperties, observers list.
    * @param  {HypertyURL[]} observers List of Hyperty URL's
    */
@@ -115,6 +90,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     let _this = this;
 
     //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onCreate
+    // TODO: remove value and add resources? should similar to 1st create
     let inviteMsg = {
       type: 'create', from: _this._syncher._owner, to: _this._syncher._subURL,
       body: { resume: false, resource: _this._url, schema: _this._schema, value: _this._syncObj.data, authorise: observers }
@@ -199,19 +175,24 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
 
       accept: () => {
         //create new subscription
-        let sub = { url: hypertyUrl, status: 'on' };
+        let sub = { url: hypertyUrl, status: 'live' };
         _this._subscriptions[hypertyUrl] = sub;
 
         //process and send childrens data
         let childrenValues = {};
-        Object.keys(_this._childrenObjects).forEach((childId) => {
-          let childData = _this._childrenObjects[childId].data;
-          childrenValues[childId] = deepClone(childData);
+        Object.keys(_this._childrenObjects).forEach((childrenId) => {
+          let childrenData = _this._childrenObjects[childrenId].data;
+          childrenValues[childrenId] = deepClone(childrenData);
         });
+
+        let msgValue = _this._metadata;
+        msgValue.childrenObjects = childrenValues;
+        msgValue.data = deepClone(_this.data);
+        msgValue.version = _this._version;
 
         let sendMsg = {
           id: msg.id, type: 'response', from: msg.to, to: msg.from,
-          body: { code: 200, schema: _this._schema, version: _this._version, value: { data: deepClone(_this.data), childrens: childrenValues } }
+          body: { code: 200, schema: _this._schema, value: msgValue }
         };
 
         //TODO: For Further Study
