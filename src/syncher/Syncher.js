@@ -104,7 +104,9 @@ class Syncher {
   * @param  {JSON} initialData - Initial data of the reporter
   * @param  {boolean} store - (Optional) if true, object will be stored by the runtime
   * @param  {boolean} p2p - (Optional) if true, data synchronisation stream will use p2p connection as much as possible
+  * @param  {string} name - (Optional) the name of the dataobject
   * @param  {MessageBodyIdentity} identity - (optional) identity data to be added to identity the user reporter. To be used for legacy identities.
+  * @param  {SyncMetadata} input - (optional) all metadata required to sunc the Data Object.
   * @return {Promise<DataObjectReporter>} Return Promise to a new Reporter. The reporter can be accepted or rejected by the PEP
   */
   create(schema, observers, initialData, store = false, p2p = false, name = 'data object without name', identity, input) {

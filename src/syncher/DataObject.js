@@ -254,8 +254,10 @@ class DataObject {
    * @param {String} children - Children name where the child is added.
    * @param {JSON} initialData - Initial data of the child
    * @param  {MessageBodyIdentity} identity - (optional) identity data to be added to identity the user reporter. To be used for legacy identities.
+   * @param  {SyncChildMetadata} input - (optional) All additional metadata about the DataObjectChild.
    * @return {Promise<DataObjectChild>} - Return Promise to a new DataObjectChild.
    */
+
   addChild(children, initialData, identity, input) {
     let _this = this;
 
