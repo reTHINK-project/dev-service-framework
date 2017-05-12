@@ -77,7 +77,7 @@ class Discovery {
       }
     };
 
-    if(schema || resources) {
+    if (schema || resources) {
       msg.body['criteria'] = {
         resources: resources,
         dataSchemes: schema
