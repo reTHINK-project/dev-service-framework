@@ -644,13 +644,17 @@ class Discovery {
     return new Promise(function(resolve, reject) {
 
       _this.messageBus.postMessage(msg, (reply) => {
+        console.log('[Discovery]', reply)
+
+        if(reply.body.code>299)
+            return reject(reply.body.description || reply.body.desc )
 
         let hyperties = reply.body.value;
 
         if (hyperties) {
           resolve(hyperties);
         } else {
-          reject('No DataObject was found');
+          resolve({});
         }
       });
     });

@@ -51,34 +51,55 @@ class DataObject {
    * @ignore
    * Should not be used directly by Hyperties. It's called by the Syncher create or subscribe method's
    */
-  constructor(syncher, url, schema, initialStatus, initialData, childrens, mutual = true, resumed = false) {
+  //constructor(syncher, url, created, reporter, runtime, schema, name, initialStatus, initialData, childrens, mutual = true, resumed = false, description, tags, resources, observerStorage, publicObservation) {
+  constructor(input) {
     let _this = this;
 
-    _this._syncher = syncher;
-    _this._url = url;
-    _this._schema = schema;
-    _this._status = initialStatus;
-    _this._syncObj = new SyncObject(initialData);
-    _this._childrens = childrens;
+    function throwMandatoryParmMissingError(par) {
+      throw '[DataObject] ' + par + ' mandatory parameter is missing';
+    }
+
+    input.syncher ? _this._syncher = input.syncher : throwMandatoryParmMissingError('syncher');
+    input.url ?  _this._url = input.url : throwMandatoryParmMissingError('url');
+    input.created ? _this._created = input.created : throwMandatoryParmMissingError('created');
+    input.reporter ? _this._reporter = input.reporter : throwMandatoryParmMissingError('reporter');
+    input.runtime ? _this._runtime = input.runtime : throwMandatoryParmMissingError('runtime');
+    input.schema ? _this._schema = input.schema : throwMandatoryParmMissingError('schema');
+    input.name ? _this._name = input.name : throwMandatoryParmMissingError('name');
+
+
+    _this._status = input.status;
+
+    if (input.data) {
+      _this._syncObj = new SyncObject(input.data);
+    } else {
+      _this._syncObj = new SyncObject({});
+    }
+    _this._childrens = input.childrens;
 
     //TODO: For Further Study
-    _this._mutualAuthentication = mutual;
+    _this._mutualAuthentication = input.mutual;
 
     _this._version = 0;
     _this._childId = 0;
-    _this._childrenObjects = {};
     _this._childrenListeners = [];
 
-    _this._resumed = resumed;
+    _this._resumed = input.resume;
 
+    _this._owner = input.syncher._owner;
+    _this._bus = input.syncher._bus;
 
-    _this._owner = syncher._owner;
-    _this._bus = syncher._bus;
+    if (input.description) _this._description = input.description;
+    if (input.tags) _this._tags = input.tags;
+    if (input.resources) _this._resources = input.resources;
+    if (input.observerStorage) _this._observerStorage = input.observerStorage;
+    if (input.publicObservation) _this._publicObservation = input.publicObservation;
 
-    /*if (resumed && childrens) {
-      _this._childId = _this._getLastChildId();
-      console.log('[Data Object resumed] last ChildId: ', _this._childId);
-    }*/
+    _this._metadata = Object.assign(input);
+    delete _this._metadata.data;
+    delete _this._metadata.syncher;
+    delete _this._metadata.authorise;
+
   }
 
   _getLastChildId() {
@@ -129,10 +150,55 @@ class DataObject {
       listener.remove();
     });
 
-    Object.keys(_this._childrenObjects).forEach((key) => {
-      _this._childrenObjects[key]._releaseListeners();
-    });
+    if (_this._childrenObjects) {
+      Object.keys(_this._childrenObjects).forEach((key) => {
+        _this._childrenObjects[key]._releaseListeners();
+      });
+    }
   }
+
+
+    /**
+     *
+     */
+    resumeChildrens(childrens) {
+      let _this = this;
+
+      let childIdString = this._owner + '#' + this._childId;
+
+      if (childrens && !_this._childrenObjects) {
+        _this._childrenObjects = {};
+      }
+
+      //setup childrens data from subscription
+      Object.keys(childrens).forEach((childrenResource) => {
+        let children = childrens[childrenResource];
+
+        Object.keys(children).forEach((childId) => {
+          let childInput = children[childId].value;
+          console.log('[DataObject.resumeChildrens] new DataObjectChild: ', childrenResource, children, childInput);
+          childInput.parentObject = _this;
+          childInput.parent = _this._url;
+          _this._childrenObjects[childId] = new DataObjectChild(childInput);
+          _this._childrenObjects[childId].identity = children[childId].identity;
+
+          if (childId > childIdString) {
+            childIdString = childId;
+          }
+
+          console.log('[DataObjectReporter.resumeChildrens] - resumed: ', this._childrenObjects[childId]);
+        });
+      });
+
+      this._childId = Number(childIdString.split('#')[1]);
+    }
+
+    /**
+     * All Metadata about the Data Object
+     * @type {Object} -
+     */
+
+  get metadata() { return this._metadata; }
 
   /**
    * Object URL of reporter or observer
@@ -193,20 +259,37 @@ class DataObject {
    * @param {String} children - Children name where the child is added.
    * @param {JSON} initialData - Initial data of the child
    * @param  {MessageBodyIdentity} identity - (optional) identity data to be added to identity the user reporter. To be used for legacy identities.
+   * @param  {SyncChildMetadata} input - (optional) All additional metadata about the DataObjectChild.
    * @return {Promise<DataObjectChild>} - Return Promise to a new DataObjectChild.
    */
-  addChild(children, initialData, identity) {
+
+  addChild(children, initialData, identity, input) {
     let _this = this;
 
+    let childInput  = Object.assign({}, input);
     //create new child unique ID, based on hypertyURL
     _this._childId++;
-    let msgChildId = _this._owner + '#' + _this._childId;
+    childInput.url = _this._owner + '#' + _this._childId;
     let msgChildPath = _this._url + '/children/' + children;
+
+    childInput.parentObject = _this;
+    childInput.data = initialData;
+    childInput.reporter = _this._owner;
+    childInput.created = (new Date).toISOString();
+    childInput.runtime = _this._runtime;
+    childInput.schema = _this._schema;
+    childInput.parent = _this.url;
+
+    let newChild = new DataObjectChild(childInput);
+
+
+    let bodyValue = newChild.metadata;
+    bodyValue.data = initialData;
 
     //FLOW-OUT: this message will be sent directly to a resource child address: MessageBus
     let requestMsg = {
       type: 'create', from: _this._owner, to: msgChildPath,
-      body: { resource: msgChildId, value: initialData }
+      body: { resource: childInput.url, value: bodyValue }
     };
 
     if (identity)      { requestMsg.body.identity = identity; }
@@ -214,17 +297,19 @@ class DataObject {
     //TODO: For Further Study
     if (!_this._mutualAuthentication) requestMsg.body.mutualAuthentication = _this._mutualAuthentication;
 
+    console.log('[DataObject.addChild] added ', newChild);
+
     //returns promise, in the future, the API may change to asynchronous call
     return new Promise((resolve) => {
       let msgId = _this._bus.postMessage(requestMsg);
 
-      console.log('create-reporter-child( ' + _this._owner + ' ): ', requestMsg);
-      let newChild = new DataObjectChild(_this, msgChildId, initialData, _this._owner, msgId);
       newChild.onChange((event) => {
-        _this._onChange(event, { path: msgChildPath, childId: msgChildId });
+        _this._onChange(event, { path: msgChildPath, childId: childInput.url });
       });
 
-      _this._childrenObjects[msgChildId] = newChild;
+      if (!_this._childrenObjects) { _this._childrenObjects = {}; }
+
+      _this._childrenObjects[childInput.url] = newChild;
 
       resolve(newChild);
     });
@@ -241,12 +326,17 @@ class DataObject {
   //FLOW-IN: message received from a remote DataObject -> addChild
   _onChildCreate(msg) {
     let _this = this;
-    let msgChildId = msg.body.resource;
+    let childInput = deepClone(msg.body.value);
+    childInput.parentObject = _this;
 
-    console.log('create-observer-child( ' + _this._owner + ' ): ', msg);
-    let newChild = new DataObjectChild(_this, msgChildId, msg.body.value);
-    _this._childrenObjects[msgChildId] = newChild;
+    console.log('[DataObject._onChildCreate] receivedBy ' + _this._owner + ' : ', msg);
+    let newChild = new DataObjectChild(childInput);
 
+    if (!_this._childrenObjects) { _this._childrenObjects = {}; }
+
+    _this._childrenObjects[childInput.url] = newChild;
+
+    //todo: remove response below
     setTimeout(() => {
       //FLOW-OUT: will flow to DataObjectChild -> _onResponse
       _this._bus.postMessage({
@@ -259,8 +349,8 @@ class DataObject {
       type: msg.type,
       from: msg.from,
       url: msg.to,
-      value: msg.body.value,
-      childId: msgChildId,
+      value: msg.body.value.data,
+      childId: childInput.url,
       identity: msg.body.identity
     };
 
@@ -276,7 +366,7 @@ class DataObject {
 
     _this._version++;
 
-    if (_this._status === 'on') {
+    if (_this._status === 'live') {
       //FLOW-OUT: this message will be sent directly to a resource changes address: MessageBus
       let changeMsg = {
         type: 'update', from: _this._url, to: _this._url + '/changes',

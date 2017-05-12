@@ -60,6 +60,7 @@ class Syncher {
     _this._bus = bus;
 
     _this._subURL = config.runtimeURL + '/sm';
+    _this._runtimeUrl = config.runtimeURL;
 
     _this._reporters = {};
     _this._observers = {};
@@ -103,31 +104,39 @@ class Syncher {
   * @param  {JSON} initialData - Initial data of the reporter
   * @param  {boolean} store - (Optional) if true, object will be stored by the runtime
   * @param  {boolean} p2p - (Optional) if true, data synchronisation stream will use p2p connection as much as possible
+  * @param  {string} name - (Optional) the name of the dataobject
   * @param  {MessageBodyIdentity} identity - (optional) identity data to be added to identity the user reporter. To be used for legacy identities.
+  * @param  {SyncMetadata} input - (optional) all metadata required to sunc the Data Object.
   * @return {Promise<DataObjectReporter>} Return Promise to a new Reporter. The reporter can be accepted or rejected by the PEP
   */
-  create(schema, observers, initialData, store = false, p2p = false, identity) {
+  create(schema, observers, initialData, store = false, p2p = false, name = 'data object without name', identity, input) {
 
     if (!schema) throw Error('[Syncher - Create] - You need specify the data object schema');
     if (!observers) throw Error('[Syncher - Create] -The observers should be defined');
-    if (!initialData) throw Error('[Syncher - Create] - You initialData should be defined');
 
     let _this = this;
-    let criteria = {};
+    let createInput  = Object.assign({}, input);
 
-    criteria.p2p = p2p;
-    criteria.store = store;
-    criteria.schema = schema;
-    criteria.observers = observers;
-    criteria.initialData = initialData;
+    createInput.p2p = p2p;
+    createInput.store = store;
+    createInput.schema = schema;
+    createInput.authorise = observers;
+    (initialData) ? createInput.data = initialData : createInput.data = {};
+    createInput.name = name;
+    createInput.reporter = _this._owner;
+    createInput.resume = false;
+    if (input) {
+      createInput.mutual = input.mutual ? input.mutual : true;
+      createInput.name = input.name ? input.name : 'no name';
+    } else { createInput.mutual = true; }
 
-    if (identity)      { criteria.identity = identity; }
+    if (identity)      { createInput.identity = identity; }
 
-    Object.assign(criteria, {resume: false});
+    //Object.assign(createInput, {resume: false});
 
-    console.log('[syncher - create] - create Reporter - criteria: ', criteria);
+    console.log('[syncher - create] - create Reporter - createInput: ', createInput);
 
-    return _this._create(criteria);
+    return _this._create(createInput);
   }
 
   /**
@@ -224,47 +233,59 @@ class Syncher {
     this._onNotificationHandler = callback;
   }
 
-  _create(criteria) {
+  _create(input) {
     let _this = this;
 
     return new Promise((resolve, reject) => {
-      let resume = criteria.resume;
-      let initialData = criteria.initialData || {};
-      let schema = criteria.schema;
 
-      initialData.reporter = _this._owner;
-      initialData.schema = criteria.schema;
+      let reporterInput  = Object.assign({}, input);
+
+      let resume = input.resume;
+
+      reporterInput.created = (new Date).toISOString();
+      reporterInput.runtime = _this._runtimeUrl;
+
+      let requestValue = deepClone(reporterInput);
+
+      delete requestValue.p2p;
+      delete requestValue.store;
+      delete requestValue.observers;
+      delete requestValue.identity;
 
       //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onCreate
       let requestMsg = {
         type: 'create', from: _this._owner, to: _this._subURL,
-        body: { resume: resume }
+        body: { resume: resume, value: requestValue  }
       };
 
-      console.log('[syncher - create]: ', criteria, requestMsg);
 
-      requestMsg.body.value = initialData;
-      requestMsg.body.reporter = _this._owner;
-      requestMsg.body.schema = criteria.schema;
+      requestMsg.body.schema = reporterInput.schema;
 
-      if (criteria.p2p) requestMsg.body.p2p = criteria.p2p;
-      if (criteria.store) requestMsg.body.store = criteria.store;
-      if (criteria.observers) requestMsg.body.authorise = criteria.observers;
-      if (criteria.identity) requestMsg.body.identity = criteria.identity;
+      if (reporterInput.p2p) requestMsg.body.p2p = reporterInput.p2p;
+      if (reporterInput.store) requestMsg.body.store = reporterInput.store;
+      if (reporterInput.identity) requestMsg.body.identity = reporterInput.identity;
 
-      console.log('[syncher - create] - create message: ', requestMsg);
+      console.log('[syncher._create]: ', reporterInput, requestMsg);
 
       //request create to the allocation system. Can be rejected by the PolicyEngine.
       _this._bus.postMessage(requestMsg, (reply) => {
         console.log('[syncher - create] - create-response: ', reply);
         if (reply.body.code === 200) {
           //reporter creation accepted
-          let objURL = reply.body.resource;
+          reporterInput.url = reply.body.resource;
 
-          let newObj = new DataObjectReporter(_this, objURL, schema, 'on', initialData, reply.body.childrenResources);
-          _this._reporters[objURL] = newObj;
+          reporterInput.status = 'live';// pch: do we ned this?
+          reporterInput.syncher = _this;
+          reporterInput.childrens = reply.body.childrenResources;
+
+          let newObj = new DataObjectReporter(reporterInput);
+
+          _this._reporters[reporterInput.url] = newObj;
+
+          newObj.inviteObservers(input.authorise);
 
           resolve(newObj);
+
         } else {
           //reporter creation rejected
           reject(reply.body.desc);
@@ -279,7 +300,6 @@ class Syncher {
 
     return new Promise((resolve, reject) => {
       let resume = criteria.resume;
-      let initialData = criteria.initialData || {};
 
       //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onCreate
       let requestMsg = {
@@ -289,19 +309,21 @@ class Syncher {
 
       console.log('[syncher - create]: ', criteria, requestMsg);
 
-      requestMsg.body.value = initialData;
-      requestMsg.body.value.reporter = _this._owner;
+      if (criteria) {
+        requestMsg.body.value = criteria;
+        requestMsg.body.value.reporter = _this._owner;
+      }
 
       if (criteria.p2p) requestMsg.body.p2p = criteria.p2p;
       if (criteria.store) requestMsg.body.store = criteria.store;
       if (criteria.observers) requestMsg.body.authorise = criteria.observers;
       if (criteria.identity) requestMsg.body.identity = criteria.identity;
 
-      console.log('[syncher - create] - resume message: ', requestMsg);
+      console.log('[syncher._resumeCreate] - resume message: ', requestMsg);
 
       //request create to the allocation system. Can be rejected by the PolicyEngine.
       _this._bus.postMessage(requestMsg, (reply) => {
-        console.log('[syncher - create] - create-resumed-response: ', reply);
+        console.log('[syncher._resumeCreate] - create-resumed-response: ', reply);
         if (reply.body.code === 200) {
 
           let listOfReporters = reply.body.value;
@@ -311,27 +333,30 @@ class Syncher {
             let dataObject = listOfReporters[index];
 
             //reporter creation accepted
-            let objURL = dataObject.resource;
-            let schema = dataObject.schema;
-            let status = dataObject.status || 'on';
-            let childrenResources = dataObject.childrenResources;
 
-            // initialData.childrens = deepClone(dataObject.childrens) || {};
-            // initialData = deepClone(dataObject.data) || {};
-            let init = deepClone(dataObject.data) || {};
-            let childrens = deepClone(dataObject.childrens) || {};
+            dataObject.data = deepClone(dataObject.data) || {};
 
-            console.log('[syncher - create] - create-resumed-dataObjectReporter', objURL, status, init);
+            if (dataObject.childrenObjects) { dataObject.childrenObjects = deepClone(dataObject.childrenObjects); }
 
-            let newObj = new DataObjectReporter(_this, objURL, schema, status, init, childrenResources, false, true);
-            newObj.resumeChildrens(childrens);
-            _this._reporters[objURL] = newObj;
+            dataObject.mutual = false;
+            dataObject.resumed = true;
+            dataObject.status = 'live';// pch: do we ned this?
+            dataObject.syncher = _this;
+
+            console.log('[syncher._resumeCreate] - create-resumed-dataObjectReporter', dataObject);
+
+            let newObj = new DataObjectReporter(dataObject);
+
+            if (dataObject.childrenObjects) { newObj.resumeChildrens(dataObject.childrenObjects); }
+            _this._reporters[dataObject.url] = newObj;
 
           }
 
           resolve(_this._reporters);
           if (this._onReportersResume) this._onReportersResume(this._reporters);
 
+        } else if (reply.body.code === 404) {
+          resolve({});
         } else {
           //reporter creation rejected
           reject(reply.body.desc);
@@ -340,7 +365,7 @@ class Syncher {
     });
   }
 
-  _subscribe(criteria) {
+  _subscribe(input) {
     let _this = this;
 
     return new Promise((resolve, reject) => {
@@ -359,21 +384,20 @@ class Syncher {
 
       // Resume Subscriptions for a certain user and data schema independently of the Hyperty URL.
       // https://github.com/reTHINK-project/specs/blob/master/messages/data-sync-messages.md#resume-subscriptions-for-a-certain-user-and-data-schema-independently-of-the-hyperty-url
-      if (criteria) {
-        if (criteria.hasOwnProperty('p2p')) subscribeMsg.body.p2p = criteria.p2p;
-        if (criteria.hasOwnProperty('store')) subscribeMsg.body.store = criteria.store;
-        if (criteria.hasOwnProperty('schema')) subscribeMsg.body.schema = criteria.schema;
-        if (criteria.hasOwnProperty('identity')) subscribeMsg.body.identity = criteria.identity;
-        if (criteria.hasOwnProperty('resource')) subscribeMsg.body.resource = criteria.resource;
+      if (input) {
+        if (input.hasOwnProperty('p2p')) subscribeMsg.body.p2p = input.p2p;
+        if (input.hasOwnProperty('store')) subscribeMsg.body.store = input.store;
+        if (input.hasOwnProperty('schema')) subscribeMsg.body.schema = input.schema;
+        if (input.hasOwnProperty('identity')) subscribeMsg.body.identity = input.identity;
+        if (input.hasOwnProperty('resource')) subscribeMsg.body.resource = input.resource;
       }
 
-      subscribeMsg.body.resume = criteria.resume;
+      subscribeMsg.body.resume = input.resume;
 
       //TODO: For Further Study
-      let mutualAuthentication = criteria.mutual;
-      if (criteria.hasOwnProperty('mutual')) subscribeMsg.body.mutualAuthentication = mutualAuthentication;
+      if (input.hasOwnProperty('mutual')) subscribeMsg.body.mutualAuthentication = input.mutual;
 
-      console.log('[syncher] - subscribe message: ', criteria, subscribeMsg);
+      console.log('[syncher_subscribe] - subscribe message: ', input, subscribeMsg);
 
       //request subscription
       //Provisional data is applied to the DataObjectObserver after confirmation. Or discarded if there is no confirmation.
@@ -381,7 +405,6 @@ class Syncher {
       _this._bus.postMessage(subscribeMsg, (reply) => {
         console.log('[syncher] - subscribe-response: ', reply);
 
-        let schema = reply.body.schema;
         let objURL = reply.body.resource;
 
         let newProvisional = _this._provisionals[objURL];
@@ -395,12 +418,21 @@ class Syncher {
         } else if (reply.body.code === 200) {
           console.log('[syncher] - new Data Object Observer: ', reply, _this._provisionals);
 
-          let initialData = reply.body.value;
-          if (!initialData.hasOwnProperty('childrens')) { initialData.childrens = {}; }
-          if (!initialData.hasOwnProperty('data')) { initialData.data = {}; }
+          let observerInput = reply.body.value;
+
+          observerInput.syncher = _this;
+          //observerInput.status = 'on';
+          observerInput.p2p = input.p2p;
+          observerInput.store = input.store;
+          observerInput.identity = input.identity;
+          observerInput.resume = input.resume;
+
+          // todo: For Further Study
+          observerInput.mutual = input.mutual;
+          observerInput.children = newProvisional.children;
 
           //TODO: mutualAuthentication For Further Study
-          let newObj = new DataObjectObserver(_this, objURL, schema, 'on', initialData, newProvisional.children, reply.body.version, mutualAuthentication);
+          let newObj = new DataObjectObserver(observerInput);
           _this._observers[objURL] = newObj;
 
           resolve(newObj);
@@ -436,7 +468,7 @@ class Syncher {
         if (criteria.hasOwnProperty('store')) subscribeMsg.body.store = criteria.store;
         if (criteria.hasOwnProperty('schema')) subscribeMsg.body.schema = criteria.schema;
         if (criteria.hasOwnProperty('identity')) subscribeMsg.body.identity = criteria.identity;
-        if (criteria.hasOwnProperty('resource')) subscribeMsg.body.resource = criteria.resource;
+        if (criteria.hasOwnProperty('resource')) subscribeMsg.body.resource = criteria.url;
       }
 
       subscribeMsg.body.resume = criteria.resume;
@@ -459,7 +491,7 @@ class Syncher {
         delete _this._provisionals[objURL];
         if (newProvisional) newProvisional._releaseListeners();
 
-        if (reply.body.code < 200) {
+        if (reply.body.code < 200) { // todo: check if this is needed for the resume
 
           console.log('[syncher] - resume new DataProvisional: ', reply, objURL);
           newProvisional = new DataProvisional(_this._owner, objURL, _this._bus, reply.body.childrenResources);
@@ -474,30 +506,29 @@ class Syncher {
             let dataObject = listOfObservers[index];
             console.log('[syncher] - Resume Object Observer: ', reply, dataObject, _this._provisionals);
 
-            let schema = dataObject.schema;
-            let status = dataObject.status || 'on';
-            let objURL = dataObject.resource;
-            let version = dataObject.version || 0;
-            let childrenResources = dataObject.childrenResources;
+            if (dataObject.childrenObjects) { dataObject.childrenObjects = deepClone(dataObject.childrenObjects); }
 
-            let initialData = {};
-            initialData.childrens = deepClone(dataObject.childrens) || {};
-            initialData.data = deepClone(dataObject.data) || {};
-
+            dataObject.data = deepClone(dataObject.data) || {};
+            dataObject.resumed = true;
+            dataObject.syncher = _this;
 
             //TODO: mutualAuthentication For Further Study
-            console.log('[syncher - resume subscribe] - create new dataObject: ', status, initialData, childrenResources, version);
-            let newObj = new DataObjectObserver(_this, objURL, schema, status, initialData, childrenResources, version, mutualAuthentication, true);
+            console.log('[syncher._resumeSubscribe] - create new dataObject: ', dataObject);
+            let newObj = new DataObjectObserver(dataObject);
+
+            if (dataObject.childrenObjects) { newObj.resumeChildrens(dataObject.childrenObjects); }
 
             _this._observers[objURL] = newObj;
 
-            _this._provisionals[objURL].apply(newObj);
+            if (_this._provisionals[objURL]) { _this._provisionals[objURL].apply(newObj); }
           }
 
           resolve(_this._observers);
 
           if (this._onObserversResume) this._onObserversResume(_this._observers);
 
+        } else if (reply.body.code === 404) {
+          resolve({});
         } else {
           reject(reply.body.desc);
         }
