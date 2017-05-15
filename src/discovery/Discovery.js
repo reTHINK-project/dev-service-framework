@@ -327,7 +327,7 @@ class Discovery {
 
         _this.messageBus.postMessage(msg, (reply) => {
 
-          if(reply.body.code === 200){
+          if(reply.body.code === 200 || reply.body.code === 500){
             reply.body.value.map(function(hyperty) {
                if(hyperty.hypertyID != _this.discoveryURL)
                    filteredHyperties.push(hyperty);
