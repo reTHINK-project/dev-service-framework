@@ -93,7 +93,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     // TODO: remove value and add resources? should similar to 1st create
     let inviteMsg = {
       type: 'create', from: _this._syncher._owner, to: _this._syncher._subURL,
-      body: { resume: false, resource: _this._url, schema: _this._schema, value: _this._syncObj.data, authorise: observers }
+      body: { resume: false, resource: _this._url, schema: _this._schema, value: _this._metadata, authorise: observers }
     };
 
     _this._bus.postMessage(inviteMsg);
