@@ -86,6 +86,8 @@ class DataObject {
 
     _this._resumed = input.resume;
 
+    if (input.resume) { _this._version = input.version; }
+
     _this._owner = input.syncher._owner;
     _this._bus = input.syncher._bus;
 

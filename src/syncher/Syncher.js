@@ -339,7 +339,7 @@ class Syncher {
             if (dataObject.childrenObjects) { dataObject.childrenObjects = deepClone(dataObject.childrenObjects); }
 
             dataObject.mutual = false;
-            dataObject.resumed = true;
+            dataObject.resume = true;
             dataObject.status = 'live';// pch: do we ned this?
             dataObject.syncher = _this;
 

@@ -55,7 +55,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     _this._subscriptions = {};
 
     _this._syncObj.observe((event) => {
-      console.log('DataObjectReporter-' + input.url + '-SEND: ', event);
+      console.log('[Syncher.DataObjectReporter] ' + _this.url + ' publish change: ', event);
       _this._onChange(event);
     });
 
@@ -264,16 +264,21 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
   //FLOW-IN: message received from ReporterURL address: emited by a remote Syncher -> read
   _onRead(msg) {
     let _this = this;
+    let objectValue = deepClone(_this.metadata);
+    objectValue.data = deepClone(_this.data);
+    objectValue.version = _this._version;
+
+    let response = {
+      id: msg.id, type: 'response', from: msg.to, to: msg.from,
+      body: { code: 200, value: objectValue }
+    };
 
     let event = {
       type: msg.type,
       url: msg.from,
 
       accept: () => {
-        _this._bus.postMessage({
-          id: msg.id, type: 'response', from: msg.to, to: msg.from,
-          body: { code: 200, value: deepClone(_this.data) }
-        });
+        _this._bus.postMessage(response);
       },
 
       reject: (reason) => {
@@ -284,7 +289,11 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
       }
     };
 
-    if (_this._onReadHandler) {
+    // if the requester is an authorised observer, the data object is responded otherwise an event is triggered
+
+    if (_this._subscriptions[msg.from]) {
+      _this._bus.postMessage(response);
+    } else if (_this._onReadHandler) {
       console.log('READ-EVENT: ', event);
       _this._onReadHandler(event);
     }
