@@ -86,7 +86,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
    * Send invitations (create messages) to hyperties, observers list.
    * @param  {HypertyURL[]} observers List of Hyperty URL's
    */
-  inviteObservers(observers) {
+  yObservers(observers) {
     let _this = this;
 
     //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onCreate
@@ -177,6 +177,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
         //create new subscription
         let sub = { url: hypertyUrl, status: 'live' };
         _this._subscriptions[hypertyUrl] = sub;
+        if (_this.metadata.subscriptions) { _this.metadata.subscriptions.push(sub.url); }
 
         let msgValue = _this._metadata;
         msgValue.data = deepClone(_this.data);
