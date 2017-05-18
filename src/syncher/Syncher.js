@@ -521,9 +521,9 @@ class Syncher {
 
             if (dataObject.childrenObjects) { newObj.resumeChildrens(dataObject.childrenObjects); }
 
-            _this._observers[objURL] = newObj;
+            _this._observers[newObj.url] = newObj;
 
-            if (_this._provisionals[objURL]) { _this._provisionals[objURL].apply(newObj); }
+            if (_this._provisionals[newObj.url]) { _this._provisionals[newObj.url].apply(newObj); }
           }
 
           resolve(_this._observers);
