@@ -425,7 +425,7 @@ class Syncher {
           observerInput.p2p = input.p2p;
           observerInput.store = input.store;
           observerInput.identity = input.identity;
-          observerInput.resume = input.resume;
+          observerInput.resume = false;
 
           // todo: For Further Study
           observerInput.mutual = input.mutual;

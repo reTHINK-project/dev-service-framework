@@ -290,8 +290,15 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     };
 
     // if the requester is an authorised observer, the data object is responded otherwise an event is triggered
+    let subscriptions = [];
 
-    if (_this.metadata.subscriptions.indexOf(msg.from) != -1) {
+    if (_this.metadata.subscriptions) {
+      subscriptions = _this.metadata.subscriptions;
+    } else if (_this._subscriptions) {
+      subscriptions = Object.keys(_this._subscriptions).map(function(key) { return _this._subscriptions[key]; });
+    }
+
+    if (subscriptions.indexOf(msg.from) != -1) {
       _this._bus.postMessage(response);
     } else if (_this._onReadHandler) {
       console.log('READ-EVENT: ', event);
