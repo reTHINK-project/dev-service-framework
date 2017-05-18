@@ -67,7 +67,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     let _this = this;
 
     _this._objectListener = _this._bus.addListener(_this._url, (msg) => {
-      console.log('DataObject-' + _this._url + '-RCV: ', msg);
+      console.log('[Syncher.DataObjectReporter] listener ' + _this._url + ' Received: ', msg);
       switch (msg.type) {
         case 'response': _this._onResponse(msg); break;
         case 'read': _this._onRead(msg); break;
@@ -291,7 +291,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
 
     // if the requester is an authorised observer, the data object is responded otherwise an event is triggered
 
-    if (_this._subscriptions[msg.from]) {
+    if (_this.metadata.subscriptions.indexOf(msg.from) != -1) {
       _this._bus.postMessage(response);
     } else if (_this._onReadHandler) {
       console.log('READ-EVENT: ', event);

@@ -509,12 +509,15 @@ class Syncher {
             if (dataObject.childrenObjects) { dataObject.childrenObjects = deepClone(dataObject.childrenObjects); }
 
             dataObject.data = deepClone(dataObject.data) || {};
-            dataObject.resumed = true;
+            dataObject.resume = true;
             dataObject.syncher = _this;
 
             //TODO: mutualAuthentication For Further Study
             console.log('[syncher._resumeSubscribe] - create new dataObject: ', dataObject);
             let newObj = new DataObjectObserver(dataObject);
+
+            //lets sync with Reporter
+            newObj.sync();
 
             if (dataObject.childrenObjects) { newObj.resumeChildrens(dataObject.childrenObjects); }
 

@@ -22,6 +22,7 @@
 **/
 
 import { deepClone } from '../utils/utils';
+import SyncObject, {ChangeType, ObjectType} from './ProxyObject';
 
 import DataObject from './DataObject';
 import DataObjectChild from './DataObjectChild';
@@ -57,8 +58,6 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
     _this._version = input.version;
     _this._filters = {};
 
-    if (input.resume) { _this._sync(); }
-
     _this._syncObj.observe((event) => {
       _this._onFilter(event);
     });
@@ -70,14 +69,19 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
   /**
    * Sync Data Object Observer with last version of Data Object Reporter. Useful for Resumes
    */
-  _sync() {
+  sync() {
 
     let _this = this;
+    console.info('[DataObjectObserver_sync] synchronising ');
 
     _this._syncher.read(_this._metadata.url).then((value)=>{
       console.info('[DataObjectObserver_sync] value to sync: ', value);
 
-      _this._syncObj = deepClone(value.data);
+      _this._syncObj = new SyncObject(value.data);
+
+      _this._syncObj.observe((event) => {
+        _this._onFilter(event);
+      });
 
       _this._metadata = deepClone(value);
 
@@ -87,7 +91,6 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
     }).catch((reason) => {
       console.info('[DataObjectObserver_sync] sync failed: ', reason);
     });
-
 
   }
 
