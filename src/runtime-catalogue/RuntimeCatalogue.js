@@ -23,6 +23,7 @@ class RuntimeCatalogue {
     getDescriptor(descriptorURL, createFunc, getFull = true, constraints) {
         console.log("getting descriptor from:", descriptorURL);
         console.log("constraints:", constraints);
+        console.log("this is a test message");
 
         // some flags for optimization
         // (later the descriptor will not be saved in case both of these booleans are true)
