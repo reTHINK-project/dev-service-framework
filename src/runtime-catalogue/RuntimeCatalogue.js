@@ -33,7 +33,7 @@ class RuntimeCatalogue {
         // first checks if descriptor is already in localStorage (based on cguid and version)
         let descriptorPromise;
         if (constraints != undefined) {
-            descriptorPromise = Promise.all([this.httpRequest.post(descriptorURL + "/version", JSON.stringify(constraints)), this.httpRequest.post(descriptorURL + "/cguid", JSON.stringify(constraints))])
+            descriptorPromise = Promise.all([this.httpRequest.post(descriptorURL + "/version", {"body": JSON.stringify(constraints)}), this.httpRequest.post(descriptorURL + "/cguid", {"body": JSON.stringify(constraints)})])
         } else {
             descriptorPromise = Promise.all([this.httpRequest.get(descriptorURL + "/version"), this.httpRequest.get(descriptorURL + "/cguid")])
         }
@@ -49,7 +49,7 @@ class RuntimeCatalogue {
                 } else {
                     console.log("storageManager does not contain saved version");
                     // no saved copy, proceed with retrieving descriptor
-                    let retrievePromise = constraints != undefined ? this.httpRequest.post(descriptorURL, JSON.stringify(constraints)) : this.httpRequest.get(descriptorURL);
+                    let retrievePromise = constraints != undefined ? this.httpRequest.post(descriptorURL, {"body": JSON.stringify(constraints)}) : this.httpRequest.get(descriptorURL);
                     return retrievePromise.then((descriptor) => {
                         descriptor = JSON.parse(descriptor);
                         //console.log("got descriptor:", JSON.stringify(descriptor, null, 2));
@@ -105,7 +105,7 @@ class RuntimeCatalogue {
     attachRawSourcePackage(descriptor, constraints) {
         console.log("attaching raw sourcePackage from:", descriptor.sourcePackageURL);
         return new Promise((resolve, reject) => {
-            let retrievePromise = constraints != undefined ? this.httpRequest.post(descriptor.sourcePackageURL, JSON.stringify(constraints)) : this.httpRequest.get(descriptor.sourcePackageURL);
+            let retrievePromise = constraints != undefined ? this.httpRequest.post(descriptor.sourcePackageURL, {"body": JSON.stringify(constraints)}) : this.httpRequest.get(descriptor.sourcePackageURL);
             retrievePromise.then((sourcePackage) => {
                 sourcePackage = JSON.parse(sourcePackage);
                 //delete descriptor.sourcePackageURL;
@@ -483,7 +483,7 @@ class RuntimeCatalogue {
      */
     getTypeList(typeURL, constraints) {
         return new Promise((resolve, reject) => {
-            let requestPromise = constraints != undefined ? this.httpRequest.post(typeURL, JSON.stringify(constraints)) : this.httpRequest.get(typeURL);
+            let requestPromise = constraints != undefined ? this.httpRequest.post(typeURL, {"body": JSON.stringify(constraints)}) : this.httpRequest.get(typeURL);
             requestPromise.then((typeList) => {
                 typeList = JSON.parse(typeList);
                 resolve(typeList);
