@@ -109,7 +109,7 @@ class Syncher {
   * @param  {SyncMetadata} input - (optional) all metadata required to sunc the Data Object.
   * @return {Promise<DataObjectReporter>} Return Promise to a new Reporter. The reporter can be accepted or rejected by the PEP
   */
-  create(schema, observers, initialData, store = false, p2p = false, name = 'data object without name', identity, input) {
+  create(schema, observers, initialData, store = false, p2p = false, name = 'no name', identity, input) {
 
     if (!schema) throw Error('[Syncher - Create] - You need specify the data object schema');
     if (!observers) throw Error('[Syncher - Create] -The observers should be defined');
@@ -127,7 +127,7 @@ class Syncher {
     createInput.resume = false;
     if (input) {
       createInput.mutual = input.mutual ? input.mutual : true;
-      createInput.name = input.name ? input.name : 'no name';
+      createInput.name = input.name ? input.name : createInput.name;
     } else { createInput.mutual = true; }
 
     if (identity)      { createInput.identity = identity; }
@@ -521,9 +521,9 @@ class Syncher {
 
             if (dataObject.childrenObjects) { newObj.resumeChildrens(dataObject.childrenObjects); }
 
-            _this._observers[objURL] = newObj;
+            _this._observers[newObj.url] = newObj;
 
-            if (_this._provisionals[objURL]) { _this._provisionals[objURL].apply(newObj); }
+            if (_this._provisionals[newObj.url]) { _this._provisionals[newObj.url].apply(newObj); }
           }
 
           resolve(_this._observers);

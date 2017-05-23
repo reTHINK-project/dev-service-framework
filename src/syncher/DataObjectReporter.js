@@ -86,7 +86,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
    * Send invitations (create messages) to hyperties, observers list.
    * @param  {HypertyURL[]} observers List of Hyperty URL's
    */
-  yObservers(observers) {
+  inviteObservers(observers) {
     let _this = this;
 
     //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onCreate
