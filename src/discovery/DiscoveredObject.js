@@ -34,9 +34,9 @@ class DiscoveredObject {
 
   constructor (data, runtimeURL, discoveryURL, msgBus) {
     this._data = data;
+    this._registryObjectURL = data.hypertyID || data.url;
     this._runtimeURL = runtimeURL;
     this._domain = divideURL(runtimeURL).domain;
-    //    this._discoveredObjectURL = discoveryURL + '/discoveredobject/';
     this._discoveredObjectURL = discoveryURL;
     this._messageBus = msgBus;
     this._subscriptionSet = false;
@@ -71,26 +71,26 @@ class DiscoveredObject {
       from: this._discoveredObjectURL,
       to: 'domain://msg-node.' + this._domain + '/sm',
       body: {
-        resources: [this._data.hypertyID + '/registration']
+        resources: [this._registryObjectURL + '/registration']
       }
     };
 
     this._messageBus.postMessage(msg, (reply) => {
-      console.log(`[DiscoveredObject.subscribe] ${this._data.hypertyID} rcved reply `, reply);
+      console.log(`[DiscoveredObject.subscribe] ${this._registryObjectURL} rcved reply `, reply);
 
       if(reply.body.code === 200) {
         this._subscriptionSet = true;
-        this._generateListener(this._data.hypertyID + '/registration');
+        this._generateListener(this._registryObjectURL + '/registration');
       }
       else
-        console.error("Error subscribing ", this._data.hypertyID);
+        console.error("Error subscribing ", this._registryObjectURL);
     });
   }
 
   _generateListener(notificationURL) {
 
     this._messageBus.addListener(notificationURL, (msg) => {
-      console.log(`[DiscoveredObject.notification] ${this._data.hypertyID}: `, msg);
+      console.log(`[DiscoveredObject.notification] ${this._registryObjectURL}: `, msg);
       this._processNotification(msg);
     });
   }
