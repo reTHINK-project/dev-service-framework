@@ -421,7 +421,6 @@ class Syncher {
           let observerInput = reply.body.value;
 
           observerInput.syncher = _this;
-          //observerInput.status = 'on';
           observerInput.p2p = input.p2p;
           observerInput.store = input.store;
           observerInput.identity = input.identity;
@@ -591,6 +590,17 @@ class Syncher {
     let resource = msg.body.resource;
 
     let object = _this._observers[resource];
+
+    let unsubscribe = {
+      from: _this.owner,
+      to: _this._subURL,
+      id: msg.id,
+      type: 'unsubscribe',
+      body: { resource: msg.body.resource }
+    };
+
+    _this._bus.postMessage(unsubscribe);
+
     if (object) {
       let event = {
         type: msg.type,
