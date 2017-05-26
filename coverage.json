@@ -1,13 +1,72 @@
 {
-  "coverage": "70.83%",
-  "expectCount": 168,
-  "actualCount": 119,
+  "coverage": "44.03%",
+  "expectCount": 352,
+  "actualCount": 155,
   "files": {
-    "src/bus/Bus.js": {
-      "expectCount": 8,
-      "actualCount": 7,
+    "src/message-factory/MessageBody.js": {
+      "expectCount": 47,
+      "actualCount": 19,
       "undocumentLines": [
-        40
+        375,
+        268,
+        380,
+        44,
+        175,
+        180,
+        47,
+        171,
+        114,
+        148,
+        177,
+        142,
+        228,
+        120,
+        117,
+        229,
+        43,
+        205,
+        257,
+        182,
+        260,
+        88,
+        45,
+        46,
+        172,
+        232,
+        86,
+        60
+      ]
+    },
+    "src/catalogue-factory/CatalogueDataObject.js": {
+      "expectCount": 22,
+      "actualCount": 3,
+      "undocumentLines": [
+        148,
+        152,
+        131,
+        74,
+        58,
+        110,
+        136,
+        78,
+        70,
+        126,
+        82,
+        105,
+        86,
+        141,
+        90,
+        62,
+        115,
+        66,
+        120
+      ]
+    },
+    "src/catalogue-factory/CatalogueDataObjectFactory.js": {
+      "expectCount": 10,
+      "actualCount": 9,
+      "undocumentLines": [
+        39
       ]
     },
     "src/syncher/SyncObject.js": {
@@ -26,18 +85,25 @@
         127
       ]
     },
-    "src/identity/Crypto.js": {
-      "expectCount": 19,
-      "actualCount": 11,
+    "src/catalogue-factory/DataObjectSchema.js": {
+      "expectCount": 15,
+      "actualCount": 0,
       "undocumentLines": [
-        559,
-        7,
-        176,
-        59,
-        145,
+        54,
+        60,
+        72,
         30,
-        88,
-        116
+        78,
+        45,
+        66,
+        39,
+        73,
+        31,
+        40,
+        46,
+        55,
+        61,
+        67
       ]
     },
     "src/syncher/DataObject.js": {
@@ -70,11 +136,67 @@
       "actualCount": 3,
       "undocumentLines": []
     },
-    "src/identity/GuiFake.js": {
-      "expectCount": 2,
+    "src/catalogue-factory/HypertyDescriptor.js": {
+      "expectCount": 17,
       "actualCount": 1,
       "undocumentLines": [
-        8
+        29,
+        116,
+        115,
+        114,
+        65,
+        91,
+        69,
+        96,
+        61,
+        86,
+        57,
+        81,
+        73,
+        101,
+        106,
+        77
+      ]
+    },
+    "src/catalogue-factory/HypertyRuntimeDescriptor.js": {
+      "expectCount": 31,
+      "actualCount": 4,
+      "undocumentLines": [
+        30,
+        198,
+        32,
+        135,
+        193,
+        55,
+        68,
+        119,
+        184,
+        188,
+        164,
+        168,
+        115,
+        131,
+        123,
+        176,
+        172,
+        180,
+        127,
+        82,
+        78,
+        90,
+        86,
+        59,
+        73,
+        63,
+        51
+      ]
+    },
+    "src/message-factory/MessageFactory.js": {
+      "expectCount": 15,
+      "actualCount": 13,
+      "undocumentLines": [
+        252,
+        46
       ]
     },
     "src/identity/Identity.js": {
@@ -86,65 +208,162 @@
         7
       ]
     },
-    "src/identity/IdentityModule.js": {
-      "expectCount": 37,
-      "actualCount": 20,
-      "undocumentLines": [
-        128,
-        748,
-        90,
-        1390,
-        1257,
-        269,
-        1438,
-        1215,
-        1079,
-        802,
-        744,
-        509,
-        780,
-        824,
-        860,
-        897,
-        913
-      ]
-    },
-    "src/bus/MessageBus.js": {
-      "expectCount": 7,
-      "actualCount": 5,
-      "undocumentLines": [
-        43,
-        53
-      ]
-    },
-    "src/bus/MiniBus.js": {
+    "src/identityManager/IdentityManager.js": {
       "expectCount": 3,
-      "actualCount": 2,
+      "actualCount": 3,
+      "undocumentLines": []
+    },
+    "src/message-factory/Message.js": {
+      "expectCount": 11,
+      "actualCount": 6,
       "undocumentLines": [
+        53,
+        50,
+        49,
+        51,
+        52
+      ]
+    },
+    "src/identity/MessageBodyIdentity.js": {
+      "expectCount": 5,
+      "actualCount": 0,
+      "undocumentLines": [
+        7,
+        16,
+        9,
+        14,
+        17
+      ]
+    },
+    "src/persistence/PersistenceManager.js": {
+      "expectCount": 6,
+      "actualCount": 1,
+      "undocumentLines": [
+        25,
+        55,
+        37,
+        46,
         32
       ]
     },
-    "src/identity/OpenIdLib.js": {
-      "expectCount": 5,
-      "actualCount": 1,
+    "src/catalogue-factory/HypertyInterceptorDescriptor.js": {
+      "expectCount": 6,
+      "actualCount": 0,
       "undocumentLines": [
-        9,
-        165,
-        32,
-        138
+        29,
+        37,
+        49,
+        30,
+        41,
+        45
       ]
     },
-    "src/bus/Pipeline.js": {
-      "expectCount": 3,
-      "actualCount": 2,
+    "src/catalogue-factory/ProtocolStubDescriptor.js": {
+      "expectCount": 18,
+      "actualCount": 0,
       "undocumentLines": [
-        35
+        30,
+        82,
+        68,
+        77,
+        64,
+        31,
+        95,
+        99,
+        87,
+        91,
+        115,
+        111,
+        107,
+        103,
+        60,
+        72,
+        123,
+        119
+      ]
+    },
+    "src/reTHINKObject/RethinkObject.js": {
+      "expectCount": 2,
+      "actualCount": 1,
+      "undocumentLines": [
+        25
+      ]
+    },
+    "src/runtime-capabilities/RuntimeCapabilities.js": {
+      "expectCount": 5,
+      "actualCount": 3,
+      "undocumentLines": [
+        1,
+        3
+      ]
+    },
+    "src/runtime-catalogue/RuntimeCatalogue.js": {
+      "expectCount": 24,
+      "actualCount": 15,
+      "undocumentLines": [
+        3,
+        10,
+        5,
+        388,
+        504,
+        9,
+        496,
+        500,
+        11
+      ]
+    },
+    "src/catalogue-factory/RuntimeConstraint.js": {
+      "expectCount": 6,
+      "actualCount": 1,
+      "undocumentLines": [
+        42,
+        34,
+        29,
+        38,
+        47
+      ]
+    },
+    "src/catalogue-factory/SourcePackage.js": {
+      "expectCount": 10,
+      "actualCount": 1,
+      "undocumentLines": [
+        28,
+        44,
+        52,
+        57,
+        48,
+        36,
+        62,
+        40,
+        67
+      ]
+    },
+    "src/storage-manager/StorageManager.js": {
+      "expectCount": 8,
+      "actualCount": 4,
+      "undocumentLines": [
+        1,
+        3,
+        21,
+        22
       ]
     },
     "src/syncher/Syncher.js": {
       "expectCount": 13,
       "actualCount": 13,
       "undocumentLines": []
+    },
+    "src/identity/UserProfile.js": {
+      "expectCount": 7,
+      "actualCount": 1,
+      "undocumentLines": [
+        11,
+        12,
+        8,
+        13,
+        14,
+        10
+      ]
     },
     "src/utils/WatchingYou.js": {
       "expectCount": 4,
