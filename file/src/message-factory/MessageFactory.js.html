@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../">
-  <title data-ice="title">src/message-factory/MessageFactory.js | API Document</title>
+  <title data-ice="title">src/message-factory/MessageFactory.js | Service Framework API Document</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -18,8 +18,8 @@
   
   <a href="identifiers.html">Reference</a>
   <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
   
-  <a data-ice="repoURL" href="git+ssh://git@github.com/reTHINK-project/core-framework.git">Repository</a>
   <div class="search-box">
   <span>
     <img src="./image/search.png">
@@ -39,34 +39,32 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~ContextDataObjectSchema.html">ContextDataObjectSchema</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~DataObjectSchema.html">DataObjectSchema</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~HypertyDataObjectSchema.html">HypertyDataObjectSchema</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~IdentifyDataObjectSchema.html">IdentifyDataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~IdentityDataObjectSchema.html">IdentityDataObjectSchema</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~MessageDataObjectSchema.html">MessageDataObjectSchema</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/HypertyDescriptor.js~HypertyDescriptor.html">HypertyDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/HypertyInterceptorDescriptor.js~PolicyEnforcerDescriptor.html">PolicyEnforcerDescriptor</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/HypertyRuntimeDescriptor.js~HypertyRuntimeDescriptor.html">HypertyRuntimeDescriptor</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/PolicyEnforcerDescriptor.js~PolicyEnforcerDescriptor.html">PolicyEnforcerDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeHypertyCapability.html">RuntimeHypertyCapability</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeProtocolCapability.html">RuntimeProtocolCapability</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor.html">ProtocolStubDescriptor</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/RuntimeConstraint.js~RuntimeConstraint.html">RuntimeConstraint</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/SourcePackage.js~SourcePackage.html">SourcePackage</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-CatalogueObjectType">CatalogueObjectType</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-DataObjectSourceLanguage">DataObjectSourceLanguage</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-DataUrlScheme">DataUrlScheme</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HypertyResourceType">HypertyResourceType</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HypertyType">HypertyType</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RuntimeHypertyCapabilityType">RuntimeHypertyCapabilityType</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RuntimeHypertyCapabilityType">RuntimeHypertyCapabilityType</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RuntimeProtocolCapabilityType">RuntimeProtocolCapabilityType</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RuntimeType">RuntimeType</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">hyperty-chat</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/hyperty-chat/Chat.js~ChatGroup.html">ChatGroup</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-activate">activate</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-CommunicationStatus">CommunicationStatus</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-communication">communication</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-participant">participant</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">hyperty-connector</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/hyperty-connector/ConnectionController.js~ConnectionController.html">ConnectionController</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-activate">activate</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-connection">connection</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-peer">peer</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">hyperty-discovery</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/hyperty-discovery/HypertyDiscovery.js~HypertyDiscovery.html">HypertyDiscovery</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">discovery</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/discovery/Discovery.js~Discovery.html">Discovery</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">identity</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/identity/Identity.js~Identity.html">Identity</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/identity/MessageBodyIdentity.js~MessageBodyIdentity.html">MessageBodyIdentity</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/identity/UserProfile.js~UserProfile.html">UserProfile</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">identityManager</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/identityManager/IdentityManager.js~IdentityManager.html">IdentityManager</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">message-factory</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/Message.js~Message.html">Message</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~CreateMessageBody.html">CreateMessageBody</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~DeleteMessageBody.html">DeleteMessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~ExecuteMessageBody.html">ExecuteMessageBody</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~ForwardMessageBody.html">ForwardMessageBody</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~MessageBody.html">MessageBody</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~ReadMessageBody.html">ReadMessageBody</a></span></span></li>
@@ -76,11 +74,15 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageFactory.js~MessageFactory.html">MessageFactory</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Enum">Enum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-MessageType">MessageType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ATTRIBUTE_TYPE">ATTRIBUTE_TYPE</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-REASON_PHRASE">REASON_PHRASE</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RESPONSE_CODE">RESPONSE_CODE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-UPDATE_OPERATION">UPDATE_OPERATION</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">persistence</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/persistence/PersistenceManager.js~PersistenceManager.html">PersistenceManager</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">reTHINKObject</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/reTHINKObject/RethinkObject.js~RethinkObject.html">RethinkObject</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">runtime-loader</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/runtime-loader/Core.js~Core.html">Core</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/runtime-loader/RuntimeLoader.js~RuntimeLoader.html">RuntimeLoader</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">runtime-capabilities</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/runtime-capabilities/RuntimeCapabilities.js~RuntimeCapabilities.html">RuntimeCapabilities</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">runtime-catalogue</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue.html">RuntimeCatalogue</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">storage-manager</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/storage-manager/StorageManager.js~StorageManager.html">StorageManager</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">syncher</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/DataObject.js~DataObject.html">DataObject</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/DataObjectChild.js~DataObjectChild.html">DataObjectChild</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/DataObjectObserver.js~DataObjectObserver.html">DataObjectObserver</a></span></span></li>
@@ -88,47 +90,71 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/Syncher.js~Syncher.html">Syncher</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ChangeType">ChangeType</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ObjectType">ObjectType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ChangeType">ChangeType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ObjectType">ObjectType</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">utils</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/utils/EventEmitter.js~EventEmitter.html">EventEmitter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/utils/WatchingYou.js~WatchingYou.html">WatchingYou</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-checkAttribute">checkAttribute</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-convertToUserURL">convertToUserURL</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-deepClone">deepClone</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-divideEmail">divideEmail</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-divideURL">divideURL</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-emptyObject">emptyObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getUserEmailFromURL">getUserEmailFromURL</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getUserURLFromEmail">getUserURLFromEmail</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseAttributes">parseAttributes</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-divideURL">divideURL</a></span></span></li>
 </ul>
 </div>
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/message-factory/MessageFactory.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import RethinkObject from &apos;../reTHINKObject/RethinkObject.js&apos;;
-import Message from &apos;./Message.js&apos;;
-import {MessageBody, CreateMessageBody, DeleteMessageBody, UpdateMessageBody, ReadMessageBody, ResponseMessageBody,
-    ForwardMessageBody} from &apos;./MessageBody.js&apos;;
-import {MessageType} from &apos;./Message.js&apos;;
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * Copyright 2016 PT Inova&#xE7;&#xE3;o e Sistemas SA
+ * Copyright 2016 INESC-ID
+ * Copyright 2016 QUOBIS NETWORKS SL
+ * Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
+ * Copyright 2016 ORANGE SA
+ * Copyright 2016 Deutsche Telekom AG
+ * Copyright 2016 Apizee
+ * Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **/
+import Message, {MessageType} from &quot;./Message.js&quot;;
+import {
+    MessageBody,
+    CreateMessageBody,
+    DeleteMessageBody,
+    UpdateMessageBody,
+    ReadMessageBody,
+    ResponseMessageBody,
+    ForwardMessageBody,
+    ExecuteMessageBody
+} from &quot;./MessageBody.js&quot;;
 
 /**
  * @author alice.cheambe[at]fokus.fraunhofer.de
  * The MessageFactory creates messages according to the reTHINK Message Data Model to be sent through the Runtime
  * Message Bus.
  */
-
-class MessageFactory extends RethinkObject {
+class MessageFactory {
 
     /**
      * Constructor to be used to instantiate an object of the Message Factory
-     * @param {boolean} validation
-     * @param {URL.URL } schema - link to the reTHINK Message Data Schema
      */
-    constructor(validation, schema){
-        super(validation,schema);
-
+    constructor() {
         this.myGenerator = new IdGenerator().idMaker();
-    }
-
-    /**
-     * Validates the message against the reTHINK Message Data Schema
-     * @param data
-     * @return {*}
-     */
-    validate(data){
-        return super.validate(data);
     }
 
     /**
@@ -141,11 +167,11 @@ class MessageFactory extends RethinkObject {
      * @param {URL.URL} policy - the sender of this message
      */
     createCreateMessageRequest(from, to, value, policy) {
-        if(!from || !to || !value)
+        if (!from || !to || !value)
             throw  new Error(&quot;from, to, and value of object to be created MUST be specified&quot;);
 
         let id = this.myGenerator.next().value;
-        let messageBody = new CreateMessageBody(value, policy, null, null, null, null, null);
+        let messageBody = new CreateMessageBody(value, policy, undefined, undefined, undefined, undefined, undefined);
         let message = new Message(id, from, to, MessageType.CREATE, messageBody);
         return message;
     }
@@ -159,13 +185,13 @@ class MessageFactory extends RethinkObject {
      * @param message {Message.Message} message - the message to be forwarded
      * @return {Message.Message} Message - the Forward Message Request
      */
-    createForwardMessageRequest(from, to, message ) {
-        if(!from || !to || !message)
+    createForwardMessageRequest(from, to, message) {
+        if (!from || !to || !message)
             throw  new Error(&quot;from, to, and message to forward MUST be specified&quot;);
 
         let id = this.myGenerator.next().value;
-        let messageBody = new ForwardMessageBody(null, null, null, null, null, message);
-        let forwardMessage = new Message(id , from, to, MessageType.FORWARD, messageBody);
+        let messageBody = new ForwardMessageBody(undefined, undefined, undefined, undefined, undefined, message);
+        let forwardMessage = new Message(id, from, to, MessageType.FORWARD, messageBody);
         return forwardMessage;
     }
 
@@ -179,13 +205,13 @@ class MessageFactory extends RethinkObject {
      * @param attribute - Identifies the attribute in the Object to be deleted
      * @return {Message.Message} Message - the Delete Message Request
      */
-    createDeleteMessageRequest(from, to, resource, attribute){
-        if(!from || !to)
+    createDeleteMessageRequest(from, to, resource, attribute) {
+        if (!from || !to)
             throw  new Error(&quot;from and to parameters MUST be specified&quot;);
 
         let id = this.myGenerator.next().value;
-        let messageBody = new DeleteMessageBody(null, null, resource, attribute, null, null);
-        let message  = new Message(id, from, to, MessageType.DELETE, messageBody);
+        let messageBody = new DeleteMessageBody(undefined, undefined, resource, attribute, undefined, undefined);
+        let message = new Message(id, from, to, MessageType.DELETE, messageBody);
         return message;
 
     }
@@ -201,13 +227,13 @@ class MessageFactory extends RethinkObject {
      * @param attribute - Identifies the attribute in the Object to be updated
      * @return {Message.Message} Message - the Update message request
      */
-    createUpdateMessageRequest(from, to, value, resource, attribute){
-        if(!from || !to || !value)
+    createUpdateMessageRequest(from, to, value, resource, attribute) {
+        if (!from || !to || !value)
             throw  new Error(&quot;from, and to and value MUST be specified&quot;);
 
         let id = this.myGenerator.next().value;
-        let messageBody = new UpdateMessageBody(null, null, resource, null, null, attribute,value);
-        let message  = new Message(id, from, to, MessageType.UPDATE, messageBody);
+        let messageBody = new UpdateMessageBody(undefined, undefined, resource, undefined, undefined, attribute, value);
+        let message = new Message(id, from, to, MessageType.UPDATE, messageBody);
         return message;
     }
 
@@ -220,14 +246,14 @@ class MessageFactory extends RethinkObject {
      * @param attribute - Identifies the attribute in the Object to be read
      * @return {Message.Message} Message - the Read message request
      */
-    createReadMessageRequest(from, to, resource, attribute){
-        if(!from || !to || !resource)
+    createReadMessageRequest(from, to, resource, attribute) {
+        if (!from || !to || !resource)
             throw  new Error(&quot;from, to and the resource to read from MUST be specified&quot;);
 
         let id = this.myGenerator.next().value;
-        let messageBody = new ReadMessageBody(null, null, resource, null, null, attribute,
-            null, null);
-        let message  = new Message(id, from, to, MessageType.READ, messageBody);
+        let messageBody = new ReadMessageBody(undefined, undefined, resource, undefined, undefined, attribute,
+            undefined, undefined);
+        let message = new Message(id, from, to, MessageType.READ, messageBody);
         return message;
     }
 
@@ -238,13 +264,13 @@ class MessageFactory extends RethinkObject {
      * different ways
      * @param {URL.URL} resource - URL of the object
      */
-    createSubscribeMessageRequest(from, to, resource){
-        if(!from || !to || !resource)
+    createSubscribeMessageRequest(from, to, resource) {
+        if (!from || !to || !resource)
             throw  new Error(&quot;from, to and the resource to subscribe to MUST be specified&quot;);
 
         let id = this.myGenerator.next().value;
-        let messageBody = new MessageBody(null, null, resource, null, null);
-        let message  = new Message(id, from, to, MessageType.SUBSCRIBE, messageBody);
+        let messageBody = new MessageBody(undefined, undefined, resource, undefined, undefined);
+        let message = new Message(id, from, to, MessageType.SUBSCRIBE, messageBody);
         return message;
     }
 
@@ -255,15 +281,34 @@ class MessageFactory extends RethinkObject {
      * different ways
      * @param {URL.URL} resource - URL of the object
      */
-    createUnsubscribeMessageRequest(from, to, resource){
-        if(!from || !to || !resource)
+    createUnsubscribeMessageRequest(from, to, resource) {
+        if (!from || !to || !resource)
             throw  new Error(&quot;from, to and the resource to subscribe to MUST be specified&quot;);
 
         let id = this.myGenerator.next().value;
-        let messageBody = new MessageBody(null, null, resource, null, null);
-        let message  = new Message(id, from, to, MessageType.UNSUBSCRIBE, messageBody);
+        let messageBody = new MessageBody(undefined, undefined, resource, undefined, undefined);
+        let message = new Message(id, from, to, MessageType.UNSUBSCRIBE, messageBody);
         return message;
     }
+
+    /**
+     * Creates a Message of type EXECUTE
+     * @param {URL.URL} from - the sender of this message
+     * @param {URL.URLList} to- One or more URLs of Message recipients. According to the URL scheme it may be handled in
+     * different ways
+     * @param {string} method -
+     * @param {Array} params -
+     */
+    createExecuteMessageRequest(from, to, method, params) {
+        if (!from || !to || !method)
+            throw  new Error(&quot;from, to and the method to execute MUST be specified&quot;);
+
+        let id = this.myGenerator.next().value;
+        let messageBody = new ExecuteMessageBody(undefined, undefined, undefined, undefined, undefined, method, params)
+        let executeMessage = new Message(id, from, to, MessageType.EXECUTE, messageBody);
+        return executeMessage;
+    }
+
 
     /**
      * Creates the response to the Message
@@ -273,10 +318,10 @@ class MessageFactory extends RethinkObject {
      * @param source - Contains the original creator of the response. Useful to identify the real source of the
      * response to a one-to-many message delivery ie multiple responses coming coming from different sources.
      */
-    createMessageResponse(message, code, value, source){
-        if(!code)
+    createMessageResponse(message, code, value, source) {
+        if (!code)
             throw  new Error(&quot;response Code MUST be specified&quot;);
-        let response = new ResponseMessageBody(null, null, null, code, value, source);
+        let response = new ResponseMessageBody(undefined, undefined, undefined, code, value, source);
         return new Message(message.id, message.to, message.from, MessageType.RESPONSE, response);
     }
 
@@ -304,7 +349,7 @@ class MessageFactory extends RethinkObject {
         let accessToken = previousBody.accessToken;
         let resource = previousBody.resource;
 
-        let response = new ResponseMessageBody(idToken,accessToken, resource, code, value);
+        let response = new ResponseMessageBody(idToken, accessToken, resource, code, value);
         let id = this.myGenerator.next().value;
         return new Message(id, data.to, data.from, MessageType.RESPONSE, response);
     }
@@ -315,9 +360,9 @@ class MessageFactory extends RethinkObject {
  * Message Identifier Generator that generates the id used to identifier message transactions
  */
 export class IdGenerator {
-    *idMaker(){
+    *idMaker() {
         let index = 1;
-        while(index &lt; 100000)
+        while (index &lt; 1000000)
             yield index++;
     }
 }
@@ -328,7 +373,7 @@ export default MessageFactory;
 </div>
 
 <footer class="footer">
-  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.4)</span></a>
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.5.2)</span><img src="./image/esdoc-logo-mini-black.png"></a>
 </footer>
 
 <script src="script/search_index.js"></script>

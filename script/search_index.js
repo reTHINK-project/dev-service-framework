@@ -1,5 +1,11 @@
 window.esdocSearchIndex = [
   [
+    "service-framework/src/message-factory/messagebody.js~attribute_type",
+    "variable/index.html#static-variable-ATTRIBUTE_TYPE",
+    "<span>ATTRIBUTE_TYPE</span> <span class=\"search-result-import-path\">service-framework/src/message-factory/MessageBody.js</span>",
+    "variable"
+  ],
+  [
     "service-framework/src/catalogue-factory/cataloguedataobject.js~cataloguedataobject",
     "class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html",
     "<span>CatalogueDataObject</span> <span class=\"search-result-import-path\">service-framework/src/catalogue-factory/CatalogueDataObject.js</span>",
@@ -18,33 +24,21 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
+    "service-framework/src/syncher/proxyobject.js~changetype",
+    "variable/index.html#static-variable-ChangeType",
+    "<span>ChangeType</span> <span class=\"search-result-import-path\">service-framework/src/syncher/ProxyObject.js</span>",
+    "variable"
+  ],
+  [
     "service-framework/src/syncher/syncobject.js~changetype",
     "variable/index.html#static-variable-ChangeType",
     "<span>ChangeType</span> <span class=\"search-result-import-path\">service-framework/src/syncher/SyncObject.js</span>",
     "variable"
   ],
   [
-    "service-framework/src/hyperty-chat/chat.js~chatgroup",
-    "class/src/hyperty-chat/Chat.js~ChatGroup.html",
-    "<span>ChatGroup</span> <span class=\"search-result-import-path\">service-framework/src/hyperty-chat/Chat.js</span>",
-    "class"
-  ],
-  [
     "service-framework/src/catalogue-factory/dataobjectschema.js~communicationdataobjectschema",
     "class/src/catalogue-factory/DataObjectSchema.js~CommunicationDataObjectSchema.html",
     "<span>CommunicationDataObjectSchema</span> <span class=\"search-result-import-path\">service-framework/src/catalogue-factory/DataObjectSchema.js</span>",
-    "class"
-  ],
-  [
-    "service-framework/src/hyperty-chat/communication.js~communicationstatus",
-    "variable/index.html#static-variable-CommunicationStatus",
-    "<span>CommunicationStatus</span> <span class=\"search-result-import-path\">service-framework/src/hyperty-chat/communication.js</span>",
-    "variable"
-  ],
-  [
-    "service-framework/src/hyperty-connector/connectioncontroller.js~connectioncontroller",
-    "class/src/hyperty-connector/ConnectionController.js~ConnectionController.html",
-    "<span>ConnectionController</span> <span class=\"search-result-import-path\">service-framework/src/hyperty-connector/ConnectionController.js</span>",
     "class"
   ],
   [
@@ -57,12 +51,6 @@ window.esdocSearchIndex = [
     "service-framework/src/catalogue-factory/dataobjectschema.js~contextdataobjectschema",
     "class/src/catalogue-factory/DataObjectSchema.js~ContextDataObjectSchema.html",
     "<span>ContextDataObjectSchema</span> <span class=\"search-result-import-path\">service-framework/src/catalogue-factory/DataObjectSchema.js</span>",
-    "class"
-  ],
-  [
-    "service-framework/src/runtime-loader/core.js~core",
-    "class/src/runtime-loader/Core.js~Core.html",
-    "<span>Core</span> <span class=\"search-result-import-path\">service-framework/src/runtime-loader/Core.js</span>",
     "class"
   ],
   [
@@ -108,9 +96,21 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
+    "service-framework/src/catalogue-factory/dataobjectschema.js~dataurlscheme",
+    "variable/index.html#static-variable-DataUrlScheme",
+    "<span>DataUrlScheme</span> <span class=\"search-result-import-path\">service-framework/src/catalogue-factory/DataObjectSchema.js</span>",
+    "variable"
+  ],
+  [
     "service-framework/src/message-factory/messagebody.js~deletemessagebody",
     "class/src/message-factory/MessageBody.js~DeleteMessageBody.html",
     "<span>DeleteMessageBody</span> <span class=\"search-result-import-path\">service-framework/src/message-factory/MessageBody.js</span>",
+    "class"
+  ],
+  [
+    "service-framework/src/discovery/discovery.js~discovery",
+    "class/src/discovery/Discovery.js~Discovery.html",
+    "<span>Discovery</span> <span class=\"search-result-import-path\">service-framework/src/discovery/Discovery.js</span>",
     "class"
   ],
   [
@@ -123,6 +123,12 @@ window.esdocSearchIndex = [
     "service-framework/src/utils/eventemitter.js~eventemitter",
     "class/src/utils/EventEmitter.js~EventEmitter.html",
     "<span>EventEmitter</span> <span class=\"search-result-import-path\">service-framework/src/utils/EventEmitter.js</span>",
+    "class"
+  ],
+  [
+    "service-framework/src/message-factory/messagebody.js~executemessagebody",
+    "class/src/message-factory/MessageBody.js~ExecuteMessageBody.html",
+    "<span>ExecuteMessageBody</span> <span class=\"search-result-import-path\">service-framework/src/message-factory/MessageBody.js</span>",
     "class"
   ],
   [
@@ -144,10 +150,10 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "service-framework/src/hyperty-discovery/hypertydiscovery.js~hypertydiscovery",
-    "class/src/hyperty-discovery/HypertyDiscovery.js~HypertyDiscovery.html",
-    "<span>HypertyDiscovery</span> <span class=\"search-result-import-path\">service-framework/src/hyperty-discovery/HypertyDiscovery.js</span>",
-    "class"
+    "service-framework/src/catalogue-factory/hypertydescriptor.js~hypertyresourcetype",
+    "variable/index.html#static-variable-HypertyResourceType",
+    "<span>HypertyResourceType</span> <span class=\"search-result-import-path\">service-framework/src/catalogue-factory/HypertyDescriptor.js</span>",
+    "variable"
   ],
   [
     "service-framework/src/catalogue-factory/hypertyruntimedescriptor.js~hypertyruntimedescriptor",
@@ -168,9 +174,21 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "service-framework/src/catalogue-factory/dataobjectschema.js~identifydataobjectschema",
-    "class/src/catalogue-factory/DataObjectSchema.js~IdentifyDataObjectSchema.html",
-    "<span>IdentifyDataObjectSchema</span> <span class=\"search-result-import-path\">service-framework/src/catalogue-factory/DataObjectSchema.js</span>",
+    "service-framework/src/identity/identity.js~identity",
+    "class/src/identity/Identity.js~Identity.html",
+    "<span>Identity</span> <span class=\"search-result-import-path\">service-framework/src/identity/Identity.js</span>",
+    "class"
+  ],
+  [
+    "service-framework/src/catalogue-factory/dataobjectschema.js~identitydataobjectschema",
+    "class/src/catalogue-factory/DataObjectSchema.js~IdentityDataObjectSchema.html",
+    "<span>IdentityDataObjectSchema</span> <span class=\"search-result-import-path\">service-framework/src/catalogue-factory/DataObjectSchema.js</span>",
+    "class"
+  ],
+  [
+    "service-framework/src/identitymanager/identitymanager.js~identitymanager",
+    "class/src/identityManager/IdentityManager.js~IdentityManager.html",
+    "<span>IdentityManager</span> <span class=\"search-result-import-path\">service-framework/src/identityManager/IdentityManager.js</span>",
     "class"
   ],
   [
@@ -183,6 +201,12 @@ window.esdocSearchIndex = [
     "service-framework/src/message-factory/messagebody.js~messagebody",
     "class/src/message-factory/MessageBody.js~MessageBody.html",
     "<span>MessageBody</span> <span class=\"search-result-import-path\">service-framework/src/message-factory/MessageBody.js</span>",
+    "class"
+  ],
+  [
+    "service-framework/src/identity/messagebodyidentity.js~messagebodyidentity",
+    "class/src/identity/MessageBodyIdentity.js~MessageBodyIdentity.html",
+    "<span>MessageBodyIdentity</span> <span class=\"search-result-import-path\">service-framework/src/identity/MessageBodyIdentity.js</span>",
     "class"
   ],
   [
@@ -204,15 +228,27 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
+    "service-framework/src/syncher/proxyobject.js~objecttype",
+    "variable/index.html#static-variable-ObjectType",
+    "<span>ObjectType</span> <span class=\"search-result-import-path\">service-framework/src/syncher/ProxyObject.js</span>",
+    "variable"
+  ],
+  [
     "service-framework/src/syncher/syncobject.js~objecttype",
     "variable/index.html#static-variable-ObjectType",
     "<span>ObjectType</span> <span class=\"search-result-import-path\">service-framework/src/syncher/SyncObject.js</span>",
     "variable"
   ],
   [
-    "service-framework/src/catalogue-factory/policyenforcerdescriptor.js~policyenforcerdescriptor",
-    "class/src/catalogue-factory/PolicyEnforcerDescriptor.js~PolicyEnforcerDescriptor.html",
-    "<span>PolicyEnforcerDescriptor</span> <span class=\"search-result-import-path\">service-framework/src/catalogue-factory/PolicyEnforcerDescriptor.js</span>",
+    "service-framework/src/persistence/persistencemanager.js~persistencemanager",
+    "class/src/persistence/PersistenceManager.js~PersistenceManager.html",
+    "<span>PersistenceManager</span> <span class=\"search-result-import-path\">service-framework/src/persistence/PersistenceManager.js</span>",
+    "class"
+  ],
+  [
+    "service-framework/src/catalogue-factory/hypertyinterceptordescriptor.js~policyenforcerdescriptor",
+    "class/src/catalogue-factory/HypertyInterceptorDescriptor.js~PolicyEnforcerDescriptor.html",
+    "<span>PolicyEnforcerDescriptor</span> <span class=\"search-result-import-path\">service-framework/src/catalogue-factory/HypertyInterceptorDescriptor.js</span>",
     "class"
   ],
   [
@@ -252,9 +288,27 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "service-framework/src/runtime-capabilities/runtimecapabilities.js~runtimecapabilities",
+    "class/src/runtime-capabilities/RuntimeCapabilities.js~RuntimeCapabilities.html",
+    "<span>RuntimeCapabilities</span> <span class=\"search-result-import-path\">service-framework/src/runtime-capabilities/RuntimeCapabilities.js</span>",
+    "class"
+  ],
+  [
+    "service-framework/src/runtime-catalogue/runtimecatalogue.js~runtimecatalogue",
+    "class/src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue.html",
+    "<span>RuntimeCatalogue</span> <span class=\"search-result-import-path\">service-framework/src/runtime-catalogue/RuntimeCatalogue.js</span>",
+    "class"
+  ],
+  [
     "service-framework/src/catalogue-factory/runtimeconstraint.js~runtimeconstraint",
     "class/src/catalogue-factory/RuntimeConstraint.js~RuntimeConstraint.html",
     "<span>RuntimeConstraint</span> <span class=\"search-result-import-path\">service-framework/src/catalogue-factory/RuntimeConstraint.js</span>",
+    "class"
+  ],
+  [
+    "service-framework/src/catalogue-factory/hypertyruntimedescriptor.js~runtimehypertycapability",
+    "class/src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeHypertyCapability.html",
+    "<span>RuntimeHypertyCapability</span> <span class=\"search-result-import-path\">service-framework/src/catalogue-factory/HypertyRuntimeDescriptor.js</span>",
     "class"
   ],
   [
@@ -264,22 +318,10 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
-    "service-framework/src/catalogue-factory/hypertyruntimedescriptor.js~runtimehypertycapabilitytype",
-    "variable/index.html#static-variable-RuntimeHypertyCapabilityType",
-    "<span>RuntimeHypertyCapabilityType</span> <span class=\"search-result-import-path\">service-framework/src/catalogue-factory/HypertyRuntimeDescriptor.js</span>",
-    "variable"
-  ],
-  [
-    "service-framework/src/runtime-loader/runtimeloader.js~runtimeloader",
-    "class/src/runtime-loader/RuntimeLoader.js~RuntimeLoader.html",
-    "<span>RuntimeLoader</span> <span class=\"search-result-import-path\">service-framework/src/runtime-loader/RuntimeLoader.js</span>",
+    "service-framework/src/catalogue-factory/hypertyruntimedescriptor.js~runtimeprotocolcapability",
+    "class/src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeProtocolCapability.html",
+    "<span>RuntimeProtocolCapability</span> <span class=\"search-result-import-path\">service-framework/src/catalogue-factory/HypertyRuntimeDescriptor.js</span>",
     "class"
-  ],
-  [
-    "service-framework/src/catalogue-factory/hypertyruntimedescriptor.js~runtimeprotocolcapabilitytype",
-    "variable/index.html#static-variable-RuntimeProtocolCapabilityType",
-    "<span>RuntimeProtocolCapabilityType</span> <span class=\"search-result-import-path\">service-framework/src/catalogue-factory/HypertyRuntimeDescriptor.js</span>",
-    "variable"
   ],
   [
     "service-framework/src/catalogue-factory/hypertyruntimedescriptor.js~runtimetype",
@@ -294,10 +336,22 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "service-framework/src/storage-manager/storagemanager.js~storagemanager",
+    "class/src/storage-manager/StorageManager.js~StorageManager.html",
+    "<span>StorageManager</span> <span class=\"search-result-import-path\">service-framework/src/storage-manager/StorageManager.js</span>",
+    "class"
+  ],
+  [
     "service-framework/src/syncher/syncher.js~syncher",
     "class/src/syncher/Syncher.js~Syncher.html",
     "<span>Syncher</span> <span class=\"search-result-import-path\">service-framework/src/syncher/Syncher.js</span>",
     "class"
+  ],
+  [
+    "service-framework/src/message-factory/messagebody.js~update_operation",
+    "variable/index.html#static-variable-UPDATE_OPERATION",
+    "<span>UPDATE_OPERATION</span> <span class=\"search-result-import-path\">service-framework/src/message-factory/MessageBody.js</span>",
+    "variable"
   ],
   [
     "service-framework/src/message-factory/messagebody.js~updatemessagebody",
@@ -306,33 +360,39 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "service-framework/src/hyperty-chat/hypertychat.js~activate",
-    "function/index.html#static-function-activate",
-    "<span>activate</span> <span class=\"search-result-import-path\">service-framework/src/hyperty-chat/HypertyChat.js</span>",
+    "service-framework/src/identity/userprofile.js~userprofile",
+    "class/src/identity/UserProfile.js~UserProfile.html",
+    "<span>UserProfile</span> <span class=\"search-result-import-path\">service-framework/src/identity/UserProfile.js</span>",
+    "class"
+  ],
+  [
+    "service-framework/src/utils/watchingyou.js~watchingyou",
+    "class/src/utils/WatchingYou.js~WatchingYou.html",
+    "<span>WatchingYou</span> <span class=\"search-result-import-path\">service-framework/src/utils/WatchingYou.js</span>",
+    "class"
+  ],
+  [
+    "service-framework/src/utils/utils.js~checkattribute",
+    "function/index.html#static-function-checkAttribute",
+    "<span>checkAttribute</span> <span class=\"search-result-import-path\">service-framework/src/utils/utils.js</span>",
     "function"
   ],
   [
-    "service-framework/src/hyperty-connector/hypertyconnector.js~activate",
-    "function/index.html#static-function-activate",
-    "<span>activate</span> <span class=\"search-result-import-path\">service-framework/src/hyperty-connector/HypertyConnector.js</span>",
+    "service-framework/src/utils/utils.js~converttouserurl",
+    "function/index.html#static-function-convertToUserURL",
+    "<span>convertToUserURL</span> <span class=\"search-result-import-path\">service-framework/src/utils/utils.js</span>",
     "function"
-  ],
-  [
-    "service-framework/src/hyperty-chat/communication.js~communication",
-    "variable/index.html#static-variable-communication",
-    "<span>communication</span> <span class=\"search-result-import-path\">service-framework/src/hyperty-chat/communication.js</span>",
-    "variable"
-  ],
-  [
-    "service-framework/src/hyperty-connector/connection.js~connection",
-    "variable/index.html#static-variable-connection",
-    "<span>connection</span> <span class=\"search-result-import-path\">service-framework/src/hyperty-connector/connection.js</span>",
-    "variable"
   ],
   [
     "service-framework/src/utils/utils.js~deepclone",
     "function/index.html#static-function-deepClone",
     "<span>deepClone</span> <span class=\"search-result-import-path\">service-framework/src/utils/utils.js</span>",
+    "function"
+  ],
+  [
+    "service-framework/src/utils/utils.js~divideemail",
+    "function/index.html#static-function-divideEmail",
+    "<span>divideEmail</span> <span class=\"search-result-import-path\">service-framework/src/utils/utils.js</span>",
     "function"
   ],
   [
@@ -342,346 +402,1180 @@ window.esdocSearchIndex = [
     "function"
   ],
   [
-    "service-framework/src/hyperty-chat/participant.js~participant",
-    "variable/index.html#static-variable-participant",
-    "<span>participant</span> <span class=\"search-result-import-path\">service-framework/src/hyperty-chat/participant.js</span>",
-    "variable"
+    "service-framework/src/utils/utils.js~emptyobject",
+    "function/index.html#static-function-emptyObject",
+    "<span>emptyObject</span> <span class=\"search-result-import-path\">service-framework/src/utils/utils.js</span>",
+    "function"
   ],
   [
-    "service-framework/src/hyperty-connector/peer.js~peer",
-    "variable/index.html#static-variable-peer",
-    "<span>peer</span> <span class=\"search-result-import-path\">service-framework/src/hyperty-connector/peer.js</span>",
-    "variable"
+    "service-framework/src/utils/utils.js~getuseremailfromurl",
+    "function/index.html#static-function-getUserEmailFromURL",
+    "<span>getUserEmailFromURL</span> <span class=\"search-result-import-path\">service-framework/src/utils/utils.js</span>",
+    "function"
+  ],
+  [
+    "service-framework/src/utils/utils.js~getuserurlfromemail",
+    "function/index.html#static-function-getUserURLFromEmail",
+    "<span>getUserURLFromEmail</span> <span class=\"search-result-import-path\">service-framework/src/utils/utils.js</span>",
+    "function"
+  ],
+  [
+    "service-framework/src/utils/utils.js~parseattributes",
+    "function/index.html#static-function-parseAttributes",
+    "<span>parseAttributes</span> <span class=\"search-result-import-path\">service-framework/src/utils/utils.js</span>",
+    "function"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~array",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
     "BuiltinExternal/ECMAScriptExternal.js~Array",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~arraybuffer",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
     "BuiltinExternal/ECMAScriptExternal.js~ArrayBuffer",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~boolean",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
     "BuiltinExternal/ECMAScriptExternal.js~Boolean",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~dataview",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
     "BuiltinExternal/ECMAScriptExternal.js~DataView",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~date",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
     "BuiltinExternal/ECMAScriptExternal.js~Date",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~error",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
     "BuiltinExternal/ECMAScriptExternal.js~Error",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~evalerror",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
     "BuiltinExternal/ECMAScriptExternal.js~EvalError",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~float32array",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
     "BuiltinExternal/ECMAScriptExternal.js~Float32Array",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~float64array",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
     "BuiltinExternal/ECMAScriptExternal.js~Float64Array",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~function",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
     "BuiltinExternal/ECMAScriptExternal.js~Function",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~generator",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
     "BuiltinExternal/ECMAScriptExternal.js~Generator",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~generatorfunction",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
     "BuiltinExternal/ECMAScriptExternal.js~GeneratorFunction",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~infinity",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
     "BuiltinExternal/ECMAScriptExternal.js~Infinity",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~int16array",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
     "BuiltinExternal/ECMAScriptExternal.js~Int16Array",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~int32array",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
     "BuiltinExternal/ECMAScriptExternal.js~Int32Array",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~int8array",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
     "BuiltinExternal/ECMAScriptExternal.js~Int8Array",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~internalerror",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
     "BuiltinExternal/ECMAScriptExternal.js~InternalError",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~json",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
     "BuiltinExternal/ECMAScriptExternal.js~JSON",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~map",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
     "BuiltinExternal/ECMAScriptExternal.js~Map",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~nan",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
     "BuiltinExternal/ECMAScriptExternal.js~NaN",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~number",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
     "BuiltinExternal/ECMAScriptExternal.js~Number",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~object",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
     "BuiltinExternal/ECMAScriptExternal.js~Object",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~promise",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
     "BuiltinExternal/ECMAScriptExternal.js~Promise",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~proxy",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
     "BuiltinExternal/ECMAScriptExternal.js~Proxy",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~rangeerror",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
     "BuiltinExternal/ECMAScriptExternal.js~RangeError",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~referenceerror",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
     "BuiltinExternal/ECMAScriptExternal.js~ReferenceError",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~reflect",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
     "BuiltinExternal/ECMAScriptExternal.js~Reflect",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~regexp",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
     "BuiltinExternal/ECMAScriptExternal.js~RegExp",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~set",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
     "BuiltinExternal/ECMAScriptExternal.js~Set",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~string",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
     "BuiltinExternal/ECMAScriptExternal.js~String",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~symbol",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
     "BuiltinExternal/ECMAScriptExternal.js~Symbol",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~syntaxerror",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
     "BuiltinExternal/ECMAScriptExternal.js~SyntaxError",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~typeerror",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
     "BuiltinExternal/ECMAScriptExternal.js~TypeError",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~urierror",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
     "BuiltinExternal/ECMAScriptExternal.js~URIError",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~uint16array",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
     "BuiltinExternal/ECMAScriptExternal.js~Uint16Array",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~uint32array",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
     "BuiltinExternal/ECMAScriptExternal.js~Uint32Array",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~uint8array",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
     "BuiltinExternal/ECMAScriptExternal.js~Uint8Array",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~uint8clampedarray",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
     "BuiltinExternal/ECMAScriptExternal.js~Uint8ClampedArray",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~weakmap",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
     "BuiltinExternal/ECMAScriptExternal.js~WeakMap",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~weakset",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
     "BuiltinExternal/ECMAScriptExternal.js~WeakSet",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~boolean",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
     "BuiltinExternal/ECMAScriptExternal.js~boolean",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~function",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
     "BuiltinExternal/ECMAScriptExternal.js~function",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~null",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
     "BuiltinExternal/ECMAScriptExternal.js~null",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~number",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
     "BuiltinExternal/ECMAScriptExternal.js~number",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~object",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
     "BuiltinExternal/ECMAScriptExternal.js~object",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~string",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
     "BuiltinExternal/ECMAScriptExternal.js~string",
     "external"
   ],
   [
     "builtinexternal/ecmascriptexternal.js~undefined",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
     "BuiltinExternal/ECMAScriptExternal.js~undefined",
     "external"
   ],
   [
     "builtinexternal/webapiexternal.js~audiocontext",
-    "external/index.html",
+    "https://developer.mozilla.org/en/docs/Web/API/AudioContext",
     "BuiltinExternal/WebAPIExternal.js~AudioContext",
     "external"
   ],
   [
     "builtinexternal/webapiexternal.js~canvasrenderingcontext2d",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D",
     "BuiltinExternal/WebAPIExternal.js~CanvasRenderingContext2D",
     "external"
   ],
   [
     "builtinexternal/webapiexternal.js~documentfragment",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment",
     "BuiltinExternal/WebAPIExternal.js~DocumentFragment",
     "external"
   ],
   [
     "builtinexternal/webapiexternal.js~element",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/API/Element",
     "BuiltinExternal/WebAPIExternal.js~Element",
     "external"
   ],
   [
     "builtinexternal/webapiexternal.js~event",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/API/Event",
     "BuiltinExternal/WebAPIExternal.js~Event",
     "external"
   ],
   [
     "builtinexternal/webapiexternal.js~node",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/API/Node",
     "BuiltinExternal/WebAPIExternal.js~Node",
     "external"
   ],
   [
     "builtinexternal/webapiexternal.js~nodelist",
-    "external/index.html",
+    "https://developer.mozilla.org/en-US/docs/Web/API/NodeList",
     "BuiltinExternal/WebAPIExternal.js~NodeList",
     "external"
   ],
   [
     "builtinexternal/webapiexternal.js~xmlhttprequest",
-    "external/index.html",
+    "https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest",
     "BuiltinExternal/WebAPIExternal.js~XMLHttpRequest",
     "external"
+  ],
+  [
+    "",
+    "test-file/test/CatalogueDataObjectFactory.spec.js.html#lineNumber18",
+    "CatalogueDataObjectFactory",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/CatalogueDataObjectFactory.spec.js.html#lineNumber22",
+    "CatalogueDataObjectFactory constructor()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/CatalogueDataObjectFactory.spec.js.html#lineNumber24",
+    "CatalogueDataObjectFactory constructor() should create a CatalogueDataObject-Factory object without error",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/CatalogueDataObjectFactory.spec.js.html#lineNumber116",
+    "CatalogueDataObjectFactory createCatalogueDataObject()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/CatalogueDataObjectFactory.spec.js.html#lineNumber128",
+    "CatalogueDataObjectFactory createCatalogueDataObject() should be of type HYPERTY",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/CatalogueDataObjectFactory.spec.js.html#lineNumber120",
+    "CatalogueDataObjectFactory createCatalogueDataObject() should generate CatalogueDataObject of type HypertyDescriptor",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/CatalogueDataObjectFactory.spec.js.html#lineNumber132",
+    "CatalogueDataObjectFactory createCatalogueDataObject() should have valid GUID",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/CatalogueDataObjectFactory.spec.js.html#lineNumber160",
+    "CatalogueDataObjectFactory createHypertyDataObjectSchema()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/CatalogueDataObjectFactory.spec.js.html#lineNumber174",
+    "CatalogueDataObjectFactory createHypertyDataObjectSchema() should be of type DATA_SCHEMA",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/CatalogueDataObjectFactory.spec.js.html#lineNumber163",
+    "CatalogueDataObjectFactory createHypertyDataObjectSchema() should generate HypertyDataObjectSchema",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/CatalogueDataObjectFactory.spec.js.html#lineNumber178",
+    "CatalogueDataObjectFactory createHypertyDataObjectSchema() should have valid GUID",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/CatalogueDataObjectFactory.spec.js.html#lineNumber29",
+    "CatalogueDataObjectFactory createHypertyDescriptorObject()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/CatalogueDataObjectFactory.spec.js.html#lineNumber41",
+    "CatalogueDataObjectFactory createHypertyDescriptorObject() should be of type HYPERTY",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/CatalogueDataObjectFactory.spec.js.html#lineNumber33",
+    "CatalogueDataObjectFactory createHypertyDescriptorObject() should generate HypertyDescriptor",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/CatalogueDataObjectFactory.spec.js.html#lineNumber59",
+    "CatalogueDataObjectFactory createHypertyDescriptorObject() should have valid GUID",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/CatalogueDataObjectFactory.spec.js.html#lineNumber45",
+    "CatalogueDataObjectFactory createHypertyDescriptorObject() testing getters/setters (name, type, messageSchema)",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/CatalogueDataObjectFactory.spec.js.html#lineNumber86",
+    "CatalogueDataObjectFactory createHypertyInterceptorObject()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/CatalogueDataObjectFactory.spec.js.html#lineNumber97",
+    "CatalogueDataObjectFactory createHypertyInterceptorObject() should be of type HYPERTY_INTERCEPTOR",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/CatalogueDataObjectFactory.spec.js.html#lineNumber89",
+    "CatalogueDataObjectFactory createHypertyInterceptorObject() should generate HypertyInterceptorDescriptor",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/CatalogueDataObjectFactory.spec.js.html#lineNumber101",
+    "CatalogueDataObjectFactory createHypertyInterceptorObject() should have valid GUID",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/CatalogueDataObjectFactory.spec.js.html#lineNumber138",
+    "CatalogueDataObjectFactory createHypertyRuntimeDescriptorObject()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/CatalogueDataObjectFactory.spec.js.html#lineNumber150",
+    "CatalogueDataObjectFactory createHypertyRuntimeDescriptorObject() should be of type HYPERTY_RUNTIME",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/CatalogueDataObjectFactory.spec.js.html#lineNumber141",
+    "CatalogueDataObjectFactory createHypertyRuntimeDescriptorObject() should generate HypertyRuntimeDescriptor",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/CatalogueDataObjectFactory.spec.js.html#lineNumber154",
+    "CatalogueDataObjectFactory createHypertyRuntimeDescriptorObject() should have valid GUID",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/CatalogueDataObjectFactory.spec.js.html#lineNumber65",
+    "CatalogueDataObjectFactory createProtoStubDescriptorObject()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/CatalogueDataObjectFactory.spec.js.html#lineNumber76",
+    "CatalogueDataObjectFactory createProtoStubDescriptorObject() should be of type PROTOSTUB",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/CatalogueDataObjectFactory.spec.js.html#lineNumber68",
+    "CatalogueDataObjectFactory createProtoStubDescriptorObject() should generate ProtocolStubDescriptor",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/CatalogueDataObjectFactory.spec.js.html#lineNumber80",
+    "CatalogueDataObjectFactory createProtoStubDescriptorObject() should have valid GUID",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/CatalogueDataObjectFactory.spec.js.html#lineNumber107",
+    "CatalogueDataObjectFactory createSourcePackage()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/CatalogueDataObjectFactory.spec.js.html#lineNumber110",
+    "CatalogueDataObjectFactory createSourcePackage() should generate SourcePackage",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/Discovery.spec.js.html#lineNumber9",
+    "Discovery",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/Discovery.spec.js.html#lineNumber226",
+    "Discovery constructor()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/Discovery.spec.js.html#lineNumber227",
+    "Discovery constructor() should create a HypertyDiscovery object without error",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/Discovery.spec.js.html#lineNumber330",
+    "Discovery discoverDataObjectPerURL()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/Discovery.spec.js.html#lineNumber331",
+    "Discovery discoverDataObjectPerURL() should conclude the advanced search without error",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/Discovery.spec.js.html#lineNumber312",
+    "Discovery discoverDataObjects()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/Discovery.spec.js.html#lineNumber313",
+    "Discovery discoverDataObjects() should conclude the advanced search without error",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/Discovery.spec.js.html#lineNumber294",
+    "Discovery discoverDataObjectsPerGUID()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/Discovery.spec.js.html#lineNumber295",
+    "Discovery discoverDataObjectsPerGUID() should conclude the advanced search without error",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/Discovery.spec.js.html#lineNumber339",
+    "Discovery discoverDataObjectsPerName()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/Discovery.spec.js.html#lineNumber340",
+    "Discovery discoverDataObjectsPerName() should conclude the advanced search without error",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/Discovery.spec.js.html#lineNumber348",
+    "Discovery discoverDataObjectsPerReporter()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/Discovery.spec.js.html#lineNumber349",
+    "Discovery discoverDataObjectsPerReporter() should conclude the advanced search without error",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/Discovery.spec.js.html#lineNumber276",
+    "Discovery discoverDataObjectsPerUserProfileData()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/Discovery.spec.js.html#lineNumber277",
+    "Discovery discoverDataObjectsPerUserProfileData() should conclude the advanced search without error",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/Discovery.spec.js.html#lineNumber303",
+    "Discovery discoverHyperties()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/Discovery.spec.js.html#lineNumber304",
+    "Discovery discoverHyperties() should conclude the advanced search without error",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/Discovery.spec.js.html#lineNumber285",
+    "Discovery discoverHypertiesPerGUID()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/Discovery.spec.js.html#lineNumber286",
+    "Discovery discoverHypertiesPerGUID() should conclude the advanced search without error",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/Discovery.spec.js.html#lineNumber267",
+    "Discovery discoverHypertiesPerUserProfileData()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/Discovery.spec.js.html#lineNumber268",
+    "Discovery discoverHypertiesPerUserProfileData() should conclude the advanced search without error",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/Discovery.spec.js.html#lineNumber258",
+    "Discovery discoverHyperty()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/Discovery.spec.js.html#lineNumber259",
+    "Discovery discoverHyperty() should conclude the advanced search without error",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/Discovery.spec.js.html#lineNumber321",
+    "Discovery discoverHypertyPerURL()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/Discovery.spec.js.html#lineNumber322",
+    "Discovery discoverHypertyPerURL() should conclude the advanced search without error",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/Discovery.spec.js.html#lineNumber232",
+    "Discovery discoverHypertyPerUser()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/Discovery.spec.js.html#lineNumber246",
+    "Discovery discoverHypertyPerUser() should return a Promise with an Identity using a given domain",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/Discovery.spec.js.html#lineNumber233",
+    "Discovery discoverHypertyPerUser() should return a Promise with an Identity using the default domain",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/IdentityFactory.spec.js.html#lineNumber11",
+    "IdentityFactory",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/IdentityFactory.spec.js.html#lineNumber14",
+    "IdentityFactory constructor()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/IdentityFactory.spec.js.html#lineNumber15",
+    "IdentityFactory constructor() should create an Identity object without error",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/IdentityManager.spec.js.html#lineNumber9",
+    "IdentityManager",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/IdentityManager.spec.js.html#lineNumber30",
+    "IdentityManager constructor()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/IdentityManager.spec.js.html#lineNumber31",
+    "IdentityManager constructor() should create a identityManager object without error",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/IdentityManager.spec.js.html#lineNumber36",
+    "IdentityManager discoverUserRegistered()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/IdentityManager.spec.js.html#lineNumber37",
+    "IdentityManager discoverUserRegistered() should return a Promise with the identity associated",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/IdentityManager.spec.js.html#lineNumber44",
+    "IdentityManager discoverUserRegistered() should return a Promise with the identity associated (with optional hyperty field)",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/MessageFactory.spec.js.html#lineNumber14",
+    "MessageFactory",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/MessageFactory.spec.js.html#lineNumber146",
+    "MessageFactory addAccessToken()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/MessageFactory.spec.js.html#lineNumber147",
+    "MessageFactory addAccessToken() should add asserted identity to the given message",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/MessageFactory.spec.js.html#lineNumber156",
+    "MessageFactory addIdToken()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/MessageFactory.spec.js.html#lineNumber157",
+    "MessageFactory addIdToken() should add asserted identity to the given message",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/MessageFactory.spec.js.html#lineNumber136",
+    "MessageFactory assertIdentity()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/MessageFactory.spec.js.html#lineNumber137",
+    "MessageFactory assertIdentity() should add asserted identity to the given message",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/MessageFactory.spec.js.html#lineNumber18",
+    "MessageFactory constructor()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/MessageFactory.spec.js.html#lineNumber19",
+    "MessageFactory constructor() should create a Message Factory object without error",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/MessageFactory.spec.js.html#lineNumber25",
+    "MessageFactory createCreateMessageRequest()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/MessageFactory.spec.js.html#lineNumber26",
+    "MessageFactory createCreateMessageRequest() should be a Message of Type CREATE",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/MessageFactory.spec.js.html#lineNumber57",
+    "MessageFactory createDeleteMessageRequest()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/MessageFactory.spec.js.html#lineNumber58",
+    "MessageFactory createDeleteMessageRequest() should be a Message of Type DELETE",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/MessageFactory.spec.js.html#lineNumber166",
+    "MessageFactory createExecuteMessageRequest()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/MessageFactory.spec.js.html#lineNumber168",
+    "MessageFactory createExecuteMessageRequest() should create a new Execute Message Request",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/MessageFactory.spec.js.html#lineNumber40",
+    "MessageFactory createForwardMessageRequest()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/MessageFactory.spec.js.html#lineNumber42",
+    "MessageFactory createForwardMessageRequest() should create a new Forward Message Request with a message payload",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/MessageFactory.spec.js.html#lineNumber182",
+    "MessageFactory createMessageResponse()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/MessageFactory.spec.js.html#lineNumber183",
+    "MessageFactory createMessageResponse() should be a Response Message of Type RESPONSE",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/MessageFactory.spec.js.html#lineNumber90",
+    "MessageFactory createReadMessageRequest()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/MessageFactory.spec.js.html#lineNumber91",
+    "MessageFactory createReadMessageRequest() should be a Message of Type READ",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/MessageFactory.spec.js.html#lineNumber106",
+    "MessageFactory createSubscribeMessageRequest()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/MessageFactory.spec.js.html#lineNumber107",
+    "MessageFactory createSubscribeMessageRequest() should be a Message of Type SUBSCRIBE",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/MessageFactory.spec.js.html#lineNumber121",
+    "MessageFactory createUnSubscribeMessageRequest()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/MessageFactory.spec.js.html#lineNumber122",
+    "MessageFactory createUnSubscribeMessageRequest() should be a Message of Type SUBSCRIBE",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/MessageFactory.spec.js.html#lineNumber74",
+    "MessageFactory createUpdateMessageRequest()",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/MessageFactory.spec.js.html#lineNumber75",
+    "MessageFactory createUpdateMessageRequest() should be a Message of Type UPDATE",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/RuntimeCatalogue.spec.js.html#lineNumber35",
+    "Runtime Catalogue",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/RuntimeCatalogue.spec.js.html#lineNumber106",
+    "Runtime Catalogue should NOT get hyperty",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/RuntimeCatalogue.spec.js.html#lineNumber90",
+    "Runtime Catalogue should get dataschema descriptor",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/RuntimeCatalogue.spec.js.html#lineNumber49",
+    "Runtime Catalogue should get hyperty descriptor",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/RuntimeCatalogue.spec.js.html#lineNumber66",
+    "Runtime Catalogue should get hyperty source code",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/RuntimeCatalogue.spec.js.html#lineNumber98",
+    "Runtime Catalogue should get idpproxy descriptor",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/RuntimeCatalogue.spec.js.html#lineNumber74",
+    "Runtime Catalogue should get protostub descriptor",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/RuntimeCatalogue.spec.js.html#lineNumber82",
+    "Runtime Catalogue should get runtime descriptor",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/RuntimeCatalogue.spec.js.html#lineNumber58",
+    "Runtime Catalogue should get sourcePackage",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/RuntimeCapabilities.spec.js.html#lineNumber17",
+    "Runtime Runtime Capabilities",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/RuntimeCapabilities.spec.js.html#lineNumber121",
+    "Runtime Runtime Capabilities should return a promise with RuntimeCapabilities and save on storageManager",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/RuntimeCapabilities.spec.js.html#lineNumber129",
+    "Runtime Runtime Capabilities should return if a capability was available",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/RuntimeCapabilities.spec.js.html#lineNumber155",
+    "Runtime Runtime Capabilities should update the previous capabilites",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/StorageManager.spec.js.html#lineNumber7",
+    "StorageManager",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/StorageManager.spec.js.html#lineNumber79",
+    "StorageManager delete",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/StorageManager.spec.js.html#lineNumber80",
+    "StorageManager delete should remove a value from StorageManager for a given key",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/StorageManager.spec.js.html#lineNumber91",
+    "StorageManager delete shouldnt remove a value from StorageManager if the given key doesnt exist",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/StorageManager.spec.js.html#lineNumber36",
+    "StorageManager get",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/StorageManager.spec.js.html#lineNumber37",
+    "StorageManager get should get the value for a given key",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/StorageManager.spec.js.html#lineNumber49",
+    "StorageManager get should return undefined if no object with the given key exists",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/StorageManager.spec.js.html#lineNumber58",
+    "StorageManager getVersion",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/StorageManager.spec.js.html#lineNumber59",
+    "StorageManager getVersion should get the value version for a given key",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/StorageManager.spec.js.html#lineNumber70",
+    "StorageManager getVersion should get undefined if no object with the given key exists",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/StorageManager.spec.js.html#lineNumber15",
+    "StorageManager set",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/StorageManager.spec.js.html#lineNumber25",
+    "StorageManager set should replace the value for a given key-version tuple if it exists",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/StorageManager.spec.js.html#lineNumber17",
+    "StorageManager set should set the value for a given key-version tuple",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/Sync.spec.js.html#lineNumber11",
+    "The Object.Observer and Array.Observer",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/Sync.spec.js.html#lineNumber13",
+    "The Object.Observer and Array.Observer should use SyncObject",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/Sync.spec.js.html#lineNumber50",
+    "The Object.Observer and Array.Observer should use SyncObject observe",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/JsonSchemaValidation.spec.js.html#lineNumber69",
+    "adding new schema",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/JsonSchemaValidation.spec.js.html#lineNumber70",
+    "adding new schema should add a new schema",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/JsonSchemaValidation.spec.js.html#lineNumber52",
+    "schema validation of good Apple",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/JsonSchemaValidation.spec.js.html#lineNumber53",
+    "schema validation of good Apple good Apple should be good",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/JsonSchemaValidation.spec.js.html#lineNumber54",
+    "schema validation of good Apple good Apple should be good should return false instead of true",
+    "test"
+  ],
+  [
+    "src/cataloguefactory.js",
+    "file/src/CatalogueFactory.js.html",
+    "src/CatalogueFactory.js",
+    "file"
+  ],
+  [
+    "src/discovery.js",
+    "file/src/Discovery.js.html",
+    "src/Discovery.js",
+    "file"
+  ],
+  [
+    "src/identityfactory.js",
+    "file/src/IdentityFactory.js.html",
+    "src/IdentityFactory.js",
+    "file"
+  ],
+  [
+    "src/identitymanager.js",
+    "file/src/IdentityManager.js.html",
+    "src/IdentityManager.js",
+    "file"
+  ],
+  [
+    "src/messagefactory.js",
+    "file/src/MessageFactory.js.html",
+    "src/MessageFactory.js",
+    "file"
+  ],
+  [
+    "src/persistencemanager.js",
+    "file/src/PersistenceManager.js.html",
+    "src/PersistenceManager.js",
+    "file"
+  ],
+  [
+    "src/runtimecatalogue.js",
+    "file/src/RuntimeCatalogue.js.html",
+    "src/RuntimeCatalogue.js",
+    "file"
+  ],
+  [
+    "src/syncher.js",
+    "file/src/Syncher.js.html",
+    "src/Syncher.js",
+    "file"
+  ],
+  [
+    "src/utils.js",
+    "file/src/Utils.js.html",
+    "src/Utils.js",
+    "file"
   ],
   [
     "src/address-factory/urlmalformederror.js",
@@ -721,20 +1615,14 @@ window.esdocSearchIndex = [
   ],
   [
     "src/catalogue-factory/cataloguedataobject.js~cataloguedataobject#guid",
-    "class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html#instance-get-guid",
-    "src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject#guid",
-    "member"
-  ],
-  [
-    "src/catalogue-factory/cataloguedataobject.js~cataloguedataobject#guid",
     "class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html#instance-set-guid",
     "src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject#guid",
     "member"
   ],
   [
-    "src/catalogue-factory/cataloguedataobject.js~cataloguedataobject#language",
-    "class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html#instance-set-language",
-    "src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject#language",
+    "src/catalogue-factory/cataloguedataobject.js~cataloguedataobject#guid",
+    "class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html#instance-get-guid",
+    "src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject#guid",
     "member"
   ],
   [
@@ -744,14 +1632,20 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "src/catalogue-factory/cataloguedataobject.js~cataloguedataobject#objectname",
-    "class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html#instance-get-objectName",
-    "src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject#objectName",
+    "src/catalogue-factory/cataloguedataobject.js~cataloguedataobject#language",
+    "class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html#instance-set-language",
+    "src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject#language",
     "member"
   ],
   [
     "src/catalogue-factory/cataloguedataobject.js~cataloguedataobject#objectname",
     "class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html#instance-set-objectName",
+    "src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject#objectName",
+    "member"
+  ],
+  [
+    "src/catalogue-factory/cataloguedataobject.js~cataloguedataobject#objectname",
+    "class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html#instance-get-objectName",
     "src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject#objectName",
     "member"
   ],
@@ -769,13 +1663,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/catalogue-factory/cataloguedataobject.js~cataloguedataobject#sourcepackage",
-    "class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html#instance-set-sourcePackage",
+    "class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html#instance-get-sourcePackage",
     "src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject#sourcePackage",
     "member"
   ],
   [
     "src/catalogue-factory/cataloguedataobject.js~cataloguedataobject#sourcepackage",
-    "class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html#instance-get-sourcePackage",
+    "class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html#instance-set-sourcePackage",
     "src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject#sourcePackage",
     "member"
   ],
@@ -804,16 +1698,22 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/catalogue-factory/cataloguedataobject.js~cataloguedataobject#version",
+    "class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html#instance-get-version",
+    "src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject#version",
+    "member"
+  ],
+  [
+    "src/catalogue-factory/cataloguedataobject.js~cataloguedataobject#version",
+    "class/src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject.html#instance-set-version",
+    "src/catalogue-factory/CatalogueDataObject.js~CatalogueDataObject#version",
+    "member"
+  ],
+  [
     "src/catalogue-factory/cataloguedataobjectfactory.js",
     "file/src/catalogue-factory/CatalogueDataObjectFactory.js.html",
     "src/catalogue-factory/CatalogueDataObjectFactory.js",
     "file"
-  ],
-  [
-    "src/catalogue-factory/cataloguedataobjectfactory.js~cataloguedataobjectfactory#constructor",
-    "class/src/catalogue-factory/CatalogueDataObjectFactory.js~CatalogueDataObjectFactory.html#instance-constructor-constructor",
-    "src/catalogue-factory/CatalogueDataObjectFactory.js~CatalogueDataObjectFactory#constructor",
-    "method"
   ],
   [
     "src/catalogue-factory/cataloguedataobjectfactory.js~cataloguedataobjectfactory#createcataloguedataobject",
@@ -828,9 +1728,21 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/catalogue-factory/cataloguedataobjectfactory.js~cataloguedataobjectfactory#createhypertydataobjectschema",
+    "class/src/catalogue-factory/CatalogueDataObjectFactory.js~CatalogueDataObjectFactory.html#instance-method-createHypertyDataObjectSchema",
+    "src/catalogue-factory/CatalogueDataObjectFactory.js~CatalogueDataObjectFactory#createHypertyDataObjectSchema",
+    "method"
+  ],
+  [
     "src/catalogue-factory/cataloguedataobjectfactory.js~cataloguedataobjectfactory#createhypertydescriptorobject",
     "class/src/catalogue-factory/CatalogueDataObjectFactory.js~CatalogueDataObjectFactory.html#instance-method-createHypertyDescriptorObject",
     "src/catalogue-factory/CatalogueDataObjectFactory.js~CatalogueDataObjectFactory#createHypertyDescriptorObject",
+    "method"
+  ],
+  [
+    "src/catalogue-factory/cataloguedataobjectfactory.js~cataloguedataobjectfactory#createhypertyinterceptordescriptorobject",
+    "class/src/catalogue-factory/CatalogueDataObjectFactory.js~CatalogueDataObjectFactory.html#instance-method-createHypertyInterceptorDescriptorObject",
+    "src/catalogue-factory/CatalogueDataObjectFactory.js~CatalogueDataObjectFactory#createHypertyInterceptorDescriptorObject",
     "method"
   ],
   [
@@ -840,9 +1752,9 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/catalogue-factory/cataloguedataobjectfactory.js~cataloguedataobjectfactory#createpolicyenforcerdescriptorobject",
-    "class/src/catalogue-factory/CatalogueDataObjectFactory.js~CatalogueDataObjectFactory.html#instance-method-createPolicyEnforcerDescriptorObject",
-    "src/catalogue-factory/CatalogueDataObjectFactory.js~CatalogueDataObjectFactory#createPolicyEnforcerDescriptorObject",
+    "src/catalogue-factory/cataloguedataobjectfactory.js~cataloguedataobjectfactory#createmessagedataobjectschema",
+    "class/src/catalogue-factory/CatalogueDataObjectFactory.js~CatalogueDataObjectFactory.html#instance-method-createMessageDataObjectSchema",
+    "src/catalogue-factory/CatalogueDataObjectFactory.js~CatalogueDataObjectFactory#createMessageDataObjectSchema",
     "method"
   ],
   [
@@ -894,9 +1806,9 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/catalogue-factory/dataobjectschema.js~identifydataobjectschema#constructor",
-    "class/src/catalogue-factory/DataObjectSchema.js~IdentifyDataObjectSchema.html#instance-constructor-constructor",
-    "src/catalogue-factory/DataObjectSchema.js~IdentifyDataObjectSchema#constructor",
+    "src/catalogue-factory/dataobjectschema.js~identitydataobjectschema#constructor",
+    "class/src/catalogue-factory/DataObjectSchema.js~IdentityDataObjectSchema.html#instance-constructor-constructor",
+    "src/catalogue-factory/DataObjectSchema.js~IdentityDataObjectSchema#constructor",
     "method"
   ],
   [
@@ -913,13 +1825,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/catalogue-factory/hypertydescriptor.js~hypertydescriptor#configuration",
-    "class/src/catalogue-factory/HypertyDescriptor.js~HypertyDescriptor.html#instance-get-configuration",
+    "class/src/catalogue-factory/HypertyDescriptor.js~HypertyDescriptor.html#instance-set-configuration",
     "src/catalogue-factory/HypertyDescriptor.js~HypertyDescriptor#configuration",
     "member"
   ],
   [
     "src/catalogue-factory/hypertydescriptor.js~hypertydescriptor#configuration",
-    "class/src/catalogue-factory/HypertyDescriptor.js~HypertyDescriptor.html#instance-set-configuration",
+    "class/src/catalogue-factory/HypertyDescriptor.js~HypertyDescriptor.html#instance-get-configuration",
     "src/catalogue-factory/HypertyDescriptor.js~HypertyDescriptor#configuration",
     "member"
   ],
@@ -943,13 +1855,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/catalogue-factory/hypertydescriptor.js~hypertydescriptor#dataobjects",
-    "class/src/catalogue-factory/HypertyDescriptor.js~HypertyDescriptor.html#instance-set-dataObjects",
+    "class/src/catalogue-factory/HypertyDescriptor.js~HypertyDescriptor.html#instance-get-dataObjects",
     "src/catalogue-factory/HypertyDescriptor.js~HypertyDescriptor#dataObjects",
     "member"
   ],
   [
     "src/catalogue-factory/hypertydescriptor.js~hypertydescriptor#dataobjects",
-    "class/src/catalogue-factory/HypertyDescriptor.js~HypertyDescriptor.html#instance-get-dataObjects",
+    "class/src/catalogue-factory/HypertyDescriptor.js~HypertyDescriptor.html#instance-set-dataObjects",
     "src/catalogue-factory/HypertyDescriptor.js~HypertyDescriptor#dataObjects",
     "member"
   ],
@@ -979,14 +1891,50 @@ window.esdocSearchIndex = [
   ],
   [
     "src/catalogue-factory/hypertydescriptor.js~hypertydescriptor#policies",
-    "class/src/catalogue-factory/HypertyDescriptor.js~HypertyDescriptor.html#instance-get-policies",
+    "class/src/catalogue-factory/HypertyDescriptor.js~HypertyDescriptor.html#instance-set-policies",
     "src/catalogue-factory/HypertyDescriptor.js~HypertyDescriptor#policies",
     "member"
   ],
   [
     "src/catalogue-factory/hypertydescriptor.js~hypertydescriptor#policies",
-    "class/src/catalogue-factory/HypertyDescriptor.js~HypertyDescriptor.html#instance-set-policies",
+    "class/src/catalogue-factory/HypertyDescriptor.js~HypertyDescriptor.html#instance-get-policies",
     "src/catalogue-factory/HypertyDescriptor.js~HypertyDescriptor#policies",
+    "member"
+  ],
+  [
+    "src/catalogue-factory/hypertyinterceptordescriptor.js",
+    "file/src/catalogue-factory/HypertyInterceptorDescriptor.js.html",
+    "src/catalogue-factory/HypertyInterceptorDescriptor.js",
+    "file"
+  ],
+  [
+    "src/catalogue-factory/hypertyinterceptordescriptor.js~policyenforcerdescriptor#configuration",
+    "class/src/catalogue-factory/HypertyInterceptorDescriptor.js~PolicyEnforcerDescriptor.html#instance-set-configuration",
+    "src/catalogue-factory/HypertyInterceptorDescriptor.js~PolicyEnforcerDescriptor#configuration",
+    "member"
+  ],
+  [
+    "src/catalogue-factory/hypertyinterceptordescriptor.js~policyenforcerdescriptor#configuration",
+    "class/src/catalogue-factory/HypertyInterceptorDescriptor.js~PolicyEnforcerDescriptor.html#instance-get-configuration",
+    "src/catalogue-factory/HypertyInterceptorDescriptor.js~PolicyEnforcerDescriptor#configuration",
+    "member"
+  ],
+  [
+    "src/catalogue-factory/hypertyinterceptordescriptor.js~policyenforcerdescriptor#constructor",
+    "class/src/catalogue-factory/HypertyInterceptorDescriptor.js~PolicyEnforcerDescriptor.html#instance-constructor-constructor",
+    "src/catalogue-factory/HypertyInterceptorDescriptor.js~PolicyEnforcerDescriptor#constructor",
+    "method"
+  ],
+  [
+    "src/catalogue-factory/hypertyinterceptordescriptor.js~policyenforcerdescriptor#policies",
+    "class/src/catalogue-factory/HypertyInterceptorDescriptor.js~PolicyEnforcerDescriptor.html#instance-get-policies",
+    "src/catalogue-factory/HypertyInterceptorDescriptor.js~PolicyEnforcerDescriptor#policies",
+    "member"
+  ],
+  [
+    "src/catalogue-factory/hypertyinterceptordescriptor.js~policyenforcerdescriptor#policies",
+    "class/src/catalogue-factory/HypertyInterceptorDescriptor.js~PolicyEnforcerDescriptor.html#instance-set-policies",
+    "src/catalogue-factory/HypertyInterceptorDescriptor.js~PolicyEnforcerDescriptor#policies",
     "member"
   ],
   [
@@ -1003,14 +1951,38 @@ window.esdocSearchIndex = [
   ],
   [
     "src/catalogue-factory/hypertyruntimedescriptor.js~hypertyruntimedescriptor#hypertycapabilities",
-    "class/src/catalogue-factory/HypertyRuntimeDescriptor.js~HypertyRuntimeDescriptor.html#instance-set-hypertyCapabilities",
+    "class/src/catalogue-factory/HypertyRuntimeDescriptor.js~HypertyRuntimeDescriptor.html#instance-get-hypertyCapabilities",
     "src/catalogue-factory/HypertyRuntimeDescriptor.js~HypertyRuntimeDescriptor#hypertyCapabilities",
     "member"
   ],
   [
     "src/catalogue-factory/hypertyruntimedescriptor.js~hypertyruntimedescriptor#hypertycapabilities",
-    "class/src/catalogue-factory/HypertyRuntimeDescriptor.js~HypertyRuntimeDescriptor.html#instance-get-hypertyCapabilities",
+    "class/src/catalogue-factory/HypertyRuntimeDescriptor.js~HypertyRuntimeDescriptor.html#instance-set-hypertyCapabilities",
     "src/catalogue-factory/HypertyRuntimeDescriptor.js~HypertyRuntimeDescriptor#hypertyCapabilities",
+    "member"
+  ],
+  [
+    "src/catalogue-factory/hypertyruntimedescriptor.js~hypertyruntimedescriptor#p2phandlerstub",
+    "class/src/catalogue-factory/HypertyRuntimeDescriptor.js~HypertyRuntimeDescriptor.html#instance-get-p2pHandlerStub",
+    "src/catalogue-factory/HypertyRuntimeDescriptor.js~HypertyRuntimeDescriptor#p2pHandlerStub",
+    "member"
+  ],
+  [
+    "src/catalogue-factory/hypertyruntimedescriptor.js~hypertyruntimedescriptor#p2phandlerstub",
+    "class/src/catalogue-factory/HypertyRuntimeDescriptor.js~HypertyRuntimeDescriptor.html#instance-set-p2pHandlerStub",
+    "src/catalogue-factory/HypertyRuntimeDescriptor.js~HypertyRuntimeDescriptor#p2pHandlerStub",
+    "member"
+  ],
+  [
+    "src/catalogue-factory/hypertyruntimedescriptor.js~hypertyruntimedescriptor#p2prequesterstub",
+    "class/src/catalogue-factory/HypertyRuntimeDescriptor.js~HypertyRuntimeDescriptor.html#instance-get-p2pRequesterStub",
+    "src/catalogue-factory/HypertyRuntimeDescriptor.js~HypertyRuntimeDescriptor#p2pRequesterStub",
+    "member"
+  ],
+  [
+    "src/catalogue-factory/hypertyruntimedescriptor.js~hypertyruntimedescriptor#p2prequesterstub",
+    "class/src/catalogue-factory/HypertyRuntimeDescriptor.js~HypertyRuntimeDescriptor.html#instance-set-p2pRequesterStub",
+    "src/catalogue-factory/HypertyRuntimeDescriptor.js~HypertyRuntimeDescriptor#p2pRequesterStub",
     "member"
   ],
   [
@@ -1038,40 +2010,100 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "src/catalogue-factory/policyenforcerdescriptor.js",
-    "file/src/catalogue-factory/PolicyEnforcerDescriptor.js.html",
-    "src/catalogue-factory/PolicyEnforcerDescriptor.js",
-    "file"
-  ],
-  [
-    "src/catalogue-factory/policyenforcerdescriptor.js~policyenforcerdescriptor#configuration",
-    "class/src/catalogue-factory/PolicyEnforcerDescriptor.js~PolicyEnforcerDescriptor.html#instance-set-configuration",
-    "src/catalogue-factory/PolicyEnforcerDescriptor.js~PolicyEnforcerDescriptor#configuration",
-    "member"
-  ],
-  [
-    "src/catalogue-factory/policyenforcerdescriptor.js~policyenforcerdescriptor#configuration",
-    "class/src/catalogue-factory/PolicyEnforcerDescriptor.js~PolicyEnforcerDescriptor.html#instance-get-configuration",
-    "src/catalogue-factory/PolicyEnforcerDescriptor.js~PolicyEnforcerDescriptor#configuration",
-    "member"
-  ],
-  [
-    "src/catalogue-factory/policyenforcerdescriptor.js~policyenforcerdescriptor#constructor",
-    "class/src/catalogue-factory/PolicyEnforcerDescriptor.js~PolicyEnforcerDescriptor.html#instance-constructor-constructor",
-    "src/catalogue-factory/PolicyEnforcerDescriptor.js~PolicyEnforcerDescriptor#constructor",
+    "src/catalogue-factory/hypertyruntimedescriptor.js~runtimehypertycapability#constructor",
+    "class/src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeHypertyCapability.html#instance-constructor-constructor",
+    "src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeHypertyCapability#constructor",
     "method"
   ],
   [
-    "src/catalogue-factory/policyenforcerdescriptor.js~policyenforcerdescriptor#policies",
-    "class/src/catalogue-factory/PolicyEnforcerDescriptor.js~PolicyEnforcerDescriptor.html#instance-set-policies",
-    "src/catalogue-factory/PolicyEnforcerDescriptor.js~PolicyEnforcerDescriptor#policies",
+    "src/catalogue-factory/hypertyruntimedescriptor.js~runtimehypertycapability#getcapabilityset",
+    "class/src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeHypertyCapability.html#instance-method-getCapabilitySet",
+    "src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeHypertyCapability#getCapabilitySet",
+    "method"
+  ],
+  [
+    "src/catalogue-factory/hypertyruntimedescriptor.js~runtimehypertycapability#iscamera",
+    "class/src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeHypertyCapability.html#instance-get-isCamera",
+    "src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeHypertyCapability#isCamera",
     "member"
   ],
   [
-    "src/catalogue-factory/policyenforcerdescriptor.js~policyenforcerdescriptor#policies",
-    "class/src/catalogue-factory/PolicyEnforcerDescriptor.js~PolicyEnforcerDescriptor.html#instance-get-policies",
-    "src/catalogue-factory/PolicyEnforcerDescriptor.js~PolicyEnforcerDescriptor#policies",
+    "src/catalogue-factory/hypertyruntimedescriptor.js~runtimehypertycapability#ismic",
+    "class/src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeHypertyCapability.html#instance-get-isMic",
+    "src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeHypertyCapability#isMic",
     "member"
+  ],
+  [
+    "src/catalogue-factory/hypertyruntimedescriptor.js~runtimehypertycapability#isortcs",
+    "class/src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeHypertyCapability.html#instance-get-isORTCS",
+    "src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeHypertyCapability#isORTCS",
+    "member"
+  ],
+  [
+    "src/catalogue-factory/hypertyruntimedescriptor.js~runtimehypertycapability#issensor",
+    "class/src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeHypertyCapability.html#instance-get-isSensor",
+    "src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeHypertyCapability#isSensor",
+    "member"
+  ],
+  [
+    "src/catalogue-factory/hypertyruntimedescriptor.js~runtimehypertycapability#iswebrtc",
+    "class/src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeHypertyCapability.html#instance-get-isWebRTC",
+    "src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeHypertyCapability#isWebRTC",
+    "member"
+  ],
+  [
+    "src/catalogue-factory/hypertyruntimedescriptor.js~runtimeprotocolcapability#constructor",
+    "class/src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeProtocolCapability.html#instance-constructor-constructor",
+    "src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeProtocolCapability#constructor",
+    "method"
+  ],
+  [
+    "src/catalogue-factory/hypertyruntimedescriptor.js~runtimeprotocolcapability#getcapabilityset",
+    "class/src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeProtocolCapability.html#instance-method-getCapabilitySet",
+    "src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeProtocolCapability#getCapabilitySet",
+    "method"
+  ],
+  [
+    "src/catalogue-factory/hypertyruntimedescriptor.js~runtimeprotocolcapability#iscoap",
+    "class/src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeProtocolCapability.html#instance-method-isCoap",
+    "src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeProtocolCapability#isCoap",
+    "method"
+  ],
+  [
+    "src/catalogue-factory/hypertyruntimedescriptor.js~runtimeprotocolcapability#isdatachannel",
+    "class/src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeProtocolCapability.html#instance-method-isDataChannel",
+    "src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeProtocolCapability#isDataChannel",
+    "method"
+  ],
+  [
+    "src/catalogue-factory/hypertyruntimedescriptor.js~runtimeprotocolcapability#ishttp",
+    "class/src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeProtocolCapability.html#instance-method-isHttp",
+    "src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeProtocolCapability#isHttp",
+    "method"
+  ],
+  [
+    "src/catalogue-factory/hypertyruntimedescriptor.js~runtimeprotocolcapability#ishttps",
+    "class/src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeProtocolCapability.html#instance-method-isHttps",
+    "src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeProtocolCapability#isHttps",
+    "method"
+  ],
+  [
+    "src/catalogue-factory/hypertyruntimedescriptor.js~runtimeprotocolcapability#issensorsupported",
+    "class/src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeProtocolCapability.html#instance-method-isSensorSupported",
+    "src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeProtocolCapability#isSensorSupported",
+    "method"
+  ],
+  [
+    "src/catalogue-factory/hypertyruntimedescriptor.js~runtimeprotocolcapability#isws",
+    "class/src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeProtocolCapability.html#instance-method-isWS",
+    "src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeProtocolCapability#isWS",
+    "method"
+  ],
+  [
+    "src/catalogue-factory/hypertyruntimedescriptor.js~runtimeprotocolcapability#iswss",
+    "class/src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeProtocolCapability.html#instance-method-isWSS",
+    "src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeProtocolCapability#isWSS",
+    "method"
   ],
   [
     "src/catalogue-factory/protocolstubdescriptor.js",
@@ -1081,13 +2113,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/catalogue-factory/protocolstubdescriptor.js~protocolstubdescriptor#configuration",
-    "class/src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor.html#instance-set-configuration",
+    "class/src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor.html#instance-get-configuration",
     "src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor#configuration",
     "member"
   ],
   [
     "src/catalogue-factory/protocolstubdescriptor.js~protocolstubdescriptor#configuration",
-    "class/src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor.html#instance-get-configuration",
+    "class/src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor.html#instance-set-configuration",
     "src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor#configuration",
     "member"
   ],
@@ -1110,15 +2142,75 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/catalogue-factory/protocolstubdescriptor.js~protocolstubdescriptor#messageschemas",
-    "class/src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor.html#instance-set-messageSchemas",
-    "src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor#messageSchemas",
+    "src/catalogue-factory/protocolstubdescriptor.js~protocolstubdescriptor#dataobjects",
+    "class/src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor.html#instance-set-dataObjects",
+    "src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor#dataObjects",
+    "member"
+  ],
+  [
+    "src/catalogue-factory/protocolstubdescriptor.js~protocolstubdescriptor#dataobjects",
+    "class/src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor.html#instance-get-dataObjects",
+    "src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor#dataObjects",
+    "member"
+  ],
+  [
+    "src/catalogue-factory/protocolstubdescriptor.js~protocolstubdescriptor#hypertytype",
+    "class/src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor.html#instance-set-hypertyType",
+    "src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor#hypertyType",
+    "member"
+  ],
+  [
+    "src/catalogue-factory/protocolstubdescriptor.js~protocolstubdescriptor#hypertytype",
+    "class/src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor.html#instance-get-hypertyType",
+    "src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor#hypertyType",
+    "member"
+  ],
+  [
+    "src/catalogue-factory/protocolstubdescriptor.js~protocolstubdescriptor#idpproxy",
+    "class/src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor.html#instance-set-idpProxy",
+    "src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor#idpProxy",
+    "member"
+  ],
+  [
+    "src/catalogue-factory/protocolstubdescriptor.js~protocolstubdescriptor#idpproxy",
+    "class/src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor.html#instance-get-idpProxy",
+    "src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor#idpProxy",
+    "member"
+  ],
+  [
+    "src/catalogue-factory/protocolstubdescriptor.js~protocolstubdescriptor#interworking",
+    "class/src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor.html#instance-set-interworking",
+    "src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor#interworking",
+    "member"
+  ],
+  [
+    "src/catalogue-factory/protocolstubdescriptor.js~protocolstubdescriptor#interworking",
+    "class/src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor.html#instance-get-interworking",
+    "src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor#interworking",
     "member"
   ],
   [
     "src/catalogue-factory/protocolstubdescriptor.js~protocolstubdescriptor#messageschemas",
     "class/src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor.html#instance-get-messageSchemas",
     "src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor#messageSchemas",
+    "member"
+  ],
+  [
+    "src/catalogue-factory/protocolstubdescriptor.js~protocolstubdescriptor#messageschemas",
+    "class/src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor.html#instance-set-messageSchemas",
+    "src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor#messageSchemas",
+    "member"
+  ],
+  [
+    "src/catalogue-factory/protocolstubdescriptor.js~protocolstubdescriptor#mutualauthentication",
+    "class/src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor.html#instance-set-mutualAuthentication",
+    "src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor#mutualAuthentication",
+    "member"
+  ],
+  [
+    "src/catalogue-factory/protocolstubdescriptor.js~protocolstubdescriptor#mutualauthentication",
+    "class/src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor.html#instance-get-mutualAuthentication",
+    "src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor#mutualAuthentication",
     "member"
   ],
   [
@@ -1147,13 +2239,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/catalogue-factory/runtimeconstraint.js~runtimeconstraint#runtimehypertycapabilitytype",
-    "class/src/catalogue-factory/RuntimeConstraint.js~RuntimeConstraint.html#instance-set-runtimeHypertyCapabilityType",
+    "class/src/catalogue-factory/RuntimeConstraint.js~RuntimeConstraint.html#instance-get-runtimeHypertyCapabilityType",
     "src/catalogue-factory/RuntimeConstraint.js~RuntimeConstraint#runtimeHypertyCapabilityType",
     "member"
   ],
   [
     "src/catalogue-factory/runtimeconstraint.js~runtimeconstraint#runtimehypertycapabilitytype",
-    "class/src/catalogue-factory/RuntimeConstraint.js~RuntimeConstraint.html#instance-get-runtimeHypertyCapabilityType",
+    "class/src/catalogue-factory/RuntimeConstraint.js~RuntimeConstraint.html#instance-set-runtimeHypertyCapabilityType",
     "src/catalogue-factory/RuntimeConstraint.js~RuntimeConstraint#runtimeHypertyCapabilityType",
     "member"
   ],
@@ -1183,13 +2275,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/catalogue-factory/sourcepackage.js~sourcepackage#signature",
-    "class/src/catalogue-factory/SourcePackage.js~SourcePackage.html#instance-get-signature",
+    "class/src/catalogue-factory/SourcePackage.js~SourcePackage.html#instance-set-signature",
     "src/catalogue-factory/SourcePackage.js~SourcePackage#signature",
     "member"
   ],
   [
     "src/catalogue-factory/sourcepackage.js~sourcepackage#signature",
-    "class/src/catalogue-factory/SourcePackage.js~SourcePackage.html#instance-set-signature",
+    "class/src/catalogue-factory/SourcePackage.js~SourcePackage.html#instance-get-signature",
     "src/catalogue-factory/SourcePackage.js~SourcePackage#signature",
     "member"
   ],
@@ -1207,302 +2299,224 @@ window.esdocSearchIndex = [
   ],
   [
     "src/catalogue-factory/sourcepackage.js~sourcepackage#sourcecodeclassname",
-    "class/src/catalogue-factory/SourcePackage.js~SourcePackage.html#instance-get-sourceCodeClassname",
-    "src/catalogue-factory/SourcePackage.js~SourcePackage#sourceCodeClassname",
-    "member"
-  ],
-  [
-    "src/catalogue-factory/sourcepackage.js~sourcepackage#sourcecodeclassname",
     "class/src/catalogue-factory/SourcePackage.js~SourcePackage.html#instance-set-sourceCodeClassname",
     "src/catalogue-factory/SourcePackage.js~SourcePackage#sourceCodeClassname",
     "member"
   ],
   [
-    "src/hyperty-chat/chat.js",
-    "file/src/hyperty-chat/Chat.js.html",
-    "src/hyperty-chat/Chat.js",
+    "src/catalogue-factory/sourcepackage.js~sourcepackage#sourcecodeclassname",
+    "class/src/catalogue-factory/SourcePackage.js~SourcePackage.html#instance-get-sourceCodeClassname",
+    "src/catalogue-factory/SourcePackage.js~SourcePackage#sourceCodeClassname",
+    "member"
+  ],
+  [
+    "src/discovery/discovery.js",
+    "file/src/discovery/Discovery.js.html",
+    "src/discovery/Discovery.js",
     "file"
   ],
   [
-    "src/hyperty-chat/chat.js~chatgroup#addparticipant",
-    "class/src/hyperty-chat/Chat.js~ChatGroup.html#instance-method-addParticipant",
-    "src/hyperty-chat/Chat.js~ChatGroup#addParticipant",
+    "src/discovery/discovery.js~discovery#constructor",
+    "class/src/discovery/Discovery.js~Discovery.html#instance-constructor-constructor",
+    "src/discovery/Discovery.js~Discovery#constructor",
     "method"
   ],
   [
-    "src/hyperty-chat/chat.js~chatgroup#close",
-    "class/src/hyperty-chat/Chat.js~ChatGroup.html#instance-method-close",
-    "src/hyperty-chat/Chat.js~ChatGroup#close",
+    "src/discovery/discovery.js~discovery#discoverdataobject",
+    "class/src/discovery/Discovery.js~Discovery.html#instance-method-discoverDataObject",
+    "src/discovery/Discovery.js~Discovery#discoverDataObject",
     "method"
   ],
   [
-    "src/hyperty-chat/chat.js~chatgroup#constructor",
-    "class/src/hyperty-chat/Chat.js~ChatGroup.html#instance-constructor-constructor",
-    "src/hyperty-chat/Chat.js~ChatGroup#constructor",
+    "src/discovery/discovery.js~discovery#discoverdataobjectperurl",
+    "class/src/discovery/Discovery.js~Discovery.html#instance-method-discoverDataObjectPerURL",
+    "src/discovery/Discovery.js~Discovery#discoverDataObjectPerURL",
     "method"
   ],
   [
-    "src/hyperty-chat/chat.js~chatgroup#dataobject",
-    "class/src/hyperty-chat/Chat.js~ChatGroup.html#instance-get-dataObject",
-    "src/hyperty-chat/Chat.js~ChatGroup#dataObject",
-    "member"
-  ],
-  [
-    "src/hyperty-chat/chat.js~chatgroup#dataobjectobserver",
-    "class/src/hyperty-chat/Chat.js~ChatGroup.html#instance-set-dataObjectObserver",
-    "src/hyperty-chat/Chat.js~ChatGroup#dataObjectObserver",
-    "member"
-  ],
-  [
-    "src/hyperty-chat/chat.js~chatgroup#dataobjectobserver",
-    "class/src/hyperty-chat/Chat.js~ChatGroup.html#instance-get-dataObjectObserver",
-    "src/hyperty-chat/Chat.js~ChatGroup#dataObjectObserver",
-    "member"
-  ],
-  [
-    "src/hyperty-chat/chat.js~chatgroup#dataobjectreporter",
-    "class/src/hyperty-chat/Chat.js~ChatGroup.html#instance-get-dataObjectReporter",
-    "src/hyperty-chat/Chat.js~ChatGroup#dataObjectReporter",
-    "member"
-  ],
-  [
-    "src/hyperty-chat/chat.js~chatgroup#dataobjectreporter",
-    "class/src/hyperty-chat/Chat.js~ChatGroup.html#instance-set-dataObjectReporter",
-    "src/hyperty-chat/Chat.js~ChatGroup#dataObjectReporter",
-    "member"
-  ],
-  [
-    "src/hyperty-chat/chat.js~chatgroup#join",
-    "class/src/hyperty-chat/Chat.js~ChatGroup.html#instance-method-join",
-    "src/hyperty-chat/Chat.js~ChatGroup#join",
+    "src/discovery/discovery.js~discovery#discoverdataobjects",
+    "class/src/discovery/Discovery.js~Discovery.html#instance-method-discoverDataObjects",
+    "src/discovery/Discovery.js~Discovery#discoverDataObjects",
     "method"
   ],
   [
-    "src/hyperty-chat/chat.js~chatgroup#open",
-    "class/src/hyperty-chat/Chat.js~ChatGroup.html#instance-method-open",
-    "src/hyperty-chat/Chat.js~ChatGroup#open",
+    "src/discovery/discovery.js~discovery#discoverdataobjectsperguid",
+    "class/src/discovery/Discovery.js~Discovery.html#instance-method-discoverDataObjectsPerGUID",
+    "src/discovery/Discovery.js~Discovery#discoverDataObjectsPerGUID",
     "method"
   ],
   [
-    "src/hyperty-chat/chat.js~chatgroup#processpartipants",
-    "class/src/hyperty-chat/Chat.js~ChatGroup.html#instance-method-processPartipants",
-    "src/hyperty-chat/Chat.js~ChatGroup#processPartipants",
+    "src/discovery/discovery.js~discovery#discoverdataobjectspername",
+    "class/src/discovery/Discovery.js~Discovery.html#instance-method-discoverDataObjectsPerName",
+    "src/discovery/Discovery.js~Discovery#discoverDataObjectsPerName",
     "method"
   ],
   [
-    "src/hyperty-chat/chat.js~chatgroup#removeparticipant",
-    "class/src/hyperty-chat/Chat.js~ChatGroup.html#instance-method-removeParticipant",
-    "src/hyperty-chat/Chat.js~ChatGroup#removeParticipant",
+    "src/discovery/discovery.js~discovery#discoverdataobjectsperreporter",
+    "class/src/discovery/Discovery.js~Discovery.html#instance-method-discoverDataObjectsPerReporter",
+    "src/discovery/Discovery.js~Discovery#discoverDataObjectsPerReporter",
     "method"
   ],
   [
-    "src/hyperty-chat/chat.js~chatgroup#send",
-    "class/src/hyperty-chat/Chat.js~ChatGroup.html#instance-method-send",
-    "src/hyperty-chat/Chat.js~ChatGroup#send",
+    "src/discovery/discovery.js~discovery#discoverdataobjectsperuserprofiledata",
+    "class/src/discovery/Discovery.js~Discovery.html#instance-method-discoverDataObjectsPerUserProfileData",
+    "src/discovery/Discovery.js~Discovery#discoverDataObjectsPerUserProfileData",
     "method"
   ],
   [
-    "src/hyperty-chat/hypertychat.js",
-    "file/src/hyperty-chat/HypertyChat.js.html",
-    "src/hyperty-chat/HypertyChat.js",
+    "src/discovery/discovery.js~discovery#discoverhyperties",
+    "class/src/discovery/Discovery.js~Discovery.html#instance-method-discoverHyperties",
+    "src/discovery/Discovery.js~Discovery#discoverHyperties",
+    "method"
+  ],
+  [
+    "src/discovery/discovery.js~discovery#discoverhypertiesperguid",
+    "class/src/discovery/Discovery.js~Discovery.html#instance-method-discoverHypertiesPerGUID",
+    "src/discovery/Discovery.js~Discovery#discoverHypertiesPerGUID",
+    "method"
+  ],
+  [
+    "src/discovery/discovery.js~discovery#discoverhypertiesperuser",
+    "class/src/discovery/Discovery.js~Discovery.html#instance-method-discoverHypertiesPerUser",
+    "src/discovery/Discovery.js~Discovery#discoverHypertiesPerUser",
+    "method"
+  ],
+  [
+    "src/discovery/discovery.js~discovery#discoverhypertiesperuserprofiledata",
+    "class/src/discovery/Discovery.js~Discovery.html#instance-method-discoverHypertiesPerUserProfileData",
+    "src/discovery/Discovery.js~Discovery#discoverHypertiesPerUserProfileData",
+    "method"
+  ],
+  [
+    "src/discovery/discovery.js~discovery#discoverhyperty",
+    "class/src/discovery/Discovery.js~Discovery.html#instance-method-discoverHyperty",
+    "src/discovery/Discovery.js~Discovery#discoverHyperty",
+    "method"
+  ],
+  [
+    "src/discovery/discovery.js~discovery#discoverhypertyperurl",
+    "class/src/discovery/Discovery.js~Discovery.html#instance-method-discoverHypertyPerURL",
+    "src/discovery/Discovery.js~Discovery#discoverHypertyPerURL",
+    "method"
+  ],
+  [
+    "src/discovery/discovery.js~discovery#discoverhypertyperuser",
+    "class/src/discovery/Discovery.js~Discovery.html#instance-method-discoverHypertyPerUser",
+    "src/discovery/Discovery.js~Discovery#discoverHypertyPerUser",
+    "method"
+  ],
+  [
+    "src/identity/identity.js",
+    "file/src/identity/Identity.js.html",
+    "src/identity/Identity.js",
     "file"
   ],
   [
-    "src/hyperty-chat/communication.js",
-    "file/src/hyperty-chat/communication.js.html",
-    "src/hyperty-chat/communication.js",
+    "src/identity/identity.js~identity#addidassertion",
+    "class/src/identity/Identity.js~Identity.html#instance-method-addIdAssertion",
+    "src/identity/Identity.js~Identity#addIdAssertion",
+    "method"
+  ],
+  [
+    "src/identity/identity.js~identity#addidentity",
+    "class/src/identity/Identity.js~Identity.html#instance-method-addIdentity",
+    "src/identity/Identity.js~Identity#addIdentity",
+    "method"
+  ],
+  [
+    "src/identity/identity.js~identity#constructor",
+    "class/src/identity/Identity.js~Identity.html#instance-constructor-constructor",
+    "src/identity/Identity.js~Identity#constructor",
+    "method"
+  ],
+  [
+    "src/identity/messagebodyidentity.js",
+    "file/src/identity/MessageBodyIdentity.js.html",
+    "src/identity/MessageBodyIdentity.js",
     "file"
   ],
   [
-    "src/hyperty-chat/participant.js",
-    "file/src/hyperty-chat/participant.js.html",
-    "src/hyperty-chat/participant.js",
-    "file"
-  ],
-  [
-    "src/hyperty-connector/connectioncontroller.js",
-    "file/src/hyperty-connector/ConnectionController.js.html",
-    "src/hyperty-connector/ConnectionController.js",
-    "file"
-  ],
-  [
-    "src/hyperty-connector/connectioncontroller.js~connectioncontroller#accept",
-    "class/src/hyperty-connector/ConnectionController.js~ConnectionController.html#instance-method-accept",
-    "src/hyperty-connector/ConnectionController.js~ConnectionController#accept",
-    "method"
-  ],
-  [
-    "src/hyperty-connector/connectioncontroller.js~connectioncontroller#addpeer",
-    "class/src/hyperty-connector/ConnectionController.js~ConnectionController.html#instance-method-addPeer",
-    "src/hyperty-connector/ConnectionController.js~ConnectionController#addPeer",
-    "method"
-  ],
-  [
-    "src/hyperty-connector/connectioncontroller.js~connectioncontroller#changepeerinformation",
-    "class/src/hyperty-connector/ConnectionController.js~ConnectionController.html#instance-method-changePeerInformation",
-    "src/hyperty-connector/ConnectionController.js~ConnectionController#changePeerInformation",
-    "method"
-  ],
-  [
-    "src/hyperty-connector/connectioncontroller.js~connectioncontroller#constructor",
-    "class/src/hyperty-connector/ConnectionController.js~ConnectionController.html#instance-constructor-constructor",
-    "src/hyperty-connector/ConnectionController.js~ConnectionController#constructor",
-    "method"
-  ],
-  [
-    "src/hyperty-connector/connectioncontroller.js~connectioncontroller#createanswer",
-    "class/src/hyperty-connector/ConnectionController.js~ConnectionController.html#instance-method-createAnswer",
-    "src/hyperty-connector/ConnectionController.js~ConnectionController#createAnswer",
-    "method"
-  ],
-  [
-    "src/hyperty-connector/connectioncontroller.js~connectioncontroller#createoffer",
-    "class/src/hyperty-connector/ConnectionController.js~ConnectionController.html#instance-method-createOffer",
-    "src/hyperty-connector/ConnectionController.js~ConnectionController#createOffer",
-    "method"
-  ],
-  [
-    "src/hyperty-connector/connectioncontroller.js~connectioncontroller#dataobjectobserver",
-    "class/src/hyperty-connector/ConnectionController.js~ConnectionController.html#instance-get-dataObjectObserver",
-    "src/hyperty-connector/ConnectionController.js~ConnectionController#dataObjectObserver",
+    "src/identity/messagebodyidentity.js~messagebodyidentity#assertion",
+    "class/src/identity/MessageBodyIdentity.js~MessageBodyIdentity.html#instance-member-assertion",
+    "src/identity/MessageBodyIdentity.js~MessageBodyIdentity#assertion",
     "member"
   ],
   [
-    "src/hyperty-connector/connectioncontroller.js~connectioncontroller#dataobjectobserver",
-    "class/src/hyperty-connector/ConnectionController.js~ConnectionController.html#instance-set-dataObjectObserver",
-    "src/hyperty-connector/ConnectionController.js~ConnectionController#dataObjectObserver",
+    "src/identity/messagebodyidentity.js~messagebodyidentity#constructor",
+    "class/src/identity/MessageBodyIdentity.js~MessageBodyIdentity.html#instance-constructor-constructor",
+    "src/identity/MessageBodyIdentity.js~MessageBodyIdentity#constructor",
+    "method"
+  ],
+  [
+    "src/identity/messagebodyidentity.js~messagebodyidentity#idp",
+    "class/src/identity/MessageBodyIdentity.js~MessageBodyIdentity.html#instance-member-idp",
+    "src/identity/MessageBodyIdentity.js~MessageBodyIdentity#idp",
     "member"
   ],
   [
-    "src/hyperty-connector/connectioncontroller.js~connectioncontroller#dataobjectreporter",
-    "class/src/hyperty-connector/ConnectionController.js~ConnectionController.html#instance-get-dataObjectReporter",
-    "src/hyperty-connector/ConnectionController.js~ConnectionController#dataObjectReporter",
+    "src/identity/messagebodyidentity.js~messagebodyidentity#userprofile",
+    "class/src/identity/MessageBodyIdentity.js~MessageBodyIdentity.html#instance-member-userProfile",
+    "src/identity/MessageBodyIdentity.js~MessageBodyIdentity#userProfile",
     "member"
   ],
   [
-    "src/hyperty-connector/connectioncontroller.js~connectioncontroller#dataobjectreporter",
-    "class/src/hyperty-connector/ConnectionController.js~ConnectionController.html#instance-set-dataObjectReporter",
-    "src/hyperty-connector/ConnectionController.js~ConnectionController#dataObjectReporter",
-    "member"
-  ],
-  [
-    "src/hyperty-connector/connectioncontroller.js~connectioncontroller#decline",
-    "class/src/hyperty-connector/ConnectionController.js~ConnectionController.html#instance-method-decline",
-    "src/hyperty-connector/ConnectionController.js~ConnectionController#decline",
-    "method"
-  ],
-  [
-    "src/hyperty-connector/connectioncontroller.js~connectioncontroller#disablecam",
-    "class/src/hyperty-connector/ConnectionController.js~ConnectionController.html#instance-method-disableCam",
-    "src/hyperty-connector/ConnectionController.js~ConnectionController#disableCam",
-    "method"
-  ],
-  [
-    "src/hyperty-connector/connectioncontroller.js~connectioncontroller#disablemic",
-    "class/src/hyperty-connector/ConnectionController.js~ConnectionController.html#instance-method-disableMic",
-    "src/hyperty-connector/ConnectionController.js~ConnectionController#disableMic",
-    "method"
-  ],
-  [
-    "src/hyperty-connector/connectioncontroller.js~connectioncontroller#disconnect",
-    "class/src/hyperty-connector/ConnectionController.js~ConnectionController.html#instance-method-disconnect",
-    "src/hyperty-connector/ConnectionController.js~ConnectionController#disconnect",
-    "method"
-  ],
-  [
-    "src/hyperty-connector/connectioncontroller.js~connectioncontroller#getusermedia",
-    "class/src/hyperty-connector/ConnectionController.js~ConnectionController.html#instance-method-getUserMedia",
-    "src/hyperty-connector/ConnectionController.js~ConnectionController#getUserMedia",
-    "method"
-  ],
-  [
-    "src/hyperty-connector/connectioncontroller.js~connectioncontroller#infoerror",
-    "class/src/hyperty-connector/ConnectionController.js~ConnectionController.html#instance-method-infoError",
-    "src/hyperty-connector/ConnectionController.js~ConnectionController#infoError",
-    "method"
-  ],
-  [
-    "src/hyperty-connector/connectioncontroller.js~connectioncontroller#mute",
-    "class/src/hyperty-connector/ConnectionController.js~ConnectionController.html#instance-method-mute",
-    "src/hyperty-connector/ConnectionController.js~ConnectionController#mute",
-    "method"
-  ],
-  [
-    "src/hyperty-connector/connectioncontroller.js~connectioncontroller#onlocalsessioncreated",
-    "class/src/hyperty-connector/ConnectionController.js~ConnectionController.html#instance-method-onLocalSessionCreated",
-    "src/hyperty-connector/ConnectionController.js~ConnectionController#onLocalSessionCreated",
-    "method"
-  ],
-  [
-    "src/hyperty-connector/connectioncontroller.js~connectioncontroller#processpeerinformation",
-    "class/src/hyperty-connector/ConnectionController.js~ConnectionController.html#instance-method-processPeerInformation",
-    "src/hyperty-connector/ConnectionController.js~ConnectionController#processPeerInformation",
-    "method"
-  ],
-  [
-    "src/hyperty-connector/connectioncontroller.js~connectioncontroller#remotedescriptionerror",
-    "class/src/hyperty-connector/ConnectionController.js~ConnectionController.html#instance-method-remoteDescriptionError",
-    "src/hyperty-connector/ConnectionController.js~ConnectionController#remoteDescriptionError",
-    "method"
-  ],
-  [
-    "src/hyperty-connector/connectioncontroller.js~connectioncontroller#remotedescriptionsuccess",
-    "class/src/hyperty-connector/ConnectionController.js~ConnectionController.html#instance-method-remoteDescriptionSuccess",
-    "src/hyperty-connector/ConnectionController.js~ConnectionController#remoteDescriptionSuccess",
-    "method"
-  ],
-  [
-    "src/hyperty-connector/connectioncontroller.js~connectioncontroller#remotepeerinformation",
-    "class/src/hyperty-connector/ConnectionController.js~ConnectionController.html#instance-set-remotePeerInformation",
-    "src/hyperty-connector/ConnectionController.js~ConnectionController#remotePeerInformation",
-    "member"
-  ],
-  [
-    "src/hyperty-connector/connectioncontroller.js~connectioncontroller#remotepeerinformation",
-    "class/src/hyperty-connector/ConnectionController.js~ConnectionController.html#instance-get-remotePeerInformation",
-    "src/hyperty-connector/ConnectionController.js~ConnectionController#remotePeerInformation",
-    "member"
-  ],
-  [
-    "src/hyperty-connector/connectioncontroller.js~connectioncontroller#removepeer",
-    "class/src/hyperty-connector/ConnectionController.js~ConnectionController.html#instance-method-removePeer",
-    "src/hyperty-connector/ConnectionController.js~ConnectionController#removePeer",
-    "method"
-  ],
-  [
-    "src/hyperty-connector/hypertyconnector.js",
-    "file/src/hyperty-connector/HypertyConnector.js.html",
-    "src/hyperty-connector/HypertyConnector.js",
+    "src/identity/userprofile.js",
+    "file/src/identity/UserProfile.js.html",
+    "src/identity/UserProfile.js",
     "file"
   ],
   [
-    "src/hyperty-connector/connection.js",
-    "file/src/hyperty-connector/connection.js.html",
-    "src/hyperty-connector/connection.js",
-    "file"
+    "src/identity/userprofile.js~userprofile#avatar",
+    "class/src/identity/UserProfile.js~UserProfile.html#instance-member-avatar",
+    "src/identity/UserProfile.js~UserProfile#avatar",
+    "member"
   ],
   [
-    "src/hyperty-connector/peer.js",
-    "file/src/hyperty-connector/peer.js.html",
-    "src/hyperty-connector/peer.js",
-    "file"
+    "src/identity/userprofile.js~userprofile#cn",
+    "class/src/identity/UserProfile.js~UserProfile.html#instance-member-cn",
+    "src/identity/UserProfile.js~UserProfile#cn",
+    "member"
   ],
   [
-    "src/hyperty-discovery/hypertydiscovery.js",
-    "file/src/hyperty-discovery/HypertyDiscovery.js.html",
-    "src/hyperty-discovery/HypertyDiscovery.js",
-    "file"
-  ],
-  [
-    "src/hyperty-discovery/hypertydiscovery.js~hypertydiscovery#constructor",
-    "class/src/hyperty-discovery/HypertyDiscovery.js~HypertyDiscovery.html#instance-constructor-constructor",
-    "src/hyperty-discovery/HypertyDiscovery.js~HypertyDiscovery#constructor",
+    "src/identity/userprofile.js~userprofile#constructor",
+    "class/src/identity/UserProfile.js~UserProfile.html#instance-constructor-constructor",
+    "src/identity/UserProfile.js~UserProfile#constructor",
     "method"
   ],
   [
-    "src/hyperty-discovery/hypertydiscovery.js~hypertydiscovery#discoverhypertyperuser",
-    "class/src/hyperty-discovery/HypertyDiscovery.js~HypertyDiscovery.html#instance-method-discoverHypertyPerUser",
-    "src/hyperty-discovery/HypertyDiscovery.js~HypertyDiscovery#discoverHypertyPerUser",
+    "src/identity/userprofile.js~userprofile#locale",
+    "class/src/identity/UserProfile.js~UserProfile.html#instance-member-locale",
+    "src/identity/UserProfile.js~UserProfile#locale",
+    "member"
+  ],
+  [
+    "src/identity/userprofile.js~userprofile#userurl",
+    "class/src/identity/UserProfile.js~UserProfile.html#instance-member-userURL",
+    "src/identity/UserProfile.js~UserProfile#userURL",
+    "member"
+  ],
+  [
+    "src/identity/userprofile.js~userprofile#username",
+    "class/src/identity/UserProfile.js~UserProfile.html#instance-member-username",
+    "src/identity/UserProfile.js~UserProfile#username",
+    "member"
+  ],
+  [
+    "src/identitymanager/identitymanager.js",
+    "file/src/identityManager/IdentityManager.js.html",
+    "src/identityManager/IdentityManager.js",
+    "file"
+  ],
+  [
+    "src/identitymanager/identitymanager.js~identitymanager#constructor",
+    "class/src/identityManager/IdentityManager.js~IdentityManager.html#instance-constructor-constructor",
+    "src/identityManager/IdentityManager.js~IdentityManager#constructor",
+    "method"
+  ],
+  [
+    "src/identitymanager/identitymanager.js~identitymanager#discoveruserregistered",
+    "class/src/identityManager/IdentityManager.js~IdentityManager.html#instance-method-discoverUserRegistered",
+    "src/identityManager/IdentityManager.js~IdentityManager#discoverUserRegistered",
     "method"
   ],
   [
@@ -1596,10 +2610,34 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/message-factory/messagebody.js~deletemessagebody#childrenresources",
+    "class/src/message-factory/MessageBody.js~DeleteMessageBody.html#instance-member-childrenResources",
+    "src/message-factory/MessageBody.js~DeleteMessageBody#childrenResources",
+    "member"
+  ],
+  [
     "src/message-factory/messagebody.js~deletemessagebody#constructor",
     "class/src/message-factory/MessageBody.js~DeleteMessageBody.html#instance-constructor-constructor",
     "src/message-factory/MessageBody.js~DeleteMessageBody#constructor",
     "method"
+  ],
+  [
+    "src/message-factory/messagebody.js~executemessagebody#constructor",
+    "class/src/message-factory/MessageBody.js~ExecuteMessageBody.html#instance-constructor-constructor",
+    "src/message-factory/MessageBody.js~ExecuteMessageBody#constructor",
+    "method"
+  ],
+  [
+    "src/message-factory/messagebody.js~executemessagebody#method",
+    "class/src/message-factory/MessageBody.js~ExecuteMessageBody.html#instance-member-method",
+    "src/message-factory/MessageBody.js~ExecuteMessageBody#method",
+    "member"
+  ],
+  [
+    "src/message-factory/messagebody.js~executemessagebody#params",
+    "class/src/message-factory/MessageBody.js~ExecuteMessageBody.html#instance-member-params",
+    "src/message-factory/MessageBody.js~ExecuteMessageBody#params",
+    "member"
   ],
   [
     "src/message-factory/messagebody.js~forwardmessagebody#constructor",
@@ -1618,6 +2656,12 @@ window.esdocSearchIndex = [
     "class/src/message-factory/MessageBody.js~MessageBody.html#instance-member-accessToken",
     "src/message-factory/MessageBody.js~MessageBody#accessToken",
     "member"
+  ],
+  [
+    "src/message-factory/messagebody.js~messagebody#addvia",
+    "class/src/message-factory/MessageBody.js~MessageBody.html#instance-method-addVia",
+    "src/message-factory/MessageBody.js~MessageBody#addVia",
+    "method"
   ],
   [
     "src/message-factory/messagebody.js~messagebody#assertedidentity",
@@ -1647,6 +2691,12 @@ window.esdocSearchIndex = [
     "src/message-factory/messagebody.js~messagebody#schema",
     "class/src/message-factory/MessageBody.js~MessageBody.html#instance-member-schema",
     "src/message-factory/MessageBody.js~MessageBody#schema",
+    "member"
+  ],
+  [
+    "src/message-factory/messagebody.js~messagebody#via",
+    "class/src/message-factory/MessageBody.js~MessageBody.html#instance-member-via",
+    "src/message-factory/MessageBody.js~MessageBody#via",
     "member"
   ],
   [
@@ -1698,9 +2748,27 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/message-factory/messagebody.js~updatemessagebody#addattributetype",
+    "class/src/message-factory/MessageBody.js~UpdateMessageBody.html#instance-method-addAttributeType",
+    "src/message-factory/MessageBody.js~UpdateMessageBody#addAttributeType",
+    "method"
+  ],
+  [
+    "src/message-factory/messagebody.js~updatemessagebody#addoperation",
+    "class/src/message-factory/MessageBody.js~UpdateMessageBody.html#instance-method-addOperation",
+    "src/message-factory/MessageBody.js~UpdateMessageBody#addOperation",
+    "method"
+  ],
+  [
     "src/message-factory/messagebody.js~updatemessagebody#attribute",
     "class/src/message-factory/MessageBody.js~UpdateMessageBody.html#instance-member-attribute",
     "src/message-factory/MessageBody.js~UpdateMessageBody#attribute",
+    "member"
+  ],
+  [
+    "src/message-factory/messagebody.js~updatemessagebody#attributetype",
+    "class/src/message-factory/MessageBody.js~UpdateMessageBody.html#instance-member-attributeType",
+    "src/message-factory/MessageBody.js~UpdateMessageBody#attributeType",
     "member"
   ],
   [
@@ -1708,6 +2776,12 @@ window.esdocSearchIndex = [
     "class/src/message-factory/MessageBody.js~UpdateMessageBody.html#instance-constructor-constructor",
     "src/message-factory/MessageBody.js~UpdateMessageBody#constructor",
     "method"
+  ],
+  [
+    "src/message-factory/messagebody.js~updatemessagebody#operation",
+    "class/src/message-factory/MessageBody.js~UpdateMessageBody.html#instance-member-operation",
+    "src/message-factory/MessageBody.js~UpdateMessageBody#operation",
+    "member"
   ],
   [
     "src/message-factory/messagebody.js~updatemessagebody#value",
@@ -1743,6 +2817,12 @@ window.esdocSearchIndex = [
     "src/message-factory/messagefactory.js~messagefactory#createdeletemessagerequest",
     "class/src/message-factory/MessageFactory.js~MessageFactory.html#instance-method-createDeleteMessageRequest",
     "src/message-factory/MessageFactory.js~MessageFactory#createDeleteMessageRequest",
+    "method"
+  ],
+  [
+    "src/message-factory/messagefactory.js~messagefactory#createexecutemessagerequest",
+    "class/src/message-factory/MessageFactory.js~MessageFactory.html#instance-method-createExecuteMessageRequest",
+    "src/message-factory/MessageFactory.js~MessageFactory#createExecuteMessageRequest",
     "method"
   ],
   [
@@ -1794,9 +2874,39 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "src/message-factory/messagefactory.js~messagefactory#validate",
-    "class/src/message-factory/MessageFactory.js~MessageFactory.html#instance-method-validate",
-    "src/message-factory/MessageFactory.js~MessageFactory#validate",
+    "src/persistence/persistencemanager.js",
+    "file/src/persistence/PersistenceManager.js.html",
+    "src/persistence/PersistenceManager.js",
+    "file"
+  ],
+  [
+    "src/persistence/persistencemanager.js~persistencemanager#constructor",
+    "class/src/persistence/PersistenceManager.js~PersistenceManager.html#instance-constructor-constructor",
+    "src/persistence/PersistenceManager.js~PersistenceManager#constructor",
+    "method"
+  ],
+  [
+    "src/persistence/persistencemanager.js~persistencemanager#delete",
+    "class/src/persistence/PersistenceManager.js~PersistenceManager.html#instance-method-delete",
+    "src/persistence/PersistenceManager.js~PersistenceManager#delete",
+    "method"
+  ],
+  [
+    "src/persistence/persistencemanager.js~persistencemanager#get",
+    "class/src/persistence/PersistenceManager.js~PersistenceManager.html#instance-method-get",
+    "src/persistence/PersistenceManager.js~PersistenceManager#get",
+    "method"
+  ],
+  [
+    "src/persistence/persistencemanager.js~persistencemanager#getversion",
+    "class/src/persistence/PersistenceManager.js~PersistenceManager.html#instance-method-getVersion",
+    "src/persistence/PersistenceManager.js~PersistenceManager#getVersion",
+    "method"
+  ],
+  [
+    "src/persistence/persistencemanager.js~persistencemanager#set",
+    "class/src/persistence/PersistenceManager.js~PersistenceManager.html#instance-method-set",
+    "src/persistence/PersistenceManager.js~PersistenceManager#set",
     "method"
   ],
   [
@@ -1824,76 +2934,232 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "src/rethinkobject/rethinkobject.js~rethinkobject#constructor",
-    "class/src/reTHINKObject/RethinkObject.js~RethinkObject.html#instance-constructor-constructor",
-    "src/reTHINKObject/RethinkObject.js~RethinkObject#constructor",
-    "method"
-  ],
-  [
-    "src/rethinkobject/rethinkobject.js~rethinkobject#schema",
-    "class/src/reTHINKObject/RethinkObject.js~RethinkObject.html#instance-member-schema",
-    "src/reTHINKObject/RethinkObject.js~RethinkObject#schema",
-    "member"
-  ],
-  [
     "src/rethinkobject/rethinkobject.js~rethinkobject#validate",
     "class/src/reTHINKObject/RethinkObject.js~RethinkObject.html#instance-method-validate",
     "src/reTHINKObject/RethinkObject.js~RethinkObject#validate",
     "method"
   ],
   [
-    "src/rethinkobject/rethinkobject.js~rethinkobject#validation",
-    "class/src/reTHINKObject/RethinkObject.js~RethinkObject.html#instance-member-validation",
-    "src/reTHINKObject/RethinkObject.js~RethinkObject#validation",
+    "src/runtime-capabilities/runtimecapabilities.js",
+    "file/src/runtime-capabilities/RuntimeCapabilities.js.html",
+    "src/runtime-capabilities/RuntimeCapabilities.js",
+    "file"
+  ],
+  [
+    "src/runtime-capabilities/runtimecapabilities.js~runtimecapabilities#constructor",
+    "class/src/runtime-capabilities/RuntimeCapabilities.js~RuntimeCapabilities.html#instance-constructor-constructor",
+    "src/runtime-capabilities/RuntimeCapabilities.js~RuntimeCapabilities#constructor",
+    "method"
+  ],
+  [
+    "src/runtime-capabilities/runtimecapabilities.js~runtimecapabilities#getruntimecapabilities",
+    "class/src/runtime-capabilities/RuntimeCapabilities.js~RuntimeCapabilities.html#instance-method-getRuntimeCapabilities",
+    "src/runtime-capabilities/RuntimeCapabilities.js~RuntimeCapabilities#getRuntimeCapabilities",
+    "method"
+  ],
+  [
+    "src/runtime-capabilities/runtimecapabilities.js~runtimecapabilities#isavailable",
+    "class/src/runtime-capabilities/RuntimeCapabilities.js~RuntimeCapabilities.html#instance-method-isAvailable",
+    "src/runtime-capabilities/RuntimeCapabilities.js~RuntimeCapabilities#isAvailable",
+    "method"
+  ],
+  [
+    "src/runtime-capabilities/runtimecapabilities.js~runtimecapabilities#update",
+    "class/src/runtime-capabilities/RuntimeCapabilities.js~RuntimeCapabilities.html#instance-method-update",
+    "src/runtime-capabilities/RuntimeCapabilities.js~RuntimeCapabilities#update",
+    "method"
+  ],
+  [
+    "src/runtime-catalogue/runtimecatalogue.js",
+    "file/src/runtime-catalogue/RuntimeCatalogue.js.html",
+    "src/runtime-catalogue/RuntimeCatalogue.js",
+    "file"
+  ],
+  [
+    "src/runtime-catalogue/runtimecatalogue.js~runtimecatalogue#atob",
+    "class/src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue.html#instance-member-atob",
+    "src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue#atob",
     "member"
   ],
   [
-    "src/runtime-loader/core.js",
-    "file/src/runtime-loader/Core.js.html",
-    "src/runtime-loader/Core.js",
+    "src/runtime-catalogue/runtimecatalogue.js~runtimecatalogue#attachrawsourcepackage",
+    "class/src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue.html#instance-method-attachRawSourcePackage",
+    "src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue#attachRawSourcePackage",
+    "method"
+  ],
+  [
+    "src/runtime-catalogue/runtimecatalogue.js~runtimecatalogue#constructor",
+    "class/src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue.html#instance-constructor-constructor",
+    "src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue#constructor",
+    "method"
+  ],
+  [
+    "src/runtime-catalogue/runtimecatalogue.js~runtimecatalogue#createdataschema",
+    "class/src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue.html#instance-method-createDataSchema",
+    "src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue#createDataSchema",
+    "method"
+  ],
+  [
+    "src/runtime-catalogue/runtimecatalogue.js~runtimecatalogue#createhyperty",
+    "class/src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue.html#instance-method-createHyperty",
+    "src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue#createHyperty",
+    "method"
+  ],
+  [
+    "src/runtime-catalogue/runtimecatalogue.js~runtimecatalogue#createidpproxy",
+    "class/src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue.html#instance-method-createIdpProxy",
+    "src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue#createIdpProxy",
+    "method"
+  ],
+  [
+    "src/runtime-catalogue/runtimecatalogue.js~runtimecatalogue#createruntimedescriptor",
+    "class/src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue.html#instance-method-createRuntimeDescriptor",
+    "src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue#createRuntimeDescriptor",
+    "method"
+  ],
+  [
+    "src/runtime-catalogue/runtimecatalogue.js~runtimecatalogue#createsourcepackage",
+    "class/src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue.html#instance-method-createSourcePackage",
+    "src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue#createSourcePackage",
+    "method"
+  ],
+  [
+    "src/runtime-catalogue/runtimecatalogue.js~runtimecatalogue#createstub",
+    "class/src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue.html#instance-method-createStub",
+    "src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue#createStub",
+    "method"
+  ],
+  [
+    "src/runtime-catalogue/runtimecatalogue.js~runtimecatalogue#deletefrompm",
+    "class/src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue.html#instance-method-deleteFromPM",
+    "src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue#deleteFromPM",
+    "method"
+  ],
+  [
+    "src/runtime-catalogue/runtimecatalogue.js~runtimecatalogue#getdataschemadescriptor",
+    "class/src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue.html#instance-method-getDataSchemaDescriptor",
+    "src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue#getDataSchemaDescriptor",
+    "method"
+  ],
+  [
+    "src/runtime-catalogue/runtimecatalogue.js~runtimecatalogue#getdescriptor",
+    "class/src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue.html#instance-method-getDescriptor",
+    "src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue#getDescriptor",
+    "method"
+  ],
+  [
+    "src/runtime-catalogue/runtimecatalogue.js~runtimecatalogue#gethypertydescriptor",
+    "class/src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue.html#instance-method-getHypertyDescriptor",
+    "src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue#getHypertyDescriptor",
+    "method"
+  ],
+  [
+    "src/runtime-catalogue/runtimecatalogue.js~runtimecatalogue#getidpproxydescriptor",
+    "class/src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue.html#instance-method-getIdpProxyDescriptor",
+    "src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue#getIdpProxyDescriptor",
+    "method"
+  ],
+  [
+    "src/runtime-catalogue/runtimecatalogue.js~runtimecatalogue#getruntimedescriptor",
+    "class/src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue.html#instance-method-getRuntimeDescriptor",
+    "src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue#getRuntimeDescriptor",
+    "method"
+  ],
+  [
+    "src/runtime-catalogue/runtimecatalogue.js~runtimecatalogue#getsourcecodefromdescriptor",
+    "class/src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue.html#instance-method-getSourceCodeFromDescriptor",
+    "src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue#getSourceCodeFromDescriptor",
+    "method"
+  ],
+  [
+    "src/runtime-catalogue/runtimecatalogue.js~runtimecatalogue#getsourcepackagefromurl",
+    "class/src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue.html#instance-method-getSourcePackageFromURL",
+    "src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue#getSourcePackageFromURL",
+    "method"
+  ],
+  [
+    "src/runtime-catalogue/runtimecatalogue.js~runtimecatalogue#getstubdescriptor",
+    "class/src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue.html#instance-method-getStubDescriptor",
+    "src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue#getStubDescriptor",
+    "method"
+  ],
+  [
+    "src/runtime-catalogue/runtimecatalogue.js~runtimecatalogue#gettypelist",
+    "class/src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue.html#instance-method-getTypeList",
+    "src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue#getTypeList",
+    "method"
+  ],
+  [
+    "src/runtime-catalogue/runtimecatalogue.js~runtimecatalogue#httprequest",
+    "class/src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue.html#instance-member-httpRequest",
+    "src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue#httpRequest",
+    "member"
+  ],
+  [
+    "src/runtime-catalogue/runtimecatalogue.js~runtimecatalogue#runtimeurl",
+    "class/src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue.html#instance-set-runtimeURL",
+    "src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue#runtimeURL",
+    "member"
+  ],
+  [
+    "src/runtime-catalogue/runtimecatalogue.js~runtimecatalogue#runtimeurl",
+    "class/src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue.html#instance-get-runtimeURL",
+    "src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue#runtimeURL",
+    "member"
+  ],
+  [
+    "src/runtime-catalogue/runtimecatalogue.js~runtimecatalogue#storagemanager",
+    "class/src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue.html#instance-member-storageManager",
+    "src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue#storageManager",
+    "member"
+  ],
+  [
+    "src/storage-manager/storagemanager.js",
+    "file/src/storage-manager/StorageManager.js.html",
+    "src/storage-manager/StorageManager.js",
     "file"
   ],
   [
-    "src/runtime-loader/core.js~core#constructor",
-    "class/src/runtime-loader/Core.js~Core.html#instance-constructor-constructor",
-    "src/runtime-loader/Core.js~Core#constructor",
+    "src/storage-manager/storagemanager.js~storagemanager#constructor",
+    "class/src/storage-manager/StorageManager.js~StorageManager.html#instance-constructor-constructor",
+    "src/storage-manager/StorageManager.js~StorageManager#constructor",
     "method"
   ],
   [
-    "src/runtime-loader/core.js~core#install",
-    "class/src/runtime-loader/Core.js~Core.html#instance-method-install",
-    "src/runtime-loader/Core.js~Core#install",
+    "src/storage-manager/storagemanager.js~storagemanager#db",
+    "class/src/storage-manager/StorageManager.js~StorageManager.html#instance-member-db",
+    "src/storage-manager/StorageManager.js~StorageManager#db",
+    "member"
+  ],
+  [
+    "src/storage-manager/storagemanager.js~storagemanager#delete",
+    "class/src/storage-manager/StorageManager.js~StorageManager.html#instance-method-delete",
+    "src/storage-manager/StorageManager.js~StorageManager#delete",
     "method"
   ],
   [
-    "src/runtime-loader/runtimeloader.js",
-    "file/src/runtime-loader/RuntimeLoader.js.html",
-    "src/runtime-loader/RuntimeLoader.js",
-    "file"
-  ],
-  [
-    "src/runtime-loader/runtimeloader.js~runtimeloader#constructor",
-    "class/src/runtime-loader/RuntimeLoader.js~RuntimeLoader.html#instance-constructor-constructor",
-    "src/runtime-loader/RuntimeLoader.js~RuntimeLoader#constructor",
+    "src/storage-manager/storagemanager.js~storagemanager#get",
+    "class/src/storage-manager/StorageManager.js~StorageManager.html#instance-method-get",
+    "src/storage-manager/StorageManager.js~StorageManager#get",
     "method"
   ],
   [
-    "src/runtime-loader/runtimeloader.js~runtimeloader#requirehyperty",
-    "class/src/runtime-loader/RuntimeLoader.js~RuntimeLoader.html#instance-method-requireHyperty",
-    "src/runtime-loader/RuntimeLoader.js~RuntimeLoader#requireHyperty",
+    "src/storage-manager/storagemanager.js~storagemanager#getversion",
+    "class/src/storage-manager/StorageManager.js~StorageManager.html#instance-method-getVersion",
+    "src/storage-manager/StorageManager.js~StorageManager#getVersion",
     "method"
   ],
   [
-    "src/runtime-loader/runtimeloader.js~runtimeloader#requireprotostub",
-    "class/src/runtime-loader/RuntimeLoader.js~RuntimeLoader.html#instance-method-requireProtostub",
-    "src/runtime-loader/RuntimeLoader.js~RuntimeLoader#requireProtostub",
+    "src/storage-manager/storagemanager.js~storagemanager#set",
+    "class/src/storage-manager/StorageManager.js~StorageManager.html#instance-method-set",
+    "src/storage-manager/StorageManager.js~StorageManager#set",
     "method"
   ],
   [
-    "src/service-framework.js",
-    "file/src/service-framework.js.html",
-    "src/service-framework.js",
-    "file"
+    "src/storage-manager/storagemanager.js~storagemanager#storagename",
+    "class/src/storage-manager/StorageManager.js~StorageManager.html#instance-member-storageName",
+    "src/storage-manager/StorageManager.js~StorageManager#storageName",
+    "member"
   ],
   [
     "src/syncher/dataobject.js",
@@ -1902,15 +3168,15 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "src/syncher/dataobject.js~dataobject#addchildren",
-    "class/src/syncher/DataObject.js~DataObject.html#instance-method-addChildren",
-    "src/syncher/DataObject.js~DataObject#addChildren",
+    "src/syncher/dataobject.js~dataobject#addchild",
+    "class/src/syncher/DataObject.js~DataObject.html#instance-method-addChild",
+    "src/syncher/DataObject.js~DataObject#addChild",
     "method"
   ],
   [
-    "src/syncher/dataobject.js~dataobject#children",
-    "class/src/syncher/DataObject.js~DataObject.html#instance-get-children",
-    "src/syncher/DataObject.js~DataObject#children",
+    "src/syncher/dataobject.js~dataobject#childrens",
+    "class/src/syncher/DataObject.js~DataObject.html#instance-get-childrens",
+    "src/syncher/DataObject.js~DataObject#childrens",
     "member"
   ],
   [
@@ -1920,9 +3186,21 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "src/syncher/dataobject.js~dataobject#onaddchildren",
-    "class/src/syncher/DataObject.js~DataObject.html#instance-method-onAddChildren",
-    "src/syncher/DataObject.js~DataObject#onAddChildren",
+    "src/syncher/dataobject.js~dataobject#metadata",
+    "class/src/syncher/DataObject.js~DataObject.html#instance-get-metadata",
+    "src/syncher/DataObject.js~DataObject#metadata",
+    "member"
+  ],
+  [
+    "src/syncher/dataobject.js~dataobject#onaddchild",
+    "class/src/syncher/DataObject.js~DataObject.html#instance-method-onAddChild",
+    "src/syncher/DataObject.js~DataObject#onAddChild",
+    "method"
+  ],
+  [
+    "src/syncher/dataobject.js~dataobject#resumechildrens",
+    "class/src/syncher/DataObject.js~DataObject.html#instance-method-resumeChildrens",
+    "src/syncher/DataObject.js~DataObject#resumeChildrens",
     "method"
   ],
   [
@@ -1962,6 +3240,30 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/syncher/dataobjectchild.js~dataobjectchild#delete",
+    "class/src/syncher/DataObjectChild.js~DataObjectChild.html#instance-method-delete",
+    "src/syncher/DataObjectChild.js~DataObjectChild#delete",
+    "method"
+  ],
+  [
+    "src/syncher/dataobjectchild.js~dataobjectchild#identity",
+    "class/src/syncher/DataObjectChild.js~DataObjectChild.html#instance-set-identity",
+    "src/syncher/DataObjectChild.js~DataObjectChild#identity",
+    "member"
+  ],
+  [
+    "src/syncher/dataobjectchild.js~dataobjectchild#identity",
+    "class/src/syncher/DataObjectChild.js~DataObjectChild.html#instance-get-identity",
+    "src/syncher/DataObjectChild.js~DataObjectChild#identity",
+    "member"
+  ],
+  [
+    "src/syncher/dataobjectchild.js~dataobjectchild#metadata",
+    "class/src/syncher/DataObjectChild.js~DataObjectChild.html#instance-get-metadata",
+    "src/syncher/DataObjectChild.js~DataObjectChild#metadata",
+    "member"
+  ],
+  [
     "src/syncher/dataobjectchild.js~dataobjectchild#onchange",
     "class/src/syncher/DataObjectChild.js~DataObjectChild.html#instance-method-onChange",
     "src/syncher/DataObjectChild.js~DataObjectChild#onChange",
@@ -1980,9 +3282,27 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "src/syncher/dataobjectobserver.js~dataobjectobserver#delete",
+    "class/src/syncher/DataObjectObserver.js~DataObjectObserver.html#instance-method-delete",
+    "src/syncher/DataObjectObserver.js~DataObjectObserver#delete",
+    "method"
+  ],
+  [
     "src/syncher/dataobjectobserver.js~dataobjectobserver#onchange",
     "class/src/syncher/DataObjectObserver.js~DataObjectObserver.html#instance-method-onChange",
     "src/syncher/DataObjectObserver.js~DataObjectObserver#onChange",
+    "method"
+  ],
+  [
+    "src/syncher/dataobjectobserver.js~dataobjectobserver#sync",
+    "class/src/syncher/DataObjectObserver.js~DataObjectObserver.html#instance-method-sync",
+    "src/syncher/DataObjectObserver.js~DataObjectObserver#sync",
+    "method"
+  ],
+  [
+    "src/syncher/dataobjectobserver.js~dataobjectobserver#unsubscribe",
+    "class/src/syncher/DataObjectObserver.js~DataObjectObserver.html#instance-method-unsubscribe",
+    "src/syncher/DataObjectObserver.js~DataObjectObserver#unsubscribe",
     "method"
   ],
   [
@@ -1990,6 +3310,24 @@ window.esdocSearchIndex = [
     "file/src/syncher/DataObjectReporter.js.html",
     "src/syncher/DataObjectReporter.js",
     "file"
+  ],
+  [
+    "src/syncher/dataobjectreporter.js~dataobjectreporter#delete",
+    "class/src/syncher/DataObjectReporter.js~DataObjectReporter.html#instance-method-delete",
+    "src/syncher/DataObjectReporter.js~DataObjectReporter#delete",
+    "method"
+  ],
+  [
+    "src/syncher/dataobjectreporter.js~dataobjectreporter#inviteobservers",
+    "class/src/syncher/DataObjectReporter.js~DataObjectReporter.html#instance-method-inviteObservers",
+    "src/syncher/DataObjectReporter.js~DataObjectReporter#inviteObservers",
+    "method"
+  ],
+  [
+    "src/syncher/dataobjectreporter.js~dataobjectreporter#onread",
+    "class/src/syncher/DataObjectReporter.js~DataObjectReporter.html#instance-method-onRead",
+    "src/syncher/DataObjectReporter.js~DataObjectReporter#onRead",
+    "method"
   ],
   [
     "src/syncher/dataobjectreporter.js~dataobjectreporter#onresponse",
@@ -2013,6 +3351,12 @@ window.esdocSearchIndex = [
     "src/syncher/dataprovisional.js",
     "file/src/syncher/DataProvisional.js.html",
     "src/syncher/DataProvisional.js",
+    "file"
+  ],
+  [
+    "src/syncher/proxyobject.js",
+    "file/src/syncher/ProxyObject.js.html",
+    "src/syncher/ProxyObject.js",
     "file"
   ],
   [
@@ -2052,16 +3396,46 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/syncher/syncher.js~syncher#onobserversresume",
+    "class/src/syncher/Syncher.js~Syncher.html#instance-method-onObserversResume",
+    "src/syncher/Syncher.js~Syncher#onObserversResume",
+    "method"
+  ],
+  [
+    "src/syncher/syncher.js~syncher#onreportersresume",
+    "class/src/syncher/Syncher.js~Syncher.html#instance-method-onReportersResume",
+    "src/syncher/Syncher.js~Syncher#onReportersResume",
+    "method"
+  ],
+  [
     "src/syncher/syncher.js~syncher#owner",
     "class/src/syncher/Syncher.js~Syncher.html#instance-get-owner",
     "src/syncher/Syncher.js~Syncher#owner",
     "member"
   ],
   [
+    "src/syncher/syncher.js~syncher#read",
+    "class/src/syncher/Syncher.js~Syncher.html#instance-method-read",
+    "src/syncher/Syncher.js~Syncher#read",
+    "method"
+  ],
+  [
     "src/syncher/syncher.js~syncher#reporters",
     "class/src/syncher/Syncher.js~Syncher.html#instance-get-reporters",
     "src/syncher/Syncher.js~Syncher#reporters",
     "member"
+  ],
+  [
+    "src/syncher/syncher.js~syncher#resumeobservers",
+    "class/src/syncher/Syncher.js~Syncher.html#instance-method-resumeObservers",
+    "src/syncher/Syncher.js~Syncher#resumeObservers",
+    "method"
+  ],
+  [
+    "src/syncher/syncher.js~syncher#resumereporters",
+    "class/src/syncher/Syncher.js~Syncher.html#instance-method-resumeReporters",
+    "src/syncher/Syncher.js~Syncher#resumeReporters",
+    "method"
   ],
   [
     "src/syncher/syncher.js~syncher#subscribe",
@@ -2088,6 +3462,30 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/utils/watchingyou.js",
+    "file/src/utils/WatchingYou.js.html",
+    "src/utils/WatchingYou.js",
+    "file"
+  ],
+  [
+    "src/utils/watchingyou.js~watchingyou#constructor",
+    "class/src/utils/WatchingYou.js~WatchingYou.html#instance-constructor-constructor",
+    "src/utils/WatchingYou.js~WatchingYou#constructor",
+    "method"
+  ],
+  [
+    "src/utils/watchingyou.js~watchingyou#observe",
+    "class/src/utils/WatchingYou.js~WatchingYou.html#instance-method-observe",
+    "src/utils/WatchingYou.js~WatchingYou#observe",
+    "method"
+  ],
+  [
+    "src/utils/watchingyou.js~watchingyou#watch",
+    "class/src/utils/WatchingYou.js~WatchingYou.html#instance-method-watch",
+    "src/utils/WatchingYou.js~WatchingYou#watch",
+    "method"
+  ],
+  [
     "src/utils/utils.js",
     "file/src/utils/utils.js.html",
     "src/utils/utils.js",
@@ -2098,5 +3496,95 @@ window.esdocSearchIndex = [
     "typedef/index.html#static-typedef-divideURL",
     "src/utils/utils.js~divideURL",
     "typedef"
+  ],
+  [
+    "test/cataloguedataobjectfactory.spec.js",
+    "test-file/test/CatalogueDataObjectFactory.spec.js.html",
+    "test/CatalogueDataObjectFactory.spec.js",
+    "testFile"
+  ],
+  [
+    "test/discovery.spec.js",
+    "test-file/test/Discovery.spec.js.html",
+    "test/Discovery.spec.js",
+    "testFile"
+  ],
+  [
+    "test/identityfactory.spec.js",
+    "test-file/test/IdentityFactory.spec.js.html",
+    "test/IdentityFactory.spec.js",
+    "testFile"
+  ],
+  [
+    "test/identitymanager.spec.js",
+    "test-file/test/IdentityManager.spec.js.html",
+    "test/IdentityManager.spec.js",
+    "testFile"
+  ],
+  [
+    "test/jsonschemavalidation.spec.js",
+    "test-file/test/JsonSchemaValidation.spec.js.html",
+    "test/JsonSchemaValidation.spec.js",
+    "testFile"
+  ],
+  [
+    "test/messagefactory.spec.js",
+    "test-file/test/MessageFactory.spec.js.html",
+    "test/MessageFactory.spec.js",
+    "testFile"
+  ],
+  [
+    "test/runtimecapabilities.spec.js",
+    "test-file/test/RuntimeCapabilities.spec.js.html",
+    "test/RuntimeCapabilities.spec.js",
+    "testFile"
+  ],
+  [
+    "test/runtimecatalogue.spec.js",
+    "test-file/test/RuntimeCatalogue.spec.js.html",
+    "test/RuntimeCatalogue.spec.js",
+    "testFile"
+  ],
+  [
+    "test/storagemanager.spec.js",
+    "test-file/test/StorageManager.spec.js.html",
+    "test/StorageManager.spec.js",
+    "testFile"
+  ],
+  [
+    "test/sync.spec.js",
+    "test-file/test/Sync.spec.js.html",
+    "test/Sync.spec.js",
+    "testFile"
+  ],
+  [
+    "test/addressfactorytest.js",
+    "test-file/test/addressFactoryTest.js.html",
+    "test/addressFactoryTest.js",
+    "testFile"
+  ],
+  [
+    "test/utils.spec.js",
+    "test-file/test/utils.spec.js.html",
+    "test/utils.spec.js",
+    "testFile"
+  ],
+  [
+    "utils utils,utils",
+    "test-file/test/utils.spec.js.html#lineNumber21",
+    "this is test for Utils.",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/utils.spec.js.html#lineNumber55",
+    "this is test for Utils. should convert a user identity to userURL",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/utils.spec.js.html#lineNumber23",
+    "this is test for Utils. should divide an url in 3 parts (type, domain, identity)",
+    "test"
   ]
 ]

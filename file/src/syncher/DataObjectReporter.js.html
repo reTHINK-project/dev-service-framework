@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../">
-  <title data-ice="title">src/syncher/DataObjectReporter.js | API Document</title>
+  <title data-ice="title">src/syncher/DataObjectReporter.js | Service Framework API Document</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -18,8 +18,8 @@
   
   <a href="identifiers.html">Reference</a>
   <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
   
-  <a data-ice="repoURL" href="git+ssh://git@github.com/reTHINK-project/core-framework.git">Repository</a>
   <div class="search-box">
   <span>
     <img src="./image/search.png">
@@ -39,34 +39,32 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~ContextDataObjectSchema.html">ContextDataObjectSchema</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~DataObjectSchema.html">DataObjectSchema</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~HypertyDataObjectSchema.html">HypertyDataObjectSchema</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~IdentifyDataObjectSchema.html">IdentifyDataObjectSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~IdentityDataObjectSchema.html">IdentityDataObjectSchema</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/DataObjectSchema.js~MessageDataObjectSchema.html">MessageDataObjectSchema</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/HypertyDescriptor.js~HypertyDescriptor.html">HypertyDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/HypertyInterceptorDescriptor.js~PolicyEnforcerDescriptor.html">PolicyEnforcerDescriptor</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/HypertyRuntimeDescriptor.js~HypertyRuntimeDescriptor.html">HypertyRuntimeDescriptor</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/PolicyEnforcerDescriptor.js~PolicyEnforcerDescriptor.html">PolicyEnforcerDescriptor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeHypertyCapability.html">RuntimeHypertyCapability</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/HypertyRuntimeDescriptor.js~RuntimeProtocolCapability.html">RuntimeProtocolCapability</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/ProtocolStubDescriptor.js~ProtocolStubDescriptor.html">ProtocolStubDescriptor</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/RuntimeConstraint.js~RuntimeConstraint.html">RuntimeConstraint</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/catalogue-factory/SourcePackage.js~SourcePackage.html">SourcePackage</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-CatalogueObjectType">CatalogueObjectType</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-DataObjectSourceLanguage">DataObjectSourceLanguage</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-DataUrlScheme">DataUrlScheme</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HypertyResourceType">HypertyResourceType</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HypertyType">HypertyType</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RuntimeHypertyCapabilityType">RuntimeHypertyCapabilityType</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RuntimeHypertyCapabilityType">RuntimeHypertyCapabilityType</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RuntimeProtocolCapabilityType">RuntimeProtocolCapabilityType</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RuntimeType">RuntimeType</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">hyperty-chat</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/hyperty-chat/Chat.js~ChatGroup.html">ChatGroup</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-activate">activate</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-CommunicationStatus">CommunicationStatus</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-communication">communication</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-participant">participant</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">hyperty-connector</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/hyperty-connector/ConnectionController.js~ConnectionController.html">ConnectionController</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-activate">activate</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-connection">connection</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-peer">peer</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">hyperty-discovery</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/hyperty-discovery/HypertyDiscovery.js~HypertyDiscovery.html">HypertyDiscovery</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">discovery</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/discovery/Discovery.js~Discovery.html">Discovery</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">identity</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/identity/Identity.js~Identity.html">Identity</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/identity/MessageBodyIdentity.js~MessageBodyIdentity.html">MessageBodyIdentity</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/identity/UserProfile.js~UserProfile.html">UserProfile</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">identityManager</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/identityManager/IdentityManager.js~IdentityManager.html">IdentityManager</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">message-factory</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/Message.js~Message.html">Message</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~CreateMessageBody.html">CreateMessageBody</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~DeleteMessageBody.html">DeleteMessageBody</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~ExecuteMessageBody.html">ExecuteMessageBody</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~ForwardMessageBody.html">ForwardMessageBody</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~MessageBody.html">MessageBody</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageBody.js~ReadMessageBody.html">ReadMessageBody</a></span></span></li>
@@ -76,11 +74,15 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/message-factory/MessageFactory.js~MessageFactory.html">MessageFactory</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Enum">Enum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-MessageType">MessageType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ATTRIBUTE_TYPE">ATTRIBUTE_TYPE</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-REASON_PHRASE">REASON_PHRASE</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-RESPONSE_CODE">RESPONSE_CODE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-UPDATE_OPERATION">UPDATE_OPERATION</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">persistence</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/persistence/PersistenceManager.js~PersistenceManager.html">PersistenceManager</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">reTHINKObject</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/reTHINKObject/RethinkObject.js~RethinkObject.html">RethinkObject</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">runtime-loader</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/runtime-loader/Core.js~Core.html">Core</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/runtime-loader/RuntimeLoader.js~RuntimeLoader.html">RuntimeLoader</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">runtime-capabilities</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/runtime-capabilities/RuntimeCapabilities.js~RuntimeCapabilities.html">RuntimeCapabilities</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">runtime-catalogue</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/runtime-catalogue/RuntimeCatalogue.js~RuntimeCatalogue.html">RuntimeCatalogue</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">storage-manager</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/storage-manager/StorageManager.js~StorageManager.html">StorageManager</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">syncher</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/DataObject.js~DataObject.html">DataObject</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/DataObjectChild.js~DataObjectChild.html">DataObjectChild</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/DataObjectObserver.js~DataObjectObserver.html">DataObjectObserver</a></span></span></li>
@@ -88,16 +90,52 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/syncher/Syncher.js~Syncher.html">Syncher</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ChangeType">ChangeType</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ObjectType">ObjectType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ChangeType">ChangeType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ObjectType">ObjectType</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">utils</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/utils/EventEmitter.js~EventEmitter.html">EventEmitter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/utils/WatchingYou.js~WatchingYou.html">WatchingYou</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-checkAttribute">checkAttribute</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-convertToUserURL">convertToUserURL</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-deepClone">deepClone</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-divideEmail">divideEmail</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-divideURL">divideURL</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-emptyObject">emptyObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getUserEmailFromURL">getUserEmailFromURL</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getUserURLFromEmail">getUserURLFromEmail</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseAttributes">parseAttributes</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-divideURL">divideURL</a></span></span></li>
 </ul>
 </div>
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/syncher/DataObjectReporter.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import DataObject from &apos;./DataObject&apos;;
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+* Copyright 2016 PT Inova&#xE7;&#xE3;o e Sistemas SA
+* Copyright 2016 INESC-ID
+* Copyright 2016 QUOBIS NETWORKS SL
+* Copyright 2016 FRAUNHOFER-GESELLSCHAFT ZUR FOERDERUNG DER ANGEWANDTEN FORSCHUNG E.V
+* Copyright 2016 ORANGE SA
+* Copyright 2016 Deutsche Telekom AG
+* Copyright 2016 Apizee
+* Copyright 2016 TECHNISCHE UNIVERSITAT BERLIN
+*
+* Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*   http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+**/
+
+import DataObject from &apos;./DataObject&apos;;
+
+import DataObjectChild from &apos;./DataObjectChild&apos;;
+
 import { deepClone } from &apos;../utils/utils.js&apos;;
 
 /**
@@ -111,28 +149,88 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
   ----event handlers----
   _onSubscriptionHandler: (event) =&gt; void
   _onResponseHandler: (event) =&gt; void
+  _onReadHandler: (event) =&gt; void
   */
 
   /**
    * @ignore
    * Should not be used directly by Hyperties. It&apos;s called by the Syncher.create method
    */
-  constructor(owner, url, schema, bus, initialStatus, initialData, children) {
-    super(owner, url, schema, bus, initialStatus, initialData, children);
+
+   //constructor(syncher, url, created, reporter, runtime, schema, name, initialStatus, initialData, childrens, mutual = true, resumed = false, description, tags, resources, observerStorage, publicObservation) {
+  constructor(input) {
+
+    super(input);
     let _this = this;
 
-    bus.addListener(owner, (msg) =&gt; {
-      if (msg.type === &apos;response&apos; &amp;&amp; msg.body.source === url) {
-        _this._onResponse(msg);
-      }
-    });
+    _this._subscriptions = {};
 
     _this._syncObj.observe((event) =&gt; {
-      console.log(&apos;DataObjectReporter-&apos; + url + &apos;-SEND: &apos;, event);
+      console.log(&apos;[Syncher.DataObjectReporter] &apos; + _this.url + &apos; publish change: &apos;, event);
       _this._onChange(event);
     });
 
-    _this._subscriptions = {};
+    _this._allocateListeners();
+  }
+
+  _allocateListeners() {
+    super._allocateListeners();
+    let _this = this;
+
+    _this._objectListener = _this._bus.addListener(_this._url, (msg) =&gt; {
+      console.log(&apos;[Syncher.DataObjectReporter] listener &apos; + _this._url + &apos; Received: &apos;, msg);
+      switch (msg.type) {
+        case &apos;response&apos;: _this._onResponse(msg); break;
+        case &apos;read&apos;: _this._onRead(msg); break;
+      }
+    });
+  }
+
+  _releaseListeners() {
+    super._releaseListeners();
+    let _this = this;
+
+    _this._objectListener.remove();
+  }
+
+  /**
+   * Send invitations (create messages) to hyperties, observers list.
+   * @param  {HypertyURL[]} observers List of Hyperty URL&apos;s
+   */
+  inviteObservers(observers) {
+    let _this = this;
+
+    //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -&gt; _onCreate
+    // TODO: remove value and add resources? should similar to 1st create
+    let inviteMsg = {
+      type: &apos;create&apos;, from: _this._syncher._owner, to: _this._syncher._subURL,
+      body: { resume: false, resource: _this._url, schema: _this._schema, value: _this._metadata, authorise: observers }
+    };
+
+    _this._bus.postMessage(inviteMsg);
+  }
+
+  /**
+   * Release and delete object data
+   */
+  delete() {
+    let _this = this;
+
+    //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -&gt; _onDelete
+    let deleteMsg = {
+      type: &apos;delete&apos;, from: _this._owner, to: _this._syncher._subURL,
+      body: { resource: _this._url }
+    };
+
+    _this._bus.postMessage(deleteMsg, (reply) =&gt; {
+      console.log(&apos;DataObjectReporter-DELETE: &apos;, reply);
+      if (reply.body.code === 200) {
+        _this._releaseListeners();
+        delete _this._syncher._reporters[_this._url];
+
+        _this._syncObj = {};
+      }
+    });
   }
 
   /**
@@ -143,7 +241,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
 
   /**
    * Setup the callback to process subscribe and unsubscribe notifications
-   * @param {function(event: MsgEvent)} callback
+   * @param {function(event: MsgEvent)} callback function to receive events
    */
   onSubscription(callback) {
     this._onSubscriptionHandler = callback;
@@ -151,12 +249,21 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
 
   /**
    * Setup the callback to process response notifications of the create&apos;s
-   * @param {function(event: MsgEvent)} callback
+   * @param {function(event: MsgEvent)} callback function to receive events
    */
   onResponse(callback) {
     this._onResponseHandler = callback;
   }
 
+  /**
+   * Setup the callback to process read notifications
+   * @param {function(event: MsgEvent)} callback
+   */
+  onRead(callback) {
+    this._onReadHandler = callback;
+  }
+
+  //FLOW-IN: message received from parent Syncher -&gt; _onForward
   _onForward(msg) {
     let _this = this;
 
@@ -167,24 +274,52 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     }
   }
 
+  //FLOW-IN: message received from this -&gt; _onForward: emitted by a remote Syncher -&gt; subscribe
   _onSubscribe(msg) {
     let _this = this;
     let hypertyUrl = msg.body.from;
+    console.log(&apos;[DataObjectReporter._onSubscribe]&apos;, msg);
 
     let event = {
       type: msg.body.type,
       url: hypertyUrl,
 
+      identity: msg.body.identity,
+
       accept: () =&gt; {
         //create new subscription
-        let sub = { url: hypertyUrl, status: &apos;on&apos; };
+        let sub = { url: hypertyUrl, status: &apos;live&apos; };
         _this._subscriptions[hypertyUrl] = sub;
+        if (_this.metadata.subscriptions) { _this.metadata.subscriptions.push(sub.url); }
+
+        let msgValue = _this._metadata;
+        msgValue.data = deepClone(_this.data);
+        msgValue.version = _this._version;
+
+        //process and send childrens data
+        let childrenValues = {};
+
+        if (_this._childrenObjects) {
+          Object.keys(_this._childrenObjects).forEach((childrenId) =&gt; {
+            let childrenData = _this._childrenObjects[childrenId].data;
+            childrenValues[childrenId] = deepClone(childrenData);
+          });
+          msgValue.childrenObjects = childrenValues;
+        }
+
+        let sendMsg = {
+          id: msg.id, type: &apos;response&apos;, from: msg.to, to: msg.from,
+          body: { code: 200, schema: _this._schema, value: msgValue }
+        };
+
+        //TODO: For Further Study
+        if (msg.body.hasOwnProperty(&apos;mutualAuthentication&apos;) &amp;&amp; !msg.body.mutualAuthentication) {
+          sendMsg.body.mutualAuthentication = this._mutualAuthentication;
+          this._mutualAuthentication = msg.body.mutualAuthentication;
+        }
 
         //send ok response message
-        _this._bus.postMessage({
-          id: msg.id, type: &apos;response&apos;, from: msg.to, to: msg.from,
-          body: { code: 200, schema: _this._schema, version: _this._version, value: deepClone(_this.data) }
-        });
+        _this._bus.postMessage(sendMsg);
 
         return sub;
       },
@@ -199,28 +334,32 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     };
 
     if (_this._onSubscriptionHandler) {
+      console.log(&apos;SUBSCRIPTION-EVENT: &apos;, event);
       _this._onSubscriptionHandler(event);
     }
   }
 
+  //FLOW-IN: message received from this -&gt; _onForward: emitted by a remote DataObjectObserver -&gt; unsubscribe
   _onUnSubscribe(msg) {
     let _this = this;
     let hypertyUrl = msg.body.from;
 
-    let sub = _this._subscriptions[hypertyUrl];
+    //let sub = _this._subscriptions[hypertyUrl];
     delete _this._subscriptions[hypertyUrl];
 
     let event = {
       type: msg.body.type,
       url: hypertyUrl,
-      object: sub
+      identity: msg.body.identity
     };
 
     if (_this._onSubscriptionHandler) {
+      console.log(&apos;UN-SUBSCRIPTION-EVENT: &apos;, event);
       _this._onSubscriptionHandler(event);
     }
   }
 
+  //FLOW-IN: message received from ReporterURL address: emited by a remote Syncher -&gt; _onRemoteCreate -&gt; event.ack
   _onResponse(msg) {
     let _this = this;
 
@@ -231,7 +370,53 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     };
 
     if (_this._onResponseHandler) {
+      console.log(&apos;RESPONSE-EVENT: &apos;, event);
       _this._onResponseHandler(event);
+    }
+  }
+
+  //FLOW-IN: message received from ReporterURL address: emited by a remote Syncher -&gt; read
+  _onRead(msg) {
+    let _this = this;
+    let objectValue = deepClone(_this.metadata);
+    objectValue.data = deepClone(_this.data);
+    objectValue.version = _this._version;
+
+    let response = {
+      id: msg.id, type: &apos;response&apos;, from: msg.to, to: msg.from,
+      body: { code: 200, value: objectValue }
+    };
+
+    let event = {
+      type: msg.type,
+      url: msg.from,
+
+      accept: () =&gt; {
+        _this._bus.postMessage(response);
+      },
+
+      reject: (reason) =&gt; {
+        _this._bus.postMessage({
+          id: msg.id, type: &apos;response&apos;, from: msg.to, to: msg.from,
+          body: { code: 401, desc: reason }
+        });
+      }
+    };
+
+    // if the requester is an authorised observer, the data object is responded otherwise an event is triggered
+    let subscriptions = [];
+
+    if (_this.metadata.subscriptions) {
+      subscriptions = _this.metadata.subscriptions;
+    } else if (_this._subscriptions) {
+      subscriptions = Object.keys(_this._subscriptions).map(function(key) { return _this._subscriptions[key]; });
+    }
+
+    if (subscriptions.indexOf(msg.from) != -1) {
+      _this._bus.postMessage(response);
+    } else if (_this._onReadHandler) {
+      console.log(&apos;READ-EVENT: &apos;, event);
+      _this._onReadHandler(event);
     }
   }
 
@@ -243,7 +428,7 @@ export default DataObjectReporter;
 </div>
 
 <footer class="footer">
-  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.4)</span></a>
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.5.2)</span><img src="./image/esdoc-logo-mini-black.png"></a>
 </footer>
 
 <script src="script/search_index.js"></script>

@@ -1,159 +1,134 @@
 {
-  "coverage": "40%",
-  "expectCount": 255,
-  "actualCount": 102,
+  "coverage": "44.03%",
+  "expectCount": 352,
+  "actualCount": 155,
   "files": {
+    "src/message-factory/MessageBody.js": {
+      "expectCount": 47,
+      "actualCount": 19,
+      "undocumentLines": [
+        375,
+        268,
+        380,
+        44,
+        175,
+        180,
+        47,
+        171,
+        114,
+        148,
+        177,
+        142,
+        228,
+        120,
+        117,
+        229,
+        43,
+        205,
+        257,
+        182,
+        260,
+        88,
+        45,
+        46,
+        172,
+        232,
+        86,
+        60
+      ]
+    },
     "src/catalogue-factory/CatalogueDataObject.js": {
-      "expectCount": 20,
+      "expectCount": 22,
       "actualCount": 3,
       "undocumentLines": [
-        110,
-        115,
-        43,
-        94,
-        79,
-        31,
-        99,
-        47,
-        89,
-        39,
-        51,
+        148,
+        152,
+        131,
         74,
-        55,
-        59,
-        104,
-        35,
-        84
+        58,
+        110,
+        136,
+        78,
+        70,
+        126,
+        82,
+        105,
+        86,
+        141,
+        90,
+        62,
+        115,
+        66,
+        120
       ]
     },
     "src/catalogue-factory/CatalogueDataObjectFactory.js": {
-      "expectCount": 9,
-      "actualCount": 8,
+      "expectCount": 10,
+      "actualCount": 9,
       "undocumentLines": [
-        22
+        39
       ]
     },
     "src/syncher/SyncObject.js": {
       "expectCount": 2,
       "actualCount": 0,
       "undocumentLines": [
-        272,
-        273
+        297,
+        298
       ]
     },
-    "src/hyperty-chat/Chat.js": {
-      "expectCount": 14,
-      "actualCount": 5,
-      "undocumentLines": [
-        4,
-        6,
-        74,
-        51,
-        69,
-        20,
-        46,
-        144,
-        79
-      ]
-    },
-    "src/catalogue-factory/DataObjectSchema.js": {
-      "expectCount": 14,
-      "actualCount": 0,
-      "undocumentLines": [
-        30,
-        36,
-        48,
-        7,
-        22,
-        42,
-        16,
-        43,
-        23,
-        37,
-        17,
-        49,
-        31,
-        8
-      ]
-    },
-    "src/hyperty-chat/communication.js": {
+    "src/syncher/ProxyObject.js": {
       "expectCount": 2,
       "actualCount": 0,
       "undocumentLines": [
-        1,
-        9
+        126,
+        127
       ]
     },
-    "src/hyperty-connector/ConnectionController.js": {
-      "expectCount": 25,
-      "actualCount": 12,
-      "undocumentLines": [
-        12,
-        191,
-        14,
-        250,
-        241,
-        409,
-        390,
-        280,
-        428,
-        258,
-        205,
-        237,
-        233
-      ]
-    },
-    "src/runtime-loader/Core.js": {
-      "expectCount": 3,
+    "src/catalogue-factory/DataObjectSchema.js": {
+      "expectCount": 15,
       "actualCount": 0,
       "undocumentLines": [
-        1,
-        3,
-        6
-      ]
-    },
-    "src/message-factory/MessageBody.js": {
-      "expectCount": 34,
-      "actualCount": 16,
-      "undocumentLines": [
-        192,
-        23,
-        29,
-        112,
-        83,
-        135,
-        183,
-        89,
-        86,
-        184,
-        21,
-        159,
-        57,
-        25,
-        27,
-        187,
+        54,
+        60,
+        72,
+        30,
+        78,
+        45,
+        66,
+        39,
+        73,
+        31,
+        40,
+        46,
         55,
-        136
+        61,
+        67
       ]
     },
     "src/syncher/DataObject.js": {
-      "expectCount": 8,
-      "actualCount": 8,
+      "expectCount": 10,
+      "actualCount": 10,
       "undocumentLines": []
     },
     "src/syncher/DataObjectChild.js": {
+      "expectCount": 9,
+      "actualCount": 9,
+      "undocumentLines": []
+    },
+    "src/syncher/DataObjectObserver.js": {
       "expectCount": 5,
       "actualCount": 5,
       "undocumentLines": []
     },
-    "src/syncher/DataObjectObserver.js": {
-      "expectCount": 2,
-      "actualCount": 2,
+    "src/syncher/DataObjectReporter.js": {
+      "expectCount": 7,
+      "actualCount": 7,
       "undocumentLines": []
     },
-    "src/syncher/DataObjectReporter.js": {
-      "expectCount": 4,
-      "actualCount": 4,
+    "src/discovery/Discovery.js": {
+      "expectCount": 16,
+      "actualCount": 16,
       "undocumentLines": []
     },
     "src/utils/EventEmitter.js": {
@@ -162,182 +137,251 @@
       "undocumentLines": []
     },
     "src/catalogue-factory/HypertyDescriptor.js": {
-      "expectCount": 16,
-      "actualCount": 0,
+      "expectCount": 17,
+      "actualCount": 1,
       "undocumentLines": [
-        6,
-        78,
-        77,
-        54,
-        28,
-        59,
-        32,
-        8,
-        49,
-        24,
-        20,
-        44,
-        64,
-        36,
-        40,
-        69
+        29,
+        116,
+        115,
+        114,
+        65,
+        91,
+        69,
+        96,
+        61,
+        86,
+        57,
+        81,
+        73,
+        101,
+        106,
+        77
       ]
     },
-    "src/hyperty-discovery/HypertyDiscovery.js": {
-      "expectCount": 3,
-      "actualCount": 3,
-      "undocumentLines": []
-    },
     "src/catalogue-factory/HypertyRuntimeDescriptor.js": {
-      "expectCount": 11,
-      "actualCount": 0,
+      "expectCount": 31,
+      "actualCount": 4,
       "undocumentLines": [
-        7,
-        54,
-        58,
-        53,
-        9,
-        42,
-        29,
-        47,
-        33,
-        25,
-        37
+        30,
+        198,
+        32,
+        135,
+        193,
+        55,
+        68,
+        119,
+        184,
+        188,
+        164,
+        168,
+        115,
+        131,
+        123,
+        176,
+        172,
+        180,
+        127,
+        82,
+        78,
+        90,
+        86,
+        59,
+        73,
+        63,
+        51
       ]
     },
     "src/message-factory/MessageFactory.js": {
       "expectCount": 15,
       "actualCount": 13,
       "undocumentLines": [
-        219,
-        23
+        252,
+        46
       ]
+    },
+    "src/identity/Identity.js": {
+      "expectCount": 4,
+      "actualCount": 1,
+      "undocumentLines": [
+        28,
+        16,
+        7
+      ]
+    },
+    "src/identityManager/IdentityManager.js": {
+      "expectCount": 3,
+      "actualCount": 3,
+      "undocumentLines": []
     },
     "src/message-factory/Message.js": {
       "expectCount": 11,
       "actualCount": 6,
       "undocumentLines": [
-        29,
-        26,
-        25,
-        27,
-        28
+        53,
+        50,
+        49,
+        51,
+        52
       ]
     },
-    "src/catalogue-factory/PolicyEnforcerDescriptor.js": {
-      "expectCount": 6,
-      "actualCount": 0,
-      "undocumentLines": [
-        6,
-        14,
-        26,
-        7,
-        18,
-        22
-      ]
-    },
-    "src/catalogue-factory/ProtocolStubDescriptor.js": {
-      "expectCount": 8,
-      "actualCount": 0,
-      "undocumentLines": [
-        8,
-        47,
-        33,
-        29,
-        42,
-        9,
-        37,
-        25
-      ]
-    },
-    "src/reTHINKObject/RethinkObject.js": {
+    "src/identity/MessageBodyIdentity.js": {
       "expectCount": 5,
       "actualCount": 0,
       "undocumentLines": [
+        7,
+        16,
+        9,
+        14,
+        17
+      ]
+    },
+    "src/persistence/PersistenceManager.js": {
+      "expectCount": 6,
+      "actualCount": 1,
+      "undocumentLines": [
+        25,
+        55,
+        37,
+        46,
+        32
+      ]
+    },
+    "src/catalogue-factory/HypertyInterceptorDescriptor.js": {
+      "expectCount": 6,
+      "actualCount": 0,
+      "undocumentLines": [
+        29,
+        37,
+        49,
+        30,
+        41,
+        45
+      ]
+    },
+    "src/catalogue-factory/ProtocolStubDescriptor.js": {
+      "expectCount": 18,
+      "actualCount": 0,
+      "undocumentLines": [
+        30,
+        82,
+        68,
+        77,
+        64,
+        31,
+        95,
+        99,
+        87,
+        91,
+        115,
+        111,
+        107,
+        103,
+        60,
+        72,
+        123,
+        119
+      ]
+    },
+    "src/reTHINKObject/RethinkObject.js": {
+      "expectCount": 2,
+      "actualCount": 1,
+      "undocumentLines": [
+        25
+      ]
+    },
+    "src/runtime-capabilities/RuntimeCapabilities.js": {
+      "expectCount": 5,
+      "actualCount": 3,
+      "undocumentLines": [
+        1,
+        3
+      ]
+    },
+    "src/runtime-catalogue/RuntimeCatalogue.js": {
+      "expectCount": 24,
+      "actualCount": 15,
+      "undocumentLines": [
         3,
-        5,
         10,
-        13,
-        9
+        5,
+        388,
+        504,
+        9,
+        496,
+        500,
+        11
       ]
     },
     "src/catalogue-factory/RuntimeConstraint.js": {
       "expectCount": 6,
       "actualCount": 1,
       "undocumentLines": [
-        11,
-        19,
-        6,
-        24,
-        15
-      ]
-    },
-    "src/runtime-loader/RuntimeLoader.js": {
-      "expectCount": 4,
-      "actualCount": 2,
-      "undocumentLines": [
-        3,
-        5
+        42,
+        34,
+        29,
+        38,
+        47
       ]
     },
     "src/catalogue-factory/SourcePackage.js": {
       "expectCount": 10,
       "actualCount": 1,
       "undocumentLines": [
-        5,
-        29,
-        21,
-        25,
-        34,
-        39,
-        13,
+        28,
         44,
-        17
+        52,
+        57,
+        48,
+        36,
+        62,
+        40,
+        67
+      ]
+    },
+    "src/storage-manager/StorageManager.js": {
+      "expectCount": 8,
+      "actualCount": 4,
+      "undocumentLines": [
+        1,
+        3,
+        21,
+        22
       ]
     },
     "src/syncher/Syncher.js": {
-      "expectCount": 8,
-      "actualCount": 8,
+      "expectCount": 13,
+      "actualCount": 13,
       "undocumentLines": []
     },
-    "src/hyperty-connector/HypertyConnector.js": {
-      "expectCount": 1,
-      "actualCount": 0,
+    "src/identity/UserProfile.js": {
+      "expectCount": 7,
+      "actualCount": 1,
       "undocumentLines": [
-        225
+        11,
+        12,
+        8,
+        13,
+        14,
+        10
       ]
     },
-    "src/hyperty-chat/HypertyChat.js": {
-      "expectCount": 1,
+    "src/utils/WatchingYou.js": {
+      "expectCount": 4,
       "actualCount": 0,
       "undocumentLines": [
-        147
-      ]
-    },
-    "src/hyperty-connector/connection.js": {
-      "expectCount": 1,
-      "actualCount": 0,
-      "undocumentLines": [
-        27
+        3,
+        5,
+        27,
+        10
       ]
     },
     "src/utils/utils.js": {
-      "expectCount": 2,
-      "actualCount": 2,
-      "undocumentLines": []
-    },
-    "src/hyperty-chat/participant.js": {
-      "expectCount": 1,
-      "actualCount": 0,
+      "expectCount": 9,
+      "actualCount": 6,
       "undocumentLines": [
-        1
-      ]
-    },
-    "src/hyperty-connector/peer.js": {
-      "expectCount": 1,
-      "actualCount": 0,
-      "undocumentLines": [
-        1
+        166,
+        91,
+        207
       ]
     }
   }
