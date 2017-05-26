@@ -233,13 +233,13 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     let _this = this;
     let hypertyUrl = msg.body.from;
 
-    let sub = _this._subscriptions[hypertyUrl];
+    //let sub = _this._subscriptions[hypertyUrl];
     delete _this._subscriptions[hypertyUrl];
 
     let event = {
       type: msg.body.type,
       url: hypertyUrl,
-      object: sub
+      identity: msg.body.identity
     };
 
     if (_this._onSubscriptionHandler) {
