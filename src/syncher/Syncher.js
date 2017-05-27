@@ -516,14 +516,16 @@ class Syncher {
             console.log('[syncher._resumeSubscribe] - create new dataObject: ', dataObject);
             let newObj = new DataObjectObserver(dataObject);
 
-            //lets sync with Reporter
-            newObj.sync();
-
             if (dataObject.childrenObjects) { newObj.resumeChildrens(dataObject.childrenObjects); }
-
+            console.log('[syncher._resumeSubscribe] - new dataObject', newObj);
             _this._observers[newObj.url] = newObj;
 
-            if (_this._provisionals[newObj.url]) { _this._provisionals[newObj.url].apply(newObj); }
+            if (_this._provisionals[newObj.url]) {
+              _this._provisionals[newObj.url].apply(newObj);
+            }
+
+            //lets sync with Reporter
+            newObj.sync();
           }
 
           resolve(_this._observers);

@@ -240,6 +240,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
       object: sub
     };
 
+    // TODO: check if the _onSubscriptionHandler it is the same of the subscriptions???
     if (_this._onSubscriptionHandler) {
       console.log('UN-SUBSCRIPTION-EVENT: ', event);
       _this._onSubscriptionHandler(event);
