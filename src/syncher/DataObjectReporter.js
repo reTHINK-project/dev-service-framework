@@ -116,6 +116,9 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
       if (reply.body.code === 200) {
         _this._releaseListeners();
         delete _this._syncher._reporters[_this._url];
+
+        _this._syncObj.unobserve();
+        _this._syncObj = {};
       }
     });
   }
@@ -231,15 +234,16 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     let _this = this;
     let hypertyUrl = msg.body.from;
 
-    let sub = _this._subscriptions[hypertyUrl];
+    //let sub = _this._subscriptions[hypertyUrl];
     delete _this._subscriptions[hypertyUrl];
 
     let event = {
       type: msg.body.type,
       url: hypertyUrl,
-      object: sub
+      identity: msg.body.identity
     };
 
+    // TODO: check if the _onSubscriptionHandler it is the same of the subscriptions???
     if (_this._onSubscriptionHandler) {
       console.log('UN-SUBSCRIPTION-EVENT: ', event);
       _this._onSubscriptionHandler(event);
