@@ -122,7 +122,7 @@ class Syncher {
     createInput.schema = schema;
     createInput.authorise = observers;
     (initialData) ? createInput.data = deepClone(initialData) : createInput.data = {};
-    createInput.name = name;
+    createInput.name = name.length === 0 ? 'no name': name;
     createInput.reporter = _this._owner;
     createInput.resume = false;
     if (input) {
