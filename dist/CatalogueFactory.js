@@ -1,5 +1,5 @@
-// version: 0.6.1
-// date: Mon May 29 2017 14:17:15 GMT+0100 (WEST)
+// version: 0.6.2
+// date: Mon May 29 2017 16:53:22 GMT+0100 (WEST)
 // licence: 
 /**
 * Copyright 2016 PT Inovação e Sistemas SA
