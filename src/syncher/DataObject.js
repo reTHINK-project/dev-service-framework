@@ -86,6 +86,8 @@ class DataObject {
 
     _this._resumed = input.resume;
 
+    if (input.resume) { _this._version = input.version; }
+
     _this._owner = input.syncher._owner;
     _this._bus = input.syncher._bus;
 
@@ -96,6 +98,8 @@ class DataObject {
     if (input.publicObservation) _this._publicObservation = input.publicObservation;
 
     _this._metadata = Object.assign(input);
+    _this._metadata.lastModified = _this._metadata.created;
+
     delete _this._metadata.data;
     delete _this._metadata.syncher;
     delete _this._metadata.authorise;
@@ -364,13 +368,15 @@ class DataObject {
   _onChange(event, childInfo) {
     let _this = this;
 
+    _this._metadata.lastModified = (new Date).toISOString();
+
     _this._version++;
 
     if (_this._status === 'live') {
       //FLOW-OUT: this message will be sent directly to a resource changes address: MessageBus
       let changeMsg = {
         type: 'update', from: _this._url, to: _this._url + '/changes',
-        body: { version: _this._version, source: _this._owner, attribute: event.field }
+        body: { version: _this._version, source: _this._owner, attribute: event.field, lastModified: _this._metadata.lastModified }
       };
 
       console.log('[DataObject - _onChange] - ', event, childInfo, changeMsg);
@@ -412,6 +418,12 @@ class DataObject {
       let path = msg.body.attribute;
       let value = deepClone(msg.body.value);
       let findResult = syncObj.findBefore(path);
+
+      if (msg.body.lastModified) {
+        _this._metadata.lastModified = msg.body.lastModified;
+      } else {
+        _this._metadata.lastModified = (new Date).toISOString();
+      }
 
       if (msg.body.attributeType === ObjectType.ARRAY) {
         if (msg.body.operation === ChangeType.ADD) {

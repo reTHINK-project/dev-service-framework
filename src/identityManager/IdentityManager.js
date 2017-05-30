@@ -76,7 +76,7 @@ class IdentityManager {
         if (userURL && reply.body.code === 200) {
           resolve(userURL);
         } else {
-          reject('code: ' + reply.body.code + ' No user was not found');
+          reject('code: ' + reply.body.code + ' No user was found');
         }
       });
     });

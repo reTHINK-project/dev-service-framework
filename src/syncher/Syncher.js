@@ -109,7 +109,7 @@ class Syncher {
   * @param  {SyncMetadata} input - (optional) all metadata required to sunc the Data Object.
   * @return {Promise<DataObjectReporter>} Return Promise to a new Reporter. The reporter can be accepted or rejected by the PEP
   */
-  create(schema, observers, initialData, store = false, p2p = false, name = 'data object without name', identity, input) {
+  create(schema, observers, initialData, store = false, p2p = false, name = 'no name', identity, input) {
 
     if (!schema) throw Error('[Syncher - Create] - You need specify the data object schema');
     if (!observers) throw Error('[Syncher - Create] -The observers should be defined');
@@ -121,13 +121,13 @@ class Syncher {
     createInput.store = store;
     createInput.schema = schema;
     createInput.authorise = observers;
-    (initialData) ? createInput.data = initialData : createInput.data = {};
-    createInput.name = name;
+    (initialData) ? createInput.data = deepClone(initialData) : createInput.data = {};
+    createInput.name = name.length === 0 ? 'no name': name;
     createInput.reporter = _this._owner;
     createInput.resume = false;
     if (input) {
       createInput.mutual = input.mutual ? input.mutual : true;
-      createInput.name = input.name ? input.name : 'no name';
+      createInput.name = input.name ? input.name : createInput.name;
     } else { createInput.mutual = true; }
 
     if (identity)      { createInput.identity = identity; }
@@ -339,7 +339,7 @@ class Syncher {
             if (dataObject.childrenObjects) { dataObject.childrenObjects = deepClone(dataObject.childrenObjects); }
 
             dataObject.mutual = false;
-            dataObject.resumed = true;
+            dataObject.resume = true;
             dataObject.status = 'live';// pch: do we ned this?
             dataObject.syncher = _this;
 
@@ -421,11 +421,10 @@ class Syncher {
           let observerInput = reply.body.value;
 
           observerInput.syncher = _this;
-          //observerInput.status = 'on';
           observerInput.p2p = input.p2p;
           observerInput.store = input.store;
           observerInput.identity = input.identity;
-          observerInput.resume = input.resume;
+          observerInput.resume = false;
 
           // todo: For Further Study
           observerInput.mutual = input.mutual;
@@ -509,7 +508,7 @@ class Syncher {
             if (dataObject.childrenObjects) { dataObject.childrenObjects = deepClone(dataObject.childrenObjects); }
 
             dataObject.data = deepClone(dataObject.data) || {};
-            dataObject.resumed = true;
+            dataObject.resume = true;
             dataObject.syncher = _this;
 
             //TODO: mutualAuthentication For Further Study
@@ -517,10 +516,15 @@ class Syncher {
             let newObj = new DataObjectObserver(dataObject);
 
             if (dataObject.childrenObjects) { newObj.resumeChildrens(dataObject.childrenObjects); }
+            console.log('[syncher._resumeSubscribe] - new dataObject', newObj);
+            _this._observers[newObj.url] = newObj;
 
-            _this._observers[objURL] = newObj;
+            if (_this._provisionals[newObj.url]) {
+              _this._provisionals[newObj.url].apply(newObj);
+            }
 
-            if (_this._provisionals[objURL]) { _this._provisionals[objURL].apply(newObj); }
+            //lets sync with Reporter
+            newObj.sync();
           }
 
           resolve(_this._observers);
@@ -588,6 +592,17 @@ class Syncher {
     let resource = msg.body.resource;
 
     let object = _this._observers[resource];
+
+    let unsubscribe = {
+      from: _this.owner,
+      to: _this._subURL,
+      id: msg.id,
+      type: 'unsubscribe',
+      body: { resource: msg.body.resource }
+    };
+
+    _this._bus.postMessage(unsubscribe);
+
     if (object) {
       let event = {
         type: msg.type,
