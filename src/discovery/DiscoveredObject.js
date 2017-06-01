@@ -48,20 +48,38 @@ class DiscoveredObject {
 
   onLive(callback) {
 
-    if(!this._subscriptionSet)
-      this._subscribe();
+    return new Promise((resolve, reject) => {
 
-    this._subscribers.live.push(callback);
-
+      if(!this._subscriptionSet) {
+        this._subscribe()
+        .then(() => {
+          this._subscribers.live.push(callback);
+          resolve();
+        })
+        .catch((err) => reject(err));
+      } else {
+        this._subscribers.live.push(callback);
+        resolve();
+      }
+    });
   }
 
   onDisconnected(callback) {
 
-    if(!this._subscriptionSet)
-      this._subscribe();
+    return new Promise((resolve, reject) => {
 
-    this._subscribers.disconnected.push(callback);
-
+      if(!this._subscriptionSet) {
+        this._subscribe()
+        .then(() => {
+          this._subscribers.disconnected.push(callback);
+          resolve();
+        })
+        .catch((err) => reject(err));
+      } else {
+        this._subscribers.disconnected.push(callback);
+        resolve();
+      }
+    });
   }
 
   _subscribe() {
@@ -75,15 +93,20 @@ class DiscoveredObject {
       }
     };
 
-    this._messageBus.postMessage(msg, (reply) => {
-      console.log(`[DiscoveredObject.subscribe] ${this._registryObjectURL} rcved reply `, reply);
+    return new Promise((resolve, reject) => {
 
-      if(reply.body.code === 200) {
-        this._subscriptionSet = true;
-        this._generateListener(this._registryObjectURL + '/registration');
-      }
-      else
-        console.error("Error subscribing ", this._registryObjectURL);
+      this._messageBus.postMessage(msg, (reply) => {
+        console.log(`[DiscoveredObject.subscribe] ${this._registryObjectURL} rcved reply `, reply);
+
+        if(reply.body.code === 200) {
+          this._generateListener(this._registryObjectURL + '/registration');
+          this._subscriptionSet = true;
+          resolve();
+        }
+        else
+          console.error("Error subscribing ", this._registryObjectURL);
+          reject("Error subscribing " + this._registryObjectURL);
+      });
     });
   }
 
