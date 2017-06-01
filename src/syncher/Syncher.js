@@ -428,14 +428,16 @@ class Syncher {
 
           // todo: For Further Study
           observerInput.mutual = input.mutual;
-          observerInput.children = newProvisional.children;
+          //observerInput.children = newProvisional.children;
 
           //TODO: mutualAuthentication For Further Study
           let newObj = new DataObjectObserver(observerInput);
           _this._observers[objURL] = newObj;
 
           resolve(newObj);
-          newProvisional.apply(newObj);
+
+          if (newProvisional) { newProvisional.apply(newObj); }
+
         } else {
           reject(reply.body.desc);
         }
