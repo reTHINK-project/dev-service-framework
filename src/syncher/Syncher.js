@@ -121,8 +121,8 @@ class Syncher {
     createInput.store = store;
     createInput.schema = schema;
     createInput.authorise = observers;
-    (initialData) ? createInput.data = initialData : createInput.data = {};
-    createInput.name = name;
+    (initialData) ? createInput.data = deepClone(initialData) : createInput.data = {};
+    createInput.name = name.length === 0 ? 'no name': name;
     createInput.reporter = _this._owner;
     createInput.resume = false;
     if (input) {
@@ -421,7 +421,6 @@ class Syncher {
           let observerInput = reply.body.value;
 
           observerInput.syncher = _this;
-          //observerInput.status = 'on';
           observerInput.p2p = input.p2p;
           observerInput.store = input.store;
           observerInput.identity = input.identity;
@@ -429,14 +428,16 @@ class Syncher {
 
           // todo: For Further Study
           observerInput.mutual = input.mutual;
-          observerInput.children = newProvisional.children;
+          //observerInput.children = newProvisional.children;
 
           //TODO: mutualAuthentication For Further Study
           let newObj = new DataObjectObserver(observerInput);
           _this._observers[objURL] = newObj;
 
           resolve(newObj);
-          newProvisional.apply(newObj);
+
+          if (newProvisional) { newProvisional.apply(newObj); }
+
         } else {
           reject(reply.body.desc);
         }
@@ -516,14 +517,16 @@ class Syncher {
             console.log('[syncher._resumeSubscribe] - create new dataObject: ', dataObject);
             let newObj = new DataObjectObserver(dataObject);
 
-            //lets sync with Reporter
-            newObj.sync();
-
             if (dataObject.childrenObjects) { newObj.resumeChildrens(dataObject.childrenObjects); }
-
+            console.log('[syncher._resumeSubscribe] - new dataObject', newObj);
             _this._observers[newObj.url] = newObj;
 
-            if (_this._provisionals[newObj.url]) { _this._provisionals[newObj.url].apply(newObj); }
+            if (_this._provisionals[newObj.url]) {
+              _this._provisionals[newObj.url].apply(newObj);
+            }
+
+            //lets sync with Reporter
+            newObj.sync();
           }
 
           resolve(_this._observers);
@@ -591,6 +594,17 @@ class Syncher {
     let resource = msg.body.resource;
 
     let object = _this._observers[resource];
+
+    let unsubscribe = {
+      from: _this.owner,
+      to: _this._subURL,
+      id: msg.id,
+      type: 'unsubscribe',
+      body: { resource: msg.body.resource }
+    };
+
+    _this._bus.postMessage(unsubscribe);
+
     if (object) {
       let event = {
         type: msg.type,
