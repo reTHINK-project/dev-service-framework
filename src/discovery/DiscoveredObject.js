@@ -41,42 +41,42 @@ class DiscoveredObject {
     this._messageBus = msgBus;
     this._subscriptionSet = false;
     this._subscribers = {
-      live: [],
-      disconnected: []
+      live: {},
+      disconnected: {}
     };
   }
 
-  onLive(callback) {
+  onLive(subscriber, callback) {
 
     return new Promise((resolve, reject) => {
 
       if(!this._subscriptionSet) {
         this._subscribe()
         .then(() => {
-          this._subscribers.live.push(callback);
+          this._subscribers.live[subscriber] = callback;
           resolve();
         })
         .catch((err) => reject(err));
       } else {
-        this._subscribers.live.push(callback);
+        this._subscribers.live[subscriber] = callback;
         resolve();
       }
     });
   }
 
-  onDisconnected(callback) {
+  onDisconnected(subscriber, callback) {
 
     return new Promise((resolve, reject) => {
 
       if(!this._subscriptionSet) {
         this._subscribe()
         .then(() => {
-          this._subscribers.disconnected.push(callback);
+          this._subscribers.disconnected[subscriber] = callback;
           resolve();
         })
         .catch((err) => reject(err));
       } else {
-        this._subscribers.disconnected.push(callback);
+        this._subscribers.disconnected[subscriber] = callback;
         resolve();
       }
     });
@@ -119,8 +119,80 @@ class DiscoveredObject {
   }
 
   _processNotification(msg) {
+    const status = msg.body.value
 
-    this._subscribers[msg.body.value].forEach(fn => fn());
+    Object.keys(this._subscribers[status]).forEach(
+      subscriber => this._subscribers[status][subscriber]()
+    );
+  }
+
+  _unsubscribe() {
+
+    const msg = {
+      type: 'unsubscribe',
+      from: this._discoveredObjectURL,
+      to: 'domain://msg-node.' + this._domain + '/sm',
+      body: {
+        resources: [this._registryObjectURL + '/registration']
+      }
+    };
+
+    return new Promise((resolve, reject) => {
+
+      this._messageBus.postMessage(msg, (reply) => {
+        console.log(`[DiscoveredObject.unsubscribe] ${this._registryObjectURL} rcved reply `, reply);
+
+        if(reply.body.code === 200) {
+          resolve();
+        }
+        else
+          console.error("Error unsubscribing ", this._registryObjectURL);
+          reject("Error unsubscribing " + this._registryObjectURL);
+      });
+    });
+  }
+
+  unsubscribeLive(subscriber, callback) {
+    return new Promise((resolve, reject) => {
+
+        if(subscriber in this._subscribers.live){
+          delete this._subscribers.live[subscriber];
+
+          if(this._areSubscriptionsEmpty()) {
+            this._unsubscribe()
+            .then(() => resolve())
+            .catch((err) => reject(err));
+          } else {
+              resolve();
+          }
+        } else {
+          reject(`${subscriber} doesn't subscribe onLive for ${this._registryObjectURL}`);
+        }
+    });
+  }
+
+  unsubscribeDisconnected(subscriber, callback) {
+    return new Promise((resolve, reject) => {
+
+        if(subscriber in this._subscribers.disconnected){
+          delete this._subscribers.disconnected[subscriber];
+
+          if(this._areSubscriptionsEmpty()) {
+            this._unsubscribe()
+            .then(() => resolve())
+            .catch((err) => reject(err));
+          } else {
+              resolve();
+          }
+        } else {
+          reject(`${subscriber} doesn't subscribe onDisconnected for ${this._registryObjectURL}`);
+        }
+    });
+  }
+
+  _areSubscriptionsEmpty() {
+    return Object.keys(this._subscribers.live).length === 0
+      && Object.keys(this._subscribers.disconnected).length === 0
   }
 
 }
