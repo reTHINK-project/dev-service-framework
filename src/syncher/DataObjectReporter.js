@@ -23,9 +23,7 @@
 
 import DataObject from './DataObject';
 
-import DataObjectChild from './DataObjectChild';
-
-import { deepClone } from '../utils/utils.js';
+import { deepClone, divideURL } from '../utils/utils.js';
 
 /**
  * The class returned from the Syncher create call.
@@ -168,11 +166,16 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
   _onSubscribe(msg) {
     let _this = this;
     let hypertyUrl = msg.body.from;
-    console.log('[DataObjectReporter._onSubscribe]', msg);
+    let dividedURL = divideURL(hypertyUrl);
+    let domain = dividedURL.domain;
+
+    console.log('[DataObjectReporter._onSubscribe]', msg, domain, dividedURL);
 
     let event = {
       type: msg.body.type,
       url: hypertyUrl,
+
+      domain: domain,
 
       identity: msg.body.identity,
 
@@ -233,6 +236,10 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
   _onUnSubscribe(msg) {
     let _this = this;
     let hypertyUrl = msg.body.from;
+    let dividedURL = divideURL(hypertyUrl);
+    let domain = dividedURL.domain;
+
+    console.log('[DataObjectReporter._onUnSubscribe]', msg, domain, dividedURL);
 
     //let sub = _this._subscriptions[hypertyUrl];
     delete _this._subscriptions[hypertyUrl];
@@ -240,6 +247,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     let event = {
       type: msg.body.type,
       url: hypertyUrl,
+      domain: domain,
       identity: msg.body.identity
     };
 
