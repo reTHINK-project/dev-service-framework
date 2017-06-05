@@ -20,7 +20,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 **/
-import { deepClone } from '../utils/utils';
+import { deepClone, divideURL } from '../utils/utils';
 
 import DataObjectReporter from './DataObjectReporter';
 import DataObjectObserver from './DataObjectObserver';
@@ -554,14 +554,15 @@ class Syncher {
   //FLOW-IN: message received from a remote Syncher -> create (this is actually an invitation to subscribe)
   _onRemoteCreate(msg) {
     let _this = this;
-
-   //remove "/subscription" from the URL
-    let resource = msg.from.slice(0, -13);
+    let resource = msg.from.slice(0, -13); //remove "/subscription" from the URL
+    let dividedURL = divideURL(resource);
+    let domain = dividedURL.domain;
 
     let event = {
       type: msg.type,
       from: msg.body.source,
       url: resource,
+      domain: domain,
       schema: msg.body.schema,
       value: msg.body.value,
       identity: msg.body.identity,
