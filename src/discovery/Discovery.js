@@ -178,6 +178,23 @@ class Discovery {
   }
 
   /**
+  * function to request about dataObject registered in domain registry, and
+  * returns discoveredObject.
+  * @param  {String}           guidURL                guid URL e.g user-guid://<unique-user-identifier>
+  * @param  {Array<string>}    schema (Optional)     types of hyperties schemas
+  * @param  {Array<string>}    resources (Optional)  types of hyperties resources
+  * @param  {String}           domain (Optional)     domain of the registry to search
+  */
+  discoverDataObjectsPerUserProfileDataDO(guidURL, schema, resources) {
+
+    return new Promise((resolve, reject) => {
+      this.discoverDataObjectsPerUserProfileData(...arguments)
+        .then(registryObjects => resolve(this._convertToDiscoveredObject(registryObjects)))
+        .catch(error => reject(error));
+    });
+  }
+
+  /**
   * Advanced Search for Hyperties registered in domain registry associated with some GUID
   * @param  {String}           guidURL                guid URL e.g user-guid://<unique-user-identifier>
   * @param  {Array<string>}    schema (Optional)     types of hyperties schemas
@@ -237,7 +254,7 @@ class Discovery {
   discoverHypertiesPerGUIDDO(guidURL, schema, resources) {
 
     return new Promise((resolve, reject) => {
-      this.discoverDataObjectsPerGUID(...arguments)
+      this.discoverHypertiesPerGUID(...arguments)
       .then(hyperties => {
         resolve(this._convertToDiscoveredObject(hyperties));
       })
@@ -284,6 +301,23 @@ class Discovery {
           reject(reply.body.description);
         }
       });
+    });
+  }
+
+  /**
+  * function to request about dataObject registered in domain registry, and
+  * returns discoveredObject.
+  * @param  {String}           guidURL                guid URL e.g user-guid://<unique-user-identifier>
+  * @param  {Array<string>}    schema (Optional)     types of hyperties schemas
+  * @param  {Array<string>}    resources (Optional)  types of hyperties resources
+  * @param  {String}           domain (Optional)     domain of the registry to search
+  */
+  discoverDataObjectsPerGUIDDO(guidURL, schema, resources) {
+
+    return new Promise((resolve, reject) => {
+      this.discoverDataObjectsPerGUID(...arguments)
+        .then(registryObjects => resolve(this._convertToDiscoveredObject(registryObjects)))
+        .catch(error => reject(error));
     });
   }
 
@@ -418,6 +452,23 @@ class Discovery {
   }
 
   /**
+  * function to request about dataObject registered in domain registry, and
+  * returns discoveredObject.
+  * @param  {String}           user                  user identifier, either in url or email format
+  * @param  {Array<string>}    schema (Optional)     types of dataObjects schemas
+  * @param  {Array<string>}    resources (Optional)  types of dataObjects resources
+  * @param  {String}           domain (Optional)     domain of the registry to search
+  */
+  discoverDataObjectsDO(user, schema, resources, domain) {
+
+    return new Promise((resolve, reject) => {
+      this.discoverDataObjects(...arguments)
+        .then(registryObjects => resolve(this._convertToDiscoveredObject(registryObjects)))
+        .catch(error => reject(error));
+    });
+  }
+
+  /**
   * function to request about hyperties registered in domain registry, and
   * return the hyperty information, if found.
   * @param  {String}              url  hyperty URL
@@ -466,7 +517,7 @@ class Discovery {
   discoverHypertyPerURLDO(url, domain) {
 
     return new Promise((resolve, reject) => {
-      this.discoverHypertyPerURL(url, domain)
+      this.discoverHypertyPerURL(...arguments)
         .then(hyperty => resolve(new DiscoveredObject(hyperty)))
         .catch(error => reject(error));
     });
@@ -509,6 +560,21 @@ class Discovery {
           reject(reply.body.description);
         }
       });
+    });
+  }
+
+  /**
+  * function to request about dataObject registered in domain registry, and
+  * returns discoveredObject.
+  * @param  {String}              url  dataObject URL
+  * @param  {String}            domain (Optional)
+  */
+  discoverDataObjectPerURLDO(url, domain) {
+
+    return new Promise((resolve, reject) => {
+      this.discoverDataObjectPerURL(...arguments)
+        .then(registryObject => resolve(new DiscoveredObject(registryObject)))
+        .catch(error => reject(error));
     });
   }
 
@@ -564,6 +630,23 @@ class Discovery {
   }
 
   /**
+  * function to request about dataObject registered in domain registry, and
+  * returns discoveredObject.
+  * @param  {String}              name  dataObject URL
+  * @param  {Array<string>}    schema (Optional)     types of dataObjects schemas
+  * @param  {Array<string>}    resources (Optional)  types of dataObjects resources
+  * @param  {String}            domain (Optional)
+  */
+  discoverDataObjectsPerNameDO(name, schema, resources, domain) {
+
+    return new Promise((resolve, reject) => {
+      this.discoverDataObjectsPerName(...arguments)
+        .then(registryObjects => resolve(this._convertToDiscoveredObject(registryObjects)))
+        .catch(error => reject(error));
+    });
+  }
+
+  /**
   * function to request about specific reporter dataObject registered in domain registry, and
   * return the dataObjects from that reporter.
   * @param  {String}           reporter     dataObject reporter
@@ -615,9 +698,26 @@ class Discovery {
     });
   }
 
-  _convertToDiscoveredObject(hyperties) {
-    return hyperties.map((hyperty) => {
-      return new DiscoveredObject(hyperty, this.runtimeURL, this.discoveryURL, this.messageBus);
+  /**
+  * function to request about dataObject registered in domain registry, and
+  * returns discoveredObject.
+  * @param  {String}              name  dataObject URL
+  * @param  {Array<string>}    schema (Optional)     types of dataObjects schemas
+  * @param  {Array<string>}    resources (Optional)  types of dataObjects resources
+  * @param  {String}            domain (Optional)
+  */
+  discoverDataObjectsPerReporterDO(reporter, schema, resources, domain) {
+
+    return new Promise((resolve, reject) => {
+      this.discoverDataObjectsPerReporter(...arguments)
+        .then(registryObjects => resolve(this._convertToDiscoveredObject(registryObjects)))
+        .catch(error => reject(error));
+    });
+  }
+
+  _convertToDiscoveredObject(registryObjects) {
+    return registryObjects.map((registryObject) => {
+      return new DiscoveredObject(registryObject, this.runtimeURL, this.discoveryURL, this.messageBus);
     });
   }
 

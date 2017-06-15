@@ -55,7 +55,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     _this._subscriptions = {};
 
     _this._syncObj.observe((event) => {
-      console.log('DataObjectReporter-' + input.url + '-SEND: ', event);
+      console.log('[Syncher.DataObjectReporter] ' + _this.url + ' publish change: ', event);
       _this._onChange(event);
     });
 
@@ -67,7 +67,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     let _this = this;
 
     _this._objectListener = _this._bus.addListener(_this._url, (msg) => {
-      console.log('DataObject-' + _this._url + '-RCV: ', msg);
+      console.log('[Syncher.DataObjectReporter] listener ' + _this._url + ' Received: ', msg);
       switch (msg.type) {
         case 'response': _this._onResponse(msg); break;
         case 'read': _this._onRead(msg); break;
@@ -93,7 +93,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     // TODO: remove value and add resources? should similar to 1st create
     let inviteMsg = {
       type: 'create', from: _this._syncher._owner, to: _this._syncher._subURL,
-      body: { resume: false, resource: _this._url, schema: _this._schema, value: _this._syncObj.data, authorise: observers }
+      body: { resume: false, resource: _this._url, schema: _this._schema, value: _this._metadata, authorise: observers }
     };
 
     _this._bus.postMessage(inviteMsg);
@@ -116,6 +116,9 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
       if (reply.body.code === 200) {
         _this._releaseListeners();
         delete _this._syncher._reporters[_this._url];
+
+        _this._syncObj.unobserve();
+        _this._syncObj = {};
       }
     });
   }
@@ -177,6 +180,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
         //create new subscription
         let sub = { url: hypertyUrl, status: 'live' };
         _this._subscriptions[hypertyUrl] = sub;
+        if (_this.metadata.subscriptions) { _this.metadata.subscriptions.push(sub.url); }
 
         let msgValue = _this._metadata;
         msgValue.data = deepClone(_this.data);
@@ -230,15 +234,16 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     let _this = this;
     let hypertyUrl = msg.body.from;
 
-    let sub = _this._subscriptions[hypertyUrl];
+    //let sub = _this._subscriptions[hypertyUrl];
     delete _this._subscriptions[hypertyUrl];
 
     let event = {
       type: msg.body.type,
       url: hypertyUrl,
-      object: sub
+      identity: msg.body.identity
     };
 
+    // TODO: check if the _onSubscriptionHandler it is the same of the subscriptions???
     if (_this._onSubscriptionHandler) {
       console.log('UN-SUBSCRIPTION-EVENT: ', event);
       _this._onSubscriptionHandler(event);
@@ -264,16 +269,21 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
   //FLOW-IN: message received from ReporterURL address: emited by a remote Syncher -> read
   _onRead(msg) {
     let _this = this;
+    let objectValue = deepClone(_this.metadata);
+    objectValue.data = deepClone(_this.data);
+    objectValue.version = _this._version;
+
+    let response = {
+      id: msg.id, type: 'response', from: msg.to, to: msg.from,
+      body: { code: 200, value: objectValue }
+    };
 
     let event = {
       type: msg.type,
       url: msg.from,
 
       accept: () => {
-        _this._bus.postMessage({
-          id: msg.id, type: 'response', from: msg.to, to: msg.from,
-          body: { code: 200, value: deepClone(_this.data) }
-        });
+        _this._bus.postMessage(response);
       },
 
       reject: (reason) => {
@@ -284,7 +294,18 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
       }
     };
 
-    if (_this._onReadHandler) {
+    // if the requester is an authorised observer, the data object is responded otherwise an event is triggered
+    let subscriptions = [];
+
+    if (_this.metadata.subscriptions) {
+      subscriptions = _this.metadata.subscriptions;
+    } else if (_this._subscriptions) {
+      subscriptions = Object.keys(_this._subscriptions).map(function(key) { return _this._subscriptions[key]; });
+    }
+
+    if (subscriptions.indexOf(msg.from) != -1) {
+      _this._bus.postMessage(response);
+    } else if (_this._onReadHandler) {
       console.log('READ-EVENT: ', event);
       _this._onReadHandler(event);
     }
