@@ -74,6 +74,7 @@ class Syncher {
           case 'forward': _this._onForward(msg); break;
           case 'create': _this._onRemoteCreate(msg); break;
           case 'delete': _this._onRemoteDelete(msg); break;
+          case 'execute': _this._onExecute(msg); break;
         }
       }
     });
@@ -231,6 +232,14 @@ class Syncher {
   */
   onNotification(callback) {
     this._onNotificationHandler = callback;
+  }
+
+  /**
+  * Setup the callback to process close events from the runtime.
+  * @param {function(event: MsgEvent)} callback
+  */
+  onClose(callback) {
+    this._onClose = callback;
   }
 
   _create(input) {
@@ -641,6 +650,38 @@ class Syncher {
         body: { code: 404, source: _this._owner }
       });
     }
+  }
+
+  // close event received from runtime registry
+  _onExecute(msg) {
+    let _this = this;
+
+    let reply = {
+      id: msg.id, type: 'response', from: msg.to, to: msg.from,
+      body: { code: 200 }
+    };
+
+    if ((msg.from === _this._runtimeUrl + '/registry/' || msg.from === _this._runtimeUrl + '/registry') && msg.body && msg.body.method && msg.body.method === 'close' && _this._onClose) {
+      let event = {
+        type: 'close',
+
+        ack: (type) => {
+          if (type) {
+            reply.body.code = type;
+          }
+
+         //send ack response message
+          _this._bus.postMessage(reply);
+        }
+      };
+
+      console.info('[Syncher] Close-EVENT: ', event);
+      _this._onClose(event);
+
+    } else {
+      _this._bus.postMessage(reply);
+    }
+
   }
 
   /**
