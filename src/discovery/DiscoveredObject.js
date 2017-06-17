@@ -32,7 +32,7 @@ class DiscoveredObject {
     return this._data;
   }
 
-  constructor (data, runtimeURL, discoveryURL, msgBus) {
+  constructor(data, runtimeURL, discoveryURL, msgBus) {
     this._data = data;
     this._registryObjectURL = data.hypertyID || data.url;
     this._runtimeURL = runtimeURL;
@@ -50,7 +50,7 @@ class DiscoveredObject {
 
     return new Promise((resolve, reject) => {
 
-      if(!this._subscriptionSet) {
+      if (!this._subscriptionSet) {
         this._subscribe()
         .then(() => {
           this._subscribers.live[subscriber] = callback;
@@ -68,7 +68,7 @@ class DiscoveredObject {
 
     return new Promise((resolve, reject) => {
 
-      if(!this._subscriptionSet) {
+      if (!this._subscriptionSet) {
         this._subscribe()
         .then(() => {
           this._subscribers.disconnected[subscriber] = callback;
@@ -87,7 +87,7 @@ class DiscoveredObject {
     const msg = {
       type: 'subscribe',
       from: this._discoveredObjectURL,
-      to: 'domain://msg-node.' + this._domain + '/sm',
+      to: this._runtimeURL + '/subscriptions',
       body: {
         resources: [this._registryObjectURL + '/registration']
       }
@@ -98,14 +98,14 @@ class DiscoveredObject {
       this._messageBus.postMessage(msg, (reply) => {
         console.log(`[DiscoveredObject.subscribe] ${this._registryObjectURL} rcved reply `, reply);
 
-        if(reply.body.code === 200) {
+        if (reply.body.code === 200) {
           this._generateListener(this._registryObjectURL + '/registration');
           this._subscriptionSet = true;
           resolve();
+        } else {
+          console.error('Error subscribing ', this._registryObjectURL);
+          reject('Error subscribing ' + this._registryObjectURL);
         }
-        else
-          console.error("Error subscribing ", this._registryObjectURL);
-          reject("Error subscribing " + this._registryObjectURL);
       });
     });
   }
@@ -131,7 +131,7 @@ class DiscoveredObject {
     const msg = {
       type: 'unsubscribe',
       from: this._discoveredObjectURL,
-      to: 'domain://msg-node.' + this._domain + '/sm',
+      to: this._runtimeURL + '/subscriptions',
       body: {
         resources: [this._registryObjectURL + '/registration']
       }
@@ -142,12 +142,12 @@ class DiscoveredObject {
       this._messageBus.postMessage(msg, (reply) => {
         console.log(`[DiscoveredObject.unsubscribe] ${this._registryObjectURL} rcved reply `, reply);
 
-        if(reply.body.code === 200) {
+        if (reply.body.code === 200) {
           resolve();
+        } else {
+          console.error('Error unsubscribing ', this._registryObjectURL);
+          reject('Error unsubscribing ' + this._registryObjectURL);
         }
-        else
-          console.error("Error unsubscribing ", this._registryObjectURL);
-          reject("Error unsubscribing " + this._registryObjectURL);
       });
     });
   }
@@ -155,10 +155,10 @@ class DiscoveredObject {
   unsubscribeLive(subscriber, callback) {
     return new Promise((resolve, reject) => {
 
-        if(subscriber in this._subscribers.live){
+        if (subscriber in this._subscribers.live){
           delete this._subscribers.live[subscriber];
 
-          if(this._areSubscriptionsEmpty()) {
+          if (this._areSubscriptionsEmpty()) {
             this._unsubscribe()
             .then(() => resolve())
             .catch((err) => reject(err));
@@ -174,19 +174,19 @@ class DiscoveredObject {
   unsubscribeDisconnected(subscriber, callback) {
     return new Promise((resolve, reject) => {
 
-        if(subscriber in this._subscribers.disconnected){
-          delete this._subscribers.disconnected[subscriber];
+      if (subscriber in this._subscribers.disconnected) {
+        delete this._subscribers.disconnected[subscriber];
 
-          if(this._areSubscriptionsEmpty()) {
-            this._unsubscribe()
-            .then(() => resolve())
-            .catch((err) => reject(err));
-          } else {
-              resolve();
-          }
+        if (this._areSubscriptionsEmpty()) {
+          this._unsubscribe()
+          .then(() => resolve())
+          .catch((err) => reject(err));
         } else {
-          reject(`${subscriber} doesn't subscribe onDisconnected for ${this._registryObjectURL}`);
+          resolve();
         }
+      } else {
+        reject(`${subscriber} doesn't subscribe onDisconnected for ${this._registryObjectURL}`);
+      }
     });
   }
 

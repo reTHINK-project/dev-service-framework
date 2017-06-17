@@ -518,7 +518,7 @@ class Discovery {
 
     return new Promise((resolve, reject) => {
       this.discoverHypertyPerURL(...arguments)
-        .then(hyperty => resolve(new DiscoveredObject(hyperty)))
+        .then(hyperty => resolve(new DiscoveredObject(hyperty, this.runtimeURL, this.discoveryURL, this.messageBus)))
         .catch(error => reject(error));
     });
   }
@@ -573,7 +573,7 @@ class Discovery {
 
     return new Promise((resolve, reject) => {
       this.discoverDataObjectPerURL(...arguments)
-        .then(registryObject => resolve(new DiscoveredObject(registryObject)))
+        .then(registryObject => resolve(new DiscoveredObject(registryObject, this.runtimeURL, this.discoveryURL, this.messageBus)))
         .catch(error => reject(error));
     });
   }
