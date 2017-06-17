@@ -20,7 +20,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 **/
-import { deepClone } from '../utils/utils';
+import { deepClone, divideURL } from '../utils/utils';
 
 import DataObjectReporter from './DataObjectReporter';
 import DataObjectObserver from './DataObjectObserver';
@@ -74,6 +74,7 @@ class Syncher {
           case 'forward': _this._onForward(msg); break;
           case 'create': _this._onRemoteCreate(msg); break;
           case 'delete': _this._onRemoteDelete(msg); break;
+          case 'execute': _this._onExecute(msg); break;
         }
       }
     });
@@ -231,6 +232,14 @@ class Syncher {
   */
   onNotification(callback) {
     this._onNotificationHandler = callback;
+  }
+
+  /**
+  * Setup the callback to process close events from the runtime.
+  * @param {function(event: MsgEvent)} callback
+  */
+  onClose(callback) {
+    this._onClose = callback;
   }
 
   _create(input) {
@@ -554,14 +563,15 @@ class Syncher {
   //FLOW-IN: message received from a remote Syncher -> create (this is actually an invitation to subscribe)
   _onRemoteCreate(msg) {
     let _this = this;
-
-   //remove "/subscription" from the URL
-    let resource = msg.from.slice(0, -13);
+    let resource = msg.from.slice(0, -13); //remove "/subscription" from the URL
+    let dividedURL = divideURL(resource);
+    let domain = dividedURL.domain;
 
     let event = {
       type: msg.type,
       from: msg.body.source,
       url: resource,
+      domain: domain,
       schema: msg.body.schema,
       value: msg.body.value,
       identity: msg.body.identity,
@@ -640,6 +650,38 @@ class Syncher {
         body: { code: 404, source: _this._owner }
       });
     }
+  }
+
+  // close event received from runtime registry
+  _onExecute(msg) {
+    let _this = this;
+
+    let reply = {
+      id: msg.id, type: 'response', from: msg.to, to: msg.from,
+      body: { code: 200 }
+    };
+
+    if ((msg.from === _this._runtimeUrl + '/registry/' || msg.from === _this._runtimeUrl + '/registry') && msg.body && msg.body.method && msg.body.method === 'close' && _this._onClose) {
+      let event = {
+        type: 'close',
+
+        ack: (type) => {
+          if (type) {
+            reply.body.code = type;
+          }
+
+         //send ack response message
+          _this._bus.postMessage(reply);
+        }
+      };
+
+      console.info('[Syncher] Close-EVENT: ', event);
+      _this._onClose(event);
+
+    } else {
+      _this._bus.postMessage(reply);
+    }
+
   }
 
   /**
