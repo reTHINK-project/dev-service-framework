@@ -940,7 +940,6 @@ class Discovery {
       });
     });
   }
-
 }
 
 export default Discovery;

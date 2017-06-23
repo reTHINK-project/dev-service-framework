@@ -133,7 +133,7 @@ class DiscoveredObject {
       from: this._discoveredObjectURL,
       to: this._runtimeURL + '/subscriptions',
       body: {
-        resources: [this._registryObjectURL + '/registration']
+        resource: this._registryObjectURL + '/registration'
       }
     };
 

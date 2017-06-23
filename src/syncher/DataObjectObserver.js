@@ -191,6 +191,59 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
       }
     });
   }
+
+  onDisconnected(callback) {
+
+    return new Promise((resolve, reject) => {
+
+      this._subscribeRegistration()
+      .then(() => {
+        this._onDisconnected = callback;
+        resolve();
+      })
+      .catch((err) => reject(err));
+    });
+  }
+
+  _subscribeRegistration() {
+
+    const msg = {
+      type: 'subscribe',
+      from: this._owner,
+      to: this._syncher._runtimeUrl + '/subscriptions',
+      body: {
+        resources: [this._url + '/registration']
+      }
+    };
+
+    return new Promise((resolve, reject) => {
+
+      this._bus.postMessage(msg, (reply) => {
+        console.log(`[DataObjectObserver._subscribeRegistration] ${this._url} rcved reply `, reply);
+
+        if (reply.body.code === 200) {
+          this._generateListener(this._url + '/registration');
+          resolve();
+        } else {
+          console.error('Error subscribing registration status for ', this._url);
+          reject('Error subscribing registration status for ' + this._url);
+        }
+      });
+    });
+  }
+
+  _generateListener(notificationURL) {
+    let _this = this;
+
+    _this._bus.addListener(notificationURL, (msg) => {
+      console.log(`[DataObjectObserver.registrationNotification] ${_this._url}: `, msg);
+      if (msg.body.value && msg.body.value === 'disconnected' && _this._onDisconnected) {
+        console.log(`[DataObjectObserver] ${_this._url}: was disconnected `, msg);
+        _this._onDisconnected();
+      }
+
+    });
+  }
 }
 
 export default DataObjectObserver;
