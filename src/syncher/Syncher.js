@@ -535,7 +535,8 @@ class Syncher {
             }
 
             //lets sync with Reporter
-            newObj.sync();
+            // it was commented to let hyperties decide when to sync
+            //newObj.sync();
           }
 
           resolve(_this._observers);
