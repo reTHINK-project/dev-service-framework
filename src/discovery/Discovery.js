@@ -778,8 +778,6 @@ class Discovery {
       activeDomain = domain;
     }
 
-
-
     return new Promise(function(resolve, reject) {
 
       console.log('[Discovery.discoverHyperty] ACTIVE DOMAIN -> ', activeDomain, 'user->', user, 'schema->', schema, 'resources->', resources, 'domain->', domain);
@@ -939,6 +937,56 @@ class Discovery {
         resolve(value);
       });
     });
+  }
+
+  /**
+  * function to request about users registered in domain registry, and
+  * return the all the hyperties registered by the user
+  * @deprecated Deprecated. Use discoverHyperty instead
+  * @param  {email}              email
+  * @param  {domain}            domain (Optional)
+  */
+  resumeDiscoveries() {
+
+    let _this = this;
+
+    console.log('[Discovery] resumeDiscoveries');
+
+    return new Promise(function(resolve, reject) {
+
+      let msg = {
+        type: 'read', from: _this.discoveryURL, to: _this.runtimeURL + '/subscriptions', body: { resource: _this.discoveryURL}
+      };
+
+      _this.messageBus.postMessage(msg, (reply)=>{
+        console.log('[Discovery.resumeDiscoveries] reply: ', reply);
+
+        let notifications = [];
+
+        if (reply.body.code === 200) {
+          let urls = reply.body.value;// URLs to add listeners to
+
+          //lets create one DiscoveryObject per notification
+          urls.forEach((url) => {
+            let objectUrl = url.split('/registration')[0];
+            let data = {};
+            data.url = objectUrl;
+            console.log('[Discovery.resumeDiscoveries] adding listener to: ', objectUrl);
+
+            if (objectUrl.includes('hyperty://')) {
+              notifications.push(_this.discoverHypertyPerURLDO(objectUrl));
+            } else {
+              notifications.push(_this.discoverDataObjectPerURLDO(objectUrl));
+            }
+          });
+          Promise.all(notifications).then(values=>{ resolve(values); });
+        } else {
+          resolve([]);
+        }
+      });
+
+    });
+
   }
 }
 
