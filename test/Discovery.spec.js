@@ -29,7 +29,7 @@ describe('Discovery', function() {
 
       if (msg.body.resource === 'user://gmail.com/openidtest10') { //deprecated
         expect(msg).to.eql({
-          type: 'read', from: domain, to: 'domain://registry.ist.pt/',
+          type: 'read', from: domain, to: 'domain://registry.ist.pt',
           body: {resource: 'user://gmail.com/openidtest10'}
         });
         replyCallback({
@@ -41,7 +41,7 @@ describe('Discovery', function() {
         });
       } else if (msg.body.resource === 'user://specific.com/openidtest10') { //deprecated
         expect(msg).to.eql({
-          type: 'read', from: domain, to: 'domain://registry.specific.com/',
+          type: 'read', from: domain, to: 'domain://registry.specific.com',
           body: {resource: 'user://specific.com/openidtest10'}
         });
         replyCallback({
@@ -53,7 +53,7 @@ describe('Discovery', function() {
         });
       } else if (msg.body.resource === 'user://gmail.com/openidtest20') { //deprecated
         expect(msg).to.eql({
-          type: 'read', from: domain, to: 'domain://registry.ist.pt/',
+          type: 'read', from: domain, to: 'domain://registry.ist.pt',
           body: {resource: 'user://gmail.com/openidtest20', criteria: {resources: ['chat'], dataSchemes: ['comm']}}
         });
         replyCallback({
