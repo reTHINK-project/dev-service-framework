@@ -537,7 +537,7 @@ class Discovery {
     activeDomain = (!domain) ? _this.domain : domain;
 
     let msg = {
-      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: name,
+      type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain, body: { resource: name,
       criteria: {resources: resources, dataSchemes: schema}
       }
     };
@@ -590,7 +590,7 @@ class Discovery {
         return resolve(legacyUser);
       }
       let msg = {
-        type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: userIdentifier,
+        type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain, body: { resource: userIdentifier,
         criteria: {resources: resources, dataSchemes: schema}
         }
       };
@@ -642,7 +642,7 @@ class Discovery {
 
       // message to query domain registry, asking for a user hyperty.
       let message = {
-        type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: identityURL}
+        type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain, body: { resource: identityURL}
       };
 
       console.info('[Discovery] Message: ', message, activeDomain, identityURL);
@@ -721,7 +721,7 @@ class Discovery {
 
       // message to query domain registry, asking for a user hyperty.
       let message = {
-        type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain + '/', body: { resource: identityURL}
+        type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain, body: { resource: identityURL}
       };
 
       console.log('[Discovery] Message discoverHypertiesPerUser: ', message, activeDomain, identityURL);
