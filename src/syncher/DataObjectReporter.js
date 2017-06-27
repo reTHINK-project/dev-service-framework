@@ -87,6 +87,9 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
   inviteObservers(observers) {
     let _this = this;
 
+    console.log('[Syncher.DataObjectReporter] InviteObservers ', observers);
+    console.log('[Syncher.DataObjectReporter] InviteObservers ', _this._metadata);
+
     //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onCreate
     // TODO: remove value and add resources? should similar to 1st create
     let inviteMsg = {

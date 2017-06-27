@@ -287,11 +287,12 @@ class Syncher {
           reporterInput.syncher = _this;
           reporterInput.childrens = reply.body.childrenResources;
 
-          let newObj = new DataObjectReporter(reporterInput);
-
-          _this._reporters[reporterInput.url] = newObj;
-
-          newObj.inviteObservers(input.authorise);
+          let newObj = _this._reporters[reporterInput.url];
+          if (!newObj) {
+            newObj = new DataObjectReporter(reporterInput);
+            _this._reporters[reporterInput.url] = newObj;
+            newObj.inviteObservers(input.authorise);
+          }
 
           resolve(newObj);
 
@@ -440,8 +441,12 @@ class Syncher {
           //observerInput.children = newProvisional.children;
 
           //TODO: mutualAuthentication For Further Study
-          let newObj = new DataObjectObserver(observerInput);
-          _this._observers[objURL] = newObj;
+          let newObj = _this._observers[objURL];
+          console.log('[syncher] - new Data Object Observer already exist: ', newObj);
+          if (!newObj) {
+            newObj = new DataObjectObserver(observerInput);
+            _this._observers[objURL] = newObj;
+          }
 
           resolve(newObj);
 
@@ -614,6 +619,8 @@ class Syncher {
     };
 
     _this._bus.postMessage(unsubscribe);
+
+    delete _this._observers[resource];
 
     if (object) {
       let event = {

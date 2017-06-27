@@ -270,41 +270,51 @@ class DataObject {
   addChild(children, initialData, identity, input) {
     let _this = this;
 
-    let childInput  = Object.assign({}, input);
-    //create new child unique ID, based on hypertyURL
-    _this._childId++;
-    childInput.url = _this._owner + '#' + _this._childId;
-    let msgChildPath = _this._url + '/children/' + children;
-
-    childInput.parentObject = _this;
-    childInput.data = initialData;
-    childInput.reporter = _this._owner;
-    childInput.created = (new Date).toISOString();
-    childInput.runtime = _this._runtime;
-    childInput.schema = _this._schema;
-    childInput.parent = _this.url;
-
-    let newChild = new DataObjectChild(childInput);
-
-
-    let bodyValue = newChild.metadata;
-    bodyValue.data = initialData;
-
-    //FLOW-OUT: this message will be sent directly to a resource child address: MessageBus
-    let requestMsg = {
-      type: 'create', from: _this._owner, to: msgChildPath,
-      body: { resource: childInput.url, value: bodyValue }
-    };
-
-    if (identity)      { requestMsg.body.identity = identity; }
-
-    //TODO: For Further Study
-    if (!_this._mutualAuthentication) requestMsg.body.mutualAuthentication = _this._mutualAuthentication;
-
-    console.log('[DataObject.addChild] added ', newChild);
-
     //returns promise, in the future, the API may change to asynchronous call
     return new Promise((resolve) => {
+
+      let childInput  = Object.assign({}, input);
+      //create new child unique ID, based on hypertyURL
+      _this._childId++;
+      childInput.url = _this._owner + '#' + _this._childId;
+      let msgChildPath = _this._url + '/children/' + children;
+
+      childInput.parentObject = _this;
+      childInput.data = initialData;
+      childInput.reporter = _this._owner;
+      childInput.created = (new Date).toISOString();
+      childInput.runtime = _this._runtime;
+      childInput.schema = _this._schema;
+      childInput.parent = _this.url;
+
+      let newChild = new DataObjectChild(childInput);
+
+      let bodyValue = newChild.metadata;
+      bodyValue.data = initialData;
+
+      if (!_this._metadata.hasOwnProperty('childrenObjects')) {
+        _this._metadata.childrenObjects = {};
+      }
+
+      if (!_this._metadata.childrenObjects.hasOwnProperty(childInput.url)) {
+        _this._metadata.childrenObjects[childInput.url] = {};
+      }
+
+      _this._metadata.childrenObjects[childInput.url] = bodyValue;
+
+      //FLOW-OUT: this message will be sent directly to a resource child address: MessageBus
+      let requestMsg = {
+        type: 'create', from: _this._owner, to: msgChildPath,
+        body: { resource: childInput.url, value: bodyValue }
+      };
+
+      if (identity)      { requestMsg.body.identity = identity; }
+
+      //TODO: For Further Study
+      if (!_this._mutualAuthentication) requestMsg.body.mutualAuthentication = _this._mutualAuthentication;
+
+      console.log('[DataObject.addChild] added ', newChild);
+
       let msgId = _this._bus.postMessage(requestMsg);
 
       newChild.onChange((event) => {
