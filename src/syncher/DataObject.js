@@ -161,46 +161,45 @@ class DataObject {
     }
   }
 
+  /**
+   *
+   */
+  resumeChildrens(childrens) {
+    let _this = this;
 
-    /**
-     *
-     */
-    resumeChildrens(childrens) {
-      let _this = this;
+    let childIdString = this._owner + '#' + this._childId;
 
-      let childIdString = this._owner + '#' + this._childId;
-
-      if (childrens && !_this._childrenObjects) {
-        _this._childrenObjects = {};
-      }
-
-      //setup childrens data from subscription
-      Object.keys(childrens).forEach((childrenResource) => {
-        let children = childrens[childrenResource];
-
-        Object.keys(children).forEach((childId) => {
-          let childInput = children[childId].value;
-          console.log('[DataObject.resumeChildrens] new DataObjectChild: ', childrenResource, children, childInput);
-          childInput.parentObject = _this;
-          childInput.parent = _this._url;
-          _this._childrenObjects[childId] = new DataObjectChild(childInput);
-          _this._childrenObjects[childId].identity = children[childId].identity;
-
-          if (childId > childIdString) {
-            childIdString = childId;
-          }
-
-          console.log('[DataObjectReporter.resumeChildrens] - resumed: ', this._childrenObjects[childId]);
-        });
-      });
-
-      this._childId = Number(childIdString.split('#')[1]);
+    if (childrens && !_this._childrenObjects) {
+      _this._childrenObjects = {};
     }
 
-    /**
-     * All Metadata about the Data Object
-     * @type {Object} -
-     */
+    //setup childrens data from subscription
+    Object.keys(childrens).forEach((childrenResource) => {
+      let children = childrens[childrenResource];
+
+      Object.keys(children).forEach((childId) => {
+        let childInput = children[childId].value;
+        console.log('[DataObject.resumeChildrens] new DataObjectChild: ', childrenResource, children, childInput);
+        childInput.parentObject = _this;
+        childInput.parent = _this._url;
+        _this._childrenObjects[childId] = new DataObjectChild(childInput);
+        _this._childrenObjects[childId].identity = children[childId].identity;
+
+        if (childId > childIdString) {
+          childIdString = childId;
+        }
+
+        console.log('[DataObjectReporter.resumeChildrens] - resumed: ', this._childrenObjects[childId]);
+      });
+    });
+
+    this._childId = Number(childIdString.split('#')[1]);
+  }
+
+  /**
+   * All Metadata about the Data Object
+   * @type {Object} -
+   */
 
   get metadata() { return this._metadata; }
 
@@ -274,6 +273,7 @@ class DataObject {
     return new Promise((resolve) => {
 
       let childInput  = Object.assign({}, input);
+
       //create new child unique ID, based on hypertyURL
       _this._childId++;
       childInput.url = _this._owner + '#' + _this._childId;
@@ -292,30 +292,23 @@ class DataObject {
       let bodyValue = newChild.metadata;
       bodyValue.data = initialData;
 
-      if (!_this._metadata.hasOwnProperty('childrenObjects')) {
-        _this._metadata.childrenObjects = {};
-      }
-
-      if (!_this._metadata.childrenObjects.hasOwnProperty(childInput.url)) {
-        _this._metadata.childrenObjects[childInput.url] = {};
-      }
-
-      _this._metadata.childrenObjects[childInput.url] = bodyValue;
-
       //FLOW-OUT: this message will be sent directly to a resource child address: MessageBus
       let requestMsg = {
         type: 'create', from: _this._owner, to: msgChildPath,
         body: { resource: childInput.url, value: bodyValue }
       };
 
-      if (identity)      { requestMsg.body.identity = identity; }
+      if (identity)      {
+        newChild.identity = identity;
+        requestMsg.body.identity = identity;
+      }
 
       //TODO: For Further Study
       if (!_this._mutualAuthentication) requestMsg.body.mutualAuthentication = _this._mutualAuthentication;
 
-      console.log('[DataObject.addChild] added ', newChild);
-
       let msgId = _this._bus.postMessage(requestMsg);
+
+      console.log('[DataObject.addChild] added ', newChild, msgId, bodyValue);
 
       newChild.onChange((event) => {
         _this._onChange(event, { path: msgChildPath, childId: childInput.url });
@@ -323,7 +316,7 @@ class DataObject {
 
       if (!_this._childrenObjects) { _this._childrenObjects = {}; }
 
-      _this._childrenObjects[childInput.url] = newChild;
+      _this._childrenObjects[childInput.url] = bodyValue;
 
       resolve(newChild);
     });
@@ -345,10 +338,11 @@ class DataObject {
 
     console.log('[DataObject._onChildCreate] receivedBy ' + _this._owner + ' : ', msg);
     let newChild = new DataObjectChild(childInput);
+    newChild.identity = msg.body.identity;
 
     if (!_this._childrenObjects) { _this._childrenObjects = {}; }
 
-    _this._childrenObjects[childInput.url] = newChild;
+    _this._childrenObjects[childInput.url] = childInput;
 
     //todo: remove response below
     setTimeout(() => {

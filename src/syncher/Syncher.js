@@ -123,7 +123,7 @@ class Syncher {
     createInput.schema = schema;
     createInput.authorise = observers;
     (initialData) ? createInput.data = deepClone(initialData) : createInput.data = {};
-    createInput.name = name.length === 0 ? 'no name': name;
+    createInput.name = name.length === 0 ? 'no name' : name;
     createInput.reporter = _this._owner;
     createInput.resume = false;
     if (input) {
@@ -438,15 +438,19 @@ class Syncher {
 
           // todo: For Further Study
           observerInput.mutual = input.mutual;
+
           //observerInput.children = newProvisional.children;
 
           //TODO: mutualAuthentication For Further Study
           let newObj = _this._observers[objURL];
-          console.log('[syncher] - new Data Object Observer already exist: ', newObj);
           if (!newObj) {
             newObj = new DataObjectObserver(observerInput);
             _this._observers[objURL] = newObj;
+          } else {
+            newObj.sync();
           }
+
+          console.log('[syncher] - new Data Object Observer already exist: ', newObj);
 
           resolve(newObj);
 
