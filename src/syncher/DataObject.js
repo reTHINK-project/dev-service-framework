@@ -342,7 +342,7 @@ class DataObject {
 
     if (!_this._childrenObjects) { _this._childrenObjects = {}; }
 
-    _this._childrenObjects[childInput.url] = childInput;
+    _this._childrenObjects[childInput.url] = newChild;
 
     //todo: remove response below
     setTimeout(() => {
