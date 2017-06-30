@@ -22,6 +22,7 @@
 **/
 
 import SyncObject from './ProxyObject';
+
 //import { deepClone } from '../utils/utils.js';
 
 /**
@@ -75,7 +76,7 @@ class DataObjectChild /* implements SyncStatus */ {
 
     _this._metadata = input;
 
-    delete _this._metadata.data;
+    // delete _this._metadata.data;
     delete _this._metadata.parentObject;
 
   }

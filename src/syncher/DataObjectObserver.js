@@ -22,10 +22,7 @@
 **/
 
 import { deepClone } from '../utils/utils';
-import SyncObject, {ChangeType, ObjectType} from './ProxyObject';
-
 import DataObject from './DataObject';
-import DataObjectChild from './DataObjectChild';
 
 let FilterType = {ANY: 'any', START: 'start', EXACT: 'exact'};
 
@@ -87,6 +84,8 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
         delete _this._metadata.data;
 
         _this._version = value.version;
+      } else {
+        console.info('[DataObjectObserver_sync] existing data updated: ', value);
       }
 
     }).catch((reason) => {

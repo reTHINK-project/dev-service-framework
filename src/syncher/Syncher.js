@@ -123,7 +123,7 @@ class Syncher {
     createInput.schema = schema;
     createInput.authorise = observers;
     (initialData) ? createInput.data = deepClone(initialData) : createInput.data = {};
-    createInput.name = name.length === 0 ? 'no name': name;
+    createInput.name = name.length === 0 ? 'no name' : name;
     createInput.reporter = _this._owner;
     createInput.resume = false;
     if (input) {
@@ -287,11 +287,12 @@ class Syncher {
           reporterInput.syncher = _this;
           reporterInput.childrens = reply.body.childrenResources;
 
-          let newObj = new DataObjectReporter(reporterInput);
-
-          _this._reporters[reporterInput.url] = newObj;
-
-          newObj.inviteObservers(input.authorise);
+          let newObj = _this._reporters[reporterInput.url];
+          if (!newObj) {
+            newObj = new DataObjectReporter(reporterInput);
+            _this._reporters[reporterInput.url] = newObj;
+            newObj.inviteObservers(input.authorise);
+          }
 
           resolve(newObj);
 
@@ -437,11 +438,19 @@ class Syncher {
 
           // todo: For Further Study
           observerInput.mutual = input.mutual;
+
           //observerInput.children = newProvisional.children;
 
           //TODO: mutualAuthentication For Further Study
-          let newObj = new DataObjectObserver(observerInput);
-          _this._observers[objURL] = newObj;
+          let newObj = _this._observers[objURL];
+          if (!newObj) {
+            newObj = new DataObjectObserver(observerInput);
+            _this._observers[objURL] = newObj;
+          } else {
+            newObj.sync();
+          }
+
+          console.log('[syncher] - new Data Object Observer already exist: ', newObj);
 
           resolve(newObj);
 
@@ -614,6 +623,8 @@ class Syncher {
     };
 
     _this._bus.postMessage(unsubscribe);
+
+    delete _this._observers[resource];
 
     if (object) {
       let event = {
