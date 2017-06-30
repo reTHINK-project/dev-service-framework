@@ -22,7 +22,7 @@
 **/
 
 import {divideURL, convertToUserURL} from '../utils/utils';
-
+import DiscoveredObject from './DiscoveredObject';
 /**
 * Core Discovery interface
 * Class to allow applications to search for hyperties and DataObjects using the message bus
@@ -58,7 +58,6 @@ class Discovery {
     }
   }
 
-
   /**
   * Advanced Search for Hyperties registered in domain registry associated with some user identifier (eg email, name ...)
   * @param  {String}           userIdentifier
@@ -67,6 +66,7 @@ class Discovery {
   */
   discoverHypertiesPerUserProfileData(userIdentifier, schema, resources) {
     let _this = this;
+    let filteredHyperties = [];
 
     let msg = {
       type: 'read',
@@ -77,7 +77,7 @@ class Discovery {
       }
     };
 
-    if(schema || resources) {
+    if (schema || resources) {
       msg.body['criteria'] = {
         resources: resources,
         dataSchemes: schema
@@ -87,11 +87,20 @@ class Discovery {
     return new Promise(function(resolve, reject) {
 
       if (!_this._isLegacyUser(userIdentifier)) {// todo: to reomve when discovery of legcay users are supported
+
         _this.messageBus.postMessage(msg, (reply) => {
 
           if(reply.body.code === 200){
-            console.log("Reply log: ",reply.body.value);
-            resolve(reply.body.value);
+            reply.body.value.map(function(hyperty) {
+               if(hyperty.hypertyID != _this.discoveryURL)
+                   filteredHyperties.push(hyperty);
+            });
+            if(filteredHyperties.length === 0)
+              reject('No Hyperty was found');
+            else {
+              console.log("Reply log: ",filteredHyperties);
+              resolve(filteredHyperties);
+            }
           }
           else {
             console.log("Error Log: ", reply.body.description);
@@ -101,7 +110,24 @@ class Discovery {
       } else {
         resolve({hypertyID: userIdentifier});
       }
+    });
+  }
 
+  /**
+  * Advanced Search for Hyperties registered in domain registry associated with some user identifier (eg email, name ...)
+  * returns DiscoveredObject
+  * @param  {String}           userIdentifier
+  * @param  {Array<string>}    schema (Optional)     types of hyperties schemas
+  * @param  {Array<string>}    resources (Optional)  types of hyperties resources
+  */
+  discoverHypertiesPerUserProfileDataDO(userIdentifier, schema, resources) {
+
+    return new Promise((resolve, reject) => {
+      this.discoverHypertiesPerUserProfileData(...arguments)
+      .then(hyperties => {
+        resolve(this._convertToDiscoveredObject(hyperties));
+      })
+      .catch(error => reject(error));
     });
   }
 
@@ -132,23 +158,39 @@ class Discovery {
 
     return new Promise(function(resolve, reject) {
 
-    if (!_this._isLegacyUser(userIdentifier)) {// todo: to reomve when discovery of legcay users are supported
+      if (!_this._isLegacyUser(userIdentifier)) {// todo: to reomve when discovery of legcay users are supported
 
-      _this.messageBus.postMessage(msg, (reply) => {
+        _this.messageBus.postMessage(msg, (reply) => {
 
-        if(reply.body.code === 200){
-          console.log("Reply log: ",reply.body.value);
-          resolve(reply.body.value);
+          if(reply.body.code === 200){
+            console.log("Reply log: ",reply.body.value);
+            resolve(reply.body.value);
+          }
+          else {
+            console.log("Error Log: ", reply.body.description);
+            reject(reply.body.description);
+          }
+        });
+      } else {
+          resolve({hypertyID: userIdentifier});
         }
-        else {
-          console.log("Error Log: ", reply.body.description);
-          reject(reply.body.description);
-        }
-      });
-    } else {
-      resolve({hypertyID: userIdentifier});
-    }
+    });
+  }
 
+  /**
+  * function to request about dataObject registered in domain registry, and
+  * returns discoveredObject.
+  * @param  {String}           guidURL                guid URL e.g user-guid://<unique-user-identifier>
+  * @param  {Array<string>}    schema (Optional)     types of hyperties schemas
+  * @param  {Array<string>}    resources (Optional)  types of hyperties resources
+  * @param  {String}           domain (Optional)     domain of the registry to search
+  */
+  discoverDataObjectsPerUserProfileDataDO(guidURL, schema, resources) {
+
+    return new Promise((resolve, reject) => {
+      this.discoverDataObjectsPerUserProfileData(...arguments)
+        .then(registryObjects => resolve(this._convertToDiscoveredObject(registryObjects)))
+        .catch(error => reject(error));
     });
   }
 
@@ -160,6 +202,7 @@ class Discovery {
   */
   discoverHypertiesPerGUID(guidURL, schema, resources) {
     let _this = this;
+    let filteredHyperties = [];
 
     let msg = {
       type: 'read',
@@ -182,14 +225,40 @@ class Discovery {
       _this.messageBus.postMessage(msg, (reply) => {
 
         if(reply.body.code === 200){
-          console.log("Reply log: ",reply.body.value);
-          resolve(reply.body.value);
+          reply.body.value.map(function(hyperty) {
+             if(hyperty.hypertyID != _this.discoveryURL)
+                 filteredHyperties.push(hyperty);
+          });
+          if(filteredHyperties.length === 0)
+            reject('No Hyperty was found');
+          else {
+            console.log("Reply log: ",filteredHyperties);
+            resolve(filteredHyperties);
+          }
         }
         else {
           console.log("Error Log: ", reply.body.description);
           reject(reply.body.description);
         }
       });
+    });
+  }
+
+  /**
+  * Advanced Search for Hyperties registered in domain registry associated with some GUID
+  * returns DiscoveredObject
+  * @param  {String}           guidURL                guid URL e.g user-guid://<unique-user-identifier>
+  * @param  {Array<string>}    schema (Optional)     types of hyperties schemas
+  * @param  {Array<string>}    resources (Optional)  types of hyperties resources
+  */
+  discoverHypertiesPerGUIDDO(guidURL, schema, resources) {
+
+    return new Promise((resolve, reject) => {
+      this.discoverHypertiesPerGUID(...arguments)
+      .then(hyperties => {
+        resolve(this._convertToDiscoveredObject(hyperties));
+      })
+      .catch(error => reject(error));
     });
   }
 
@@ -235,6 +304,23 @@ class Discovery {
     });
   }
 
+  /**
+  * function to request about dataObject registered in domain registry, and
+  * returns discoveredObject.
+  * @param  {String}           guidURL                guid URL e.g user-guid://<unique-user-identifier>
+  * @param  {Array<string>}    schema (Optional)     types of hyperties schemas
+  * @param  {Array<string>}    resources (Optional)  types of hyperties resources
+  * @param  {String}           domain (Optional)     domain of the registry to search
+  */
+  discoverDataObjectsPerGUIDDO(guidURL, schema, resources) {
+
+    return new Promise((resolve, reject) => {
+      this.discoverDataObjectsPerGUID(...arguments)
+        .then(registryObjects => resolve(this._convertToDiscoveredObject(registryObjects)))
+        .catch(error => reject(error));
+    });
+  }
+
   /** Advanced Search for Hyperties registered in domain registry
   * @param  {String}           user                  user identifier, either in url or email format
   * @param  {Array<string>}    schema (Optional)     types of hyperties schemas
@@ -244,6 +330,7 @@ class Discovery {
   discoverHyperties(user, schema, resources, domain) {
     let _this = this;
     let activeDomain;
+    let filteredHyperties = [];
 
     activeDomain = (!domain) ? _this.domain : domain;
 
@@ -274,9 +361,17 @@ class Discovery {
 
         _this.messageBus.postMessage(msg, (reply) => {
 
-          if(reply.body.code === 200){
-            console.log("Reply log: ",reply.body.value);
-            resolve(reply.body.value);
+          if(reply.body.code === 200 || reply.body.code === 500){
+            reply.body.value.map(function(hyperty) {
+               if(hyperty.hypertyID != _this.discoveryURL)
+                   filteredHyperties.push(hyperty);
+            });
+            if(filteredHyperties.length === 0)
+              reject('No Hyperty was found');
+            else {
+              console.log("Reply log: ",filteredHyperties);
+              resolve(filteredHyperties);
+            }
           }
           else {
             console.log("Error Log: ", reply.body.description);
@@ -286,7 +381,24 @@ class Discovery {
       } else {
         resolve({hypertyID: user});
       }
+    });
+  }
 
+  /** Advanced Search for Hyperties registered in domain registry,
+  *returns DiscoveredObject
+  * @param  {String}           user                  user identifier, either in url or email format
+  * @param  {Array<string>}    schema (Optional)     types of hyperties schemas
+  * @param  {Array<string>}    resources (Optional)  types of hyperties resources
+  * @param  {String}           domain (Optional)     domain of the registry to search
+  */
+  discoverHypertiesDO(user, schema, resources, domain) {
+
+    return new Promise((resolve, reject) => {
+      this.discoverHyperties(...arguments)
+      .then(hyperties => {
+        resolve(this._convertToDiscoveredObject(hyperties));
+      })
+      .catch(error => reject(error));
     });
   }
 
@@ -340,6 +452,23 @@ class Discovery {
   }
 
   /**
+  * function to request about dataObject registered in domain registry, and
+  * returns discoveredObject.
+  * @param  {String}           user                  user identifier, either in url or email format
+  * @param  {Array<string>}    schema (Optional)     types of dataObjects schemas
+  * @param  {Array<string>}    resources (Optional)  types of dataObjects resources
+  * @param  {String}           domain (Optional)     domain of the registry to search
+  */
+  discoverDataObjectsDO(user, schema, resources, domain) {
+
+    return new Promise((resolve, reject) => {
+      this.discoverDataObjects(...arguments)
+        .then(registryObjects => resolve(this._convertToDiscoveredObject(registryObjects)))
+        .catch(error => reject(error));
+    });
+  }
+
+  /**
   * function to request about hyperties registered in domain registry, and
   * return the hyperty information, if found.
   * @param  {String}              url  hyperty URL
@@ -380,6 +509,21 @@ class Discovery {
   }
 
   /**
+  * function to request about hyperties registered in domain registry, and
+  * returns discoveredObject.
+  * @param  {String}              url  hyperty URL
+  * @param  {String}            domain (Optional)
+  */
+  discoverHypertyPerURLDO(url, domain) {
+
+    return new Promise((resolve, reject) => {
+      this.discoverHypertyPerURL(...arguments)
+        .then(hyperty => resolve(new DiscoveredObject(hyperty, this.runtimeURL, this.discoveryURL, this.messageBus)))
+        .catch(error => reject(error));
+    });
+  }
+
+  /**
   * function to request about dataObject registered in domain registry, and
   * return the dataObject information, if found.
   * @param  {String}              url  dataObject URL
@@ -416,6 +560,21 @@ class Discovery {
           reject(reply.body.description);
         }
       });
+    });
+  }
+
+  /**
+  * function to request about dataObject registered in domain registry, and
+  * returns discoveredObject.
+  * @param  {String}              url  dataObject URL
+  * @param  {String}            domain (Optional)
+  */
+  discoverDataObjectPerURLDO(url, domain) {
+
+    return new Promise((resolve, reject) => {
+      this.discoverDataObjectPerURL(...arguments)
+        .then(registryObject => resolve(new DiscoveredObject(registryObject, this.runtimeURL, this.discoveryURL, this.messageBus)))
+        .catch(error => reject(error));
     });
   }
 
@@ -471,6 +630,23 @@ class Discovery {
   }
 
   /**
+  * function to request about dataObject registered in domain registry, and
+  * returns discoveredObject.
+  * @param  {String}              name  dataObject URL
+  * @param  {Array<string>}    schema (Optional)     types of dataObjects schemas
+  * @param  {Array<string>}    resources (Optional)  types of dataObjects resources
+  * @param  {String}            domain (Optional)
+  */
+  discoverDataObjectsPerNameDO(name, schema, resources, domain) {
+
+    return new Promise((resolve, reject) => {
+      this.discoverDataObjectsPerName(...arguments)
+        .then(registryObjects => resolve(this._convertToDiscoveredObject(registryObjects)))
+        .catch(error => reject(error));
+    });
+  }
+
+  /**
   * function to request about specific reporter dataObject registered in domain registry, and
   * return the dataObjects from that reporter.
   * @param  {String}           reporter     dataObject reporter
@@ -519,6 +695,29 @@ class Discovery {
           reject(reply.body.description);
         }
       });
+    });
+  }
+
+  /**
+  * function to request about dataObject registered in domain registry, and
+  * returns discoveredObject.
+  * @param  {String}              name  dataObject URL
+  * @param  {Array<string>}    schema (Optional)     types of dataObjects schemas
+  * @param  {Array<string>}    resources (Optional)  types of dataObjects resources
+  * @param  {String}            domain (Optional)
+  */
+  discoverDataObjectsPerReporterDO(reporter, schema, resources, domain) {
+
+    return new Promise((resolve, reject) => {
+      this.discoverDataObjectsPerReporter(...arguments)
+        .then(registryObjects => resolve(this._convertToDiscoveredObject(registryObjects)))
+        .catch(error => reject(error));
+    });
+  }
+
+  _convertToDiscoveredObject(registryObjects) {
+    return registryObjects.map((registryObject) => {
+      return new DiscoveredObject(registryObject, this.runtimeURL, this.discoveryURL, this.messageBus);
     });
   }
 
@@ -578,8 +777,6 @@ class Discovery {
     } else {
       activeDomain = domain;
     }
-
-
 
     return new Promise(function(resolve, reject) {
 
@@ -742,6 +939,55 @@ class Discovery {
     });
   }
 
+  /**
+  * function to request about users registered in domain registry, and
+  * return the all the hyperties registered by the user
+  * @deprecated Deprecated. Use discoverHyperty instead
+  * @param  {email}              email
+  * @param  {domain}            domain (Optional)
+  */
+  resumeDiscoveries() {
+
+    let _this = this;
+
+    console.log('[Discovery] resumeDiscoveries');
+
+    return new Promise(function(resolve, reject) {
+
+      let msg = {
+        type: 'read', from: _this.discoveryURL, to: _this.runtimeURL + '/subscriptions', body: { resource: _this.discoveryURL}
+      };
+
+      _this.messageBus.postMessage(msg, (reply)=>{
+        console.log('[Discovery.resumeDiscoveries] reply: ', reply);
+
+        let notifications = [];
+
+        if (reply.body.code === 200) {
+          let urls = reply.body.value;// URLs to add listeners to
+
+          //lets create one DiscoveryObject per notification
+          urls.forEach((url) => {
+            let objectUrl = url.split('/registration')[0];
+            let data = {};
+            data.url = objectUrl;
+            console.log('[Discovery.resumeDiscoveries] adding listener to: ', objectUrl);
+
+            if (objectUrl.includes('hyperty://')) {
+              notifications.push(_this.discoverHypertyPerURLDO(objectUrl));
+            } else {
+              notifications.push(_this.discoverDataObjectPerURLDO(objectUrl));
+            }
+          });
+          Promise.all(notifications).then(values=>{ resolve(values); });
+        } else {
+          resolve([]);
+        }
+      });
+
+    });
+
+  }
 }
 
 export default Discovery;

@@ -417,8 +417,8 @@ class DataObject {
     //TODO: update version ?
     //how to handle an incorrect version ? Example: receive a version 3 when the observer is in version 1, where is the version 2 ?
     //will we need to confirm the reception ?
-    if (_this._version + 1 === msg.body.version) {
-      _this._version++;
+    if (_this._version + 1 <= msg.body.version) {
+      _this._version = msg.body.version;
       let path = msg.body.attribute;
       let value = deepClone(msg.body.value);
       let findResult = syncObj.findBefore(path);
