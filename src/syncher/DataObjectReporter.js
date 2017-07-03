@@ -311,7 +311,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     if (_this.metadata.subscriptions) {
       subscriptions = _this.metadata.subscriptions;
     } else if (_this._subscriptions) {
-      subscriptions = Object.keys(_this._subscriptions).map(function(key) { return _this._subscriptions[key]; });
+      subscriptions = Object.keys(_this._subscriptions).map(function(key) { return _this._subscriptions[key].url; });
     }
 
     if (subscriptions.indexOf(msg.from) != -1) {
