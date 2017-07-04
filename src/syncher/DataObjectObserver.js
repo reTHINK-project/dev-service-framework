@@ -74,7 +74,13 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
     _this._syncher.read(_this._metadata.url).then((value)=>{
       console.info('[DataObjectObserver_sync] value to sync: ', value);
 
-      if (value.version != _this._version) {
+      Object.assign(_this.data, deepClone(value.data));
+
+      _this._version = value.version;
+
+      _this._metadata.lastModified = value.lastModified;
+
+      /*if (value.version != _this._version) {
         console.info('[DataObjectObserver_sync] updating existing data: ', _this.data);
 
         Object.assign(_this.data || {}, deepClone(value.data));
@@ -86,8 +92,8 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
         _this._version = value.version;
 
       } else {
-        console.info('[DataObjectObserver_sync] existing data updated: ', value);
-      }
+        console.info('[DataObjectObserver_sync] existing data is updated: ', value);
+      }*/
 
     }).catch((reason) => {
       console.info('[DataObjectObserver_sync] sync failed: ', reason);
