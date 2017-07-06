@@ -118,7 +118,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
         _this._releaseListeners();
         delete _this._syncher._reporters[_this._url];
 
-        _this._syncObj.unobserve();
+        //_this._syncObj.unobserve();
         _this._syncObj = {};
       }
     });

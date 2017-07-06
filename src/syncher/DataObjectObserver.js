@@ -126,6 +126,7 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
   delete() {
     let _this = this;
 
+    _this.unsubscribe();
     _this._releaseListeners();
     delete _this._syncher._observers[_this._url];
   }
