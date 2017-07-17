@@ -316,7 +316,7 @@ class DataObject {
 
       if (!_this._childrenObjects) { _this._childrenObjects = {}; }
 
-      _this._childrenObjects[childInput.url] = bodyValue;
+      _this._childrenObjects[childInput.url] = newChild;
 
       resolve(newChild);
     });
