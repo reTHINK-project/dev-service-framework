@@ -22,10 +22,7 @@
 **/
 
 import { deepClone } from '../utils/utils';
-import SyncObject, {ChangeType, ObjectType} from './ProxyObject';
-
 import DataObject from './DataObject';
-import DataObjectChild from './DataObjectChild';
 
 let FilterType = {ANY: 'any', START: 'start', EXACT: 'exact'};
 
@@ -77,7 +74,13 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
     _this._syncher.read(_this._metadata.url).then((value)=>{
       console.info('[DataObjectObserver_sync] value to sync: ', value);
 
-      if (value.version != _this._version) {
+      Object.assign(_this.data, deepClone(value.data));
+
+      _this._version = value.version;
+
+      _this._metadata.lastModified = value.lastModified;
+
+      /*if (value.version != _this._version) {
         console.info('[DataObjectObserver_sync] updating existing data: ', _this.data);
 
         Object.assign(_this.data || {}, deepClone(value.data));
@@ -87,7 +90,10 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
         delete _this._metadata.data;
 
         _this._version = value.version;
-      }
+
+      } else {
+        console.info('[DataObjectObserver_sync] existing data is updated: ', value);
+      }*/
 
     }).catch((reason) => {
       console.info('[DataObjectObserver_sync] sync failed: ', reason);
@@ -120,6 +126,7 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
   delete() {
     let _this = this;
 
+    _this.unsubscribe();
     _this._releaseListeners();
     delete _this._syncher._observers[_this._url];
   }
@@ -189,6 +196,59 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
           filter.callback(event);
         }
       }
+    });
+  }
+
+  onDisconnected(callback) {
+
+    return new Promise((resolve, reject) => {
+
+      this._subscribeRegistration()
+      .then(() => {
+        this._onDisconnected = callback;
+        resolve();
+      })
+      .catch((err) => reject(err));
+    });
+  }
+
+  _subscribeRegistration() {
+
+    const msg = {
+      type: 'subscribe',
+      from: this._owner,
+      to: this._syncher._runtimeUrl + '/subscriptions',
+      body: {
+        resources: [this._url + '/registration']
+      }
+    };
+
+    return new Promise((resolve, reject) => {
+
+      this._bus.postMessage(msg, (reply) => {
+        console.log(`[DataObjectObserver._subscribeRegistration] ${this._url} rcved reply `, reply);
+
+        if (reply.body.code === 200) {
+          this._generateListener(this._url + '/registration');
+          resolve();
+        } else {
+          console.error('Error subscribing registration status for ', this._url);
+          reject('Error subscribing registration status for ' + this._url);
+        }
+      });
+    });
+  }
+
+  _generateListener(notificationURL) {
+    let _this = this;
+
+    _this._bus.addListener(notificationURL, (msg) => {
+      console.log(`[DataObjectObserver.registrationNotification] ${_this._url}: `, msg);
+      if (msg.body.value && msg.body.value === 'disconnected' && _this._onDisconnected) {
+        console.log(`[DataObjectObserver] ${_this._url}: was disconnected `, msg);
+        _this._onDisconnected();
+      }
+
     });
   }
 }

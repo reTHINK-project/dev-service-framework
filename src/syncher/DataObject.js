@@ -161,46 +161,45 @@ class DataObject {
     }
   }
 
+  /**
+   *
+   */
+  resumeChildrens(childrens) {
+    let _this = this;
 
-    /**
-     *
-     */
-    resumeChildrens(childrens) {
-      let _this = this;
+    let childIdString = this._owner + '#' + this._childId;
 
-      let childIdString = this._owner + '#' + this._childId;
-
-      if (childrens && !_this._childrenObjects) {
-        _this._childrenObjects = {};
-      }
-
-      //setup childrens data from subscription
-      Object.keys(childrens).forEach((childrenResource) => {
-        let children = childrens[childrenResource];
-
-        Object.keys(children).forEach((childId) => {
-          let childInput = children[childId].value;
-          console.log('[DataObject.resumeChildrens] new DataObjectChild: ', childrenResource, children, childInput);
-          childInput.parentObject = _this;
-          childInput.parent = _this._url;
-          _this._childrenObjects[childId] = new DataObjectChild(childInput);
-          _this._childrenObjects[childId].identity = children[childId].identity;
-
-          if (childId > childIdString) {
-            childIdString = childId;
-          }
-
-          console.log('[DataObjectReporter.resumeChildrens] - resumed: ', this._childrenObjects[childId]);
-        });
-      });
-
-      this._childId = Number(childIdString.split('#')[1]);
+    if (childrens && !_this._childrenObjects) {
+      _this._childrenObjects = {};
     }
 
-    /**
-     * All Metadata about the Data Object
-     * @type {Object} -
-     */
+    //setup childrens data from subscription
+    Object.keys(childrens).forEach((childrenResource) => {
+      let children = childrens[childrenResource];
+
+      Object.keys(children).forEach((childId) => {
+        let childInput = children[childId].value;
+        console.log('[DataObject.resumeChildrens] new DataObjectChild: ', childrenResource, children, childInput);
+        childInput.parentObject = _this;
+        childInput.parent = _this._url;
+        _this._childrenObjects[childId] = new DataObjectChild(childInput);
+        _this._childrenObjects[childId].identity = children[childId].identity;
+
+        if (childId > childIdString) {
+          childIdString = childId;
+        }
+
+        console.log('[DataObjectReporter.resumeChildrens] - resumed: ', this._childrenObjects[childId]);
+      });
+    });
+
+    this._childId = Number(childIdString.split('#')[1]);
+  }
+
+  /**
+   * All Metadata about the Data Object
+   * @type {Object} -
+   */
 
   get metadata() { return this._metadata; }
 
@@ -270,42 +269,46 @@ class DataObject {
   addChild(children, initialData, identity, input) {
     let _this = this;
 
-    let childInput  = Object.assign({}, input);
-    //create new child unique ID, based on hypertyURL
-    _this._childId++;
-    childInput.url = _this._owner + '#' + _this._childId;
-    let msgChildPath = _this._url + '/children/' + children;
-
-    childInput.parentObject = _this;
-    childInput.data = initialData;
-    childInput.reporter = _this._owner;
-    childInput.created = (new Date).toISOString();
-    childInput.runtime = _this._runtime;
-    childInput.schema = _this._schema;
-    childInput.parent = _this.url;
-
-    let newChild = new DataObjectChild(childInput);
-
-
-    let bodyValue = newChild.metadata;
-    bodyValue.data = initialData;
-
-    //FLOW-OUT: this message will be sent directly to a resource child address: MessageBus
-    let requestMsg = {
-      type: 'create', from: _this._owner, to: msgChildPath,
-      body: { resource: childInput.url, value: bodyValue }
-    };
-
-    if (identity)      { requestMsg.body.identity = identity; }
-
-    //TODO: For Further Study
-    if (!_this._mutualAuthentication) requestMsg.body.mutualAuthentication = _this._mutualAuthentication;
-
-    console.log('[DataObject.addChild] added ', newChild);
-
     //returns promise, in the future, the API may change to asynchronous call
     return new Promise((resolve) => {
+
+      let childInput  = Object.assign({}, input);
+
+      //create new child unique ID, based on hypertyURL
+      _this._childId++;
+      childInput.url = _this._owner + '#' + _this._childId;
+      let msgChildPath = _this._url + '/children/' + children;
+
+      childInput.parentObject = _this;
+      childInput.data = initialData;
+      childInput.reporter = _this._owner;
+      childInput.created = (new Date).toISOString();
+      childInput.runtime = _this._runtime;
+      childInput.schema = _this._schema;
+      childInput.parent = _this.url;
+
+      let newChild = new DataObjectChild(childInput);
+
+      let bodyValue = newChild.metadata;
+      bodyValue.data = initialData;
+
+      //FLOW-OUT: this message will be sent directly to a resource child address: MessageBus
+      let requestMsg = {
+        type: 'create', from: _this._owner, to: msgChildPath,
+        body: { resource: childInput.url, value: bodyValue }
+      };
+
+      if (identity)      {
+        newChild.identity = identity;
+        requestMsg.body.identity = identity;
+      }
+
+      //TODO: For Further Study
+      if (!_this._mutualAuthentication) requestMsg.body.mutualAuthentication = _this._mutualAuthentication;
+
       let msgId = _this._bus.postMessage(requestMsg);
+
+      console.log('[DataObject.addChild] added ', newChild, msgId, bodyValue);
 
       newChild.onChange((event) => {
         _this._onChange(event, { path: msgChildPath, childId: childInput.url });
@@ -335,6 +338,7 @@ class DataObject {
 
     console.log('[DataObject._onChildCreate] receivedBy ' + _this._owner + ' : ', msg);
     let newChild = new DataObjectChild(childInput);
+    newChild.identity = msg.body.identity;
 
     if (!_this._childrenObjects) { _this._childrenObjects = {}; }
 
@@ -413,8 +417,8 @@ class DataObject {
     //TODO: update version ?
     //how to handle an incorrect version ? Example: receive a version 3 when the observer is in version 1, where is the version 2 ?
     //will we need to confirm the reception ?
-    if (_this._version + 1 === msg.body.version) {
-      _this._version++;
+    if (_this._version + 1 <= msg.body.version) {
+      _this._version = msg.body.version;
       let path = msg.body.attribute;
       let value = deepClone(msg.body.value);
       let findResult = syncObj.findBefore(path);

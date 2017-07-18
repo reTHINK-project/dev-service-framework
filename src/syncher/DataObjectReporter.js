@@ -23,9 +23,7 @@
 
 import DataObject from './DataObject';
 
-import DataObjectChild from './DataObjectChild';
-
-import { deepClone } from '../utils/utils.js';
+import { deepClone, divideURL } from '../utils/utils.js';
 
 /**
  * The class returned from the Syncher create call.
@@ -89,6 +87,9 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
   inviteObservers(observers) {
     let _this = this;
 
+    console.log('[Syncher.DataObjectReporter] InviteObservers ', observers);
+    console.log('[Syncher.DataObjectReporter] InviteObservers ', _this._metadata);
+
     //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onCreate
     // TODO: remove value and add resources? should similar to 1st create
     let inviteMsg = {
@@ -117,7 +118,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
         _this._releaseListeners();
         delete _this._syncher._reporters[_this._url];
 
-        _this._syncObj.unobserve();
+        //_this._syncObj.unobserve();
         _this._syncObj = {};
       }
     });
@@ -168,11 +169,16 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
   _onSubscribe(msg) {
     let _this = this;
     let hypertyUrl = msg.body.from;
-    console.log('[DataObjectReporter._onSubscribe]', msg);
+    let dividedURL = divideURL(hypertyUrl);
+    let domain = dividedURL.domain;
+
+    console.log('[DataObjectReporter._onSubscribe]', msg, domain, dividedURL);
 
     let event = {
       type: msg.body.type,
       url: hypertyUrl,
+
+      domain: domain,
 
       identity: msg.body.identity,
 
@@ -187,15 +193,15 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
         msgValue.version = _this._version;
 
         //process and send childrens data
-        let childrenValues = {};
-
-        if (_this._childrenObjects) {
-          Object.keys(_this._childrenObjects).forEach((childrenId) => {
-            let childrenData = _this._childrenObjects[childrenId].data;
-            childrenValues[childrenId] = deepClone(childrenData);
-          });
-          msgValue.childrenObjects = childrenValues;
-        }
+        // let childrenValues = {};
+        //
+        // if (_this._childrenObjects) {
+        //   Object.keys(_this._childrenObjects).forEach((childrenId) => {
+        //     let childrenData = _this._childrenObjects[childrenId];
+        //     childrenValues[childrenId] = deepClone(childrenData);
+        //   });
+        //   msgValue.childrenObjects = childrenValues;
+        // }
 
         let sendMsg = {
           id: msg.id, type: 'response', from: msg.to, to: msg.from,
@@ -233,6 +239,10 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
   _onUnSubscribe(msg) {
     let _this = this;
     let hypertyUrl = msg.body.from;
+    let dividedURL = divideURL(hypertyUrl);
+    let domain = dividedURL.domain;
+
+    console.log('[DataObjectReporter._onUnSubscribe]', msg, domain, dividedURL);
 
     //let sub = _this._subscriptions[hypertyUrl];
     delete _this._subscriptions[hypertyUrl];
@@ -240,6 +250,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     let event = {
       type: msg.body.type,
       url: hypertyUrl,
+      domain: domain,
       identity: msg.body.identity
     };
 
@@ -300,7 +311,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     if (_this.metadata.subscriptions) {
       subscriptions = _this.metadata.subscriptions;
     } else if (_this._subscriptions) {
-      subscriptions = Object.keys(_this._subscriptions).map(function(key) { return _this._subscriptions[key]; });
+      subscriptions = Object.keys(_this._subscriptions).map(function(key) { return _this._subscriptions[key].url; });
     }
 
     if (subscriptions.indexOf(msg.from) != -1) {

@@ -15,6 +15,14 @@ describe('Discovery', function() {
                    dataSchemes: ['comm'],
                    resources:   ['chat']}
   };
+
+  let expectedHypertiesMessage = [{'hyperty://ist.pt/1':
+                  {descriptor: 'hyperty-catalogue://ist.pt/.well-known/hyperty/HelloHyperty',
+                   lastModified: '"2016-03-03T13:32:06Z"',
+                   dataSchemes: ['comm'],
+                   resources:   ['chat']}
+  }];
+
   let expectedDataObjectMessage = {'comm://ist.pt/1':
                   {schema: 'hyperty-catalogue://catalogue.hybroker.rethink.ptinovacao.pt/.well-known/dataschema/Communication',
                    url: 'comm://ist.pt/1',
@@ -29,7 +37,7 @@ describe('Discovery', function() {
 
       if (msg.body.resource === 'user://gmail.com/openidtest10') { //deprecated
         expect(msg).to.eql({
-          type: 'read', from: domain, to: 'domain://registry.ist.pt/',
+          type: 'read', from: domain, to: 'domain://registry.ist.pt',
           body: {resource: 'user://gmail.com/openidtest10'}
         });
         replyCallback({
@@ -41,7 +49,7 @@ describe('Discovery', function() {
         });
       } else if (msg.body.resource === 'user://specific.com/openidtest10') { //deprecated
         expect(msg).to.eql({
-          type: 'read', from: domain, to: 'domain://registry.specific.com/',
+          type: 'read', from: domain, to: 'domain://registry.specific.com',
           body: {resource: 'user://specific.com/openidtest10'}
         });
         replyCallback({
@@ -53,7 +61,7 @@ describe('Discovery', function() {
         });
       } else if (msg.body.resource === 'user://gmail.com/openidtest20') { //deprecated
         expect(msg).to.eql({
-          type: 'read', from: domain, to: 'domain://registry.ist.pt/',
+          type: 'read', from: domain, to: 'domain://registry.ist.pt',
           body: {resource: 'user://gmail.com/openidtest20', criteria: {resources: ['chat'], dataSchemes: ['comm']}}
         });
         replyCallback({
@@ -73,11 +81,11 @@ describe('Discovery', function() {
         replyCallback({
           id: 1, type: 'response', to: msg.from, from: msg.to, body: {code: 200,
             assertedIdentity: 'user://google.com/openidtest20@gmail.com',
-            value: {'hyperty://ist.pt/1':
+            value: [{'hyperty://ist.pt/1':
                         {descriptor: 'hyperty-catalogue://ist.pt/.well-known/hyperty/HelloHyperty',
                          lastModified: '"2016-03-03T13:32:06Z"',
                          dataSchemes: ['comm'],
-                         resources:   ['chat']}}}
+                         resources:   ['chat']}}]}
         });
       } else if (msg.body.resource === '/dataObject/userprofile/openidtest20') { //discoverDataObjectsPerUserProfileData
         expect(msg).to.eql({
@@ -103,11 +111,11 @@ describe('Discovery', function() {
         replyCallback({
           id: 1, type: 'response', to: msg.from, from: msg.to, body: {code: 200,
             assertedIdentity: 'user://google.com/openidtest20@gmail.com',
-            value: {'hyperty://ist.pt/1':
+            value: [{'hyperty://ist.pt/1':
                         {descriptor: 'hyperty-catalogue://ist.pt/.well-known/hyperty/HelloHyperty',
                          lastModified: '"2016-03-03T13:32:06Z"',
                          dataSchemes: ['comm'],
-                         resources:   ['chat']}}}
+                         resources:   ['chat']}}]}
         });
       } else if (msg.body.resource === '/dataObject/guid/user-guid://3vGnMSSVVhJL7soMC9tSj6DyIxWUNrzj3BNBcbUyceo') { //discoverDataObjectsPerGUID
         expect(msg).to.eql({
@@ -133,11 +141,11 @@ describe('Discovery', function() {
         replyCallback({
           id: 1, type: 'response', to: msg.from, from: msg.to, body: {code: 200,
             assertedIdentity: 'user://google.com/openidtest20@gmail.com',
-            value: {'hyperty://ist.pt/1':
+            value: [{'hyperty://ist.pt/1':
                         {descriptor: 'hyperty-catalogue://ist.pt/.well-known/hyperty/HelloHyperty',
                          lastModified: '"2016-03-03T13:32:06Z"',
                          dataSchemes: ['comm'],
-                         resources:   ['chat']}}}
+                         resources:   ['chat']}}]}
         });
       } else if (msg.body.resource === '/dataObject/user/openidtest20@gmail.com') { //discoverDataObjects
         expect(msg).to.eql({
@@ -269,7 +277,7 @@ describe('Discovery', function() {
 
       expect(hypertyDiscovery.discoverHypertiesPerUserProfileData('openidtest20', ['comm'], ['chat']).then(function(response) {
         return response;
-      })).to.be.fulfilled.and.eventually.eql(expectedHypertyMessage).and.notify(done);
+      })).to.be.fulfilled.and.eventually.eql(expectedHypertiesMessage).and.notify(done);
     });
   });
 
@@ -287,7 +295,7 @@ describe('Discovery', function() {
 
       expect(hypertyDiscovery.discoverHypertiesPerGUID('user-guid://3vGnMSSVVhJL7soMC9tSj6DyIxWUNrzj3BNBcbUyceo', ['comm'], ['chat']).then(function(response) {
         return response;
-      })).to.be.fulfilled.and.eventually.eql(expectedHypertyMessage).and.notify(done);
+      })).to.be.fulfilled.and.eventually.eql(expectedHypertiesMessage).and.notify(done);
     });
   });
 
@@ -305,7 +313,7 @@ describe('Discovery', function() {
 
       expect(hypertyDiscovery.discoverHyperties('openidtest20@gmail.com', ['comm'], ['chat']).then(function(response) {
         return response;
-      })).to.be.fulfilled.and.eventually.eql(expectedHypertyMessage).and.notify(done);
+      })).to.be.fulfilled.and.eventually.eql(expectedHypertiesMessage).and.notify(done);
     });
   });
 
