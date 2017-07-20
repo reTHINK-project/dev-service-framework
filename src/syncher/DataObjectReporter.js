@@ -58,6 +58,8 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     });
 
     _this._allocateListeners();
+
+    _this._invitations = [];
   }
 
   _allocateListeners() {
@@ -92,12 +94,25 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
 
     //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onCreate
     // TODO: remove value and add resources? should similar to 1st create
-    let inviteMsg = {
-      type: 'create', from: _this._syncher._owner, to: _this._syncher._subURL,
-      body: { resume: false, resource: _this._url, schema: _this._schema, value: _this._metadata, authorise: observers }
-    };
 
-    _this._bus.postMessage(inviteMsg);
+    let toInvite = [];
+
+    observers.forEach((observer)=> {
+      if (!_this._invitations[observer]){
+        toInvite.push(observer);
+        _this._invitations[observer] = observer;
+      }
+    });
+
+    if (toInvite.length > 0) {
+      let inviteMsg = {
+        type: 'create', from: _this._syncher._owner, to: _this._syncher._subURL,
+        body: { resume: false, resource: _this._url, schema: _this._schema, value: _this._metadata, authorise: observers }
+      };
+
+      _this._bus.postMessage(inviteMsg);
+
+    }
   }
 
   /**
@@ -246,6 +261,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
 
     //let sub = _this._subscriptions[hypertyUrl];
     delete _this._subscriptions[hypertyUrl];
+    delete _this._invitations[hypertyUrl];
 
     let event = {
       type: msg.body.type,
