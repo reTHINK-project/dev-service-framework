@@ -71,6 +71,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
       switch (msg.type) {
         case 'response': _this._onResponse(msg); break;
         case 'read': _this._onRead(msg); break;
+        case 'execute': _this._onExecute(msg); break;
       }
     });
   }
@@ -165,8 +166,18 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
    * Setup the callback to process read notifications
    * @param {function(event: MsgEvent)} callback
    */
+
   onRead(callback) {
     this._onReadHandler = callback;
+  }
+
+  /**
+   * Setup the callback to process execute notifications
+   * @param {function(event: MsgEvent)} callback
+   */
+
+  onExecute(callback) {
+    this._onExecuteHandler = callback;
   }
 
   //FLOW-IN: message received from parent Syncher -> _onForward
@@ -335,6 +346,41 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     } else if (_this._onReadHandler) {
       console.log('READ-EVENT: ', event);
       _this._onReadHandler(event);
+    }
+  }
+
+  // Execute request received
+  _onExecute(msg) {
+    let _this = this;
+
+    if (!msg.body.method) throw '[DataObjectReporter._onExecute] method missing ', msg;
+
+    let response = {
+      id: msg.id, type: 'response', from: msg.to, to: msg.from,
+      body: { code: 200 }
+    };
+
+    let event = {
+      type: msg.type,
+      url: msg.from,
+      method: msg.body.method,
+      params: msg.body.params,
+
+      accept: () => {
+        _this._bus.postMessage(response);
+      },
+
+      reject: (reason) => {
+        _this._bus.postMessage({
+          id: msg.id, type: 'response', from: msg.to, to: msg.from,
+          body: { code: 401, desc: reason }
+        });
+      }
+    };
+
+    if (_this._onExecuteHandler) {
+      console.log('[DataObjectReporter] EXECUTE-EVENT: ', event);
+      _this._onExecuteHandler(event);
     }
   }
 
