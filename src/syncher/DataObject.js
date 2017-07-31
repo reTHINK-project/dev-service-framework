@@ -51,7 +51,7 @@ class DataObject {
    * @ignore
    * Should not be used directly by Hyperties. It's called by the Syncher create or subscribe method's
    */
-  //constructor(syncher, url, created, reporter, runtime, schema, name, initialStatus, initialData, childrens, mutual = true, resumed = false, description, tags, resources, observerStorage, publicObservation) {
+
   constructor(input) {
     let _this = this;
 
@@ -82,7 +82,8 @@ class DataObject {
 
     _this._version = 0;
     _this._childId = 0;
-    _this._childrenListeners = [];
+    _this._childrenListeners = []; //bus listeners per children
+    _this._onAddChildrenHandler; //Hyperty side handlers to process child objects created by remote Hyperties
 
     _this._resumed = input.resume;
 
@@ -325,8 +326,10 @@ class DataObject {
   /**
    * Setup the callback to process create and delete of childrens.
    * @param {function(event: MsgEvent)} callback
+   * TODO: add childrenId to support different handlers per children
    */
   onAddChild(callback) {
+
     this._onAddChildrenHandler = callback;
   }
 
@@ -362,10 +365,7 @@ class DataObject {
       identity: msg.body.identity
     };
 
-    if (_this._onAddChildrenHandler) {
-      console.log('ADD-CHILDREN-EVENT: ', event);
-      _this._onAddChildrenHandler(event);
-    }
+    if (_this._onAddChildrenHandler) _this._onAddChildrenHandler(event);
   }
 
   //send delta messages to subscriptions
