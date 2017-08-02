@@ -19,57 +19,83 @@ class FileHypertyResource extends HypertyResource {
   * @param  {Array} input optional input parameters
   */
 
-  constructor(owner, runtime, bus, parent, isReporter, file, input) {
+  constructor(owner, runtime, bus, parent, isSender, metadata) {
 
-    super(owner, runtime, bus, parent, isReporter, input);
+    super(owner, runtime, bus, parent, isSender, metadata);
 
     let _this = this;
 
-    if (!file) throw new Error('[FileHypertyResource.constructor] missing mandatory file input ');
-
-    if (isReporter) {
-      _this._getContent(file);
-      _this._thumbnail(file);
-    } else {
-      _this.content = file.content;
-      _this._metadata.thumbnail = file.thumbnail;
-    }
-
-    _this.type = 'file';
-    _this._metadata.name = file.name;
-    _this._metadata.lastModified = file.lastModified;
-    _this._metadata.size = file.size;
-    _this._metadata.mimetype = file.type;
+    _this._type = 'file';
 
   }
 
-  _getContent(file) {
-
+  init( file) {
     let _this = this;
 
-    let reader = new FileReader();
+    if (!file) throw new Error('[FileHypertyResource.constructor] missing mandatory *file* input ');
 
-    reader.onload = function(theFile) {
-      _this.content = theFile.result;
-    }
+    return new Promise(function(resolve, reject) {
 
-    reader.readAsBinaryString(file);
+      _this._metadata.name = file.name;
+      _this._metadata.lastModified = file.lastModified;
+      _this._metadata.size = file.size;
+      _this._metadata.mimetype = file.type;
+
+      if (_this._isSender) {
+        let reader = new FileReader();
+
+        reader.onload = function(theFile) {
+
+          _this._content = theFile.target.result;
+
+          let mimetype = file.type.split('/')[0];
+
+          switch (mimetype) {
+            case 'image' :
+              _this._metadata.thumbnail = _this._getImageThumbnail(_this._content); break;
+            default :
+              break;
+          }
+        resolve();
+
+        }
+
+        reader.readAsDataURL(file);
+
+      } else {
+        _this._content = file.content;
+        if (file.thumbnail) _this._metadata.thumbnail = file.thumbnail;
+        resolve();
+      }
+
+    });
 
   }
 
-  _thumbnail(file) {
+  _getImageThumbnail(image){
+    let canvas = document.createElement('canvas');
+    let img = new Image();
+    img.src = image;
+
+    let ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0, 50, 50);
+
+    let thumbnail = document.createElement('img');
+    thumbnail.src = canvas.toDataURL();
+
+    console.log('[FileHypertyResource._getImageThumbnail] returning ', thumbnail);
+    return(thumbnail.src);
+
+  }
+
+  get name() {
     let _this = this;
-    let img = document.createElement("img");
-    let reader = new FileReader();
+    return _this._metadata.name;
+  }
 
-    //TODO: to be completed / adapted. Distinguish images from other files.
-
-    reader.onload = function(theFile) {
-      _this._metadata.thumbnail = theFile.result;
-    }
-
-    reader.readAsDataURL(file);
-
+  get thumbnail() {
+    let _this = this;
+    return _this._metadata.thumbnail;
   }
 
   /**
@@ -84,10 +110,10 @@ class FileHypertyResource extends HypertyResource {
     return new Promise(function(resolve, reject) {
       //to be improved and adapted
 
-      if (!_this._isReporter) reject('[FileHypertyResource.share] Observers can nott share files');
+      if (!_this._isSender) return reject('[FileHypertyResource.share] Observers can nott share files');
 
-      let file2share = _this.metadata;
-      file2share.type = _this.type;
+      let file2share = _this._metadata;
+      file2share.type = _this._type;
 
       _this._parent.addChild(children, file2share).then(function(dataObjectChild) {
         console.log('[FileHypertyResource.share] object child: ', dataObjectChild);

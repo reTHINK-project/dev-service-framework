@@ -9,36 +9,38 @@ class HypertyResource {
   * HypertyResource constructor
   *
   * @param  {URL} owner HypertyURL of the Hyperty handling this resource
-  * @param  {URL} runtime Runtime URL where this resource is hosted
+  * @param  {URL} runtimeURL Runtime URL where this resource is hosted
   * @param  {Bus} bus sandbox message bus
   * @param  {DataObject} parent Parent Data Object where the HypertyResource is handled as a child
   * @param  {Boolean} isReporter indicates if parent is Reporter or an Observer
   * @param  {Array} input optional input parameters
   */
 
-  constructor(owner, runtime, bus, parent, isReporter, input) {
+  constructor(owner, runtimeURL, bus, parent, isSender, input) {
     let _this = this;
 
     if (!bus) throw new Error('[HypertyResource.constructor] missing mandatory *bus* parameter');
     if (!owner) throw new Error('[HypertyResource.constructor] missing mandatory *owner* parameter');
-    if (!runtime) throw new Error('[HypertyResource.constructor] missing mandatory *runtime* parameter');
+    if (!runtimeURL) throw new Error('[HypertyResource.constructor] missing mandatory *runtimeURL* parameter');
     if (!parent) throw new Error('[HypertyResource.constructor] missing mandatory *parent* parameter');
-    if (!isReporter) throw new Error('[HypertyResource.constructor] missing mandatory *isReporter* parameter');
+    //if (!isSender) throw new Error('[HypertyResource.constructor] missing mandatory *isSender* parameter');
 
     _this._bus = bus;
     _this._owner = owner;
-    _this._runtime = runtime;
+    _this._runtimeURL = runtimeURL;
 
     _this._parent = parent;
-    _this._isReporter = isReporter;
 
-    _this._metadata = input;
+    _this._isSender = isSender;
+
+    if (input)  _this._metadata = input;
+    else  _this._metadata = {};
 
   }
 
   get type() {
     let _this = this;
-    return _this.type;
+    return _this._type;
   }
 
   get mimetype() {
@@ -48,7 +50,7 @@ class HypertyResource {
 
   get content() {
     let _this = this;
-    return _this.content;
+    return _this._content;
   }
 
   get contentURL() {
@@ -56,10 +58,11 @@ class HypertyResource {
     return _this._metadata.contentURL;
   }
 
+/*
   set parent(parent) {
     let _this = this;
     _this._parent = parent;
-  }
+  }*/
 
   save() {
     let _this = this;
@@ -68,9 +71,9 @@ class HypertyResource {
 
       let msg = {
         from: _this._owner,
-        to: _this._runtime + '/storage',
+        to: _this._runtimeURL + '/storage',
         type: 'create',
-        body: { value: _this.content }
+        body: { value: _this._content }
       }
 
       _this._bus.postMessage(msg, (reply) => {
@@ -95,7 +98,7 @@ class HypertyResource {
 
       let msg = {
         from: _this._owner,
-        to: _this._runtime + '/storage',
+        to: _this._runtimeURL + '/storage',
         type: 'read',
         body: { resource: _this._metadata.contentURL }
       }
