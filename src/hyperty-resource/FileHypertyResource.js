@@ -52,7 +52,11 @@ class FileHypertyResource extends HypertyResource {
 
           switch (mimetype) {
             case 'image' :
-              _this._metadata.thumbnail = _this._getImageThumbnail(_this._content); break;
+              _this._getImageThumbnail(_this._content).then((thumbnail)=>{
+                _this._metadata.thumbnail = thumbnail;
+                resolve();
+              });
+              break;
             default :
               break;
           }
@@ -73,18 +77,23 @@ class FileHypertyResource extends HypertyResource {
   }
 
   _getImageThumbnail(image){
-    let canvas = document.createElement('canvas');
-    let img = new Image();
-    img.src = image;
 
-    let ctx = canvas.getContext('2d');
-    ctx.drawImage(img, 0, 0, 50, 50);
+    return new Promise((resolve,reject)=>{
+      let canvas = document.createElement('canvas');
+      let img = new Image();
+      img.src = image;
 
-    let thumbnail = document.createElement('img');
-    thumbnail.src = canvas.toDataURL();
 
-    console.log('[FileHypertyResource._getImageThumbnail] returning ', thumbnail);
-    return(thumbnail.src);
+      img.onload = function () {
+              let width = this.naturalWidth;
+              let height = this.naturalHeight;
+              var can = canvas,
+                  ctx = can.getContext('2d');
+                  ctx.drawImage(this, 0, 0, 250, (height / width) * 250);
+                  console.log('[FileHypertyResource._getImageThumbnail] returning ', can.toDataURL());
+                  resolve(can.toDataURL());
+          };
+    });
 
   }
 
