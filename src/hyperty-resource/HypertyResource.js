@@ -73,8 +73,10 @@ class HypertyResource {
         from: _this._owner,
         to: _this._runtimeURL + '/storage',
         type: 'create',
-        body: { value: _this._content }
+        body: { value: _this._metadata }
       }
+
+      msg.body.value.content = _this._content;
 
       _this._bus.postMessage(msg, (reply) => {
         console.log('[HypertyResource.save] reply: ', reply);

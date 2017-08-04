@@ -53,7 +53,7 @@ class FileHypertyResource extends HypertyResource {
           switch (mimetype) {
             case 'image' :
               _this._getImageThumbnail(_this._content).then((thumbnail)=>{
-                _this._metadata.thumbnail = thumbnail;
+                _this._metadata.preview = thumbnail;
                 resolve();
               });
               break;
@@ -68,7 +68,7 @@ class FileHypertyResource extends HypertyResource {
 
       } else {
         _this._content = file.content;
-        if (file.thumbnail) _this._metadata.thumbnail = file.thumbnail;
+        if (file.preview) _this._metadata.preview = file.preview;
         resolve();
       }
 
@@ -102,9 +102,9 @@ class FileHypertyResource extends HypertyResource {
     return _this._metadata.name;
   }
 
-  get thumbnail() {
+  get preview() {
     let _this = this;
-    return _this._metadata.thumbnail;
+    return _this._metadata.preview;
   }
 
   /**
@@ -119,7 +119,7 @@ class FileHypertyResource extends HypertyResource {
     return new Promise(function(resolve, reject) {
       //to be improved and adapted
 
-      if (!_this._isSender) return reject('[FileHypertyResource.share] Observers can nott share files');
+      if (!_this._isSender) return reject('[FileHypertyResource.share] Observers can not share files');
 
       let file2share = _this._metadata;
       file2share.type = _this._type;
