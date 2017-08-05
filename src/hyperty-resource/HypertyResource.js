@@ -3,6 +3,8 @@
 *
 */
 
+import { deepClone } from '../utils/utils.js';
+
 class HypertyResource {
 
   /**
@@ -76,7 +78,7 @@ class HypertyResource {
         body: { value: _this._metadata }
       }
 
-      msg.body.value.content = _this._content;
+      msg.body.value.content = deepClone(_this._content);
 
       _this._bus.postMessage(msg, (reply) => {
         console.log('[HypertyResource.save] reply: ', reply);

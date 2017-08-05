@@ -4,6 +4,8 @@
 */
 
 import HypertyResource from './HypertyResource';
+import { deepClone } from '../utils/utils.js';
+
 
 class FileHypertyResource extends HypertyResource {
 
@@ -46,14 +48,14 @@ class FileHypertyResource extends HypertyResource {
 
         reader.onload = function(theFile) {
 
-          _this._content = theFile.target.result;
+          _this._content = deepClone(theFile.target.result);
 
           let mimetype = file.type.split('/')[0];
 
           switch (mimetype) {
             case 'image' :
-              _this._getImageThumbnail(_this._content).then((thumbnail)=>{
-                _this._metadata.preview = thumbnail;
+              _this._getImageThumbnail(theFile.target.result).then((thumbnail)=>{
+                _this._metadata.preview = deepClone(thumbnail);
                 resolve();
               });
               break;
@@ -127,12 +129,8 @@ class FileHypertyResource extends HypertyResource {
       _this._parent.addChild(children, file2share).then(function(dataObjectChild) {
         console.log('[FileHypertyResource.share] object child: ', dataObjectChild);
 
-        let sharedFile = {
-          childId: dataObjectChild._childId,
-          from: dataObjectChild._owner,
-          value: dataObjectChild.data,
-          type: 'create',
-        };
+        let sharedFile = dataObjectChild.data;
+
         resolve(sharedFile);
 
       }).catch(function(reason) {
