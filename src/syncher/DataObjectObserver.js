@@ -251,6 +251,41 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
 
     });
   }
+
+  /**
+   * Requests the reporter to execute a method on the data object
+   * @param {string} method - Name of the function to be executed.
+   * @param {array} params - array of parameters for the requested function
+   * @return {promise}
+   */
+
+  execute(method, params) {
+    let _this = this;
+
+    return new Promise((resolve, reject) => {
+
+      const msg = {
+        type: 'execute',
+        from: this._owner,
+        to: _this._url,
+        body: {
+          method: method,
+          params: params
+        }
+      };
+
+      _this._bus.postMessage(msg, (reply) => {
+        console.log(`[DataObjectObserver.execute] ${_this._url} rcved reply `, reply);
+
+        if (reply.body.code === 200) {
+          resolve();
+        } else {
+          console.warning(`[DataObjectObserver.execute] execution of method ${method} was reject by reporter`);
+          reject(`[DataObjectObserver.execute] execution of method ${method} was reject by reporter`);
+        }
+      });
+    });
+  }
 }
 
 export default DataObjectObserver;
