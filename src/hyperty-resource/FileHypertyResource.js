@@ -5,6 +5,7 @@
 
 import HypertyResource from './HypertyResource';
 import { deepClone } from '../utils/utils.js';
+import ImageTools from '../utils/ImageTools.js';
 
 
 class FileHypertyResource extends HypertyResource {
@@ -48,21 +49,23 @@ class FileHypertyResource extends HypertyResource {
 
         reader.onload = function(theFile) {
 
+          console.log('[FileHypertyResource.init] file loaded ', theFile);
+
           _this._content = deepClone(theFile.target.result);
 
           let mimetype = file.type.split('/')[0];
 
           switch (mimetype) {
             case 'image' :
-              _this._getImageThumbnail(theFile.target.result).then((thumbnail)=>{
-                _this._metadata.preview = deepClone(thumbnail);
+              _this._getImagePreview(file).then((preview)=>{
+                _this._metadata.preview = preview;
                 resolve();
               });
               break;
             default :
               break;
           }
-        resolve();
+        // resolve();
 
         }
 
@@ -78,26 +81,30 @@ class FileHypertyResource extends HypertyResource {
 
   }
 
-  _getImageThumbnail(image){
+ _getImagePreview(image){
+   let reader = new FileReader();
+   return new Promise((resolve,reject)=>{
 
-    return new Promise((resolve,reject)=>{
-      let canvas = document.createElement('canvas');
-      let img = new Image();
-      img.src = image;
+   ImageTools.resize(image, {
+        width: 100, // maximum width
+        height: 100 // maximum height
+    }, function(blob, didItResize) {
+        // didItResize will be true if it managed to resize it, otherwise false (and will return the original file as 'blob')
+        if (didItResize) {
+          reader.readAsDataURL(blob);
 
-
-      img.onload = function () {
-              let width = this.naturalWidth;
-              let height = this.naturalHeight;
-              var can = canvas,
-                  ctx = can.getContext('2d');
-                  ctx.drawImage(this, 0, 0, 250, (height / width) * 250);
-                  console.log('[FileHypertyResource._getImageThumbnail] returning ', can.toDataURL());
-                  resolve(can.toDataURL());
-          };
+          reader.onload = function(theImage) {
+            resolve(theImage.target.result);
+        };
+      } else {
+        console.warn('[FileHypertyResource._getImagePreview] unable to create image preview from original image ');
+        resolve(undefined);
+      }
     });
+  });
+ }
 
-  }
+
 
   get name() {
     let _this = this;

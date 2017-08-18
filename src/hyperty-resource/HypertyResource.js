@@ -75,7 +75,7 @@ class HypertyResource {
         from: _this._owner,
         to: _this._runtimeURL + '/storage',
         type: 'create',
-        body: { value: _this._metadata }
+        body: { value: deepClone(_this._metadata) }
       }
 
       msg.body.value.content = deepClone(_this._content);
