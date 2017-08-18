@@ -40,7 +40,7 @@ class StorageManager {
     console.info('[StorageManager] - set ', key);
 
     return this.db.transaction('rw!', this.db[this.storageName], () => {
-      this.db[this.storageName].put({key: this._checkKey(key), version: version, value: value});
+      return this.db[this.storageName].put({key: this._checkKey(key), version: version, value: value});
     });
 
   }
