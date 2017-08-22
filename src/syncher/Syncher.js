@@ -283,6 +283,9 @@ class Syncher {
           //reporter creation accepted
           reporterInput.url = reply.body.resource;
 
+          if (reply.body.p2pHandler) reporterInput.p2pHandler = reply.body.p2pHandler;
+          if (reply.body.p2pRequester) reporterInput.p2pRequester = reply.body.p2pRequester;
+
           reporterInput.status = 'live';// pch: do we ned this?
           reporterInput.syncher = _this;
           reporterInput.childrens = reply.body.childrenResources;
@@ -291,7 +294,7 @@ class Syncher {
           if (!newObj) {
             newObj = new DataObjectReporter(reporterInput);
             _this._reporters[reporterInput.url] = newObj;
-            newObj.inviteObservers(input.authorise);
+            newObj.inviteObservers(input.authorise, input.p2p);
           }
 
           resolve(newObj);

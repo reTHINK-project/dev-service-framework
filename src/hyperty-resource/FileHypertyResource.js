@@ -22,13 +22,13 @@ class FileHypertyResource extends HypertyResource {
   * @param  {Array} input optional input parameters
   */
 
-  constructor(owner, runtime, bus, parent, isSender, metadata) {
+  constructor(isSender, input) {
 
-    super(owner, runtime, bus, parent, isSender, metadata);
+    super(isSender, input);
 
     let _this = this;
 
-    _this._type = 'file';
+    _this._resourceType = 'file';
 
   }
 

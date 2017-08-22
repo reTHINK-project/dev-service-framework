@@ -87,7 +87,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
    * Send invitations (create messages) to hyperties, observers list.
    * @param  {HypertyURL[]} observers List of Hyperty URL's
    */
-  inviteObservers(observers) {
+  inviteObservers(observers, p2p) {
     let _this = this;
 
 
@@ -110,6 +110,8 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
         type: 'create', from: _this._syncher._owner, to: _this._syncher._subURL,
         body: { resume: false, resource: _this._url, schema: _this._schema, value: _this._metadata, authorise: toInvite }
       };
+
+      if (p2p) inviteMsg.body.p2p = p2p;
 
       _this._bus.postMessage(inviteMsg);
 
