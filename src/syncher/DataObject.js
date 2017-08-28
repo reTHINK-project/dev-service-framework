@@ -177,22 +177,44 @@ class DataObject {
       let children = childrens[childrenResource];
 
       Object.keys(children).forEach((childId) => {
-        let childInput = children[childId].value;
-        console.log('[DataObject.resumeChildrens] new DataObjectChild: ', childrenResource, children, childInput);
-        childInput.parentObject = _this;
-        childInput.parent = _this._url;
-        _this._childrenObjects[childId] = new DataObjectChild(childInput);
-        _this._childrenObjects[childId].identity = children[childId].identity;
+        if (children[childId].value.resourceType) {
+          _this._childrenObjects[childId] = _this._resumeHypertyResource(children[childId].value);
+        } else {
+          _this._childrenObjects[childId] = _this._resumeChild(children[childId].value);
+          }
 
-        if (childId > childIdString) {
-          childIdString = childId;
+          _this._childrenObjects[childId].identity = children[childId].identity;
+          console.log('[DataObject.resumeChildrens] new DataObjectChild: ', _this._childrenObjects[childId]);
+
+          if (childId > childIdString) {
+            childIdString = childId;
+
+          console.log('[DataObjectReporter.resumeChildrens] - resuming: ', this._childrenObjects[childId]);
+
         }
 
-        console.log('[DataObjectReporter.resumeChildrens] - resumed: ', this._childrenObjects[childId]);
       });
     });
 
     this._childId = Number(childIdString.split('#')[1]);
+
+  }
+
+  _resumeChild(input) {
+    let childInput = input;
+    childInput.parentObject = _this;
+    childInput.parent = _this._url;
+
+    return new DataObjectChild(childInput);
+  }
+
+  _resumeHypertyResource(input) {
+    let _this = this;
+    let childInput = input;
+    childInput.parentObject = _this;
+    childInput.parent = _this._url;
+
+    return (_this._hypertyResourceFactory.createHypertyResource(false, input.resourceType, input));
   }
 
   /**
@@ -353,22 +375,21 @@ class DataObject {
       let hypertyResource;
       let msgChildPath = _this._url + '/children/' + children;
 
-      //create new child unique ID, based on hypertyURL
+          _this._hypertyResourceFactory.createHypertyResourceWithContent(true, type, resource, _this._getChildInput(input)).then((resource)=>{
+            hypertyResource = resource;
+            _this._shareChild(children, hypertyResource.shareable, identity);
 
-        _this._hypertyResourceFactory.createHypertyResourceWithContent(true, type, resource, _this._getChildInput(input)).then((hypertyResource)=>{
-          hypertyResource = hypertyResource;
-          _this._shareChild(children, hypertyResource.shareable, identity);
+            console.log('[DataObject.addHypertyResource] added ', hypertyResource);
 
-          console.log('[DataObject.addHypertyResource] added ', hypertyResource);
+            hypertyResource.onChange((event) => {
+              _this._onChange(event, { path: msgChildPath, childId: hypertyResource.url });
+            });
 
-          hypertyResource.onChange((event) => {
-            _this._onChange(event, { path: msgChildPath, childId: hypertyResource.url });
+            _this._childrenObjects[hypertyResource.url] = hypertyResource;
+
+            resolve(hypertyResource);
           });
 
-          _this._childrenObjects[hypertyResource.url] = hypertyResource;
-
-          resolve(hypertyResource);
-          });
 
     });
   }
@@ -413,8 +434,7 @@ class DataObject {
 
     input.parentObject = _this;
 
-    _this._hypertyResourceFactory.createHypertyResource(false, input.resourceType, input).then((resource)=>{
-      hypertyResource = resource;
+      hypertyResource = _this._hypertyResourceFactory.createHypertyResource(false, input.resourceType, input);
       hypertyResource.identity = msg.body.identity;
 
       _this._childrenObjects[hypertyResource.url] = hypertyResource;
@@ -425,7 +445,6 @@ class DataObject {
         console.log('[DataObject.onHypertyResourceAdded] content loaded from ', hypertyResource.contentURL);
         hypertyResource.save();
       });
-    });
   }
 
 _hypertyEvt(msg, child){

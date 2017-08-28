@@ -25,6 +25,7 @@ class HypertyResource extends DataObjectChild {
     let _this = this;
 
     _this._isSender = isSender;
+
     _this._localStorageURL = _this._parentObject._syncher._runtimeUrl + '/storage';
 
   }

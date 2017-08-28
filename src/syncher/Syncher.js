@@ -360,7 +360,9 @@ class Syncher {
 
             let newObj = new DataObjectReporter(dataObject);
 
-            if (dataObject.childrenObjects) { newObj.resumeChildrens(dataObject.childrenObjects); }
+            if (dataObject.childrenObjects) {
+              newObj.resumeChildrens(dataObject.childrenObjects);
+            }
             _this._reporters[dataObject.url] = newObj;
 
           }
