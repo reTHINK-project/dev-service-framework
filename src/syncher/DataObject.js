@@ -336,7 +336,7 @@ class DataObject {
     childInput.parentObject = _this;
     childInput.reporter = _this._owner;
     childInput.created = (new Date).toISOString();
-    childInput.runtime = _this._runtime;
+    childInput.runtime = _this._syncher._runtimeUrl;
     childInput.schema = _this._schema;
     childInput.parent = _this.url;
 
@@ -420,6 +420,11 @@ class DataObject {
       _this._childrenObjects[hypertyResource.url] = hypertyResource;
 
       _this._hypertyEvt(msg, hypertyResource);
+
+      hypertyResource.read().then(()=>{//TODO: temporary.hyperty should decide to load or not the Hyperty Resource content
+        console.log('[DataObject.onHypertyResourceAdded] content loaded from ', hypertyResource.contentURL);
+        hypertyResource.save();
+      });
     });
   }
 

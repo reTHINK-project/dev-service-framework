@@ -11,11 +11,12 @@ class HypertyResource extends DataObjectChild {
   /**
   * HypertyResource constructor
   *
+  * @param  {URL} localRuntimeURL RuntimeURL of local runtime
   * @param  {URL} input.owner HypertyURL of the Hyperty handling this resource
   * @param  {URL} input.runtime Runtime URL where this resource is hosted
   * @param  {Bus} input.bus sandbox message bus
   * @param  {DataObject} input.parent Parent Data Object where the HypertyResource is handled as a child
-  * @param  {Boolean} isReporter indicates if parent is Reporter or an Observer
+  * @param  {Boolean} isSender indicates if parent is Reporter or an Observer
   * @param  {Array} input optional input parameters
   */
 
@@ -24,6 +25,7 @@ class HypertyResource extends DataObjectChild {
     let _this = this;
 
     _this._isSender = isSender;
+    _this._localStorageURL = _this._parentObject._syncher._runtimeUrl + '/storage';
 
   }
 
@@ -67,10 +69,10 @@ class HypertyResource extends DataObjectChild {
 
       let msg = {
         from: _this._owner,
-        to: _this._runtime + '/storage',
+        to: _this._localStorageURL,
         type: 'create',
         body: { value: deepClone(_this._metadata) }
-      }
+      };
 
       msg.body.value.content = deepClone(_this._content);
 
@@ -99,9 +101,11 @@ class HypertyResource extends DataObjectChild {
         resolve();
       } else {
 
+        //let storageUrl = _this._metadata.contentURL.split('/storage/')[0]+'/storage';
+
         let msg = {
           from: _this._owner,
-          to: _this._runtime + '/storage',
+          to: _this._runtime+'/storage',
           type: 'read',
           body: { resource: _this._metadata.contentURL, p2p: true }
         };
@@ -112,14 +116,22 @@ class HypertyResource extends DataObjectChild {
         }
 
 
-        _this._bus.postMessage(msg, (reply) => {
+        let id = _this._bus.postMessage(msg);
+
+        _this._bus.addResponseListener( _this._owner, id, (reply) => {
           console.log('[HypertyResource.read] reply: ', reply);
           if (reply.body.code === 200) {
-            _this.content = reply.body.value;
+            _this._content = reply.body.value.content;
+            _this.save();
+            _this._bus.removeResponseListener(_this._owner, id);
             resolve();
-          } else reject(reply.body.code+ ' ' + reply.body.desc);
-        });
-      }
+          } else if (reply.body.code === 183) {// notify with progress percentage}
+        } else {
+          _this._bus.removeResponseListener(_this._owner, id);
+          reject(reply.body.code+ ' ' + reply.body.desc);
+        }
+      });
+    }
 
     }).catch(function(reason) {
       console.error('Reason:', reason);
