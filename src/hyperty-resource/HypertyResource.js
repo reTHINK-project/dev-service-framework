@@ -111,9 +111,9 @@ class HypertyResource extends DataObjectChild {
           body: { resource: _this._metadata.contentURL, p2p: true }
         };
 
-        if (_this._parentObject.metadata.p2pRequester && _this._parentObject.metadata.p2pHandler) {
-          msg.body.p2pRequester = _this._parentObject.metadata.p2pRequester;
-          msg.body.p2pHandler = _this._parentObject.metadata.p2pHandler;
+        if (_this.metadata.p2pRequester && _this.metadata.p2pHandler) {
+          msg.body.p2pRequester = _this.metadata.p2pRequester;
+          msg.body.p2pHandler = _this.metadata.p2pHandler;
         }
 
 

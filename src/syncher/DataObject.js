@@ -201,6 +201,7 @@ class DataObject {
   }
 
   _resumeChild(input) {
+    let _this = this;
     let childInput = input;
     childInput.parentObject = _this;
     childInput.parent = _this._url;
@@ -359,6 +360,8 @@ class DataObject {
     childInput.reporter = _this._owner;
     childInput.created = (new Date).toISOString();
     childInput.runtime = _this._syncher._runtimeUrl;
+    childInput.p2pHandler = _this._syncher._p2pHandler;
+    childInput.p2pRequester = _this._syncher._p2pRequester;
     childInput.schema = _this._schema;
     childInput.parent = _this.url;
 

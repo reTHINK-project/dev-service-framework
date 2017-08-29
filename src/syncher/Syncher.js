@@ -62,6 +62,9 @@ class Syncher {
     _this._subURL = config.runtimeURL + '/sm';
     _this._runtimeUrl = config.runtimeURL;
 
+    _this._p2pHandler = config.p2pHandler;
+    _this._p2pRequester = config.p2pRequester;
+
     _this._reporters = {};
     _this._observers = {};
     _this._provisionals = {};
@@ -122,6 +125,8 @@ class Syncher {
     createInput.store = store;
     createInput.schema = schema;
     createInput.authorise = observers;
+    createInput.p2pHandler = _this._p2pHandler;
+    createInput.p2pRequester = _this._p2pRequester;
     (initialData) ? createInput.data = deepClone(initialData) : createInput.data = {};
     createInput.name = name.length === 0 ? 'no name' : name;
     createInput.reporter = _this._owner;
@@ -283,8 +288,8 @@ class Syncher {
           //reporter creation accepted
           reporterInput.url = reply.body.resource;
 
-          if (reply.body.p2pHandler) reporterInput.p2pHandler = reply.body.p2pHandler;
-          if (reply.body.p2pRequester) reporterInput.p2pRequester = reply.body.p2pRequester;
+/*          if (reply.body.p2pHandler) reporterInput.p2pHandler = reply.body.p2pHandler;
+          if (reply.body.p2pRequester) reporterInput.p2pRequester = reply.body.p2pRequester;*/
 
           reporterInput.status = 'live';// pch: do we ned this?
           reporterInput.syncher = _this;
