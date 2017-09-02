@@ -51,7 +51,7 @@ class FileHypertyResource extends HypertyResource {
 
           console.log('[FileHypertyResource.init] file loaded ', theFile);
 
-          _this._content = deepClone(theFile.target.result);
+          _this._content = theFile.target.result;
 
           let mimetype = file.type.split('/')[0];
 
@@ -70,7 +70,7 @@ class FileHypertyResource extends HypertyResource {
 
         }
 
-        reader.readAsDataURL(file);
+        reader.readAsArrayBuffer(file);
 
       } else {
         _this._content = file.content;

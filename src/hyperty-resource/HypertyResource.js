@@ -75,19 +75,21 @@ class HypertyResource extends DataObjectChild {
         body: { value: deepClone(_this._metadata) }
       };
 
-      msg.body.value.content = deepClone(_this._content);
+      msg.body.value.content = _this._content;
 
-      _this._bus.postMessage(msg, (reply) => {
+      let id = _this._bus.postMessage(msg);
+
+      _this._bus.addResponseListener( _this._owner, id, (reply) => {
         console.log('[HypertyResource.save] reply: ', reply);
+        _this._bus.removeResponseListener(_this._owner, id);
         if (reply.body.code === 200) {
-          _this._metadata.contentURL = reply.body.value;
+          if (reply.body.value) {
+            _this._metadata.contentURL = reply.body.value;
+          }
           resolve();
-        } else reject();
+        } else reject(reply.body.code+ ' ' + reply.body.desc);
+
       });
-
-
-    }).catch(function(reason) {
-      console.error('Reason:', reason);
     });
 
   }
@@ -99,7 +101,7 @@ class HypertyResource extends DataObjectChild {
     return new Promise(function(resolve, reject) {
 
       if (_this.content) {
-        resolve();
+        resolve(_this);
       } else {
 
         //let storageUrl = _this._metadata.contentURL.split('/storage/')[0]+'/storage';
@@ -125,7 +127,7 @@ class HypertyResource extends DataObjectChild {
             _this._content = reply.body.value.content;
             _this.save();
             _this._bus.removeResponseListener(_this._owner, id);
-            resolve();
+            resolve(_this);
           } else if (reply.body.code === 183) {// notify with progress percentage}
         } else {
           _this._bus.removeResponseListener(_this._owner, id);

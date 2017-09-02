@@ -444,10 +444,10 @@ class DataObject {
 
       _this._hypertyEvt(msg, hypertyResource);
 
-      hypertyResource.read().then(()=>{//TODO: temporary.hyperty should decide to load or not the Hyperty Resource content
+      /*hypertyResource.read().then(()=>{//TODO: temporary.hyperty should decide to load or not the Hyperty Resource content
         console.log('[DataObject.onHypertyResourceAdded] content loaded from ', hypertyResource.contentURL);
         hypertyResource.save();
-      });
+      });*/
   }
 
 _hypertyEvt(msg, child){
