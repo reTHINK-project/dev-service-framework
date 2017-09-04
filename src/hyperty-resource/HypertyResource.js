@@ -24,6 +24,8 @@ class HypertyResource extends DataObjectChild {
     super(input);
     let _this = this;
 
+    _this.arraybufferSizeLimit = 5242880; //above this limit content is not saved as ArrayBuffer
+
     _this._isSender = isSender;
 
     _this._localStorageURL = _this._parentObject._syncher._runtimeUrl + '/storage';
@@ -32,7 +34,7 @@ class HypertyResource extends DataObjectChild {
 
   get resourceType() {
     let _this = this;
-    return _this._resourceType;
+    return _this.metadata.resourceType;
   }
 
   get mimetype() {
@@ -84,7 +86,8 @@ class HypertyResource extends DataObjectChild {
         _this._bus.removeResponseListener(_this._owner, id);
         if (reply.body.code === 200) {
           if (reply.body.value) {
-            _this._metadata.contentURL = reply.body.value;
+            if (!_this._metadata.contentURL) _this._metadata.contentURL = [];
+            _this._metadata.contentURL.push(reply.body.value);
           }
           resolve();
         } else reject(reply.body.code+ ' ' + reply.body.desc);
@@ -104,13 +107,15 @@ class HypertyResource extends DataObjectChild {
         resolve(_this);
       } else {
 
-        //let storageUrl = _this._metadata.contentURL.split('/storage/')[0]+'/storage';
+        //TODO: use an iteration to get online runtime storages when some are offline
+
+        let storage = _this._getBestContentURL(_this._metadata.contentURL);
 
         let msg = {
           from: _this._owner,
-          to: _this._runtime+'/storage',
+          to: storage.url,
           type: 'read',
-          body: { resource: _this._metadata.contentURL, p2p: true }
+          body: { resource: storage.resource, p2p: true }
         };
 
         if (_this.metadata.p2pRequester && _this.metadata.p2pHandler) {
@@ -125,7 +130,10 @@ class HypertyResource extends DataObjectChild {
           console.log('[HypertyResource.read] reply: ', reply);
           if (reply.body.code === 200) {
             _this._content = reply.body.value.content;
-            _this.save();
+
+            // save locally if not too big
+            if (reply.body.value.size < _this.arraybufferSizeLimit) _this.save();
+
             _this._bus.removeResponseListener(_this._owner, id);
             resolve(_this);
           } else if (reply.body.code === 183) {// notify with progress percentage}
@@ -141,6 +149,20 @@ class HypertyResource extends DataObjectChild {
     });
 
   }
+  _getBestContentURL(contentURLList) {
+
+    let _this = this;
+
+    contentURLList.forEach( (url) => {
+      if (url.includes(_this._localStorageURL) ) {
+        return ( {url: _this._localStorageURL, resource: url } );
+      }
+    });
+
+    return contentURLList[0];
+
+  }
+
 }
 
 

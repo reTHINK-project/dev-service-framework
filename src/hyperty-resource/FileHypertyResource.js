@@ -28,7 +28,7 @@ class FileHypertyResource extends HypertyResource {
 
     let _this = this;
 
-    _this._resourceType = 'file';
+    _this.metadata.resourceType = 'file';
 
   }
 
@@ -44,39 +44,49 @@ class FileHypertyResource extends HypertyResource {
       _this._metadata.size = file.size;
       _this._metadata.mimetype = file.type;
 
+      console.log('[FileHypertyResource.init] file: ', file);
+
       if (_this._isSender) {
-        let reader = new FileReader();
 
-        reader.onload = function(theFile) {
+        let mimetype = file.type.split('/')[0];
 
-          console.log('[FileHypertyResource.init] file loaded ', theFile);
-
-          _this._content = theFile.target.result;
-
-          let mimetype = file.type.split('/')[0];
-
-          switch (mimetype) {
-            case 'image' :
-              _this._getImagePreview(file).then((preview)=>{
-                _this._metadata.preview = preview;
-                resolve();
-              });
-              break;
-            default :
+        switch (mimetype) {
+          case 'image' :
+            _this._getImagePreview(file).then((preview)=>{
+              _this._metadata.preview = preview;
+              _this._content = file;
               resolve();
-              break;
-          }
-        // resolve();
-
+            });
+            break;
+          default :
+            resolve();
+            break;
         }
 
-        reader.readAsArrayBuffer(file);
+        // if too big lets store as File and asArray Buffer
 
+      //  if (file.size > _this.arraybufferSizeLimit) {
+      /*  } else {
+
+          let reader = new FileReader();
+
+          reader.onload = function(theFile) {
+
+            console.log('[FileHypertyResource.init] file loaded ', theFile);
+
+            _this._content = theFile.target.result;
+            resolve();
+
+          }
+
+          reader.readAsArrayBuffer(file);
+
+        }*/
       } else {
-        _this._content = file.content;
-        if (file.preview) _this._metadata.preview = file.preview;
-        resolve();
-      }
+      _this._content = file.content;
+      if (file.preview) _this._metadata.preview = file.preview;
+      resolve();
+    }
 
     });
 
