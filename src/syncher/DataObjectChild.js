@@ -37,7 +37,7 @@ class DataObjectChild /* implements SyncStatus */ {
 
   /**
    * @ignore
-   * Should not be used directly by Hyperties. It's called by the DataObject.addChildren
+   * Should not be used directly by Hyperties. It's called by the DataObject.addChild
    */
   constructor(input) {
     let _this = this;

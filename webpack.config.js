@@ -71,6 +71,7 @@ module.exports = {
     RuntimeCatalogue: './src/RuntimeCatalogue.js',
     IdentityFactory: './src/IdentityFactory.js',
     Syncher: './src/Syncher.js',
+    HypertyResource: './src/HypertyResource.js',
     Utils: './src/Utils.js'
   },
   output: {

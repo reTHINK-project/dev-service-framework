@@ -1,6 +1,6 @@
 
 
-reTHINK Service Framework 
+reTHINK Service Framework
 -------------------------
 
 #### Build status
@@ -75,7 +75,7 @@ import MessageFactory from 'service-framework/dist/MessageFactory';
 import {Syncher, DataObjectReporter, DataObjectObserver} from 'service-framework/dist/Syncher';
 ```
 
-**Old Way - Depreciated!!!**
+**Old Way - Deprecated!!!**
 
 Another way to import classes from the Service Framework that will be only supported until the runtime-core and other repositories are update to the **"new way"**:
 
