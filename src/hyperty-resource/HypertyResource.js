@@ -159,7 +159,11 @@ class HypertyResource extends DataObjectChild {
       }
     });
 
-    return contentURLList[0];
+    let splitedResource = contentURLList[0].split('/storage/');
+    let url = splitedResource[0] + '/storage';
+    let resource = contentURLList[0];
+
+    return {url: url, resource: resource };
 
   }
 
