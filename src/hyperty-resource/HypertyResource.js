@@ -165,9 +165,6 @@ class HypertyResource extends DataObjectChild {
       }
     });
 
-    // url: runtime://localhost/5a2f2aad-694c-84f6-115d-17525c7faa44/storage
-    // resource: runtime://localhost/5a2f2aad-694c-84f6-115d-17525c7faa44/storage/<contentURLList[0]>
-
     let splitedResource = contentURLList[0].split('/storage/');
     let url = splitedResource[0] + '/storage';
     let resource = contentURLList[0];
