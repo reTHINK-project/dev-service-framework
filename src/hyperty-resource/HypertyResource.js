@@ -81,7 +81,7 @@ class HypertyResource extends DataObjectChild {
 
       let id = _this._bus.postMessage(msg);
 
-      _this._bus.addResponseListener( _this._owner, id, (reply) => {
+      _this._bus.addResponseListener(_this._owner, id, (reply) => {
         console.log('[HypertyResource.save] reply: ', reply);
         _this._bus.removeResponseListener(_this._owner, id);
         if (reply.body.code === 200) {
@@ -90,7 +90,7 @@ class HypertyResource extends DataObjectChild {
             _this._metadata.contentURL.push(reply.body.value);
           }
           resolve();
-        } else reject(reply.body.code+ ' ' + reply.body.desc);
+        } else reject(reply.body.code + ' ' + reply.body.desc);
 
       });
     });
@@ -111,6 +111,8 @@ class HypertyResource extends DataObjectChild {
 
         let storage = _this._getBestContentURL(_this._metadata.contentURL);
 
+        console.log('Storage:', storage);
+
         let msg = {
           from: _this._owner,
           to: storage.url,
@@ -126,8 +128,9 @@ class HypertyResource extends DataObjectChild {
 
         let id = _this._bus.postMessage(msg);
 
-        _this._bus.addResponseListener( _this._owner, id, (reply) => {
+        _this._bus.addResponseListener(_this._owner, id, (reply) => {
           console.log('[HypertyResource.read] reply: ', reply);
+
           if (reply.body.code === 200) {
             _this._content = reply.body.value.content;
 
@@ -136,13 +139,14 @@ class HypertyResource extends DataObjectChild {
 
             _this._bus.removeResponseListener(_this._owner, id);
             resolve(_this);
-          } else if (reply.body.code === 183) {// notify with progress percentage}
-        } else {
-          _this._bus.removeResponseListener(_this._owner, id);
-          reject(reply.body.code+ ' ' + reply.body.desc);
-        }
-      });
-    }
+          } else if (reply.body.code === 183) {
+            // notify with progress percentage
+          } else {
+            _this._bus.removeResponseListener(_this._owner, id);
+            reject(reply.body.code + ' ' + reply.body.desc);
+          }
+        });
+      }
 
     }).catch(function(reason) {
       console.error('Reason:', reason);
@@ -153,9 +157,11 @@ class HypertyResource extends DataObjectChild {
 
     let _this = this;
 
-    contentURLList.forEach( (url) => {
-      if (url.includes(_this._localStorageURL) ) {
-        return ( {url: _this._localStorageURL, resource: url } );
+    contentURLList.forEach((url) => {
+      if (url.includes(_this._localStorageURL)) {
+        return ({
+          url: _this._localStorageURL, resource: url
+        });
       }
     });
 

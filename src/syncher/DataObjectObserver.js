@@ -280,7 +280,7 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
         if (reply.body.code === 200) {
           resolve();
         } else {
-          console.warning(`[DataObjectObserver.execute] execution of method ${method} was reject by reporter`);
+          console.warn(`[DataObjectObserver.execute] execution of method ${method} was reject by reporter`);
           reject(`[DataObjectObserver.execute] execution of method ${method} was reject by reporter`);
         }
       });

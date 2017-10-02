@@ -39,7 +39,10 @@ class StorageManager {
   set(key, version, value) {
     console.info('[StorageManager] - set ', key);
 
-    return this.db[this.storageName].put({key: this._checkKey(key), version: version, value: value});
+    return this.db.transaction('rw!', this.db[this.storageName], () => {
+      return this.db[this.storageName].put({key: this._checkKey(key), version: version, value: value});
+    });
+
   }
 
 /**
@@ -50,20 +53,23 @@ class StorageManager {
  */
   get(key) {
     console.info('[StorageManager] - get ', key);
-    return this.db[this.storageName].where('key')
-      .equals(this._checkKey(key))
-      .first()
-      .then(object => {
-        if (object) {
-          return object.value;
-        } else {
-          return object;
-        }
-      })
-      .catch(error => {
-        console.info('error getting the key ', key, ' with error: ', error);
-        return undefined;
-      });
+    return this.db.transaction('rw!', this.db[this.storageName], () => {
+      return this.db[this.storageName].where('key')
+        .equals(this._checkKey(key))
+        .first()
+        .then(object => {
+          if (object) {
+            return object.value;
+          } else {
+            return object;
+          }
+        })
+        .catch(error => {
+          console.info('error getting the key ', key, ' with error: ', error);
+          return undefined;
+        });
+
+    });
   }
 
 /**
@@ -74,20 +80,22 @@ class StorageManager {
  */
   getVersion(key) {
     console.info('[StorageManager] - getVersion for key ', key);
-    return this.db[this.storageName].where('key')
-      .equals(this._checkKey(key))
-      .first()
-      .then((object) => {
-        if (object) {
-          return object.version;
-        } else {
-          return object;
-        }
-      })
-      .catch(error => {
-        console.info('error getting the version for ', key, ' with error: ', error);
-        return undefined;
-      });
+    return this.db.transaction('rw!', this.db[this.storageName], () => {
+      return this.db[this.storageName].where('key')
+        .equals(this._checkKey(key))
+        .first()
+        .then((object) => {
+          if (object) {
+            return object.version;
+          } else {
+            return object;
+          }
+        })
+        .catch(error => {
+          console.info('error getting the version for ', key, ' with error: ', error);
+          return undefined;
+        });
+    });
   }
 
 /**
@@ -96,10 +104,13 @@ class StorageManager {
  * @returns {Promise} result - Promise that will be fulfilled with the number of affected rows.
  */
   delete(key) {
-    return this.db[this.storageName]
-      .where('key')
-      .equals(this._checkKey(key))
-      .delete();
+    return this.db.transaction('rw!', this.db[this.storageName], () => {
+      return this.db[this.storageName]
+        .where('key')
+        .equals(this._checkKey(key))
+        .delete();
+
+    });
   }
 
 }
