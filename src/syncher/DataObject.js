@@ -158,10 +158,10 @@ class DataObject {
       listener.remove();
     });
 
-      Object.keys(_this._childrenObjects).forEach((key) => {
-        _this._childrenObjects[key]._releaseListeners();
-      });
-}
+    Object.keys(_this._childrenObjects).forEach((key) => {
+      _this._childrenObjects[key]._releaseListeners();
+    });
+  }
 
   /**
    *
@@ -181,16 +181,14 @@ class DataObject {
           _this._childrenObjects[childId] = _this._resumeHypertyResource(children[childId].value);
         } else {
           _this._childrenObjects[childId] = _this._resumeChild(children[childId].value);
-          }
+        }
 
-          _this._childrenObjects[childId].identity = children[childId].identity;
-          console.log('[DataObject.resumeChildrens] new DataObjectChild: ', _this._childrenObjects[childId]);
+        _this._childrenObjects[childId].identity = children[childId].identity;
+        console.log('[DataObject.resumeChildrens] new DataObjectChild: ', _this._childrenObjects[childId]);
 
-          if (childId > childIdString) {
-            childIdString = childId;
-
+        if (childId > childIdString) {
+          childIdString = childId;
           console.log('[DataObjectReporter.resumeChildrens] - resuming: ', this._childrenObjects[childId]);
-
         }
 
       });
@@ -330,22 +328,22 @@ class DataObject {
   _shareChild(children, childValue, identity) {
     let _this = this;
 
-      let msgChildPath = _this._url + '/children/' + children;
+    let msgChildPath = _this._url + '/children/' + children;
 
-      //FLOW-OUT: this message will be sent directly to a resource child address: MessageBus
-      let requestMsg = {
-        type: 'create', from: _this._owner, to: msgChildPath,
-        body: { resource: childValue.url, value: childValue }
-      };
+    //FLOW-OUT: this message will be sent directly to a resource child address: MessageBus
+    let requestMsg = {
+      type: 'create', from: _this._owner, to: msgChildPath,
+      body: { resource: childValue.url, value: childValue }
+    };
 
-      if (identity)      {
-        requestMsg.body.identity = identity;
-      }
+    if (identity)      {
+      requestMsg.body.identity = identity;
+    }
 
-      //TODO: For Further Study
-      if (!_this._mutualAuthentication) requestMsg.body.mutualAuthentication = _this._mutualAuthentication;
+    //TODO: For Further Study
+    if (!_this._mutualAuthentication) requestMsg.body.mutualAuthentication = _this._mutualAuthentication;
 
-      let msgId = _this._bus.postMessage(requestMsg);
+    let msgId = _this._bus.postMessage(requestMsg);
 
   }
 
@@ -378,20 +376,20 @@ class DataObject {
       let hypertyResource;
       let msgChildPath = _this._url + '/children/' + children;
 
-          _this._hypertyResourceFactory.createHypertyResourceWithContent(true, type, resource, _this._getChildInput(input)).then((resource)=>{
-            hypertyResource = resource;
-            _this._shareChild(children, hypertyResource.shareable, identity);
+      _this._hypertyResourceFactory.createHypertyResourceWithContent(true, type, resource, _this._getChildInput(input)).then((resource)=>{
+        hypertyResource = resource;
+        _this._shareChild(children, hypertyResource.shareable, identity);
 
-            console.log('[DataObject.addHypertyResource] added ', hypertyResource);
+        console.log('[DataObject.addHypertyResource] added ', hypertyResource);
 
-            hypertyResource.onChange((event) => {
-              _this._onChange(event, { path: msgChildPath, childId: hypertyResource.url });
-            });
+        hypertyResource.onChange((event) => {
+          _this._onChange(event, { path: msgChildPath, childId: hypertyResource.url });
+        });
 
-            _this._childrenObjects[hypertyResource.url] = hypertyResource;
+        _this._childrenObjects[hypertyResource.url] = hypertyResource;
 
-            resolve(hypertyResource);
-          });
+        resolve(hypertyResource);
+      });
 
 
     });
@@ -437,21 +435,21 @@ class DataObject {
 
     input.parentObject = _this;
 
-      hypertyResource = _this._hypertyResourceFactory.createHypertyResource(false, input.resourceType, input);
-      hypertyResource.identity = msg.body.identity;
+    hypertyResource = _this._hypertyResourceFactory.createHypertyResource(false, input.resourceType, input);
+    hypertyResource.identity = msg.body.identity;
 
-      _this._childrenObjects[hypertyResource.url] = hypertyResource;
+    _this._childrenObjects[hypertyResource.url] = hypertyResource;
 
-      _this._hypertyEvt(msg, hypertyResource);
+    _this._hypertyEvt(msg, hypertyResource);
 
-      /*hypertyResource.read().then(()=>{//TODO: temporary.hyperty should decide to load or not the Hyperty Resource content
-        console.log('[DataObject.onHypertyResourceAdded] content loaded from ', hypertyResource.contentURL);
-        hypertyResource.save();
-      });*/
+    /*hypertyResource.read().then(()=>{//TODO: temporary.hyperty should decide to load or not the Hyperty Resource content
+      console.log('[DataObject.onHypertyResourceAdded] content loaded from ', hypertyResource.contentURL);
+      hypertyResource.save();
+    });*/
   }
 
-_hypertyEvt(msg, child){
-  let _this = this;
+  _hypertyEvt(msg, child) {
+    let _this = this;
 
     let event = {
       type: msg.type,

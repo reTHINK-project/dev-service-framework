@@ -59,6 +59,7 @@ class FileHypertyResource extends HypertyResource {
             });
             break;
           default :
+            _this._content = file;
             resolve();
             break;
         }
