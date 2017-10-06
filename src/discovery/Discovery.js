@@ -96,15 +96,15 @@ class Discovery {
                    filteredHyperties.push(hyperty);
             });
             if(filteredHyperties.length === 0)
-              reject('No Hyperty was found');
+              resolve([]);
             else {
-              console.log("Reply log: ",filteredHyperties);
+              console.log("[Discovery.discoverHypertiesPerUserProfileData] Reply log: ",filteredHyperties);
               resolve(filteredHyperties);
             }
           }
           else {
-            console.log("Error Log: ", reply.body.description);
-            reject(reply.body.description);
+            console.warning("[Discovery.discoverHypertiesPerUserProfileData] Error Reply for " + userIdentifier + " Reason: ", reply.body.description);
+            resolve([]);
           }
         });
       } else {
@@ -167,8 +167,8 @@ class Discovery {
             resolve(reply.body.value);
           }
           else {
-            console.log("Error Log: ", reply.body.description);
-            reject(reply.body.description);
+            console.warning("[Discovery.discoverDataObjectsPerUserProfileData] Error Reply for " + userIdentifier + " Reason: ", reply.body.description);
+            resolve([]);
           }
         });
       } else {
@@ -237,8 +237,8 @@ class Discovery {
           }
         }
         else {
-          console.log("Error Log: ", reply.body.description);
-          reject(reply.body.description);
+          console.warning("[Discovery.discoverHypertiesPerGUID] Error Reply for " + guidURL + " Reason: ", reply.body.description);
+          resolve([]);
         }
       });
     });
@@ -297,8 +297,8 @@ class Discovery {
           resolve(reply.body.value);
         }
         else {
-          console.log("Error Log: ", reply.body.description);
-          reject(reply.body.description);
+          console.warning("[Discovery.discoverDataObjectsPerGUID] Error Reply for " + guidURL + " Reason: ", reply.body.description);
+          resolve([]);
         }
       });
     });
@@ -366,16 +366,16 @@ class Discovery {
                if(hyperty.hypertyID != _this.discoveryURL)
                    filteredHyperties.push(hyperty);
             });
-            if(filteredHyperties.length === 0)
+/*            if(filteredHyperties.length === 0)
               reject('No Hyperty was found');
-            else {
-              console.log("Reply log: ",filteredHyperties);
+            else {*/
+              console.log("[Discovery.discoverHyperties] Reply : ",filteredHyperties);
               resolve(filteredHyperties);
-            }
+//            }
           }
           else {
-            console.log("Error Log: ", reply.body.description);
-            reject(reply.body.description);
+            console.warning("[Discovery.discoverHyperties] Error Reply for " + user + " Reason: ", reply.body.description);
+            resolve(filteredHyperties);
           }
         });
       } else {
@@ -444,8 +444,8 @@ class Discovery {
           resolve(reply.body.value);
         }
         else {
-          console.log("Error Log: ", reply.body.description);
-          reject(reply.body.description);
+          console.warning("[Discovery.discoverDataObjects] Error Reply for " + user + " Reason: ", reply.body.description);
+          resolve([]);
         }
       });
     });
@@ -501,8 +501,8 @@ class Discovery {
           resolve(reply.body.value);
         }
         else {
-          console.log("Error Log: ", reply.body.description);
-          reject(reply.body.description);
+          console.warning("[Discovery.discoverHypertyPerURL] Error Reply for " + url + " Reason: ", reply.body.description);
+          resolve([]);
         }
       });
     });
@@ -556,8 +556,8 @@ class Discovery {
           resolve(reply.body.value);
         }
         else {
-          console.log("Error Log: ", reply.body.description);
-          reject(reply.body.description);
+          console.warning("[Discovery.discoverDataObjectPerURL] Error Reply for " + url + " Reason: ", reply.body.description);
+          resolve([]);
         }
       });
     });
@@ -622,8 +622,8 @@ class Discovery {
           resolve(reply.body.value);
         }
         else {
-          console.log("Error Log: ", reply.body.description);
-          reject(reply.body.description);
+          console.warning("[Discovery.discoverDataObjectsPerName] Error Reply for " + name + " Reason: ", reply.body.description);
+          resolve([]);
         }
       });
     });
@@ -691,8 +691,8 @@ class Discovery {
           resolve(reply.body.value);
         }
         else {
-          console.log("Error Log: ", reply.body.description);
-          reject(reply.body.description);
+          console.warning("[Discovery.discoverDataObjectsPerName] Error Reply for " + reporter + " Reason: ", reply.body.description);
+          resolve([]);
         }
       });
     });
@@ -746,15 +746,17 @@ class Discovery {
       _this.messageBus.postMessage(msg, (reply) => {
         console.log('[Discovery]', reply)
 
-        if(reply.body.code>299)
-            return reject(reply.body.description || reply.body.desc )
+        if(reply.body.code>299) {
+          console.warning("[Discovery.discoverDataObject] Error Reply for " + name + " Reason: ", reply.body.description);
+          return resolve([]);
+        }
 
         let hyperties = reply.body.value;
 
         if (hyperties) {
           resolve(hyperties);
         } else {
-          resolve({});
+          resolve([]);
         }
       });
     });
