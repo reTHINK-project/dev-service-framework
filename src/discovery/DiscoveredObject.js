@@ -121,9 +121,13 @@ class DiscoveredObject {
   _processNotification(msg) {
     const status = msg.body.value
 
-    Object.keys(this._subscribers[status]).forEach(
-      subscriber => this._subscribers[status][subscriber]()
-    );
+    setTimeout( ()=>{// Hack to give time for onLive Hyperties to get ready. To be removed when Hyperty State machaine is implemented
+      Object.keys(this._subscribers[status]).forEach(
+        subscriber => this._subscribers[status][subscriber]()
+      );
+
+    }, 500);
+
   }
 
   _unsubscribe() {
