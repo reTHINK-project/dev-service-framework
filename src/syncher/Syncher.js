@@ -296,11 +296,14 @@ class Syncher {
           reporterInput.childrens = reply.body.childrenResources;
 
           let newObj = _this._reporters[reporterInput.url];
+          let invitations = [];
+
           if (!newObj) {
             newObj = new DataObjectReporter(reporterInput);
             _this._reporters[reporterInput.url] = newObj;
-            newObj.inviteObservers(input.authorise, input.p2p);
           }
+
+          newObj.inviteObservers(input.authorise, input.p2p);
 
           resolve(newObj);
 

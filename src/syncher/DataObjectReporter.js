@@ -60,6 +60,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     _this._allocateListeners();
 
     _this._invitations = [];
+    _this.invitations = []; // array of promises with pending invitations
   }
 
   _allocateListeners() {
@@ -94,26 +95,50 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onCreate
     // TODO: remove value and add resources? should similar to 1st create
 
-    let toInvite = [];
+    let toInvite = observers;
+    let invitePromises = [];
 
-    observers.forEach((observer)=> {
+  /*  observers.forEach((observer)=> {
       if (!_this._invitations[observer]) {
         toInvite.push(observer);
         _this._invitations[observer] = observer;
       }
-    });
+    });*/
+
 
     if (toInvite.length > 0) {
       console.log('[Syncher.DataObjectReporter] InviteObservers ', toInvite, _this._metadata);
 
-      let inviteMsg = {
-        type: 'create', from: _this._syncher._owner, to: _this._syncher._subURL,
-        body: { resume: false, resource: _this._url, schema: _this._schema, value: _this._metadata, authorise: toInvite }
-      };
+      toInvite.forEach((observer)=>{
 
-      if (p2p) inviteMsg.body.p2p = p2p;
+        let invitation = new Promise((resolve, reject) => {
 
-      _this._bus.postMessage(inviteMsg);
+          let inviteMsg = {
+            type: 'create', from: _this._syncher._owner, to: _this._syncher._subURL,
+            body: { resume: false, resource: _this._url, schema: _this._schema, value: _this._metadata, authorise: [observer] }
+          };
+
+          if (p2p) inviteMsg.body.p2p = p2p;
+
+          _this._bus.postMessage(inviteMsg, (reply)=>{
+            console.log('[Syncher.DataObjectReporter] Invitation reply ', reply);
+
+              let result = {
+                invited: observer,
+                code: reply.body && reply.body.code ? reply.body.code : 500,
+                desc: reply.body && reply.body.desc ? reply.body.desc : 'Unknown error'
+              };
+
+            if (result.code < 300) resolve(result);
+            else if (result.code >= 299) reject(result);
+          });
+        });
+
+        _this.invitations.push(invitation);
+
+      });
+
+//      return(invitePromises);
 
     }
   }
