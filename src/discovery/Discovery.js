@@ -103,7 +103,7 @@ class Discovery {
             }
           }
           else {
-            console.warning("[Discovery.discoverHypertiesPerUserProfileData] Error Reply for " + userIdentifier + " Reason: ", reply.body.description);
+            console.warn("[Discovery.discoverHypertiesPerUserProfileData] Error Reply for " + userIdentifier + " Reason: ", reply.body.description);
             resolve([]);
           }
         });
@@ -167,7 +167,7 @@ class Discovery {
             resolve(reply.body.value);
           }
           else {
-            console.warning("[Discovery.discoverDataObjectsPerUserProfileData] Error Reply for " + userIdentifier + " Reason: ", reply.body.description);
+            console.warn("[Discovery.discoverDataObjectsPerUserProfileData] Error Reply for " + userIdentifier + " Reason: ", reply.body.description);
             resolve([]);
           }
         });
@@ -237,7 +237,7 @@ class Discovery {
           }
         }
         else {
-          console.warning("[Discovery.discoverHypertiesPerGUID] Error Reply for " + guidURL + " Reason: ", reply.body.description);
+          console.warn("[Discovery.discoverHypertiesPerGUID] Error Reply for " + guidURL + " Reason: ", reply.body.description);
           resolve([]);
         }
       });
@@ -297,7 +297,7 @@ class Discovery {
           resolve(reply.body.value);
         }
         else {
-          console.warning("[Discovery.discoverDataObjectsPerGUID] Error Reply for " + guidURL + " Reason: ", reply.body.description);
+          console.warn("[Discovery.discoverDataObjectsPerGUID] Error Reply for " + guidURL + " Reason: ", reply.body.description);
           resolve([]);
         }
       });
@@ -374,7 +374,7 @@ class Discovery {
 //            }
           }
           else {
-            console.warning("[Discovery.discoverHyperties] Error Reply for " + user + " Reason: ", reply.body.description);
+            console.warn("[Discovery.discoverHyperties] Error Reply for " + user + " Reason: ", reply.body.description);
             resolve(filteredHyperties);
           }
         });
@@ -444,7 +444,7 @@ class Discovery {
           resolve(reply.body.value);
         }
         else {
-          console.warning("[Discovery.discoverDataObjects] Error Reply for " + user + " Reason: ", reply.body.description);
+          console.warn("[Discovery.discoverDataObjects] Error Reply for " + user + " Reason: ", reply.body.description);
           resolve([]);
         }
       });
@@ -501,7 +501,7 @@ class Discovery {
           resolve(reply.body.value);
         }
         else {
-          console.warning("[Discovery.discoverHypertyPerURL] Error Reply for " + url + " Reason: ", reply.body.description);
+          console.warn("[Discovery.discoverHypertyPerURL] Error Reply for " + url + " Reason: ", reply.body.description);
           resolve([]);
         }
       });
@@ -518,7 +518,7 @@ class Discovery {
 
     return new Promise((resolve, reject) => {
       this.discoverHypertyPerURL(...arguments)
-        .then(hyperty => resolve(new DiscoveredObject(hyperty, this.runtimeURL, this.discoveryURL, this.messageBus)))
+        .then(hyperty => resolve(new DiscoveredObject(hyperty, this.runtimeURL, this.discoveryURL, this.messageBus, this)))
         .catch(error => reject(error));
     });
   }
@@ -556,7 +556,7 @@ class Discovery {
           resolve(reply.body.value);
         }
         else {
-          console.warning("[Discovery.discoverDataObjectPerURL] Error Reply for " + url + " Reason: ", reply.body.description);
+          console.warn("[Discovery.discoverDataObjectPerURL] Error Reply for " + url + " Reason: ", reply.body.description);
           resolve([]);
         }
       });
@@ -573,7 +573,7 @@ class Discovery {
 
     return new Promise((resolve, reject) => {
       this.discoverDataObjectPerURL(...arguments)
-        .then(registryObject => resolve(new DiscoveredObject(registryObject, this.runtimeURL, this.discoveryURL, this.messageBus)))
+        .then(registryObject => resolve(new DiscoveredObject(registryObject, this.runtimeURL, this.discoveryURL, this.messageBus, this)))
         .catch(error => reject(error));
     });
   }
@@ -622,7 +622,7 @@ class Discovery {
           resolve(reply.body.value);
         }
         else {
-          console.warning("[Discovery.discoverDataObjectsPerName] Error Reply for " + name + " Reason: ", reply.body.description);
+          console.warn("[Discovery.discoverDataObjectsPerName] Error Reply for " + name + " Reason: ", reply.body.description);
           resolve([]);
         }
       });
@@ -691,7 +691,7 @@ class Discovery {
           resolve(reply.body.value);
         }
         else {
-          console.warning("[Discovery.discoverDataObjectsPerName] Error Reply for " + reporter + " Reason: ", reply.body.description);
+          console.warn("[Discovery.discoverDataObjectsPerName] Error Reply for " + reporter + " Reason: ", reply.body.description);
           resolve([]);
         }
       });
@@ -717,7 +717,7 @@ class Discovery {
 
   _convertToDiscoveredObject(registryObjects) {
     return registryObjects.map((registryObject) => {
-      return new DiscoveredObject(registryObject, this.runtimeURL, this.discoveryURL, this.messageBus);
+      return new DiscoveredObject(registryObject, this.runtimeURL, this.discoveryURL, this.messageBus, this);
     });
   }
 
@@ -747,7 +747,7 @@ class Discovery {
         console.log('[Discovery]', reply)
 
         if(reply.body.code>299) {
-          console.warning("[Discovery.discoverDataObject] Error Reply for " + name + " Reason: ", reply.body.description);
+          console.warn("[Discovery.discoverDataObject] Error Reply for " + name + " Reason: ", reply.body.description);
           return resolve([]);
         }
 

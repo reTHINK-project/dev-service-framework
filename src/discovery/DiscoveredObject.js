@@ -32,7 +32,7 @@ class DiscoveredObject {
     return this._data;
   }
 
-  constructor(data, runtimeURL, discoveryURL, msgBus) {
+  constructor(data, runtimeURL, discoveryURL, msgBus, discovery) {
     this._data = data;
     this._registryObjectURL = data.hypertyID || data.url;
     this._runtimeURL = runtimeURL;
@@ -44,7 +44,9 @@ class DiscoveredObject {
       live: {},
       disconnected: {}
     };
+    this._discovery = discovery;
   }
+
 
   onLive(subscriber, callback) {
 
@@ -128,6 +130,33 @@ class DiscoveredObject {
 
     }, 500);
 
+  }
+
+  /**
+  * function to check the status of the DiscoveredObject.
+  * Depending on existing subscribers it may trigger onLive or onDisconnected events.
+  *
+  */
+
+  check() {
+    // query DR for the status and call processNotification with msg received
+
+    let _this = this;
+    let message = {
+      body: {}
+    };
+
+    if (_this._discoveredObjectURL.startsWith('hyperty://') ) {
+      _this._discovery.discoverHypertyPerURL(_this._discoveredObjectURL).then((registration)=>{
+        message.body.status = registration.status;
+        _this._processNotification(message);
+      });
+    } else {
+      _this._discovery.discoverDataObjectsPerURL(_this._discoveredObjectURL).then((registration)=>{
+        message.body.status = registration.status;
+        _this._processNotification(message);
+      });
+    }
   }
 
   _unsubscribe() {
