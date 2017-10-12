@@ -128,7 +128,7 @@ class DiscoveredObject {
         subscriber => this._subscribers[status][subscriber]()
       );
 
-    }, 500);
+    }, 5000);
 
   }
 
