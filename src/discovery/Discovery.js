@@ -108,7 +108,7 @@ class Discovery {
           }
         });
       } else {
-        resolve({hypertyID: userIdentifier});
+        resolve([{hypertyID: userIdentifier}]);
       }
     });
   }
@@ -172,7 +172,7 @@ class Discovery {
           }
         });
       } else {
-          resolve({hypertyID: userIdentifier});
+          resolve([{hypertyID: userIdentifier}]);
         }
     });
   }
@@ -379,7 +379,7 @@ class Discovery {
           }
         });
       } else {
-        resolve({hypertyID: user});
+        resolve([{hypertyID: user}]);
       }
     });
   }

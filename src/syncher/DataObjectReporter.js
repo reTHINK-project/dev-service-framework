@@ -126,11 +126,11 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
               let result = {
                 invited: observer,
                 code: reply.body && reply.body.code ? reply.body.code : 500,
-                desc: reply.body && reply.body.desc ? reply.body.desc : 'Unknown error'
+                desc: reply.body && reply.body.desc ? reply.body.desc : 'Unknown'
               };
 
             if (result.code < 300) resolve(result);
-            else if (result.code >= 299) reject(result);
+            else if (result.code >= 300) reject(result);
           });
         });
 

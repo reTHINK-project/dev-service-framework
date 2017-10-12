@@ -188,8 +188,9 @@ class DiscoveredObject {
   unsubscribeLive(subscriber, callback) {
     return new Promise((resolve, reject) => {
 
-        if (subscriber in this._subscribers.live){
+        if (subscriber in this._subscribers.live){//TODO: unsubscribe outside this condition
           delete this._subscribers.live[subscriber];
+        }
 
           if (this._areSubscriptionsEmpty()) {
             this._unsubscribe()
@@ -198,9 +199,9 @@ class DiscoveredObject {
           } else {
               resolve();
           }
-        } else {
+      /*  } else {
           reject(`${subscriber} doesn't subscribe onLive for ${this._registryObjectURL}`);
-        }
+        }*/
     });
   }
 
