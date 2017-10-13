@@ -507,7 +507,7 @@ class DataObject {
       //TODO: For Further Study
       if (!_this._mutualAuthentication) changeMsg.body.mutualAuthentication = _this._mutualAuthentication;
 
-      _this._bus.postMessage(changeMsg);
+      _this._bus.postMessage(JSON.parse(JSON.stringify(changeMsg)));
     }
   }
 
