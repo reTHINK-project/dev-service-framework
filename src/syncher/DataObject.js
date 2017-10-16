@@ -430,7 +430,7 @@ class DataObject {
 
   _onHypertyResourceAdded(msg) {
     let _this = this;
-    let input = deepClone(msg.body.value);
+    let input = msg.body.value;
     let hypertyResource;
 
     input.parentObject = _this;
