@@ -158,8 +158,10 @@ class DataObject {
       listener.remove();
     });
 
-    Object.keys(_this._childrenObjects).forEach((key) => {
-      _this._childrenObjects[key]._releaseListeners();
+    Object.keys(_this._childrenObjects).forEach((children) => {
+      Object.keys(_this._childrenObjects[children]).forEach((child) => {
+        _this._childrenObjects[children][child]._releaseListeners();
+      });
     });
   }
 
@@ -176,19 +178,28 @@ class DataObject {
     Object.keys(childrens).forEach((childrenResource) => {
       let children = childrens[childrenResource];
 
+      //_this._childrenObjects[childrenResource] = {};
       Object.keys(children).forEach((childId) => {
+        let newChild = false;
+
+        if (!_this._childrenObjects.hasOwnProperty(childrenResource))
+          _this._childrenObjects[childrenResource] = {};
+
         if (children[childId].value.resourceType) {
+          //TODO: add children in the structure similar to chat messages
           _this._childrenObjects[childId] = _this._resumeHypertyResource(children[childId].value);
-        } else {
-          _this._childrenObjects[childId] = _this._resumeChild(children[childId].value);
+          _this._childrenObjects[childId].identity = children[childId].identity;
+          newChild = true;
+        } else if (!_this._childrenObjects[childrenResource].hasOwnProperty(childId)) {
+
+          _this._childrenObjects[childrenResource][childId] = _this._resumeChild(children[childId]);
+          console.log('[DataObject.resumeChildrens] new DataObjectChild: ', _this._childrenObjects[childrenResource][childId]);
+          newChild = true;
         }
 
-        _this._childrenObjects[childId].identity = children[childId].identity;
-        console.log('[DataObject.resumeChildrens] new DataObjectChild: ', _this._childrenObjects[childId]);
-
-        if (childId > childIdString) {
+        if (newChild && childId > childIdString) {
           childIdString = childId;
-          console.log('[DataObjectReporter.resumeChildrens] - resuming: ', this._childrenObjects[childId]);
+          console.log('[DataObjectReporter.resumeChildrens] - resuming: ', this._childrenObjects[childrenResource][childId]);
         }
 
       });
@@ -200,11 +211,33 @@ class DataObject {
 
   _resumeChild(input) {
     let _this = this;
-    let childInput = input;
+    let childInput = input.value;
     childInput.parentObject = _this;
     childInput.parent = _this._url;
 
-    return new DataObjectChild(childInput);
+    let child = new DataObjectChild(childInput);
+
+    child.identity = input.identity;
+
+    let event = {
+      type: 'create',
+      from: child.reporter,
+      url: child.parent,
+      value: child.data,
+      childId: child.url,
+      identity: child.identity,
+      child: child
+    };
+
+    if (child.resourceType) {
+      event.resource = child;
+
+    }
+
+    if (_this._onAddChildrenHandler) _this._onAddChildrenHandler(event);
+
+    return child;
+
   }
 
   _resumeHypertyResource(input) {
@@ -299,6 +332,8 @@ class DataObject {
       childInput.data = initialData;
       newChild = new DataObjectChild(childInput);
 
+      newChild.identity = identity;
+
       let childValue = newChild.metadata;
       childValue.data = initialData;
 
@@ -310,7 +345,9 @@ class DataObject {
         _this._onChange(event, { path: msgChildPath, childId: childInput.url });
       });
 
-      _this._childrenObjects[childInput.url] = newChild;
+      if (!_this._childrenObjects[children]) _this._childrenObjects[children] = {};
+
+      _this._childrenObjects[children][childInput.url] = newChild;
 
       resolve(newChild);
     });
@@ -423,7 +460,11 @@ class DataObject {
     let newChild = new DataObjectChild(childInput);
     newChild.identity = msg.body.identity;
 
-    _this._childrenObjects[childInput.url] = newChild;
+    let children = msg.to.split('/children/')[1];
+
+    if (!_this._childrenObjects[children]) _this._childrenObjects[children] = {};
+
+    _this._childrenObjects[children][childInput.url] = newChild;
 
     _this._hypertyEvt(msg, newChild);
   }

@@ -62,7 +62,7 @@ class DataObjectChild /* implements SyncStatus */ {
     if (input.publicObservation) _this._publicObservation = input.publicObservation;
 
     _this._childId = input.url;
-    
+
     if (input.data) {
       _this._syncObj = new SyncObject(input.data);
     } else {
