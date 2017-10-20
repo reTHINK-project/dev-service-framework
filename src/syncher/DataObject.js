@@ -185,10 +185,8 @@ class DataObject {
         if (!_this._childrenObjects.hasOwnProperty(childrenResource))
           _this._childrenObjects[childrenResource] = {};
 
-        if (children[childId].value.resourceType) {
-          //TODO: add children in the structure similar to chat messages
-          _this._childrenObjects[childId] = _this._resumeHypertyResource(children[childId].value);
-          _this._childrenObjects[childId].identity = children[childId].identity;
+        if (children[childId].value.resourceType && !_this._childrenObjects[childrenResource].hasOwnProperty(childId)) {
+          _this._childrenObjects[childrenResource][childId] = _this._resumeHypertyResource(children[childId]);
           newChild = true;
         } else if (!_this._childrenObjects[childrenResource].hasOwnProperty(childId)) {
 
@@ -242,12 +240,33 @@ class DataObject {
 
   _resumeHypertyResource(input) {
     let _this = this;
-    let childInput = input;
+    let childInput = input.value;
     childInput.parentObject = _this;
     childInput.parent = _this._url;
 
-    return (_this._hypertyResourceFactory.createHypertyResource(false, input.resourceType, input));
-  }
+    let hypertyResource = _this._hypertyResourceFactory.createHypertyResource(false, childInput.resourceType, childInput)
+
+    hypertyResource.identity = input.identity;
+
+    let event = {
+      type: 'create',
+      from: hypertyResource.reporter,
+      url: hypertyResource.parent,
+      value: hypertyResource.data,
+      childId: hypertyResource.url,
+      identity: hypertyResource.identity,
+      child: hypertyResource
+    };
+
+    if (hypertyResource.resourceType) {
+      event.resource = hypertyResource;
+
+    }
+
+    if (_this._onAddChildrenHandler) _this._onAddChildrenHandler(event);
+
+    return hypertyResource;
+    }
 
   /**
    * All Metadata about the Data Object
@@ -345,7 +364,7 @@ class DataObject {
         _this._onChange(event, { path: msgChildPath, childId: childInput.url });
       });
 
-      if (!_this._childrenObjects[children]) _this._childrenObjects[children] = {};
+      if (!_this._childrenObjects.hasOwnProperty(children)) _this._childrenObjects[children] = {};
 
       _this._childrenObjects[children][childInput.url] = newChild;
 
@@ -423,7 +442,9 @@ class DataObject {
           _this._onChange(event, { path: msgChildPath, childId: hypertyResource.url });
         });
 
-        _this._childrenObjects[hypertyResource.url] = hypertyResource;
+        if (!_this._childrenObjects.hasOwnProperty(children)) _this._childrenObjects[children] = {};
+
+        _this._childrenObjects[children][hypertyResource.url] = hypertyResource;
 
         resolve(hypertyResource);
       });
@@ -462,7 +483,7 @@ class DataObject {
 
     let children = msg.to.split('/children/')[1];
 
-    if (!_this._childrenObjects[children]) _this._childrenObjects[children] = {};
+    if (!_this._childrenObjects.hasOwnProperty(children)) _this._childrenObjects[children] = {};
 
     _this._childrenObjects[children][childInput.url] = newChild;
 
@@ -474,12 +495,16 @@ class DataObject {
     let input = msg.body.value;
     let hypertyResource;
 
+    let children = msg.to.split('/children/')[1];
+
     input.parentObject = _this;
 
     hypertyResource = _this._hypertyResourceFactory.createHypertyResource(false, input.resourceType, input);
     hypertyResource.identity = msg.body.identity;
 
-    _this._childrenObjects[hypertyResource.url] = hypertyResource;
+    if (!_this._childrenObjects.hasOwnProperty(children)) _this._childrenObjects[children] = {};
+
+    _this._childrenObjects[children][hypertyResource.url] = hypertyResource;
 
     _this._hypertyEvt(msg, hypertyResource);
 
