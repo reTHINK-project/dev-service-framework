@@ -131,7 +131,7 @@ class RegistrationStatus {
         subscriber => this._subscribers[status][subscriber]()
       );
 
-    }, 10000);
+    }, 5000);
 
   }
 
