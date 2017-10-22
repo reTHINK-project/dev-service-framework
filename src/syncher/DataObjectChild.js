@@ -81,6 +81,98 @@ class DataObjectChild /* implements SyncStatus */ {
     // delete _this._metadata.data;
     delete _this._metadata.parentObject;
 
+    _this._sharingStatus = false;
+
+  }
+
+  /**
+   * This function is used to share the child Object among authorised Hyperties
+   * @param  {boolean}     reporter  If true the child object is only shared to Parent reporter
+   * @return {Promise<JSON>}        It returns a promise with the sharing results.
+   */
+
+  share(toReporter) {
+    let _this = this;
+    let to;
+    let reporter = toReporter;
+
+    if (reporter) {
+      to = _this.metadata.parent;
+    } else to = _this.metadata.parent + '/children/' + _this.metadata.children;
+
+    let childValue = _this.metadata;
+    childValue.data = _this.data;
+
+    //FLOW-OUT: this message will be sent directly to a resource child address: MessageBus
+    let requestMsg = {
+      type: 'create', from:  _this.metadata.reporter, to: to,
+      body: { resource: childValue.url, value: childValue }
+    };
+
+    if (_this.identity)      {
+      requestMsg.body.identity = _this.identity;
+    }
+
+
+    _this._sharingStatus = new Promise ((resolve, reject) => {
+
+      let id = _this._bus.postMessage(requestMsg);
+
+      if (_this._parentObject.metadata.reporter === _this.metadata.reporter) {
+        resolve();
+      } else {
+        _this._bus.addResponseListener(requestMsg.from, id, (reply) => {
+
+            if (reply.to === _this._reporter) {
+              _this._bus.removeResponseListener(requestMsg.from, id);
+
+              console.log('[Syncher.DataObjectChild.share] Parent reporter reply ', reply);
+
+                let result = {
+                  code: reply.body && reply.body.code ? reply.body.code : 500,
+                  desc: reply.body && reply.body.desc ? reply.body.desc : 'Unknown'
+                };
+
+                if ( reply.body.code < 300){
+                  if (reporter) _this.store();
+                  resolve(result);
+                }
+                else reject(result);
+
+            }
+          });
+        }
+      });
+
+    }
+
+    /**
+     * This function is used to share the child Object among authorised Hyperties
+     * @param  {boolean}     reporter  If true the child object is only shared to Parent reporter
+     * @return {Promise<JSON>}        It returns a promise with the sharing results.
+     */
+
+  store() {
+    let _this = this;
+
+    let child;
+
+    child.value = _this.metadata;
+    child.identity = child.identity;
+
+    let msg = {
+
+      from: _this._metadata.reporter,
+      to: _this._syncher._subURL,
+      type: 'create',
+      body: {
+        resource: _this._metadata.parent,
+        attribute: _this.metadata.children,
+        value: child
+      }
+    };
+
+    _this._bus.postMessage(msg);
   }
 
   _allocateListeners() {
@@ -133,6 +225,16 @@ class DataObjectChild /* implements SyncStatus */ {
    * Data Structure to be synchronized.
    * @type {JSON} - JSON structure that should follow the defined schema, if any.
    */
+
+   get sharingStatus() {
+     return this._sharingStatus;
+   }
+
+   /**
+    * Data Structure to be synchronized.
+    * @type {JSON} - JSON structure that should follow the defined schema, if any.
+    */
+
   get data() { return this._syncObj.data; }
 
   /**

@@ -73,6 +73,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
         case 'response': _this._onResponse(msg); break;
         case 'read': _this._onRead(msg); break;
         case 'execute': _this._onExecute(msg); break;
+        case 'create': _this._onChildCreate(msg); break;// to create child objects that were sent whenn offline
       }
     });
   }

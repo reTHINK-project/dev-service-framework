@@ -129,14 +129,8 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
 
       Object.keys(children).forEach((childId) => {
         childrens[childrenResource][childId] = {};
-        if (children[childId].metadata.resourceType) {
-          //TODO: add children in the structure similar to chat messages
-          childrens[childrenResource][childId].value = children[childId].metadata;
-          childrens[childrenResource][childId].identity = children[childId].identity;
-        } else {
-          childrens[childrenResource][childId].value = children[childId].metadata;
-          childrens[childrenResource][childId].identity = children[childId].identity;
-        }
+        childrens[childrenResource][childId].value = children[childId].metadata;
+        childrens[childrenResource][childId].identity = children[childId].identity;
       });
     });
 

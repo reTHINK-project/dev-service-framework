@@ -108,6 +108,7 @@ class DataObject {
 
     _this._hypertyResourceFactory = new HypertyResourceFactory();
     _this._childrenObjects = {};
+    _this._sharedChilds = []; //childObjects that were not sent yet to Reporters
   }
 
   _getLastChildId() {
@@ -347,16 +348,15 @@ class DataObject {
 
       let msgChildPath = _this._url + '/children/' + children;
 
+
       let childInput = _this._getChildInput(input);
       childInput.data = initialData;
+      childInput.children = children;
       newChild = new DataObjectChild(childInput);
 
       newChild.identity = identity;
 
-      let childValue = newChild.metadata;
-      childValue.data = initialData;
-
-      _this._shareChild(children, childValue, identity);
+      newChild.share();
 
       console.log('[DataObject.addChild] added ', newChild);
 
@@ -380,7 +380,7 @@ class DataObject {
    * @param  {SyncChildMetadata} input - (optional) All additional metadata about the DataObjectChild.
    * @return {Promise<DataObjectChild>} - Return Promise to a new DataObjectChild.
    */
-
+/*
   _shareChild(children, childValue, identity) {
     let _this = this;
 
@@ -399,9 +399,40 @@ class DataObject {
     //TODO: For Further Study
     if (!_this._mutualAuthentication) requestMsg.body.mutualAuthentication = _this._mutualAuthentication;
 
-    let msgId = _this._bus.postMessage(requestMsg);
+    let sendPromise = new Promise ((resolve, reject) => {
 
-  }
+      let id = _this._bus.postMessage(requestMsg);
+
+      if (_this._reporter === _this._owner) {
+        resolve();
+      } else {
+        _this._bus.addResponseListener(requestMsg.from, id, (reply) => {
+
+            if (reply.from === _this._reporter) {
+              _this._bus.removeResponseListener(requestMsg.from, id);
+
+              console.log('[Syncher.DataObjectReporter.shareChild] reporter reply ', reply);
+
+                let result = {
+                  identity: identity,
+                  childValue: childValue,
+                  children: children,
+                  code: reply.body && reply.body.code ? reply.body.code : 500,
+                  desc: reply.body && reply.body.desc ? reply.body.desc : 'Unknown'
+                };
+
+                if ( reply.body.code < 300) resolve(result);
+                else reject(result);
+
+            }
+          });
+        });
+
+      _this._sharedChilds.push(sendPromise);
+    }
+
+
+  }*/
 
   _getChildInput(input) {
     let _this = this;
@@ -468,6 +499,18 @@ class DataObject {
     let _this = this;
 
     console.log('[DataObject._onChildCreate] receivedBy ' + _this._owner + ' : ', msg);
+
+    let response = {
+      from: msg.to,
+      to: msg.from,
+      type: 'response',
+      id: msg.id,
+      body: {
+        code: 200
+      }
+    }
+
+    _this._bus.postMessage(response);
 
     if (msg.body.value.resourceType) {
       _this._onHypertyResourceAdded(msg);
