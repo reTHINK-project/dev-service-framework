@@ -463,9 +463,13 @@ class DataObject {
       let hypertyResource;
       let msgChildPath = _this._url + '/children/' + children;
 
-      _this._hypertyResourceFactory.createHypertyResourceWithContent(true, type, resource, _this._getChildInput(input)).then((resource)=>{
+      let childInput = _this._getChildInput(input);
+      childInput.children = children;
+
+      _this._hypertyResourceFactory.createHypertyResourceWithContent(true, type, resource, childInput).then((resource)=>{
         hypertyResource = resource;
-        _this._shareChild(children, hypertyResource.shareable, identity);
+
+        hypertyResource.share();
 
         console.log('[DataObject.addHypertyResource] added ', hypertyResource);
 
@@ -532,9 +536,6 @@ class DataObject {
 
     _this._childrenObjects[children][childInput.url] = newChild;
 
-    // locally store messages that are directly sent to the hyperty
-    // ie to sync with messages sent when offline
-
     if (msg.to === _this.metadata.url) newChild.store();
 
     _this._hypertyEvt(msg, newChild);
@@ -545,7 +546,7 @@ class DataObject {
     let input = msg.body.value;
     let hypertyResource;
 
-    let children = msg.to.split('/children/')[1];
+    let children = input.children;
 
     input.parentObject = _this;
 
@@ -558,10 +559,10 @@ class DataObject {
 
     _this._hypertyEvt(msg, hypertyResource);
 
-    /*hypertyResource.read().then(()=>{//TODO: temporary.hyperty should decide to load or not the Hyperty Resource content
-      console.log('[DataObject.onHypertyResourceAdded] content loaded from ', hypertyResource.contentURL);
-      hypertyResource.save();
-    });*/
+    // locally store messages that are directly sent to the hyperty
+    // ie to sync with messages sent when offline
+
+    if (msg.to === _this.metadata.url) hypertyResource.store();
   }
 
   _hypertyEvt(msg, child) {

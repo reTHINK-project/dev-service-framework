@@ -85,6 +85,13 @@ class DataObjectChild /* implements SyncStatus */ {
 
   }
 
+  get shareable() {
+    let shareable = _this.metadata;
+    shareable.data = _this.data;
+
+    return shareable;
+  }
+
   /**
    * This function is used to share the child Object among authorised Hyperties
    * @param  {boolean}     reporter  If true the child object is only shared to Parent reporter
