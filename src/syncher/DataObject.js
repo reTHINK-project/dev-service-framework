@@ -521,14 +521,21 @@ class DataObject {
     let _this = this;
     let childInput = deepClone(msg.body.value);
     childInput.parentObject = _this;
+
+    let children = childInput.children;
+
     let newChild = new DataObjectChild(childInput);
     newChild.identity = msg.body.identity;
 
-    let children = msg.to.split('/children/')[1];
 
     if (!_this._childrenObjects.hasOwnProperty(children)) _this._childrenObjects[children] = {};
 
     _this._childrenObjects[children][childInput.url] = newChild;
+
+    // locally store messages that are directly sent to the hyperty
+    // ie to sync with messages sent when offline
+
+    if (msg.to === _this.metadata.url) newChild.store();
 
     _this._hypertyEvt(msg, newChild);
   }

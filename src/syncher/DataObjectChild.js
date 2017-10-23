@@ -119,7 +119,7 @@ class DataObjectChild /* implements SyncStatus */ {
       let id = _this._bus.postMessage(requestMsg);
 
       if (_this._parentObject.metadata.reporter === _this.metadata.reporter) {
-        resolve();
+        return resolve();
       } else {
         _this._bus.addResponseListener(requestMsg.from, id, (reply) => {
 
@@ -134,13 +134,24 @@ class DataObjectChild /* implements SyncStatus */ {
                 };
 
                 if ( reply.body.code < 300){
-                  if (reporter) _this.store();
-                  resolve(result);
+                  return resolve(result);
                 }
-                else reject(result);
+                else return reject(result);
 
             }
           });
+
+          setTimeout( ()=>{// If Reporter does  not reply the promise is rejected
+            _this._bus.removeResponseListener(requestMsg.from, id);
+
+              let result = {
+                code: 408,
+                desc: 'timout'
+              };
+              return reject(result);
+
+          }, 3000);
+
         }
       });
 
@@ -155,22 +166,25 @@ class DataObjectChild /* implements SyncStatus */ {
   store() {
     let _this = this;
 
-    let child;
+    let child = {};
+    let key = _this.metadata.children + '.' + _this.metadata.url;
 
     child.value = _this.metadata;
-    child.identity = child.identity;
+    child.identity = _this.identity;
 
     let msg = {
 
-      from: _this._metadata.reporter,
-      to: _this._syncher._subURL,
+      from: _this.metadata.reporter,
+      to: _this._parentObject._syncher._subURL,
       type: 'create',
       body: {
-        resource: _this._metadata.parent,
-        attribute: _this.metadata.children,
+        resource: _this.metadata.parent,
+        attribute: key,
         value: child
       }
     };
+
+    console.log('[DataObjectChild.store]:', msg);
 
     _this._bus.postMessage(msg);
   }
