@@ -378,6 +378,7 @@ class DataObject {
 
       _this._hypertyResourceFactory.createHypertyResourceWithContent(true, type, resource, _this._getChildInput(input)).then((resource)=>{
         hypertyResource = resource;
+        hypertyResource.identity = identity;
         _this._shareChild(children, hypertyResource.shareable, identity);
 
         console.log('[DataObject.addHypertyResource] added ', hypertyResource);
