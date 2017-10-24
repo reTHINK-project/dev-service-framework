@@ -99,7 +99,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     let toInvite = observers;
     let invitePromises = [];
 
-  /*  observers.forEach((observer)=> {
+    /*  observers.forEach((observer)=> {
       if (!_this._invitations[observer]) {
         toInvite.push(observer);
         _this._invitations[observer] = observer;

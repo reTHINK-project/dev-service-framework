@@ -354,7 +354,7 @@ class DataObject {
       childInput.children = children;
       newChild = new DataObjectChild(childInput);
 
-      newChild.identity = identity;
+      if (identity) newChild.identity = identity;
 
       newChild.share();
 
@@ -455,7 +455,6 @@ class DataObject {
 
   addHypertyResource(children, type, resource, identity, input) {
     let _this = this;
-    let newChild;
 
     //returns promise, in the future, the API may change to asynchronous call
     return new Promise((resolve) => {
@@ -469,17 +468,19 @@ class DataObject {
       _this._hypertyResourceFactory.createHypertyResourceWithContent(true, type, resource, childInput).then((resource)=>{
         hypertyResource = resource;
 
+        if (identity) hypertyResource.identity = identity;
+
         hypertyResource.share();
 
         console.log('[DataObject.addHypertyResource] added ', hypertyResource);
 
         hypertyResource.onChange((event) => {
-          _this._onChange(event, { path: msgChildPath, childId: hypertyResource.url });
+          _this._onChange(event, { path: msgChildPath, childId: hypertyResource.childId });
         });
 
         if (!_this._childrenObjects.hasOwnProperty(children)) _this._childrenObjects[children] = {};
 
-        _this._childrenObjects[children][hypertyResource.url] = hypertyResource;
+        _this._childrenObjects[children][hypertyResource.childId] = hypertyResource;
 
         resolve(hypertyResource);
       });
