@@ -23,7 +23,7 @@
 
 import SyncObject from './ProxyObject';
 
-//import { deepClone } from '../utils/utils.js';
+import { deepClone } from '../utils/utils.js';
 
 /**
  * The class returned from the DataObject addChildren call or from onAddChildren if remotely created.
@@ -86,8 +86,8 @@ class DataObjectChild /* implements SyncStatus */ {
   }
 
   get shareable() {
-    let shareable = _this.metadata;
-    shareable.data = _this.data;
+    let shareable = this.metadata;
+    shareable.data = this.data;
 
     return shareable;
   }
@@ -112,7 +112,7 @@ class DataObjectChild /* implements SyncStatus */ {
 
     //FLOW-OUT: this message will be sent directly to a resource child address: MessageBus
     let requestMsg = {
-      type: 'create', from:  _this.metadata.reporter, to: to,
+      type: 'create', from: _this.metadata.reporter, to: to,
       body: { resource: childValue.url, value: childValue }
     };
 
@@ -121,9 +121,9 @@ class DataObjectChild /* implements SyncStatus */ {
     }
 
 
-    _this._sharingStatus = new Promise ((resolve, reject) => {
+    _this._sharingStatus = new Promise((resolve, reject) => {
 
-      let id = _this._bus.postMessage(requestMsg);
+      let id = _this._bus.postMessage(deepClone(requestMsg));
 
       if (_this._parentObject.metadata.reporter === _this.metadata.reporter) {
         return resolve();
