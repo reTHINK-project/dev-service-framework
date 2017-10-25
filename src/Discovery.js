@@ -1,2 +1,3 @@
 import Discovery from './discovery/Discovery';
-export default Discovery;
+import RegistrationStatus from './discovery/RegistrationStatus';
+export {Discovery, RegistrationStatus};

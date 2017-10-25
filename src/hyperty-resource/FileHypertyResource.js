@@ -134,7 +134,7 @@ class FileHypertyResource extends HypertyResource {
   * @param  {string} children Data Object Parent children name where the file is shared
   */
 
-  share(children) {
+/*  share(children) {
     let _this = this;
 
     return new Promise(function(resolve, reject) {
@@ -159,7 +159,7 @@ class FileHypertyResource extends HypertyResource {
 
     });
 
-  }
+  }*/
 
   /**
   * Returns file content optimised to be displayed in a message line

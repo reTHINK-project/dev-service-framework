@@ -73,6 +73,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
         case 'response': _this._onResponse(msg); break;
         case 'read': _this._onRead(msg); break;
         case 'execute': _this._onExecute(msg); break;
+        case 'create': _this._onChildCreate(msg); break;// to create child objects that were sent whenn offline
       }
     });
   }
@@ -98,7 +99,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     let toInvite = observers;
     let invitePromises = [];
 
-  /*  observers.forEach((observer)=> {
+    /*  observers.forEach((observer)=> {
       if (!_this._invitations[observer]) {
         toInvite.push(observer);
         _this._invitations[observer] = observer;
@@ -336,6 +337,23 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     let _this = this;
     let objectValue = deepClone(_this.metadata);
     objectValue.data = deepClone(_this.data);
+
+    if (_this._childrenObjects) {
+      objectValue.childrenObjects = {};
+      let children;
+
+      for (children in _this._childrenObjects) {
+        let child;
+        objectValue.childrenObjects[children] = {};
+        for (child in _this._childrenObjects[children]) {
+          objectValue.childrenObjects[children][child] = {};
+          objectValue.childrenObjects[children][child].value = _this._childrenObjects[children][child].metadata;
+          objectValue.childrenObjects[children][child].identity = _this._childrenObjects[children][child].identity;
+        }
+      }
+
+    }
+
     objectValue.version = _this._version;
 
     let response = {

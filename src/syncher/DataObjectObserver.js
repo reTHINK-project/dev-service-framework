@@ -71,33 +71,82 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
     let _this = this;
     console.info('[DataObjectObserver_sync] synchronising ');
 
-    _this._syncher.read(_this._metadata.url).then((value)=>{
-      console.info('[DataObjectObserver_sync] value to sync: ', value);
+    return new Promise((resolve, reject) => {
 
-      Object.assign(_this.data, deepClone(value.data));
+      _this._syncher.read(_this._metadata.url).then((value)=>{
+        console.info('[DataObjectObserver_sync] value to sync: ', value);
 
-      _this._version = value.version;
-
-      _this._metadata.lastModified = value.lastModified;
-
-      /*if (value.version != _this._version) {
-        console.info('[DataObjectObserver_sync] updating existing data: ', _this.data);
-
-        Object.assign(_this.data || {}, deepClone(value.data));
-
-        _this._metadata = deepClone(value);
-
-        delete _this._metadata.data;
+        Object.assign(_this.data, deepClone(value.data));
 
         _this._version = value.version;
 
-      } else {
-        console.info('[DataObjectObserver_sync] existing data is updated: ', value);
-      }*/
+        _this._metadata.lastModified = value.lastModified;
 
-    }).catch((reason) => {
-      console.info('[DataObjectObserver_sync] sync failed: ', reason);
+        //TODO: check first if there are new childrenObjects to avoid overhead
+
+        if (value.childrenObjects) {
+          _this.resumeChildrens(value.childrenObjects);
+          _this._storeChildrens();
+          resolve(true);
+        } else resolve(true);
+
+
+        /*if (value.version != _this._version) {
+          console.info('[DataObjectObserver_sync] updating existing data: ', _this.data);
+
+          Object.assign(_this.data || {}, deepClone(value.data));
+
+          _this._metadata = deepClone(value);
+
+          delete _this._metadata.data;
+
+          _this._version = value.version;
+
+        } else {
+          console.info('[DataObjectObserver_sync] existing data is updated: ', value);
+        }*/
+
+      }).catch((reason) => {
+        console.info('[DataObjectObserver_sync] sync failed: ', reason);
+        resolve(false);
+      });
+
     });
+
+
+  }
+
+  _storeChildrens() {
+    let _this = this;
+
+    let childrens = {};
+
+    //TODO: to be sent to HypertyResourceStorage when ready to handle Chat Messages
+
+    Object.keys(_this._childrenObjects).forEach((childrenResource) => {
+      let children = _this._childrenObjects[childrenResource];
+      childrens[childrenResource] = {};
+
+      Object.keys(children).forEach((childId) => {
+        childrens[childrenResource][childId] = {};
+        childrens[childrenResource][childId].value = children[childId].metadata;
+        childrens[childrenResource][childId].identity = children[childId].identity;
+      });
+    });
+
+      let msg = {
+
+        from: _this._owner,
+        to: _this._syncher._subURL,
+        type: 'create',
+        body: {
+          resource: _this._url,
+          attribute: 'childrenObjects',
+          value: childrens
+        }
+      };
+
+      _this._bus.postMessage(msg);
 
   }
 
