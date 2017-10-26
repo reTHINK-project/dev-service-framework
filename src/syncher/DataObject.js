@@ -372,67 +372,23 @@ class DataObject {
     });
   }
 
-  /**
-   * share created child among authorised listeners.
-   * @param {String} children - Children name where the child is added.
-   * @param {JSON} initialData - Initial data of the child
-   * @param  {MessageBodyIdentity} identity - (optional) identity data to be added to identity the user reporter. To be used for legacy identities.
-   * @param  {SyncChildMetadata} input - (optional) All additional metadata about the DataObjectChild.
-   * @return {Promise<DataObjectChild>} - Return Promise to a new DataObjectChild.
-   */
-/*
-  _shareChild(children, childValue, identity) {
+  _deleteChildrens() {
+
     let _this = this;
+    let deletePromises = [];
 
-    let msgChildPath = _this._url + '/children/' + children;
-
-    //FLOW-OUT: this message will be sent directly to a resource child address: MessageBus
-    let requestMsg = {
-      type: 'create', from: _this._owner, to: msgChildPath,
-      body: { resource: childValue.url, value: childValue }
-    };
-
-    if (identity)      {
-      requestMsg.body.identity = identity;
-    }
-
-    //TODO: For Further Study
-    if (!_this._mutualAuthentication) requestMsg.body.mutualAuthentication = _this._mutualAuthentication;
-
-    let sendPromise = new Promise ((resolve, reject) => {
-
-      let id = _this._bus.postMessage(requestMsg);
-
-      if (_this._reporter === _this._owner) {
-        resolve();
-      } else {
-        _this._bus.addResponseListener(requestMsg.from, id, (reply) => {
-
-            if (reply.from === _this._reporter) {
-              _this._bus.removeResponseListener(requestMsg.from, id);
-
-              console.log('[Syncher.DataObjectReporter.shareChild] reporter reply ', reply);
-
-                let result = {
-                  identity: identity,
-                  childValue: childValue,
-                  children: children,
-                  code: reply.body && reply.body.code ? reply.body.code : 500,
-                  desc: reply.body && reply.body.desc ? reply.body.desc : 'Unknown'
-                };
-
-                if ( reply.body.code < 300) resolve(result);
-                else reject(result);
-
-            }
-          });
+    if (_this.childrens) {
+      console.log('[DataObject.deleteChildrens]', _this.childrens );
+      Object.keys(_this.childrens).forEach((children) => {
+        Object.keys(_this.childrens[children]).forEach((child) => {
+          deletePromises.push(_this.childrens[children][child].delete());
         });
-
-      _this._sharedChilds.push(sendPromise);
+      });
     }
 
-
-  }*/
+    if (deletePromises.length > 0) return Promise.all(deletePromises);
+    else return Promise.resolve('[DataObject._deleteChildrens] nothing to delete');
+  }
 
   _getChildInput(input) {
     let _this = this;
@@ -556,7 +512,7 @@ class DataObject {
 
     if (!_this._childrenObjects.hasOwnProperty(children)) _this._childrenObjects[children] = {};
 
-    _this._childrenObjects[children][hypertyResource.url] = hypertyResource;
+    _this._childrenObjects[children][hypertyResource.childId] = hypertyResource;
 
     _this._hypertyEvt(msg, hypertyResource);
 

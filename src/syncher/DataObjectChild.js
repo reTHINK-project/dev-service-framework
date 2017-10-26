@@ -196,6 +196,11 @@ class DataObjectChild /* implements SyncStatus */ {
     _this._bus.postMessage(msg);
   }
 
+  delete() {
+    //nothing to be done
+    Promise.resolve();
+  }
+
   _allocateListeners() {
     let _this = this;
 

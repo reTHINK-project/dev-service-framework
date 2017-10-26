@@ -150,22 +150,25 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
   delete() {
     let _this = this;
 
-    //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onDelete
-    let deleteMsg = {
-      type: 'delete', from: _this._owner, to: _this._syncher._subURL,
-      body: { resource: _this._url }
-    };
+    _this._deleteChildrens().then(()=>{
+      //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onDelete
+      let deleteMsg = {
+        type: 'delete', from: _this._owner, to: _this._syncher._subURL,
+        body: { resource: _this._url }
+      };
 
-    _this._bus.postMessage(deleteMsg, (reply) => {
-      console.log('DataObjectReporter-DELETE: ', reply);
-      if (reply.body.code === 200) {
-        _this._releaseListeners();
-        delete _this._syncher._reporters[_this._url];
+      _this._bus.postMessage(deleteMsg, (reply) => {
+        console.log('DataObjectReporter-DELETE: ', reply);
+        if (reply.body.code === 200) {
+          _this._releaseListeners();
+          delete _this._syncher._reporters[_this._url];
 
-        //_this._syncObj.unobserve();
-        _this._syncObj = {};
-      }
+          //_this._syncObj.unobserve();
+          _this._syncObj = {};
+        }
+      });
     });
+
   }
 
   /**

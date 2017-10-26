@@ -153,6 +153,30 @@ class HypertyResource extends DataObjectChild {
     });
 
   }
+
+  // Remove Hyperty from the local storage
+
+  delete() {
+    let _this = this;
+
+    console.log('[HypertyResource.delete]', _this.metadata);
+
+
+    let msg = {
+      from: _this._owner,
+      to: _this._localStorageURL,
+      type: 'delete',
+      body: { resources: _this.metadata.contentURL }
+    };
+
+    return new Promise((resolve) => {
+      _this._bus.postMessage(msg, (reply) => {
+        if (reply.body.code < 300) resolve(true);
+        else resolve(false);
+      });
+    });
+  }
+
   _getBestContentURL(contentURLList) {
 
     let _this = this;
