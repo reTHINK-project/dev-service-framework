@@ -1,4 +1,9 @@
 {
-  "presets": ["env"],
-  "plugins": ["add-module-exports", "babel-polyfill", "transform-runtime", "transform-regenerator"]
+  "presets": ["es2015"],
+  "plugins": [
+    "add-module-exports",
+    "babel-polyfill",
+    "transform-runtime",
+    "transform-regenerator"
+  ]
 }

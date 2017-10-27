@@ -3,6 +3,10 @@
 *
 */
 
+// Log System
+import * as logger from 'loglevel';
+let log = logger.getLogger('HypertyResource');
+
 import { deepClone } from '../utils/utils.js';
 import DataObjectChild from '../syncher/DataObjectChild.js';
 
@@ -82,7 +86,7 @@ class HypertyResource extends DataObjectChild {
       let id = _this._bus.postMessage(msg);
 
       _this._bus.addResponseListener(_this._owner, id, (reply) => {
-        console.log('[HypertyResource.save] reply: ', reply);
+        log.info('[HypertyResource.save] reply: ', reply);
         _this._bus.removeResponseListener(_this._owner, id);
         if (reply.body.code === 200) {
           if (reply.body.value) {
@@ -99,7 +103,7 @@ class HypertyResource extends DataObjectChild {
 
   read() {
     let _this = this;
-    console.log('[HypertyResource.read] ', this);
+    log.info('[HypertyResource.read] ', this);
 
     return new Promise(function(resolve, reject) {
 
@@ -111,7 +115,7 @@ class HypertyResource extends DataObjectChild {
 
         let storage = _this._getBestContentURL(_this._metadata.contentURL);
 
-        console.log('Storage:', storage);
+        log.log('Storage:', storage);
 
         let msg = {
           from: _this._owner,
@@ -129,7 +133,7 @@ class HypertyResource extends DataObjectChild {
         let id = _this._bus.postMessage(msg);
 
         _this._bus.addResponseListener(_this._owner, id, (reply) => {
-          console.log('[HypertyResource.read] reply: ', reply);
+          log.log('[HypertyResource.read] reply: ', reply);
 
           if (reply.body.code === 200) {
             _this._content = reply.body.value.content;
@@ -149,7 +153,7 @@ class HypertyResource extends DataObjectChild {
       }
 
     }).catch(function(reason) {
-      console.error('Reason:', reason);
+      log.error('Reason:', reason);
     });
 
   }
@@ -159,7 +163,7 @@ class HypertyResource extends DataObjectChild {
   delete() {
     let _this = this;
 
-    console.log('[HypertyResource.delete]', _this.metadata);
+    log.info('[HypertyResource.delete]', _this.metadata);
 
 
     let msg = {

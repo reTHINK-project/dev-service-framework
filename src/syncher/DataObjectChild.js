@@ -20,6 +20,9 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 **/
+// Log System
+import * as logger from 'loglevel';
+let log = logger.getLogger('DataObjectChild');
 
 import SyncObject from './ProxyObject';
 
@@ -69,7 +72,7 @@ class DataObjectChild /* implements SyncStatus */ {
       _this._syncObj = new SyncObject({});
     }
 
-    console.log('[DataObjectChild -  Constructor] - ', _this._syncObj);
+    log.log('[DataObjectChild -  Constructor] - ', _this._syncObj);
 
     _this._bus = _this._parentObject._bus;
     _this._owner = _this._parentObject._owner;
@@ -133,7 +136,7 @@ class DataObjectChild /* implements SyncStatus */ {
             if (reply.to === _this._reporter) {
               _this._bus.removeResponseListener(requestMsg.from, id);
 
-              console.log('[Syncher.DataObjectChild.share] Parent reporter reply ', reply);
+              log.log('[Syncher.DataObjectChild.share] Parent reporter reply ', reply);
 
                 let result = {
                   code: reply.body && reply.body.code ? reply.body.code : 500,
@@ -191,7 +194,7 @@ class DataObjectChild /* implements SyncStatus */ {
       }
     };
 
-    console.log('[DataObjectChild.store]:', msg);
+    log.log('[DataObjectChild.store]:', msg);
 
     _this._bus.postMessage(msg);
   }
@@ -208,7 +211,7 @@ class DataObjectChild /* implements SyncStatus */ {
     if (_this._reporter === _this._owner) {
       _this._listener = _this._bus.addListener(_this._reporter, (msg) => {
         if (msg.type === 'response' && msg.id === _this._msgId) {
-          console.log('DataObjectChild.onResponse:', msg);
+          log.log('DataObjectChild.onResponse:', msg);
           _this._onResponse(msg);
         }
       });
@@ -283,7 +286,7 @@ class DataObjectChild /* implements SyncStatus */ {
    */
   onChange(callback) {
     this._syncObj.observe((event) => {
-      console.log('[DataObjectChild - observer] - ', event);
+      log.log('[DataObjectChild - observer] - ', event);
       callback(event);
     });
   }

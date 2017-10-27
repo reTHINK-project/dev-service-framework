@@ -21,6 +21,10 @@
 * limitations under the License.
 **/
 
+// Log System
+import * as logger from 'loglevel';
+let log = logger.getLogger('DataObject');
+
 import SyncObject, {ChangeType, ObjectType} from './ProxyObject';
 import DataObjectChild from './DataObjectChild';
 import {deepClone} from '../utils/utils.js';
@@ -131,17 +135,17 @@ class DataObject {
     let _this = this;
 
     let childBaseURL = _this._url + '/children/';
-    console.log('[Data Object - AllocateListeners] - ', _this._childrens);
+    log.log('[Data Object - AllocateListeners] - ', _this._childrens);
     if (_this._childrens) {
       _this._childrens.forEach((child) => {
         let childURL = childBaseURL + child;
         let listener = _this._bus.addListener(childURL, (msg) => {
           //ignore msg sent by himself
           if (msg.from !== this._owner) {
-            console.log('DataObject-Children-RCV: ', msg);
+            log.log('DataObject-Children-RCV: ', msg);
             switch (msg.type) {
               case 'create': _this._onChildCreate(msg); break;
-              case 'delete': console.log(msg); break;
+              case 'delete': log.log(msg); break;
               default: _this._changeChildren(msg); break;
             }
           }
@@ -192,13 +196,13 @@ class DataObject {
         } else if (!_this._childrenObjects[childrenResource].hasOwnProperty(childId)) {
 
           _this._childrenObjects[childrenResource][childId] = _this._resumeChild(children[childId]);
-          console.log('[DataObject.resumeChildrens] new DataObjectChild: ', _this._childrenObjects[childrenResource][childId]);
+          log.log('[DataObject.resumeChildrens] new DataObjectChild: ', _this._childrenObjects[childrenResource][childId]);
           newChild = true;
         }
 
         if (newChild && childId > childIdString) {
           childIdString = childId;
-          console.log('[DataObjectReporter.resumeChildrens] - resuming: ', this._childrenObjects[childrenResource][childId]);
+          log.log('[DataObjectReporter.resumeChildrens] - resuming: ', this._childrenObjects[childrenResource][childId]);
         }
 
       });
@@ -358,7 +362,7 @@ class DataObject {
 
       newChild.share();
 
-      console.log('[DataObject.addChild] added ', newChild);
+      log.log('[DataObject.addChild] added ', newChild);
 
       newChild.onChange((event) => {
         _this._onChange(event, { path: msgChildPath, childId: childInput.url });
@@ -378,7 +382,7 @@ class DataObject {
     let deletePromises = [];
 
     if (_this.childrens) {
-      console.log('[DataObject.deleteChildrens]', _this.childrens );
+      log.log('[DataObject.deleteChildrens]', _this.childrens );
       Object.keys(_this.childrens).forEach((children) => {
         Object.keys(_this.childrens[children]).forEach((child) => {
           deletePromises.push(_this.childrens[children][child].delete());
@@ -428,7 +432,7 @@ class DataObject {
 
         hypertyResource.share();
 
-        console.log('[DataObject.addHypertyResource] added ', hypertyResource);
+        log.log('[DataObject.addHypertyResource] added ', hypertyResource);
 
         hypertyResource.onChange((event) => {
           _this._onChange(event, { path: msgChildPath, childId: hypertyResource.childId });
@@ -459,7 +463,7 @@ class DataObject {
   _onChildCreate(msg) {
     let _this = this;
 
-    console.log('[DataObject._onChildCreate] receivedBy ' + _this._owner + ' : ', msg);
+    log.log('[DataObject._onChildCreate] receivedBy ' + _this._owner + ' : ', msg);
 
     let response = {
       from: msg.to,
@@ -558,7 +562,7 @@ class DataObject {
         body: { version: _this._version, source: _this._owner, attribute: event.field, lastModified: _this._metadata.lastModified }
       };
 
-      console.log('[DataObject - _onChange] - ', event, childInfo, changeMsg);
+      log.log('[DataObject - _onChange] - ', event, childInfo, changeMsg);
 
       if (event.oType === ObjectType.OBJECT) {
         if (event.cType !== ChangeType.REMOVE) {
@@ -625,14 +629,14 @@ class DataObject {
       }
     } else {
       //TODO: how to handle unsynchronized versions?
-      console.log('UNSYNCHRONIZED VERSION: (data => ' + _this._version + ', msg => ' + msg.body.version + ')');
+      log.log('UNSYNCHRONIZED VERSION: (data => ' + _this._version + ', msg => ' + msg.body.version + ')');
     }
   }
 
   //FLOW-IN: message received from a remote DataObjectChild when changing data
   _changeChildren(msg) {
     let _this = this;
-    console.log('Change children: ', _this._owner, msg);
+    log.log('Change children: ', _this._owner, msg);
 
     let childId = msg.body.resource;
     let children = _this._childrenObjects[childId];
@@ -640,7 +644,7 @@ class DataObject {
     if (children) {
       _this._changeObject(children._syncObj, msg);
     } else {
-      console.log('No children found for: ', childId);
+      log.log('No children found for: ', childId);
     }
   }
 

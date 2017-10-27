@@ -21,6 +21,10 @@
 * limitations under the License.
 **/
 
+// Log System
+import * as logger from 'loglevel';
+let log = logger.getLogger('DataObjectReporter');
+
 import DataObject from './DataObject';
 
 import { deepClone, divideURL } from '../utils/utils.js';
@@ -53,7 +57,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     _this._subscriptions = {};
 
     _this._syncObj.observe((event) => {
-      console.log('[Syncher.DataObjectReporter] ' + _this.url + ' publish change: ', event);
+      log.log('[Syncher.DataObjectReporter] ' + _this.url + ' publish change: ', event);
       _this._onChange(event);
     });
 
@@ -68,7 +72,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     let _this = this;
 
     _this._objectListener = _this._bus.addListener(_this._url, (msg) => {
-      console.log('[Syncher.DataObjectReporter] listener ' + _this._url + ' Received: ', msg);
+      log.log('[Syncher.DataObjectReporter] listener ' + _this._url + ' Received: ', msg);
       switch (msg.type) {
         case 'response': _this._onResponse(msg); break;
         case 'read': _this._onRead(msg); break;
@@ -108,7 +112,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
 
 
     if (toInvite.length > 0) {
-      console.log('[Syncher.DataObjectReporter] InviteObservers ', toInvite, _this._metadata);
+      log.log('[Syncher.DataObjectReporter] InviteObservers ', toInvite, _this._metadata);
 
       toInvite.forEach((observer)=>{
 
@@ -122,7 +126,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
           if (p2p) inviteMsg.body.p2p = p2p;
 
           _this._bus.postMessage(inviteMsg, (reply)=>{
-            console.log('[Syncher.DataObjectReporter] Invitation reply ', reply);
+            log.log('[Syncher.DataObjectReporter] Invitation reply ', reply);
 
               let result = {
                 invited: observer,
@@ -158,7 +162,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
       };
 
       _this._bus.postMessage(deleteMsg, (reply) => {
-        console.log('DataObjectReporter-DELETE: ', reply);
+        log.log('DataObjectReporter-DELETE: ', reply);
         if (reply.body.code === 200) {
           _this._releaseListeners();
           delete _this._syncher._reporters[_this._url];
@@ -215,7 +219,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
   _onForward(msg) {
     let _this = this;
 
-    console.log('DataObjectReporter-RCV: ', msg);
+    log.log('DataObjectReporter-RCV: ', msg);
     switch (msg.body.type) {
       case 'subscribe': _this._onSubscribe(msg); break;
       case 'unsubscribe': _this._onUnSubscribe(msg); break;
@@ -229,7 +233,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     let dividedURL = divideURL(hypertyUrl);
     let domain = dividedURL.domain;
 
-    console.log('[DataObjectReporter._onSubscribe]', msg, domain, dividedURL);
+    log.log('[DataObjectReporter._onSubscribe]', msg, domain, dividedURL);
 
     let event = {
       type: msg.body.type,
@@ -287,7 +291,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     };
 
     if (_this._onSubscriptionHandler) {
-      console.log('SUBSCRIPTION-EVENT: ', event);
+      log.log('SUBSCRIPTION-EVENT: ', event);
       _this._onSubscriptionHandler(event);
     }
   }
@@ -299,7 +303,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     let dividedURL = divideURL(hypertyUrl);
     let domain = dividedURL.domain;
 
-    console.log('[DataObjectReporter._onUnSubscribe]', msg, domain, dividedURL);
+    log.log('[DataObjectReporter._onUnSubscribe]', msg, domain, dividedURL);
 
     //let sub = _this._subscriptions[hypertyUrl];
     delete _this._subscriptions[hypertyUrl];
@@ -314,7 +318,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
 
     // TODO: check if the _onSubscriptionHandler it is the same of the subscriptions???
     if (_this._onSubscriptionHandler) {
-      console.log('UN-SUBSCRIPTION-EVENT: ', event);
+      log.log('UN-SUBSCRIPTION-EVENT: ', event);
       _this._onSubscriptionHandler(event);
     }
   }
@@ -330,7 +334,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     };
 
     if (_this._onResponseHandler) {
-      console.log('RESPONSE-EVENT: ', event);
+      log.log('RESPONSE-EVENT: ', event);
       _this._onResponseHandler(event);
     }
   }
@@ -392,7 +396,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     if (subscriptions.indexOf(msg.from) != -1) {
       _this._bus.postMessage(response);
     } else if (_this._onReadHandler) {
-      console.log('READ-EVENT: ', event);
+      log.log('READ-EVENT: ', event);
       _this._onReadHandler(event);
     }
   }
@@ -427,7 +431,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     };
 
     if (_this._onExecuteHandler) {
-      console.log('[DataObjectReporter] EXECUTE-EVENT: ', event);
+      log.log('[DataObjectReporter] EXECUTE-EVENT: ', event);
       _this._onExecuteHandler(event);
     }
   }

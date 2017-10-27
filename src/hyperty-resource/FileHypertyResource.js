@@ -3,6 +3,10 @@
 *
 */
 
+// Log System
+import * as logger from 'loglevel';
+let log = logger.getLogger('FileHypertyResource');
+
 import HypertyResource from './HypertyResource';
 import { deepClone } from '../utils/utils.js';
 import ImageTools from '../utils/ImageTools.js';
@@ -44,7 +48,7 @@ class FileHypertyResource extends HypertyResource {
       _this._metadata.size = file.size;
       _this._metadata.mimetype = file.type;
 
-      console.log('[FileHypertyResource.init] file: ', file);
+      log.log('[FileHypertyResource.init] file: ', file);
 
       if (_this._isSender) {
 
@@ -73,7 +77,7 @@ class FileHypertyResource extends HypertyResource {
 
           reader.onload = function(theFile) {
 
-            console.log('[FileHypertyResource.init] file loaded ', theFile);
+            log.log('[FileHypertyResource.init] file loaded ', theFile);
 
             _this._content = theFile.target.result;
             resolve();
@@ -109,7 +113,7 @@ class FileHypertyResource extends HypertyResource {
             resolve(theImage.target.result);
         };
       } else {
-        console.warn('[FileHypertyResource._getImagePreview] unable to create image preview from original image ');
+        log.warn('[FileHypertyResource._getImagePreview] unable to create image preview from original image ');
         resolve(undefined);
       }
     });
@@ -146,14 +150,14 @@ class FileHypertyResource extends HypertyResource {
       file2share.type = _this._type;
 
       _this._parent.addChild(children, file2share).then(function(dataObjectChild) {
-        console.log('[FileHypertyResource.share] object child: ', dataObjectChild);
+        log.log('[FileHypertyResource.share] object child: ', dataObjectChild);
 
         let sharedFile = dataObjectChild.data;
 
         resolve(sharedFile);
 
       }).catch(function(reason) {
-        console.error('Reason:', reason);
+        log.error('Reason:', reason);
         reject(reason);
       });
 

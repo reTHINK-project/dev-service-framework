@@ -32,6 +32,11 @@
  * Since there is no DataObjectObserver before the ubscription confirmation, there should be some other object collecting the updates.
  * Provisional data is applied to the DataObjectObserver after confirmation. Or discarded if there is no confirmation.
  */
+
+// Log System
+import * as logger from 'loglevel';
+let log = logger.getLogger('DataProvisional');
+
 class DataProvisional {
   /* private
   _childrenListeners: [MsgListener]
@@ -56,7 +61,7 @@ class DataProvisional {
     let _this = this;
 
     _this._listener = _this._bus.addListener(_this._url, (msg) => {
-      console.log('DataProvisional-' + _this._url + '-RCV: ', msg);
+      log.log('DataProvisional-' + _this._url + '-RCV: ', msg);
       _this._changes.push(msg);
     });
 
@@ -69,7 +74,7 @@ class DataProvisional {
         let listener = _this._bus.addListener(childURL, (msg) => {
           //ignore msg sent by himself
           if (msg.from !== owner) {
-            console.log(msg);
+            log.log(msg);
           }
         });
 
