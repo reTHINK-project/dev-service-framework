@@ -44,7 +44,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
    * Should not be used directly by Hyperties. It's called by the Syncher.create method
    */
 
-   //constructor(syncher, url, created, reporter, runtime, schema, name, initialStatus, initialData, childrens, mutual = true, resumed = false, description, tags, resources, observerStorage, publicObservation) {
+  //constructor(syncher, url, created, reporter, runtime, schema, name, initialStatus, initialData, childrens, mutual = true, resumed = false, description, tags, resources, observerStorage, publicObservation) {
   constructor(input) {
 
     super(input);
@@ -61,6 +61,8 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
 
     _this._invitations = [];
     _this.invitations = []; // array of promises with pending invitations
+    _this._childrenSizeThreshold = 50000;// to be used when replying to sync requests to ensure each response msg is not too large
+
   }
 
   _allocateListeners() {
@@ -124,11 +126,11 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
           _this._bus.postMessage(inviteMsg, (reply)=>{
             console.log('[Syncher.DataObjectReporter] Invitation reply ', reply);
 
-              let result = {
-                invited: observer,
-                code: reply.body && reply.body.code ? reply.body.code : 500,
-                desc: reply.body && reply.body.desc ? reply.body.desc : 'Unknown'
-              };
+            let result = {
+              invited: observer,
+              code: reply.body && reply.body.code ? reply.body.code : 500,
+              desc: reply.body && reply.body.desc ? reply.body.desc : 'Unknown'
+            };
 
             if (result.code < 300) resolve(result);
             else if (result.code >= 300) reject(result);
@@ -139,7 +141,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
 
       });
 
-//      return(invitePromises);
+      //      return(invitePromises);
 
     }
   }
@@ -338,38 +340,17 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
   //FLOW-IN: message received from ReporterURL address: emited by a remote Syncher -> read
   _onRead(msg) {
     let _this = this;
-    let objectValue = deepClone(_this.metadata);
-    objectValue.data = deepClone(_this.data);
+    let childrensSize = JSON.stringify(_this.childrensJSON).length;
 
-    if (_this._childrenObjects) {
-      objectValue.childrenObjects = {};
-      let children;
-
-      for (children in _this._childrenObjects) {
-        let child;
-        objectValue.childrenObjects[children] = {};
-        for (child in _this._childrenObjects[children]) {
-          objectValue.childrenObjects[children][child] = {};
-          objectValue.childrenObjects[children][child].value = _this._childrenObjects[children][child].metadata;
-          objectValue.childrenObjects[children][child].identity = _this._childrenObjects[children][child].identity;
-        }
-      }
-
-    }
-
-    objectValue.version = _this._version;
-
-    let response = {
-      id: msg.id, type: 'response', from: msg.to, to: msg.from,
-      body: { code: 200, value: objectValue }
-    };
+    let largeObject = (childrensSize > _this._childrenSizeThreshold) ? true : false;
 
     let event = {
       type: msg.type,
       url: msg.from,
 
       accept: () => {
-        _this._bus.postMessage(response);
+        if (largeObject) _this._syncReplyForLargeData(msg);
+        else _this._syncReply(msg);
       },
 
       reject: (reason) => {
@@ -390,11 +371,114 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     }
 
     if (subscriptions.indexOf(msg.from) != -1) {
-      _this._bus.postMessage(response);
+      if (largeObject) _this._syncReplyForLargeData(msg);
+      else _this._syncReply(msg);
     } else if (_this._onReadHandler) {
       console.log('READ-EVENT: ', event);
       _this._onReadHandler(event);
     }
+
+  }
+
+  get childrensJSON() {
+    let _this = this;
+    let childrens = {};
+
+    let children;
+
+    for (children in _this._childrenObjects) {
+      let child;
+      childrens[children] = {};
+      for (child in _this._childrenObjects[children]) {
+        childrens[children][child] = {};
+        childrens[children][child].value = _this._childrenObjects[children][child].metadata;
+        childrens[children][child].identity = _this._childrenObjects[children][child].identity;
+      }
+    }
+
+    return childrens;
+  }
+
+  _syncReply(msg) {
+    let _this = this;
+
+    let objectValue = deepClone(_this.metadata);
+
+    objectValue.data = deepClone(_this.data);
+    objectValue.childrenObjects = _this.childrensJSON;
+
+    objectValue.version = _this._version;
+
+    let response = {
+      id: msg.id, type: 'response', from: msg.to, to: msg.from,
+      body: { code: 200, value: objectValue }
+    };
+
+    _this._bus.postMessage(response);
+
+  }
+
+  // This function is only used if the data object to be synched has childrenOjects too large
+
+  _syncReplyForLargeData(msg) {
+  //set attribute with number of spllited messages
+    let _this = this;
+
+    // lets set the initial message with no childObjects
+
+    let objectValue = deepClone(_this.metadata);
+
+    objectValue.data = deepClone(_this.data);
+
+    objectValue.version = _this._version;
+
+    delete objectValue.childrenObjects;
+
+    let children;
+    let values = []; // array of values to be sent in separated responses
+    let childrenValue = {}; // value to be used in each response
+
+    for (children in _this._childrenObjects) {
+      let child;
+      childrenValue[children] = {};
+      for (child in _this._childrenObjects[children]) {
+        if (JSON.stringify(childrenValue).length > _this._childrenSizeThreshold) {
+          //childrenValue big enough to be sent in a response message
+          values.push(childrenValue);
+          childrenValue = {};
+          childrenValue[children] = {};
+        }
+        childrenValue[children][child] = {};
+        childrenValue[children][child].value = _this._childrenObjects[children][child].metadata;
+        childrenValue[children][child].identity = _this._childrenObjects[children][child].identity;
+      }
+    }
+
+    values.push(childrenValue);
+
+    objectValue.responses = values.length + 1; //number of responses to be sent
+
+    let initialResponse = {
+      id: msg.id, type: 'response', from: msg.to, to: msg.from,
+      body: { code: 100, value: objectValue }
+    };
+
+    _this._bus.postMessage(initialResponse);
+
+    values.forEach((value) => {
+
+      let response = deepClone(initialResponse);
+
+      response.body.value = value;
+
+      response.body.value.responses = objectValue.responses;
+
+      setTimeout(() => { _this._bus.postMessage(response); }, 50);
+
+      // should put a timeout?
+
+    });
+
   }
 
   // Execute request received

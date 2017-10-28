@@ -219,10 +219,39 @@ class Syncher {
     };
 
     return new Promise((resolve, reject) => {
-      _this._bus.postMessage(readMsg, (reply) => {
-        console.log('read-response: ', reply);
-        if (reply.body.code === 200) {
-          resolve(reply.body.value);
+
+      let id = _this._bus.postMessage(readMsg)
+
+      let childrens = {};
+      let value = {};
+      let n = 0;
+
+      _this._bus.addResponseListener(readMsg.from, id, (reply) => {
+        console.log('[Syncher.read] reply: ', reply);
+        if (reply.body.code < 300) {
+          if (!reply.body.value.hasOwnProperty('responses')) {
+            _this._bus.removeResponseListener(readMsg.from, id);
+            resolve(reply.body.value);
+          } else { //data object is sent in separated messages
+            if (n === 0) { //initial response without childrens
+              value = reply.body.value;
+              ++n;
+            } else { // received response contains childrens
+              delete reply.body.value.responses;
+              let children;
+              for (children in reply.body.value) {
+                if (!childrens.hasOwnProperty(children)) childrens[children] = {};
+                Object.assign(childrens[children], reply.body.value[children]);
+              }
+              ++n;
+              if (n === value.responses) {
+                value.childrenObjects = childrens;
+                delete value.responses;
+                _this._bus.removeResponseListener(readMsg.from, id);
+                resolve(value);
+              }
+            }
+          }
         } else {
           reject(reply.body.desc);
         }
