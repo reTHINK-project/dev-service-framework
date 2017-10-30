@@ -40,44 +40,42 @@
  */
 export function divideURL(url) {
 
-  if (!url) throw Error('URL is needed to split');
-
-	function recurse(value) {
-		const regex = /([a-zA-Z-]*)(:\/\/(?:\.)?|:)([-a-zA-Z0-9@:%._\+~#=]{2,256})([-a-zA-Z0-9@:%._\+~#=\/]*)/gi;
+  function recurse(value) {
+    const regex = /([a-zA-Z-]*)(:\/\/(?:\.)?|:)([-a-zA-Z0-9@:%._\+~#=]{2,256})([-a-zA-Z0-9@:%._\+~#=\/]*)/gi;
     const subst = '$1,$3,$4';
-	  let parts = value.replace(regex, subst).split(',');
-		return parts;
-	}
+    let parts = value.replace(regex, subst).split(',');
+    return parts;
+  }
 
-	let parts = recurse(url);
+  let parts = recurse(url);
 
   // If the url has no scheme
   if (parts[0] === url && !parts[0].includes('@')) {
 
     let result = {
-      type: "",
+      type: '',
       domain: url,
-      identity: ""
+      identity: ''
     };
 
-    console.error('[DivideURL] DivideURL don\'t support url without scheme. Please review your url address', url);
+    console.warn('[DivideURL] DivideURL don\'t support url without scheme. Please review your url address', url);
 
     return result;
   }
 
-	// check if the url has the scheme and includes an @
-	if (parts[0] === url && parts[0].includes('@')) {
-		let scheme = parts[0] === url ? 'smtp' : parts[0];
-		parts = recurse(scheme + '://' + parts[0]);
-	}
+  // check if the url has the scheme and includes an @
+  if (parts[0] === url && parts[0].includes('@')) {
+    let scheme = parts[0] === url ? 'smtp' : parts[0];
+    parts = recurse(scheme + '://' + parts[0]);
+  }
 
-	// if the domain includes an @, divide it to domain and identity respectively
-	if (parts[1].includes('@')) {
-		parts[2] = parts[0] + '://' + parts[1];
-		parts[1] = parts[1].substr(parts[1].indexOf('@') + 1)
-    } 	/*else if (parts[2].includes('/')) {
-    parts[2] = parts[2].substr(parts[2].lastIndexOf('/')+1);
-  }*/
+  // if the domain includes an @, divide it to domain and identity respectively
+  if (parts[1].includes('@')) {
+    parts[2] = parts[0] + '://' + parts[1];
+    parts[1] = parts[1].substr(parts[1].indexOf('@') + 1);
+  } 	/*else if (parts[2].includes('/')) {
+     parts[2] = parts[2].substr(parts[2].lastIndexOf('/')+1);
+   }*/
 
   let result = {
     type: parts[0],
@@ -86,6 +84,7 @@ export function divideURL(url) {
   };
 
   return result;
+
 }
 
 export function divideEmail(email) {

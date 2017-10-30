@@ -27,7 +27,7 @@ let log = logger.getLogger('DataObject');
 
 import SyncObject, {ChangeType, ObjectType} from './ProxyObject';
 import DataObjectChild from './DataObjectChild';
-import {deepClone} from '../utils/utils.js';
+import { deepClone, divideURL } from '../utils/utils.js';
 import HypertyResourceFactory from '../hyperty-resource/HypertyResourceFactory.js';
 
 /**
@@ -585,7 +585,7 @@ class DataObject {
       //TODO: For Further Study
       if (!_this._mutualAuthentication) changeMsg.body.mutualAuthentication = _this._mutualAuthentication;
 
-      _this._bus.postMessage(JSON.parse(JSON.stringify(changeMsg)));
+      _this._bus.postMessage(changeMsg);
     }
   }
 
@@ -636,15 +636,19 @@ class DataObject {
   //FLOW-IN: message received from a remote DataObjectChild when changing data
   _changeChildren(msg) {
     let _this = this;
-    log.log('Change children: ', _this._owner, msg);
+    const dividedURL = divideURL(msg.to);
+    const identity = dividedURL.identity;
+    const resource = identity ? identity.substring(identity.lastIndexOf('/') + 1) : undefined;
 
     let childId = msg.body.resource;
-    let children = _this._childrenObjects[childId];
+    let children = _this._childrenObjects[resource][childId];
+
+    log.log('Change children: ', _this._owner, msg, resource);
 
     if (children) {
       _this._changeObject(children._syncObj, msg);
     } else {
-      log.log('No children found for: ', childId);
+      log.warn('No children found for: ', childId);
     }
   }
 
