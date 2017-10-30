@@ -21,8 +21,13 @@
 * limitations under the License.
 **/
 
+// Log System
+import * as logger from 'loglevel';
+let log = logger.getLogger('Discovery');
+
 import {divideURL, convertToUserURL} from '../utils/utils';
 import DiscoveredObject from './DiscoveredObject';
+
 /**
 * Core Discovery interface
 * Class to allow applications to search for hyperties and DataObjects using the message bus
@@ -98,12 +103,12 @@ class Discovery {
             if(filteredHyperties.length === 0)
               resolve([]);
             else {
-              console.log("[Discovery.discoverHypertiesPerUserProfileData] Reply log: ",filteredHyperties);
+              log.log("[Discovery.discoverHypertiesPerUserProfileData] Reply log: ",filteredHyperties);
               resolve(filteredHyperties);
             }
           }
           else {
-            console.warn("[Discovery.discoverHypertiesPerUserProfileData] Error Reply for " + userIdentifier + " Reason: ", reply.body.description);
+            log.warn("[Discovery.discoverHypertiesPerUserProfileData] Error Reply for " + userIdentifier + " Reason: ", reply.body.description);
             resolve([]);
           }
         });
@@ -163,11 +168,11 @@ class Discovery {
         _this.messageBus.postMessage(msg, (reply) => {
 
           if(reply.body.code === 200){
-            console.log("Reply log: ",reply.body.value);
+            log.log("Reply log: ",reply.body.value);
             resolve(reply.body.value);
           }
           else {
-            console.warn("[Discovery.discoverDataObjectsPerUserProfileData] Error Reply for " + userIdentifier + " Reason: ", reply.body.description);
+            log.warn("[Discovery.discoverDataObjectsPerUserProfileData] Error Reply for " + userIdentifier + " Reason: ", reply.body.description);
             resolve([]);
           }
         });
@@ -232,12 +237,12 @@ class Discovery {
           if(filteredHyperties.length === 0)
             reject('No Hyperty was found');
           else {
-            console.log("Reply log: ",filteredHyperties);
+            log.log("Reply log: ",filteredHyperties);
             resolve(filteredHyperties);
           }
         }
         else {
-          console.warn("[Discovery.discoverHypertiesPerGUID] Error Reply for " + guidURL + " Reason: ", reply.body.description);
+          log.warn("[Discovery.discoverHypertiesPerGUID] Error Reply for " + guidURL + " Reason: ", reply.body.description);
           resolve([]);
         }
       });
@@ -293,11 +298,11 @@ class Discovery {
       _this.messageBus.postMessage(msg, (reply) => {
 
         if(reply.body.code === 200){
-          console.log("Reply log: ",reply.body.value);
+          log.log("Reply log: ",reply.body.value);
           resolve(reply.body.value);
         }
         else {
-          console.warn("[Discovery.discoverDataObjectsPerGUID] Error Reply for " + guidURL + " Reason: ", reply.body.description);
+          log.warn("[Discovery.discoverDataObjectsPerGUID] Error Reply for " + guidURL + " Reason: ", reply.body.description);
           resolve([]);
         }
       });
@@ -369,12 +374,12 @@ class Discovery {
 /*            if(filteredHyperties.length === 0)
               reject('No Hyperty was found');
             else {*/
-              console.log("[Discovery.discoverHyperties] Reply : ",filteredHyperties);
+              log.log("[Discovery.discoverHyperties] Reply : ",filteredHyperties);
               resolve(filteredHyperties);
 //            }
           }
           else {
-            console.warn("[Discovery.discoverHyperties] Error Reply for " + user + " Reason: ", reply.body.description);
+            log.warn("[Discovery.discoverHyperties] Error Reply for " + user + " Reason: ", reply.body.description);
             resolve(filteredHyperties);
           }
         });
@@ -440,11 +445,11 @@ class Discovery {
       _this.messageBus.postMessage(msg, (reply) => {
 
         if(reply.body.code === 200){
-          console.log("Reply Value Log: ",reply.body.value);
+          log.log("Reply Value Log: ",reply.body.value);
           resolve(reply.body.value);
         }
         else {
-          console.warn("[Discovery.discoverDataObjects] Error Reply for " + user + " Reason: ", reply.body.description);
+          log.warn("[Discovery.discoverDataObjects] Error Reply for " + user + " Reason: ", reply.body.description);
           resolve([]);
         }
       });
@@ -497,11 +502,11 @@ class Discovery {
       _this.messageBus.postMessage(msg, (reply) => {
 
         if(reply.body.code === 200){
-          console.log("Reply Value Log: ",reply.body.value);
+          log.log("Reply Value Log: ",reply.body.value);
           resolve(reply.body.value);
         }
         else {
-          console.warn("[Discovery.discoverHypertyPerURL] Error Reply for " + url + " Reason: ", reply.body.description);
+          log.warn("[Discovery.discoverHypertyPerURL] Error Reply for " + url + " Reason: ", reply.body.description);
           resolve([]);
         }
       });
@@ -552,11 +557,11 @@ class Discovery {
       _this.messageBus.postMessage(msg, (reply) => {
 
         if(reply.body.code === 200){
-          console.log("Reply Value Log: ",reply.body.value);
+          log.log("Reply Value Log: ",reply.body.value);
           resolve(reply.body.value);
         }
         else {
-          console.warn("[Discovery.discoverDataObjectPerURL] Error Reply for " + url + " Reason: ", reply.body.description);
+          log.warn("[Discovery.discoverDataObjectPerURL] Error Reply for " + url + " Reason: ", reply.body.description);
           resolve([]);
         }
       });
@@ -618,11 +623,11 @@ class Discovery {
       _this.messageBus.postMessage(msg, (reply) => {
 
         if(reply.body.code === 200){
-          console.log("Reply Value Log: ",reply.body.value);
+          log.log("Reply Value Log: ",reply.body.value);
           resolve(reply.body.value);
         }
         else {
-          console.warn("[Discovery.discoverDataObjectsPerName] Error Reply for " + name + " Reason: ", reply.body.description);
+          log.warn("[Discovery.discoverDataObjectsPerName] Error Reply for " + name + " Reason: ", reply.body.description);
           resolve([]);
         }
       });
@@ -687,11 +692,11 @@ class Discovery {
       _this.messageBus.postMessage(msg, (reply) => {
 
         if(reply.body.code === 200){
-          console.log("Reply Value Log: ",reply.body.value);
+          log.log("Reply Value Log: ",reply.body.value);
           resolve(reply.body.value);
         }
         else {
-          console.warn("[Discovery.discoverDataObjectsPerName] Error Reply for " + reporter + " Reason: ", reply.body.description);
+          log.warn("[Discovery.discoverDataObjectsPerName] Error Reply for " + reporter + " Reason: ", reply.body.description);
           resolve([]);
         }
       });
@@ -744,10 +749,10 @@ class Discovery {
     return new Promise(function(resolve, reject) {
 
       _this.messageBus.postMessage(msg, (reply) => {
-        console.log('[Discovery]', reply)
+        log.log('[Discovery]', reply)
 
         if(reply.body.code>299) {
-          console.warn("[Discovery.discoverDataObject] Error Reply for " + name + " Reason: ", reply.body.description);
+          log.warn("[Discovery.discoverDataObject] Error Reply for " + name + " Reason: ", reply.body.description);
           return resolve([]);
         }
 
@@ -782,9 +787,9 @@ class Discovery {
 
     return new Promise(function(resolve, reject) {
 
-      console.log('[Discovery.discoverHyperty] ACTIVE DOMAIN -> ', activeDomain, 'user->', user, 'schema->', schema, 'resources->', resources, 'domain->', domain);
+      log.log('[Discovery.discoverHyperty] ACTIVE DOMAIN -> ', activeDomain, 'user->', user, 'schema->', schema, 'resources->', resources, 'domain->', domain);
       if (user.includes(':') && !user.includes('user://')) {
-        console.log('[Discovery.discoverHyperty] ' + user + ' is legacy domain');
+        log.log('[Discovery.discoverHyperty] ' + user + ' is legacy domain');
         let legacyUser = { userID: user, hypertyID: user, schema: schema, resources: resources };
         return resolve(legacyUser);
       }
@@ -794,11 +799,11 @@ class Discovery {
         }
       };
 
-      console.info('[Discovery] msg to send->', msg);
+      log.info('[Discovery] msg to send->', msg);
 
       _this.messageBus.postMessage(msg, (reply) => {
 
-        console.info('[Discovery] ON discoverHyperty->', reply);
+        log.info('[Discovery] ON discoverHyperty->', reply);
         let hyperties = reply.body.value;
 
         if (hyperties) {
@@ -825,7 +830,7 @@ class Discovery {
 
       // Hack for legacy users
       if (email.includes(':') && !email.includes('user://')) {
-        console.log('[Discovery.discoverHyperty] ' + email +'is legacy domain');
+        log.log('[Discovery.discoverHyperty] ' + email +'is legacy domain');
         let legacyUser = { id: email, hypertyURL: email, descriptor: 'unknown' };
         return resolve(legacyUser);
       }
@@ -844,12 +849,12 @@ class Discovery {
         type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain, body: { resource: identityURL}
       };
 
-      console.info('[Discovery] Message: ', message, activeDomain, identityURL);
+      log.info('[Discovery] Message: ', message, activeDomain, identityURL);
 
-      //console.info('[Discovery] message READ', message);
+      //log.info('[Discovery] message READ', message);
 
       _this.messageBus.postMessage(message, (reply) => {
-        console.info('[Discovery] message reply', reply);
+        log.info('[Discovery] message reply', reply);
 
         let hyperty;
         let mostRecent;
@@ -871,7 +876,7 @@ class Discovery {
           }
         }
 
-        console.info('[Discovery] Last Hyperty: ', lastHyperty, mostRecent);
+        log.info('[Discovery] Last Hyperty: ', lastHyperty, mostRecent);
 
         let hypertyURL = lastHyperty;
 
@@ -885,7 +890,7 @@ class Discovery {
           hypertyURL: hypertyURL
         };
 
-        console.info('[Discovery] ===> hypertyDiscovery messageBundle: ', idPackage);
+        log.info('[Discovery] ===> hypertyDiscovery messageBundle: ', idPackage);
         resolve(idPackage);
       });
     });
@@ -901,11 +906,11 @@ class Discovery {
   discoverHypertiesPerUser(email, domain) {
     let _this = this;
     let activeDomain;
-    console.log('on Function->', email);
+    log.log('on Function->', email);
     return new Promise(function(resolve, reject) {
 
       if (email.includes(':') && !email.includes('user://')) {
-        console.log('[Discovery.discoverHyperty] is legacy domain');
+        log.log('[Discovery.discoverHyperty] is legacy domain');
         let legacyUser = { userID: email, hypertyID: email, schema: schema, resources: resources };
         return resolve(legacyUser);
       }
@@ -923,12 +928,12 @@ class Discovery {
         type: 'read', from: _this.discoveryURL, to: 'domain://registry.' + activeDomain, body: { resource: identityURL}
       };
 
-      console.log('[Discovery] Message discoverHypertiesPerUser: ', message, activeDomain, identityURL);
+      log.log('[Discovery] Message discoverHypertiesPerUser: ', message, activeDomain, identityURL);
 
-      //console.info('[Discovery] message READ', message);
+      //log.info('[Discovery] message READ', message);
 
       _this.messageBus.postMessage(message, (reply) => {
-        console.info('[Discovery] discoverHypertiesPerUser reply', reply);
+        log.info('[Discovery] discoverHypertiesPerUser reply', reply);
 
         let value = reply.body.value;
 
@@ -952,7 +957,7 @@ class Discovery {
 
     let _this = this;
 
-    console.log('[Discovery] resumeDiscoveries');
+    log.log('[Discovery] resumeDiscoveries');
 
     return new Promise(function(resolve, reject) {
 
@@ -961,7 +966,7 @@ class Discovery {
       };
 
       _this.messageBus.postMessage(msg, (reply)=>{
-        console.log('[Discovery.resumeDiscoveries] reply: ', reply);
+        log.log('[Discovery.resumeDiscoveries] reply: ', reply);
 
         let notifications = [];
 
@@ -973,7 +978,7 @@ class Discovery {
             let objectUrl = url.split('/registration')[0];
             let data = {};
             data.url = objectUrl;
-            console.log('[Discovery.resumeDiscoveries] adding listener to: ', objectUrl);
+            log.log('[Discovery.resumeDiscoveries] adding listener to: ', objectUrl);
 
             if (objectUrl.includes('hyperty://')) {
               notifications.push(_this.discoverHypertyPerURLDO(objectUrl));

@@ -29,7 +29,7 @@ describe('Runtime Runtime Capabilities', () => {
 
     runtimeCapabilities = new RuntimeCapabilities();
 
-    sinon.stub(runtimeCapabilities, 'getRuntimeCapabilities', () => {
+    sinon.stub(runtimeCapabilities, 'getRuntimeCapabilities').callsFake(() => {
       return new Promise((resolve, reject) => {
 
         Promise.all([getEnvironment(), getMediaDevices()]).then((result) => {
@@ -47,7 +47,7 @@ describe('Runtime Runtime Capabilities', () => {
       });
     });
 
-    sinon.stub(runtimeCapabilities, 'isAvailable', (capability) => {
+    sinon.stub(runtimeCapabilities, 'isAvailable').callsFake((capability) => {
       return new Promise((resolve) => {
 
         storageManager.get('capabilities').then((capabilities) => {
@@ -63,7 +63,7 @@ describe('Runtime Runtime Capabilities', () => {
       });
     });
 
-    sinon.stub(runtimeCapabilities, 'update', () => {
+    sinon.stub(runtimeCapabilities, 'update').callsFake(() => {
       return new Promise((resolve, reject) => {
         runtimeCapabilities.getRuntimeCapabilities().then(resolve).catch(reject);
       });

@@ -21,7 +21,11 @@
 * limitations under the License.
 **/
 
-import {divideURL, convertToUserURL} from '../utils/utils';
+// Log System
+import * as logger from 'loglevel';
+let log = logger.getLogger('RegistrationStatus');
+
+import { divideURL } from '../utils/utils';
 
 /**
 * The RegistrationStatus lib allows to monitor registration status of an Hyperty or Data Object
@@ -101,14 +105,14 @@ class RegistrationStatus {
     return new Promise((resolve, reject) => {
 
       this._messageBus.postMessage(msg, (reply) => {
-        console.log(`[DiscoveredObject.subscribe] ${this._registryObjectURL} rcved reply `, reply);
+        log.log(`[DiscoveredObject.subscribe] ${this._registryObjectURL} rcved reply `, reply);
 
         if (reply.body.code === 200) {
           this._generateListener(this._registryObjectURL + '/registration');
           this._subscriptionSet = true;
           resolve();
         } else {
-          console.error('Error subscribing ', this._registryObjectURL);
+          log.error('Error subscribing ', this._registryObjectURL);
           reject('Error subscribing ' + this._registryObjectURL);
         }
       });
@@ -118,15 +122,17 @@ class RegistrationStatus {
   _generateListener(notificationURL) {
 
     this._messageBus.addListener(notificationURL, (msg) => {
-      console.log(`[DiscoveredObject.notification] ${this._registryObjectURL}: `, msg);
+      log.log(`[DiscoveredObject.notification] ${this._registryObjectURL}: `, msg);
       this._processNotification(msg);
     });
   }
 
   _processNotification(msg) {
-    const status = msg.body.value
+    const status = msg.body.value;
 
-    setTimeout( ()=>{// Hack to give time for onLive Hyperties to get ready. To be removed when Hyperty State machaine is implemented
+    setTimeout(() => {
+
+      // Hack to give time for onLive Hyperties to get ready. To be removed when Hyperty State machaine is implemented
       Object.keys(this._subscribers[status]).forEach(
         subscriber => this._subscribers[status][subscriber]()
       );
@@ -150,39 +156,42 @@ class RegistrationStatus {
     return new Promise((resolve, reject) => {
 
       this._messageBus.postMessage(msg, (reply) => {
-        console.log(`[DiscoveredObject.unsubscribe] ${this._registryObjectURL} rcved reply `, reply);
+        log.log(`[DiscoveredObject.unsubscribe] ${this._registryObjectURL} rcved reply `, reply);
 
         if (reply.body.code === 200) {
           resolve();
         } else {
-          console.error('Error unsubscribing ', this._registryObjectURL);
+          log.error('Error unsubscribing ', this._registryObjectURL);
           reject('Error unsubscribing ' + this._registryObjectURL);
         }
       });
     });
   }
 
-  unsubscribeLive(subscriber, callback) {
+  unsubscribeLive(subscriber) {
     return new Promise((resolve, reject) => {
 
-        if (subscriber in this._subscribers.live){//TODO: unsubscribe outside this condition
-          delete this._subscribers.live[subscriber];
-        }
+      if (subscriber in this._subscribers.live) {
 
-          if (this._areSubscriptionsEmpty()) {
-            this._unsubscribe()
+          //TODO: unsubscribe outside this condition
+        delete this._subscribers.live[subscriber];
+      }
+
+      if (this._areSubscriptionsEmpty()) {
+        this._unsubscribe()
             .then(() => resolve())
             .catch((err) => reject(err));
-          } else {
-              resolve();
-          }
+      } else {
+        resolve();
+      }
+
       /*  } else {
           reject(`${subscriber} doesn't subscribe onLive for ${this._registryObjectURL}`);
         }*/
     });
   }
 
-  unsubscribeDisconnected(subscriber, callback) {
+  unsubscribeDisconnected(subscriber) {
     return new Promise((resolve, reject) => {
 
       if (subscriber in this._subscribers.disconnected) {
@@ -203,7 +212,7 @@ class RegistrationStatus {
 
   _areSubscriptionsEmpty() {
     return Object.keys(this._subscribers.live).length === 0
-      && Object.keys(this._subscribers.disconnected).length === 0
+      && Object.keys(this._subscribers.disconnected).length === 0;
   }
 
 }

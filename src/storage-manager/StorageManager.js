@@ -1,3 +1,7 @@
+// Log System
+import * as logger from 'loglevel';
+let log = logger.getLogger('StorageManager');
+
 class StorageManager {
 
   constructor(db, storageName, version = 1) {
@@ -9,14 +13,8 @@ class StorageManager {
 
     db.version(version).stores(stores);
     db.open().then((db) => {
-      console.info('Found database name ' + db.name + ' with version no: ' + db.verno);
-
-      // db.tables.forEach((table) => {
-      //   console.log('Found table: ' + table.name);
-      //   console.log('Table Schema: ' + JSON.stringify(table.schema, null, 4));
-      // });
-
-    }).catch(console.error);
+      log.info('Found database name ' + db.name + ' with version no: ' + db.verno);
+    }).catch(log.error);
 
     this.db = db;
     this.storageName = storageName;
@@ -37,7 +35,7 @@ class StorageManager {
  * otherwise it is rejected with an error.
  */
   set(key, version, value) {
-    console.info('[StorageManager] - set ', key);
+    log.info('[StorageManager] - set ', key);
 
     return this.db.transaction('rw!', this.db[this.storageName], () => {
       return this.db[this.storageName].put({key: this._checkKey(key), version: version, value: value});
@@ -52,7 +50,7 @@ class StorageManager {
  * @returns {Promise} result - Promise that will be fulfilled with the value.
  */
   get(key) {
-    console.info('[StorageManager] - get ', key);
+    log.info('[StorageManager] - get ', key);
     return this.db.transaction('rw!', this.db[this.storageName], () => {
       return this.db[this.storageName].where('key')
         .equals(this._checkKey(key))
@@ -65,7 +63,7 @@ class StorageManager {
           }
         })
         .catch(error => {
-          console.info('error getting the key ', key, ' with error: ', error);
+          log.info('error getting the key ', key, ' with error: ', error);
           return undefined;
         });
 
@@ -79,7 +77,7 @@ class StorageManager {
  * @returns {Promise} result - Promise that will be fulfilled with the version.
  */
   getVersion(key) {
-    console.info('[StorageManager] - getVersion for key ', key);
+    log.info('[StorageManager] - getVersion for key ', key);
     return this.db.transaction('rw!', this.db[this.storageName], () => {
       return this.db[this.storageName].where('key')
         .equals(this._checkKey(key))
@@ -92,7 +90,7 @@ class StorageManager {
           }
         })
         .catch(error => {
-          console.info('error getting the version for ', key, ' with error: ', error);
+          log.info('error getting the version for ', key, ' with error: ', error);
           return undefined;
         });
     });

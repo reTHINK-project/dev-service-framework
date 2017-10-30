@@ -20,6 +20,11 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 **/
+
+// Log System
+import * as logger from 'loglevel';
+let log = logger.getLogger('Syncher');
+
 import { deepClone, divideURL } from '../utils/utils';
 
 import DataObjectReporter from './DataObjectReporter';
@@ -72,7 +77,7 @@ class Syncher {
     bus.addListener(owner, (msg) => {
       //ignore msg sent by himself
       if (msg.from !== owner) {
-        console.info('[Syncher] Syncher-RCV: ', msg, _this);
+        log.info('[Syncher] Syncher-RCV: ', msg, _this);
         switch (msg.type) {
           case 'forward': _this._onForward(msg); break;
           case 'create': _this._onRemoteCreate(msg); break;
@@ -140,7 +145,7 @@ class Syncher {
 
     //Object.assign(createInput, {resume: false});
 
-    console.log('[syncher - create] - create Reporter - createInput: ', createInput);
+    log.log('[syncher - create] - create Reporter - createInput: ', createInput);
 
     return _this._create(createInput);
   }
@@ -152,7 +157,7 @@ class Syncher {
   */
   resumeReporters(criteria) {
     let _this = this;
-    console.log('[syncher - create] - resume Reporter - criteria: ', criteria);
+    log.log('[syncher - create] - resume Reporter - criteria: ', criteria);
 
     Object.assign(criteria, {resume: true});
 
@@ -183,7 +188,7 @@ class Syncher {
     //TODO: For Further Study
     criteria.mutual = mutual;
 
-    console.log('[syncher - subscribe] - subscribe criteria: ', criteria);
+    log.log('[syncher - subscribe] - subscribe criteria: ', criteria);
 
     Object.assign(criteria, {resume: false});
 
@@ -227,7 +232,7 @@ class Syncher {
       let n = 0;
 
       _this._bus.addResponseListener(readMsg.from, id, (reply) => {
-        console.log('[Syncher.read] reply: ', reply);
+        log.log('[Syncher.read] reply: ', reply);
         if (reply.body.code < 300) {
           if (!reply.body.value.hasOwnProperty('responses')) {
             _this._bus.removeResponseListener(readMsg.from, id);
@@ -308,11 +313,11 @@ class Syncher {
       if (reporterInput.store) requestMsg.body.store = reporterInput.store;
       if (reporterInput.identity) requestMsg.body.identity = reporterInput.identity;
 
-      console.log('[syncher._create]: ', reporterInput, requestMsg);
+      log.log('[syncher._create]: ', reporterInput, requestMsg);
 
       //request create to the allocation system. Can be rejected by the PolicyEngine.
       _this._bus.postMessage(requestMsg, (reply) => {
-        console.log('[syncher - create] - create-response: ', reply);
+        log.log('[syncher - create] - create-response: ', reply);
         if (reply.body.code === 200) {
           //reporter creation accepted
           reporterInput.url = reply.body.resource;
@@ -357,7 +362,7 @@ class Syncher {
         body: { resume: resume }
       };
 
-      console.log('[syncher - create]: ', criteria, requestMsg);
+      log.log('[syncher - create]: ', criteria, requestMsg);
 
       if (criteria) {
         requestMsg.body.value = criteria;
@@ -369,11 +374,11 @@ class Syncher {
       if (criteria.observers) requestMsg.body.authorise = criteria.observers;
       if (criteria.identity) requestMsg.body.identity = criteria.identity;
 
-      console.log('[syncher._resumeCreate] - resume message: ', requestMsg);
+      log.log('[syncher._resumeCreate] - resume message: ', requestMsg);
 
       //request create to the allocation system. Can be rejected by the PolicyEngine.
       _this._bus.postMessage(requestMsg, (reply) => {
-        console.log('[syncher._resumeCreate] - create-resumed-response: ', reply);
+        log.log('[syncher._resumeCreate] - create-resumed-response: ', reply);
         if (reply.body.code === 200) {
 
           let listOfReporters = reply.body.value;
@@ -393,7 +398,7 @@ class Syncher {
             dataObject.status = 'live';// pch: do we ned this?
             dataObject.syncher = _this;
 
-            console.log('[syncher._resumeCreate] - create-resumed-dataObjectReporter', dataObject);
+            log.log('[syncher._resumeCreate] - create-resumed-dataObjectReporter', dataObject);
 
             let newObj = new DataObjectReporter(dataObject);
 
@@ -449,13 +454,13 @@ class Syncher {
       //TODO: For Further Study
       if (input.hasOwnProperty('mutual')) subscribeMsg.body.mutualAuthentication = input.mutual;
 
-      console.log('[syncher_subscribe] - subscribe message: ', input, subscribeMsg);
+      log.log('[syncher_subscribe] - subscribe message: ', input, subscribeMsg);
 
       //request subscription
       //Provisional data is applied to the DataObjectObserver after confirmation. Or discarded if there is no confirmation.
       //for more info see the DataProvisional class documentation.
       _this._bus.postMessage(subscribeMsg, (reply) => {
-        console.log('[syncher] - subscribe-response: ', reply);
+        log.log('[syncher] - subscribe-response: ', reply);
 
         let objURL = reply.body.resource;
 
@@ -464,11 +469,11 @@ class Syncher {
         if (newProvisional) newProvisional._releaseListeners();
 
         if (reply.body.code < 200) {
-          console.log('[syncher] - new DataProvisional: ', reply.body.childrenResources, objURL);
+          log.log('[syncher] - new DataProvisional: ', reply.body.childrenResources, objURL);
           newProvisional = new DataProvisional(_this._owner, objURL, _this._bus, reply.body.childrenResources);
           _this._provisionals[objURL] = newProvisional;
         } else if (reply.body.code === 200) {
-          console.log('[syncher] - new Data Object Observer: ', reply, _this._provisionals);
+          log.log('[syncher] - new Data Object Observer: ', reply, _this._provisionals);
 
           let observerInput = reply.body.value;
 
@@ -492,7 +497,7 @@ class Syncher {
             newObj.sync();
           }
 
-          console.log('[syncher] - new Data Object Observer already exist: ', newObj);
+          log.log('[syncher] - new Data Object Observer already exist: ', newObj);
 
           resolve(newObj);
 
@@ -538,13 +543,13 @@ class Syncher {
       let mutualAuthentication = criteria.mutual;
       if (criteria.hasOwnProperty('mutual')) subscribeMsg.body.mutualAuthentication = mutualAuthentication;
 
-      console.log('[syncher] - subscribe message: ', criteria, subscribeMsg);
+      log.log('[syncher] - subscribe message: ', criteria, subscribeMsg);
 
       //request subscription
       //Provisional data is applied to the DataObjectObserver after confirmation. Or discarded if there is no confirmation.
       //for more info see the DataProvisional class documentation.
       _this._bus.postMessage(subscribeMsg, (reply) => {
-        console.log('[syncher] - subscribe-resumed-response: ', reply);
+        log.log('[syncher] - subscribe-resumed-response: ', reply);
 
         let objURL = reply.body.resource;
 
@@ -554,7 +559,7 @@ class Syncher {
 
         if (reply.body.code < 200) { // todo: check if this is needed for the resume
 
-          console.log('[syncher] - resume new DataProvisional: ', reply, objURL);
+          log.log('[syncher] - resume new DataProvisional: ', reply, objURL);
           newProvisional = new DataProvisional(_this._owner, objURL, _this._bus, reply.body.childrenResources);
           _this._provisionals[objURL] = newProvisional;
 
@@ -565,7 +570,7 @@ class Syncher {
           for (let index in listOfObservers) {
 
             let dataObject = listOfObservers[index];
-            console.log('[syncher] - Resume Object Observer: ', reply, dataObject, _this._provisionals);
+            log.log('[syncher] - Resume Object Observer: ', reply, dataObject, _this._provisionals);
 
             if (dataObject.childrenObjects) { dataObject.childrenObjects = deepClone(dataObject.childrenObjects); }
 
@@ -574,11 +579,11 @@ class Syncher {
             dataObject.syncher = _this;
 
             //TODO: mutualAuthentication For Further Study
-            console.log('[syncher._resumeSubscribe] - create new dataObject: ', dataObject);
+            log.log('[syncher._resumeSubscribe] - create new dataObject: ', dataObject);
             let newObj = new DataObjectObserver(dataObject);
 
             if (dataObject.childrenObjects) { newObj.resumeChildrens(dataObject.childrenObjects); }
-            console.log('[syncher._resumeSubscribe] - new dataObject', newObj);
+            log.log('[syncher._resumeSubscribe] - new dataObject', newObj);
             _this._observers[newObj.url] = newObj;
 
             if (_this._provisionals[newObj.url]) {
@@ -643,7 +648,7 @@ class Syncher {
     };
 
     if (_this._onNotificationHandler) {
-      console.info('[Syncher] NOTIFICATION-EVENT: ', event);
+      log.info('[Syncher] NOTIFICATION-EVENT: ', event);
       _this._onNotificationHandler(event);
     }
   }
@@ -695,7 +700,7 @@ class Syncher {
       };
 
       if (_this._onNotificationHandler) {
-        console.log('NOTIFICATION-EVENT: ', event);
+        log.log('NOTIFICATION-EVENT: ', event);
         _this._onNotificationHandler(event);
       }
     } else {
@@ -729,7 +734,7 @@ class Syncher {
         }
       };
 
-      console.info('[Syncher] Close-EVENT: ', event);
+      log.info('[Syncher] Close-EVENT: ', event);
       _this._onClose(event);
 
     } else {
