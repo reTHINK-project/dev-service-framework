@@ -471,7 +471,7 @@ class DataObject {
       type: 'response',
       id: msg.id,
       body: {
-        code: 200
+        code: 100
       }
     }
 
