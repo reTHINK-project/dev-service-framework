@@ -127,6 +127,8 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
 
           if (p2p) inviteMsg.body.p2p = p2p;
 
+          if (!_this.data.mutual) inviteMsg.body.mutual = _this.data.mutual;
+
           _this._bus.postMessage(inviteMsg, (reply)=>{
             log.log('[Syncher.DataObjectReporter] Invitation reply ', reply);
 
@@ -234,6 +236,10 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     let hypertyUrl = msg.body.from;
     let dividedURL = divideURL(hypertyUrl);
     let domain = dividedURL.domain;
+    let mutual = true;
+
+    if (msg.body.hasOwnProperty('mutual') && !msg.body.mutual) mutual = false;
+
 
     log.log('[DataObjectReporter._onSubscribe]', msg, domain, dividedURL);
 
@@ -244,6 +250,8 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
       domain: domain,
 
       identity: msg.body.identity,
+
+      nutual: mutual,
 
       accept: () => {
         //create new subscription
@@ -272,9 +280,9 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
         };
 
         //TODO: For Further Study
-        if (msg.body.hasOwnProperty('mutualAuthentication') && !msg.body.mutualAuthentication) {
-          sendMsg.body.mutualAuthentication = this._mutualAuthentication;
-          this._mutualAuthentication = msg.body.mutualAuthentication;
+        if (msg.body.hasOwnProperty('mutual') && !msg.body.mutual) {
+          sendMsg.body.mutual = msg.body.mutual;// TODO: remove?
+          _this.data.mutual = false;
         }
 
         //send ok response message

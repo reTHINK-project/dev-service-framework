@@ -83,7 +83,7 @@ class DataObject {
     _this._childrens = input.childrens;
 
     //TODO: For Further Study
-    _this._mutualAuthentication = input.mutual;
+    _this._mutual = input.mutual;
 
     _this._version = 0;
     _this._childId = 0;
@@ -583,7 +583,7 @@ class DataObject {
       }
 
       //TODO: For Further Study
-      if (!_this._mutualAuthentication) changeMsg.body.mutualAuthentication = _this._mutualAuthentication;
+      if (!_this.data._mutual) changeMsg.body.mutual = _this._mutual;
 
       _this._bus.postMessage(changeMsg);
     }
@@ -599,7 +599,10 @@ class DataObject {
     if (_this._version + 1 <= msg.body.version) {
       _this._version = msg.body.version;
       let path = msg.body.attribute;
-      let value = deepClone(msg.body.value);
+      let value;
+      if (typeof msg.body.value === 'object') value = deepClone(msg.body.value);
+      else value = msg.body.value;
+
       let findResult = syncObj.findBefore(path);
 
       if (msg.body.lastModified) {
@@ -621,7 +624,7 @@ class DataObject {
           findResult.obj[findResult.last] = value; // UPDATE
         }
       } else {
-        if (msg.body.value) {
+        if (msg.body.hasOwnProperty('value')) {
           findResult.obj[findResult.last] = value; // UPDATE or ADD
         } else {
           delete findResult.obj[findResult.last]; // REMOVE
