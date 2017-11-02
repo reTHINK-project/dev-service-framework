@@ -381,17 +381,33 @@ class DataObject {
     let _this = this;
     let deletePromises = [];
 
-    if (_this.childrens) {
-      log.log('[DataObject.deleteChildrens]', _this.childrens );
-      Object.keys(_this.childrens).forEach((children) => {
-        Object.keys(_this.childrens[children]).forEach((child) => {
-          deletePromises.push(_this.childrens[children][child].delete());
-        });
-      });
-    }
 
-    if (deletePromises.length > 0) return Promise.all(deletePromises);
-    else return Promise.resolve('[DataObject._deleteChildrens] nothing to delete');
+    return new Promise((resolve) => {
+      if (_this.childrens) {
+        log.log('[DataObject.deleteChildrens]', _this.childrens);
+        let children;
+
+        for (children in _this.childrens) {
+          let child;
+          for (child in _this.childrens[children]) {
+            let childObj = _this.childrens[children][child];
+            log.log('[DataObject._deleteChildrens] child',childObj);
+            if (childObj.hasOwnProperty('resourceType'))
+              deletePromises.push(_this.childrens[children][child].delete());
+          }
+        }
+      }
+
+      log.log('[DataObject._deleteChildrens] promises ', deletePromises);
+
+      if (deletePromises.length > 0) {
+        Promise.all(deletePromises).then(()=>{
+          resolve('[DataObject._deleteChildrens] done');
+        });
+      } else resolve('[DataObject._deleteChildrens] nothing to delete');
+
+    });
+
   }
 
   _getChildInput(input) {
@@ -596,7 +612,7 @@ class DataObject {
     //TODO: update version ?
     //how to handle an incorrect version ? Example: receive a version 3 when the observer is in version 1, where is the version 2 ?
     //will we need to confirm the reception ?
-    if (_this._version + 1 <= msg.body.version) {
+  //  if (_this._version + 1 <= msg.body.version) {
       _this._version = msg.body.version;
       let path = msg.body.attribute;
       let value;
@@ -630,10 +646,10 @@ class DataObject {
           delete findResult.obj[findResult.last]; // REMOVE
         }
       }
-    } else {
+  /*  } else {
       //TODO: how to handle unsynchronized versions?
       log.log('UNSYNCHRONIZED VERSION: (data => ' + _this._version + ', msg => ' + msg.body.version + ')');
-    }
+    }*/
   }
 
   //FLOW-IN: message received from a remote DataObjectChild when changing data

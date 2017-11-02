@@ -205,7 +205,11 @@ class DataObjectChild /* implements SyncStatus */ {
 
   delete() {
     //nothing to be done
-    Promise.resolve();
+    return new Promise((resolve) => {
+      log.log('[DataObjectChild.delete]');
+      resolve();
+    });
+
   }
 
   _allocateListeners() {
