@@ -260,7 +260,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
         _this._subscriptions[hypertyUrl] = sub;
         if (_this.metadata.subscriptions) { _this.metadata.subscriptions.push(sub.url); }
 
-        let msgValue = _this._metadata;
+        let msgValue = deepClone(_this._metadata);
         msgValue.data = deepClone(_this.data);
         msgValue.version = _this._version;
 
