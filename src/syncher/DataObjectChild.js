@@ -123,6 +123,10 @@ class DataObjectChild /* implements SyncStatus */ {
       requestMsg.body.identity = _this.identity;
     }
 
+    //to be used to disable mutual authentication for legacy users
+
+    if (_this._parentObject.data.hasOwnProperty('mutual')) requestMsg.body.mutual = _this._parentObject.data.mutual;
+
 
     _this._sharingStatus = new Promise((resolve, reject) => {
 
@@ -201,7 +205,11 @@ class DataObjectChild /* implements SyncStatus */ {
 
   delete() {
     //nothing to be done
-    Promise.resolve();
+    return new Promise((resolve) => {
+      log.log('[DataObjectChild.delete]');
+      resolve();
+    });
+
   }
 
   _allocateListeners() {

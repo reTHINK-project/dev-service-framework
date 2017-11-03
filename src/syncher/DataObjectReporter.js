@@ -127,6 +127,8 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
 
           if (p2p) inviteMsg.body.p2p = p2p;
 
+          if (!_this.data.mutual) inviteMsg.body.mutual = _this.data.mutual;
+
           _this._bus.postMessage(inviteMsg, (reply)=>{
             log.log('[Syncher.DataObjectReporter] Invitation reply ', reply);
 
@@ -156,7 +158,8 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
   delete() {
     let _this = this;
 
-    _this._deleteChildrens().then(()=>{
+    _this._deleteChildrens().then((result)=>{
+      log.log(result);
       //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onDelete
       let deleteMsg = {
         type: 'delete', from: _this._owner, to: _this._syncher._subURL,
@@ -234,6 +237,10 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     let hypertyUrl = msg.body.from;
     let dividedURL = divideURL(hypertyUrl);
     let domain = dividedURL.domain;
+    let mutual = true;
+
+    if (msg.body.hasOwnProperty('mutual') && !msg.body.mutual) mutual = false;
+
 
     log.log('[DataObjectReporter._onSubscribe]', msg, domain, dividedURL);
 
@@ -245,13 +252,15 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
 
       identity: msg.body.identity,
 
+      nutual: mutual,
+
       accept: () => {
         //create new subscription
         let sub = { url: hypertyUrl, status: 'live' };
         _this._subscriptions[hypertyUrl] = sub;
         if (_this.metadata.subscriptions) { _this.metadata.subscriptions.push(sub.url); }
 
-        let msgValue = _this._metadata;
+        let msgValue = deepClone(_this._metadata);
         msgValue.data = deepClone(_this.data);
         msgValue.version = _this._version;
 
@@ -272,9 +281,9 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
         };
 
         //TODO: For Further Study
-        if (msg.body.hasOwnProperty('mutualAuthentication') && !msg.body.mutualAuthentication) {
-          sendMsg.body.mutualAuthentication = this._mutualAuthentication;
-          this._mutualAuthentication = msg.body.mutualAuthentication;
+        if (msg.body.hasOwnProperty('mutual') && !msg.body.mutual) {
+          sendMsg.body.mutual = msg.body.mutual;// TODO: remove?
+          _this.data.mutual = false;
         }
 
         //send ok response message

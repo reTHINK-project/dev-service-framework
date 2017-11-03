@@ -137,8 +137,8 @@ class Syncher {
     createInput.reporter = _this._owner;
     createInput.resume = false;
     if (input) {
-      createInput.mutual = input.mutual ? input.mutual : true;
-      createInput.name = input.name ? input.name : createInput.name;
+      createInput.mutual = input.hasOwnProperty('mutual') ? input.mutual : true;
+      createInput.name = input.hasOwnProperty('name') ? input.name : createInput.name;
     } else { createInput.mutual = true; }
 
     if (identity)      { createInput.identity = identity; }
@@ -452,7 +452,7 @@ class Syncher {
       subscribeMsg.body.resume = input.resume;
 
       //TODO: For Further Study
-      if (input.hasOwnProperty('mutual')) subscribeMsg.body.mutualAuthentication = input.mutual;
+      if (input.hasOwnProperty('mutual')) subscribeMsg.body.mutual = input.mutual;
 
       log.log('[syncher_subscribe] - subscribe message: ', input, subscribeMsg);
 
@@ -488,7 +488,7 @@ class Syncher {
 
           //observerInput.children = newProvisional.children;
 
-          //TODO: mutualAuthentication For Further Study
+          //TODO: mutual For Further Study
           let newObj = _this._observers[objURL];
           if (!newObj) {
             newObj = new DataObjectObserver(observerInput);
@@ -540,8 +540,8 @@ class Syncher {
       subscribeMsg.body.resume = criteria.resume;
 
       //TODO: For Further Study
-      let mutualAuthentication = criteria.mutual;
-      if (criteria.hasOwnProperty('mutual')) subscribeMsg.body.mutualAuthentication = mutualAuthentication;
+      let mutual = criteria.mutual;
+      if (criteria.hasOwnProperty('mutual')) subscribeMsg.body.mutual = mutual;
 
       log.log('[syncher] - subscribe message: ', criteria, subscribeMsg);
 
@@ -578,7 +578,7 @@ class Syncher {
             dataObject.resume = true;
             dataObject.syncher = _this;
 
-            //TODO: mutualAuthentication For Further Study
+            //TODO: mutual For Further Study
             log.log('[syncher._resumeSubscribe] - create new dataObject: ', dataObject);
             let newObj = new DataObjectObserver(dataObject);
 

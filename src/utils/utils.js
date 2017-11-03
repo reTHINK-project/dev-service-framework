@@ -239,4 +239,25 @@ export function parseAttributes(path) {
     return (array1.filter(Boolean));
 
   }
+
 }
+/*
+export function assign(obj, keyPath, value) {
+
+  if (!obj) obj = {};
+  if (typeof(keyPath) === 'string') keyPath = parseAttributes(keyPath);
+
+  let lastKeyIndex = keyPath.length - 1;
+
+  for (var i = 0; i < lastKeyIndex; ++i) {
+    let key = keyPath[i];
+    if (!(key in obj)) {
+      obj[key] = {};
+    }
+
+    obj = obj[key];
+
+  }
+
+  obj[keyPath[lastKeyIndex]] = value;
+}*/
