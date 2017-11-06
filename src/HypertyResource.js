@@ -6,7 +6,7 @@ import HypertyResourceFactory from './hyperty-resource/HypertyResourceFactory';
 
 const e = logger.getLogger('HypertyResource');
 const f = logger.getLogger('FileHypertyResource');
-e.setLevel(3);
-f.setLevel(3);
+e.setLevel(0);
+f.setLevel(0);
 
 export { FileHypertyResource };

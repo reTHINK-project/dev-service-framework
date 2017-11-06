@@ -16,11 +16,11 @@ const none = 5;  // Remove all logs
 const defaultLevel = 3; // Show only the info, warn, error
 const all = 0; // Show all logs;
 
-g.setLevel(all);
-h.setLevel(all);
-i.setLevel(all);
-j.setLevel(all);
-k.setLevel(all);
-l.setLevel(all);
+g.setLevel(defaultLevel);
+h.setLevel(defaultLevel);
+i.setLevel(defaultLevel);
+j.setLevel(defaultLevel);
+k.setLevel(defaultLevel);
+l.setLevel(defaultLevel);
 
 export {Syncher, DataObjectReporter, DataObjectObserver};

@@ -101,7 +101,15 @@ class HypertyResource extends DataObjectChild {
 
   }
 
-  read() {
+  /**
+  * Function to Read HypertyResource
+  *
+  * @param  {} callback callback to be called with progress information in terms of percentage
+  * @return  {Promise}  input optional input parameters
+  */
+
+
+  read(callback) {
     let _this = this;
     log.info('[HypertyResource.read] ', this);
 
@@ -144,7 +152,7 @@ class HypertyResource extends DataObjectChild {
             _this._bus.removeResponseListener(_this._owner, id);
             resolve(_this);
           } else if (reply.body.code === 183) {
-            // notify with progress percentage
+            callback(reply.body.value);
           } else {
             _this._bus.removeResponseListener(_this._owner, id);
             reject(reply.body.code + ' ' + reply.body.desc);
