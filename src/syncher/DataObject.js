@@ -582,7 +582,7 @@ class DataObject {
 
       if (event.oType === ObjectType.OBJECT) {
         if (event.cType !== ChangeType.REMOVE) {
-          changeMsg.body.value = event.data;
+          changeMsg.body.value = deepClone(event.data);
         }
       } else {
         changeMsg.body.attributeType = event.oType;
