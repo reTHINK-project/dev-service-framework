@@ -143,27 +143,26 @@ class HypertyResource extends DataObjectChild {
         _this._bus.addResponseListener(_this._owner, id, (reply) => {
           log.log('[HypertyResource.read] reply: ', reply);
 
-          if (reply.body.code === 200) {
-            _this._content = reply.body.value.content;
+          switch (reply.body.code) {
+            case 200:
+              _this._content = reply.body.value.content;
 
-            // save locally if not too big
-            if (reply.body.value.size < _this.arraybufferSizeLimit) _this.save();
-
-            _this._bus.removeResponseListener(_this._owner, id);
-            resolve(_this);
-          } else if (reply.body.code === 183) {
-            callback(reply.body.value);
-          } else {
-            _this._bus.removeResponseListener(_this._owner, id);
-            reject(reply.body.code + ' ' + reply.body.desc);
+              // save locally if not too big
+              if (reply.body.value.size < _this.arraybufferSizeLimit) _this.save();
+              _this._bus.removeResponseListener(_this._owner, id);
+              resolve(_this);
+              break;
+            case 183:
+              callback(reply.body.value);
+              break;
+            default:
+              _this._bus.removeResponseListener(_this._owner, id);
+              reject(reply.body.code + ' ' + reply.body.desc);
+              break;
           }
         });
       }
-
-    }).catch(function(reason) {
-      log.error('Reason:', reason);
     });
-
   }
 
   // Remove Hyperty from the local storage
