@@ -23,4 +23,11 @@ j.setLevel(defaultLevel);
 k.setLevel(defaultLevel);
 l.setLevel(defaultLevel);
 
+/*g.setLevel(all);
+h.setLevel(all);
+i.setLevel(all);
+j.setLevel(all);
+k.setLevel(all);
+l.setLevel(all);*/
+
 export {Syncher, DataObjectReporter, DataObjectObserver};
