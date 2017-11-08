@@ -1,4 +1,8 @@
-import CatalogueFactory from "../catalogue-factory/CatalogueDataObjectFactory";
+// Log System
+import * as logger from 'loglevel';
+let log = logger.getLogger('RuntimeCatalogue');
+
+import CatalogueFactory from '../catalogue-factory/CatalogueDataObjectFactory';
 
 class RuntimeCatalogue {
 
@@ -21,9 +25,7 @@ class RuntimeCatalogue {
      * If constraints were provided, a descriptor is only returned if it meets the constraints, otherwise the promise will be rejected.
      */
     getDescriptor(descriptorURL, createFunc, getFull = true, constraints) {
-        console.log("getting descriptor from:", descriptorURL);
-        console.log("constraints:", constraints);
-        console.log("this is a test message");
+        log.info('[RuntimeCatalogue] - getting descriptor from: ', descriptorURL, ' with constraints: ', constraints);
 
         // some flags for optimization
         // (later the descriptor will not be saved in case both of these booleans are true)
@@ -39,21 +41,21 @@ class RuntimeCatalogue {
             descriptorPromise = Promise.all([this.httpRequest.get(descriptorURL + "/version"), this.httpRequest.get(descriptorURL + "/cguid")])
         }
         descriptorPromise = descriptorPromise.then(([version, cguid]) => {
-            console.log("got version (" + version + ") and cguid (" + cguid + ") for descriptor " + descriptorURL);
+            log.info('[RuntimeCatalogue] - got version (' + version + ') and cguid (' + cguid + ') for descriptor ' + descriptorURL);
 
             // check if same version is contained in localStorage
             return this.storageManager.getVersion(cguid).then((dbVersion) => {
                 if (dbVersion >= version) {
-                    console.log("storageManager contains saved version that is the same or newer than requested");
+                    log.warn('storageManager contains saved version that is the same or newer than requested');
                     isSavedDescriptor = true;
                     return this.storageManager.get(cguid);
                 } else {
-                    console.log("storageManager does not contain saved version");
+                    log.warn('storageManager does not contain saved version');
                     // no saved copy, proceed with retrieving descriptor
                     let retrievePromise = constraints != undefined ? this.httpRequest.post(descriptorURL, {"body": JSON.stringify(constraints)}) : this.httpRequest.get(descriptorURL);
                     return retrievePromise.then((descriptor) => {
                         descriptor = JSON.parse(descriptor);
-                        //console.log("got descriptor:", JSON.stringify(descriptor, null, 2));
+                        //log.log("got descriptor:", JSON.stringify(descriptor, null, 2));
                         if (descriptor["ERROR"]) {
                             // TODO handle error properly
                             throw new Error(descriptor);
@@ -65,7 +67,7 @@ class RuntimeCatalogue {
             })
         }).catch((error) => {
             let errorString = "Unable to get descriptor for " + descriptorURL + (constraints != undefined ? " with constraints " + constraints : "") + ": " + error;
-            console.error(errorString);
+            log.error(errorString);
             throw new Error(errorString);
         });
 
@@ -73,7 +75,7 @@ class RuntimeCatalogue {
 
         // if getFull, attach sourcePackage
         if (getFull) {
-            console.log("adding promise to attach sourcePackage");
+            log.log("adding promise to attach sourcePackage");
             returnPromise = descriptorPromise.then((descriptor) => {
                 if (descriptor.sourcePackage) {
                     isCompleteDescriptor = true;
@@ -104,13 +106,13 @@ class RuntimeCatalogue {
      * @returns {Promise} - fulfills with complete descriptor
      */
     attachRawSourcePackage(descriptor, constraints) {
-        console.log("attaching raw sourcePackage from:", descriptor.sourcePackageURL);
+        log.log("attaching raw sourcePackage from:", descriptor.sourcePackageURL);
         return new Promise((resolve, reject) => {
             let retrievePromise = constraints != undefined ? this.httpRequest.post(descriptor.sourcePackageURL, {"body": JSON.stringify(constraints)}) : this.httpRequest.get(descriptor.sourcePackageURL);
             retrievePromise.then((sourcePackage) => {
                 sourcePackage = JSON.parse(sourcePackage);
                 //delete descriptor.sourcePackageURL;
-                //console.log("attaching sourcePackage:", sourcePackage);
+                //log.log("attaching sourcePackage:", sourcePackage);
                 descriptor.sourcePackage = sourcePackage;
                 resolve(descriptor);
             }).catch((reason) => {
@@ -180,7 +182,7 @@ class RuntimeCatalogue {
      * @returns {HypertyDescriptor}
      */
     createHyperty(rawHyperty) {
-        //console.log("createHyperty:", rawHyperty);
+        //log.log("createHyperty:", rawHyperty);
         // create the descriptor
         let hyperty = this._factory.createHypertyDescriptorObject(
             rawHyperty["cguid"],
@@ -192,7 +194,7 @@ class RuntimeCatalogue {
             rawHyperty["type"] || rawHyperty["hypertyType"],
             rawHyperty["dataObjects"]
         );
-        //console.log("factory returned:", hyperty);
+        //log.log("factory returned:", hyperty);
 
         // optional fields
         hyperty.configuration = rawHyperty["configuration"];
@@ -216,7 +218,7 @@ class RuntimeCatalogue {
      * @returns {ProtocolStubDescriptor}
      */
     createStub(rawStub) {
-        // console.log("creating stub descriptor based on: ", rawStub);
+        // log.log("creating stub descriptor based on: ", rawStub);
 
         // create the descriptor
         let stub = this._factory.createProtoStubDescriptorObject(
@@ -261,7 +263,7 @@ class RuntimeCatalogue {
         } catch (e) {
             // already json object
         }
-        //console.log("creating runtime descriptor based on: ", rawRuntime);
+        //log.log("creating runtime descriptor based on: ", rawRuntime);
 
 
         // create the descriptor
@@ -285,7 +287,7 @@ class RuntimeCatalogue {
         // parse and attach sourcePackage
         let sourcePackage = rawRuntime["sourcePackage"];
         if (sourcePackage) {
-            // console.log("runtime has sourcePackage:", sourcePackage);
+            // log.log("runtime has sourcePackage:", sourcePackage);
             runtime.sourcePackage = this.createSourcePackage(sourcePackage);
         }
         return runtime;
@@ -297,11 +299,11 @@ class RuntimeCatalogue {
      * @returns {DataObjectSchema}
      */
     createDataSchema(rawSchema) {
-        //console.log("creating dataSchema based on: ", rawSchema);
+        //log.log("creating dataSchema based on: ", rawSchema);
 
         let dataSchema;
-        //console.log('1. createMessageDataObjectSchema: ', rawSchema["accessControlPolicy"]);
-        //console.log('2. createMessageDataObjectSchema: ', rawSchema["scheme"]);
+        //log.log('1. createMessageDataObjectSchema: ', rawSchema["accessControlPolicy"]);
+        //log.log('2. createMessageDataObjectSchema: ', rawSchema["scheme"]);
         if (rawSchema["accessControlPolicy"] && rawSchema["scheme"]) {
             dataSchema = this._factory.createHypertyDataObjectSchema(
                 rawSchema["cguid"],
@@ -314,7 +316,7 @@ class RuntimeCatalogue {
                 rawSchema["scheme"]
             )
         } else {
-            //console.log('3. createMessageDataObjectSchema: ', rawSchema);
+            //log.log('3. createMessageDataObjectSchema: ', rawSchema);
             dataSchema = this._factory.createMessageDataObjectSchema(
                 rawSchema["cguid"],
                 rawSchema["version"],
@@ -331,19 +333,19 @@ class RuntimeCatalogue {
         // parse and attach sourcePackage
         let sourcePackage = rawSchema["sourcePackage"];
         if (sourcePackage) {
-            //console.log("dataSchema has sourcePackage:", sourcePackage);
+            //log.log("dataSchema has sourcePackage:", sourcePackage);
             dataSchema.sourcePackage = this.createSourcePackage(sourcePackage);
 
             try {
                 dataSchema.sourcePackage.sourceCode = JSON.parse(dataSchema.sourcePackage.sourceCode);
             } catch (e) {
-                console.log('DataSchema Source code is already parsed');
+                log.log('DataSchema Source code is already parsed');
             }
 
             return dataSchema;
 
         }
-        //console.log("created dataSchema descriptor object:", dataSchema);
+        //log.log("created dataSchema descriptor object:", dataSchema);
         return dataSchema;
     }
 
@@ -353,7 +355,7 @@ class RuntimeCatalogue {
      * @returns {ProtocolStubDescriptor}
      */
     createIdpProxy(rawProxy) {
-        // console.log("creating idpproxy descriptor based on: ", rawProxy);
+        // log.log("creating idpproxy descriptor based on: ", rawProxy);
 
         // create the descriptor
         let idpproxy = this._factory.createProtoStubDescriptorObject(
@@ -387,7 +389,7 @@ class RuntimeCatalogue {
     }
 
     createSourcePackage(sp) {
-        //console.log("createSourcePackage:", sp);
+        //log.log("createSourcePackage:", sp);
 
         // check encoding
         if (sp["encoding"] === "base64") {
@@ -411,11 +413,11 @@ class RuntimeCatalogue {
      * @returns {Promise}
      */
     getSourcePackageFromURL(sourcePackageURL) {
-        console.log("getting sourcePackage from:", sourcePackageURL);
+        log.log("getting sourcePackage from:", sourcePackageURL);
 
         return new Promise((resolve, reject) => {
             this.httpRequest.get(sourcePackageURL).then((result) => {
-                //console.log("got raw sourcePackage:", result);
+                //log.log("got raw sourcePackage:", result);
                 if (result["ERROR"]) {
                     // TODO handle error properly
                     reject(result);
@@ -440,13 +442,13 @@ class RuntimeCatalogue {
     getSourceCodeFromDescriptor(descriptor) {
         return new Promise((resolve, reject) => {
             if (descriptor.sourcePackage) {
-                //console.log("descriptor has sourcePackage");
-                //console.log("returning sourceCode:", descriptor.sourcePackage.sourceCode);
+                //log.log("descriptor has sourcePackage");
+                //log.log("returning sourceCode:", descriptor.sourcePackage.sourceCode);
                 resolve(descriptor.sourcePackage.sourceCode);
             } else {
                 this.storageManager.getVersion(descriptor.sourcePackageURL + "/sourceCode").then((dbVersion) => {
                     if (dbVersion >= descriptor.version) {
-                        console.log("returning cached version from storageManager");
+                        log.log("returning cached version from storageManager");
                         this.storageManager.get(descriptor.sourcePackageURL + "/sourceCode").then((sourceCode) => {
                             resolve(sourceCode);
                         }).catch((reason) => {

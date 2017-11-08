@@ -21,6 +21,10 @@
 * limitations under the License.
 **/
 
+// Log System
+import * as logger from 'loglevel';
+let log = logger.getLogger('DataObjectObserver');
+
 import { deepClone } from '../utils/utils';
 import DataObject from './DataObject';
 
@@ -69,35 +73,84 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
   sync() {
 
     let _this = this;
-    console.info('[DataObjectObserver_sync] synchronising ');
+    log.info('[DataObjectObserver_sync] synchronising ');
 
-    _this._syncher.read(_this._metadata.url).then((value)=>{
-      console.info('[DataObjectObserver_sync] value to sync: ', value);
+    return new Promise((resolve, reject) => {
 
-      Object.assign(_this.data, deepClone(value.data));
+      _this._syncher.read(_this._metadata.url).then((value)=>{
+        log.info('[DataObjectObserver_sync] value to sync: ', value);
 
-      _this._version = value.version;
-
-      _this._metadata.lastModified = value.lastModified;
-
-      /*if (value.version != _this._version) {
-        console.info('[DataObjectObserver_sync] updating existing data: ', _this.data);
-
-        Object.assign(_this.data || {}, deepClone(value.data));
-
-        _this._metadata = deepClone(value);
-
-        delete _this._metadata.data;
+        Object.assign(_this.data, deepClone(value.data));
 
         _this._version = value.version;
 
-      } else {
-        console.info('[DataObjectObserver_sync] existing data is updated: ', value);
-      }*/
+        _this._metadata.lastModified = value.lastModified;
 
-    }).catch((reason) => {
-      console.info('[DataObjectObserver_sync] sync failed: ', reason);
+        //TODO: check first if there are new childrenObjects to avoid overhead
+
+        if (value.childrenObjects) {
+          _this.resumeChildrens(value.childrenObjects);
+          _this._storeChildrens();
+          resolve(true);
+        } else resolve(true);
+
+
+        /*if (value.version != _this._version) {
+          log.info('[DataObjectObserver_sync] updating existing data: ', _this.data);
+
+          Object.assign(_this.data || {}, deepClone(value.data));
+
+          _this._metadata = deepClone(value);
+
+          delete _this._metadata.data;
+
+          _this._version = value.version;
+
+        } else {
+          log.info('[DataObjectObserver_sync] existing data is updated: ', value);
+        }*/
+
+      }).catch((reason) => {
+        log.info('[DataObjectObserver_sync] sync failed: ', reason);
+        resolve(false);
+      });
+
     });
+
+
+  }
+
+  _storeChildrens() {
+    let _this = this;
+
+    let childrens = {};
+
+    //TODO: to be sent to HypertyResourceStorage when ready to handle Chat Messages
+
+    Object.keys(_this._childrenObjects).forEach((childrenResource) => {
+      let children = _this._childrenObjects[childrenResource];
+      childrens[childrenResource] = {};
+
+      Object.keys(children).forEach((childId) => {
+        childrens[childrenResource][childId] = {};
+        childrens[childrenResource][childId].value = children[childId].metadata;
+        childrens[childrenResource][childId].identity = children[childId].identity;
+      });
+    });
+
+      let msg = {
+
+        from: _this._owner,
+        to: _this._syncher._subURL,
+        type: 'create',
+        body: {
+          resource: _this._url,
+          attribute: 'childrenObjects',
+          value: childrens
+        }
+      };
+
+      _this._bus.postMessage(msg);
 
   }
 
@@ -107,7 +160,7 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
 
     _this._changeListener = _this._bus.addListener(_this._url + '/changes', (msg) => {
       if (msg.type === 'update') {
-        console.log('DataObjectObserver-' + _this._url + '-RCV: ', msg);
+        log.log('DataObjectObserver-' + _this._url + '-RCV: ', msg);
         _this._changeObject(_this._syncObj, msg);
       }
     });
@@ -126,9 +179,12 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
   delete() {
     let _this = this;
 
-    _this.unsubscribe();
-    _this._releaseListeners();
-    delete _this._syncher._observers[_this._url];
+    _this._deleteChildrens().then(()=>{
+      _this.unsubscribe();
+      _this._releaseListeners();
+      delete _this._syncher._observers[_this._url];
+    });
+
   }
 
   /**
@@ -144,7 +200,7 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
     };
 
     _this._bus.postMessage(unSubscribeMsg, (reply) => {
-      console.log('DataObjectObserver-UNSUBSCRIBE: ', reply);
+      log.log('DataObjectObserver-UNSUBSCRIBE: ', reply);
       if (reply.body.code === 200) {
         _this._releaseListeners();
         delete _this._syncher._observers[_this._url];
@@ -226,13 +282,13 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
     return new Promise((resolve, reject) => {
 
       this._bus.postMessage(msg, (reply) => {
-        console.log(`[DataObjectObserver._subscribeRegistration] ${this._url} rcved reply `, reply);
+        log.log(`[DataObjectObserver._subscribeRegistration] ${this._url} rcved reply `, reply);
 
         if (reply.body.code === 200) {
           this._generateListener(this._url + '/registration');
           resolve();
         } else {
-          console.error('Error subscribing registration status for ', this._url);
+          log.error('Error subscribing registration status for ', this._url);
           reject('Error subscribing registration status for ' + this._url);
         }
       });
@@ -243,12 +299,47 @@ class DataObjectObserver extends DataObject /* implements SyncStatus */ {
     let _this = this;
 
     _this._bus.addListener(notificationURL, (msg) => {
-      console.log(`[DataObjectObserver.registrationNotification] ${_this._url}: `, msg);
+      log.log(`[DataObjectObserver.registrationNotification] ${_this._url}: `, msg);
       if (msg.body.value && msg.body.value === 'disconnected' && _this._onDisconnected) {
-        console.log(`[DataObjectObserver] ${_this._url}: was disconnected `, msg);
+        log.log(`[DataObjectObserver] ${_this._url}: was disconnected `, msg);
         _this._onDisconnected();
       }
 
+    });
+  }
+
+  /**
+   * Requests the reporter to execute a method on the data object
+   * @param {string} method - Name of the function to be executed.
+   * @param {array} params - array of parameters for the requested function
+   * @return {promise}
+   */
+
+  execute(method, params) {
+    let _this = this;
+
+    return new Promise((resolve, reject) => {
+
+      const msg = {
+        type: 'execute',
+        from: this._owner,
+        to: _this._url,
+        body: {
+          method: method,
+          params: params
+        }
+      };
+
+      _this._bus.postMessage(msg, (reply) => {
+        log.log(`[DataObjectObserver.execute] ${_this._url} rcved reply `, reply);
+
+        if (reply.body.code === 200) {
+          resolve();
+        } else {
+          log.warn(`[DataObjectObserver.execute] execution of method ${method} was reject by reporter`);
+          reject(`[DataObjectObserver.execute] execution of method ${method} was reject by reporter`);
+        }
+      });
     });
   }
 }

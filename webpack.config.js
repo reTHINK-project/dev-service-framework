@@ -40,21 +40,18 @@ function getModeConfig() {
     }
   }));
 
-  if (process.env.MODE === 'prod') {
-
-    plugins.push(new webpack.optimize.UglifyJsPlugin({
-      beautify: false,
-      mangle: {
-        screw_ie8: true,
-        keep_fnames: true
-      },
-      compress: {
-        screw_ie8: true
-      },
-      comments: false
-    }));
-
-  }
+  plugins.push(new webpack.optimize.UglifyJsPlugin({
+    beautify: process.env.MODE === 'prod' ? false : true,
+    mangle: {
+      screw_ie8: true,
+      keep_fnames: true
+    },
+    compress: {
+      screw_ie8: true
+    },
+    comments: false,
+    sourceMap: true
+  }));
 
   return plugins;
 }
@@ -62,7 +59,7 @@ function getModeConfig() {
 module.exports = {
   entry: {
     RuntimeCapabilities: './src/runtime-capabilities/RuntimeCapabilities.js',
-    StorageManager: './src/storage-manager/StorageManager.js',
+    StorageManager: './src/StorageManager.js',
     CatalogueFactory: './src/CatalogueFactory.js',
     Discovery: './src/Discovery.js',
     IdentityManager: './src/IdentityManager.js',
@@ -71,6 +68,7 @@ module.exports = {
     RuntimeCatalogue: './src/RuntimeCatalogue.js',
     IdentityFactory: './src/IdentityFactory.js',
     Syncher: './src/Syncher.js',
+    HypertyResource: './src/HypertyResource.js',
     Utils: './src/Utils.js'
   },
   output: {
@@ -80,7 +78,7 @@ module.exports = {
     libraryTarget: 'umd',
     umdNamedDefine: true
   },
-  devtool: process.env.MODE === 'dev' ? 'inline-source-map' : false,
+  devtool: process.env.MODE === 'dev' ? 'cheap-module-eval-source-map' : false,
   module: {
     rules: [
 

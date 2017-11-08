@@ -1,6 +1,6 @@
 
 
-reTHINK Service Framework 
+reTHINK Service Framework
 -------------------------
 
 #### Build status
@@ -46,6 +46,17 @@ import MessageFactory from 'service-framework/dist/MessageFactory';
 import {Syncher, DataObjectReporter, DataObjectObserver} from 'service-framework/dist/Syncher';
 ```
 
+**Old Way - Deprecated!!!**
+
+Another way to import classes from the Service Framework that will be only supported until the runtime-core and other repositories are update to the **"new way"**:
+
+```javascript
+import {Syncher, MessageFactory} from 'service-framework';
+
+console.log('Syncher: ', Syncher);
+console.log('MessageFactory: ', MessageFactory);
+
+```
 
 If you have problems with the `npm install` service framework module, you should check [Github Help](https://help.github.com/articles/generating-ssh-keys/). and select the operation system you are using.
 
@@ -65,4 +76,3 @@ In order to try speed up the instalation process, we remove the first verificati
 ```shell
 npm install -g karma-cli gulp-cli browserify
 ```
-

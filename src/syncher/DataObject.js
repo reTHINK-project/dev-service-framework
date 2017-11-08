@@ -21,9 +21,14 @@
 * limitations under the License.
 **/
 
+// Log System
+import * as logger from 'loglevel';
+let log = logger.getLogger('DataObject');
+
 import SyncObject, {ChangeType, ObjectType} from './ProxyObject';
 import DataObjectChild from './DataObjectChild';
-import {deepClone} from '../utils/utils.js';
+import { deepClone, divideURL } from '../utils/utils.js';
+import HypertyResourceFactory from '../hyperty-resource/HypertyResourceFactory.js';
 
 /**
  * Main extension class for observers and reporters, with common properties and methods.
@@ -51,7 +56,7 @@ class DataObject {
    * @ignore
    * Should not be used directly by Hyperties. It's called by the Syncher create or subscribe method's
    */
-  //constructor(syncher, url, created, reporter, runtime, schema, name, initialStatus, initialData, childrens, mutual = true, resumed = false, description, tags, resources, observerStorage, publicObservation) {
+
   constructor(input) {
     let _this = this;
 
@@ -78,11 +83,12 @@ class DataObject {
     _this._childrens = input.childrens;
 
     //TODO: For Further Study
-    _this._mutualAuthentication = input.mutual;
+    _this._mutual = input.mutual;
 
     _this._version = 0;
     _this._childId = 0;
-    _this._childrenListeners = [];
+    _this._childrenListeners = []; //bus listeners per children
+    _this._onAddChildrenHandler; //Hyperty side handlers to process child objects created by remote Hyperties
 
     _this._resumed = input.resume;
 
@@ -104,6 +110,9 @@ class DataObject {
     delete _this._metadata.syncher;
     delete _this._metadata.authorise;
 
+    _this._hypertyResourceFactory = new HypertyResourceFactory();
+    _this._childrenObjects = {};
+    _this._sharedChilds = []; //childObjects that were not sent yet to Reporters
   }
 
   _getLastChildId() {
@@ -126,17 +135,17 @@ class DataObject {
     let _this = this;
 
     let childBaseURL = _this._url + '/children/';
-    console.log('[Data Object - AllocateListeners] - ', _this._childrens);
+    log.log('[Data Object - AllocateListeners] - ', _this._childrens);
     if (_this._childrens) {
       _this._childrens.forEach((child) => {
         let childURL = childBaseURL + child;
         let listener = _this._bus.addListener(childURL, (msg) => {
           //ignore msg sent by himself
           if (msg.from !== this._owner) {
-            console.log('DataObject-Children-RCV: ', msg);
+            log.log('DataObject-Children-RCV: ', msg);
             switch (msg.type) {
               case 'create': _this._onChildCreate(msg); break;
-              case 'delete': console.log(msg); break;
+              case 'delete': log.log(msg); break;
               default: _this._changeChildren(msg); break;
             }
           }
@@ -154,11 +163,11 @@ class DataObject {
       listener.remove();
     });
 
-    if (_this._childrenObjects) {
-      Object.keys(_this._childrenObjects).forEach((key) => {
-        _this._childrenObjects[key]._releaseListeners();
+    Object.keys(_this._childrenObjects).forEach((children) => {
+      Object.keys(_this._childrenObjects[children]).forEach((child) => {
+        _this._childrenObjects[children][child]._releaseListeners();
       });
-    }
+    });
   }
 
   /**
@@ -169,32 +178,100 @@ class DataObject {
 
     let childIdString = this._owner + '#' + this._childId;
 
-    if (childrens && !_this._childrenObjects) {
-      _this._childrenObjects = {};
-    }
 
     //setup childrens data from subscription
     Object.keys(childrens).forEach((childrenResource) => {
       let children = childrens[childrenResource];
 
+      //_this._childrenObjects[childrenResource] = {};
       Object.keys(children).forEach((childId) => {
-        let childInput = children[childId].value;
-        console.log('[DataObject.resumeChildrens] new DataObjectChild: ', childrenResource, children, childInput);
-        childInput.parentObject = _this;
-        childInput.parent = _this._url;
-        _this._childrenObjects[childId] = new DataObjectChild(childInput);
-        _this._childrenObjects[childId].identity = children[childId].identity;
+        let newChild = false;
 
-        if (childId > childIdString) {
-          childIdString = childId;
+        if (!_this._childrenObjects.hasOwnProperty(childrenResource))
+          _this._childrenObjects[childrenResource] = {};
+
+        if (children[childId].value.resourceType && !_this._childrenObjects[childrenResource].hasOwnProperty(childId)) {
+          _this._childrenObjects[childrenResource][childId] = _this._resumeHypertyResource(children[childId]);
+          newChild = true;
+        } else if (!_this._childrenObjects[childrenResource].hasOwnProperty(childId)) {
+
+          _this._childrenObjects[childrenResource][childId] = _this._resumeChild(children[childId]);
+          log.log('[DataObject.resumeChildrens] new DataObjectChild: ', _this._childrenObjects[childrenResource][childId]);
+          newChild = true;
         }
 
-        console.log('[DataObjectReporter.resumeChildrens] - resumed: ', this._childrenObjects[childId]);
+        if (newChild && childId > childIdString) {
+          childIdString = childId;
+          log.log('[DataObjectReporter.resumeChildrens] - resuming: ', this._childrenObjects[childrenResource][childId]);
+        }
+
       });
     });
 
     this._childId = Number(childIdString.split('#')[1]);
+
   }
+
+  _resumeChild(input) {
+    let _this = this;
+    let childInput = input.value;
+    childInput.parentObject = _this;
+    childInput.parent = _this._url;
+
+    let child = new DataObjectChild(childInput);
+
+    child.identity = input.identity;
+
+    let event = {
+      type: 'create',
+      from: child.reporter,
+      url: child.parent,
+      value: child.data,
+      childId: child.url,
+      identity: child.identity,
+      child: child
+    };
+
+    if (child.resourceType) {
+      event.resource = child;
+
+    }
+
+    if (_this._onAddChildrenHandler) _this._onAddChildrenHandler(event);
+
+    return child;
+
+  }
+
+  _resumeHypertyResource(input) {
+    let _this = this;
+    let childInput = input.value;
+    childInput.parentObject = _this;
+    childInput.parent = _this._url;
+
+    let hypertyResource = _this._hypertyResourceFactory.createHypertyResource(false, childInput.resourceType, childInput)
+
+    hypertyResource.identity = input.identity;
+
+    let event = {
+      type: 'create',
+      from: hypertyResource.reporter,
+      url: hypertyResource.parent,
+      value: hypertyResource.data,
+      childId: hypertyResource.url,
+      identity: hypertyResource.identity,
+      child: hypertyResource
+    };
+
+    if (hypertyResource.resourceType) {
+      event.resource = hypertyResource;
+
+    }
+
+    if (_this._onAddChildrenHandler) _this._onAddChildrenHandler(event);
+
+    return hypertyResource;
+    }
 
   /**
    * All Metadata about the Data Object
@@ -268,104 +345,222 @@ class DataObject {
 
   addChild(children, initialData, identity, input) {
     let _this = this;
+    let newChild;
 
     //returns promise, in the future, the API may change to asynchronous call
     return new Promise((resolve) => {
 
-      let childInput  = Object.assign({}, input);
-
-      //create new child unique ID, based on hypertyURL
-      _this._childId++;
-      childInput.url = _this._owner + '#' + _this._childId;
       let msgChildPath = _this._url + '/children/' + children;
 
-      childInput.parentObject = _this;
+
+      let childInput = _this._getChildInput(input);
       childInput.data = initialData;
-      childInput.reporter = _this._owner;
-      childInput.created = (new Date).toISOString();
-      childInput.runtime = _this._runtime;
-      childInput.schema = _this._schema;
-      childInput.parent = _this.url;
+      childInput.children = children;
+      newChild = new DataObjectChild(childInput);
 
-      let newChild = new DataObjectChild(childInput);
+      if (identity) newChild.identity = identity;
 
-      let bodyValue = newChild.metadata;
-      bodyValue.data = initialData;
+      newChild.share();
 
-      //FLOW-OUT: this message will be sent directly to a resource child address: MessageBus
-      let requestMsg = {
-        type: 'create', from: _this._owner, to: msgChildPath,
-        body: { resource: childInput.url, value: bodyValue }
-      };
-
-      if (identity)      {
-        newChild.identity = identity;
-        requestMsg.body.identity = identity;
-      }
-
-      //TODO: For Further Study
-      if (!_this._mutualAuthentication) requestMsg.body.mutualAuthentication = _this._mutualAuthentication;
-
-      let msgId = _this._bus.postMessage(requestMsg);
-
-      console.log('[DataObject.addChild] added ', newChild, msgId, bodyValue);
+      log.log('[DataObject.addChild] added ', newChild);
 
       newChild.onChange((event) => {
         _this._onChange(event, { path: msgChildPath, childId: childInput.url });
       });
 
-      if (!_this._childrenObjects) { _this._childrenObjects = {}; }
+      if (!_this._childrenObjects.hasOwnProperty(children)) _this._childrenObjects[children] = {};
 
-      _this._childrenObjects[childInput.url] = newChild;
+      _this._childrenObjects[children][childInput.url] = newChild;
 
       resolve(newChild);
+    });
+  }
+
+  _deleteChildrens() {
+
+    let _this = this;
+    let deletePromises = [];
+
+
+    return new Promise((resolve) => {
+      if (_this.childrens) {
+        log.log('[DataObject.deleteChildrens]', _this.childrens);
+        let children;
+
+        for (children in _this.childrens) {
+          let child;
+          for (child in _this.childrens[children]) {
+            let childObj = _this.childrens[children][child];
+            log.log('[DataObject._deleteChildrens] child',childObj);
+            if (childObj.metadata.hasOwnProperty('resourceType'))
+              deletePromises.push(_this.childrens[children][child].delete());
+          }
+        }
+      }
+
+      log.log('[DataObject._deleteChildrens] promises ', deletePromises);
+
+      if (deletePromises.length > 0) {
+        Promise.all(deletePromises).then(()=>{
+          resolve('[DataObject._deleteChildrens] done');
+        });
+      } else resolve('[DataObject._deleteChildrens] nothing to delete');
+
+    });
+
+  }
+
+  _getChildInput(input) {
+    let _this = this;
+    let childInput  = Object.assign({}, input);
+
+    _this._childId++;
+    childInput.url = _this._owner + '#' + _this._childId;
+
+    childInput.parentObject = _this;
+    childInput.reporter = _this._owner;
+    childInput.created = (new Date).toISOString();
+    childInput.runtime = _this._syncher._runtimeUrl;
+    childInput.p2pHandler = _this._syncher._p2pHandler;
+    childInput.p2pRequester = _this._syncher._p2pRequester;
+    childInput.schema = _this._schema;
+    childInput.parent = _this.url;
+
+    return childInput;
+  }
+
+  addHypertyResource(children, type, resource, identity, input) {
+    let _this = this;
+
+    //returns promise, in the future, the API may change to asynchronous call
+    return new Promise((resolve) => {
+
+      let hypertyResource;
+      let msgChildPath = _this._url + '/children/' + children;
+
+      let childInput = _this._getChildInput(input);
+      childInput.children = children;
+
+      _this._hypertyResourceFactory.createHypertyResourceWithContent(true, type, resource, childInput).then((resource)=>{
+        hypertyResource = resource;
+
+        if (identity) hypertyResource.identity = identity;
+
+        hypertyResource.share();
+
+        log.log('[DataObject.addHypertyResource] added ', hypertyResource);
+
+        hypertyResource.onChange((event) => {
+          _this._onChange(event, { path: msgChildPath, childId: hypertyResource.childId });
+        });
+
+        if (!_this._childrenObjects.hasOwnProperty(children)) _this._childrenObjects[children] = {};
+
+        _this._childrenObjects[children][hypertyResource.childId] = hypertyResource;
+
+        resolve(hypertyResource);
+      });
+
+
     });
   }
 
   /**
    * Setup the callback to process create and delete of childrens.
    * @param {function(event: MsgEvent)} callback
+   * TODO: add childrenId to support different handlers per children
    */
   onAddChild(callback) {
+
     this._onAddChildrenHandler = callback;
   }
 
   //FLOW-IN: message received from a remote DataObject -> addChild
   _onChildCreate(msg) {
     let _this = this;
+
+    log.log('[DataObject._onChildCreate] receivedBy ' + _this._owner + ' : ', msg);
+
+    let response = {
+      from: msg.to,
+      to: msg.from,
+      type: 'response',
+      id: msg.id,
+      body: {
+        code: 100
+      }
+    }
+
+    _this._bus.postMessage(response);
+
+    if (msg.body.value.resourceType) {
+      _this._onHypertyResourceAdded(msg);
+    } else _this._onChildAdded(msg);
+  }
+
+  _onChildAdded(msg) {
+    let _this = this;
     let childInput = deepClone(msg.body.value);
     childInput.parentObject = _this;
 
-    console.log('[DataObject._onChildCreate] receivedBy ' + _this._owner + ' : ', msg);
+    let children = childInput.children;
+
     let newChild = new DataObjectChild(childInput);
     newChild.identity = msg.body.identity;
 
-    if (!_this._childrenObjects) { _this._childrenObjects = {}; }
 
-    _this._childrenObjects[childInput.url] = newChild;
+    if (!_this._childrenObjects.hasOwnProperty(children)) _this._childrenObjects[children] = {};
 
-    //todo: remove response below
-    setTimeout(() => {
-      //FLOW-OUT: will flow to DataObjectChild -> _onResponse
-      _this._bus.postMessage({
-        id: msg.id, type: 'response', from: msg.to, to: msg.from,
-        body: { code: 200, source: _this._owner }
-      });
-    });
+    _this._childrenObjects[children][childInput.url] = newChild;
+
+    if (msg.to === _this.metadata.url) newChild.store();
+
+    _this._hypertyEvt(msg, newChild);
+  }
+
+  _onHypertyResourceAdded(msg) {
+    let _this = this;
+    let input = msg.body.value;
+    let hypertyResource;
+
+    let children = input.children;
+
+    input.parentObject = _this;
+
+    hypertyResource = _this._hypertyResourceFactory.createHypertyResource(false, input.resourceType, input);
+    hypertyResource.identity = msg.body.identity;
+
+    if (!_this._childrenObjects.hasOwnProperty(children)) _this._childrenObjects[children] = {};
+
+    _this._childrenObjects[children][hypertyResource.childId] = hypertyResource;
+
+    _this._hypertyEvt(msg, hypertyResource);
+
+    // locally store messages that are directly sent to the hyperty
+    // ie to sync with messages sent when offline
+
+    if (msg.to === _this.metadata.url) hypertyResource.store();
+  }
+
+  _hypertyEvt(msg, child) {
+    let _this = this;
 
     let event = {
       type: msg.type,
       from: msg.from,
       url: msg.to,
-      value: msg.body.value.data,
-      childId: childInput.url,
-      identity: msg.body.identity
+      value: child.data,
+      childId: child.url,
+      identity: msg.body.identity,
+      child: child
     };
 
-    if (_this._onAddChildrenHandler) {
-      console.log('ADD-CHILDREN-EVENT: ', event);
-      _this._onAddChildrenHandler(event);
+    if (child.resourceType) {
+      event.resource = child;
+
     }
+
+    if (_this._onAddChildrenHandler) _this._onAddChildrenHandler(event);
   }
 
   //send delta messages to subscriptions
@@ -383,11 +578,11 @@ class DataObject {
         body: { version: _this._version, source: _this._owner, attribute: event.field, lastModified: _this._metadata.lastModified }
       };
 
-      console.log('[DataObject - _onChange] - ', event, childInfo, changeMsg);
+      log.log('[DataObject - _onChange] - ', event, childInfo, changeMsg);
 
       if (event.oType === ObjectType.OBJECT) {
         if (event.cType !== ChangeType.REMOVE) {
-          changeMsg.body.value = event.data;
+          changeMsg.body.value = deepClone(event.data);
         }
       } else {
         changeMsg.body.attributeType = event.oType;
@@ -404,7 +599,7 @@ class DataObject {
       }
 
       //TODO: For Further Study
-      if (!_this._mutualAuthentication) changeMsg.body.mutualAuthentication = _this._mutualAuthentication;
+      if (!_this.data._mutual) changeMsg.body.mutual = _this._mutual;
 
       _this._bus.postMessage(changeMsg);
     }
@@ -420,7 +615,10 @@ class DataObject {
     if (_this._version + 1 <= msg.body.version) {
       _this._version = msg.body.version;
       let path = msg.body.attribute;
-      let value = deepClone(msg.body.value);
+      let value;
+      if (typeof msg.body.value === 'object') value = deepClone(msg.body.value);
+      else value = msg.body.value;
+
       let findResult = syncObj.findBefore(path);
 
       if (msg.body.lastModified) {
@@ -442,7 +640,7 @@ class DataObject {
           findResult.obj[findResult.last] = value; // UPDATE
         }
       } else {
-        if (msg.body.value) {
+        if (msg.body.hasOwnProperty('value')) {
           findResult.obj[findResult.last] = value; // UPDATE or ADD
         } else {
           delete findResult.obj[findResult.last]; // REMOVE
@@ -450,22 +648,26 @@ class DataObject {
       }
     } else {
       //TODO: how to handle unsynchronized versions?
-      console.log('UNSYNCHRONIZED VERSION: (data => ' + _this._version + ', msg => ' + msg.body.version + ')');
+      log.log('UNSYNCHRONIZED VERSION: (data => ' + _this._version + ', msg => ' + msg.body.version + ')');
     }
   }
 
   //FLOW-IN: message received from a remote DataObjectChild when changing data
   _changeChildren(msg) {
     let _this = this;
-    console.log('Change children: ', _this._owner, msg);
+    const dividedURL = divideURL(msg.to);
+    const identity = dividedURL.identity;
+    const resource = identity ? identity.substring(identity.lastIndexOf('/') + 1) : undefined;
 
     let childId = msg.body.resource;
-    let children = _this._childrenObjects[childId];
+    let children = _this._childrenObjects[resource][childId];
+
+    log.log('Change children: ', _this._owner, msg, resource);
 
     if (children) {
       _this._changeObject(children._syncObj, msg);
     } else {
-      console.log('No children found for: ', childId);
+      log.warn('No children found for: ', childId);
     }
   }
 

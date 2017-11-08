@@ -20,10 +20,13 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 **/
+// Log System
+import * as logger from 'loglevel';
+let log = logger.getLogger('DataObjectChild');
 
 import SyncObject from './ProxyObject';
 
-//import { deepClone } from '../utils/utils.js';
+import { deepClone } from '../utils/utils.js';
 
 /**
  * The class returned from the DataObject addChildren call or from onAddChildren if remotely created.
@@ -37,7 +40,7 @@ class DataObjectChild /* implements SyncStatus */ {
 
   /**
    * @ignore
-   * Should not be used directly by Hyperties. It's called by the DataObject.addChildren
+   * Should not be used directly by Hyperties. It's called by the DataObject.addChild
    */
   constructor(input) {
     let _this = this;
@@ -61,13 +64,15 @@ class DataObjectChild /* implements SyncStatus */ {
     if (input.observerStorage) _this._observerStorage = input.observerStorage;
     if (input.publicObservation) _this._publicObservation = input.publicObservation;
 
+    _this._childId = input.url;
+
     if (input.data) {
       _this._syncObj = new SyncObject(input.data);
     } else {
       _this._syncObj = new SyncObject({});
     }
 
-    console.log('[DataObjectChild -  Constructor] - ', _this._syncObj);
+    log.log('[DataObjectChild -  Constructor] - ', _this._syncObj);
 
     _this._bus = _this._parentObject._bus;
     _this._owner = _this._parentObject._owner;
@@ -79,6 +84,132 @@ class DataObjectChild /* implements SyncStatus */ {
     // delete _this._metadata.data;
     delete _this._metadata.parentObject;
 
+    _this._sharingStatus = false;
+
+  }
+
+  get shareable() {
+    let shareable = this.metadata;
+    shareable.data = this.data;
+
+    return shareable;
+  }
+
+  /**
+   * This function is used to share the child Object among authorised Hyperties
+   * @param  {boolean}     reporter  If true the child object is only shared to Parent reporter
+   * @return {Promise<JSON>}        It returns a promise with the sharing results.
+   */
+
+  share(toReporter) {
+    let _this = this;
+    let to;
+    let reporter = toReporter;
+
+    if (reporter) {
+      to = _this.metadata.parent;
+    } else to = _this.metadata.parent + '/children/' + _this.metadata.children;
+
+    let childValue = _this.metadata;
+    childValue.data = _this.data;
+
+    //FLOW-OUT: this message will be sent directly to a resource child address: MessageBus
+    let requestMsg = {
+      type: 'create', from: _this.metadata.reporter, to: to,
+      body: { resource: childValue.url, value: childValue }
+    };
+
+    if (_this.identity)      {
+      requestMsg.body.identity = _this.identity;
+    }
+
+    //to be used to disable mutual authentication for legacy users
+
+    if (_this._parentObject.data.hasOwnProperty('mutual')) requestMsg.body.mutual = _this._parentObject.data.mutual;
+
+
+    _this._sharingStatus = new Promise((resolve, reject) => {
+
+      let id = _this._bus.postMessage(deepClone(requestMsg));
+
+      if (_this._parentObject.metadata.reporter === _this.metadata.reporter) {
+        return resolve();
+      } else {
+        _this._bus.addResponseListener(requestMsg.from, id, (reply) => {
+
+            if (reply.to === _this._reporter) {
+              _this._bus.removeResponseListener(requestMsg.from, id);
+
+              log.log('[Syncher.DataObjectChild.share] Parent reporter reply ', reply);
+
+                let result = {
+                  code: reply.body && reply.body.code ? reply.body.code : 500,
+                  desc: reply.body && reply.body.desc ? reply.body.desc : 'Unknown'
+                };
+
+                if ( reply.body.code < 300){
+                  return resolve(result);
+                }
+                else return reject(result);
+
+            }
+          });
+
+          setTimeout( ()=>{// If Reporter does  not reply the promise is rejected
+            _this._bus.removeResponseListener(requestMsg.from, id);
+
+              let result = {
+                code: 408,
+                desc: 'timout'
+              };
+              return reject(result);
+
+          }, 3000);
+
+        }
+      });
+
+    }
+
+    /**
+     * This function is used to share the child Object among authorised Hyperties
+     * @param  {boolean}     reporter  If true the child object is only shared to Parent reporter
+     * @return {Promise<JSON>}        It returns a promise with the sharing results.
+     */
+
+  store() {
+    let _this = this;
+
+    let child = {};
+    let key = _this.metadata.children + '.' + _this.metadata.url;
+
+    child.value = _this.metadata;
+    child.identity = _this.identity;
+
+    let msg = {
+
+      from: _this.metadata.reporter,
+      to: _this._parentObject._syncher._subURL,
+      type: 'create',
+      body: {
+        resource: _this.metadata.parent,
+        attribute: key,
+        value: child
+      }
+    };
+
+    log.log('[DataObjectChild.store]:', msg);
+
+    _this._bus.postMessage(msg);
+  }
+
+  delete() {
+    //nothing to be done
+    return new Promise((resolve) => {
+      log.log('[DataObjectChild.delete]');
+      resolve();
+    });
+
   }
 
   _allocateListeners() {
@@ -88,7 +219,7 @@ class DataObjectChild /* implements SyncStatus */ {
     if (_this._reporter === _this._owner) {
       _this._listener = _this._bus.addListener(_this._reporter, (msg) => {
         if (msg.type === 'response' && msg.id === _this._msgId) {
-          console.log('DataObjectChild.onResponse:', msg);
+          log.log('DataObjectChild.onResponse:', msg);
           _this._onResponse(msg);
         }
       });
@@ -131,6 +262,16 @@ class DataObjectChild /* implements SyncStatus */ {
    * Data Structure to be synchronized.
    * @type {JSON} - JSON structure that should follow the defined schema, if any.
    */
+
+   get sharingStatus() {
+     return this._sharingStatus;
+   }
+
+   /**
+    * Data Structure to be synchronized.
+    * @type {JSON} - JSON structure that should follow the defined schema, if any.
+    */
+
   get data() { return this._syncObj.data; }
 
   /**
@@ -153,7 +294,7 @@ class DataObjectChild /* implements SyncStatus */ {
    */
   onChange(callback) {
     this._syncObj.observe((event) => {
-      console.log('[DataObjectChild - observer] - ', event);
+      log.log('[DataObjectChild - observer] - ', event);
       callback(event);
     });
   }
