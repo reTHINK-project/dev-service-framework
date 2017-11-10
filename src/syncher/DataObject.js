@@ -392,7 +392,7 @@ class DataObject {
           for (child in _this.childrens[children]) {
             let childObj = _this.childrens[children][child];
             log.log('[DataObject._deleteChildrens] child',childObj);
-            if (childObj.hasOwnProperty('resourceType'))
+            if (childObj.metadata.hasOwnProperty('resourceType'))
               deletePromises.push(_this.childrens[children][child].delete());
           }
         }

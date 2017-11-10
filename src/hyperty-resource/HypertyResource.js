@@ -158,11 +158,7 @@ class HypertyResource extends DataObjectChild {
         })
 
       }
-
-    }).catch(function(reason) {
-      log.error('Reason:', reason);
     });
-
   }
 
   _getBestResource(msg, callback) {
