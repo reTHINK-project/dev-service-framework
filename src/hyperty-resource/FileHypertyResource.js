@@ -36,7 +36,7 @@ class FileHypertyResource extends HypertyResource {
 
   }
 
-  init( file) {
+  init(file) {
     let _this = this;
 
     if (!file) throw new Error('[FileHypertyResource.constructor] missing mandatory *file* input ');

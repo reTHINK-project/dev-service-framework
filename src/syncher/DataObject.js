@@ -271,7 +271,7 @@ class DataObject {
     if (_this._onAddChildrenHandler) _this._onAddChildrenHandler(event);
 
     return hypertyResource;
-    }
+  }
 
   /**
    * All Metadata about the Data Object
