@@ -144,18 +144,28 @@ class HypertyResource extends DataObjectChild {
 
           log.warn('[HypertyResource] - get locally the resource fail', reply);
 
-          msg.to = storage.remoteURL;
-          msg.body.resource = storage.remoteURL + '/' + storage.resource;
+          // Generate new message to not use the same id of the last one;
+          let msg = {
+            from: _this._owner,
+            to: storage.remoteURL,
+            type: 'read',
+            body: { resource: storage.remoteURL + '/' + storage.resource, p2p: true }
+          };
+
+          if (_this.metadata.p2pRequester && _this.metadata.p2pHandler) {
+            msg.body.p2pRequester = _this.metadata.p2pRequester;
+            msg.body.p2pHandler = _this.metadata.p2pHandler;
+          }
 
           // get the resource on the Remote Hyperty Resource Storage;
-          return _this._getBestResource(msg, callback)
+          return _this._getBestResource(msg, callback);
         }).then((reply) => {
           log.info('[HypertyResource] - get remotely the resource', reply);
           resolve(_this);
         }).catch((reply) => {
           log.warn('[HypertyResource] - get remotely the resource fail', reply);
           reject(reply.body.code + ' ' + reply.body.desc);
-        })
+        });
 
       }
     });
@@ -171,24 +181,35 @@ class HypertyResource extends DataObjectChild {
       _this._bus.addResponseListener(_this._owner, id, (reply) => {
         log.log('[HypertyResource.read] reply: ', reply);
 
-        if (reply.body.code === 200) {
-          _this._content = reply.body.value.content;
+        switch (reply.body.code) {
+          case 200:
+            _this._content = reply.body.value.content;
 
-          // save locally if not too big
-          if (reply.body.value.size < _this.arraybufferSizeLimit) {
-            _this.save();
-          }
+            // save locally if not too big
+            if (reply.body.value.size < _this.arraybufferSizeLimit) _this.save();
+            _this._bus.removeResponseListener(_this._owner, id);
+            resolve(_this);
+            break;
 
-          resolve(_this);
-        } else if (reply.body.code === 183) {
-          callback(reply.body.value);
-        } else {
-          reject(reply.body.code + ' ' + reply.body.desc);
+          case 183:
+            callback(reply.body.value);
+            break;
+
+          default:
+            _this._bus.removeResponseListener(_this._owner, id);
+
+            try {
+              reject(reply.body.code + ' ' + reply.body.desc);
+            } catch (e) {
+              reject(e);
+            }
+
+            break;
         }
 
       });
 
-    })
+    });
 
   }
 
