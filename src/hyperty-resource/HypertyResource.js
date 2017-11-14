@@ -158,13 +158,14 @@ class HypertyResource extends DataObjectChild {
           }
 
           // get the resource on the Remote Hyperty Resource Storage;
-          return _this._getBestResource(msg, callback);
-        }).then((reply) => {
-          log.info('[HypertyResource] - get remotely the resource', reply);
-          resolve(_this);
-        }).catch((reply) => {
-          log.warn('[HypertyResource] - get remotely the resource fail', reply);
-          reject(reply.body.code + ' ' + reply.body.desc);
+          _this._getBestResource(msg, callback).then((reply) => {
+            log.warn('[HypertyResource] - get remotely the resource', reply);
+            resolve(_this);
+          }).catch((reply) => {
+            log.warn('[HypertyResource] - get remotely the resource fail', reply);
+            reject(reply.body.code + ' ' + reply.body.desc);
+          });
+
         });
 
       }
@@ -178,17 +179,35 @@ class HypertyResource extends DataObjectChild {
 
       let id = _this._bus.postMessage(msg);
 
+      let waitForResponse = setTimeout(() => {
+
+        // If Reporter does  not reply the promise is rejected
+        _this._bus.removeResponseListener(_this._owner, id);
+
+        msg.body.code = 408;
+        msg.body.desc = 'Response timeout'
+
+        return reject(msg);
+
+      }, 3000);
+
       _this._bus.addResponseListener(_this._owner, id, (reply) => {
         log.log('[HypertyResource.read] reply: ', reply);
+
+        clearTimeout(waitForResponse);
 
         switch (reply.body.code) {
           case 200:
             _this._content = reply.body.value.content;
 
             // save locally if not too big
-            if (reply.body.value.size < _this.arraybufferSizeLimit) _this.save();
+            if (reply.body.value.size < _this.arraybufferSizeLimit) {
+              _this.save();
+            }
+
             _this._bus.removeResponseListener(_this._owner, id);
-            resolve(_this);
+            resolve(reply);
+
             break;
 
           case 183:
@@ -197,13 +216,7 @@ class HypertyResource extends DataObjectChild {
 
           default:
             _this._bus.removeResponseListener(_this._owner, id);
-
-            try {
-              reject(reply.body.code + ' ' + reply.body.desc);
-            } catch (e) {
-              reject(e);
-            }
-
+            reject(reply);
             break;
         }
 
