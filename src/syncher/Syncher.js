@@ -224,18 +224,16 @@ class Syncher {
     };
 
     return new Promise((resolve, reject) => {
-
-      let id = _this._bus.postMessage(readMsg)
-
-      let childrens = {};
-      let value = {};
-      let n = 0;
-
-      _this._bus.addResponseListener(readMsg.from, id, (reply) => {
+      let callback = (reply) => {
         log.log('[Syncher.read] reply: ', reply);
+
+        let childrens = {};
+        let value = {};
+        let n = 0;
+
         if (reply.body.code < 300) {
           if (!reply.body.value.hasOwnProperty('responses')) {
-            _this._bus.removeResponseListener(readMsg.from, id);
+            _this._bus.removeResponseListener(readMsg.from, reply.id);
             resolve(reply.body.value);
           } else { //data object is sent in separated messages
             if (n === 0) { //initial response without childrens
@@ -252,7 +250,7 @@ class Syncher {
               if (n === value.responses) {
                 value.childrenObjects = childrens;
                 delete value.responses;
-                _this._bus.removeResponseListener(readMsg.from, id);
+                _this._bus.removeResponseListener(readMsg.from, reply.id);
                 resolve(value);
               }
             }
@@ -260,7 +258,11 @@ class Syncher {
         } else {
           reject(reply.body.desc);
         }
-      });
+      };
+
+      let id = _this._bus.postMessage(readMsg, callback, false);
+
+
     });
   }
 
