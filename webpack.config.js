@@ -63,6 +63,7 @@ module.exports = {
     CatalogueFactory: './src/CatalogueFactory.js',
     Discovery: './src/Discovery.js',
     IdentityManager: './src/IdentityManager.js',
+    ContextManager: './src/ContextManager.js',
     MessageFactory: './src/MessageFactory.js',
     PersistenceManager: './src/PersistenceManager.js',
     RuntimeCatalogue: './src/RuntimeCatalogue.js',

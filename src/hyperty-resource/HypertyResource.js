@@ -63,7 +63,7 @@ class HypertyResource extends DataObjectChild {
     return shareable;
   }
 
-/*
+  /*
   set parent(parent) {
     let _this = this;
     _this._parent = parent;
@@ -120,7 +120,6 @@ class HypertyResource extends DataObjectChild {
       } else {
 
         //TODO: use an iteration to get online runtime storages when some are offline
-
         let storage = _this._getBestContentURL(_this._metadata.contentURL);
 
         log.log('Storage:', storage);
@@ -129,7 +128,7 @@ class HypertyResource extends DataObjectChild {
           from: _this._owner,
           to: storage.url,
           type: 'read',
-          body: { resource: storage.resource, p2p: true }
+          body: { resource: storage.url + '/' + storage.resource, p2p: true }
         };
 
         if (_this.metadata.p2pRequester && _this.metadata.p2pHandler) {
@@ -137,32 +136,94 @@ class HypertyResource extends DataObjectChild {
           msg.body.p2pHandler = _this.metadata.p2pHandler;
         }
 
+        // get the resource first on the Local Hyperty Resource Storage;
+        _this._getBestResource(msg, callback).then((reply) => {
+          log.info('[HypertyResource] - get locally the resource:', reply);
+          resolve(_this);
+        }).catch((reply) => {
 
-        let id = _this._bus.postMessage(msg);
+          log.warn('[HypertyResource] - get locally the resource fail', reply);
 
-        _this._bus.addResponseListener(_this._owner, id, (reply) => {
-          log.log('[HypertyResource.read] reply: ', reply);
+          // Generate new message to not use the same id of the last one;
+          let msg = {
+            from: _this._owner,
+            to: storage.remoteURL,
+            type: 'read',
+            body: { resource: storage.remoteURL + '/' + storage.resource, p2p: true }
+          };
 
-          switch (reply.body.code) {
-            case 200:
-              _this._content = reply.body.value.content;
-
-              // save locally if not too big
-              if (reply.body.value.size < _this.arraybufferSizeLimit) _this.save();
-              _this._bus.removeResponseListener(_this._owner, id);
-              resolve(_this);
-              break;
-            case 183:
-              callback(reply.body.value);
-              break;
-            default:
-              _this._bus.removeResponseListener(_this._owner, id);
-              reject(reply.body.code + ' ' + reply.body.desc);
-              break;
+          if (_this.metadata.p2pRequester && _this.metadata.p2pHandler) {
+            msg.body.p2pRequester = _this.metadata.p2pRequester;
+            msg.body.p2pHandler = _this.metadata.p2pHandler;
           }
+
+          // get the resource on the Remote Hyperty Resource Storage;
+          _this._getBestResource(msg, callback).then((reply) => {
+            log.warn('[HypertyResource] - get remotely the resource', reply);
+            resolve(_this);
+          }).catch((reply) => {
+            log.warn('[HypertyResource] - get remotely the resource fail', reply);
+            reject(reply.body.code + ' ' + reply.body.desc);
+          });
+
         });
+
       }
     });
+  }
+
+  _getBestResource(msg, callback) {
+    let _this = this;
+
+    return new Promise((resolve, reject) => {
+
+      let id = _this._bus.postMessage(msg);
+
+      let waitForResponse = setTimeout(() => {
+
+        // If Reporter does  not reply the promise is rejected
+        _this._bus.removeResponseListener(_this._owner, id);
+
+        msg.body.code = 408;
+        msg.body.desc = 'Response timeout'
+
+        return reject(msg);
+
+      }, 3000);
+
+      _this._bus.addResponseListener(_this._owner, id, (reply) => {
+        log.log('[HypertyResource.read] reply: ', reply);
+
+        clearTimeout(waitForResponse);
+
+        switch (reply.body.code) {
+          case 200:
+            _this._content = reply.body.value.content;
+
+            // save locally if not too big
+            if (reply.body.value.size < _this.arraybufferSizeLimit) {
+              _this.save();
+            }
+
+            _this._bus.removeResponseListener(_this._owner, id);
+            resolve(reply);
+
+            break;
+
+          case 183:
+            callback(reply.body.value);
+            break;
+
+          default:
+            _this._bus.removeResponseListener(_this._owner, id);
+            reject(reply);
+            break;
+        }
+
+      });
+
+    });
+
   }
 
   // Remove Hyperty from the local storage
@@ -192,19 +253,12 @@ class HypertyResource extends DataObjectChild {
 
     let _this = this;
 
-    contentURLList.forEach((url) => {
-      if (url.includes(_this._localStorageURL)) {
-        return ({
-          url: _this._localStorageURL, resource: url
-        });
-      }
-    });
+    const contentURL = contentURLList[0];
+    const splitedResource = contentURL.substr(contentURL.lastIndexOf('/') + 1);
+    const url = _this._localStorageURL; // contentURL.substr(0, contentURL.lastIndexOf('/'));
+    const remoteResource = contentURL.substr(0, contentURL.lastIndexOf('/'));
 
-    let splitedResource = contentURLList[0].split('/storage/');
-    let url = splitedResource[0] + '/storage';
-    let resource = contentURLList[0];
-
-    return {url: url, resource: resource };
+    return {url: url, resource: splitedResource, remoteURL: remoteResource };
 
   }
 
