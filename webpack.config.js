@@ -64,6 +64,7 @@ module.exports = {
     Discovery: './src/Discovery.js',
     IdentityManager: './src/IdentityManager.js',
     ContextManager: './src/ContextManager.js',
+    ChatManager: './src/ChatManager.js',
     MessageFactory: './src/MessageFactory.js',
     PersistenceManager: './src/PersistenceManager.js',
     RuntimeCatalogue: './src/RuntimeCatalogue.js',
