@@ -418,7 +418,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     let objectValue = deepClone(_this.metadata);
 
     objectValue.data = deepClone(_this.data);
-    objectValue.childrenObjects = _this.childrensJSON;
+    objectValue.childrenObjects = deepClone(_this.childrensJSON);
 
     objectValue.version = _this._version;
 
