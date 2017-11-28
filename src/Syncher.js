@@ -12,9 +12,10 @@ const j = logger.getLogger('DataObjectObserver');
 const k = logger.getLogger('DataObjectReporter');
 const l = logger.getLogger('DataProvisional');
 
-const none = 5;  // Remove all logs
-const defaultLevel = 3; // Show only the info, warn, error
 const all = 0; // Show all logs;
+const none = 5;  // Remove all logs
+
+const defaultLevel = all; // Show only the info, warn, error
 
 g.setLevel(defaultLevel);
 h.setLevel(defaultLevel);

@@ -63,7 +63,6 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
 
     _this._allocateListeners();
 
-    _this._invitations = [];
     _this.invitations = []; // array of promises with pending invitations
     _this._childrenSizeThreshold = 50000;// to be used when replying to sync requests to ensure each response msg is not too large
 
@@ -103,12 +102,13 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
     // TODO: remove value and add resources? should similar to 1st create
 
     let toInvite = observers;
-    let invitePromises = [];
+
+    // let invitePromises = [];
 
     /*  observers.forEach((observer)=> {
-      if (!_this._invitations[observer]) {
+      if (!_this.invitations[observer]) {
         toInvite.push(observer);
-        _this._invitations[observer] = observer;
+        _this.invitations[observer] = observer;
       }
     });*/
 
@@ -318,7 +318,7 @@ class DataObjectReporter extends DataObject /* implements SyncStatus */ {
 
     //let sub = _this._subscriptions[hypertyUrl];
     delete _this._subscriptions[hypertyUrl];
-    delete _this._invitations[hypertyUrl];
+    delete _this.invitations[hypertyUrl];
 
     let event = {
       type: msg.body.type,

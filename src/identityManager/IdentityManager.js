@@ -52,22 +52,23 @@ class IdentityManager {
   */
   discoverUserRegistered(type, hypertyURL) {
     let _this = this;
-    let activeHypertyURL;
-
-    // if any type of search is selected query for that type, otherwise query for default user info
-    let searchType = (type) ? type : '.';
-
-    if (!hypertyURL) {
-      activeHypertyURL = _this.hypertyURL;
-    } else {
-      activeHypertyURL = hypertyURL;
-    }
-
-    let msg = {
-      type: 'read', from: activeHypertyURL, to: _this.runtimeURL + '/registry/', body: { resource: searchType, criteria: activeHypertyURL}
-    };
 
     return new Promise(function(resolve, reject) {
+
+      let activeHypertyURL;
+
+      // if any type of search is selected query for that type, otherwise query for default user info
+      let searchType = (type) ? type : '.';
+
+      if (!hypertyURL) {
+        activeHypertyURL = _this.hypertyURL;
+      } else {
+        activeHypertyURL = hypertyURL;
+      }
+
+      let msg = {
+        type: 'read', from: activeHypertyURL, to: _this.runtimeURL + '/registry/', body: { resource: searchType, criteria: activeHypertyURL}
+      };
 
       _this.messageBus.postMessage(msg, (reply) => {
 
