@@ -19,7 +19,9 @@ class NotificationHandler {
   onCreate(msg) {
 
     let _this = this;
-    let resource = msg.from.slice(0, -13); //remove "/subscription" from the URL
+  //  let resource = msg.from.slice(0, -13); //remove "/subscription" from the URL
+
+    let resource = msg.body.hasOwnProperty('resource') ? msg.body.resource : msg.from.slice(0, -13);
     let dividedURL = divideURL(resource);
     let domain = dividedURL.domain;
 
