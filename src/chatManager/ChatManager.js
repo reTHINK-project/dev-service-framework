@@ -52,8 +52,9 @@ class ChatManager {
     let _this = this;
     let syncher = new Syncher(myUrl, bus, configuration);
 
+    _this._runtimeURL = configuration.runtimeURL;
 
-    let domain = divideURL(myUrl).domain;
+    let domain = divideURL(_this._runtimeURL).domain;
     let discovery = new Discovery(myUrl, configuration.runtimeURL, bus);
     let identityManager = new IdentityManager(myUrl, configuration.runtimeURL, bus);
 
@@ -64,7 +65,6 @@ class ChatManager {
 
     _this._myUrl = myUrl;
     _this._bus = bus;
-    _this._runtimeURL = configuration.runtimeURL;
     _this._syncher = syncher;
     _this._domain = domain;
 
@@ -272,7 +272,7 @@ class ChatManager {
    * @param  {URL.CommunicationURL} invitationURL  The Communication URL of the Group Chat to join that is provided in the invitation event
    * @return {<Promise>ChatController}             It returns the ChatController object as a Promise
    */
-  join(invitationURL, identity) {
+  join(invitationURL, mutual = true, identity) {
     let _this = this;
 
     return new Promise(function(resolve, reject) {
@@ -283,7 +283,7 @@ class ChatManager {
       console.info('invitationURL', invitationURL);
       _this._myIdentity(identity).then((identity) => {
         myIdentity = identity;
-        return syncher.subscribe(_this._objectDescURL, invitationURL, true, false, identity);
+        return syncher.subscribe(_this._objectDescURL, invitationURL, true, false, mutual, identity);
 
       }).then(function(dataObjectObserver) {
         console.info('Data Object Observer: ', dataObjectObserver);
