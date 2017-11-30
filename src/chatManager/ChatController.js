@@ -63,6 +63,10 @@ class ChatController {
     return this._invitationsHandler;
   }
 
+  get url() {
+    return this.controllerMode === 'reporter' ? this.dataObjectReporter.url : this.dataObjectObserver.url;
+  }
+
   set dataObjectReporter(dataObjectReporter) {
 
     if (!dataObjectReporter) throw new Error('[ChatController] The data object reporter is necessary parameter ');
@@ -318,7 +322,7 @@ class ChatController {
    * @param  {string}     message                        Is the ChatMessage to be sent.
    * @return {Promise<Communication.ChatMessage>}        It returns the ChatMessage child object created by the Syncher as a Promise.
    */
-  send(message) {
+  send(message, identify) {
 
     let _this = this;
     let mode = _this.controllerMode;
@@ -329,17 +333,19 @@ class ChatController {
       let _dataObjectChild;
       _this.child_cseq += 1;
       let msg = {
+
 /*        url: dataObject.data.url,
         cseq: _this.child_cseq,
         reporter: dataObject.data.reporter,
         schema: dataObject.data.schema,
         name: dataObject.data.name,
         created : new Date().toJSON(),*/
-        type : "chat",
-        content : message
+
+        type: 'chat',
+        content: message
       }
 
-      let identity = {
+      let identity = identity ? identity : {
         userProfile: _this.myIdentity
       };
 

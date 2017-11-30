@@ -81,13 +81,9 @@ class HypertyResource extends DataObjectChild {
         body: { value: deepClone(_this._metadata) }
       };
 
-      msg.body.value.content = _this._content;
-
-      let id = _this._bus.postMessage(msg);
-
-      _this._bus.addResponseListener(_this._owner, id, (reply) => {
+      let callback = (reply) => {
         log.info('[HypertyResource.save] reply: ', reply);
-        _this._bus.removeResponseListener(_this._owner, id);
+        _this._bus.removeResponseListener(_this._owner, reply.id);
         if (reply.body.code === 200) {
           if (reply.body.value) {
             if (!_this._metadata.contentURL) _this._metadata.contentURL = [];
@@ -96,7 +92,12 @@ class HypertyResource extends DataObjectChild {
           resolve();
         } else reject(reply.body.code + ' ' + reply.body.desc);
 
-      });
+      };
+
+      msg.body.value.content = _this._content;
+
+      _this._bus.postMessage(msg, callback, false);
+
     });
 
   }
@@ -172,26 +173,13 @@ class HypertyResource extends DataObjectChild {
     });
   }
 
-  _getBestResource(msg, callback) {
+  _getBestResource(msg, inProgressCallback) {
     let _this = this;
 
     return new Promise((resolve, reject) => {
 
-      let id = _this._bus.postMessage(msg);
 
-      let waitForResponse = setTimeout(() => {
-
-        // If Reporter does  not reply the promise is rejected
-        _this._bus.removeResponseListener(_this._owner, id);
-
-        msg.body.code = 408;
-        msg.body.desc = 'Response timeout'
-
-        return reject(msg);
-
-      }, 3000);
-
-      _this._bus.addResponseListener(_this._owner, id, (reply) => {
+      let callback = (reply) => {
         log.log('[HypertyResource.read] reply: ', reply);
 
         clearTimeout(waitForResponse);
@@ -211,7 +199,7 @@ class HypertyResource extends DataObjectChild {
             break;
 
           case 183:
-            callback(reply.body.value);
+            inProgressCallback(reply.body.value);
             break;
 
           default:
@@ -220,7 +208,9 @@ class HypertyResource extends DataObjectChild {
             break;
         }
 
-      });
+      };
+
+      _this._bus.postMessage(msg, callback, false);
 
     });
 

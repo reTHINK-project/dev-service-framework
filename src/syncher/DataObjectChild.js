@@ -130,15 +130,15 @@ class DataObjectChild /* implements SyncStatus */ {
 
     _this._sharingStatus = new Promise((resolve, reject) => {
 
-      let id = _this._bus.postMessage(deepClone(requestMsg));
-
       if (_this._parentObject.metadata.reporter === _this.metadata.reporter) {
+        _this._bus.postMessage(deepClone(requestMsg));
         return resolve();
       } else {
-        _this._bus.addResponseListener(requestMsg.from, id, (reply) => {
+
+        let callback = (reply) => {
 
             if (reply.to === _this._reporter) {
-              _this._bus.removeResponseListener(requestMsg.from, id);
+              _this._bus.removeResponseListener(requestMsg.from, reply.id);
 
               log.log('[Syncher.DataObjectChild.share] Parent reporter reply ', reply);
 
@@ -153,7 +153,9 @@ class DataObjectChild /* implements SyncStatus */ {
                 else return reject(result);
 
             }
-          });
+          };
+
+          let id = _this._bus.postMessage(deepClone(requestMsg), callback, false);
 
           setTimeout( ()=>{// If Reporter does  not reply the promise is rejected
             _this._bus.removeResponseListener(requestMsg.from, id);

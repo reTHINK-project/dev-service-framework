@@ -24,7 +24,7 @@
 
 // Service Framework
 import IdentityManager from '../identityManager/IdentityManager';
-import RegistrationStatus from '../discovery/RegistrationStatus';
+//import RegistrationStatus from '../discovery/RegistrationStatus';
 import Discovery from '../discovery/Discovery';
 import Syncher from '../syncher/Syncher';
 
@@ -44,25 +44,25 @@ import { UserInfo } from './UserInfo';
 */
 class ChatManager {
 
-  constructor(hypertyURL, bus, configuration) {
-    if (!hypertyURL) throw new Error('[ChatManager.constructor] The hypertyURL is a needed parameter');
+  constructor(myUrl, bus, configuration) {
+    if (!myUrl) throw new Error('[ChatManager.constructor] The myUrl is a needed parameter');
     if (!bus) throw new Error('[ChatManager.constructor] The MiniBus is a needed parameter');
     if (!configuration) throw new Error('[ChatManager.constructor] The configuration is a needed parameter');
 
     let _this = this;
-    let syncher = new Syncher(hypertyURL, bus, configuration);
+    let syncher = new Syncher(myUrl, bus, configuration);
 
 
-    let domain = divideURL(hypertyURL).domain;
-    let discovery = new Discovery(hypertyURL, configuration.runtimeURL, bus);
-    let identityManager = new IdentityManager(hypertyURL, configuration.runtimeURL, bus);
+    let domain = divideURL(myUrl).domain;
+    let discovery = new Discovery(myUrl, configuration.runtimeURL, bus);
+    let identityManager = new IdentityManager(myUrl, configuration.runtimeURL, bus);
 
     _this._objectDescURL = 'hyperty-catalogue://catalogue.' + domain + '/.well-known/dataschema/Communication';
 
     _this._reportersControllers = {};
     _this._observersControllers = {};
 
-    _this._hypertyURL = hypertyURL;
+    _this._myUrl = myUrl;
     _this._bus = bus;
     _this._runtimeURL = configuration.runtimeURL;
     _this._syncher = syncher;
@@ -81,45 +81,66 @@ class ChatManager {
     console.log('[ChatManager] Discover ', discovery);
     console.log('[ChatManager] Identity Manager ', identityManager);
 
-    syncher.onNotification(function(event) {
-
-      console.log('[ChatManager] onNotification: ', event);
-
-      if (event.type === 'create') {
-
-        // TODO: replace the 100 for Message.Response
-        // event.ack(200);
-
-        if (_this._onInvitation) { _this._onInvitation(event); }
-      }
-
-      if (event.type === 'delete') {
-        // TODO: replace the 200 for Message.Response
-        event.ack(200);
-
-        _this._observersControllers[event.url].closeEvent = event;
-
-        delete _this._observersControllers[event.url];
-
-        _this._observersControllers.closeEvent = event;
-
-        _this.communicationObject = communicationObject;
-
-
-        for (let url in this._reportersControllers) {
-          this._reportersControllers[url].closeEvent(event);
-        }
-
-        for (let url in this._observersControllers) {
-          this._observersControllers[url].closeEvent(event);
-        }
-
-      }
-
-    });
 
   }
 
+
+  processNotification(event) {
+    let _this = this;
+    console.log('[ChatManager.processNotification: ', event);
+
+    if (event.type === 'create') {
+
+      // TODO: replace the 100 for Message.Response
+      // event.ack(200);
+
+      if (_this._onInvitation) { _this._onInvitation(event); }
+    }
+
+    if (event.type === 'delete') {
+      // TODO: replace the 200 for Message.Response
+      event.ack(200);
+
+      _this._observersControllers[event.url].closeEvent = event;
+
+      delete _this._observersControllers[event.url];
+
+      _this._observersControllers.closeEvent = event;
+
+      _this.communicationObject = communicationObject;
+
+
+      for (let url in this._reportersControllers) {
+        this._reportersControllers[url].closeEvent(event);
+      }
+
+      for (let url in this._observersControllers) {
+        this._observersControllers[url].closeEvent(event);
+      }
+
+    }
+  }
+
+  _myIdentity(identity) {
+
+    return new Promise((resolve, reject) => {
+      if (identity) return resolve(identity);
+
+      if (this._myUrl.includes('hyperty://')) {
+        this.identityManager.discoverUserRegistered().then((identity) => {
+          resolve(identity);
+        }).catch(function(reason) {
+          reject(reason);
+        });
+      } else {
+        this.identityManager.discoverIdentityPerIdP().then((identity) => {
+          resolve(identity);
+        }).catch(function(reason) {
+          reject(reason);
+        });
+      }
+    });
+  }
 
   /**
    * This function is used to create a new Group Chat providing the name and the identifiers of users to be invited.
@@ -141,13 +162,13 @@ class ChatManager {
 
       let myIdentity;
 
-      _this.search.myIdentity().then((identity) => {
+      _this._myIdentity().then((identity) => {
         myIdentity = identity;
         console.log('[ChatManager.create ] My Identity', identity);
 
         // let url = _this.communicationObject.reporter;
 
-        let userInfo = new UserInfo(_this._hypertyURL, _this._domain, identity);
+        let userInfo = new UserInfo(_this._myUrl, _this._domain, identity);
 
         // Add my identity
         _this.communicationObject.participants[identity.userURL] = userInfo;
@@ -229,7 +250,7 @@ class ChatManager {
         });
 
       }).catch((reason) => {
-        console.log('[ChatManager] MyIdentity Error:', reason);
+        console.log('[ChatManager.create] MyIdentity Error:', reason);
         return reject(reason);
       });
     });
@@ -251,7 +272,7 @@ class ChatManager {
    * @param  {URL.CommunicationURL} invitationURL  The Communication URL of the Group Chat to join that is provided in the invitation event
    * @return {<Promise>ChatController}             It returns the ChatController object as a Promise
    */
-  join(invitationURL) {
+  join(invitationURL, identity) {
     let _this = this;
 
     return new Promise(function(resolve, reject) {
@@ -260,9 +281,9 @@ class ChatManager {
 
       console.info('[ChatManager] ------------------------ Syncher subscribe ---------------------- \n');
       console.info('invitationURL', invitationURL);
-      _this.search.myIdentity().then((identity) => {
+      _this._myIdentity(identity).then((identity) => {
         myIdentity = identity;
-        return syncher.subscribe(_this._objectDescURL, invitationURL, true, false);
+        return syncher.subscribe(_this._objectDescURL, invitationURL, true, false, identity);
 
       }).then(function(dataObjectObserver) {
         console.info('Data Object Observer: ', dataObjectObserver);
