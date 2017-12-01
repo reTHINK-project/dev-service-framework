@@ -22,14 +22,11 @@
 **/
 
 // Service Framework
-//import {Discovery} from 'service-framework/dist/Discovery';
-import IdentityManager from 'service-framework/dist/IdentityManager';
-import {Syncher} from 'service-framework/dist/Syncher';
+import Syncher from '../syncher/Syncher';
 
 // Utils
 import EventEmitter from '../utils/EventEmitter.js';
 import {divideURL} from '../utils/utils.js';
-import URI from 'urijs';
 
 // import availability from './availability.js';
 
@@ -44,18 +41,18 @@ class ContextReporter extends EventEmitter {
     if (!hypertyURL) throw new Error('The hypertyURL is a needed parameter');
     if (!bus) throw new Error('The MiniBus is a needed parameter');
     if (!configuration) throw new Error('The configuration is a needed parameter');
-    if (!syncher) throw new Error('The configuration is a needed parameter');
 
     super(hypertyURL, bus, configuration);
+
     let _this = this;
 
     console.info('[ContextReporter] started with url: ', hypertyURL);
 
-    this.syncher = syncher;
+    this.syncher = syncher ? syncher : new Syncher(hypertyURL, bus, configuration);
+
 
     //    this.discovery = new Discovery(hypertyURL, bus);
-    this.identityManager = new IdentityManager(hypertyURL, configuration.runtimeURL, bus);
-    this.domain = divideURL(hypertyURL).domain;
+    this.domain = divideURL(configuration.runtimeURL).domain;
     this.contexts = {};
 
     this.contextDescURL = 'hyperty-catalogue://catalogue.' + this.domain + '/.well-known/dataschema/Context';
@@ -139,7 +136,7 @@ start(){
       console.info('[ContextReporter.create] lets create a new User availability Context Object ');
       _this.syncher.create(_this.contextDescURL, [],init, true, false, name, null, {resources: resources, expires: 30})
       .then((context) => {
-        _this.context[id] = context;
+        _this.contexts[id] = context;
 
         _this._onSubscription(context);
         resolve(context);
@@ -161,10 +158,10 @@ start(){
 
   setStatus(id, newStatus) {
     let _this = this;
-    console.log('[ContextReporterReporter.setStatus] before change :', _this.context[id].data);
+    console.log('[ContextReporterReporter.setStatus] before change :', _this.contexts[id].data);
 
-    _this.context[id].data.values[0].value = newStatus;
-    console.debug('[ContextReporterReporter.setStatus] after change :', _this.context[id].data);
+    _this.contexts[id].data.values[0].value = newStatus;
+    console.debug('[ContextReporterReporter.setStatus] after change :', _this.contexts[id].data);
     _this.trigger(id+'-context-update', newStatus);
 
   }
