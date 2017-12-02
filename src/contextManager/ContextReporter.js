@@ -151,18 +151,19 @@ start(){
 
   _onSubscription(context){
     context.onSubscription((event) => {
-      console.info('[ContextReporterReporter._onSubscription] accepting: ', event);
+      console.info('[ContextReporter._onSubscription] accepting: ', event);
       event.accept();
     });
   }
 
-  setStatus(id, newStatus) {
+  setContext(id, newContext) {
     let _this = this;
-    console.log('[ContextReporterReporter.setStatus] before change :', _this.contexts[id].data);
+    console.log('[ContextReporter.setContext] before change :', _this.contexts[id].data);
+//    _this.contexts[id].data.values[0].value = newContext;
 
-    _this.contexts[id].data.values[0].value = newStatus;
-    console.debug('[ContextReporterReporter.setStatus] after change :', _this.contexts[id].data);
-    _this.trigger(id+'-context-update', newStatus);
+    _this.contexts[id].data.values = newContext;
+    console.debug('[ContextReporter.setContext] after change :', _this.contexts[id].data);
+    _this.trigger(id+'-context-update', newContext);
 
   }
 
