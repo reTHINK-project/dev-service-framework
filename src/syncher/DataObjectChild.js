@@ -103,32 +103,32 @@ class DataObjectChild /* implements SyncStatus */ {
 
   share(toReporter) {
     let _this = this;
-    let to;
-    let reporter = toReporter;
-
-    if (reporter) {
-      to = _this.metadata.parent;
-    } else to = _this.metadata.parent + '/children/' + _this.metadata.children;
-
-    let childValue = _this.metadata;
-    childValue.data = _this.data;
-
-    //FLOW-OUT: this message will be sent directly to a resource child address: MessageBus
-    let requestMsg = {
-      type: 'create', from: _this.metadata.reporter, to: to,
-      body: { resource: childValue.url, value: childValue }
-    };
-
-    if (_this.identity)      {
-      requestMsg.body.identity = _this.identity;
-    }
-
-    //to be used to disable mutual authentication for legacy users
-
-    if (_this._parentObject.data.hasOwnProperty('mutual')) requestMsg.body.mutual = _this._parentObject.data.mutual;
-
 
     _this._sharingStatus = new Promise((resolve, reject) => {
+
+      let to;
+      let reporter = toReporter;
+
+      if (reporter) {
+        to = _this.metadata.parent;
+      } else to = _this.metadata.parent + '/children/' + _this.metadata.children;
+
+      let childValue = _this.metadata;
+      childValue.data = _this.data;
+
+      //FLOW-OUT: this message will be sent directly to a resource child address: MessageBus
+      let requestMsg = {
+        type: 'create', from: _this.metadata.reporter, to: to,
+        body: { resource: childValue.url, value: childValue }
+      };
+
+      if (_this.identity)      {
+        requestMsg.body.identity = _this.identity;
+      }
+
+      //to be used to disable mutual authentication for legacy users
+
+      if (_this._parentObject.data.hasOwnProperty('mutual')) requestMsg.body.mutual = _this._parentObject.data.mutual;
 
       if (_this._parentObject.metadata.reporter === _this.metadata.reporter) {
         _this._bus.postMessage(deepClone(requestMsg));
@@ -137,43 +137,44 @@ class DataObjectChild /* implements SyncStatus */ {
 
         let callback = (reply) => {
 
-            if (reply.to === _this._reporter) {
-              _this._bus.removeResponseListener(requestMsg.from, reply.id);
+          if (reply.to === _this._reporter) {
+            _this._bus.removeResponseListener(requestMsg.from, reply.id);
 
-              log.log('[Syncher.DataObjectChild.share] Parent reporter reply ', reply);
+            log.log('[Syncher.DataObjectChild.share] Parent reporter reply ', reply);
 
-                let result = {
-                  code: reply.body && reply.body.code ? reply.body.code : 500,
-                  desc: reply.body && reply.body.desc ? reply.body.desc : 'Unknown'
-                };
+            let result = {
+              code: reply.body && reply.body.code ? reply.body.code : 500,
+              desc: reply.body && reply.body.desc ? reply.body.desc : 'Unknown'
+            };
 
-                if ( reply.body.code < 300){
-                  return resolve(result);
-                }
-                else return reject(result);
+            if (reply.body.code < 300) {
+              return resolve(result);
+            } else return reject(result);
 
-            }
+          }
+        };
+
+        let id = _this._bus.postMessage(deepClone(requestMsg), callback, false);
+
+        setTimeout(()=> {
+
+          // If Reporter does  not reply the promise is rejected
+          _this._bus.removeResponseListener(requestMsg.from, id);
+
+          let result = {
+            code: 408,
+            desc: 'timout'
           };
+          return reject(result);
 
-          let id = _this._bus.postMessage(deepClone(requestMsg), callback, false);
+        }, 3000);
 
-          setTimeout( ()=>{// If Reporter does  not reply the promise is rejected
-            _this._bus.removeResponseListener(requestMsg.from, id);
+      }
+    });
 
-              let result = {
-                code: 408,
-                desc: 'timout'
-              };
-              return reject(result);
+  }
 
-          }, 3000);
-
-        }
-      });
-
-    }
-
-    /**
+  /**
      * This function is used to share the child Object among authorised Hyperties
      * @param  {boolean}     reporter  If true the child object is only shared to Parent reporter
      * @return {Promise<JSON>}        It returns a promise with the sharing results.
@@ -203,15 +204,6 @@ class DataObjectChild /* implements SyncStatus */ {
     log.log('[DataObjectChild.store]:', msg);
 
     _this._bus.postMessage(msg);
-  }
-
-  delete() {
-    //nothing to be done
-    return new Promise((resolve) => {
-      log.log('[DataObjectChild.delete]');
-      resolve();
-    });
-
   }
 
   _allocateListeners() {
@@ -246,6 +238,12 @@ class DataObjectChild /* implements SyncStatus */ {
     _this._releaseListeners();
 
     //TODO: send delete message ?
+
+    // nothing to be done
+    // return new Promise((resolve) => {
+    //   log.log('[DataObjectChild.delete]');
+    //   resolve();
+    // });
   }
 
   /**
@@ -265,11 +263,11 @@ class DataObjectChild /* implements SyncStatus */ {
    * @type {JSON} - JSON structure that should follow the defined schema, if any.
    */
 
-   get sharingStatus() {
-     return this._sharingStatus;
-   }
+  get sharingStatus() {
+    return this._sharingStatus;
+  }
 
-   /**
+  /**
     * Data Structure to be synchronized.
     * @type {JSON} - JSON structure that should follow the defined schema, if any.
     */
