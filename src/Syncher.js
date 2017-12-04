@@ -4,6 +4,7 @@ import * as logger from 'loglevel';
 import Syncher from './syncher/Syncher';
 import DataObjectReporter from './syncher/DataObjectReporter';
 import DataObjectObserver from './syncher/DataObjectObserver';
+import NotificationHandler from './syncher/NotificationHandler';
 
 const g = logger.getLogger('Syncher');
 const h = logger.getLogger('DataObject');
@@ -31,4 +32,4 @@ j.setLevel(all);
 k.setLevel(all);
 l.setLevel(all);*/
 
-export {Syncher, DataObjectReporter, DataObjectObserver};
+export {Syncher, DataObjectReporter, DataObjectObserver, NotificationHandler};

@@ -365,7 +365,7 @@ class ChatController {
           from: dataObjectChild._owner,
           value: dataObjectChild.data,
           type: 'create',
-          identity: identity
+          identity: sender
         };
 
         let reporterStatus = new RegistrationStatus(dataObject.url, _this._manager._runtimeURL, _this._manager._hypertyURL, _this._manager._bus );

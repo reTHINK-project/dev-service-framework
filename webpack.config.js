@@ -55,7 +55,6 @@ module.exports = {
     IdentityManager: './src/IdentityManager.js',
     ContextManager: './src/ContextManager.js',
     ChatManager: './src/ChatManager.js',
-    NotificationHandler: './src/NotificationHandler.js',
     MessageFactory: './src/MessageFactory.js',
     PersistenceManager: './src/PersistenceManager.js',
     RuntimeCatalogue: './src/RuntimeCatalogue.js',
