@@ -178,9 +178,21 @@ class HypertyResource extends DataObjectChild {
 
     return new Promise((resolve, reject) => {
 
+      let waitForResponse = setTimeout(() => {
+
+        // If Reporter does  not reply the promise is rejected
+        _this._bus.removeResponseListener(_this._owner, id);
+
+        msg.body.code = 408;
+        msg.body.desc = 'Response timeout'
+
+        return reject(msg);
+
+      }, 3000);
 
       let callback = (reply) => {
         log.log('[HypertyResource.read] reply: ', reply);
+        let id = reply.id;
 
         clearTimeout(waitForResponse);
 
@@ -210,7 +222,7 @@ class HypertyResource extends DataObjectChild {
 
       };
 
-      _this._bus.postMessage(msg, callback, false);
+      let id = _this._bus.postMessage(msg, callback, false);
 
     });
 

@@ -1,6 +1,6 @@
 {
   "name": "service-framework",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "description": "Set of JavaScript factory modules for thr reTHINK base Data Models and Data Synchronization",
   "files": [
     "dist"
