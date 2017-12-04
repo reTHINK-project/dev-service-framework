@@ -1,6 +1,6 @@
 {
   "name": "service-framework",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "description": "Set of JavaScript factory modules for thr reTHINK base Data Models and Data Synchronization",
   "files": [
     "dist"
@@ -68,6 +68,7 @@
     "tr46": "0.0.2",
     "tv4": "^1.2.7",
     "type-detect": "^1.0.0",
+    "uglifyjs-webpack-plugin": "^1.1.1",
     "webpack": "^3.8.1"
   }
 }

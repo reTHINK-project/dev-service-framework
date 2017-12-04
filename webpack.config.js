@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 var packageFile = require('./package.json');
 
 var PrependText = require('./webpack/PrependText.js');
@@ -40,18 +41,7 @@ function getModeConfig() {
     }
   }));
 
-  plugins.push(new webpack.optimize.UglifyJsPlugin({
-    beautify: process.env.MODE === 'prod' ? false : true,
-    mangle: {
-      screw_ie8: true,
-      keep_fnames: true
-    },
-    compress: {
-      screw_ie8: true
-    },
-    comments: false,
-    sourceMap: true
-  }));
+  plugins.push(new UglifyJsPlugin());
 
   return plugins;
 }
@@ -64,6 +54,7 @@ module.exports = {
     Discovery: './src/Discovery.js',
     IdentityManager: './src/IdentityManager.js',
     ContextManager: './src/ContextManager.js',
+    ChatManager: './src/ChatManager.js',
     MessageFactory: './src/MessageFactory.js',
     PersistenceManager: './src/PersistenceManager.js',
     RuntimeCatalogue: './src/RuntimeCatalogue.js',
@@ -79,7 +70,7 @@ module.exports = {
     libraryTarget: 'umd',
     umdNamedDefine: true
   },
-  devtool: process.env.MODE === 'dev' ? 'cheap-module-eval-source-map' : false,
+  devtool: process.env.MODE === 'dev' ? 'eval-source-map' : 'none',
   module: {
     rules: [
 

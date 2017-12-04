@@ -332,7 +332,6 @@ class Syncher {
           reporterInput.childrens = reply.body.childrenResources;
 
           let newObj = _this._reporters[reporterInput.url];
-          let invitations = [];
 
           if (!newObj) {
             newObj = new DataObjectReporter(reporterInput);

@@ -31,43 +31,44 @@ class IdentityManager {
   /**
   * To initialise the IdentityManager, which will provide the support for hyperties to
   * query about identities registered
-  * @param  {String}          hypertyURL            hypertyURL
+  * @param  {String}          owner            owner
   * @param  {String}          runtimeURL            runtimeURL
   * @param  {MessageBus}          msgbus                msgbus
   */
-  constructor(hypertyURL, runtimeURL, msgBus) {
+  constructor(owner, runtimeURL, msgBus) {
     let _this = this;
     _this.messageBus = msgBus;
 
-    _this.domain = divideURL(hypertyURL).domain;
-    _this.hypertyURL = hypertyURL;
+    _this.domain = divideURL(owner).domain;
+    _this.owner = owner;
     _this.runtimeURL = runtimeURL;
   }
 
   /**
   * Function to query the runtime registry about the identity to which the hyperty was associated
   * @param {String}       type (Optional)         type of user info required
-  * @param {String}       hypertyURL (Optional)   hypertyURL to search for
+  * @param {String}       owner (Optional)   owner to search for
   * @return {Promise}     userURL       userURL associated to the hyperty
   */
-  discoverUserRegistered(type, hypertyURL) {
+  discoverUserRegistered(type, hyperty) {
     let _this = this;
-    let activeHypertyURL;
-
-    // if any type of search is selected query for that type, otherwise query for default user info
-    let searchType = (type) ? type : '.';
-
-    if (!hypertyURL) {
-      activeHypertyURL = _this.hypertyURL;
-    } else {
-      activeHypertyURL = hypertyURL;
-    }
-
-    let msg = {
-      type: 'read', from: activeHypertyURL, to: _this.runtimeURL + '/registry/', body: { resource: searchType, criteria: activeHypertyURL}
-    };
 
     return new Promise(function(resolve, reject) {
+
+      let activeHypertyURL;
+
+      // if any type of search is selected query for that type, otherwise query for default user info
+      let searchType = (type) ? type : '.';
+
+      if (!hyperty) {
+        activeHypertyURL = _this.owner;
+      } else {
+        activeHypertyURL = hyperty;
+      }
+
+      let msg = {
+        type: 'read', from: activeHypertyURL, to: _this.runtimeURL + '/registry/', body: { resource: searchType, criteria: activeHypertyURL}
+      };
 
       _this.messageBus.postMessage(msg, (reply) => {
 
@@ -77,6 +78,32 @@ class IdentityManager {
           resolve(userURL);
         } else {
           reject('code: ' + reply.body.code + ' No user was found');
+        }
+      });
+    });
+  }
+
+  /**
+  * Function to query the Identity Module about authenticated identities from a certain domain
+  * @param {String}       idp idp domain of the identity to be discovered
+  * @return {Promise}     identity
+  */
+
+  discoverIdentityPerIdP(idp) {
+    let _this = this;
+
+    return new Promise(function(resolve, reject) {
+
+      let msg = {
+        type: 'read', from: this.owner, to: _this.runtimeURL + '/idm', body: { resource: idp, criteria: 'idp'}
+      };
+
+      _this.messageBus.postMessage(msg, (reply) => {
+
+        if (reply.body.code === 200) {
+          resolve(reply.body.value);
+        } else {
+          reject(reply.body.code + ' ' + reply.body.desc);
         }
       });
     });
