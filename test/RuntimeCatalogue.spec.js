@@ -33,83 +33,83 @@ import {divideURL} from '../src/utils/utils';
 
 // Testing RuntimeCatalogue
 describe('Runtime Catalogue', function () {
-    let domain = 'localhost';
-    let hypertyName = "FirstHyperty";
-    let protostubName = "FirstProtostub";
-    let runtimeName = "FirstRuntime";
-    let schemaName = "FirstDataSchema";
-    let idpproxyName = "FirstProxy";
+  let domain = 'localhost';
+  let hypertyName = "FirstHyperty";
+  let protostubName = "FirstProtostub";
+  let runtimeName = "FirstRuntime";
+  let schemaName = "FirstDataSchema";
+  let idpproxyName = "FirstProxy";
 
-    let runtimeFactory = new RuntimeFactory();
+  let runtimeFactory = new RuntimeFactory();
 
-    let runtimeCatalogue = new RuntimeCatalogue(runtimeFactory);
-    runtimeCatalogue.runtimeURL = domain;
-    let tempHypertyDescriptor;
+  let runtimeCatalogue = new RuntimeCatalogue(runtimeFactory, 'runtimeCatalogue');
+  runtimeCatalogue.runtimeURL = domain;
+  let tempHypertyDescriptor;
 
-    it('should get hyperty descriptor', function (done) {
-        let hypertyDescriptorURL = 'hyperty-catalogue://' + domain + '/.well-known/hyperty/' + hypertyName;
-        expect(runtimeCatalogue.getHypertyDescriptor(hypertyDescriptorURL).then((hypertyDescriptor) => {
-            //console.info("getHypertyDescriptor returned:", JSON.stringify(hypertyDescriptor, null, 2));
-            tempHypertyDescriptor = hypertyDescriptor;
-            return hypertyDescriptor;
-        })).to.eventually.be.instanceof(HypertyDescriptor).and.notify(done);
-    });
+  it('should get hyperty descriptor', function (done) {
+    let hypertyDescriptorURL = 'hyperty-catalogue://' + domain + '/.well-known/hyperty/' + hypertyName;
+    expect(runtimeCatalogue.getHypertyDescriptor(hypertyDescriptorURL).then((hypertyDescriptor) => {
+      //console.info("getHypertyDescriptor returned:", JSON.stringify(hypertyDescriptor, null, 2));
+      tempHypertyDescriptor = hypertyDescriptor;
+      return hypertyDescriptor;
+    })).to.eventually.be.instanceof(HypertyDescriptor).and.notify(done);
+  });
 
-    it('should get sourcePackage', function (done) {
-        expect(runtimeCatalogue.getSourcePackageFromURL(tempHypertyDescriptor.sourcePackageURL).then((sourcePackage) => {
-            //console.info("getSourcePackageFromURL returned:", JSON.stringify(sourcePackage, null, 2));
-            return sourcePackage;
-        })).to.eventually.be.instanceof(SourcePackage).and.notify(done);
-    });
+  it('should get sourcePackage', function (done) {
+    expect(runtimeCatalogue.getSourcePackageFromURL(tempHypertyDescriptor.sourcePackageURL).then((sourcePackage) => {
+      //console.info("getSourcePackageFromURL returned:", JSON.stringify(sourcePackage, null, 2));
+      return sourcePackage;
+    })).to.eventually.be.instanceof(SourcePackage).and.notify(done);
+  });
 
 
-    it('should get hyperty source code', function (done) {
-        expect(runtimeCatalogue.getSourceCodeFromDescriptor(tempHypertyDescriptor).then((sourceCode) => {
-            //console.info("getSourceCodeFromDescriptor returned:", sourceCode);
-            return sourceCode;
-        })).to.be.fulfilled.and.notify(done);
+  it('should get hyperty source code', function (done) {
+    expect(runtimeCatalogue.getSourceCodeFromDescriptor(tempHypertyDescriptor).then((sourceCode) => {
+      //console.info("getSourceCodeFromDescriptor returned:", sourceCode);
+      return sourceCode;
+    })).to.be.fulfilled.and.notify(done);
 
-    });
+  });
 
-    it('should get protostub descriptor', function (done) {
-        let protostubURL = 'hyperty-catalogue://' + domain + '/.well-known/protocolstub/' + protostubName;
-        expect(runtimeCatalogue.getStubDescriptor(protostubURL).then((protostub) => {
-            //console.info("getStubDescriptor returned:", JSON.stringify(protostub, null, 2));
-            return protostub;
-        })).to.eventually.be.instanceof(ProtocolStubDescriptor).and.notify(done);
-    });
+  it('should get protostub descriptor', function (done) {
+    let protostubURL = 'hyperty-catalogue://' + domain + '/.well-known/protocolstub/' + protostubName;
+    expect(runtimeCatalogue.getStubDescriptor(protostubURL).then((protostub) => {
+      //console.info("getStubDescriptor returned:", JSON.stringify(protostub, null, 2));
+      return protostub;
+    })).to.eventually.be.instanceof(ProtocolStubDescriptor).and.notify(done);
+  });
 
-    it('should get runtime descriptor', function (done) {
-        let runtimeURL = 'hyperty-catalogue://' + domain + '/.well-known/runtime/' + runtimeName;
-        expect(runtimeCatalogue.getRuntimeDescriptor(runtimeURL).then((runtime) => {
-            //console.info("getRuntimeDescriptor returned:", JSON.stringify(runtime, null, 2));
-            return runtime;
-        })).to.eventually.be.instanceof(HypertyRuntimeDescriptor).and.notify(done);
-    });
+  it('should get runtime descriptor', function (done) {
+    let runtimeURL = 'hyperty-catalogue://' + domain + '/.well-known/runtime/' + runtimeName;
+    expect(runtimeCatalogue.getRuntimeDescriptor(runtimeURL).then((runtime) => {
+      //console.info("getRuntimeDescriptor returned:", JSON.stringify(runtime, null, 2));
+      return runtime;
+    })).to.eventually.be.instanceof(HypertyRuntimeDescriptor).and.notify(done);
+  });
 
-    it('should get dataschema descriptor', function (done) {
-        let schemaURL = 'hyperty-catalogue://' + domain + '/.well-known/dataschema/' + schemaName;
-        expect(runtimeCatalogue.getDataSchemaDescriptor(schemaURL).then((schemaDescriptor) => {
-            //console.info("getDataSchemaDescriptor returned:", JSON.stringify(schemaDescriptor, null, 2));
-            return schemaDescriptor;
-        })).to.eventually.be.instanceof(DataObjectSchema).and.notify(done);
-    });
+  it('should get dataschema descriptor', function (done) {
+    let schemaURL = 'hyperty-catalogue://' + domain + '/.well-known/dataschema/' + schemaName;
+    expect(runtimeCatalogue.getDataSchemaDescriptor(schemaURL).then((schemaDescriptor) => {
+      //console.info("getDataSchemaDescriptor returned:", JSON.stringify(schemaDescriptor, null, 2));
+      return schemaDescriptor;
+    })).to.eventually.be.instanceof(DataObjectSchema).and.notify(done);
+  });
 
-    it('should get idpproxy descriptor', function (done) {
-        let protostubURL = 'hyperty-catalogue://' + domain + '/.well-known/idp-proxy/' + idpproxyName;
-        expect(runtimeCatalogue.getIdpProxyDescriptor(protostubURL).then((proxyDescriptor) => {
-            //console.info("getIdpProxyDescriptor returned:", JSON.stringify(proxyDescriptor, null, 2));
-            return proxyDescriptor;
-        })).to.eventually.be.instanceof(ProtocolStubDescriptor).and.notify(done);
-    });
+  it('should get idpproxy descriptor', function (done) {
+    let protostubURL = 'hyperty-catalogue://' + domain + '/.well-known/idp-proxy/' + idpproxyName;
+    expect(runtimeCatalogue.getIdpProxyDescriptor(protostubURL).then((proxyDescriptor) => {
+      //console.info("getIdpProxyDescriptor returned:", JSON.stringify(proxyDescriptor, null, 2));
+      return proxyDescriptor;
+    })).to.eventually.be.instanceof(ProtocolStubDescriptor).and.notify(done);
+  });
 
-    it('should NOT get hyperty', function (done) {
-        let hypertyDescriptorURL = 'someInvalidURL';
-        expect(runtimeCatalogue.getHypertyDescriptor(hypertyDescriptorURL).then((hypertyDescriptor) => {
-            //console.info("getHypertyDescriptor returned:", JSON.stringify(hypertyDescriptor, null, 2));
-            tempHypertyDescriptor = hypertyDescriptor;
-            return hypertyDescriptor;
-        })).to.be.rejected.and.notify(done);
-    });
+  it('should NOT get hyperty', function (done) {
+    let hypertyDescriptorURL = 'someInvalidURL';
+    expect(runtimeCatalogue.getHypertyDescriptor(hypertyDescriptorURL).then((hypertyDescriptor) => {
+      //console.info("getHypertyDescriptor returned:", JSON.stringify(hypertyDescriptor, null, 2));
+      tempHypertyDescriptor = hypertyDescriptor;
+      return hypertyDescriptor;
+    })).to.be.rejected.and.notify(done);
+  });
 
 });
