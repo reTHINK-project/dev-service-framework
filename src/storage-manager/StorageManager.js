@@ -216,13 +216,10 @@ class StorageManager {
       data = key;
     }
 
-    return this.db.transaction('rw!', this.db[name], () => {
-      return this.db[name]
-        .where(primaryKey)
-        .equals(data)
-        .delete();
-
-    });
+    return this.db[name]
+      .where(primaryKey)
+      .equals(data)
+      .delete();
   }
 
 }
