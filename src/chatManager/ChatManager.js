@@ -121,19 +121,21 @@ class ChatManager {
     }
   }
 
-  _myIdentity(identity) {
+  myIdentity(identity) {
+    let _this = this;
 
     return new Promise((resolve, reject) => {
+      console.info('[ChatManager.myIdentity]');
       if (identity) return resolve(identity);
 
-      if (this._myUrl.includes('hyperty://')) {
-        this.identityManager.discoverUserRegistered().then((identity) => {
+      if (_this._myUrl.includes('hyperty://')) {
+        _this.identityManager.discoverUserRegistered().then((identity) => {
           resolve(identity);
         }).catch(function(reason) {
           reject(reason);
         });
       } else {
-        this.identityManager.discoverIdentityPerIdP().then((identity) => {
+        _this.identityManager.discoverIdentityPerIdP().then((identity) => {
           resolve(identity);
         }).catch(function(reason) {
           reject(reason);
@@ -162,7 +164,7 @@ class ChatManager {
 
       let myIdentity;
 
-      _this._myIdentity().then((identity) => {
+      _this.myIdentity().then((identity) => {
         myIdentity = identity;
         console.log('[ChatManager.create ] My Identity', identity);
 
@@ -281,7 +283,7 @@ class ChatManager {
 
       console.info('[ChatManager] ------------------------ Syncher subscribe ---------------------- \n');
       console.info('invitationURL', invitationURL);
-      _this._myIdentity(identity).then((identity) => {
+      _this.myIdentity(identity).then((identity) => {
         myIdentity = identity;
         return syncher.subscribe(_this._objectDescURL, invitationURL, true, false, mutual, identity);
 

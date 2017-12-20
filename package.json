@@ -9,7 +9,7 @@
     "test": "karma start",
     "test:lint": "eslint --config .eslintrc.yml ./src/",
     "build:doc": "./node_modules/.bin/esdoc -c esdoc.json",
-    "build:dev": "cross-env MODE=dev webpack",
+    "build:dev": "cross-env MODE=dev webpack && cp -TRv ./dist ../dev-hyperty/src/group-chat-manager/node_modules/service-framework/dist",
     "build:prod": "cross-env MODE=prod webpack",
     "build": "node scripts/transform.js"
   },

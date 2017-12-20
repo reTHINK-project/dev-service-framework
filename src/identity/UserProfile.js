@@ -5,11 +5,11 @@
 
 class UserProfile {
 
-  constructor(username, userURL, avatar, cn, locale, profile) {
+  constructor(username, userURL, picture, name, locale, profile) {
 
-    if (username) { this.username = username; }
-    if (avatar) { this.avatar = avatar; }
-    if (cn) { this.cn = cn; }
+    if (username) { this.preferred_username = username; }
+    if (picture) { this.picture = picture; }
+    if (name) { this.name = name; }
     if (locale) { this.locale = locale; }
     if (userURL) { this.userURL = userURL; }
     if (profile) Object.assign(this, profile);
