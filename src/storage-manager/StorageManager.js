@@ -54,6 +54,7 @@ class StorageManager {
    * @param value - value stored in the database that is mapped to given key
    * @returns {Promise} result - Promise that will be fulfilled with the key if the entry was stored successfully,
    * otherwise it is rejected with an error.
+   * @memberof StorageManager
    */
   set(key, version, value) {
     log.info('[StorageManager] - set ', key, value);
@@ -84,7 +85,9 @@ class StorageManager {
    * Get a entry value from the database for a given key.
    * If no entry is found undefined is returned.
    * @param {!string} key - key that was stored using {@link storageManager.set}
+   * @param {any} value - value which should be found
    * @returns {Promise} result - Promise that will be fulfilled with the value.
+   * @memberof StorageManager
    */
   get(key, value) {
     console.info('[StorageManager] - get ', key, value);
@@ -168,7 +171,9 @@ class StorageManager {
    * Get a entry version from the database for a given key.
    * If no entry is found undefined is returned.
    * @param {!string} key - key that was stored using {@link storageManager.set}
+   * @param {any} value - the value which sould be used to find the storage resource
    * @returns {Promise} result - Promise that will be fulfilled with the version.
+   * @memberof StorageManager
    */
   getVersion(key, value) {
     log.info('[StorageManager] - getVersion for key ', key);
@@ -205,6 +210,7 @@ class StorageManager {
    * Delete a entry from the database for a given key.
    * @param {!string} key - key that was stored using {@link storageManager.set}
    * @returns {Promise} result - Promise that will be fulfilled with the number of affected rows.
+   * @memberof StorageManager
    */
   delete(key, value) {
     const name = this._getTable(key);
