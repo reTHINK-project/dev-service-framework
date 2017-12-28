@@ -7,11 +7,14 @@ module.exports = function(config) {
     ],
     exclude: [],
     preprocessors: {
-      './test/*.spec.js': ['webpack']
+      './test/*.spec.js': ['webpack', 'sourcemap']
     },
 
     // webpack configuration
-    webpack: require('./webpack.config.js'),
+    webpack: {
+      devtool: 'inline-source-map'
+    },
+
     reporters: ['mocha'],
 
     client: {
@@ -19,6 +22,16 @@ module.exports = function(config) {
         reporter: 'html'
       }
     },
+
+    plugins: [
+      'karma-webpack',
+      'karma-sourcemap-loader',
+      'karma-mocha',
+      'karma-chai',
+      'karma-sinon',
+      'karma-mocha-reporter',
+      'karma-chrome-launcher'],
+
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
