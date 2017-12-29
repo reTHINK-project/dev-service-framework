@@ -1,5 +1,5 @@
 var path = require('path');
-var webpack = require('webpack');
+var WebpackMonitor = require('webpack-monitor');
 var UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 var packageFile = require('./package.json');
 
@@ -40,6 +40,13 @@ function getModeConfig() {
       licence: '\n' + license
     }
   }));
+
+  if (process.env.MONITOR) {
+    plugins.push(new WebpackMonitor({
+      launch: true, // -> default 'false'
+      port: 3031 // default -> 8081
+    }));
+  }
 
   plugins.push(new UglifyJsPlugin());
 

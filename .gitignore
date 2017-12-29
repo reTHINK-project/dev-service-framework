@@ -12,6 +12,7 @@ CVS
 npm-debug.log
 npm-debug.log.*
 vendor
+monitor
 node_modules
 
 *.iml
