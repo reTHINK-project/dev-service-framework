@@ -44,13 +44,15 @@ import { UserInfo } from './UserInfo';
 */
 class ChatManager {
 
-  constructor(myUrl, bus, configuration) {
+  constructor(myUrl, bus, configuration, syncher) {
     if (!myUrl) throw new Error('[ChatManager.constructor] The myUrl is a needed parameter');
     if (!bus) throw new Error('[ChatManager.constructor] The MiniBus is a needed parameter');
     if (!configuration) throw new Error('[ChatManager.constructor] The configuration is a needed parameter');
 
     let _this = this;
-    let syncher = new Syncher(myUrl, bus, configuration);
+    if (!syncher) {
+      syncher = new Syncher(myUrl, bus, configuration);
+    }
 
     _this._runtimeURL = configuration.runtimeURL;
 

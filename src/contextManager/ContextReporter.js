@@ -58,7 +58,7 @@ class ContextReporter extends EventEmitter {
     this.contextDescURL = 'hyperty-catalogue://catalogue.' + this.domain + '/.well-known/dataschema/Context';
 
 
-//    this.heartbeat = [];
+    //    this.heartbeat = [];
 
     this.syncher.onNotification((event) => {
       let _this = this;
@@ -69,7 +69,7 @@ class ContextReporter extends EventEmitter {
 
     this.syncher.onClose((event) => {
 
-      console.log('[ContextReporter.onClose]')
+      console.log('[ContextReporter.onClose]');
       let _this = this;
       _this.setStatus(event.id, 'unavailable');
       event.ack();
@@ -79,46 +79,46 @@ class ContextReporter extends EventEmitter {
 
   //TODO: move to User availability Reporter or to abstract HypertyContextReporter
 
-start(){
-  let _this = this;
+  start() {
+    let _this = this;
 
-  return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
 
-    this.syncher.resumeReporters({store: true}).then((reporters) => {
+      this.syncher.resumeReporters({store: true}).then((reporters) => {
 
-      let reportersList = Object.keys(reporters);
+        let reportersList = Object.keys(reporters);
 
-      if (reportersList.length  > 0) {
+        if (reportersList.length  > 0) {
 
-      console.log('[ContextReporter.start] resuming ', reporters[reportersList[0]]);
-      // set availability to available
+          console.log('[ContextReporter.start] resuming ', reporters[reportersList[0]]);
 
-      _this.contexts = reporters;
+          // set availability to available
 
-      //TODO:
-      reportersList.forEach((context) => {
-        _this._onSubscription(_this.contexts[context]);
+          _this.contexts = reporters;
+
+          //TODO:
+          reportersList.forEach((context) => {
+            _this._onSubscription(_this.contexts[context]);
+          });
+
+          resolve(_this.contexts);
+        } else {
+          console.log('[ContextReporter.start] nothing to resume ', reporters);
+          resolve(false);
+        }
+
+      }).catch((reason) => {
+        console.error('[ContextReporter] Resume failed | ', reason);
       });
-
-      resolve(_this.contexts);
-      } else {
-        console.log('[ContextReporter.start] nothing to resume ', reporters);
-        resolve(false);
-      }
-
     }).catch((reason) => {
-      console.error('[ContextReporter] Resume failed | ', reason);
+      reject('[ContextReporter] Start failed | ', reason);
     });
-  }).catch((reason) => {
-  reject('[ContextReporter] Start failed | ', reason);
-});
-}
+  }
 
 
-
- processNotification(event) {
-   let _this = this;
-   console.log('[ContextReporter.processNotification: ', event);
+  processNotification(event) {
+    let _this = this;
+    console.log('[ContextReporter.processNotification: ', event);
 
     event.ack();
 
@@ -129,27 +129,32 @@ start(){
    * @param  {URL.UserURL} contacts List of Users
    * @return {Promise}
    */
-  create(id, init, resources, name = 'myContext') {
+  create(id, init, resources, name = 'myContext', reporter = null) {
     let _this = this;
-
+    let input;
     return new Promise((resolve, reject) => {
+      if (!reporter) {
+        input = {resources: resources, expires: 30};
+      } else {
+        input = {resources: resources, expires: 30, reporter: reporter};
+      }
       console.info('[ContextReporter.create] lets create a new User availability Context Object ');
-      _this.syncher.create(_this.contextDescURL, [],init, true, false, name, null, {resources: resources, expires: 30})
-      .then((context) => {
-        _this.contexts[id] = context;
+      _this.syncher.create(_this.contextDescURL, [], init, true, false, name, null, {resources: resources, expires: 30}, input)
+        .then((context) => {
+          _this.contexts[id] = context;
 
-        _this._onSubscription(context);
-        resolve(context);
+          _this._onSubscription(context);
+          resolve(context);
 
-      }).catch(function(reason) {
-        reject(reason);
-      });
+        }).catch(function(reason) {
+          reject(reason);
+        });
 
     });
 
   }
 
-  _onSubscription(context){
+  _onSubscription(context) {
     context.onSubscription((event) => {
       console.info('[ContextReporter._onSubscription] accepting: ', event);
       event.accept();
@@ -159,11 +164,12 @@ start(){
   setContext(id, newContext) {
     let _this = this;
     console.log('[ContextReporter.setContext] before change :', _this.contexts[id].data);
-//    _this.contexts[id].data.values[0].value = newContext;
+
+    //    _this.contexts[id].data.values[0].value = newContext;
 
     _this.contexts[id].data.values = newContext;
     console.debug('[ContextReporter.setContext] after change :', _this.contexts[id].data);
-    _this.trigger(id+'-context-update', newContext);
+    _this.trigger(id + '-context-update', newContext);
 
   }
 

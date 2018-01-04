@@ -124,6 +124,7 @@ class Syncher {
     if (!observers) throw Error('[Syncher - Create] -The observers should be defined');
 
     let _this = this;
+    input = input || {};
     let createInput  = Object.assign({}, input);
 
     createInput.p2p = p2p;
@@ -134,7 +135,7 @@ class Syncher {
     createInput.p2pRequester = _this._p2pRequester;
     (initialData) ? createInput.data = deepClone(initialData) : createInput.data = {};
     createInput.name = name.length === 0 ? 'no name' : name;
-    createInput.reporter = _this._owner;
+    createInput.reporter = input.hasOwnProperty('reporter') ? input.reporter : _this._owner;
     createInput.resume = false;
     if (input) {
       createInput.mutual = input.hasOwnProperty('mutual') ? input.mutual : true;
@@ -367,7 +368,11 @@ class Syncher {
 
       if (criteria) {
         requestMsg.body.value = criteria;
-        requestMsg.body.value.reporter = _this._owner;
+        if (criteria.hasOwnProperty('reporter')) {
+          requestMsg.body.value.reporter = criteria.reporter;
+        } else {
+          requestMsg.body.value.reporter = _this._owner;
+        }
       }
 
       if (criteria.p2p) requestMsg.body.p2p = criteria.p2p;
