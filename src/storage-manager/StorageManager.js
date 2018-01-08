@@ -46,27 +46,34 @@ class StorageManager {
     return this.db.table(table).schema.primKey.name;
   }
 
+  _isDefaultSchema(table) {
+    const name = this._getTable(table);
+    const schema = this.db[name].schema.instanceTemplate;
+    return schema.hasOwnProperty('value') && schema.hasOwnProperty('version') && schema.hasOwnProperty('key');
+  }
+
   /**
    * Adds a new entry to the database for a given key, together with its version.
    * If an entry for the given key is already stored in the database, it will be updated.
    * @param {!string} key - key that can be used with {@link storageManager.get} to retrieve the value object
    * @param {!string} version - version descriptor for the given value
    * @param value - value stored in the database that is mapped to given key
+   * @param {!string} table - table which should be looking for
    * @returns {Promise} result - Promise that will be fulfilled with the key if the entry was stored successfully,
    * otherwise it is rejected with an error.
    * @memberof StorageManager
    */
-  set(key, version, value) {
+  set(key, version, value, table) {
     log.info('[StorageManager] - set ', key, value);
-    const name = this._getTable(key);
-    const schema = this.db[name].schema.instanceTemplate;
+    table = table ? table : key;
+    const name = this._getTable(table);
     const primaryKey = this._getPrimaryKey(name);
 
     // Object.assign(value, {version: version});
 
     let data = value;
 
-    if (schema.hasOwnProperty('value') && schema.hasOwnProperty('version') && schema.hasOwnProperty('key')) {
+    if (this._isDefaultSchema(table)) {
       data = {
         key: key,
         version: version,
@@ -85,14 +92,15 @@ class StorageManager {
    * Get a entry value from the database for a given key.
    * If no entry is found undefined is returned.
    * @param {!string} key - key that was stored using {@link storageManager.set}
-   * @param {any} value - value which should be found
+   * @param {!any} value - value which should be found
+   * @param {!string} table - table which should be looking for
    * @returns {Promise} result - Promise that will be fulfilled with the value.
    * @memberof StorageManager
    */
-  get(key, value) {
+  get(key, value, table) {
     console.info('[StorageManager] - get ', key, value);
-
-    const name = this._getTable(key);
+    table = table ? table : key;
+    const name = this._getTable(table);
     const primaryKey = this._getPrimaryKey(name);
 
     return this.db.transaction('rw!', this.db[name], () => {
@@ -103,7 +111,6 @@ class StorageManager {
             acc[key[primaryKey]] = key;
             return acc;
           }, {});
-
         });
       }
 
@@ -172,13 +179,14 @@ class StorageManager {
    * If no entry is found undefined is returned.
    * @param {!string} key - key that was stored using {@link storageManager.set}
    * @param {any} value - the value which sould be used to find the storage resource
+   * @param {!string} table - table which should be looking for
    * @returns {Promise} result - Promise that will be fulfilled with the version.
    * @memberof StorageManager
    */
-  getVersion(key, value) {
+  getVersion(key, value, table) {
     log.info('[StorageManager] - getVersion for key ', key);
-
-    const name = this._getTable(key);
+    table = table ? table : key;
+    const name = this._getTable(table);
     const primaryKey = this._getPrimaryKey(name);
 
     let data = value;
@@ -209,11 +217,14 @@ class StorageManager {
   /**
    * Delete a entry from the database for a given key.
    * @param {!string} key - key that was stored using {@link storageManager.set}
+   * @param {!any} value - the value which sould be used to find the storage resource
+   * @param {!string} table - table which should be looking for
    * @returns {Promise} result - Promise that will be fulfilled with the number of affected rows.
    * @memberof StorageManager
    */
-  delete(key, value) {
-    const name = this._getTable(key);
+  delete(key, value, table) {
+    table = table ? table : key;
+    const name = this._getTable(table);
     const primaryKey = this._getPrimaryKey(name);
 
     let data = value;
