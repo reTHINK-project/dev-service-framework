@@ -145,7 +145,7 @@ resumeDiscoveries() {
           _this._discoveries[hyperty.data.hypertyID] = hyperty;
           if (hyperty.data.status === 'live') {
             discovered.push(hyperty.data);
-          } else {
+          } else if (disconnected.length < 5) {
             disconnected.push(hyperty);
             };
         });

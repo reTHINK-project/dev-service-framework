@@ -134,7 +134,7 @@ start(){
 
     return new Promise((resolve, reject) => {
       console.info('[ContextReporter.create] lets create a new User availability Context Object ');
-      _this.syncher.create(_this.contextDescURL, [],init, true, false, name, null, {resources: resources, expires: 30})
+      _this.syncher.create(_this.contextDescURL, [],init, true, false, name, null, {resources: resources, expires: 60})
       .then((context) => {
         _this.contexts[id] = context;
 
