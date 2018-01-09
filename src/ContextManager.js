@@ -1,3 +1,4 @@
-import ContextObsever from './contextManager/ContextObserver';
+import ContextObserver from './contextManager/ContextObserver';
+import ContextReporter from './contextManager/ContextReporter';
 
-export default ContextObsever;
+export {ContextObserver, ContextReporter};

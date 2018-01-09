@@ -1,5 +1,5 @@
 var path = require('path');
-var webpack = require('webpack');
+var WebpackMonitor = require('webpack-monitor');
 var UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 var packageFile = require('./package.json');
 
@@ -41,6 +41,13 @@ function getModeConfig() {
     }
   }));
 
+  if (process.env.MONITOR) {
+    plugins.push(new WebpackMonitor({
+      launch: true, // -> default 'false'
+      port: 3031 // default -> 8081
+    }));
+  }
+
   plugins.push(new UglifyJsPlugin());
 
   return plugins;
@@ -54,6 +61,7 @@ module.exports = {
     Discovery: './src/Discovery.js',
     IdentityManager: './src/IdentityManager.js',
     ContextManager: './src/ContextManager.js',
+    ChatManager: './src/ChatManager.js',
     MessageFactory: './src/MessageFactory.js',
     PersistenceManager: './src/PersistenceManager.js',
     RuntimeCatalogue: './src/RuntimeCatalogue.js',

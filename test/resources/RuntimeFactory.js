@@ -2,6 +2,10 @@ import Request from './Request';
 import { RuntimeCatalogue } from '../../src/RuntimeCatalogue';
 import PersistenceManager from '../../src/persistence/PersistenceManager';
 
+import StorageManager from '../../src/StorageManager';
+
+import  Dexie from 'dexie';
+
 class RuntimeFactory {
 
   createSandbox() {
@@ -26,37 +30,27 @@ class RuntimeFactory {
     return new PersistenceManager(localStorage);
   }
 
-  storageManager() {
-    return {
-      get: (key) => {
-        console.log('get: ', key);
-        return new Promise((resolve) => {
-          resolve(undefined);
-        });
-      },
+  storageManager(name, schemas) {
 
-      set:(key, version, value) => {
-        console.log('set: ', key, version, value);
-        return new Promise((resolve) => {
-          resolve(undefined);
-        });
-      },
+    if (!this.databases) { this.databases = {}; }
+    if (!this.storeManager) { this.storeManager = {}; }
 
-      getVersion: (key) => {
-        console.log('get version: ', key);
-        return new Promise((resolve) => {
-          resolve(undefined);
-        });
-      },
+    // Using the implementation of Service Framework
+    // Dexie is the IndexDB Wrapper
+    if (!this.databases.hasOwnProperty(name)) {
+      this.databases[name] = new Dexie(name);
+    }
 
-      delete: (key) => {
-        console.log('delete: ', key);
-        return new Promise((resolve) => {
-          resolve(undefined);
-        });
+    if (!this.storeManager.hasOwnProperty(name)) {
+      const schema = {
+        runtimeCatalogue: '&cguid, accessControlPolicy, constraints, dataObjects, hypertyType, objectName, sourcePackageURL, version'
       }
-    };
+      this.storeManager[name] = new StorageManager(this.databases[name], name, schema);
+    }
 
+    console.log(this.storeManager[name]);
+
+    return this.storeManager[name];
   }
 
   // TODO optimize the parameter was passed to inside the RuntimeCatalogue

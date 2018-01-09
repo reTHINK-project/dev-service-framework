@@ -7,7 +7,7 @@ import EventEmitter from '../utils/EventEmitter';
 
 class ContextObserver extends EventEmitter {
 
-  constructor(hypertyURL, bus, configuration, contextResourceTypes) {
+  constructor(hypertyURL, bus, configuration, contextResourceTypes, syncher) {
     if (!hypertyURL) throw new Error('The hypertyURL is a needed parameter');
     if (!bus) throw new Error('The MiniBus is a needed parameter');
     if (!configuration) throw new Error('The configuration is a needed parameter ');
@@ -24,13 +24,14 @@ class ContextObserver extends EventEmitter {
 
     //let identityManager = new IdentityManager(hypertyURL, configuration.runtimeURL, bus);
     console.log('[ContextObserver] started with hypertyURL->', hypertyURL);
-    _this._domain = divideURL(hypertyURL).domain;
+    _this._domain = divideURL(configuration.runtimeURL).domain;
     _this._objectDescURL = 'hyperty-catalogue://catalogue.' + _this._domain + '/.well-known/dataschema/Context';
 
     _this._users2observe = [];
     _this._observers = {};
 
-    _this._syncher = new Syncher(hypertyURL, bus, configuration);
+    this._syncher = syncher ? syncher : new Syncher(hypertyURL, bus, configuration);
+
     let discovery = new Discovery(hypertyURL, configuration.runtimeURL, bus);
     _this._discovery = discovery;
 
@@ -41,7 +42,7 @@ class ContextObserver extends EventEmitter {
   }
 
 
-  start() {
+  start(resumedContext, disconnectedCallBack) {
     let _this = this;
     console.log('[ContextObserver.start] ');
 
@@ -62,11 +63,16 @@ class ContextObserver extends EventEmitter {
         resolve(observers);
 
         observersList.forEach((observer) =>{
-          let Context = observers[observer]
+          let Context = observers[observer];
+;
+          // By default resumed context is set with resumedContext.
+          if (resumedContext) context.data.values = resumedContext;
 
           // Context will will be updated with value synchronized with reporter if connected
           Context.sync();
 
+          //Add listener to be notified when reporter is abruptly disconnected
+          if (disconnectedCallBack) Context.onDisconnected(disconnectedCallBack);
         });
 
 
@@ -139,7 +145,7 @@ resumeDiscoveries() {
           _this._discoveries[hyperty.data.hypertyID] = hyperty;
           if (hyperty.data.status === 'live') {
             discovered.push(hyperty.data);
-          } else {
+          } else if (disconnected.length < 5) {
             disconnected.push(hyperty);
             };
         });

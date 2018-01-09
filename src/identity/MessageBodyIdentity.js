@@ -6,7 +6,7 @@ import UserProfile from './UserProfile';
 
 class MessageBodyIdentity {
 
-  constructor(username, userURL, avatar, cn, locale, idp, assertion) {
+  constructor(username, userURL, picture, name, locale, idp, assertion, profile) {
 
     if (!idp) throw new Error('IDP should be a parameter');
     if (!username) throw new Error('username should be a parameter');
@@ -14,7 +14,7 @@ class MessageBodyIdentity {
     this.idp = idp;
 
     if (assertion)      { this.assertion = assertion; }
-    this.userProfile = new UserProfile(username, userURL, avatar, cn, locale);
+    this.userProfile = new UserProfile(username, userURL, picture, name, locale, profile);
 
   }
 
