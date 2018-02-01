@@ -130,6 +130,7 @@ class ContextReporter extends EventEmitter {
    * @return {Promise}
    */
   create(id, init, resources, name = 'myContext', reporter = null) {
+    //debugger;
     let _this = this;
     let input;
     return new Promise((resolve, reject) => {
