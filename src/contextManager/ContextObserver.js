@@ -254,7 +254,7 @@ class ContextObserver extends EventEmitter {
             }
             _this._subscribeContext(obj.schema, obj.url).then(function(resultSubscribe) {
               console.log('[ContextObserver._discoverAndSubscribeLegacyUsers] _subscribeContext', resultSubscribe);
-              return resolve(true);
+              return resolve(resultSubscribe);
             });
           }
         });
