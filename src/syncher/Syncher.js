@@ -145,7 +145,7 @@ class Syncher {
     if (identity)      { createInput.identity = identity; }
 
     //Object.assign(createInput, {resume: false});
-
+    //debugger;
     log.log('[syncher - create] - create Reporter - createInput: ', createInput);
 
     return _this._create(createInput);
@@ -365,7 +365,6 @@ class Syncher {
       };
 
       log.log('[syncher - create]: ', criteria, requestMsg);
-
       if (criteria) {
         requestMsg.body.value = criteria;
         if (criteria.hasOwnProperty('reporter')) {
@@ -382,11 +381,14 @@ class Syncher {
 
       log.log('[syncher._resumeCreate] - resume message: ', requestMsg);
 
+      //debugger;
+
       //request create to the allocation system. Can be rejected by the PolicyEngine.
+
       _this._bus.postMessage(requestMsg, (reply) => {
         log.log('[syncher._resumeCreate] - create-resumed-response: ', reply);
         if (reply.body.code === 200) {
-
+          //debugger;
           let listOfReporters = reply.body.value;
 
           for (let index in listOfReporters) {

@@ -139,8 +139,8 @@ class ContextReporter extends EventEmitter {
       } else {
         input = {resources: resources, expires: 30, reporter: reporter};
       }
-      console.info('[ContextReporter.create] lets create a new User availability Context Object ');
-      _this.syncher.create(_this.contextDescURL, [], init, true, false, name, null, {resources: resources, expires: 30}, input)
+      console.info('[ContextReporter.create] lets create a new User availability Context Object ', input);
+      _this.syncher.create(_this.contextDescURL, [], init, true, false, name, null, input)
         .then((context) => {
           _this.contexts[id] = context;
 
