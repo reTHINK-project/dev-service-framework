@@ -135,7 +135,7 @@ class Syncher {
     createInput.p2pRequester = _this._p2pRequester;
     (initialData) ? createInput.data = deepClone(initialData) : createInput.data = {};
     createInput.name = name.length === 0 ? 'no name' : name;
-    createInput.reporter = input.hasOwnProperty('reporter') ? input.reporter : _this._owner;
+    createInput.reporter = (input.hasOwnProperty('reporter') && ((typeof input.reporter) !== 'boolean')) ? input.reporter : _this._owner;
     createInput.resume = false;
     if (input) {
       createInput.mutual = input.hasOwnProperty('mutual') ? input.mutual : true;
