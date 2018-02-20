@@ -129,16 +129,21 @@ class ContextReporter extends EventEmitter {
    * @param  {URL.UserURL} contacts List of Users
    * @return {Promise}
    */
-  create(id, init, resources, name = 'myContext', reporter = null) {
+  create(id, init, resources, name = 'myContext', reporter = null, reuseURL = null) {
     //debugger;
     let _this = this;
     let input;
     return new Promise((resolve, reject) => {
-      if (!reporter) {
+      if (!reporter && !reuseURL) {
         input = {resources: resources, expires: 30};
-      } else {
+      } else if (reporter && !reuseURL) {
         input = {resources: resources, expires: 30, reporter: reporter};
+      } else if (!reporter && reuseURL) {
+        input = {resources: resources, expires: 30, reuseURL: reuseURL};
+      } else {
+        input = {resources: resources, expires: 30, reuseURL: reuseURL, reporter: reporter};
       }
+
       console.info('[ContextReporter.create] lets create a new User availability Context Object ', input);
       _this.syncher.create(_this.contextDescURL, [], init, true, false, name, null, input)
         .then((context) => {
@@ -164,6 +169,7 @@ class ContextReporter extends EventEmitter {
 
   setContext(id, newContext) {
     let _this = this;
+    console.log('THIS [ContextReporter.setContext] before change :', _this.contexts[id]);
     console.log('[ContextReporter.setContext] before change :', _this.contexts[id].data);
 
     //    _this.contexts[id].data.values[0].value = newContext;

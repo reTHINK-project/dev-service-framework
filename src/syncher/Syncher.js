@@ -142,6 +142,10 @@ class Syncher {
       createInput.name = input.hasOwnProperty('name') ? input.name : createInput.name;
     } else { createInput.mutual = true; }
 
+    if (input.hasOwnProperty('reuseURL')) {
+      createInput.resource = input.reuseURL;
+    }
+
     if (identity)      { createInput.identity = identity; }
 
     //Object.assign(createInput, {resume: false});
@@ -304,6 +308,7 @@ class Syncher {
       delete requestValue.identity;
 
       //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onCreate
+      //debugger;
       let requestMsg = {
         type: 'create', from: _this._owner, to: _this._subURL,
         body: { resume: resume, value: requestValue  }
