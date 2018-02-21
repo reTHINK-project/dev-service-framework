@@ -511,7 +511,7 @@ class ChatController {
                selectedHyperties.push(discovered.data.hypertyID);
                live[discovered.data.hypertyID] = discovered;
              }
-             else disconnected.push(discovered);
+             else if (disconnected.length < 5) disconnected.push(discovered);
            });
 
         });

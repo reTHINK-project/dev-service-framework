@@ -133,6 +133,7 @@ class ContextObserver extends EventEmitter {
 
     let user = email + '@' + domain;
 
+<<<<<<< HEAD
     if (!_this._discoverUsersPromises[user]) {
       _this._discoverUsersPromises[user] = new Promise(function(resolve, reject) {
 
@@ -149,6 +150,24 @@ class ContextObserver extends EventEmitter {
               disconnected.push(hyperty);
             }
           });
+=======
+    if (!_this._discoverUsersPromises[user])
+      _this._discoverUsersPromises[user] = new Promise(function(resolve,reject) {
+
+      _this._discovery.discoverHypertiesDO(email, ['context'], _this._contextResourceTypes, domain).then(hyperties =>{
+      //_this.search.users([email], [domain], ['context'], ['Context_context']).then(function(a) {
+        console.log('[ContextObserver.discoverUsers] discovery result->', hyperties);
+        let discovered = [];
+        let disconnected = [];
+        hyperties.forEach(hyperty =>{
+          _this._discoveries[hyperty.data.hypertyID] = hyperty;
+          if (hyperty.data.status === 'live') {
+            discovered.push(hyperty.data);
+          } else if (disconnected.length < 5) {
+            disconnected.push(hyperty);
+            };
+        });
+>>>>>>> develop
 
           if (discovered.length > 0) {
             console.log('[ContextObserver.discoverUsers] returning discovered hyperties data->', discovered);

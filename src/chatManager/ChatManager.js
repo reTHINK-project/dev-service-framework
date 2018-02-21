@@ -207,7 +207,12 @@ class ChatManager {
               if (discovered.data.status === 'live') {
                 selectedHyperties.push(discovered.data.hypertyID);
                 live[discovered.data.hypertyID] = discovered;
-              } else disconnected.push(discovered);
+              } else {
+                // To control the number of subscriptions to disconnected devices
+                 if (disconnected.length < 5) {
+                    disconnected.push(discovered);
+                  }
+              }
             });
 
           });

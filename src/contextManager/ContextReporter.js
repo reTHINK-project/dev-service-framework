@@ -134,6 +134,7 @@ class ContextReporter extends EventEmitter {
     let _this = this;
     let input;
     return new Promise((resolve, reject) => {
+<<<<<<< HEAD
       if (!reporter && !reuseURL) {
         input = {resources: resources, expires: 30};
       } else if (reporter && !reuseURL) {
@@ -143,6 +144,12 @@ class ContextReporter extends EventEmitter {
       } else {
         input = {resources: resources, expires: 30, reuseURL: reuseURL, reporter: reporter};
       }
+=======
+      console.info('[ContextReporter.create] lets create a new User availability Context Object ');
+      _this.syncher.create(_this.contextDescURL, [],init, true, false, name, null, {resources: resources, expires: 60})
+      .then((context) => {
+        _this.contexts[id] = context;
+>>>>>>> develop
 
       console.info('[ContextReporter.create] lets create a new User availability Context Object ', input);
       _this.syncher.create(_this.contextDescURL, [], init, true, false, name, null, input)
