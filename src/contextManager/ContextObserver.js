@@ -6,6 +6,11 @@ import {divideURL} from '../utils/utils';
 //import Search from '../utils/Search';
 import EventEmitter from '../utils/EventEmitter';
 
+/**
+* Context Observer;
+* @author Paulo Chainho [paulo-g-chainho@alticelabs.com]
+*/
+
 class ContextObserver extends EventEmitter {
 
   constructor(hypertyURL, bus, configuration, contextResourceTypes, syncher) {
