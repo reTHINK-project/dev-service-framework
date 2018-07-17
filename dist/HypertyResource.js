@@ -1,5 +1,9 @@
 // version: 0.9.0
+<<<<<<< HEAD
 // date: Mon Jul 16 2018 14:53:41 GMT+0100 (GMT Daylight Time)
+=======
+// date: Mon Jul 16 2018 15:23:25 GMT+0100 (Western European Summer Time)
+>>>>>>> develop
 // licence: 
 /**
 * Copyright 2016 PT Inovação e Sistemas SA

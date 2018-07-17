@@ -2,6 +2,7 @@
 cp -TRv ./dist ../dev-hyperty/src/group-chat-manager/node_modules/service-framework/dist
 cp -TRv ./dist ../dev-hyperty/src/connector/node_modules/service-framework/dist
 cp -TRv ./dist ../dev-hyperty/src/user-availability/node_modules/service-framework/dist
+cp -TRv ./dist ../dev-hyperty/src/wallet/node_modules/service-framework/dist
 
 cp -TRv ./dist ../dev-hyperty/src/observer-kwh/node_modules/service-framework/dist
 

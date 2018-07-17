@@ -1,6 +1,6 @@
 // version: 0.9.0
 // date: Mon Jul 16 2018 14:53:41 GMT+0100 (GMT Daylight Time)
-// licence: 
+// licence:
 /**
 * Copyright 2016 PT Inovação e Sistemas SA
 * Copyright 2016 INESC-ID

@@ -52,7 +52,7 @@ class WalletReporter extends EventEmitter {
     this.domain = divideURL(configuration.runtimeURL).domain;
     this.wallet = {};
 
-    this.walletDescURL = 'hyperty-catalogue://catalogue.' + this.domain + '/.well-known/dataschema/Wallet';
+    this.walletDescURL = 'hyperty-catalogue://catalogue.' + this.domain + '/.well-known/dataschema/WalletData';
 
 
     //    this.heartbeat = [];
