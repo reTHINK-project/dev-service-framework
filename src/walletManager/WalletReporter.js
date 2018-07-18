@@ -122,20 +122,22 @@ class WalletReporter extends EventEmitter {
    * @param  {URL.UserURL} contacts List of Users
    * @return {Promise}
    */
-  create(init, resources, name = 'myWallet', reporter = null, reuseURL = null) {
+  create(init, resources, name = 'myWallet', reporter = null, reuseURL = null, domainRegistration = true) {
     //debugger;
     let _this = this;
     let input;
     return new Promise((resolve, reject) => {
       if (!reporter && !reuseURL) {
-        input = {resources: resources, expires: 30};
+        input = {resources: resources};
       } else if (reporter && !reuseURL) {
-        input = {resources: resources, expires: 30, reporter: reporter};
+        input = {resources: resources, reporter: reporter};
       } else if (!reporter && reuseURL) {
-        input = {resources: resources, expires: 30, reuseURL: reuseURL};
+        input = {resources: resources, reuseURL: reuseURL};
       } else {
-        input = {resources: resources, expires: 30, reuseURL: reuseURL, reporter: reporter};
+        input = {resources: resources, reuseURL: reuseURL, reporter: reporter};
       }
+
+      input.domain_registration = domainRegistration;
 
       console.info('[WalletReporter.create] lets create a new Wallet Object ', input);
       _this.syncher.create(_this.walletDescURL, [], init, true, false, name, null, input)
