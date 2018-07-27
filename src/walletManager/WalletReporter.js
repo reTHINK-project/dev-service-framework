@@ -22,7 +22,7 @@
 **/
 
 // Service Framework
-import Syncher from '../syncher/Syncher';
+//import Syncher from '../syncher/Syncher';
 
 // Utils
 import EventEmitter from '../utils/EventEmitter.js';
@@ -36,16 +36,17 @@ import {divideURL} from '../utils/utils.js';
 */
 class WalletReporter extends EventEmitter {
 
-  constructor(hypertyURL, bus, configuration, syncher) {
+  constructor(hypertyURL, bus, configuration, factory, syncher) {
     if (!hypertyURL) throw new Error('The hypertyURL is a needed parameter');
     if (!bus) throw new Error('The MiniBus is a needed parameter');
     if (!configuration) throw new Error('The configuration is a needed parameter');
+    if (!factory) throw new Error('The factory is a needed parameter');
 
     super(hypertyURL, bus, configuration);
 
     console.info('[WalletReporter] started with url: ', hypertyURL);
 
-    this.syncher = syncher ? syncher : new Syncher(hypertyURL, bus, configuration);
+    this.syncher = syncher ? syncher : factory.createSyncher(hypertyURL, bus, configuration);
 
 
     //    this.discovery = new Discovery(hypertyURL, bus);
