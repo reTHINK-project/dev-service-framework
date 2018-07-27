@@ -179,13 +179,16 @@ class Syncher {
   * @param  {MessageBodyIdentity} identity - (optional) identity data to be added to identity the user reporter. To be used for legacy identities.
   * @return {Promise<DataObjectObserver>} Return Promise to a new observer. It's associated with the reporter.
   */
-  subscribe(schema, objURL, store = false, p2p = false, mutual = true, identity) {
+
+  //TODO: use input JSON param with all optional parameters similar to create
+  subscribe(schema, objURL, store = false, p2p = false, mutual = true, domain_subscription = true, identity) {
     let _this = this;
     let criteria = {};
 
     criteria.p2p = p2p;
     criteria.store = store;
     criteria.schema = schema;
+    criteria.domain_subscription = domain_subscription;
 
     criteria.resource = objURL;
     if (identity)      { criteria.identity = identity; }
@@ -460,7 +463,9 @@ class Syncher {
         if (input.hasOwnProperty('schema')) subscribeMsg.body.schema = input.schema;
         if (input.hasOwnProperty('identity')) subscribeMsg.body.identity = input.identity;
         if (input.hasOwnProperty('resource')) subscribeMsg.body.resource = input.resource;
+        if (input.hasOwnProperty('domain_subscription')) subscribeMsg.body.domain_subscription = input.domain_subscription;
       }
+      
 
       subscribeMsg.body.resume = input.resume;
 
