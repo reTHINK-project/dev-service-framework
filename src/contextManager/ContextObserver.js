@@ -227,7 +227,7 @@ class ContextObserver extends EventEmitter {
         if (Context.url === url) return resolve(Context);
       });
 
-      _this._syncher.subscribe(_this._objectDescURL, url).then((Context) => {
+      _this._syncher.subscribe(_this._objectDescURL, url, null, null, null, false).then((Context) => {
         console.log('[ContextObserver._subscribeContext] observer object', Context);
 
         //let newUserAvailability = new UserAvailabilityController(Context, userID);
