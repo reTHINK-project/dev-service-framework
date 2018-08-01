@@ -31,10 +31,10 @@ import {divideURL} from '../utils/utils.js';
 // import availability from './availability.js';
 
 /**
-* Context Reporter;
+* Context Manager
 * @author Paulo Chainho [paulo-g-chainho@alticelabs.com]
 */
-class ContextReporter extends EventEmitter {
+class WalletReporter extends EventEmitter {
 
   constructor(hypertyURL, bus, configuration, syncher) {
     if (!hypertyURL) throw new Error('The hypertyURL is a needed parameter');
@@ -43,18 +43,16 @@ class ContextReporter extends EventEmitter {
 
     super(hypertyURL, bus, configuration);
 
-    let _this = this;
-
-    console.info('[ContextReporter] started with url: ', hypertyURL);
+    console.info('[WalletReporter] started with url: ', hypertyURL);
 
     this.syncher = syncher ? syncher : new Syncher(hypertyURL, bus, configuration);
 
 
     //    this.discovery = new Discovery(hypertyURL, bus);
     this.domain = divideURL(configuration.runtimeURL).domain;
-    this.contexts = {};
+    this.wallet = {};
 
-    this.contextDescURL = 'hyperty-catalogue://catalogue.' + this.domain + '/.well-known/dataschema/Context';
+    this.walletDescURL = 'hyperty-catalogue://catalogue.' + this.domain + '/.well-known/dataschema/WalletData';
 
 
     //    this.heartbeat = [];
@@ -68,7 +66,7 @@ class ContextReporter extends EventEmitter {
 
     this.syncher.onClose((event) => {
 
-      console.log('[ContextReporter.onClose]');
+      console.log('[WalletReporter.onClose]');
       let _this = this;
       _this.setStatus(event.id, 'unavailable');
       event.ack();
@@ -76,12 +74,12 @@ class ContextReporter extends EventEmitter {
 
   }
 
-  //TODO: move to User availability Reporter or to abstract HypertyContextReporter
-
   start() {
     let _this = this;
 
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
+
+      // it is assumed no more than one wallet exists
 
       this.syncher.resumeReporters({store: true}).then((reporters) => {
 
@@ -89,35 +87,31 @@ class ContextReporter extends EventEmitter {
 
         if (reportersList.length  > 0) {
 
-          console.log('[ContextReporter.start] resuming ', reporters[reportersList[0]]);
+          console.log('[WalletReporter.start] resuming ', reporters[reportersList[0]]);
 
           // set availability to available
 
-          _this.contexts = reporters;
+          _this.wallet = reporters[0];
 
-          //TODO:
-          reportersList.forEach((context) => {
-            _this._onSubscription(_this.contexts[context]);
-          });
+          _this._onSubscription(_this.wallet);
 
-          resolve(_this.contexts);
+          resolve(_this.wallet);
         } else {
-          console.log('[ContextReporter.start] nothing to resume ', reporters);
+          console.log('[WalletReporter.start] nothing to resume ', reporters);
           resolve(false);
         }
 
       }).catch((reason) => {
-        console.error('[ContextReporter] Resume failed | ', reason);
+        console.error('[WalletReporter] Resume failed | ', reason);
       });
     }).catch((reason) => {
-      reject('[ContextReporter] Start failed | ', reason);
+      console.error('[WalletReporter] Start failed | ', reason);
     });
   }
 
 
   processNotification(event) {
-    let _this = this;
-    console.log('[ContextReporter.processNotification: ', event);
+    console.log('[WalletReporter.processNotification: ', event);
 
     event.ack();
 
@@ -128,28 +122,30 @@ class ContextReporter extends EventEmitter {
    * @param  {URL.UserURL} contacts List of Users
    * @return {Promise}
    */
-  create(id, init, resources, name = 'myContext', reporter = null, reuseURL = null) {
+  create(init, resources, name = 'myWallet', reporter = null, reuseURL = null, domainRegistration = true) {
     //debugger;
     let _this = this;
     let input;
     return new Promise((resolve, reject) => {
       if (!reporter && !reuseURL) {
-        input = {resources: resources, expires: 30};
+        input = {resources: resources};
       } else if (reporter && !reuseURL) {
-        input = {resources: resources, expires: 30, reporter: reporter};
+        input = {resources: resources, reporter: reporter};
       } else if (!reporter && reuseURL) {
-        input = {resources: resources, expires: 30, reuseURL: reuseURL};
+        input = {resources: resources, reuseURL: reuseURL};
       } else {
-        input = {resources: resources, expires: 30, reuseURL: reuseURL, reporter: reporter};
+        input = {resources: resources, reuseURL: reuseURL, reporter: reporter};
       }
 
-      console.info('[ContextReporter.create] lets create a new User availability Context Object ', input);
-      _this.syncher.create(_this.contextDescURL, [], init, true, false, name, null, input)
-        .then((context) => {
-          _this.contexts[id] = context;
+      input.domain_registration = domainRegistration;
 
-          _this._onSubscription(context);
-          resolve(context);
+      console.info('[WalletReporter.create] lets create a new Wallet Object ', input);
+      _this.syncher.create(_this.walletDescURL, [], init, true, false, name, null, input)
+        .then((wallet) => {
+          _this.wallet = wallet;
+
+          _this._onSubscription(wallet);
+          resolve(wallet);
 
         }).catch(function(reason) {
           reject(reason);
@@ -159,27 +155,25 @@ class ContextReporter extends EventEmitter {
 
   }
 
-  _onSubscription(context) {
-    context.onSubscription((event) => {
-      console.info('[ContextReporter._onSubscription] accepting: ', event);
+  _onSubscription(wallet) {
+    wallet.onSubscription((event) => {
+      console.info('[WalletReporter._onSubscription] accepting: ', event);
       event.accept();
     });
   }
 
-  setContext(id, newContext) {
+  addNewTransaction(newTransaction) {
     let _this = this;
-    console.log('THIS [ContextReporter.setContext] before change :', _this.contexts[id]);
-    console.log('[ContextReporter.setContext] before change :', _this.contexts[id].data);
+    console.log('THIS [WalletReporter.setContext] before change :', _this.wallet);
+    console.log('[WalletReporter.setContext] before change :', _this.wallet.data);
 
-    //    _this.contexts[id].data.values[0].value = newContext;
-
-    _this.contexts[id].data.values = newContext;
-    console.debug('[ContextReporter.setContext] after change :', _this.contexts[id].data);
-    _this.trigger(id + '-context-update', newContext);
+    _this.wallet.data.transactions.push(newTransaction);
+    console.debug('[WalletReporter.addNewTransaction] after change :', _this.wallet.data);
+    _this.trigger('wallet-update', newTransaction);
 
   }
 
 
 }
 
-export default ContextReporter;
+export default WalletReporter;

@@ -1,6 +1,6 @@
 {
   "name": "service-framework",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "Set of JavaScript factory modules for the reTHINK base Data Models and Data Synchronization",
   "files": [
     "dist"
@@ -9,7 +9,7 @@
     "test": "karma start",
     "test:lint": "eslint --config .eslintrc.yml ./src/",
     "build:doc": "./node_modules/.bin/esdoc -c esdoc.json",
-    "build:dev": "cross-env MODE=dev webpack && ./update.sh",
+    "build:dev": "cross-env MODE=dev webpack && sh update.sh",
     "build:prod": "cross-env MODE=prod webpack",
     "build:dev:monitor": "cross-env MONITOR=true cross-env MODE=dev webpack",
     "build": "node scripts/transform.js"

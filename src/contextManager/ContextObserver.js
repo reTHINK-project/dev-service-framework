@@ -2,8 +2,14 @@
 import Syncher from '../syncher/Syncher.js';
 import Discovery from '../discovery/Discovery.js';
 import {divideURL} from '../utils/utils';
+
 //import Search from '../utils/Search';
 import EventEmitter from '../utils/EventEmitter';
+
+/**
+* Context Observer;
+* @author Paulo Chainho [paulo-g-chainho@alticelabs.com]
+*/
 
 class ContextObserver extends EventEmitter {
 
@@ -58,115 +64,117 @@ class ContextObserver extends EventEmitter {
           /*observersList.forEach((i)=>{
           _this._users2observe.push(new UserAvailabilityController(observers[i]));
         });*/
-        _this._observers = observers;
+          _this._observers = observers;
 
-        resolve(observers);
+          resolve(observers);
 
-        observersList.forEach((observer) =>{
-          let Context = observers[observer];
-;
-          // By default resumed context is set with resumedContext.
-          if (resumedContext) context.data.values = resumedContext;
+          observersList.forEach((observer) =>{
+            let Context = observers[observer];
 
-          // Context will will be updated with value synchronized with reporter if connected
-          Context.sync();
+            // By default resumed context is set with resumedContext.
+            if (resumedContext) context.data.values = resumedContext;
 
-          //Add listener to be notified when reporter is abruptly disconnected
-          if (disconnectedCallBack) Context.onDisconnected(disconnectedCallBack);
-        });
+            // Context will will be updated with value synchronized with reporter if connected
+            Context.sync();
+
+            //Add listener to be notified when reporter is abruptly disconnected
+            if (disconnectedCallBack) Context.onDisconnected(disconnectedCallBack);
+          });
 
 
-      } else {
+        } else {
+          resolve(false);
+        }
+
+      }).catch((reason) => {
+        console.info('[ContextObserver] Resume Observer failed | ', reason);
         resolve(false);
-      }
-
+      });
     }).catch((reason) => {
-      console.info('[ContextObserver] Resume Observer failed | ', reason);
-      resolve(false);
+      reject('[ContextObserver] Start failed | ', reason);
     });
-  }).catch((reason) => {
-    reject('[ContextObserver] Start failed | ', reason);
-  });
-}
+  }
 
-resumeDiscoveries() {
-  let _this = this;
+  resumeDiscoveries() {
+    let _this = this;
 
-  return new Promise((resolve, reject) => {
-    _this._discovery.resumeDiscoveries().then((discoveries) => {
+    return new Promise((resolve, reject) => {
+      _this._discovery.resumeDiscoveries().then((discoveries) => {
 
-      console.log('[ContextObserver._resumeDiscoveries] found: ', discoveries);
+        console.log('[ContextObserver._resumeDiscoveries] found: ', discoveries);
 
-      discoveries.forEach((discovery) =>{
+        discoveries.forEach((discovery) =>{
 
-        if (discovery.data.resources && discovery.data.resources[0] === _this._contextResourceTypes[0]) {
-          console.log('[ContextObserver._resumeDiscoveries] resuming: ', discovery);
+          if (discovery.data.resources && discovery.data.resources[0] === _this._contextResourceTypes[0]) {
+            console.log('[ContextObserver._resumeDiscoveries] resuming: ', discovery);
 
-          if (discovery.data.status === 'live' ) {// previously discovered object is now live
-            resolve([discovery.data]);
-            discovery.unsubscribeLive(_this._url);
-          } else {// previously discovered object is still disconnected
-            discovery.onLive(_this._url,()=>{
-              console.log('[ContextObserver._resumeDiscoveries] disconnected Hyperty is back to live', discovery);
+            if (discovery.data.status === 'live') { // previously discovered object is now live
               resolve([discovery.data]);
               discovery.unsubscribeLive(_this._url);
-            });
+            } else { // previously discovered object is still disconnected
+              discovery.onLive(_this._url, ()=>{
+                console.log('[ContextObserver._resumeDiscoveries] disconnected Hyperty is back to live', discovery);
+                resolve([discovery.data]);
+                discovery.unsubscribeLive(_this._url);
+              });
+            }
           }
-        }
+        });
       });
+    }).catch((reason) => {
+      reject('[ContextObserver] resumeDiscoveries failed | ', reason);
     });
-  }).catch((reason) => {
-  reject('[ContextObserver] resumeDiscoveries failed | ', reason);
-});
-}
+  }
 
   onResumeObserver(callback) {
-     let _this = this;
-     _this._onResumeObserver = callback;
-   }
+    let _this = this;
+    _this._onResumeObserver = callback;
+  }
 
 
-  discoverUsers(email,domain)
-  {
+  discoverUsers(email, domain) {
     let _this = this;
 
 
     let user = email + '@' + domain;
 
-    if (!_this._discoverUsersPromises[user])
-      _this._discoverUsersPromises[user] = new Promise(function(resolve,reject) {
+    if (!_this._discoverUsersPromises[user]) {
+      _this._discoverUsersPromises[user] = new Promise(function(resolve, reject) {
 
-      _this._discovery.discoverHypertiesDO(email, ['context'], _this._contextResourceTypes, domain).then(hyperties =>{
-      //_this.search.users([email], [domain], ['context'], ['Context_context']).then(function(a) {
-        console.log('[ContextObserver.discoverUsers] discovery result->', hyperties);
-        let discovered = [];
-        let disconnected = [];
-        hyperties.forEach(hyperty =>{
-          _this._discoveries[hyperty.data.hypertyID] = hyperty;
-          if (hyperty.data.status === 'live') {
-            discovered.push(hyperty.data);
-          } else if (disconnected.length < 5) {
-            disconnected.push(hyperty);
-            };
-        });
-
-        if (discovered.length > 0) {
-          console.log('[ContextObserver.discoverUsers] returning discovered hyperties data->', discovered);
-          resolve(discovered);
-        } else if (disconnected.length > 0) {
-          console.log('[ContextObserver.discoverUsers] disconnected Hyperties ', disconnected);
-          //resolve([]);
-
-          disconnected[0].onLive(_this._url,()=>{
-            console.log('[ContextObserver.discoverUsers] disconnected Hyperty is back to live', disconnected[0]);
-
-            discovered.push(disconnected[0].data);
-            resolve(discovered);
-            disconnected[0].unsubscribeLive(_this._url);
+        _this._discovery.discoverHypertiesDO(email, ['context'], _this._contextResourceTypes, domain).then(hyperties =>{
+          //_this.search.users([email], [domain], ['context'], ['Context_context']).then(function(a) {
+          console.log('[ContextObserver.discoverUsers] discovery result->', hyperties);
+          let discovered = [];
+          let disconnected = [];
+          hyperties.forEach(hyperty =>{
+            _this._discoveries[hyperty.data.hypertyID] = hyperty;
+            if (hyperty.data.status === 'live') {
+              discovered.push(hyperty.data);
+            } else {
+              disconnected.push(hyperty);
+            }
           });
-        }
+
+
+          if (discovered.length > 0) {
+            console.log('[ContextObserver.discoverUsers] returning discovered hyperties data->', discovered);
+            resolve(discovered);
+          } else if (disconnected.length > 0) {
+            console.log('[ContextObserver.discoverUsers] disconnected Hyperties ', disconnected);
+
+            //resolve([]);
+
+            disconnected[0].onLive(_this._url, ()=>{
+              console.log('[ContextObserver.discoverUsers] disconnected Hyperty is back to live', disconnected[0]);
+
+              discovered.push(disconnected[0].data);
+              resolve(discovered);
+              disconnected[0].unsubscribeLive(_this._url);
+            });
+          }
+        });
       });
-    });
+    }
     return _this._discoverUsersPromises[user];
   }
 
@@ -176,83 +184,107 @@ resumeDiscoveries() {
    * @return {<Promise> DataObjectObserver}      It returns as a Promise the UserAvailability Data Object Observer.
    */
 
-  observe(hyperty)
-    {
-      let _this = this;
-      if (!_this._observePromises[hyperty.hypertyID])
-        _this._observePromises[hyperty.hypertyID] = new Promise(function(resolve,reject) {
-        //check if we are already observing it
+  observe(hyperty) {
+    let _this = this;
+    if (!_this._observePromises[hyperty.hypertyID]) {
+      _this._observePromises[hyperty.hypertyID] = new Promise(function(resolve, reject) {
+      //check if we are already observing it
         _this._users2observe.forEach((Context) => {
           if (Context._reporter === hyperty.hypertyID) return resolve(Context);
         });
 
-          _this._discovery.discoverDataObjectsPerReporter(hyperty.hypertyID, ['context'], _this._contextResourceTypes,  _this._domain).then(function(dataObjects) {
-            console.log('[ContextObserver.discoverAvailability] discovered context objects ', dataObjects);
+        _this._discovery.discoverDataObjectsPerReporter(hyperty.hypertyID, ['context'], _this._contextResourceTypes,  _this._domain).then(function(dataObjects) {
+          console.log('[ContextObserver.discoverAvailability] discovered context objects ', dataObjects);
           let last = 0;
           let url;
 
-          dataObjects.forEach( (dataObject) => {
+          dataObjects.forEach((dataObject) => {
             if (dataObject.hasOwnProperty('lastModified') && dataObject.hasOwnProperty('url') && Date.parse(dataObject.lastModified) > last) {
               last = dataObject.lastModified;
               url = dataObject.url;
-                //console.log('URL DATA Object', url);
+
+            //console.log('URL DATA Object', url);
+            }
+          });
+          if (last != 0 && url) {
+            resolve(_this._subscribeContext(hyperty, url));
+          } else {
+            reject('[ContextObserver.observe] discovered DataObjecs are invalid', dataObjects);
           }
         });
-        if (last != 0 && url) {
-          resolve(_this._subscribeContext(hyperty, url));
-        } else {
-          reject ('[ContextObserver.observe] discovered DataObjecs are invalid', dataObjects);
-        }
       });
-    });
+    }
     return _this._observePromises[hyperty.hypertyID];
   }
 
   _subscribeContext(hyperty, url) {
     let _this = this;
+
     // avoid duplicated subscriptions
 
-    return new Promise(function(resolve,reject) {
+    return new Promise(function(resolve, reject) {
       _this._users2observe.forEach((Context) => {
         if (Context.url === url) return resolve(Context);
       });
 
-        _this._syncher.subscribe(_this._objectDescURL, url).then((Context) => {
-          console.log('[ContextObserver._subscribeContext] observer object', Context);
+      _this._syncher.subscribe(_this._objectDescURL, url, null, null, null, false).then((Context) => {
+        console.log('[ContextObserver._subscribeContext] observer object', Context);
 
-          //let newUserAvailability = new UserAvailabilityController(Context, userID);
+        //let newUserAvailability = new UserAvailabilityController(Context, userID);
 
-          _this._users2observe.push(Context);
+        _this._users2observe.push(Context);
 
-          // When Object is disconnected set user Context status as unavailable
-          Context.onDisconnected(()=>{
-            console.log('[ContextObserver.onDisconnected]: ', Context);
+        // When Object is disconnected set user Context status as unavailable
+        Context.onDisconnected(()=>{
+          console.log('[ContextObserver.onDisconnected]: ', Context);
 
-            Context.data.values[0].value = 'unavailable';
-            Context.sync();
-          });
-
-          resolve(Context);
+          Context.data.values[0].value = 'unavailable';
+          Context.sync();
         });
+
+        resolve(Context);
       });
+    });
   }
 
-/**
+  _discoverAndSubscribeLegacyUsers(name) {
+    let _this = this;
+    return new Promise(function(resolve, reject) {
+      _this._discovery.discoverDataObjectsPerName(name).then(function(result) {
+        console.log('[ContextObserver._discoverAndSubscribeLegacyUsers] All DataObjects Result', result);
+        result.forEach(function(obj) {
+          if (obj.status === 'live') {
+            console.log('Live obj', obj);
+            if (!obj.hypertyID) {
+              obj.hypertyID = obj.reporter;
+            }
+            _this._subscribeContext(obj.schema, obj.url).then(function(resultSubscribe) {
+              console.log('[ContextObserver._discoverAndSubscribeLegacyUsers] _subscribeContext', resultSubscribe);
+              return resolve(resultSubscribe);
+            });
+          }
+        });
+      }).catch(function(err) {
+        console.log('error ', err);
+      });
+    });
+  }
+
+  /**
  * This function is used to stop the user Context observation for a certain user
  * @param  {string} Context       the UserAvailability Data Object Observer URL to be unobserved.
  */
 
-  unobserve(Context)
-    {
-      let _this = this;
+  unobserve(Context) {
+    let _this = this;
 
-      _this._users2observe.forEach( (user, index) => {
-        if (user.url === Context) {
-          user.unsubscribe();
-          _this._users2observe.splice(index, 1);
-        }
+    _this._users2observe.forEach((user, index) => {
+      if (user.url === Context) {
+        user.unsubscribe();
+        _this._users2observe.splice(index, 1);
+      }
 
-      });
+    });
   }
 
 }

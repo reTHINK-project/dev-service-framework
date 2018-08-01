@@ -2,7 +2,7 @@ var path = require('path');
 var WebpackMonitor = require('webpack-monitor');
 var UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 var packageFile = require('./package.json');
-
+var webpack = require('webpack');
 var PrependText = require('./webpack/PrependText.js');
 
 var license = '/**\n' +
@@ -48,7 +48,15 @@ function getModeConfig() {
     }));
   }
 
-  plugins.push(new UglifyJsPlugin());
+  plugins.push(new webpack.optimize.UglifyJsPlugin({
+    uglifyOptions: {
+      comments: false,
+      compress: {
+        drop_console: true,
+        warnings: false
+      }
+    }
+  }));
 
   return plugins;
 }
@@ -61,6 +69,7 @@ module.exports = {
     Discovery: './src/Discovery.js',
     IdentityManager: './src/IdentityManager.js',
     ContextManager: './src/ContextManager.js',
+    WalletManager: './src/WalletManager.js',
     ChatManager: './src/ChatManager.js',
     MessageFactory: './src/MessageFactory.js',
     PersistenceManager: './src/PersistenceManager.js',

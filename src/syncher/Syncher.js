@@ -124,6 +124,7 @@ class Syncher {
     if (!observers) throw Error('[Syncher - Create] -The observers should be defined');
 
     let _this = this;
+    input = input || {};
     let createInput  = Object.assign({}, input);
 
     createInput.p2p = p2p;
@@ -134,17 +135,21 @@ class Syncher {
     createInput.p2pRequester = _this._p2pRequester;
     (initialData) ? createInput.data = deepClone(initialData) : createInput.data = {};
     createInput.name = name.length === 0 ? 'no name' : name;
-    createInput.reporter = _this._owner;
+    createInput.reporter = (input.hasOwnProperty('reporter') && ((typeof input.reporter) !== 'boolean')) ? input.reporter : _this._owner;
     createInput.resume = false;
     if (input) {
       createInput.mutual = input.hasOwnProperty('mutual') ? input.mutual : true;
       createInput.name = input.hasOwnProperty('name') ? input.name : createInput.name;
     } else { createInput.mutual = true; }
 
+    if (input.hasOwnProperty('reuseURL')) {
+      createInput.resource = input.reuseURL;
+    }
+
     if (identity)      { createInput.identity = identity; }
 
     //Object.assign(createInput, {resume: false});
-
+    //debugger;
     log.log('[syncher - create] - create Reporter - createInput: ', createInput);
 
     return _this._create(createInput);
@@ -174,13 +179,16 @@ class Syncher {
   * @param  {MessageBodyIdentity} identity - (optional) identity data to be added to identity the user reporter. To be used for legacy identities.
   * @return {Promise<DataObjectObserver>} Return Promise to a new observer. It's associated with the reporter.
   */
-  subscribe(schema, objURL, store = false, p2p = false, mutual = true, identity) {
+
+  //TODO: use input JSON param with all optional parameters similar to create
+  subscribe(schema, objURL, store = false, p2p = false, mutual = true, domain_subscription = true, identity) {
     let _this = this;
     let criteria = {};
 
     criteria.p2p = p2p;
     criteria.store = store;
     criteria.schema = schema;
+    criteria.domain_subscription = domain_subscription;
 
     criteria.resource = objURL;
     if (identity)      { criteria.identity = identity; }
@@ -303,6 +311,7 @@ class Syncher {
       delete requestValue.identity;
 
       //FLOW-OUT: this message will be sent to the runtime instance of SyncherManager -> _onCreate
+      //debugger;
       let requestMsg = {
         type: 'create', from: _this._owner, to: _this._subURL,
         body: { resume: resume, value: requestValue  }
@@ -364,10 +373,13 @@ class Syncher {
       };
 
       log.log('[syncher - create]: ', criteria, requestMsg);
-
       if (criteria) {
         requestMsg.body.value = criteria;
-        requestMsg.body.value.reporter = _this._owner;
+        if (criteria.hasOwnProperty('reporter')) {
+          requestMsg.body.value.reporter = criteria.reporter;
+        } else {
+          requestMsg.body.value.reporter = _this._owner;
+        }
       }
 
       if (criteria.p2p) requestMsg.body.p2p = criteria.p2p;
@@ -377,11 +389,14 @@ class Syncher {
 
       log.log('[syncher._resumeCreate] - resume message: ', requestMsg);
 
+      //debugger;
+
       //request create to the allocation system. Can be rejected by the PolicyEngine.
+
       _this._bus.postMessage(requestMsg, (reply) => {
         log.log('[syncher._resumeCreate] - create-resumed-response: ', reply);
         if (reply.body.code === 200) {
-
+          //debugger;
           let listOfReporters = reply.body.value;
 
           for (let index in listOfReporters) {
@@ -448,7 +463,9 @@ class Syncher {
         if (input.hasOwnProperty('schema')) subscribeMsg.body.schema = input.schema;
         if (input.hasOwnProperty('identity')) subscribeMsg.body.identity = input.identity;
         if (input.hasOwnProperty('resource')) subscribeMsg.body.resource = input.resource;
+        if (input.hasOwnProperty('domain_subscription')) subscribeMsg.body.domain_subscription = input.domain_subscription;
       }
+      
 
       subscribeMsg.body.resume = input.resume;
 
