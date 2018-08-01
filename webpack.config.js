@@ -48,7 +48,13 @@ function getModeConfig() {
     }));
   }
 
-  plugins.push(new UglifyJsPlugin());
+  plugins.push(new UglifyJsPlugin({
+    uglifyOptions: {
+      compress: {
+        drop_console: true,
+      }
+    }
+  }));
 
   return plugins;
 }
