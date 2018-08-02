@@ -1,7 +1,7 @@
 //import IdentityManager from '../identityManager/IdentityManager';
-import Syncher from '../syncher/Syncher.js';
-import Discovery from '../discovery/Discovery.js';
-import {divideURL} from '../utils/utils';
+//import Syncher from '../syncher/Syncher.js';
+//import Discovery from '../discovery/Discovery.js';
+//import {divideURL} from '../utils/utils';
 
 //import Search from '../utils/Search';
 import EventEmitter from '../utils/EventEmitter';
@@ -13,10 +13,11 @@ import EventEmitter from '../utils/EventEmitter';
 
 class ContextObserver extends EventEmitter {
 
-  constructor(hypertyURL, bus, configuration, contextResourceTypes, syncher) {
+  constructor(hypertyURL, bus, configuration, contextResourceTypes, factory, syncher) {
     if (!hypertyURL) throw new Error('The hypertyURL is a needed parameter');
     if (!bus) throw new Error('The MiniBus is a needed parameter');
     if (!configuration) throw new Error('The configuration is a needed parameter ');
+    if (!factory) throw new Error('The factory is a needed parameter ');
 
     super();
 
@@ -30,15 +31,15 @@ class ContextObserver extends EventEmitter {
 
     //let identityManager = new IdentityManager(hypertyURL, configuration.runtimeURL, bus);
     console.log('[ContextObserver] started with hypertyURL->', hypertyURL);
-    _this._domain = divideURL(configuration.runtimeURL).domain;
+    _this._domain = factory.divideURL(configuration.runtimeURL).domain;
     _this._objectDescURL = 'hyperty-catalogue://catalogue.' + _this._domain + '/.well-known/dataschema/Context';
 
     _this._users2observe = [];
     _this._observers = {};
 
-    this._syncher = syncher ? syncher : new Syncher(hypertyURL, bus, configuration);
+    this._syncher = syncher ? syncher : factory.createSyncher(hypertyURL, bus, configuration);
 
-    let discovery = new Discovery(hypertyURL, configuration.runtimeURL, bus);
+    let discovery = factory.createDiscovery(hypertyURL, configuration.runtimeURL, bus);
     _this._discovery = discovery;
 
     _this._discoveries = {}; //list of discovered objects

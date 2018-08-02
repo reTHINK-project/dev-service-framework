@@ -22,11 +22,11 @@
 **/
 
 // Service Framework
-import Syncher from '../syncher/Syncher';
+//import Syncher from '../syncher/Syncher';
 
 // Utils
 import EventEmitter from '../utils/EventEmitter.js';
-import {divideURL} from '../utils/utils.js';
+//import {divideURL} from '../utils/utils.js';
 
 // import availability from './availability.js';
 
@@ -36,7 +36,7 @@ import {divideURL} from '../utils/utils.js';
 */
 class ContextReporter extends EventEmitter {
 
-  constructor(hypertyURL, bus, configuration, syncher) {
+  constructor(hypertyURL, bus, configuration, factory, syncher) {
     if (!hypertyURL) throw new Error('The hypertyURL is a needed parameter');
     if (!bus) throw new Error('The MiniBus is a needed parameter');
     if (!configuration) throw new Error('The configuration is a needed parameter');
@@ -47,11 +47,11 @@ class ContextReporter extends EventEmitter {
 
     console.info('[ContextReporter] started with url: ', hypertyURL);
 
-    this.syncher = syncher ? syncher : new Syncher(hypertyURL, bus, configuration);
+    this.syncher = syncher ? syncher : factory.createSyncher(hypertyURL, bus, configuration);
 
 
     //    this.discovery = new Discovery(hypertyURL, bus);
-    this.domain = divideURL(configuration.runtimeURL).domain;
+    this.domain = factory.divideURL(configuration.runtimeURL).domain;
     this.contexts = {};
 
     this.contextDescURL = 'hyperty-catalogue://catalogue.' + this.domain + '/.well-known/dataschema/Context';
