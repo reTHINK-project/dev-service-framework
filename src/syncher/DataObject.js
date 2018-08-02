@@ -104,7 +104,11 @@ class DataObject {
     if (input.publicObservation) _this._publicObservation = input.publicObservation;
 
     _this._metadata = Object.assign(input);
-    if (!_this._resumed) _this._metadata.lastModified = _this._metadata.created;
+
+    if (!input.hasOwnProperty('resume') || (input.hasOwnProperty('resume') && !input.resume)) {
+      _this._metadata.lastModified = _this._metadata.created;
+    }
+
 
     delete _this._metadata.data;
     delete _this._metadata.syncher;
