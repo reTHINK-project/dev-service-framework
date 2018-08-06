@@ -27,7 +27,7 @@
 * @version 0.1.0
 */
 
-import { UserInfo } from './UserInfo';
+//import { UserInfo } from './UserInfo';
 import RegistrationStatus from '../discovery/RegistrationStatus';
 import InvitationsHandler from './InvitationsHandler';
 

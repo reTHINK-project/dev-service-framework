@@ -23,14 +23,14 @@
 **/
 
 // Service Framework
-import IdentityManager from '../identityManager/IdentityManager';
+//import IdentityManager from '../identityManager/IdentityManager';
 //import RegistrationStatus from '../discovery/RegistrationStatus';
-import Discovery from '../discovery/Discovery';
-import Syncher from '../syncher/Syncher';
+//import Discovery from '../discovery/Discovery';
+//import Syncher from '../syncher/Syncher';
 
 // Utils
-import {divideURL} from '../utils/utils';
-import Search from '../utils/Search';
+//import {divideURL} from '../utils/utils';
+//import Search from '../utils/Search';
 
 // Internals
 import { communicationObject, CommunicationStatus, communicationChildren } from './communication';
@@ -44,21 +44,21 @@ import { UserInfo } from './UserInfo';
 */
 class ChatManager {
 
-  constructor(myUrl, bus, configuration, syncher) {
+  constructor(myUrl, bus, configuration, factory, syncher) {
     if (!myUrl) throw new Error('[ChatManager.constructor] The myUrl is a needed parameter');
     if (!bus) throw new Error('[ChatManager.constructor] The MiniBus is a needed parameter');
     if (!configuration) throw new Error('[ChatManager.constructor] The configuration is a needed parameter');
 
     let _this = this;
     if (!syncher) {
-      syncher = new Syncher(myUrl, bus, configuration);
+      syncher = factory.createSyncher(myUrl, bus, configuration);
     }
 
     _this._runtimeURL = configuration.runtimeURL;
 
-    let domain = divideURL(_this._runtimeURL).domain;
-    let discovery = new Discovery(myUrl, configuration.runtimeURL, bus);
-    let identityManager = new IdentityManager(myUrl, configuration.runtimeURL, bus);
+    let domain = factory.divideURL(_this._runtimeURL).domain;
+    let discovery = factory.createDiscovery(myUrl, configuration.runtimeURL, bus);
+    let identityManager = factory.createIdentityManager(myUrl, configuration.runtimeURL, bus);
 
     _this._objectDescURL = 'hyperty-catalogue://catalogue.' + domain + '/.well-known/dataschema/Communication';
 
@@ -74,7 +74,7 @@ class ChatManager {
     _this.identityManager = identityManager;
     _this.currentIdentity;
 
-    _this.search = new Search(discovery, identityManager);
+    _this.search = factory.createSearch(discovery, identityManager);
 
     _this.communicationObject = communicationObject;
 
