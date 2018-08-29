@@ -3,6 +3,9 @@
 reTHINK Service Framework
 -------------------------
 
+DEPRECATED!! Service Framework libs have been move to [Runtime Core](https://github.com/reTHINK-project/dev-runtime-core)
+-------------------------
+
 #### Build status
 
 | Master                                   | Develop                                  |
